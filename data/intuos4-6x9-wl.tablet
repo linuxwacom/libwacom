@@ -1,0 +1,15 @@
+[Device]
+Product=Intuos 4 WL 6x9
+Vendor=Wacom
+DeviceMatch=usb:056a:00bc
+Class=Intuos4
+Width=9
+Height=6
+
+[Features]
+Stylus=true
+Ring=true
+VStrip=false
+HStrip=false
+Buttons=9
+BuiltIn=false

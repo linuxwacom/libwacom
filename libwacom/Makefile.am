@@ -1,0 +1,12 @@
+lib_LTLIBRARIES=libwacom.la
+
+AM_CPPFLAGS = $(GLIB_CFLAGS) -DDATADIR="\"$(datadir)/libwacom\""
+
+libwacom_la_SOURCES = \
+                      libwacom.h \
+                      libwacomint.h \
+                      libwacom.c \
+                      libwacom-error.c \
+		      libwacom-database.c
+
+libwacom_la_LIBADD = $(GLIB_LIBS)

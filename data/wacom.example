@@ -1,0 +1,54 @@
+# Example model file description for a tablet
+[Device]
+
+# The product is the product name announced by the kernel
+Product=Intuos 4 WL 6x9
+
+# Vendor name of this tablet
+Vendor=Wacom
+
+# DeviceMatch includes the bus (usb, serial), the vendor ID and the actual
+# product ID 
+DeviceMatch=usb:056a:00bc
+
+# Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
+Class=Intuos4
+
+# Exact model of the tablet, not including the size.
+Model=Intuos 4 Wireless
+
+# Width in inches, as advertised by the manufacturer
+Width=9
+
+# Height in inches, as advertised by the manufacturer
+Height=6
+
+# Optional features that this tablet supports
+# Some features are dependent on the actual tool used, e.g. not all styli
+# have an eraser and some styli have additional custom axes (e.g. the
+# airbrush pen). These features describe those available on the tablet.
+#
+# Features not set in a file default to false/0
+
+[Features]
+# This tablet supports styli (and erasers, if present on the actual stylus)
+Stylus=true
+
+# This tablet supports touch.
+Touch=false
+
+# This tablet has a touch ring (Intuos4 and Cintiq 24HD)
+Ring=true
+# This tablet has a second touch ring (Cintiq 24HD)
+Ring2=false
+
+# This tablet has a vertical/horizontal scroll strip
+VStrip=false
+HStrip=false
+
+# Number of buttons on the tablet
+Buttons=9
+
+# This tablet is built-in (most serial tablets, Cintiqs) 
+BuiltIn=false
+

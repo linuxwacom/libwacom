@@ -1,0 +1,3 @@
+libwacom is a library to identify wacom tablets and their model-specific
+features. It provides easy access to information such as "is this a built-in
+on-screen tablet", "what is the size of this model", etc.

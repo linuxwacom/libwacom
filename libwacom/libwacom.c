@@ -202,6 +202,11 @@ int libwacom_is_builtin(WacomDevice *device)
     return !!(device->ref->features & FEATURE_BUILTIN);
 }
 
+int libwacom_is_reversible(WacomDevice *device)
+{
+    return !!(device->ref->features & FEATURE_REVERSIBLE);
+}
+
 WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
     return device->ref->bus;

@@ -139,6 +139,9 @@ libwacom_parse_keyfile(const char *path)
 	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "BuiltIn", NULL))
 		device->features |= FEATURE_BUILTIN;
 
+	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Reversible", NULL))
+		device->features |= FEATURE_REVERSIBLE;
+
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURE_GROUP, "Buttons", NULL);
 
 out:

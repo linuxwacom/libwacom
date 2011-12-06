@@ -264,6 +264,13 @@ int libwacom_is_builtin(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return non-zero if the device can be used left-handed
+ * (rotated 180 degrees)
+ */
+int libwacom_is_reversible(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The bustype of this device.
  */
 WacomBusType libwacom_get_bustype(WacomDevice *device);

@@ -45,6 +45,7 @@ enum WacomFeature {
 	FEATURE_VSTRIP		= (1 << 4),
 	FEATURE_HSTRIP		= (1 << 5),
 	FEATURE_BUILTIN		= (1 << 6),
+	FEATURE_REVERSIBLE	= (1 << 7)
 };
 
 typedef struct _WacomDeviceData {

@@ -58,7 +58,7 @@ libwacom_model_string_to_enum(const char *model)
 }
 
 static int
-libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, enum WacomBusType *bus)
+libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
 {
 	char busstr[64];
 	int rc;

@@ -88,12 +88,12 @@ enum WacomErrorCode {
 /**
  * Bus types for tablets.
  */
-enum WacomBusType {
+typedef enum {
     WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
     WBUSTYPE_USB,		/**< USB tablet */
     WBUSTYPE_SERIAL,		/**< Serial tablet */
     WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
-};
+} WacomBusType;
 
 /**
  * Classes of devices.
@@ -266,7 +266,7 @@ int libwacom_is_builtin(WacomDevice *device);
  * @param device The tablet to query
  * @return The bustype of this device.
  */
-enum WacomBusType libwacom_get_bustype(WacomDevice *device);
+WacomBusType libwacom_get_bustype(WacomDevice *device);
 
 #endif /* _LIBWACOM_H_ */
 

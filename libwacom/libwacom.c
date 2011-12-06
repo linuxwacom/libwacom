@@ -199,7 +199,7 @@ int libwacom_is_builtin(WacomDevice *device)
     return !!(device->ref->features & FEATURE_BUILTIN);
 }
 
-enum WacomBusType libwacom_get_bustype(WacomDevice *device)
+WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
     return device->ref->bus;
 }

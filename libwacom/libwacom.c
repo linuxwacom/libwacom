@@ -141,6 +141,11 @@ int libwacom_get_vendor_id(WacomDevice *device)
     return device->ref->vendor_id;
 }
 
+const char* libwacom_get_product(WacomDevice *device)
+{
+    return device->ref->product;
+}
+
 int libwacom_get_product_id(WacomDevice *device)
 {
     return device->ref->product_id;

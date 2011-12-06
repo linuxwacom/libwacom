@@ -187,6 +187,12 @@ int libwacom_get_vendor_id(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return The human-readable product for this device
+ */
+const char* libwacom_get_product(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The numeric product ID for this device
  */
 int libwacom_get_product_id(WacomDevice *device);

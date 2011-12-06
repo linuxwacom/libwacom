@@ -43,13 +43,14 @@ libwacom_new_devicedata(void)
 }
 
 static int
-libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id)
+libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id, WacomBusType bus)
 {
     int i;
 
     for (i = 0; i < device->nentries; i++) {
         if (device->database[i]->vendor_id == vendor_id &&
-            device->database[i]->product_id == product_id) {
+            device->database[i]->product_id == product_id &&
+            device->database[i]->bus == bus) {
             device->ref = device->database[i];
             break;
         }
@@ -63,6 +64,7 @@ libwacom_new_from_path(const char *path, WacomError *error)
 {
     WacomDevice *device;
     int vendor_id = 0, product_id = 0;
+    WacomBusType bus;
 
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
@@ -76,11 +78,12 @@ libwacom_new_from_path(const char *path, WacomError *error)
     }
 
     /* FIXME: open path, read device information */
+    bus = WBUSTYPE_UNKNOWN;
 
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id)) {
+    } else if (!libwacom_ref_device(device, vendor_id, product_id, bus)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }
@@ -101,7 +104,7 @@ libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error)
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id)) {
+    } else if (!libwacom_ref_device(device, vendor_id, product_id, WBUSTYPE_USB)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }

@@ -57,7 +57,7 @@ typedef struct _WacomDeviceData {
 	uint32_t vendor_id;
 	uint32_t product_id;
 
-	enum WacomClass cls;
+	WacomClass cls;
 	WacomBusType bus;
 	int num_buttons;
 	uint32_t features;

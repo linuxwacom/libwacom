@@ -40,7 +40,7 @@
 #define FEATURE_GROUP "Features"
 #define DEVICE_GROUP "Device"
 
-static enum WacomClass
+static WacomClass
 libwacom_model_string_to_enum(const char *model)
 {
 	if (strcmp(model, "Intuos3") == 0)

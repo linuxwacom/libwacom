@@ -156,7 +156,7 @@ int libwacom_get_height(WacomDevice *device)
     return device->ref->height;
 }
 
-enum WacomClass
+WacomClass
 libwacom_get_class(WacomDevice *device)
 {
     return device->ref->cls;

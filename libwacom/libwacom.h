@@ -98,7 +98,7 @@ typedef enum {
 /**
  * Classes of devices.
  */
-enum WacomClass {
+typedef enum {
     WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
     WCLASS_INTUOS3,		/**< Any Intuos3 series */
     WCLASS_INTUOS4,		/**< Any Intuos4 series */
@@ -106,7 +106,7 @@ enum WacomClass {
     WCLASS_BAMBOO,		/**< Any Bamboo device */
     WCLASS_GRAPHIRE,		/**< Any Graphire device */
     WCLASS_ISDV4,		/**< Any serial ISDV4 device */
-};
+} WacomClass;
 
 /**
  * Allocate a new structure for error reporting.
@@ -171,7 +171,7 @@ void libwacom_destroy(WacomDevice **device);
  * @param device The tablet to query
  * @return The class of the device
  */
-enum WacomClass libwacom_get_class(WacomDevice *device);
+WacomClass libwacom_get_class(WacomDevice *device);
 
 /**
  * @param device The tablet to query

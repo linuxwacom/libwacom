@@ -92,6 +92,7 @@ enum WacomBusType {
     WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
     WBUSTYPE_USB,		/**< USB tablet */
     WBUSTYPE_SERIAL,		/**< Serial tablet */
+    WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
 };
 
 /**

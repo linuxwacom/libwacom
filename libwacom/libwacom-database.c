@@ -78,14 +78,7 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 	if (rc != 3)
 		return 0;
 
-	if (strcmp(busstr, "usb") == 0)
-		*bus = WBUSTYPE_USB;
-	else if (strcmp(busstr, "serial") == 0)
-		*bus = WBUSTYPE_SERIAL;
-	else if (strcmp(busstr, "bluetooth") == 0)
-		*bus = WBUSTYPE_BLUETOOTH;
-	else
-		*bus = WBUSTYPE_UNKNOWN;
+	*bus = bus_from_str (busstr);
 
 	return 1;
 }

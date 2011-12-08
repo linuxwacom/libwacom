@@ -1,0 +1,16 @@
+[Device]
+Product=Intuos 4 M 6x9
+Vendor=Wacom
+DeviceMatch=usb:056a:00b9
+Class=Intuos4
+Reversible=true
+Width=9
+Height=6
+
+[Features]
+Stylus=true
+Ring=true
+VStrip=false
+HStrip=false
+Buttons=9
+BuiltIn=false

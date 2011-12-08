@@ -57,6 +57,18 @@ libwacom_model_string_to_enum(const char *model)
 	return WCLASS_UNKNOWN;
 }
 
+WacomBusType
+bus_from_str (const char *str)
+{
+	if (strcmp (str, "usb") == 0)
+		return WBUSTYPE_USB;
+	if (strcmp (str, "serial") == 0)
+		return WBUSTYPE_SERIAL;
+	if (strcmp (str, "bluetooth") == 0)
+		return WBUSTYPE_BLUETOOTH;
+	return WBUSTYPE_UNKNOWN;
+}
+
 static int
 libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
 {

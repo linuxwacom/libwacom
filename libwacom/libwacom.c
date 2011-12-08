@@ -31,6 +31,7 @@
 #include "libwacomint.h"
 #include <stdlib.h>
 #include <string.h>
+#include <gudev/gudev.h>
 
 WacomDeviceData*
 libwacom_new_devicedata(void)
@@ -59,11 +60,90 @@ libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id, WacomBus
     return !!device->ref;
 }
 
+static int
+get_device_info (const char   *path,
+		 int          *vendor_id,
+		 int          *product_id,
+		 WacomBusType *bus,
+		 WacomError   *error)
+{
+	GUdevClient *client;
+	GUdevDevice *device;
+	const char * const subsystems[] = { "input", NULL };
+	gboolean retval;
+	const char *bus_str;
+
+	retval = FALSE;
+	client = g_udev_client_new (subsystems);
+	device = g_udev_client_query_by_device_file (client, path);
+	if (device == NULL) {
+		libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
+		goto bail;
+	}
+
+	bus_str = g_udev_device_get_property (device, "ID_BUS");
+	/* Poke the parent device for Bluetooth models */
+	if (bus_str == NULL) {
+		GUdevDevice *parent;
+
+		parent = g_udev_device_get_parent (device);
+
+		g_object_unref (device);
+		device = parent;
+		bus_str = g_udev_device_get_property (device, "ID_BUS");
+		if (bus_str == NULL) {
+			libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find bus property for '%s' in udev", path);
+			goto bail;
+		}
+	}
+
+	*bus = bus_from_str (bus_str);
+	if (*bus == WBUSTYPE_USB) {
+		const char *vendor_str, *product_str;
+
+		vendor_str = g_udev_device_get_property (device, "ID_VENDOR_ID");
+		product_str = g_udev_device_get_property (device, "ID_MODEL_ID");
+
+		*vendor_id = strtol (vendor_str, NULL, 16);
+		*product_id = strtol (product_str, NULL, 16);
+	} else if (*bus == WBUSTYPE_BLUETOOTH) {
+		const char *product_str;
+
+		product_str = g_udev_device_get_property (device, "PRODUCT");
+
+		/* FIXME, parse that:
+		 * E: PRODUCT=5/56a/81/100
+		 * into:
+		 * vendor 0x56a
+		 * product 0x81
+		 */
+		*vendor_id = 0x56a;
+		*product_id = 0x81;
+	} else if (*bus == WBUSTYPE_SERIAL) {
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+		/* FIXME implement */
+	} else {
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
+	}
+
+	if (*bus != WBUSTYPE_UNKNOWN &&
+	    vendor_id != 0 &&
+	    product_id != 0)
+		retval = TRUE;
+
+bail:
+	if (device != NULL)
+		g_object_unref (device);
+	if (client != NULL)
+		g_object_unref (client);
+	return retval;
+}
+
 WacomDevice*
 libwacom_new_from_path(const char *path, WacomError *error)
 {
     WacomDevice *device;
-    int vendor_id = 0, product_id = 0;
+    int vendor_id, product_id;
     WacomBusType bus;
 
     if (!path) {
@@ -77,8 +157,8 @@ libwacom_new_from_path(const char *path, WacomError *error)
         return NULL;
     }
 
-    /* FIXME: open path, read device information */
-    bus = WBUSTYPE_UNKNOWN;
+    if (!get_device_info (path, &vendor_id, &product_id, &bus, error))
+        return NULL;
 
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");

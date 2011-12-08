@@ -21,7 +21,7 @@ PKG_PROG_PKG_CONFIG
 AC_CHECK_PROG(HAVE_DOXYGEN, [doxygen], [yes], [no])
 AM_CONDITIONAL(HAVE_DOXYGEN, test "x$HAVE_DOXYGEN" = xyes)
 
-PKG_CHECK_MODULES(GLIB, glib-2.0)
+PKG_CHECK_MODULES(GLIB, glib-2.0 gudev-1.0)
 
 AC_CONFIG_FILES([Makefile
                  data/Makefile

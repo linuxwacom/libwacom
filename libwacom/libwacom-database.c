@@ -77,6 +77,11 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 {
 	char busstr[64];
 	int rc;
+
+	/* Ignore errors for lack of match */
+	if (match == NULL || *match == '\0')
+		return 1;
+
 	rc = sscanf(match, "%63[^:]:%x:%x", busstr, vendor_id, product_id);
 	if (rc != 3)
 		return 0;

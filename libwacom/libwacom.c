@@ -34,42 +34,10 @@
 #include <string.h>
 #include <gudev/gudev.h>
 
-WacomDeviceData*
-libwacom_new_devicedata(void)
+static const WacomDevice *
+libwacom_get_device(WacomDeviceDatabase *db, const char *match)
 {
-    WacomDeviceData *device;
-
-    device = calloc(1, sizeof(*device));
-
-    return device;
-}
-
-static int
-libwacom_ref_device(WacomDevice *device, int fallback, int vendor_id, int product_id, WacomBusType bus)
-{
-    int i;
-
-    for (i = 0; i < device->nentries; i++) {
-        if (device->database[i]->vendor_id == vendor_id &&
-            device->database[i]->product_id == product_id &&
-            device->database[i]->bus == bus) {
-            device->ref = device->database[i];
-            break;
-        }
-    }
-
-    if (device->ref == NULL && fallback) {
-        for (i = 0; i < device->nentries; i++) {
-            if (device->database[i]->vendor_id == 0 &&
-                device->database[i]->product_id == 0 &&
-                device->database[i]->bus == 0) {
-                device->ref = device->database[i];
-                break;
-            }
-        }
-    }
-
-    return !!device->ref;
+	return (WacomDevice *) g_hash_table_lookup (db->device_ht, match);
 }
 
 static int
@@ -155,170 +123,191 @@ bail:
 	return retval;
 }
 
-WacomDevice*
-libwacom_new_from_path(const char *path, int fallback, WacomError *error)
+static WacomDevice *
+libwacom_copy(const WacomDevice *device)
 {
-    WacomDevice *device;
+	WacomDevice *d;
+
+	d = g_new0 (WacomDevice, 1);
+	d->vendor = g_strdup (device->vendor);
+	d->product = g_strdup (device->product);
+	d->model = g_strdup (device->model);
+	d->width = device->width;
+	d->height = device->height;
+	d->match = g_strdup (device->match);
+	d->vendor_id = device->vendor_id;
+	d->product_id = device->product_id;
+	d->cls = device->cls;
+	d->bus = device->bus;
+	d->num_buttons = device->num_buttons;
+	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
+	d->num_styli = device->num_styli;
+	d->features = device->features;
+
+	return d;
+}
+
+static const WacomDevice *
+libwacom_new (WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusType bus, WacomError *error)
+{
+    const WacomDevice *device;
+    char *match;
+
+    if (!db) {
+        libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+        return NULL;
+    }
+
+    match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
+    device = libwacom_get_device(db, match);
+    g_free (match);
+
+    return device;
+}
+
+WacomDevice*
+libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, WacomError *error)
+{
     int vendor_id, product_id;
     WacomBusType bus;
+    const WacomDevice *device;
 
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
         return NULL;
     }
 
-    device = calloc(1, sizeof(*device));
-    if (!device) {
-        libwacom_error_set(error, WERROR_BAD_ALLOC, NULL);
-        return NULL;
-    }
-
     if (!get_device_info (path, &vendor_id, &product_id, &bus, error))
         return NULL;
 
-    if (!libwacom_load_database(device)) {
-        libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
-        libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, fallback, vendor_id, product_id, bus)) {
-        libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
-        libwacom_destroy(&device);
-    }
+    device = libwacom_new (db, vendor_id, product_id, bus, error);
 
-    return device;
+    if (device == NULL && fallback)
+	    device = libwacom_get_device(db, "generic");
+
+    if (device)
+	    return libwacom_copy(device);
+
+    libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
+    return NULL;
 }
 
 WacomDevice*
-libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error)
+libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error)
 {
-    WacomDevice *device;
-    device = calloc(1, sizeof(*device));
-    if (!device) {
-        libwacom_error_set(error, WERROR_BAD_ALLOC, NULL);
-        return NULL;
-    }
+    const WacomDevice *device;
 
-    if (!libwacom_load_database(device)) {
-        libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
-        libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, 0, vendor_id, product_id, WBUSTYPE_USB)) {
-        libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
-        libwacom_destroy(&device);
-    }
+    device = libwacom_new(db, vendor_id, product_id, WBUSTYPE_USB, error);
 
-    return device;
+    if (device)
+	    return libwacom_copy(device);
+
+    libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
+    return NULL;
 }
 
 void
-libwacom_destroy(WacomDevice **device)
+libwacom_destroy(WacomDevice *device)
 {
-    WacomDevice *d;
+	g_free (device->vendor);
+	g_free (device->product);
+	g_free (device->model);
 
-    if (!device || !*device)
-        return;
-
-    d = *device;
-
-    while (d->nentries--) {
-        g_free(d->database[d->nentries]->supported_styli);
-        free(d->database[d->nentries]);
-    }
-
-    free(d->database);
-    free(d);
-
-    *device = NULL;
+	g_free (device->match);
+	g_free (device->supported_styli);
+	g_free (device);
 }
 
 const char* libwacom_get_vendor(WacomDevice *device)
 {
-    return device->ref->vendor;
+    return device->vendor;
 }
 
 int libwacom_get_vendor_id(WacomDevice *device)
 {
-    return device->ref->vendor_id;
+    return device->vendor_id;
 }
 
 const char* libwacom_get_product(WacomDevice *device)
 {
-    return device->ref->product;
+    return device->product;
 }
 
 int libwacom_get_product_id(WacomDevice *device)
 {
-    return device->ref->product_id;
+    return device->product_id;
 }
 
 int libwacom_get_width(WacomDevice *device)
 {
-    return device->ref->width;
+    return device->width;
 }
 
 int libwacom_get_height(WacomDevice *device)
 {
-    return device->ref->height;
+    return device->height;
 }
 
 WacomClass
 libwacom_get_class(WacomDevice *device)
 {
-    return device->ref->cls;
+    return device->cls;
 }
 
 int libwacom_has_stylus(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_STYLUS);
+    return !!(device->features & FEATURE_STYLUS);
 }
 
 int libwacom_has_touch(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_TOUCH);
+    return !!(device->features & FEATURE_TOUCH);
 }
 
 int libwacom_get_num_buttons(WacomDevice *device)
 {
-    return device->ref->num_buttons;
+    return device->num_buttons;
 }
 
 int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli)
 {
-    *num_styli = device->ref->num_styli;
-    return device->ref->supported_styli;
+    *num_styli = device->num_styli;
+    return device->supported_styli;
 }
 
 int libwacom_has_ring(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_RING);
+    return !!(device->features & FEATURE_RING);
 }
 
 int libwacom_has_ring2(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_RING2);
+    return !!(device->features & FEATURE_RING2);
 }
 
 int libwacom_has_vstrip(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_VSTRIP);
+    return !!(device->features & FEATURE_VSTRIP);
 }
 
 int libwacom_has_hstrip(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_HSTRIP);
+    return !!(device->features & FEATURE_HSTRIP);
 }
 
 int libwacom_is_builtin(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_BUILTIN);
+    return !!(device->features & FEATURE_BUILTIN);
 }
 
 int libwacom_is_reversible(WacomDevice *device)
 {
-    return !!(device->ref->features & FEATURE_REVERSIBLE);
+    return !!(device->features & FEATURE_REVERSIBLE);
 }
 
 WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
-    return device->ref->bus;
+    return device->bus;
 }
 
 /* vim :noexpandtab shiftwidth=8: */

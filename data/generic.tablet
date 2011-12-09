@@ -1,7 +1,7 @@
 [Device]
 Product=Generic
 Vendor=Wacom
-DeviceMatch=
+DeviceMatch=generic
 Reversible=true
 
 [Features]

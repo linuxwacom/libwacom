@@ -38,6 +38,8 @@
 #define DBG(...) \
 	printf(__VA_ARGS__)
 
+#define GENERIC_DEVICE_MATCH "generic"
+
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),
@@ -49,13 +51,14 @@ enum WacomFeature {
 	FEATURE_REVERSIBLE	= (1 << 7)
 };
 
-typedef struct _WacomDeviceData {
+struct _WacomDevice {
 	char *vendor;
 	char *product;
 	char *model;
 	int width;
 	int height;
 
+	char *match;
 	uint32_t vendor_id;
 	uint32_t product_id;
 
@@ -65,12 +68,10 @@ typedef struct _WacomDeviceData {
 	int *supported_styli;
 	gsize num_styli;
 	uint32_t features;
-} WacomDeviceData;
+};
 
-struct _WacomDevice {
-	WacomDeviceData *ref; /* points to the matching element in the database */
-	WacomDeviceData **database;
-	int nentries;
+struct _WacomDeviceDatabase {
+	GHashTable *device_ht; /* key = DeviceMatch, value = WacomDeviceData */
 };
 
 struct _WacomError {
@@ -79,8 +80,6 @@ struct _WacomError {
 };
 
 /* INTERNAL */
-WacomDeviceData* libwacom_new_devicedata(void);
-int libwacom_load_database(WacomDevice* device);
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 
 WacomBusType  bus_from_str (const char *str);

@@ -95,10 +95,6 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 	char busstr[64];
 	int rc;
 
-	/* Ignore errors for lack of match */
-	if (match == NULL || *match == '\0')
-		return 1;
-
 	rc = sscanf(match, "%63[^:]:%x:%x", busstr, vendor_id, product_id);
 	if (rc != 3)
 		return 0;
@@ -108,10 +104,10 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 	return 1;
 }
 
-static WacomDeviceData*
-libwacom_parse_keyfile(const char *path)
+static WacomDevice*
+libwacom_parse_tablet_keyfile(const char *path)
 {
-	WacomDeviceData *device = NULL;
+	WacomDevice *device = NULL;
 	GKeyFile *keyfile;
 	GError *error = NULL;
 	gboolean rc;
@@ -128,11 +124,7 @@ libwacom_parse_keyfile(const char *path)
 		goto out;
 	}
 
-	device = libwacom_new_devicedata();
-	if (!device) {
-		DBG("Cannot allocate memory\n");
-		goto out;
-	}
+	device = g_new0 (WacomDevice, 1);
 
 	device->vendor = g_key_file_get_string(keyfile, DEVICE_GROUP, "Vendor", NULL);
 	device->product = g_key_file_get_string(keyfile, DEVICE_GROUP, "Product", NULL);
@@ -144,9 +136,15 @@ libwacom_parse_keyfile(const char *path)
 	g_free(class);
 
 	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
-	if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
-		DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
-	g_free(match);
+	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
+		device->match = match;
+	} else {
+		if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
+			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", device->match, path);
+		else
+			device->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (device->bus), device->vendor_id, device->product_id);
+		g_free (match);
+	}
 
 	styli_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (styli_list) {
@@ -219,52 +217,48 @@ scandir_filter(const struct dirent *entry)
 	return !strcmp(&name[len - suffix_len], SUFFIX);
 }
 
-int
-libwacom_load_database(WacomDevice* device)
+WacomDeviceDatabase *
+libwacom_database_new (void)
 {
     int n, nfiles;
     struct dirent **files;
-    WacomDeviceData **tmp;
-    int ndevices = 0;
+    WacomDeviceDatabase *db;
+
+    db = g_new0 (WacomDeviceDatabase, 1);
+    db->device_ht = g_hash_table_new_full (g_str_hash,
+					   g_str_equal,
+					   g_free,
+					   (GDestroyNotify) libwacom_destroy);
 
     n = scandir(DATADIR, &files, scandir_filter, alphasort);
-
     if (n <= 0)
-	    return 0;
-
-    device->database = calloc(n, sizeof(device));
-    if (!device->database)
-	    goto out;
+	    return db;
 
     nfiles = n;
     while(n--) {
-	    WacomDeviceData *d;
-	    char *path = malloc(strlen(DATADIR) + strlen(files[n]->d_name) + 2);
+	    WacomDevice *d;
+	    char *path;
 
-	    if (!path)
-		    break;
-
-	    strcpy(path, DATADIR);
-	    strcat(path, "/");
-	    strcat(path, files[n]->d_name);
-	    d = libwacom_parse_keyfile(path);
-	    free(path);
+	    path = g_build_filename (DATADIR, files[n]->d_name, NULL);
+	    d = libwacom_parse_tablet_keyfile(path);
+	    g_free(path);
 
 	    if (d)
-		    device->database[ndevices++] = d;
+		    g_hash_table_insert (db->device_ht, g_strdup (d->match), d);
     }
 
-    tmp = realloc(device->database, ndevices * sizeof(*device));
-    if (tmp)
-	    device->database = tmp;
-    device->nentries = ndevices;
-
-out:
     while(nfiles--)
 	    free(files[nfiles]);
     free(files);
 
-    return !!ndevices;
+    return db;
+}
+
+void
+libwacom_database_destroy(WacomDeviceDatabase *db)
+{
+	g_hash_table_destroy(db->device_ht);
+	g_free (db);
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

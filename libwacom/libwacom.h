@@ -74,6 +74,8 @@ typedef struct _WacomDevice WacomDevice;
 
 typedef struct _WacomError WacomError;
 
+typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
+
 /**
  * Possible error codes.
  */
@@ -81,6 +83,7 @@ enum WacomErrorCode {
     WERROR_NONE,		/**< No error has occured */
     WERROR_BAD_ALLOC,		/**< Allocation error */
     WERROR_INVALID_PATH,	/**< A path specified is invalid */
+    WERROR_INVALID_DB,		/**< The passed DB is invalid */
     WERROR_BAD_ACCESS,		/**< Invalid permissions to access the path */
     WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
 };
@@ -136,37 +139,54 @@ enum WacomErrorCode libwacom_error_get_code(WacomError *error);
 const char* libwacom_error_get_message(WacomError *error);
 
 /**
+ * Loads the Tablet and Stylus databases, to be used
+ * in libwacom_new_*() functions.
+ *
+ * @return A new database or NULL on error.
+ */
+WacomDeviceDatabase* libwacom_database_new(void);
+
+/**
+  * Free all memory used by the database.
+  *
+  * @param db A Tablet and Stylus database.
+  */
+void libwacom_database_destroy(WacomDeviceDatabase *db);
+
+/**
  * Create a new device reference from the given device path.
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
  *
+ * @param db A device database
  * @param path A device path in the form of e.g. /dev/input/event0
  * @param fallback Whether we should create a generic if model is unknown
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(const char *path, int fallback, WacomError *error);
+WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
  *
+ * @param db A device database
  * @param vendor_id The vendor ID of the device
  * @param product_id The product ID of the device
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error);
+WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
 
 /**
  * Remove the device and free all memory and references to it.
  *
  * @param device The device to delete
  */
-void libwacom_destroy(WacomDevice **device);
+void libwacom_destroy(WacomDevice *device);
 
 /**
  * @param device The tablet to query

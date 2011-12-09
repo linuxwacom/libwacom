@@ -1,0 +1,30 @@
+[0x802]
+Name=Intuos4 General Pen
+Buttons=2
+HasEraser=true
+Type=General
+#Icon=wacom-stylus
+
+[0x80a]
+Name=Intuos4 General Pen Eraser
+IsEraser=true
+Type=General
+
+[0x20802]
+Name=Intuos4 Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+#Icon=wacom-stylus-inking
+
+[0x902]
+Name=Intuos4 Airbrush Pen
+Buttons=1
+HasEraser=true
+Type=Airbrush
+#Icon=wacom-stylus-airbrush
+
+[0x91b]
+Name=Intuos4 Airbrush Pen Eraser
+IsEraser=true
+Type=Airbrush

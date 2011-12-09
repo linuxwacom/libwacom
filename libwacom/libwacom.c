@@ -92,6 +92,11 @@ get_device_info (const char   *path,
 		goto bail;
 	}
 
+	if (g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") == FALSE) {
+		libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
+		goto bail;
+	}
+
 	bus_str = g_udev_device_get_property (device, "ID_BUS");
 	/* Poke the parent device for Bluetooth models */
 	if (bus_str == NULL) {

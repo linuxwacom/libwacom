@@ -44,7 +44,7 @@ libwacom_new_devicedata(void)
 }
 
 static int
-libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id, WacomBusType bus)
+libwacom_ref_device(WacomDevice *device, int fallback, int vendor_id, int product_id, WacomBusType bus)
 {
     int i;
 
@@ -54,6 +54,17 @@ libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id, WacomBus
             device->database[i]->bus == bus) {
             device->ref = device->database[i];
             break;
+        }
+    }
+
+    if (device->ref == NULL && fallback) {
+        for (i = 0; i < device->nentries; i++) {
+            if (device->database[i]->vendor_id == 0 &&
+                device->database[i]->product_id == 0 &&
+                device->database[i]->bus == 0) {
+                device->ref = device->database[i];
+                break;
+            }
         }
     }
 
@@ -140,7 +151,7 @@ bail:
 }
 
 WacomDevice*
-libwacom_new_from_path(const char *path, WacomError *error)
+libwacom_new_from_path(const char *path, int fallback, WacomError *error)
 {
     WacomDevice *device;
     int vendor_id, product_id;
@@ -163,7 +174,7 @@ libwacom_new_from_path(const char *path, WacomError *error)
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id, bus)) {
+    } else if (!libwacom_ref_device(device, fallback, vendor_id, product_id, bus)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }
@@ -184,7 +195,7 @@ libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error)
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id, WBUSTYPE_USB)) {
+    } else if (!libwacom_ref_device(device, 0, vendor_id, product_id, WBUSTYPE_USB)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }

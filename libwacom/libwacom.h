@@ -141,11 +141,12 @@ const char* libwacom_error_get_message(WacomError *error);
  * appropriate value.
  *
  * @param path A device path in the form of e.g. /dev/input/event0
+ * @param fallback Whether we should create a generic if model is unknown
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(const char *path, WacomError *error);
+WacomDevice* libwacom_new_from_path(const char *path, int fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.

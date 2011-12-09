@@ -43,6 +43,9 @@
 static WacomClass
 libwacom_model_string_to_enum(const char *model)
 {
+	if (model == NULL || *model == '\0')
+		return WCLASS_UNKNOWN;
+
 	if (strcmp(model, "Intuos3") == 0)
 		return WCLASS_INTUOS3;
 	if (strcmp(model, "Intuos4") == 0)

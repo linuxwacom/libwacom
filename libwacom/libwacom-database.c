@@ -72,6 +72,23 @@ bus_from_str (const char *str)
 	return WBUSTYPE_UNKNOWN;
 }
 
+const char *
+bus_to_str (WacomBusType bus)
+{
+	switch (bus) {
+	case WBUSTYPE_UNKNOWN:
+		g_assert_not_reached();
+		break;
+	case WBUSTYPE_USB:
+		return "usb";
+	case WBUSTYPE_SERIAL:
+		return "bluetooth";
+	case WBUSTYPE_BLUETOOTH:
+		return "bluetooth";
+	}
+	g_assert_not_reached ();
+}
+
 static int
 libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
 {

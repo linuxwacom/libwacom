@@ -82,7 +82,9 @@ struct _WacomError {
 WacomDeviceData* libwacom_new_devicedata(void);
 int libwacom_load_database(WacomDevice* device);
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
-WacomBusType bus_from_str (const char *str);
+
+WacomBusType  bus_from_str (const char *str);
+const char   *bus_to_str   (WacomBusType bus);
 
 #endif /* _LIBWACOMINT_H_ */
 

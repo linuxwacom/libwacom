@@ -106,11 +106,7 @@ get_device_info (const char   *path,
 
 		g_object_unref (device);
 		device = parent;
-		bus_str = g_udev_device_get_property (device, "ID_BUS");
-		if (bus_str == NULL) {
-			libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find bus property for '%s' in udev", path);
-			goto bail;
-		}
+		bus_str = "bluetooth";
 	}
 
 	*bus = bus_from_str (bus_str);

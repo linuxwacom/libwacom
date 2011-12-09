@@ -238,6 +238,13 @@ int libwacom_get_num_buttons(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @param num_styli Return location for the number of listed styli
+ * @return an array of Styli IDs supported by the device
+ */
+int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli);
+
+/**
+ * @param device The tablet to query
  * @return non-zero if the device has a touch ring or zero otherwise
  */
 int libwacom_has_ring(WacomDevice *device);

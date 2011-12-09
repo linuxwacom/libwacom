@@ -33,6 +33,7 @@
 
 #include "libwacom.h"
 #include <stdint.h>
+#include <glib.h>
 
 #define DBG(...) \
 	printf(__VA_ARGS__)
@@ -61,6 +62,8 @@ typedef struct _WacomDeviceData {
 	WacomClass cls;
 	WacomBusType bus;
 	int num_buttons;
+	int *supported_styli;
+	gsize num_styli;
 	uint32_t features;
 } WacomDeviceData;
 

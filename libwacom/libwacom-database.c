@@ -100,6 +100,7 @@ libwacom_parse_keyfile(const char *path)
 	gboolean rc;
 	char *class;
 	char *match;
+	char **styli_list;
 
 	keyfile = g_key_file_new();
 
@@ -129,6 +130,24 @@ libwacom_parse_keyfile(const char *path)
 	if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
 		DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
 	g_free(match);
+
+	styli_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
+	if (styli_list) {
+		GArray *array;
+		guint i;
+
+		array = g_array_new (FALSE, FALSE, sizeof(int));
+		device->num_styli = 0;
+		for (i = 0; styli_list[i]; i++) {
+			glong long_value = strtol (styli_list[i], NULL, 0);
+			int int_value = long_value;
+
+			g_array_append_val (array, int_value);
+			device->num_styli++;
+		}
+		g_strfreev (styli_list);
+		device->supported_styli = (int *) g_array_free (array, FALSE);
+	}
 
 	/* Features */
 	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Stylus", NULL))

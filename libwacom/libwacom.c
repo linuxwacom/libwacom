@@ -218,8 +218,10 @@ libwacom_destroy(WacomDevice **device)
 
     d = *device;
 
-    while (d->nentries--)
+    while (d->nentries--) {
+        g_free(d->database[d->nentries]->supported_styli);
         free(d->database[d->nentries]);
+    }
 
     free(d->database);
     free(d);
@@ -276,6 +278,12 @@ int libwacom_has_touch(WacomDevice *device)
 int libwacom_get_num_buttons(WacomDevice *device)
 {
     return device->ref->num_buttons;
+}
+
+int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli)
+{
+    *num_styli = device->ref->num_styli;
+    return device->ref->supported_styli;
 }
 
 int libwacom_has_ring(WacomDevice *device)

@@ -61,7 +61,7 @@ libwacom_error_get_code(WacomError *error)
 const char*
 libwacom_error_get_message(WacomError *error)
 {
-	return NULL;
+	return error->msg;
 }
 
 /* INTERNAL */

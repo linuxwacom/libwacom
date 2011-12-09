@@ -72,6 +72,8 @@
 
 typedef struct _WacomDevice WacomDevice;
 
+typedef struct _WacomStylus WacomStylus;
+
 typedef struct _WacomError WacomError;
 
 typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
@@ -110,6 +112,16 @@ typedef enum {
     WCLASS_GRAPHIRE,		/**< Any Graphire device */
     WCLASS_ISDV4,		/**< Any serial ISDV4 device */
 } WacomClass;
+
+/**
+ * Class of stylus
+ */
+typedef enum {
+    WSTYLUS_UNKNOWN,
+    WSTYLUS_GENERAL,
+    WSTYLUS_INKING,
+    WSTYLUS_AIRBRUSH
+} WacomStylusType;
 
 /**
  * Allocate a new structure for error reporting.
@@ -308,6 +320,51 @@ int libwacom_is_reversible(WacomDevice *device);
  * @return The bustype of this device.
  */
 WacomBusType libwacom_get_bustype(WacomDevice *device);
+
+/**
+ * Get the WacomStylus for the given tool ID.
+ *
+ * @param db A Tablet and Stylus database.
+ * @param id The Tool ID for this stylus
+ * @return A WacomStylus representing the stylus. Do not free.
+ */
+const WacomStylus *libwacom_stylus_get_for_id (WacomDeviceDatabase *db, int id);
+
+/**
+ * @param stylus The stylus to query
+ * @return the ID of the tool
+ */
+int         libwacom_stylus_get_id (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The name of the stylus
+ */
+const char *libwacom_stylus_get_name (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The number of buttons on the stylus
+ */
+int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return Whether the stylus has an eraser
+ */
+int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return Whether the stylus is actually an eraser
+ */
+int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The type of stylus
+ */
+WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
 
 #endif /* _LIBWACOM_H_ */
 

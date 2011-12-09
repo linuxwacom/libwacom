@@ -60,6 +60,20 @@ libwacom_model_string_to_enum(const char *model)
 	return WCLASS_UNKNOWN;
 }
 
+WacomStylusType
+type_from_str (const char *type)
+{
+	if (type == NULL)
+		return WSTYLUS_UNKNOWN;
+	if (strcmp (type, "General") == 0)
+		return WSTYLUS_GENERAL;
+	if (strcmp (type, "Inking") == 0)
+		return WSTYLUS_INKING;
+	if (strcmp (type, "Airbrush") == 0)
+		return WSTYLUS_AIRBRUSH;
+	return WSTYLUS_UNKNOWN;
+}
+
 WacomBusType
 bus_from_str (const char *str)
 {
@@ -102,6 +116,48 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 	*bus = bus_from_str (busstr);
 
 	return 1;
+}
+
+static void
+libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
+{
+	GKeyFile *keyfile;
+	GError *error = NULL;
+	char **groups;
+	gboolean rc;
+	guint i;
+
+	keyfile = g_key_file_new();
+
+	rc = g_key_file_load_from_file(keyfile, path, G_KEY_FILE_NONE, &error);
+	g_assert (rc);
+
+	groups = g_key_file_get_groups (keyfile, NULL);
+	for (i = 0; groups[i]; i++) {
+		WacomStylus *stylus;
+		char *type;
+		int id;
+
+		id = strtol (groups[i], NULL, 16);
+		if (id == 0) {
+			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
+			continue;
+		}
+
+		stylus = g_new0 (WacomStylus, 1);
+		stylus->id = id;
+		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
+		stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", NULL);
+		stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", NULL);
+		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", NULL);
+
+		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);
+		stylus->type = type_from_str (type);
+		g_free (type);
+
+		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
+	}
+	g_strfreev (groups);
 }
 
 static WacomDevice*
@@ -223,8 +279,11 @@ libwacom_database_new (void)
     int n, nfiles;
     struct dirent **files;
     WacomDeviceDatabase *db;
+    char *path;
 
     db = g_new0 (WacomDeviceDatabase, 1);
+
+    /* Load tablets */
     db->device_ht = g_hash_table_new_full (g_str_hash,
 					   g_str_equal,
 					   g_free,
@@ -237,7 +296,6 @@ libwacom_database_new (void)
     nfiles = n;
     while(n--) {
 	    WacomDevice *d;
-	    char *path;
 
 	    path = g_build_filename (DATADIR, files[n]->d_name, NULL);
 	    d = libwacom_parse_tablet_keyfile(path);
@@ -251,6 +309,14 @@ libwacom_database_new (void)
 	    free(files[nfiles]);
     free(files);
 
+    /* Load styli */
+    path = g_build_filename (DATADIR, STYLUS_DATA_FILE, NULL);
+    db->stylus_ht = g_hash_table_new_full (g_direct_hash,
+					   g_direct_equal,
+					   NULL,
+					   (GDestroyNotify) libwacom_stylus_destroy);
+    libwacom_parse_stylus_keyfile(db, path);
+
     return db;
 }
 
@@ -258,6 +324,7 @@ void
 libwacom_database_destroy(WacomDeviceDatabase *db)
 {
 	g_hash_table_destroy(db->device_ht);
+	g_hash_table_destroy(db->stylus_ht);
 	g_free (db);
 }
 

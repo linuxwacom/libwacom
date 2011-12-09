@@ -39,6 +39,7 @@
 	printf(__VA_ARGS__)
 
 #define GENERIC_DEVICE_MATCH "generic"
+#define STYLUS_DATA_FILE "libwacom.stylus"
 
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
@@ -70,8 +71,18 @@ struct _WacomDevice {
 	uint32_t features;
 };
 
+struct _WacomStylus {
+	int id;
+	char *name;
+	int num_buttons;
+	gboolean has_eraser;
+	gboolean is_eraser;
+	WacomStylusType type;
+};
+
 struct _WacomDeviceDatabase {
-	GHashTable *device_ht; /* key = DeviceMatch, value = WacomDeviceData */
+	GHashTable *device_ht; /* key = DeviceMatch (str), value = WacomDeviceData * */
+	GHashTable *stylus_ht; /* key = ID (int), value = WacomStylus * */
 };
 
 struct _WacomError {
@@ -81,6 +92,7 @@ struct _WacomError {
 
 /* INTERNAL */
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
+void libwacom_stylus_destroy(WacomStylus *stylus);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

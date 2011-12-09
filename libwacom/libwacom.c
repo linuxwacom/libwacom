@@ -310,4 +310,45 @@ WacomBusType libwacom_get_bustype(WacomDevice *device)
     return device->bus;
 }
 
+const WacomStylus *libwacom_stylus_get_for_id (WacomDeviceDatabase *db, int id)
+{
+	return g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER(id));
+}
+
+int libwacom_stylus_get_id (const WacomStylus *stylus)
+{
+	return stylus->id;
+}
+
+const char *libwacom_stylus_get_name (const WacomStylus *stylus)
+{
+	return stylus->name;
+}
+
+int libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
+{
+	return stylus->num_buttons;
+}
+
+int libwacom_stylus_has_eraser (const WacomStylus *stylus)
+{
+	return stylus->has_eraser;
+}
+
+int libwacom_stylus_is_eraser (const WacomStylus *stylus)
+{
+	return stylus->is_eraser;
+}
+
+WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
+{
+	return stylus->type;
+}
+
+void libwacom_stylus_destroy(WacomStylus *stylus)
+{
+	g_free (stylus->name);
+	g_free (stylus);
+}
+
 /* vim :noexpandtab shiftwidth=8: */

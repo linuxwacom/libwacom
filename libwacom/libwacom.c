@@ -30,6 +30,7 @@
 
 #include "libwacomint.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <gudev/gudev.h>
 
@@ -120,17 +121,18 @@ get_device_info (const char   *path,
 		*product_id = strtol (product_str, NULL, 16);
 	} else if (*bus == WBUSTYPE_BLUETOOTH) {
 		const char *product_str;
+		int garbage;
 
-		product_str = g_udev_device_get_property (device, "PRODUCT");
-
-		/* FIXME, parse that:
+		/* Parse that:
 		 * E: PRODUCT=5/56a/81/100
 		 * into:
 		 * vendor 0x56a
-		 * product 0x81
-		 */
-		*vendor_id = 0x56a;
-		*product_id = 0x81;
+		 * product 0x81 */
+		product_str = g_udev_device_get_property (device, "PRODUCT");
+		if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
+			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+			goto bail;
+		}
 	} else if (*bus == WBUSTYPE_SERIAL) {
 		/* FIXME implement */
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");

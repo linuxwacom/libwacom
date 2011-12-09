@@ -127,7 +127,7 @@ libwacom_parse_keyfile(const char *path)
 
 	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
 	if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
-		DBG("failed to match %s for product/vendor IDs\n", match);
+		DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
 	g_free(match);
 
 	/* Features */

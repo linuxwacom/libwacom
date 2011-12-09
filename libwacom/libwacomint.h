@@ -45,6 +45,7 @@ enum WacomFeature {
 	FEATURE_VSTRIP		= (1 << 4),
 	FEATURE_HSTRIP		= (1 << 5),
 	FEATURE_BUILTIN		= (1 << 6),
+	FEATURE_REVERSIBLE	= (1 << 7)
 };
 
 typedef struct _WacomDeviceData {
@@ -57,8 +58,8 @@ typedef struct _WacomDeviceData {
 	uint32_t vendor_id;
 	uint32_t product_id;
 
-	enum WacomClass cls;
-	enum WacomBusType bus;
+	WacomClass cls;
+	WacomBusType bus;
 	int num_buttons;
 	uint32_t features;
 } WacomDeviceData;
@@ -78,6 +79,7 @@ struct _WacomError {
 WacomDeviceData* libwacom_new_devicedata(void);
 int libwacom_load_database(WacomDevice* device);
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
+WacomBusType bus_from_str (const char *str);
 
 #endif /* _LIBWACOMINT_H_ */
 

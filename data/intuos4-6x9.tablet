@@ -1,8 +1,7 @@
 [Device]
-Product=Intuos 4 WL 6x9
+Product=Intuos 4 M 6x9
 Vendor=Wacom
-# FIXME add missing bluetooth match
-DeviceMatch=usb:056a:00bc
+DeviceMatch=usb:056a:00b9
 Class=Intuos4
 Reversible=true
 Width=9

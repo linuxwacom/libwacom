@@ -40,9 +40,12 @@
 #define FEATURE_GROUP "Features"
 #define DEVICE_GROUP "Device"
 
-static enum WacomClass
+static WacomClass
 libwacom_model_string_to_enum(const char *model)
 {
+	if (model == NULL || *model == '\0')
+		return WCLASS_UNKNOWN;
+
 	if (strcmp(model, "Intuos3") == 0)
 		return WCLASS_INTUOS3;
 	if (strcmp(model, "Intuos4") == 0)
@@ -57,21 +60,33 @@ libwacom_model_string_to_enum(const char *model)
 	return WCLASS_UNKNOWN;
 }
 
+WacomBusType
+bus_from_str (const char *str)
+{
+	if (strcmp (str, "usb") == 0)
+		return WBUSTYPE_USB;
+	if (strcmp (str, "serial") == 0)
+		return WBUSTYPE_SERIAL;
+	if (strcmp (str, "bluetooth") == 0)
+		return WBUSTYPE_BLUETOOTH;
+	return WBUSTYPE_UNKNOWN;
+}
+
 static int
-libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, enum WacomBusType *bus)
+libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
 {
 	char busstr[64];
 	int rc;
+
+	/* Ignore errors for lack of match */
+	if (match == NULL || *match == '\0')
+		return 1;
+
 	rc = sscanf(match, "%63[^:]:%x:%x", busstr, vendor_id, product_id);
 	if (rc != 3)
 		return 0;
 
-	if (strcmp(busstr, "usb") == 0)
-		*bus = WBUSTYPE_USB;
-	else if (strcmp(busstr, "serial") == 0)
-		*bus = WBUSTYPE_SERIAL;
-	else
-		*bus = WBUSTYPE_UNKNOWN;
+	*bus = bus_from_str (busstr);
 
 	return 1;
 }
@@ -112,7 +127,7 @@ libwacom_parse_keyfile(const char *path)
 
 	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
 	if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
-		DBG("failed to match %s for product/vendor IDs\n", match);
+		DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
 	g_free(match);
 
 	/* Features */
@@ -136,6 +151,9 @@ libwacom_parse_keyfile(const char *path)
 
 	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "BuiltIn", NULL))
 		device->features |= FEATURE_BUILTIN;
+
+	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Reversible", NULL))
+		device->features |= FEATURE_REVERSIBLE;
 
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURE_GROUP, "Buttons", NULL);
 

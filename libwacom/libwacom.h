@@ -88,16 +88,17 @@ enum WacomErrorCode {
 /**
  * Bus types for tablets.
  */
-enum WacomBusType {
+typedef enum {
     WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
     WBUSTYPE_USB,		/**< USB tablet */
     WBUSTYPE_SERIAL,		/**< Serial tablet */
-};
+    WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
+} WacomBusType;
 
 /**
  * Classes of devices.
  */
-enum WacomClass {
+typedef enum {
     WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
     WCLASS_INTUOS3,		/**< Any Intuos3 series */
     WCLASS_INTUOS4,		/**< Any Intuos4 series */
@@ -105,7 +106,7 @@ enum WacomClass {
     WCLASS_BAMBOO,		/**< Any Bamboo device */
     WCLASS_GRAPHIRE,		/**< Any Graphire device */
     WCLASS_ISDV4,		/**< Any serial ISDV4 device */
-};
+} WacomClass;
 
 /**
  * Allocate a new structure for error reporting.
@@ -140,11 +141,12 @@ const char* libwacom_error_get_message(WacomError *error);
  * appropriate value.
  *
  * @param path A device path in the form of e.g. /dev/input/event0
+ * @param fallback Whether we should create a generic if model is unknown
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(const char *path, WacomError *error);
+WacomDevice* libwacom_new_from_path(const char *path, int fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.
@@ -170,11 +172,11 @@ void libwacom_destroy(WacomDevice **device);
  * @param device The tablet to query
  * @return The class of the device
  */
-enum WacomClass libwacom_get_class(WacomDevice *device);
+WacomClass libwacom_get_class(WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return The human-readable vendor ID for this device
+ * @return The human-readable vendor for this device
  */
 const char* libwacom_get_vendor(WacomDevice *device);
 
@@ -183,6 +185,12 @@ const char* libwacom_get_vendor(WacomDevice *device);
  * @return The numeric vendor ID for this device
  */
 int libwacom_get_vendor_id(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return The human-readable product for this device
+ */
+const char* libwacom_get_product(WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -263,9 +271,16 @@ int libwacom_is_builtin(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return non-zero if the device can be used left-handed
+ * (rotated 180 degrees)
+ */
+int libwacom_is_reversible(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The bustype of this device.
  */
-enum WacomBusType libwacom_get_bustype(WacomDevice *device);
+WacomBusType libwacom_get_bustype(WacomDevice *device);
 
 #endif /* _LIBWACOM_H_ */
 

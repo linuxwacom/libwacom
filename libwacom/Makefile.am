@@ -10,3 +10,6 @@ libwacom_la_SOURCES = \
 		      libwacom-database.c
 
 libwacom_la_LIBADD = $(GLIB_LIBS)
+
+libwacomincludedir = $(includedir)/libwacom-1.0/libwacom/
+libwacominclude_HEADERS = libwacom.h

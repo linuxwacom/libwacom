@@ -31,6 +31,7 @@
 #include "libwacomint.h"
 #include <stdlib.h>
 #include <string.h>
+#include <gudev/gudev.h>
 
 WacomDeviceData*
 libwacom_new_devicedata(void)
@@ -43,26 +44,118 @@ libwacom_new_devicedata(void)
 }
 
 static int
-libwacom_ref_device(WacomDevice *device, int vendor_id, int product_id)
+libwacom_ref_device(WacomDevice *device, int fallback, int vendor_id, int product_id, WacomBusType bus)
 {
     int i;
 
     for (i = 0; i < device->nentries; i++) {
         if (device->database[i]->vendor_id == vendor_id &&
-            device->database[i]->product_id == product_id) {
+            device->database[i]->product_id == product_id &&
+            device->database[i]->bus == bus) {
             device->ref = device->database[i];
             break;
+        }
+    }
+
+    if (device->ref == NULL && fallback) {
+        for (i = 0; i < device->nentries; i++) {
+            if (device->database[i]->vendor_id == 0 &&
+                device->database[i]->product_id == 0 &&
+                device->database[i]->bus == 0) {
+                device->ref = device->database[i];
+                break;
+            }
         }
     }
 
     return !!device->ref;
 }
 
+static int
+get_device_info (const char   *path,
+		 int          *vendor_id,
+		 int          *product_id,
+		 WacomBusType *bus,
+		 WacomError   *error)
+{
+	GUdevClient *client;
+	GUdevDevice *device;
+	const char * const subsystems[] = { "input", NULL };
+	gboolean retval;
+	const char *bus_str;
+
+	retval = FALSE;
+	client = g_udev_client_new (subsystems);
+	device = g_udev_client_query_by_device_file (client, path);
+	if (device == NULL) {
+		libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
+		goto bail;
+	}
+
+	bus_str = g_udev_device_get_property (device, "ID_BUS");
+	/* Poke the parent device for Bluetooth models */
+	if (bus_str == NULL) {
+		GUdevDevice *parent;
+
+		parent = g_udev_device_get_parent (device);
+
+		g_object_unref (device);
+		device = parent;
+		bus_str = g_udev_device_get_property (device, "ID_BUS");
+		if (bus_str == NULL) {
+			libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find bus property for '%s' in udev", path);
+			goto bail;
+		}
+	}
+
+	*bus = bus_from_str (bus_str);
+	if (*bus == WBUSTYPE_USB) {
+		const char *vendor_str, *product_str;
+
+		vendor_str = g_udev_device_get_property (device, "ID_VENDOR_ID");
+		product_str = g_udev_device_get_property (device, "ID_MODEL_ID");
+
+		*vendor_id = strtol (vendor_str, NULL, 16);
+		*product_id = strtol (product_str, NULL, 16);
+	} else if (*bus == WBUSTYPE_BLUETOOTH) {
+		const char *product_str;
+
+		product_str = g_udev_device_get_property (device, "PRODUCT");
+
+		/* FIXME, parse that:
+		 * E: PRODUCT=5/56a/81/100
+		 * into:
+		 * vendor 0x56a
+		 * product 0x81
+		 */
+		*vendor_id = 0x56a;
+		*product_id = 0x81;
+	} else if (*bus == WBUSTYPE_SERIAL) {
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+		/* FIXME implement */
+	} else {
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
+	}
+
+	if (*bus != WBUSTYPE_UNKNOWN &&
+	    vendor_id != 0 &&
+	    product_id != 0)
+		retval = TRUE;
+
+bail:
+	if (device != NULL)
+		g_object_unref (device);
+	if (client != NULL)
+		g_object_unref (client);
+	return retval;
+}
+
 WacomDevice*
-libwacom_new_from_path(const char *path, WacomError *error)
+libwacom_new_from_path(const char *path, int fallback, WacomError *error)
 {
     WacomDevice *device;
-    int vendor_id = 0, product_id = 0;
+    int vendor_id, product_id;
+    WacomBusType bus;
 
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
@@ -75,12 +168,13 @@ libwacom_new_from_path(const char *path, WacomError *error)
         return NULL;
     }
 
-    /* FIXME: open path, read device information */
+    if (!get_device_info (path, &vendor_id, &product_id, &bus, error))
+        return NULL;
 
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id)) {
+    } else if (!libwacom_ref_device(device, fallback, vendor_id, product_id, bus)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }
@@ -101,7 +195,7 @@ libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error)
     if (!libwacom_load_database(device)) {
         libwacom_error_set(error, WERROR_BAD_ALLOC, "Could not load database");
         libwacom_destroy(&device);
-    } else if (!libwacom_ref_device(device, vendor_id, product_id)) {
+    } else if (!libwacom_ref_device(device, 0, vendor_id, product_id, WBUSTYPE_USB)) {
         libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
         libwacom_destroy(&device);
     }
@@ -138,6 +232,11 @@ int libwacom_get_vendor_id(WacomDevice *device)
     return device->ref->vendor_id;
 }
 
+const char* libwacom_get_product(WacomDevice *device)
+{
+    return device->ref->product;
+}
+
 int libwacom_get_product_id(WacomDevice *device)
 {
     return device->ref->product_id;
@@ -153,7 +252,7 @@ int libwacom_get_height(WacomDevice *device)
     return device->ref->height;
 }
 
-enum WacomClass
+WacomClass
 libwacom_get_class(WacomDevice *device)
 {
     return device->ref->cls;
@@ -199,7 +298,12 @@ int libwacom_is_builtin(WacomDevice *device)
     return !!(device->ref->features & FEATURE_BUILTIN);
 }
 
-enum WacomBusType libwacom_get_bustype(WacomDevice *device)
+int libwacom_is_reversible(WacomDevice *device)
+{
+    return !!(device->ref->features & FEATURE_REVERSIBLE);
+}
+
+WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
     return device->ref->bus;
 }

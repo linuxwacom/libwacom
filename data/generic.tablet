@@ -1,0 +1,13 @@
+[Device]
+Product=Generic
+Vendor=Wacom
+DeviceMatch=
+Reversible=true
+
+[Features]
+Stylus=true
+Ring=true
+VStrip=true
+HStrip=true
+Buttons=4
+BuiltIn=false

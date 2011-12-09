@@ -23,6 +23,9 @@ Width=9
 # Height in inches, as advertised by the manufacturer
 Height=6
 
+# Whether the tablet can be used left-handed
+Reversible=true
+
 # Optional features that this tablet supports
 # Some features are dependent on the actual tool used, e.g. not all styli
 # have an eraser and some styli have additional custom axes (e.g. the

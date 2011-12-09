@@ -6,6 +6,6 @@ includedir=@includedir@
 Name: libwacom
 Description: Wacom model feature query library
 Version: @VERSION@
-Requires.private: glib
-Cflags: -I${includedir}
+Requires.private: glib-2.0
+Cflags: -I${includedir}/libwacom-1.0
 Libs: -L${libdir} -lwacom

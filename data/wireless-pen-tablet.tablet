@@ -1,0 +1,16 @@
+[Device]
+Product=Graphire Wireless
+Vendor=Wacom
+DeviceMatch=bluetooth:056a:81
+Class=Graphire
+Reversible=false
+Width=8
+Height=6
+
+[Features]
+Stylus=true
+Ring=false
+VStrip=false
+HStrip=false
+Buttons=2
+BuiltIn=false

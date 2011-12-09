@@ -132,10 +132,12 @@ get_device_info (const char   *path,
 		*vendor_id = 0x56a;
 		*product_id = 0x81;
 	} else if (*bus == WBUSTYPE_SERIAL) {
-		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
 		/* FIXME implement */
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+		goto bail;
 	} else {
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
+		goto bail;
 	}
 
 	if (*bus != WBUSTYPE_UNKNOWN &&

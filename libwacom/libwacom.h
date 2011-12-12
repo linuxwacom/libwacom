@@ -194,6 +194,19 @@ WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, i
 WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
 
 /**
+ * Create a new device reference from the given name.
+ * In case of error, NULL is returned and the error is set to the
+ * appropriate value.
+ *
+ * @param db A device database
+ * @param name The name identifying the device
+ * @param error If not NULL, set to the error if any occurs
+ *
+ * @return A new reference to this device or NULL on error.
+ */
+WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *error);
+
+/**
  * Remove the device and free all memory and references to it.
  *
  * @param device The device to delete

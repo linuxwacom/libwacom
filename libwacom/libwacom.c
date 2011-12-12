@@ -205,6 +205,36 @@ libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, 
     return NULL;
 }
 
+WacomDevice*
+libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *error)
+{
+    const WacomDevice *device;
+    GList *keys, *l;
+
+    if (!db) {
+        libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+        return NULL;
+    }
+
+    device = NULL;
+    keys = g_hash_table_get_values (db->device_ht);
+    for (l = keys; l; l = l->next) {
+        WacomDevice *d = l->data;
+
+        if (g_strcmp0 (d->product, name) == 0) {
+            device = d;
+            break;
+	}
+    }
+    g_list_free (keys);
+
+    if (device)
+	    return libwacom_copy(device);
+
+    libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
+    return NULL;
+}
+
 void
 libwacom_destroy(WacomDevice *device)
 {

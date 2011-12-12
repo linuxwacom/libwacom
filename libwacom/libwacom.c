@@ -131,7 +131,6 @@ libwacom_copy(const WacomDevice *device)
 	d = g_new0 (WacomDevice, 1);
 	d->vendor = g_strdup (device->vendor);
 	d->product = g_strdup (device->product);
-	d->model = g_strdup (device->model);
 	d->width = device->width;
 	d->height = device->height;
 	d->match = g_strdup (device->match);
@@ -211,7 +210,6 @@ libwacom_destroy(WacomDevice *device)
 {
 	g_free (device->vendor);
 	g_free (device->product);
-	g_free (device->model);
 
 	g_free (device->match);
 	g_free (device->supported_styli);

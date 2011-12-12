@@ -1,3 +1,14 @@
+[0xfffff]
+Name=General Pen
+Buttons=2
+HasEraser=true
+Type=General
+
+[0xffffe]
+Name=General Pen Eraser
+IsEraser=true
+Type=General
+
 [0x802]
 Name=Intuos4 General Pen
 Buttons=2

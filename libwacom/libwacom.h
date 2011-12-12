@@ -78,6 +78,9 @@ typedef struct _WacomError WacomError;
 
 typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
 
+#define WACOM_STYLUS_FALLBACK_ID 0xfffff
+#define WACOM_ERASER_FALLBACK_ID 0xffffe
+
 /**
  * Possible error codes.
  */

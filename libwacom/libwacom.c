@@ -266,6 +266,13 @@ int libwacom_get_product_id(WacomDevice *device)
     return device->product_id;
 }
 
+const char* libwacom_get_match(WacomDevice *device)
+{
+    /* FIXME make sure this only returns the first match
+     * when we implement multiple matching */
+    return device->match;
+}
+
 int libwacom_get_width(WacomDevice *device)
 {
     return device->width;

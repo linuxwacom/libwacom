@@ -362,6 +362,10 @@ const char *libwacom_stylus_get_name (const WacomStylus *stylus)
 
 int libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 {
+	if (stylus->num_buttons == -1) {
+		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->id);
+		return 2;
+	}
 	return stylus->num_buttons;
 }
 

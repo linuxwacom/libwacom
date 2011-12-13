@@ -158,12 +158,8 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		if (stylus->is_eraser == FALSE) {
 			stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", NULL);
 			stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
-			if (stylus->num_buttons == 0 &&
-			    error != NULL) {
-				if (g_error_matches (error, G_KEY_FILE_ERROR,  G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
-					g_debug ("Setting 2 buttons for pen '0x%x' because of missing Buttons property", id);
-					stylus->num_buttons = 2;
-				}
+			if (stylus->num_buttons == 0 && error != NULL) {
+				stylus->num_buttons = -1;
 				g_clear_error (&error);
 			}
 		} else {

@@ -59,7 +59,10 @@ Type=Classic
 
 [0x885]
 Name=Intuos3 Marker Pen
+# FIXME either it has an eraser and it's missing
+# or it doesn't and this is wrong
 HasEraser=true
+Type=Marker
 
 [0x802]
 Name=Intuos4 General Pen
@@ -70,6 +73,7 @@ Type=General
 [0x804]
 Name=Intuos4 Marker Pen
 HasEraser=true
+Type=Marker
 
 [0x40802]
 Name=Intuos4 Classic Pen
@@ -126,6 +130,7 @@ IsEraser=true
 [0x80c]
 Name=Intuos4 Marker Pen Eraser
 IsEraser=true
+Type=Marker
 
 [0x80a]
 Name=Intuos4 General Pen Eraser

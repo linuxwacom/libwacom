@@ -64,7 +64,7 @@ WacomStylusType
 type_from_str (const char *type)
 {
 	if (type == NULL)
-		return WSTYLUS_UNKNOWN;
+		return WSTYLUS_GENERAL;
 	if (strcmp (type, "General") == 0)
 		return WSTYLUS_GENERAL;
 	if (strcmp (type, "Inking") == 0)

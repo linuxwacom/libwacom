@@ -36,6 +36,11 @@ Type=Airbrush
 #Icon=wacom-stylus-airbrush
 
 [0x91b]
+Name=Intuos3 Airbrush Pen Eraser
+IsEraser=true
+Type=Airbrush
+
+[0x90a]
 Name=Intuos4 Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush

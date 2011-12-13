@@ -171,6 +171,9 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->type = type_from_str (type);
 		g_free (type);
 
+		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (id)) != NULL)
+			g_warning ("Duplicate definition for stylus ID '0x%x'", id);
+
 		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
 	}
 	g_strfreev (groups);

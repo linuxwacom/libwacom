@@ -71,6 +71,8 @@ type_from_str (const char *type)
 		return WSTYLUS_INKING;
 	if (strcmp (type, "Airbrush") == 0)
 		return WSTYLUS_AIRBRUSH;
+	if (strcmp (type, "Classic") == 0)
+		return WSTYLUS_CLASSIC;
 	return WSTYLUS_UNKNOWN;
 }
 

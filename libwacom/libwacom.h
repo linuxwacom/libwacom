@@ -123,7 +123,8 @@ typedef enum {
     WSTYLUS_UNKNOWN,
     WSTYLUS_GENERAL,
     WSTYLUS_INKING,
-    WSTYLUS_AIRBRUSH
+    WSTYLUS_AIRBRUSH,
+    WSTYLUS_CLASSIC
 } WacomStylusType;
 
 /**

@@ -73,6 +73,8 @@ type_from_str (const char *type)
 		return WSTYLUS_AIRBRUSH;
 	if (strcmp (type, "Classic") == 0)
 		return WSTYLUS_CLASSIC;
+	if (strcmp (type, "Marker") == 0)
+		return WSTYLUS_MARKER;
 	return WSTYLUS_UNKNOWN;
 }
 

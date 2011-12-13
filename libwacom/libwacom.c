@@ -377,6 +377,10 @@ int libwacom_stylus_is_eraser (const WacomStylus *stylus)
 
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 {
+	if (stylus->type == WSTYLUS_UNKNOWN) {
+		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->id);
+		return WSTYLUS_GENERAL;
+	}
 	return stylus->type;
 }
 

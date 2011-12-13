@@ -55,6 +55,7 @@ HasEraser=true
 [0x813]
 Name=Intuos3 Classic Pen
 HasEraser=true
+Type=Classic
 
 [0x885]
 Name=Intuos3 Marker Pen
@@ -73,6 +74,7 @@ HasEraser=true
 [0x40802]
 Name=Intuos4 Classic Pen
 HasEraser=true
+Type=Classic
 
 [0x022]
 Name=Pen
@@ -115,6 +117,7 @@ IsEraser=true
 [0x81b]
 Name=Intuos3 Classic Pen Eraser
 IsEraser=true
+Type=Classic
 
 [0x91b]
 Name=Intuos3 Airbrush Eraser
@@ -132,6 +135,7 @@ Type=General
 [0x4080a]
 Name=Intuos4 Classic Pen Eraser
 IsEraser=true
+Type=Classic
 
 [0x90a]
 Name=Intuos4 Airbrush Eraser

@@ -128,6 +128,7 @@ Type=Classic
 [0x91b]
 Name=Intuos3 Airbrush Eraser
 IsEraser=true
+Type=Airbrush
 
 [0x80c]
 Name=Intuos4 Marker Pen Eraser
@@ -147,6 +148,7 @@ Type=Classic
 [0x90a]
 Name=Intuos4 Airbrush Eraser
 IsEraser=true
+Type=Airbrush
 
 # Airbrush pen has eraser
 [0xd12]

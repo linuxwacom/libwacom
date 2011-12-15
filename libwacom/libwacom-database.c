@@ -75,6 +75,8 @@ type_from_str (const char *type)
 		return WSTYLUS_CLASSIC;
 	if (strcmp (type, "Marker") == 0)
 		return WSTYLUS_MARKER;
+	if (strcmp (type, "Stroke") == 0)
+		return WSTYLUS_STROKE;
 	return WSTYLUS_UNKNOWN;
 }
 

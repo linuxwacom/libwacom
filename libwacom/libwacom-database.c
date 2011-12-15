@@ -100,7 +100,7 @@ bus_to_str (WacomBusType bus)
 	case WBUSTYPE_USB:
 		return "usb";
 	case WBUSTYPE_SERIAL:
-		return "bluetooth";
+		return "serial";
 	case WBUSTYPE_BLUETOOTH:
 		return "bluetooth";
 	}

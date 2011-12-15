@@ -60,9 +60,7 @@ Type=Classic
 
 [0x885]
 Name=Intuos3 Marker Pen
-# FIXME either it has an eraser and it's missing
-# or it doesn't and this is wrong
-HasEraser=true
+HasEraser=false
 Type=Marker
 
 [0x802]

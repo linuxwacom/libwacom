@@ -87,10 +87,12 @@ HasEraser=true
 [0x832]
 Name=Stroke Pen
 HasEraser=false
+Type=Stroke
 
 [0x032]
 Name=Stroke Pen
 HasEraser=false
+Type=Stroke
 
 # Erasers
 [0x82a]

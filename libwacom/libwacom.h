@@ -72,7 +72,14 @@
 
 typedef struct _WacomDevice WacomDevice;
 
+typedef struct _WacomStylus WacomStylus;
+
 typedef struct _WacomError WacomError;
+
+typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
+
+#define WACOM_STYLUS_FALLBACK_ID 0xfffff
+#define WACOM_ERASER_FALLBACK_ID 0xffffe
 
 /**
  * Possible error codes.
@@ -81,6 +88,7 @@ enum WacomErrorCode {
     WERROR_NONE,		/**< No error has occured */
     WERROR_BAD_ALLOC,		/**< Allocation error */
     WERROR_INVALID_PATH,	/**< A path specified is invalid */
+    WERROR_INVALID_DB,		/**< The passed DB is invalid */
     WERROR_BAD_ACCESS,		/**< Invalid permissions to access the path */
     WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
 };
@@ -107,6 +115,18 @@ typedef enum {
     WCLASS_GRAPHIRE,		/**< Any Graphire device */
     WCLASS_ISDV4,		/**< Any serial ISDV4 device */
 } WacomClass;
+
+/**
+ * Class of stylus
+ */
+typedef enum {
+    WSTYLUS_UNKNOWN,
+    WSTYLUS_GENERAL,
+    WSTYLUS_INKING,
+    WSTYLUS_AIRBRUSH,
+    WSTYLUS_CLASSIC,
+    WSTYLUS_MARKER
+} WacomStylusType;
 
 /**
  * Allocate a new structure for error reporting.
@@ -136,37 +156,67 @@ enum WacomErrorCode libwacom_error_get_code(WacomError *error);
 const char* libwacom_error_get_message(WacomError *error);
 
 /**
+ * Loads the Tablet and Stylus databases, to be used
+ * in libwacom_new_*() functions.
+ *
+ * @return A new database or NULL on error.
+ */
+WacomDeviceDatabase* libwacom_database_new(void);
+
+/**
+  * Free all memory used by the database.
+  *
+  * @param db A Tablet and Stylus database.
+  */
+void libwacom_database_destroy(WacomDeviceDatabase *db);
+
+/**
  * Create a new device reference from the given device path.
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
  *
+ * @param db A device database
  * @param path A device path in the form of e.g. /dev/input/event0
  * @param fallback Whether we should create a generic if model is unknown
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(const char *path, int fallback, WacomError *error);
+WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
  *
+ * @param db A device database
  * @param vendor_id The vendor ID of the device
  * @param product_id The product ID of the device
  * @param error If not NULL, set to the error if any occurs
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_usbid(int vendor_id, int product_id, WacomError *error);
+WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
+
+/**
+ * Create a new device reference from the given name.
+ * In case of error, NULL is returned and the error is set to the
+ * appropriate value.
+ *
+ * @param db A device database
+ * @param name The name identifying the device
+ * @param error If not NULL, set to the error if any occurs
+ *
+ * @return A new reference to this device or NULL on error.
+ */
+WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *error);
 
 /**
  * Remove the device and free all memory and references to it.
  *
  * @param device The device to delete
  */
-void libwacom_destroy(WacomDevice **device);
+void libwacom_destroy(WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -191,6 +241,12 @@ int libwacom_get_vendor_id(WacomDevice *device);
  * @return The human-readable product for this device
  */
 const char* libwacom_get_product(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return The first match for the device in question
+ */
+const char* libwacom_get_match(WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -238,6 +294,13 @@ int libwacom_get_num_buttons(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @param num_styli Return location for the number of listed styli
+ * @return an array of Styli IDs supported by the device
+ */
+int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli);
+
+/**
+ * @param device The tablet to query
  * @return non-zero if the device has a touch ring or zero otherwise
  */
 int libwacom_has_ring(WacomDevice *device);
@@ -281,6 +344,51 @@ int libwacom_is_reversible(WacomDevice *device);
  * @return The bustype of this device.
  */
 WacomBusType libwacom_get_bustype(WacomDevice *device);
+
+/**
+ * Get the WacomStylus for the given tool ID.
+ *
+ * @param db A Tablet and Stylus database.
+ * @param id The Tool ID for this stylus
+ * @return A WacomStylus representing the stylus. Do not free.
+ */
+const WacomStylus *libwacom_stylus_get_for_id (WacomDeviceDatabase *db, int id);
+
+/**
+ * @param stylus The stylus to query
+ * @return the ID of the tool
+ */
+int         libwacom_stylus_get_id (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The name of the stylus
+ */
+const char *libwacom_stylus_get_name (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The number of buttons on the stylus
+ */
+int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return Whether the stylus has an eraser
+ */
+int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return Whether the stylus is actually an eraser
+ */
+int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The type of stylus
+ */
+WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
 
 #endif /* _LIBWACOM_H_ */
 

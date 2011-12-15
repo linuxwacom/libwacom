@@ -1,0 +1,179 @@
+# Some generic fallback styli
+[0xfffff]
+Name=General Pen
+Buttons=2
+HasEraser=true
+Type=General
+
+[0xffffe]
+Name=General Pen Eraser
+IsEraser=true
+Type=General
+
+# Inking pen have no eraser
+[0x812]
+Name=Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+
+[0x801]
+Name=Intuos3 Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+
+[0x20802]
+Name=Intuos4 Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+
+[0x012]
+Name=Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+
+# Regular pen has eraser
+[0x822]
+Name=Pen
+HasEraser=true
+
+[0x842]
+Name=Pen
+HasEraser=true
+
+[0x852]
+Name=Pen
+HasEraser=true
+
+[0x823]
+Name=Intuos3 Grip Pen
+HasEraser=true
+Type=General
+
+[0x813]
+Name=Intuos3 Classic Pen
+HasEraser=true
+Type=Classic
+
+[0x885]
+Name=Intuos3 Marker Pen
+# FIXME either it has an eraser and it's missing
+# or it doesn't and this is wrong
+HasEraser=true
+Type=Marker
+
+[0x802]
+Name=Intuos4 General Pen
+HasEraser=true
+Buttons=2
+Type=General
+
+[0x804]
+Name=Intuos4 Marker Pen
+HasEraser=true
+Type=Marker
+
+[0x40802]
+Name=Intuos4 Classic Pen
+HasEraser=true
+Type=Classic
+
+[0x022]
+Name=Pen
+HasEraser=true
+
+# Stroke pen has no eraser
+[0x832]
+Name=Stroke Pen
+HasEraser=false
+
+[0x032]
+Name=Stroke Pen
+HasEraser=false
+
+# Erasers
+[0x82a]
+Name=Eraser
+IsEraser=true
+
+[0x85a]
+Name=Eraser
+IsEraser=true
+
+[0x91a]
+Name=Eraser
+IsEraser=true
+
+[0xd1a]
+Name=Eraser
+IsEraser=true
+
+[0x0fa]
+Name=Eraser
+IsEraser=true
+
+[0x82b]
+Name=Intuos3 Grip Pen Eraser
+IsEraser=true
+Type=General
+
+[0x81b]
+Name=Intuos3 Classic Pen Eraser
+IsEraser=true
+Type=Classic
+
+[0x91b]
+Name=Intuos3 Airbrush Eraser
+IsEraser=true
+Type=Airbrush
+
+[0x80c]
+Name=Intuos4 Marker Pen Eraser
+IsEraser=true
+Type=Marker
+
+[0x80a]
+Name=Intuos4 General Pen Eraser
+IsEraser=true
+Type=General
+
+[0x4080a]
+Name=Intuos4 Classic Pen Eraser
+IsEraser=true
+Type=Classic
+
+[0x90a]
+Name=Intuos4 Airbrush Eraser
+IsEraser=true
+Type=Airbrush
+
+# Airbrush pen has eraser
+[0xd12]
+Name=Airbrush Pen
+HasEraser=true
+Type=Airbrush
+
+[0x912]
+Name=Airbrush Pen
+HasEraser=true
+Type=Airbrush
+
+[0x112]
+Name=Airbrush Pen
+HasEraser=true
+Type=Airbrush
+
+[0x913]
+Name=Intuos3 Airbrush Pen
+Buttons=1
+HasEraser=true
+Type=Airbrush
+
+[0x902]
+Name=Intuos4 Airbrush Pen
+Buttons=1
+HasEraser=true
+Type=Airbrush

@@ -35,13 +35,16 @@
 
 int main(int argc, char **argv)
 {
+    WacomDeviceDatabase *db;
     WacomDevice *device;
     const char *str;
 
-    device = libwacom_new_from_usbid(0, 0, NULL);
+    db = libwacom_database_new ();
+
+    device = libwacom_new_from_usbid(db, 0, 0, NULL);
     assert(!device);
 
-    device = libwacom_new_from_usbid(0x56a, 0x00bc, NULL);
+    device = libwacom_new_from_usbid(db, 0x56a, 0x00bc, NULL);
     assert(device);
 
     str = libwacom_get_vendor(device);
@@ -61,8 +64,8 @@ int main(int argc, char **argv)
     assert(libwacom_get_width(device) == 9);
     assert(libwacom_get_height(device) == 6);
 
-    libwacom_destroy(&device);
-    assert(!device);
+    libwacom_destroy(device);
+    libwacom_database_destroy (db);
 
     return 0;
 }

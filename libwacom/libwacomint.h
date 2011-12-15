@@ -33,9 +33,13 @@
 
 #include "libwacom.h"
 #include <stdint.h>
+#include <glib.h>
 
 #define DBG(...) \
 	printf(__VA_ARGS__)
+
+#define GENERIC_DEVICE_MATCH "generic"
+#define STYLUS_DATA_FILE "libwacom.stylus"
 
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
@@ -48,26 +52,36 @@ enum WacomFeature {
 	FEATURE_REVERSIBLE	= (1 << 7)
 };
 
-typedef struct _WacomDeviceData {
+struct _WacomDevice {
 	char *vendor;
 	char *product;
-	char *model;
 	int width;
 	int height;
 
+	char *match;
 	uint32_t vendor_id;
 	uint32_t product_id;
 
 	WacomClass cls;
 	WacomBusType bus;
 	int num_buttons;
+	int *supported_styli;
+	gsize num_styli;
 	uint32_t features;
-} WacomDeviceData;
+};
 
-struct _WacomDevice {
-	WacomDeviceData *ref; /* points to the matching element in the database */
-	WacomDeviceData **database;
-	int nentries;
+struct _WacomStylus {
+	int id;
+	char *name;
+	int num_buttons;
+	gboolean has_eraser;
+	gboolean is_eraser;
+	WacomStylusType type;
+};
+
+struct _WacomDeviceDatabase {
+	GHashTable *device_ht; /* key = DeviceMatch (str), value = WacomDeviceData * */
+	GHashTable *stylus_ht; /* key = ID (int), value = WacomStylus * */
 };
 
 struct _WacomError {
@@ -76,10 +90,11 @@ struct _WacomError {
 };
 
 /* INTERNAL */
-WacomDeviceData* libwacom_new_devicedata(void);
-int libwacom_load_database(WacomDevice* device);
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
-WacomBusType bus_from_str (const char *str);
+void libwacom_stylus_destroy(WacomStylus *stylus);
+
+WacomBusType  bus_from_str (const char *str);
+const char   *bus_to_str   (WacomBusType bus);
 
 #endif /* _LIBWACOMINT_H_ */
 

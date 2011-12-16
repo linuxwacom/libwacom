@@ -165,6 +165,16 @@ const char* libwacom_error_get_message(WacomError *error);
 WacomDeviceDatabase* libwacom_database_new(void);
 
 /**
+ * Loads the Tablet and Stylus databases, to be used
+ * in libwacom_new_*() functions, from the prefix
+ * path passes. This is only useful for diagnostics
+ * applications.
+ *
+ * @return A new database or NULL on error.
+ */
+WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
+
+/**
   * Free all memory used by the database.
   *
   * @param db A Tablet and Stylus database.

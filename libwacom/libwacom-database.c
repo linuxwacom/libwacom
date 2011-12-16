@@ -295,7 +295,7 @@ scandir_filter(const struct dirent *entry)
 }
 
 WacomDeviceDatabase *
-libwacom_database_new (void)
+libwacom_database_new_for_path (const char *datadir)
 {
     int n, nfiles;
     struct dirent **files;
@@ -310,7 +310,7 @@ libwacom_database_new (void)
 					   g_free,
 					   (GDestroyNotify) libwacom_destroy);
 
-    n = scandir(DATADIR, &files, scandir_filter, alphasort);
+    n = scandir(datadir, &files, scandir_filter, alphasort);
     if (n <= 0)
 	    return db;
 
@@ -318,7 +318,7 @@ libwacom_database_new (void)
     while(n--) {
 	    WacomDevice *d;
 
-	    path = g_build_filename (DATADIR, files[n]->d_name, NULL);
+	    path = g_build_filename (datadir, files[n]->d_name, NULL);
 	    d = libwacom_parse_tablet_keyfile(path);
 	    g_free(path);
 
@@ -331,7 +331,7 @@ libwacom_database_new (void)
     free(files);
 
     /* Load styli */
-    path = g_build_filename (DATADIR, STYLUS_DATA_FILE, NULL);
+    path = g_build_filename (datadir, STYLUS_DATA_FILE, NULL);
     db->stylus_ht = g_hash_table_new_full (g_direct_hash,
 					   g_direct_equal,
 					   NULL,
@@ -339,6 +339,12 @@ libwacom_database_new (void)
     libwacom_parse_stylus_keyfile(db, path);
 
     return db;
+}
+
+WacomDeviceDatabase *
+libwacom_database_new (void)
+{
+	return libwacom_database_new_for_path (DATADIR);
 }
 
 void

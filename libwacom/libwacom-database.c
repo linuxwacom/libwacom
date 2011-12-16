@@ -311,8 +311,10 @@ libwacom_database_new_for_path (const char *datadir)
 					   (GDestroyNotify) libwacom_destroy);
 
     n = scandir(datadir, &files, scandir_filter, alphasort);
-    if (n <= 0)
-	    return db;
+    if (n <= 0) {
+	    libwacom_database_destroy(db);
+	    return NULL;
+    }
 
     nfiles = n;
     while(n--) {
@@ -337,6 +339,13 @@ libwacom_database_new_for_path (const char *datadir)
 					   NULL,
 					   (GDestroyNotify) libwacom_stylus_destroy);
     libwacom_parse_stylus_keyfile(db, path);
+
+    /* If we couldn't load _anything_ then something's wrong */
+    if (g_hash_table_size (db->device_ht) == 0 &&
+	g_hash_table_size (db->stylus_ht) == 0) {
+	    libwacom_database_destroy(db);
+	    return NULL;
+    }
 
     return db;
 }

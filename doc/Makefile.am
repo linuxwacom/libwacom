@@ -1,12 +1,15 @@
-EXTRA_DIST = doxygen.conf
+EXTRA_DIST = doxygen.conf.in
 
 if HAVE_DOXYGEN
 EXTRA_DIST += html
 
 all-local: doxygen
 
-doxygen: $(top_srcdir)/libwacom/libwacom.h
-	doxygen doxygen.conf
+doxygen.conf: doxygen.conf.in
+	$(AM_V_GEN) sed -e "s|\@TOPSRCDIR\@|$(top_srcdir)|" $< > $@
+
+doxygen: $(top_srcdir)/libwacom/libwacom.h doxygen.conf
+	doxygen $(builddir)/doxygen.conf
 
 clean-local:
 	rm -rf html

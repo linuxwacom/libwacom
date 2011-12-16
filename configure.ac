@@ -4,7 +4,7 @@ AC_INIT([libwacom], [0.1])
 AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake
-AM_INIT_AUTOMAKE([foreign dist-bzip2])
+AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip check-news])
 AM_MAINTAINER_MODE
 
 # Enable silent build when available (Automake 1.11)

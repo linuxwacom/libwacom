@@ -40,6 +40,7 @@ int main(int argc, char **argv)
     const char *str;
 
     db = libwacom_database_new ();
+    assert(db);
 
     device = libwacom_new_from_usbid(db, 0, 0, NULL);
     assert(!device);

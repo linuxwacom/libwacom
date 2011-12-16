@@ -350,8 +350,10 @@ libwacom_database_new (void)
 void
 libwacom_database_destroy(WacomDeviceDatabase *db)
 {
-	g_hash_table_destroy(db->device_ht);
-	g_hash_table_destroy(db->stylus_ht);
+	if (db->device_ht)
+		g_hash_table_destroy(db->device_ht);
+	if (db->stylus_ht)
+		g_hash_table_destroy(db->stylus_ht);
 	g_free (db);
 }
 

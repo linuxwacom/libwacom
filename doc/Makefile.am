@@ -14,6 +14,8 @@ doxygen: $(top_srcdir)/libwacom/libwacom.h doxygen.conf
 clean-local:
 	rm -rf html
 
+CLEANFILES = doxygen.conf
+
 .PHONY: doxygen
 endif
 

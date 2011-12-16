@@ -9,7 +9,7 @@ doxygen.conf: doxygen.conf.in
 	$(AM_V_GEN) sed -e "s|\@TOPSRCDIR\@|$(top_srcdir)|" $< > $@
 
 doxygen: $(top_srcdir)/libwacom/libwacom.h doxygen.conf
-	doxygen $(builddir)/doxygen.conf
+	$(AM_V_GEN) doxygen $(builddir)/doxygen.conf
 
 clean-local:
 	rm -rf html

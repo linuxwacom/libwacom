@@ -1,0 +1,12 @@
+[Device]
+Product=Cintiq 21UX2
+Vendor=Wacom
+DeviceMatch=usb:0:0
+
+[Features]
+Stylus=true
+Ring=false
+VStrip=false
+HStrip=false
+Buttons=0
+BuiltIn=true

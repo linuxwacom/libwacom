@@ -1,0 +1,12 @@
+[Device]
+Product=Serial Tablet WACf004
+Vendor=Wacom
+DeviceMatch=serial:0:0
+
+[Features]
+Stylus=true
+Ring=false
+VStrip=false
+HStrip=false
+Buttons=0
+BuiltIn=true

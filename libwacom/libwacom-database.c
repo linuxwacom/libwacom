@@ -115,6 +115,9 @@ libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *prod
 	char busstr[64];
 	int rc;
 
+	if (match == NULL)
+		return 0;
+
 	rc = sscanf(match, "%63[^:]:%x:%x", busstr, vendor_id, product_id);
 	if (rc != 3)
 		return 0;
@@ -203,6 +206,21 @@ libwacom_parse_tablet_keyfile(const char *path)
 
 	device = g_new0 (WacomDevice, 1);
 
+	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
+	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
+		device->match = match;
+	} else {
+		if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus)) {
+			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", device->match, path);
+			g_free (match);
+			g_free (device);
+			device = NULL;
+			goto out;
+		}
+		device->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (device->bus), device->vendor_id, device->product_id);
+		g_free (match);
+	}
+
 	device->vendor = g_key_file_get_string(keyfile, DEVICE_GROUP, "Vendor", NULL);
 	device->product = g_key_file_get_string(keyfile, DEVICE_GROUP, "Product", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
@@ -211,17 +229,6 @@ libwacom_parse_tablet_keyfile(const char *path)
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);
 	device->cls = libwacom_model_string_to_enum(class);
 	g_free(class);
-
-	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
-	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
-		device->match = match;
-	} else {
-		if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus))
-			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", device->match, path);
-		else
-			device->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (device->bus), device->vendor_id, device->product_id);
-		g_free (match);
-	}
 
 	styli_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (styli_list) {

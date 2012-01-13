@@ -45,6 +45,7 @@ get_device_info (const char   *path,
 		 int          *vendor_id,
 		 int          *product_id,
 		 WacomBusType *bus,
+		 IsBuiltin    *builtin,
 		 WacomError   *error)
 {
 	GUdevClient *client;
@@ -52,8 +53,10 @@ get_device_info (const char   *path,
 	const char * const subsystems[] = { "input", NULL };
 	gboolean retval;
 	const char *bus_str;
+	const char *devname;
 
 	retval = FALSE;
+	*builtin = IS_BUILTIN_UNSET;
 	client = g_udev_client_new (subsystems);
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
@@ -76,6 +79,24 @@ get_device_info (const char   *path,
 		g_object_unref (device);
 		device = parent;
 		bus_str = "bluetooth";
+	}
+
+
+	/* Is the device builtin? */
+	devname = g_udev_device_get_name (device);
+	if (devname != NULL) {
+		char *sysfs_path, *contents;
+
+		sysfs_path = g_build_filename ("/sys/class/input", devname, "device/properties", NULL);
+		if (g_file_get_contents (sysfs_path, &contents, NULL, NULL)) {
+			int flag;
+			/* 0x01: POINTER flag
+			 * 0x02: DIRECT flag */
+			flag = atoi(contents);
+			*builtin = (flag & 0x02) == 0x02 ? IS_BUILTIN_TRUE : IS_BUILTIN_FALSE;
+			g_free (contents);
+		}
+		g_free (sysfs_path);
 	}
 
 	*bus = bus_from_str (bus_str);
@@ -170,13 +191,14 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
     int vendor_id, product_id;
     WacomBusType bus;
     const WacomDevice *device;
+    IsBuiltin builtin;
 
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
         return NULL;
     }
 
-    if (!get_device_info (path, &vendor_id, &product_id, &bus, error))
+    if (!get_device_info (path, &vendor_id, &product_id, &bus, &builtin, error))
         return NULL;
 
     device = libwacom_new (db, vendor_id, product_id, bus, error);

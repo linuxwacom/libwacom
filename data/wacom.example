@@ -8,7 +8,7 @@ Product=Intuos 4 WL 6x9
 Vendor=Wacom
 
 # DeviceMatch includes the bus (usb, serial), the vendor ID and the actual
-# product ID 
+# product ID
 DeviceMatch=usb:056a:00bc
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
@@ -52,6 +52,10 @@ HStrip=false
 # Number of buttons on the tablet
 Buttons=9
 
-# This tablet is built-in (most serial tablets, Cintiqs) 
+# This tablet is built-in (most serial tablets, Cintiqs)
+#
+# The value within the file is ignored if the WacomDevice
+# is created through the device path, in which case the
+# value comes from kernel properties
 BuiltIn=false
 

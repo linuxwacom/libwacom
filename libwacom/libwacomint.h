@@ -41,6 +41,12 @@
 #define GENERIC_DEVICE_MATCH "generic"
 #define STYLUS_DATA_FILE "libwacom.stylus"
 
+typedef enum {
+	IS_BUILTIN_UNSET	= -1,
+	IS_BUILTIN_FALSE	= 0,
+	IS_BUILTIN_TRUE		= 1
+} IsBuiltin;
+
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),

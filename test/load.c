@@ -56,6 +56,7 @@ int main(int argc, char **argv)
     assert(libwacom_get_bustype(device) == WBUSTYPE_USB);
     assert(libwacom_get_num_buttons(device) == 9);
     assert(libwacom_has_stylus(device));
+    assert(libwacom_is_reversible(device));
     assert(!libwacom_has_touch(device));
     assert(libwacom_has_ring(device));
     assert(!libwacom_has_ring2(device));

@@ -206,8 +206,18 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
     if (device == NULL && fallback)
 	    device = libwacom_get_device(db, "generic");
 
-    if (device)
-	    return libwacom_copy(device);
+    if (device) {
+	    WacomDevice *ret;
+
+	    ret = libwacom_copy(device);
+
+	    if (builtin == IS_BUILTIN_TRUE)
+	        ret->features |= FEATURE_BUILTIN;
+	    else if (builtin == IS_BUILTIN_FALSE)
+	        ret->features &= ~FEATURE_BUILTIN;
+
+	    return ret;
+    }
 
     libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
     return NULL;

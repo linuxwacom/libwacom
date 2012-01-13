@@ -4,12 +4,12 @@ Vendor=Wacom
 # FIXME add missing bluetooth match
 DeviceMatch=usb:056a:00bc
 Class=Intuos4
-Reversible=true
 Width=9
 Height=6
 Styli=0x802;0x804;0x40802;0x80c;0x80a;0x4080a;0x90a;0x20802;0x902;
 
 [Features]
+Reversible=true
 Stylus=true
 Ring=true
 VStrip=false

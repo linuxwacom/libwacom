@@ -2,9 +2,9 @@
 Product=Generic
 Vendor=Wacom
 DeviceMatch=generic
-Reversible=true
 
 [Features]
+Reversible=true
 Stylus=true
 Ring=true
 VStrip=true

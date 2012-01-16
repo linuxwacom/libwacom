@@ -72,11 +72,13 @@ Type=General
 [0x804]
 Name=Intuos4 Marker Pen
 HasEraser=true
+Buttons=2
 Type=Marker
 
 [0x40802]
 Name=Intuos4 Classic Pen
 HasEraser=true
+Buttons=2
 Type=Classic
 
 [0x022]

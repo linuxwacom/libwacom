@@ -1,2 +1,10 @@
+libwacom 0.2:
+- Don't add devices that lack DeviceMatch
+- Get whether a device is builtin from udev
+- Fix definitions for Reversible property
+- Add definition for Cintiq 21UX2
+- Add test for serial devices
+- Fix Intuos4 styli's number of buttons
+
 libwacom 0.1:
 - First release

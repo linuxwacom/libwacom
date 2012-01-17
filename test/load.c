@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     db = libwacom_database_new_for_path(TOPSRCDIR"/data");
     assert(db);
 
-    device = libwacom_new_from_usbid(db, 0x1, 0x1, NULL);
+    device = libwacom_new_from_usbid(db, 0, 0, NULL);
     assert(!device);
 
     device = libwacom_new_from_usbid(db, 0x56a, 0x00bc, NULL);

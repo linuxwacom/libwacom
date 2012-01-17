@@ -1,7 +1,7 @@
 [Device]
 Product=Cintiq 21UX2
 Vendor=Wacom
-DeviceMatch=usb:0:0
+DeviceMatch=usb:0xdeadbeef:0xdeadbeef
 
 [Features]
 Stylus=true

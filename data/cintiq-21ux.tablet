@@ -1,0 +1,13 @@
+[Device]
+Product=Cintiq 21UX
+Vendor=Wacom
+DeviceMatch=usb:056a:003f
+Class=Cintiq
+Width=17
+Height=13
+
+[Features]
+Reversible=true
+Stylus=true
+VStrip=true
+Buttons=8

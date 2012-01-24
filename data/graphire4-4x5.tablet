@@ -1,0 +1,11 @@
+[Device]
+Product=Graphire4 4x5
+Vendor=Wacom
+DeviceMatch=usb:056a:0015
+Class=Graphire
+Model=Graphire4
+Width=5
+Height=4
+
+[Features]
+Stylus=true

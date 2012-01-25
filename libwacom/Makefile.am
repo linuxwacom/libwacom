@@ -11,5 +11,7 @@ libwacom_la_SOURCES = \
 
 libwacom_la_LIBADD = $(GLIB_LIBS)
 
+libwacom_la_LDFLAGS = -version-info $(LIBWACOM_LT_VERSION)
+
 libwacomincludedir = $(includedir)/libwacom-1.0/libwacom/
 libwacominclude_HEADERS = libwacom.h

@@ -40,7 +40,7 @@ libwacom_get_device(WacomDeviceDatabase *db, const char *match)
 	return (WacomDevice *) g_hash_table_lookup (db->device_ht, match);
 }
 
-static int
+static gboolean
 get_device_info (const char   *path,
 		 int          *vendor_id,
 		 int          *product_id,

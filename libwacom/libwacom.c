@@ -44,6 +44,7 @@ static gboolean
 get_device_info (const char   *path,
 		 int          *vendor_id,
 		 int          *product_id,
+		 char        **name,
 		 WacomBusType *bus,
 		 IsBuiltin    *builtin,
 		 WacomError   *error)
@@ -57,6 +58,7 @@ get_device_info (const char   *path,
 
 	retval = FALSE;
 	*builtin = IS_BUILTIN_UNSET;
+	*name = NULL;
 	client = g_udev_client_new (subsystems);
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
@@ -81,7 +83,6 @@ get_device_info (const char   *path,
 		bus_str = "bluetooth";
 	}
 
-
 	/* Is the device builtin? */
 	devname = g_udev_device_get_name (device);
 	if (devname != NULL) {
@@ -97,6 +98,16 @@ get_device_info (const char   *path,
 			g_free (contents);
 		}
 		g_free (sysfs_path);
+	}
+
+	*name = g_strdup (g_udev_device_get_sysfs_attr (device, "name"));
+	/* Try getting the name from the parent if that fails */
+	if (*name == NULL) {
+		GUdevDevice *parent;
+
+		parent = g_udev_device_get_parent (device);
+		*name = g_strdup (g_udev_device_get_sysfs_attr (parent, "name"));
+		g_object_unref (parent);
 	}
 
 	*bus = bus_from_str (bus_str);
@@ -137,6 +148,8 @@ get_device_info (const char   *path,
 		retval = TRUE;
 
 bail:
+	if (retval == FALSE)
+		g_free (*name);
 	if (device != NULL)
 		g_object_unref (device);
 	if (client != NULL)
@@ -190,26 +203,40 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
     int vendor_id, product_id;
     WacomBusType bus;
     const WacomDevice *device;
+    WacomDevice *ret;
     IsBuiltin builtin;
+    char *name;
 
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
         return NULL;
     }
 
-    if (!get_device_info (path, &vendor_id, &product_id, &bus, &builtin, error))
+    if (!get_device_info (path, &vendor_id, &product_id, &name, &bus, &builtin, error))
         return NULL;
 
     device = libwacom_new (db, vendor_id, product_id, bus, error);
+    if (device != NULL)
+	    ret = libwacom_copy(device);
+    else if (!fallback)
+	    goto bail;
 
-    if (device == NULL && fallback)
+    if (device == NULL && fallback) {
 	    device = libwacom_get_device(db, "generic");
-
-    if (device) {
-	    WacomDevice *ret;
+	    if (device == NULL)
+		    goto bail;
 
 	    ret = libwacom_copy(device);
 
+	    if (name != NULL) {
+		    g_free (ret->name);
+		    ret->name = name;
+	    }
+    } else {
+	    g_free (name);
+    }
+
+    if (device) {
 	    if (builtin == IS_BUILTIN_TRUE)
 	        ret->features |= FEATURE_BUILTIN;
 	    else if (builtin == IS_BUILTIN_FALSE)
@@ -218,6 +245,8 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
 	    return ret;
     }
 
+bail:
+    g_free (name);
     libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
     return NULL;
 }

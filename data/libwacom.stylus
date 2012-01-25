@@ -51,11 +51,13 @@ HasEraser=true
 [0x823]
 Name=Intuos3 Grip Pen
 HasEraser=true
+Buttons=2
 Type=General
 
 [0x813]
 Name=Intuos3 Classic Pen
 HasEraser=true
+Buttons=2
 Type=Classic
 
 [0x885]

@@ -232,6 +232,11 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
 		    g_free (ret->name);
 		    ret->name = name;
 	    }
+	    ret->vendor_id = vendor_id;
+	    ret->product_id = product_id;
+	    ret->bus = bus;
+	    g_free (ret->match);
+	    ret->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
     } else {
 	    g_free (name);
     }

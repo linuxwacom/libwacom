@@ -1,6 +1,5 @@
 [Device]
-Product=Intuos 4 M 6x9
-Vendor=Wacom
+Name=Wacom Intuos 4 M 6x9
 DeviceMatch=usb:056a:00b9
 Class=Intuos4
 Width=9

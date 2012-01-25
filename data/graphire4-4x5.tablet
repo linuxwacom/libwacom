@@ -1,6 +1,5 @@
 [Device]
-Product=Graphire4 4x5
-Vendor=Wacom
+Name=Wacom Graphire4 4x5
 DeviceMatch=usb:056a:0015
 Class=Graphire
 Model=Graphire4

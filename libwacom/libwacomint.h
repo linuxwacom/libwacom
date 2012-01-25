@@ -59,8 +59,7 @@ enum WacomFeature {
 };
 
 struct _WacomDevice {
-	char *vendor;
-	char *product;
+	char *name;
 	int width;
 	int height;
 

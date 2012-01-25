@@ -1,6 +1,5 @@
 [Device]
-Product=Graphire Wireless
-Vendor=Wacom
+Name=Wacom Graphire Wireless
 DeviceMatch=bluetooth:056a:81
 Class=Graphire
 Width=8

@@ -150,8 +150,7 @@ libwacom_copy(const WacomDevice *device)
 	WacomDevice *d;
 
 	d = g_new0 (WacomDevice, 1);
-	d->vendor = g_strdup (device->vendor);
-	d->product = g_strdup (device->product);
+	d->name = g_strdup (device->name);
 	d->width = device->width;
 	d->height = device->height;
 	d->match = g_strdup (device->match);
@@ -253,7 +252,7 @@ libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *er
     for (l = keys; l; l = l->next) {
         WacomDevice *d = l->data;
 
-        if (g_strcmp0 (d->product, name) == 0) {
+        if (g_strcmp0 (d->name, name) == 0) {
             device = d;
             break;
 	}
@@ -270,17 +269,11 @@ libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *er
 void
 libwacom_destroy(WacomDevice *device)
 {
-	g_free (device->vendor);
-	g_free (device->product);
+	g_free (device->name);
 
 	g_free (device->match);
 	g_free (device->supported_styli);
 	g_free (device);
-}
-
-const char* libwacom_get_vendor(WacomDevice *device)
-{
-    return device->vendor;
 }
 
 int libwacom_get_vendor_id(WacomDevice *device)
@@ -288,9 +281,9 @@ int libwacom_get_vendor_id(WacomDevice *device)
     return device->vendor_id;
 }
 
-const char* libwacom_get_product(WacomDevice *device)
+const char* libwacom_get_name(WacomDevice *device)
 {
-    return device->product;
+    return device->name;
 }
 
 int libwacom_get_product_id(WacomDevice *device)

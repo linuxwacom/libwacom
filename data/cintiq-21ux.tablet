@@ -1,6 +1,5 @@
 [Device]
-Product=Cintiq 21UX
-Vendor=Wacom
+Name=Wacom Cintiq 21UX
 DeviceMatch=usb:056a:003f
 Class=Cintiq
 Width=17

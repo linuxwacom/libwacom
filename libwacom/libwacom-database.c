@@ -221,8 +221,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 		g_free (match);
 	}
 
-	device->vendor = g_key_file_get_string(keyfile, DEVICE_GROUP, "Vendor", NULL);
-	device->product = g_key_file_get_string(keyfile, DEVICE_GROUP, "Product", NULL);
+	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
 	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
 

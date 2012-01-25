@@ -1,6 +1,5 @@
 [Device]
-Product=Generic
-Vendor=Wacom
+Name=Generic
 DeviceMatch=generic
 
 [Features]

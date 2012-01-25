@@ -237,21 +237,15 @@ WacomClass libwacom_get_class(WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return The human-readable vendor for this device
+ * @return The human-readable name for this device
  */
-const char* libwacom_get_vendor(WacomDevice *device);
+const char* libwacom_get_name(WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The numeric vendor ID for this device
  */
 int libwacom_get_vendor_id(WacomDevice *device);
-
-/**
- * @param device The tablet to query
- * @return The human-readable product for this device
- */
-const char* libwacom_get_product(WacomDevice *device);
 
 /**
  * @param device The tablet to query

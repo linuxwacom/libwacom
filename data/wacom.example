@@ -1,11 +1,8 @@
 # Example model file description for a tablet
 [Device]
 
-# The product is the product name announced by the kernel
-Product=Intuos 4 WL 6x9
-
-# Vendor name of this tablet
-Vendor=Wacom
+# The name is the vendor and product name announced by the kernel
+Name=Wacom Intuos4 6x9
 
 # DeviceMatch includes the bus (usb, serial), the vendor ID and the actual
 # product ID

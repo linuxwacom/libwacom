@@ -1,6 +1,7 @@
 [Device]
 Name=Wacom Cintiq 21UX2
 DeviceMatch=usb:0xdeadbeef:0xdeadbeef
+Class=Cintiq
 
 [Features]
 Stylus=true

@@ -67,6 +67,11 @@ int main(int argc, char **argv)
     assert(libwacom_get_height(device) == 6);
 
     libwacom_destroy(device);
+
+    device = libwacom_new_from_name(db, "Wacom Serial Tablet WACf004", NULL);
+    assert(device);
+    assert(libwacom_is_builtin(device));
+
     libwacom_database_destroy (db);
 
     return 0;

@@ -1,21 +1,45 @@
 # Example model file description for a tablet
+#
+# Make sure to give it a recognisable name, with the ".tablet" prefix
 [Device]
 
 # The name is the vendor and product name announced by the kernel
 Name=Wacom Intuos4 6x9
 
-# DeviceMatch includes the bus (usb, serial), the vendor ID and the actual
-# product ID
+# DeviceMatch includes the bus (usb, bluetooth, serial), the vendor ID and
+# product ID.
+#
+# For example:
+# $ lsusb | grep Wacom
+# Bus 002 Device 003: ID 056a:00bc Wacom Co., Ltd Intuos4 6x9
+# will give you the device match below.
 DeviceMatch=usb:056a:00bc
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
 Class=Intuos4
 
-# Width in inches, as advertised by the manufacturer
+# (Optional) Width in inches, as advertised by the manufacturer
 Width=9
 
-# Height in inches, as advertised by the manufacturer
+# (Optional) Height in inches, as advertised by the manufacturer
 Height=6
+
+# Styli
+#
+# This is a list of stylus IDs supported by the tablet. This is the
+# hardest thing to gather.
+#
+# In general, differently sized models of the same range support the same
+# styli, so you can copy/paste the list from another definition.
+#
+# After that, you can try piecing the stylus list from the names of the
+# styli in libwacom.stylus, using the Wacom webshop as a reference
+# (how many supported styli, what do they look like, etc.)
+#
+# Finally, if you cannot find any information about the styli supported
+# by your device, you will need to gather the "Wacom Serial IDs",
+# and getting each stylus closer to the tablet.
+Styli=0x802;0x804;0x40802;0x80c;0x80a;0x4080a;0x90a;0x20802;0x902;
 
 # Optional features that this tablet supports
 # Some features are dependent on the actual tool used, e.g. not all styli

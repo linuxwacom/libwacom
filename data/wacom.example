@@ -11,9 +11,6 @@ DeviceMatch=usb:056a:00bc
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
 Class=Intuos4
 
-# Exact model of the tablet, not including the size.
-Model=Intuos 4 Wireless
-
 # Width in inches, as advertised by the manufacturer
 Width=9
 

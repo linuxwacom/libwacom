@@ -2,7 +2,6 @@
 Name=Wacom Graphire4 4x5
 DeviceMatch=usb:056a:0015
 Class=Graphire
-Model=Graphire4
 Width=5
 Height=4
 

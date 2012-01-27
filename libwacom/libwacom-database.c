@@ -41,20 +41,20 @@
 #define DEVICE_GROUP "Device"
 
 static WacomClass
-libwacom_model_string_to_enum(const char *model)
+libwacom_class_string_to_enum(const char *class)
 {
-	if (model == NULL || *model == '\0')
+	if (class == NULL || *class == '\0')
 		return WCLASS_UNKNOWN;
 
-	if (strcmp(model, "Intuos3") == 0)
+	if (strcmp(class, "Intuos3") == 0)
 		return WCLASS_INTUOS3;
-	if (strcmp(model, "Intuos4") == 0)
+	if (strcmp(class, "Intuos4") == 0)
 		return WCLASS_INTUOS4;
-	if (strcmp(model, "Cintiq") == 0)
+	if (strcmp(class, "Cintiq") == 0)
 		return WCLASS_CINTIQ;
-	if (strcmp(model, "Bamboo") == 0)
+	if (strcmp(class, "Bamboo") == 0)
 		return WCLASS_BAMBOO;
-	if (strcmp(model, "Graphire") == 0)
+	if (strcmp(class, "Graphire") == 0)
 		return WCLASS_GRAPHIRE;
 
 	return WCLASS_UNKNOWN;
@@ -226,7 +226,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
 
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);
-	device->cls = libwacom_model_string_to_enum(class);
+	device->cls = libwacom_class_string_to_enum(class);
 	g_free(class);
 
 	styli_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);

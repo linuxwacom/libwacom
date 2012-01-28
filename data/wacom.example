@@ -7,7 +7,9 @@
 Name=Wacom Intuos4 6x9
 
 # DeviceMatch includes the bus (usb, bluetooth, serial), the vendor ID and
-# product ID.
+# product ID. This is the connector used, not whatever name the kernel
+# might give it, so some "Wacom Serial" builtin devices will be USB
+# as that's how they're connected.
 #
 # For example:
 # $ lsusb | grep Wacom
@@ -16,6 +18,8 @@ Name=Wacom Intuos4 6x9
 DeviceMatch=usb:056a:00bc
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
+# If unsure, or not applicable (the tablet isn't stand-alone for
+# example), just leave it out.
 Class=Intuos4
 
 # (Optional) Width in inches, as advertised by the manufacturer
@@ -53,12 +57,19 @@ Styli=0x802;0x804;0x40802;0x80c;0x80a;0x4080a;0x90a;0x20802;0x902;
 Stylus=true
 
 # Whether the tablet can be used left-handed
+# This is only for stand-alone tablets. The tablet
+# is deemed reversible if the tablet can be turned 180 degrees
+# so buttons are placed on the other side. The Intuos4 tablet
+# is a great example of that.
 Reversible=true
 
 # This tablet supports touch.
 Touch=false
 
 # This tablet has a touch ring (Intuos4 and Cintiq 24HD)
+# A touch ring is a circular button that responds to touch
+# (rather than clicks):
+# http://intuos.wacom.com/americas/touch-ring.php
 Ring=true
 # This tablet has a second touch ring (Cintiq 24HD)
 Ring2=false

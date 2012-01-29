@@ -1,0 +1,34 @@
+[Device]
+# Bamboo Pen & Touch (CTH-460-DE), 2nd generation bamboo
+Name=Wacom Bamboo Pen & Touch
+
+DeviceMatch=usb:056a:00d1
+
+Class=Bamboo
+
+# There are two widths and heigths, one for pen input, one for touch.
+# The one for pen is bigger, but in linux, only the smaller one works.
+# But as the width is advertised as the bigger one for pen input, I put the pen input here.
+Width=5.8
+Height=3.6
+
+# The other stylusses don't match it, it has two buttons and an eraser.
+Styli=0xfffff
+
+[Features]
+Stylus=true
+
+Reversible=true
+
+Touch=true
+
+Ring=false
+Ring2=false
+
+VStrip=false
+HStrip=false
+
+Buttons=4
+
+BuiltIn=false
+

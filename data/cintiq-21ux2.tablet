@@ -1,12 +1,15 @@
 [Device]
 Name=Wacom Cintiq 21UX2
-DeviceMatch=usb:0xdeadbeef:0xdeadbeef
+DeviceMatch=usb:0x056a:0x00cc
 Class=Cintiq
+Width=17
+Height=13
+Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
 
 [Features]
 Stylus=true
 Ring=false
-VStrip=false
-HStrip=false
-Buttons=0
+VStrip=true
+HStrip=true
+Buttons=18
 BuiltIn=true

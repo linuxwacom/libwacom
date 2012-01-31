@@ -1,15 +1,13 @@
 [Device]
-Name=Wacom Cintiq 21UX
-DeviceMatch=usb:056a:003f
-Class=Cintiq
-Width=17
-Height=13
+Name=Wacom Intuos3 6x8
+DeviceMatch=usb:056a:00b1
+Class=Intuos3
+Width=8
+Height=6
 Styli=0x913;0x91b;0x813;0x81b;0x823;0x82b;0x801;0x885;
 
 [Features]
-Reversible=true
 Stylus=true
 HStrip=true
 VStrip=true
 Buttons=8
-BuiltIn=true

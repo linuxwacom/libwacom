@@ -1,10 +1,9 @@
 [Device]
-Name=Wacom Intuos4 WL
-# FIXME add missing bluetooth match
-DeviceMatch=usb:056a:00bc
+Name=Wacom Intuos4 8x13
+DeviceMatch=usb:056a:00ba
 Class=Intuos4
-Width=8
-Height=5
+Width=13
+Height=8
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
 
 [Features]

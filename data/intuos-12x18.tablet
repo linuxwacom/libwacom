@@ -1,0 +1,13 @@
+[Device]
+Name=Wacom Intuos 12x18
+DeviceMatch=usb:056a:0024
+Class=Intuos
+Width=18
+Height=12
+Styli=0xd12;0xd1a;0x822;0x82a;0x812;0x832;
+
+[Features]
+Stylus=true
+HStrip=false
+VStrip=false
+Buttons=0

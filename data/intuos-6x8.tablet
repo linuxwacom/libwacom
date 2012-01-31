@@ -1,0 +1,13 @@
+[Device]
+Name=Wacom Intuos 6x8
+DeviceMatch=usb:056a:0021
+Class=Intuos
+Width=8
+Height=6
+Styli=0xd12;0xd1a;0x822;0x82a;0x812;0x832;
+
+[Features]
+Stylus=true
+HStrip=false
+VStrip=false
+Buttons=0

@@ -1,0 +1,18 @@
+[Device]
+Name=Wacom Cintiq 24HD
+DeviceMatch=usb:056a:00f4
+Class=Cintiq
+Width=21
+Height=13
+Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=16
+VStrip=false
+HStrip=false
+Ring=true
+Ring2=true
+BuiltIn=true

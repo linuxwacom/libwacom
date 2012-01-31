@@ -12,6 +12,7 @@ Type=General
 
 # Inking pen have no eraser
 [0x812]
+# Intuos and Intuos2
 Name=Inking Pen
 Buttons=0
 HasEraser=false
@@ -37,16 +38,23 @@ Type=Inking
 
 # Regular pen has eraser
 [0x822]
-Name=Pen
+# Intuos and Intuos2
+Name=Classic Pen
 HasEraser=true
+Buttons=2
+Type=Classic
 
 [0x842]
-Name=Pen
-HasEraser=true
+Name=Intuos2 Designer Pen
+HasEraser=false
+Buttons=2
+Type=General
 
 [0x852]
-Name=Pen
+Name=Intuos2 Grip Pen
 HasEraser=true
+Buttons=2
+Type=General
 
 [0x823]
 Name=Intuos3 Grip Pen
@@ -61,18 +69,19 @@ Buttons=2
 Type=Classic
 
 [0x885]
-Name=Intuos3 Marker Pen
+Name=Intuos3 6D Art Pen
 HasEraser=false
+Buttons=0
 Type=Marker
 
 [0x802]
-Name=Intuos4 General Pen
+Name=Intuos4 Grip Pen
 HasEraser=true
 Buttons=2
 Type=General
 
 [0x804]
-Name=Intuos4 Marker Pen
+Name=Intuos4 Art Pen
 HasEraser=true
 Buttons=2
 Type=Marker
@@ -89,8 +98,10 @@ HasEraser=true
 
 # Stroke pen has no eraser
 [0x832]
+#Intuos and Intuos2
 Name=Stroke Pen
 HasEraser=false
+Buttons=0
 Type=Stroke
 
 [0x032]
@@ -100,19 +111,20 @@ Type=Stroke
 
 # Erasers
 [0x82a]
-Name=Eraser
+# Intuos and Intuos2
+Name=Classic Pen Eraser
 IsEraser=true
 
 [0x85a]
-Name=Eraser
+Name=Intuos2 Grip Pen Eraser
 IsEraser=true
 
 [0x91a]
-Name=Eraser
+Name=Intuos2 Airbrush Pen Eraser
 IsEraser=true
 
 [0xd1a]
-Name=Eraser
+Name=Intuos Airbrush Pen Eraser
 IsEraser=true
 
 [0x0fa]
@@ -130,17 +142,17 @@ IsEraser=true
 Type=Classic
 
 [0x91b]
-Name=Intuos3 Airbrush Eraser
+Name=Intuos3 Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
 [0x80c]
-Name=Intuos4 Marker Pen Eraser
+Name=Intuos4 Art Pen Eraser
 IsEraser=true
 Type=Marker
 
 [0x80a]
-Name=Intuos4 General Pen Eraser
+Name=Intuos4 Grip Pen Eraser
 IsEraser=true
 Type=General
 
@@ -150,19 +162,21 @@ IsEraser=true
 Type=Classic
 
 [0x90a]
-Name=Intuos4 Airbrush Eraser
+Name=Intuos4 Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
 # Airbrush pen has eraser
 [0xd12]
-Name=Airbrush Pen
+Name=Intuos Airbrush Pen
 HasEraser=true
+Buttons=1
 Type=Airbrush
 
 [0x912]
-Name=Airbrush Pen
+Name=Intuos2 Airbrush Pen
 HasEraser=true
+Buttons=1
 Type=Airbrush
 
 [0x112]

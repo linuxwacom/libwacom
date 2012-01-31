@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     assert(device);
 
     str = libwacom_get_name(device);
-    assert(strcmp(str, "Wacom Intuos 4 WL 6x9") == 0);
+    assert(strcmp(str, "Wacom Intuos4 WL") == 0);
     assert(libwacom_get_class(device) == WCLASS_INTUOS4);
     assert(libwacom_get_vendor_id(device) == 0x56a);
     assert(libwacom_get_product_id(device) == 0xbc);
@@ -63,8 +63,8 @@ int main(int argc, char **argv)
     assert(!libwacom_has_vstrip(device));
     assert(!libwacom_has_hstrip(device));
     assert(!libwacom_is_builtin(device));
-    assert(libwacom_get_width(device) == 9);
-    assert(libwacom_get_height(device) == 6);
+    assert(libwacom_get_width(device) == 8);
+    assert(libwacom_get_height(device) == 5);
 
     libwacom_destroy(device);
 

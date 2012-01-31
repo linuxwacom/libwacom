@@ -207,6 +207,11 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
     IsBuiltin builtin;
     char *name;
 
+    if (!db) {
+        libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+        return NULL;
+    }
+
     if (!path) {
         libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
         return NULL;
@@ -260,6 +265,11 @@ WacomDevice*
 libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error)
 {
     const WacomDevice *device;
+
+    if (!db) {
+        libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+        return NULL;
+    }
 
     device = libwacom_new(db, vendor_id, product_id, WBUSTYPE_USB, error);
 

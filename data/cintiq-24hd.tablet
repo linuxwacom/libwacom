@@ -1,3 +1,46 @@
+# Wacom
+# Cintiq 24HD
+# DTK-2400
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+# (NOTE: This map has *not* been verified.)
+#
+#       *-----------------------*
+#       |                       |
+#  A    |                       |    I
+#  B    |                       |    J
+#  C    |        DISPLAY        |    K
+#  HGDD |                       | LLOP
+#  HGEE |                       | MMOP
+#  HGFF |                       | NNOP
+#       |                       |
+#       *-----------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+# (NOTE: This map has *not* been verified.)
+#
+#    *-----------------------*
+#    |                       |
+#  A |        DISPLAY        | B
+#    |                       |
+#    *-----------------------*
+#
+# LED Map:
+# (XY=Bank X, LED Y; *=Invisible)
+# (NOTE: This map has *not* been verified.)
+#
+#     *-----------------------*
+#     |                       |
+#  10 |                       | 00
+#  11 |                       | 01
+#  12 |        DISPLAY        | 02
+#  1* |                       | 0*
+#     |                       |
+#     *-----------------------*
+#
+
 [Device]
 Name=Wacom Cintiq 24HD
 DeviceMatch=usb:056a:00f4

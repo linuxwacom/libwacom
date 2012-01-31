@@ -1,3 +1,47 @@
+# Wacom
+# Cintiq 21UX
+# DTK-2100
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  B |                       | K
+#  C |                       | L
+#  D |                       | M
+#  E |                       | N
+#  A |        DISPLAY        | J
+#  F |                       | O
+#  G |                       | P
+#  H |                       | Q
+#  I |                       | R
+#    |                       |
+#    *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    @-----------------------@
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    @-----------------------@
+#
+# LED Map:
+# (XY=Bank X, LED Y)
+#
+#     *-----------------------*
+#     |                       |
+#  10 |                       | 00
+#  11 |                       | 01
+#  12 |        DISPLAY        | 02
+#  13 |                       | 03
+#     |                       |
+#     *-----------------------*
+#
+
 [Device]
 Name=Wacom Cintiq 21UX2
 DeviceMatch=usb:0x056a:0x00cc

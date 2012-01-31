@@ -1,3 +1,34 @@
+# Wacom
+# Intuos3 4x5
+# PTZ-430
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#   CA |                       |
+#   CA |                       |
+#   CB |                       |
+#   CB |                       |
+#   DD |        TABLET         |
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  a |                       |
+#  A |        DISPLAY        |
+#    |                       |
+#    *-----------------------*
+#
+
 [Device]
 Name=Wacom Intuos3 4x5
 DeviceMatch=usb:056a:00b0

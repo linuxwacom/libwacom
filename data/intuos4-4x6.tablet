@@ -1,3 +1,38 @@
+# Wacom
+# Intuos4 Small
+# PTK-440
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+# (NOTE: This map has *not* been verified.)
+#
+#    *-----------------------*
+#    |                       |
+#    |                       |
+#  B |                       |
+#  C |                       |
+#  D |                       |
+#  A |        TABLET         |
+#  E |                       |
+#  F |                       |
+#  G |                       |
+#    |                       |
+#    |                       |
+#    *-----------------------*
+#
+# LED Map:
+# (XY=Bank X, LED Y)
+#
+#     *-----------------------*
+#     |                       |
+#  00 |                       |
+#  01 |                       |
+#  02 |        TABLET         |
+#  03 |                       |
+#     |                       |
+#     *-----------------------*
+#
+
 [Device]
 Name=Wacom Intuos4 4x6
 DeviceMatch=usb:056a:00b8

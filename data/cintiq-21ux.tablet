@@ -1,3 +1,31 @@
+# Wacom
+# Cintiq 21UX
+# DTZ-2231
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#      |                       |
+#   CA |                       | EG
+#   CA |                       | EG
+#   CB |        DISPLAY        | FG
+#   CB |                       | FG
+#   DD |                       | HH
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    *-----------------------*
+#
+
 [Device]
 Name=Wacom Cintiq 21UX
 DeviceMatch=usb:056a:003f

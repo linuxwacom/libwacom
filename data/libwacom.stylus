@@ -195,3 +195,48 @@ Name=Intuos4 Airbrush Pen
 Buttons=1
 HasEraser=true
 Type=Airbrush
+
+# Puck devices
+[0x096]
+# Intuos and Intuos2
+Name=Lens Cursor
+Type=Puck
+HasLens=True
+Buttons=5
+
+[0x097]
+Name=Intuos3 Lens Cursor
+Type=Puck
+HasLens=True
+Buttons=5
+
+[0x006]
+Name=Intuos4 Lens Cursor
+Type=Puck
+HasLens=True
+Buttons=5
+
+[0x094]
+# Intuos and Intuos2
+Name=4D Mouse
+Type=Puck
+HasLens=False
+Buttons=5
+
+[0x007]
+Name=Intuos2 2D Mouse
+Type=Puck
+HasLens=False
+Buttons=3
+
+[0x017]
+Name=Intuos3 Mouse
+Type=Puck
+HasLens=False
+Buttons=5
+
+[0x806]
+Name=Intuos4 Five Button Mouse
+Type=Puck
+HasLens=False
+Buttons=5

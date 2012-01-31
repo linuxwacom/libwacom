@@ -126,7 +126,8 @@ typedef enum {
     WSTYLUS_AIRBRUSH,
     WSTYLUS_CLASSIC,
     WSTYLUS_MARKER,
-    WSTYLUS_STROKE
+    WSTYLUS_STROKE,
+    WSTYLUS_PUCK
 } WacomStylusType;
 
 /**
@@ -388,6 +389,12 @@ int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
  * @return Whether the stylus is actually an eraser
  */
 int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return Whether the stylus has a lens
+ */
+int         libwacom_stylus_has_lens (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query

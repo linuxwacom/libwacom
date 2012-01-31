@@ -81,6 +81,7 @@ struct _WacomStylus {
 	int num_buttons;
 	gboolean has_eraser;
 	gboolean is_eraser;
+	gboolean has_lens;
 	WacomStylusType type;
 };
 

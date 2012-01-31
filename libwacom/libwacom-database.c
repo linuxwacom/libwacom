@@ -77,6 +77,8 @@ type_from_str (const char *type)
 		return WSTYLUS_MARKER;
 	if (strcmp (type, "Stroke") == 0)
 		return WSTYLUS_STROKE;
+	if (strcmp (type, "Puck") == 0)
+		return WSTYLUS_PUCK;
 	return WSTYLUS_UNKNOWN;
 }
 
@@ -167,9 +169,11 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 				stylus->num_buttons = -1;
 				g_clear_error (&error);
 			}
+			stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", NULL);
 		} else {
 			stylus->num_buttons = 0;
 			stylus->has_eraser = FALSE;
+			stylus->has_lens = FALSE;
 		}
 
 		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);

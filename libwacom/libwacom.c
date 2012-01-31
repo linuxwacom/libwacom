@@ -438,6 +438,11 @@ int libwacom_stylus_is_eraser (const WacomStylus *stylus)
 	return stylus->is_eraser;
 }
 
+int libwacom_stylus_has_lens (const WacomStylus *stylus)
+{
+	return stylus->has_lens;
+}
+
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {

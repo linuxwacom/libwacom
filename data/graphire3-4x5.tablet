@@ -1,0 +1,15 @@
+
+[Device]
+# Model CTE-430 (Sapphire) (CTE-430/B)
+Name=Wacom Graphire3 4x5
+
+DeviceMatch=usb:056a:0013
+
+Class=Graphire
+
+Width=5
+Height=4
+
+[Features]
+
+Stylus=true

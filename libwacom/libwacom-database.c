@@ -221,7 +221,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 			device = NULL;
 			goto out;
 		}
-		device->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (device->bus), device->vendor_id, device->product_id);
+		device->match = g_strdup_printf ("%s:%04x:%04x", bus_to_str (device->bus), device->vendor_id, device->product_id);
 		g_free (match);
 	}
 

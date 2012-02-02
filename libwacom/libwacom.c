@@ -190,7 +190,7 @@ libwacom_new (WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusTy
         return NULL;
     }
 
-    match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
+    match = g_strdup_printf ("%s:%04x:%04x", bus_to_str (bus), vendor_id, product_id);
     device = libwacom_get_device(db, match);
     g_free (match);
 

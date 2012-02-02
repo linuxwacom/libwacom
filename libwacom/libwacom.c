@@ -389,14 +389,9 @@ int libwacom_has_ring2(WacomDevice *device)
     return !!(device->features & FEATURE_RING2);
 }
 
-int libwacom_has_vstrip(WacomDevice *device)
+int libwacom_get_num_strips(WacomDevice *device)
 {
-    return !!(device->features & FEATURE_VSTRIP);
-}
-
-int libwacom_has_hstrip(WacomDevice *device)
-{
-    return !!(device->features & FEATURE_HSTRIP);
+    return device->num_strips;
 }
 
 int libwacom_is_builtin(WacomDevice *device)

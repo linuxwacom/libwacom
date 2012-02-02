@@ -319,17 +319,10 @@ int libwacom_has_ring2(WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return non-zero if the device has a vertical touch strip or zero
+ * @return the number of touch strips on the tablet
  * otherwise
  */
-int libwacom_has_vstrip(WacomDevice *device);
-
-/**
- * @param device The tablet to query
- * @return non-zero if the device has a horizontal touch strip or zero
- * otherwise
- */
-int libwacom_has_hstrip(WacomDevice *device);
+int libwacom_get_num_strips(WacomDevice *device);
 
 /**
  * @param device The tablet to query

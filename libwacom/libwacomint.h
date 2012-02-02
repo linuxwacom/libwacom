@@ -52,10 +52,8 @@ enum WacomFeature {
 	FEATURE_TOUCH		= (1 << 1),
 	FEATURE_RING		= (1 << 2),
 	FEATURE_RING2		= (1 << 3),
-	FEATURE_VSTRIP		= (1 << 4),
-	FEATURE_HSTRIP		= (1 << 5),
-	FEATURE_BUILTIN		= (1 << 6),
-	FEATURE_REVERSIBLE	= (1 << 7)
+	FEATURE_BUILTIN		= (1 << 4),
+	FEATURE_REVERSIBLE	= (1 << 5)
 };
 
 struct _WacomDevice {
@@ -72,6 +70,7 @@ struct _WacomDevice {
 	int num_buttons;
 	int *supported_styli;
 	gsize num_styli;
+	int num_strips;
 	uint32_t features;
 };
 

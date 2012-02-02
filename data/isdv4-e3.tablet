@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the HP Touchsmart tm2 laptop.
+
+[Device]
+Name=Wacom ISDv4 E3
+DeviceMatch=usb:056a:003e
+
+# FIXME
+# generic stylus is (stylus + 2 buttons + eraser), but this one
+# has (stylus + 1 button + eraser).
+# Styli=???
+
+[Features]
+Stylus=true
+Touch=true
+BuiltIn=true

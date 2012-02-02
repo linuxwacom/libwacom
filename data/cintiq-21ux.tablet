@@ -37,7 +37,6 @@ Styli=0x913;0x91b;0x813;0x81b;0x823;0x82b;0x801;0x885;
 [Features]
 Reversible=false
 Stylus=true
-HStrip=true
-VStrip=true
+NumStrips=2
 Buttons=8
 BuiltIn=true

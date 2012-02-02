@@ -53,7 +53,6 @@ Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
 [Features]
 Stylus=true
 Ring=false
-VStrip=true
-HStrip=true
+NumStrips=2
 Buttons=18
 BuiltIn=true

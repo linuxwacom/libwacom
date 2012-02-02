@@ -25,9 +25,6 @@ Touch=true
 Ring=false
 Ring2=false
 
-VStrip=false
-HStrip=false
-
 Buttons=4
 
 BuiltIn=false

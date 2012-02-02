@@ -15,6 +15,9 @@ Name=Wacom Intuos4 6x9
 # $ lsusb | grep Wacom
 # Bus 002 Device 003: ID 056a:00bc Wacom Co., Ltd Intuos4 6x9
 # will give you the device match below.
+#
+# You can find a full list of known Device IDs at:
+# https://sourceforge.net/apps/mediawiki/linuxwacom/index.php?title=Device_IDs
 DeviceMatch=usb:056a:00bc
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq

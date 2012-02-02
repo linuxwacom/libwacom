@@ -31,7 +31,10 @@ Height=6
 # Styli
 #
 # This is a list of stylus IDs supported by the tablet. This is the
-# hardest thing to gather.
+# hardest thing to gather, but note that this is only needed for the
+# professional range of tablets, as the consumer range of devices all
+# have a single stylus (stylus + 2 buttons + eraser), just like our
+# generic stylus.
 #
 # In general, differently sized models of the same range support the same
 # styli, so you can copy/paste the list from another definition.

@@ -276,6 +276,10 @@ libwacom_parse_tablet_keyfile(const char *path)
 	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Reversible", NULL))
 		device->features |= FEATURE_REVERSIBLE;
 
+	if (device->features & FEATURE_BUILTIN &&
+	    device->features & FEATURE_REVERSIBLE)
+		g_warning ("Tablet '%s' is both reversible and builtin. This is impossible", device->match);
+
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURE_GROUP, "Buttons", NULL);
 
 out:

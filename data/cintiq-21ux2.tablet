@@ -44,7 +44,7 @@
 
 [Device]
 Name=Wacom Cintiq 21UX2
-DeviceMatch=usb:0x056a:0x00cc
+DeviceMatch=usb:056a:00cc
 Class=Cintiq
 Width=17
 Height=13

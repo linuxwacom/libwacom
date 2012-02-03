@@ -274,6 +274,10 @@ libwacom_parse_tablet_keyfile(const char *path)
 	    device->features & FEATURE_REVERSIBLE)
 		g_warning ("Tablet '%s' is both reversible and builtin. This is impossible", device->match);
 
+	if (!(device->features & FEATURE_RING) &&
+	    (device->features & FEATURE_RING2))
+		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", device->match);
+
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURE_GROUP, "NumStrips", NULL);
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURE_GROUP, "Buttons", NULL);
 

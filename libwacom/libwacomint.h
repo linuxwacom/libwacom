@@ -56,6 +56,8 @@ enum WacomFeature {
 	FEATURE_REVERSIBLE	= (1 << 5)
 };
 
+/* WARNING: When adding new members to this struct
+ * make sure to update libwacom_copy() ! */
 struct _WacomDevice {
 	char *name;
 	int width;

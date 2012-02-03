@@ -67,6 +67,10 @@ int main(int argc, char **argv)
 
     libwacom_destroy(device);
 
+    device = libwacom_new_from_usbid(db, 0x056a, 0x00cc, NULL);
+    assert(libwacom_get_num_strips(device) == 2);
+    libwacom_destroy(device);
+
     device = libwacom_new_from_name(db, "Wacom Serial Tablet WACf004", NULL);
     assert(device);
     assert(libwacom_is_builtin(device));

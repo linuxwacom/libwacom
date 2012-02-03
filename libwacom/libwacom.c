@@ -174,6 +174,7 @@ libwacom_copy(const WacomDevice *device)
 	d->num_buttons = device->num_buttons;
 	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
 	d->num_styli = device->num_styli;
+	d->num_strips = device->num_strips;
 	d->features = device->features;
 
 	return d;

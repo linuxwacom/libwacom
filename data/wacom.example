@@ -18,6 +18,9 @@ Name=Wacom Intuos4 6x9
 #
 # You can find a full list of known Device IDs at:
 # https://sourceforge.net/apps/mediawiki/linuxwacom/index.php?title=Device_IDs
+#
+# Do not add 0x in front of the hex numbers, make sure to pad each ID
+# so it has exactly 4 digits.
 DeviceMatch=usb:056a:00bc
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq

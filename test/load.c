@@ -67,6 +67,16 @@ int main(int argc, char **argv)
 
     libwacom_destroy(device);
 
+    device = libwacom_new_from_usbid(db, 0x56a, 0x00b9, NULL);
+    assert(device);
+
+    assert(libwacom_get_button_flag(device, 'A') & WACOM_BUTTON_RING_MODESWITCH);
+    assert(libwacom_get_button_flag(device, 'I') & WACOM_BUTTON_OLED);
+    assert(libwacom_get_button_flag(device, 'J') == WACOM_BUTTON_NONE);
+    assert(libwacom_get_ring_num_modes(device) == 4);
+
+    libwacom_destroy(device);
+
     device = libwacom_new_from_usbid(db, 0x056a, 0x00cc, NULL);
     assert(libwacom_get_num_strips(device) == 2);
     libwacom_destroy(device);

@@ -57,3 +57,10 @@ Buttons=16
 Ring=true
 Ring2=true
 BuiltIn=true
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+Right=I;J;K;L;M;N;O;P
+
+Ring=A;B;C
+Ring2=I;J;K

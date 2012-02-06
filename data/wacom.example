@@ -104,3 +104,40 @@ Buttons=9
 # value comes from kernel properties
 BuiltIn=false
 
+# Metadata about the buttons on the tablet
+# Buttons are "numbered" using upper-case letters
+[Buttons]
+# Location of the buttons
+Left=A;B
+Right=C;D
+Top=
+Bottom=
+
+#####################
+# ADVANCED FEATURES #
+#####################
+
+# Those are only needed for a few professional tablets
+# for which the values have already been filled in.
+
+# Which buttons have OLEDs associated to them
+# Only the Intuos4 devices have that right now
+# http://101.wacom.com/i4settings/images/expresskeys-feature.jpg
+OLEDs=B;C;D;E;F;G;H;I
+
+# The location of the various rings, if associated with a button
+# or buttons.
+# For example, a single button in the middle of the touchring, like
+# on the Intuos4 tablets. You will need to mention the number of modes
+# that the button allows if there isn't one button per mode.
+Ring=A
+RingNumModes=4
+# Or the 2nd touchring associated with 3 buttons like the Cintiq24HD
+Ring2=I;J;K
+# Implied, as we have 3 buttons for that ring
+Ring2NumModes=3
+
+# If the touchstrips have mode toggling through a button
+# like on the Cintiq 21UX2
+Touchstrip=A
+Touchstrip2=J

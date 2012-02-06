@@ -56,3 +56,10 @@ Ring=false
 NumStrips=2
 Buttons=18
 BuiltIn=true
+
+[Buttons]
+Left=B;C;D;E;A;F;G;H;I
+Right=K;L;M;N;J;O;P;Q;R
+
+Touchstrip=A
+Touchstrip2=J

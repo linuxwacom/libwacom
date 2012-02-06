@@ -181,12 +181,14 @@ libwacom_copy(const WacomDevice *device)
 	d->product_id = device->product_id;
 	d->cls = device->cls;
 	d->bus = device->bus;
-	d->num_buttons = device->num_buttons;
-	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
-	d->num_styli = device->num_styli;
 	d->num_strips = device->num_strips;
 	d->features = device->features;
-
+	d->ring_num_modes = device->ring_num_modes;
+	d->ring2_num_modes = device->ring2_num_modes;
+	d->num_styli = device->num_styli;
+	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
+	d->num_buttons = device->num_buttons;
+	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
 	return d;
 }
 
@@ -328,6 +330,7 @@ libwacom_destroy(WacomDevice *device)
 
 	g_free (device->match);
 	g_free (device->supported_styli);
+	g_free (device->buttons);
 	g_free (device);
 }
 
@@ -400,6 +403,16 @@ int libwacom_has_ring2(WacomDevice *device)
     return !!(device->features & FEATURE_RING2);
 }
 
+int libwacom_get_ring_num_modes(WacomDevice *device)
+{
+    return device->ring_num_modes;
+}
+
+int libwacom_get_ring2_num_modes(WacomDevice *device)
+{
+    return device->ring2_num_modes;
+}
+
 int libwacom_get_num_strips(WacomDevice *device)
 {
     return device->num_strips;
@@ -418,6 +431,21 @@ int libwacom_is_reversible(WacomDevice *device)
 WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
     return device->bus;
+}
+
+WacomButtonFlags
+libwacom_get_button_flag(WacomDevice *device,
+			 char         button)
+{
+	int index;
+
+	g_return_val_if_fail (device->num_buttons > 0, WACOM_BUTTON_NONE);
+	g_return_val_if_fail (button >= 'A', WACOM_BUTTON_NONE);
+	g_return_val_if_fail (button < 'A' + device->num_buttons, WACOM_BUTTON_NONE);
+
+	index = button - 'A';
+
+	return device->buttons[index];
 }
 
 const WacomStylus *libwacom_stylus_get_for_id (WacomDeviceDatabase *db, int id)

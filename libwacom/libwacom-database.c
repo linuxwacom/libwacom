@@ -39,6 +39,7 @@
 #define SUFFIX ".tablet"
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
+#define BUTTONS_GROUP "Buttons"
 
 static WacomClass
 libwacom_class_string_to_enum(const char *class)
@@ -188,6 +189,82 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 	g_strfreev (groups);
 }
 
+struct {
+	const char       *key;
+	WacomButtonFlags  flag;
+} options[] = {
+	{ "Left", WACOM_BUTTON_POSITION_LEFT },
+	{ "Right", WACOM_BUTTON_POSITION_RIGHT },
+	{ "Top", WACOM_BUTTON_POSITION_TOP },
+	{ "Bottom", WACOM_BUTTON_POSITION_BOTTOM },
+	{ "Ring", WACOM_BUTTON_RING_MODESWITCH },
+	{ "Ring2", WACOM_BUTTON_RING2_MODESWITCH },
+	{ "Touchstrip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH },
+	{ "Touchstrip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH },
+	{ "OLEDs", WACOM_BUTTON_OLED }
+};
+
+static void
+libwacom_parse_buttons_key(WacomDevice      *device,
+			   GKeyFile         *keyfile,
+			   const char       *key,
+			   WacomButtonFlags  flag)
+{
+	guint i;
+	char **vals;
+
+	vals = g_key_file_get_string_list (keyfile, BUTTONS_GROUP, key, NULL, NULL);
+	if (vals == NULL)
+		return;
+	for (i = 0; vals[i] != NULL; i++) {
+		char val;
+
+		val = *vals[i];
+		if (strlen (vals[i]) > 1 ||
+		    val < 'A' ||
+		    val > 'Z') {
+			g_warning ("Ignoring value '%s' in key '%s'", vals[i], key);
+			continue;
+		}
+		val -= 'A';
+		device->buttons[(int) val] |= flag;
+	}
+
+	g_strfreev (vals);
+}
+
+static int
+libwacom_parse_num_modes (WacomDevice      *device,
+			  GKeyFile         *keyfile,
+			  const char       *key,
+			  WacomButtonFlags  flag)
+{
+	int num;
+	guint i;
+
+	num = g_key_file_get_integer (keyfile, BUTTONS_GROUP, key, NULL);
+	if (num > 0)
+		return num;
+	for (i = 0; i < device->num_buttons; i++) {
+		if (device->buttons[i] & flag)
+			num++;
+	}
+	return num;
+}
+
+static void
+libwacom_parse_buttons(WacomDevice *device,
+		       GKeyFile    *keyfile)
+{
+	guint i;
+
+	for (i = 0; i < G_N_ELEMENTS (options); i++)
+		libwacom_parse_buttons_key(device, keyfile, options[i].key, options[i].flag);
+
+	device->ring_num_modes = libwacom_parse_num_modes(device, keyfile, "RingNumModes", WACOM_BUTTON_RING_MODESWITCH);
+	device->ring2_num_modes = libwacom_parse_num_modes(device, keyfile, "Ring2NumModes", WACOM_BUTTON_RING2_MODESWITCH);
+}
+
 static WacomDevice*
 libwacom_parse_tablet_keyfile(const char *path)
 {
@@ -279,7 +356,16 @@ libwacom_parse_tablet_keyfile(const char *path)
 		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", device->match);
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
-	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", NULL);
+	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);
+	if (device->num_buttons == 0 &&
+	    g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
+		g_warning ("Tablet '%s' has no buttons defined, do something!", device->match);
+		g_clear_error (&error);
+	}
+	if (device->num_buttons > 0) {
+		device->buttons = g_new0 (WacomButtonFlags, device->num_buttons);
+		libwacom_parse_buttons(device, keyfile);
+	}
 
 out:
 	if (keyfile)

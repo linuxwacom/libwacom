@@ -131,6 +131,22 @@ typedef enum {
 } WacomStylusType;
 
 /**
+ * Capabilities of the various tablet buttons
+ */
+typedef enum {
+	WACOM_BUTTON_NONE                   = 0,
+	WACOM_BUTTON_POSITION_LEFT          = (1 << 1),
+	WACOM_BUTTON_POSITION_RIGHT         = (1 << 2),
+	WACOM_BUTTON_POSITION_TOP           = (1 << 3),
+	WACOM_BUTTON_POSITION_BOTTOM        = (1 << 4),
+	WACOM_BUTTON_RING_MODESWITCH        = (1 << 5),
+	WACOM_BUTTON_RING2_MODESWITCH       = (1 << 6),
+	WACOM_BUTTON_TOUCHSTRIP_MODESWITCH  = (1 << 7),
+	WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH = (1 << 8),
+	WACOM_BUTTON_OLED                   = (1 << 9)
+} WacomButtonFlags;
+
+/**
  * Allocate a new structure for error reporting.
  *
  * @return A newly allocated error structure or NULL if the allocation
@@ -319,6 +335,18 @@ int libwacom_has_ring2(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return the number of modes for the touchring if it has a mode switch
+ */
+int libwacom_get_ring_num_modes(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return the number of modes for the second touchring if it has a mode switch
+ */
+int libwacom_get_ring2_num_modes(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return the number of touch strips on the tablet
  * otherwise
  */
@@ -343,6 +371,14 @@ int libwacom_is_reversible(WacomDevice *device);
  * @return The bustype of this device.
  */
 WacomBusType libwacom_get_bustype(WacomDevice *device);
+
+/*
+ * @param device The tablet to query
+ * @param button The ID of the button to check for, between 'A' and 'Z'
+ * @return a WacomButtonFlags with information about the button
+ */
+WacomButtonFlags libwacom_get_button_flag(WacomDevice *device,
+					  char         button);
 
 /**
  * Get the WacomStylus for the given tool ID.

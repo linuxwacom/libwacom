@@ -69,11 +69,17 @@ struct _WacomDevice {
 
 	WacomClass cls;
 	WacomBusType bus;
-	int num_buttons;
-	int *supported_styli;
-	gsize num_styli;
 	int num_strips;
 	uint32_t features;
+
+	int ring_num_modes;
+	int ring2_num_modes;
+
+	gsize num_styli;
+	int *supported_styli;
+
+	int num_buttons;
+	WacomButtonFlags *buttons;
 };
 
 struct _WacomStylus {

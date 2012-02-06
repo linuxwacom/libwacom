@@ -42,6 +42,14 @@ Height=6
 # have a single stylus (stylus + 2 buttons + eraser), just like our
 # generic stylus.
 #
+# Consumer range:
+# - Graphire
+# - Bamboo
+#
+# Professional range:
+# - Cintiq
+# - Intuos
+#
 # In general, differently sized models of the same range support the same
 # styli, so you can copy/paste the list from another definition.
 #

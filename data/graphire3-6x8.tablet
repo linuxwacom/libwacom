@@ -1,0 +1,15 @@
+
+[Device]
+# Model CTE-630 (Sapphire) (CTE-630/B)
+Name=Wacom Graphire3 6x8
+
+DeviceMatch=usb:056a:0014
+
+Class=Graphire
+
+Width=8
+Height=6
+
+[Features]
+
+Stylus=true

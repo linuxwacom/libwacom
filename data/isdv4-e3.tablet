@@ -13,3 +13,4 @@ DeviceMatch=usb:056a:003e
 Stylus=true
 Touch=true
 BuiltIn=true
+Buttons=0

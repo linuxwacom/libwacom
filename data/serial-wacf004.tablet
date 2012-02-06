@@ -1,6 +1,6 @@
 [Device]
 Name=Wacom Serial Tablet WACf004
-DeviceMatch=serial:0:0
+DeviceMatch=serial:0000:0000
 
 [Features]
 Stylus=true

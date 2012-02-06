@@ -72,6 +72,11 @@ get_device_info (const char   *path,
 	}
 
 	bus_str = g_udev_device_get_property (device, "ID_BUS");
+	/* Serial devices are weird */
+	if (bus_str == NULL) {
+		if (g_strcmp0 (g_udev_device_get_subsystem (device), "tty") == 0)
+			bus_str = "serial";
+	}
 	/* Poke the parent device for Bluetooth models */
 	if (bus_str == NULL) {
 		GUdevDevice *parent;
@@ -135,9 +140,10 @@ get_device_info (const char   *path,
 			goto bail;
 		}
 	} else if (*bus == WBUSTYPE_SERIAL) {
-		/* FIXME implement */
-		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
-		goto bail;
+		/* FIXME This matches the declaration in serial-wacf004.tablet
+		 * Might not be good enough though */
+		vendor_id = 0;
+		product_id = 0;
 	} else {
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
 		goto bail;
@@ -146,6 +152,9 @@ get_device_info (const char   *path,
 	if (*bus != WBUSTYPE_UNKNOWN &&
 	    vendor_id != 0 &&
 	    product_id != 0)
+		retval = TRUE;
+	/* The serial bus uses 0:0 as the vid/pid */
+	if (*bus == WBUSTYPE_SERIAL)
 		retval = TRUE;
 
 bail:

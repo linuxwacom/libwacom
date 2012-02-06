@@ -37,7 +37,7 @@
 #include <stdio.h>
 
 #define SUFFIX ".tablet"
-#define FEATURE_GROUP "Features"
+#define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 
 static WacomClass
@@ -252,22 +252,22 @@ libwacom_parse_tablet_keyfile(const char *path)
 	}
 
 	/* Features */
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Stylus", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Stylus", NULL))
 		device->features |= FEATURE_STYLUS;
 
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Touch", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Touch", NULL))
 		device->features |= FEATURE_TOUCH;
 
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Ring", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring", NULL))
 		device->features |= FEATURE_RING;
 
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Ring2", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring2", NULL))
 		device->features |= FEATURE_RING2;
 
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "BuiltIn", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "BuiltIn", NULL))
 		device->features |= FEATURE_BUILTIN;
 
-	if (g_key_file_get_boolean(keyfile, FEATURE_GROUP, "Reversible", NULL))
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
 		device->features |= FEATURE_REVERSIBLE;
 
 	if (device->features & FEATURE_BUILTIN &&
@@ -278,8 +278,8 @@ libwacom_parse_tablet_keyfile(const char *path)
 	    (device->features & FEATURE_RING2))
 		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", device->match);
 
-	device->num_strips = g_key_file_get_integer(keyfile, FEATURE_GROUP, "NumStrips", NULL);
-	device->num_buttons = g_key_file_get_integer(keyfile, FEATURE_GROUP, "Buttons", NULL);
+	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
+	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", NULL);
 
 out:
 	if (keyfile)

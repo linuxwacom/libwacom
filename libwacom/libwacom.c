@@ -129,6 +129,7 @@ get_device_info (const char   *path,
 		 * vendor 0x56a
 		 * product 0x81 */
 		product_str = g_udev_device_get_property (device, "PRODUCT");
+		g_assert (product_str);
 		if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
 			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
 			goto bail;

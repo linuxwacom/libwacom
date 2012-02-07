@@ -358,6 +358,12 @@ int libwacom_get_num_strips(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return the number of modes for each of the touchstrips if any
+ */
+int libwacom_get_strips_num_modes(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return non-zero if the device is built-in or zero if the device is an
  * external tablet
  */

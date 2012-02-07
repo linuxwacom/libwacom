@@ -72,6 +72,7 @@ struct _WacomDevice {
 	int num_strips;
 	uint32_t features;
 
+	int strips_num_modes;
 	int ring_num_modes;
 	int ring2_num_modes;
 

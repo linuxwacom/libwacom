@@ -183,6 +183,7 @@ libwacom_copy(const WacomDevice *device)
 	d->bus = device->bus;
 	d->num_strips = device->num_strips;
 	d->features = device->features;
+	d->strips_num_modes = device->strips_num_modes;
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
 	d->num_styli = device->num_styli;
@@ -416,6 +417,11 @@ int libwacom_get_ring2_num_modes(WacomDevice *device)
 int libwacom_get_num_strips(WacomDevice *device)
 {
     return device->num_strips;
+}
+
+int libwacom_get_strips_num_modes(WacomDevice *device)
+{
+    return device->strips_num_modes;
 }
 
 int libwacom_is_builtin(WacomDevice *device)

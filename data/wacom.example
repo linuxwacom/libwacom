@@ -141,3 +141,6 @@ Ring2NumModes=3
 # like on the Cintiq 21UX2
 Touchstrip=A
 Touchstrip2=J
+# We assume the same number of modes for each of the touchstrips
+# if there is more than one
+StripsNumModes=4

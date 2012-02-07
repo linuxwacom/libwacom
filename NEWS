@@ -1,3 +1,14 @@
+libwacom 0.3:
+- Loads of new and updated tablet definition files
+- Add and correct information about styli
+- Update wacom.example with loads of documentation
+  about adding new tablet definitions
+- Handle Puck device type
+- Support enumerating touchstrips, touchrings and buttons
+- Get device name from the kernel for generic tablets
+- Add support for the WACf004 serial tablet
+- Build fixes (exported symbols, soname)
+
 libwacom 0.2:
 - Don't add devices that lack DeviceMatch
 - Get whether a device is builtin from udev

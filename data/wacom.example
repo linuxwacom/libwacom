@@ -1,6 +1,6 @@
 # Example model file description for a tablet
 #
-# Make sure to give it a recognisable name, with the ".tablet" prefix
+# Make sure to give it a recognisable name, with the ".tablet" suffix
 [Device]
 
 # The name is the vendor and product name announced by the kernel

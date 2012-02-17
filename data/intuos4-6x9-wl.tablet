@@ -35,6 +35,7 @@
 [Device]
 Name=Wacom Intuos4 WL
 # FIXME add missing bluetooth match
+# bluetooth:056a:00bd
 DeviceMatch=usb:056a:00bc
 Class=Intuos4
 Width=8
@@ -47,3 +48,11 @@ Stylus=true
 Ring=true
 Buttons=9
 BuiltIn=false
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I
+
+OLEDs=B;C;D;E;F;G;H;I
+
+Ring=A
+RingNumModes=4

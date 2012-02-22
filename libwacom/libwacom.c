@@ -66,7 +66,9 @@ get_device_info (const char   *path,
 		goto bail;
 	}
 
-	if (g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") == FALSE) {
+	/* Touchpads are only for the "Finger" part of Bamboo devices */
+	if (g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") == FALSE &&
+	    g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD") == FALSE) {
 		libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
 		goto bail;
 	}

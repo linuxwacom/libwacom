@@ -1,6 +1,6 @@
 lib_LTLIBRARIES=libwacom.la
 
-AM_CPPFLAGS = $(GLIB_CFLAGS) -DDATADIR="\"$(datadir)/libwacom\""
+AM_CPPFLAGS = $(GLIB_CFLAGS) -DDATADIR="\"$(datadir)/libwacom\"" -DG_LOG_DOMAIN="\"$(PACKAGE)\""
 
 libwacom_la_SOURCES = \
                       libwacom.h \

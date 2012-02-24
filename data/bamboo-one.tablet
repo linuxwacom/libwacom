@@ -1,0 +1,15 @@
+[Device]
+# Bamboo One (CTF-430/SO-B)
+Name=Bamboo One
+DeviceMatch=usb:056a:0069
+Width=5.0
+Height=3.6
+
+[Features]
+Reversible=true
+Stylus=true
+Touch=false
+Ring=false
+NumStrips=0
+Buttons=0
+BuiltIn=false

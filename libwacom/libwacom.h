@@ -244,6 +244,19 @@ WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int
 WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *error);
 
 /**
+ * Returns the list of devices in the given database.
+ *
+ * @param db A device database
+ * @param error If not NULL, set to the error if any occurs
+ *
+ * @return A NULL terminated list of pointers to all the devices inside the
+ * database.
+ * The content of the list is owned by the database and should not be
+ * modified of freed. Use free() to free the list.
+ */
+WacomDevice** libwacom_list_devices_from_database(WacomDeviceDatabase *db, WacomError *error);
+
+/**
  * Remove the device and free all memory and references to it.
  *
  * @param device The device to delete

@@ -466,4 +466,29 @@ libwacom_database_destroy(WacomDeviceDatabase *db)
 	g_free (db);
 }
 
+WacomDevice**
+libwacom_list_devices_from_database(WacomDeviceDatabase *db, WacomError *error)
+{
+	GList *cur, *devices;
+	WacomDevice **list, **p;
+
+	if (!db) {
+		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+		return NULL;
+	}
+
+	devices =  g_hash_table_get_values (db->device_ht);
+	list = calloc (g_list_length (devices) + 1, sizeof (WacomDevice *));
+	if (!list) {
+		libwacom_error_set(error, WERROR_BAD_ALLOC, "Memory allocation failed");
+		return NULL;
+	}
+
+	for (p = list, cur = devices; cur; cur = g_list_next (cur))
+		*p++ = (WacomDevice *) cur->data;
+	g_list_free (devices);
+
+	return list;
+}
+
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

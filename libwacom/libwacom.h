@@ -29,8 +29,10 @@
 #endif
 
 
+/** @cond hide_from_doxygen */
 #ifndef _LIBWACOM_H_
 #define _LIBWACOM_H_
+/** @endcond */
 
 /**
  @mainpage

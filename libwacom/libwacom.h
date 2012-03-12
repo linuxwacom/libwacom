@@ -110,6 +110,7 @@ typedef enum {
     WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
     WCLASS_INTUOS3,		/**< Any Intuos3 series */
     WCLASS_INTUOS4,		/**< Any Intuos4 series */
+    WCLASS_INTUOS5,		/**< Any Intuos5 series */
     WCLASS_CINTIQ,		/**< Any Cintiq device */
     WCLASS_BAMBOO,		/**< Any Bamboo device */
     WCLASS_GRAPHIRE,		/**< Any Graphire device */

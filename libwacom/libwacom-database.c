@@ -51,6 +51,8 @@ libwacom_class_string_to_enum(const char *class)
 		return WCLASS_INTUOS3;
 	if (strcmp(class, "Intuos4") == 0)
 		return WCLASS_INTUOS4;
+	if (strcmp(class, "Intuos5") == 0)
+		return WCLASS_INTUOS5;
 	if (strcmp(class, "Cintiq") == 0)
 		return WCLASS_CINTIQ;
 	if (strcmp(class, "Bamboo") == 0)

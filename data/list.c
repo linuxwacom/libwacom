@@ -50,7 +50,7 @@ static void print_udev_entry (WacomDevice *device)
     static char *touchpad;
 
     if (has_touch)
-        touchpad = ", ID_INPUT_TOUCHPAD=\"1\"";
+        touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
     else
         touchpad = "";
 

@@ -86,6 +86,10 @@ int main(int argc, char **argv)
     db = libwacom_database_new_for_path(TOPSRCDIR"/data");
 
     list = libwacom_list_devices_from_database(db, NULL);
+    if (!list) {
+        fprintf(stderr, "Failed to load device database.\n");
+        return 1;
+    }
 
     print_udev_header ();
     for (p = list; *p; p++)

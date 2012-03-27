@@ -1,3 +1,12 @@
+libwacom 0.4:
+- More metadata for:
+  - Intuos4 WL
+  - Bamboo One
+  - Intuos5 series
+- Don't fail to create a WacomDevice for Touch devices
+- Add API to access all items in the database
+- Add helper tool to generate udev rules from the database
+
 libwacom 0.3:
 - Loads of new and updated tablet definition files
 - Add and correct information about styli

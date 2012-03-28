@@ -1,0 +1,16 @@
+# Wacom
+# DTF-720 Interactive Pen Display
+#
+# FIXME: This file has not been verified yet
+
+[Device]
+Name=Wacom DTF-720
+DeviceMatch=usb:056a:00c0
+Width=13
+Height=11
+
+[Features]
+Stylus=true
+Buttons=0
+BuiltIn=true
+

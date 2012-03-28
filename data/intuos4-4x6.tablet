@@ -47,3 +47,9 @@ Stylus=true
 Ring=true
 Buttons=7
 BuiltIn=false
+
+[Buttons]
+Left=A;B;C;D;E;F;G
+
+Ring=A
+RingNumModes=4

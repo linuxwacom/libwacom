@@ -59,5 +59,7 @@ Ring=true
 BuiltIn=false
 
 [Buttons]
+Left=A;B;C;D;E;F;G;H;I
+
 Ring=A
 RingNumModes=4

@@ -43,3 +43,7 @@ Stylus=true
 NumStrips=2
 Buttons=10
 BuiltIn=true
+
+[Buttons]
+Left=A;B;C;D;I
+Right=E;F;G;H;J

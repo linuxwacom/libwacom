@@ -46,3 +46,11 @@ Stylus=true
 Ring=true
 Buttons=9
 BuiltIn=false
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I
+
+OLEDs=B;C;D;E;F;G;H;I
+
+Ring=A
+RingNumModes=4

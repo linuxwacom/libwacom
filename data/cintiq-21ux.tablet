@@ -40,3 +40,7 @@ Stylus=true
 NumStrips=2
 Buttons=8
 BuiltIn=true
+
+[Buttons]
+Left=A;B;C;D
+Right=E;F;G;H

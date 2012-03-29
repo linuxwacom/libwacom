@@ -35,95 +35,95 @@
 
 static void check_multiple_match(WacomDevice *device)
 {
-    const WacomMatch **match;
-    int nmatches = 0;
-    int found_bus = 0,
-	found_vendor_id = 0,
-	found_product_id = 0;
+	const WacomMatch **match;
+	int nmatches = 0;
+	int found_bus = 0,
+	    found_vendor_id = 0,
+	    found_product_id = 0;
 
-    for (match = libwacom_get_matches(device); *match; match++)
-    {
-	    nmatches++;
-	    if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
-		    found_bus = 1;
-	    if (libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
-		    found_vendor_id = 1;
-	    if (libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
-		    found_product_id = 1;
-    }
+	for (match = libwacom_get_matches(device); *match; match++)
+	{
+		nmatches++;
+		if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
+			found_bus = 1;
+		if (libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
+			found_vendor_id = 1;
+		if (libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
+			found_product_id = 1;
+	}
 
-    assert(nmatches == 2);
-    assert(found_bus && found_vendor_id && found_product_id);
+	assert(nmatches == 2);
+	assert(found_bus && found_vendor_id && found_product_id);
 }
 
 int main(int argc, char **argv)
 {
-    WacomDeviceDatabase *db;
-    WacomDevice *device;
-    const char *str;
+	WacomDeviceDatabase *db;
+	WacomDevice *device;
+	const char *str;
 
-    db = libwacom_database_new_for_path(TOPSRCDIR"/data");
-    if (!db)
-	    printf("Failed to load data from %s", TOPSRCDIR"/data");
-    assert(db);
+	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	if (!db)
+		printf("Failed to load data from %s", TOPSRCDIR"/data");
+	assert(db);
 
-    device = libwacom_new_from_usbid(db, 0, 0, NULL);
-    assert(!device);
+	device = libwacom_new_from_usbid(db, 0, 0, NULL);
+	assert(!device);
 
-    device = libwacom_new_from_usbid(db, 0x56a, 0x00bc, NULL);
-    assert(device);
+	device = libwacom_new_from_usbid(db, 0x56a, 0x00bc, NULL);
+	assert(device);
 
-    str = libwacom_get_name(device);
-    assert(strcmp(str, "Wacom Intuos4 WL") == 0);
-    assert(libwacom_get_class(device) == WCLASS_INTUOS4);
-    assert(libwacom_get_vendor_id(device) == 0x56a);
-    assert(libwacom_get_product_id(device) == 0xbc);
-    assert(libwacom_get_bustype(device) == WBUSTYPE_USB);
-    assert(libwacom_get_num_buttons(device) == 9);
-    assert(libwacom_has_stylus(device));
-    assert(libwacom_is_reversible(device));
-    assert(!libwacom_has_touch(device));
-    assert(libwacom_has_ring(device));
-    assert(!libwacom_has_ring2(device));
-    assert(libwacom_get_num_strips(device) == 0);
-    assert(!libwacom_is_builtin(device));
-    assert(libwacom_get_width(device) == 8);
-    assert(libwacom_get_height(device) == 5);
+	str = libwacom_get_name(device);
+	assert(strcmp(str, "Wacom Intuos4 WL") == 0);
+	assert(libwacom_get_class(device) == WCLASS_INTUOS4);
+	assert(libwacom_get_vendor_id(device) == 0x56a);
+	assert(libwacom_get_product_id(device) == 0xbc);
+	assert(libwacom_get_bustype(device) == WBUSTYPE_USB);
+	assert(libwacom_get_num_buttons(device) == 9);
+	assert(libwacom_has_stylus(device));
+	assert(libwacom_is_reversible(device));
+	assert(!libwacom_has_touch(device));
+	assert(libwacom_has_ring(device));
+	assert(!libwacom_has_ring2(device));
+	assert(libwacom_get_num_strips(device) == 0);
+	assert(!libwacom_is_builtin(device));
+	assert(libwacom_get_width(device) == 8);
+	assert(libwacom_get_height(device) == 5);
 
-    /* I4 WL has two matches */
-    check_multiple_match(device);
+	/* I4 WL has two matches */
+	check_multiple_match(device);
 
-    libwacom_destroy(device);
+	libwacom_destroy(device);
 
-    device = libwacom_new_from_usbid(db, 0x56a, 0x00b9, NULL);
-    assert(device);
+	device = libwacom_new_from_usbid(db, 0x56a, 0x00b9, NULL);
+	assert(device);
 
-    assert(libwacom_get_button_flag(device, 'A') & WACOM_BUTTON_RING_MODESWITCH);
-    assert(libwacom_get_button_flag(device, 'I') & WACOM_BUTTON_OLED);
-    assert(libwacom_get_button_flag(device, 'J') == WACOM_BUTTON_NONE);
-    assert(libwacom_get_ring_num_modes(device) == 4);
+	assert(libwacom_get_button_flag(device, 'A') & WACOM_BUTTON_RING_MODESWITCH);
+	assert(libwacom_get_button_flag(device, 'I') & WACOM_BUTTON_OLED);
+	assert(libwacom_get_button_flag(device, 'J') == WACOM_BUTTON_NONE);
+	assert(libwacom_get_ring_num_modes(device) == 4);
 
-    libwacom_destroy(device);
+	libwacom_destroy(device);
 
-    device = libwacom_new_from_usbid(db, 0x56a, 0x00f4, NULL);
-    assert(device);
+	device = libwacom_new_from_usbid(db, 0x56a, 0x00f4, NULL);
+	assert(device);
 
-    assert(libwacom_get_ring_num_modes(device) == 3);
-    assert(libwacom_get_ring2_num_modes(device) == 3);
+	assert(libwacom_get_ring_num_modes(device) == 3);
+	assert(libwacom_get_ring2_num_modes(device) == 3);
 
-    libwacom_destroy(device);
+	libwacom_destroy(device);
 
-    device = libwacom_new_from_usbid(db, 0x056a, 0x00cc, NULL);
-    assert(libwacom_get_num_strips(device) == 2);
-    libwacom_destroy(device);
+	device = libwacom_new_from_usbid(db, 0x056a, 0x00cc, NULL);
+	assert(libwacom_get_num_strips(device) == 2);
+	libwacom_destroy(device);
 
-    device = libwacom_new_from_name(db, "Wacom Serial Tablet WACf004", NULL);
-    assert(device);
-    assert(libwacom_is_builtin(device));
+	device = libwacom_new_from_name(db, "Wacom Serial Tablet WACf004", NULL);
+	assert(device);
+	assert(libwacom_is_builtin(device));
 
-    libwacom_database_destroy (db);
+	libwacom_database_destroy (db);
 
-    return 0;
+	return 0;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

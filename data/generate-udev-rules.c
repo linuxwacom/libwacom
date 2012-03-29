@@ -34,80 +34,80 @@
 
 static void print_udev_header (void)
 {
-    printf ("# udev rules for libwacom supported devices\n");
-    printf ("\n");
-    printf ("ACTION!=\"add|change\", GOTO=\"libwacom_end\"\n");
-    printf ("KERNEL!=\"event[0-9]*\", GOTO=\"libwacom_end\"\n");
-    printf ("\n");
+	printf ("# udev rules for libwacom supported devices\n");
+	printf ("\n");
+	printf ("ACTION!=\"add|change\", GOTO=\"libwacom_end\"\n");
+	printf ("KERNEL!=\"event[0-9]*\", GOTO=\"libwacom_end\"\n");
+	printf ("\n");
 }
 
 static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *match)
 {
-    WacomBusType type       = libwacom_match_get_bustype (match);
-    int          vendor     = libwacom_match_get_vendor_id (match);
-    int          product    = libwacom_match_get_product_id (match);
-    int          has_touch  = libwacom_has_touch (device);
-    static char *touchpad;
+	WacomBusType type       = libwacom_match_get_bustype (match);
+	int          vendor     = libwacom_match_get_vendor_id (match);
+	int          product    = libwacom_match_get_product_id (match);
+	int          has_touch  = libwacom_has_touch (device);
+	static char *touchpad;
 
-    if (has_touch)
-        touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
-    else
-        touchpad = "";
+	if (has_touch)
+		touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
+	else
+		touchpad = "";
 
-    switch (type) {
-        case WBUSTYPE_USB:
-            printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
-            break;
-        case WBUSTYPE_BLUETOOTH:
-            printf ("ENV{ID_BUS}==\"bluetooth\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
-            break;
-        default:
-            /* Not sure how to deal with serials  */
-            break;
-    }
+	switch (type) {
+		case WBUSTYPE_USB:
+			printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
+			break;
+		case WBUSTYPE_BLUETOOTH:
+			printf ("ENV{ID_BUS}==\"bluetooth\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
+			break;
+		default:
+			/* Not sure how to deal with serials  */
+			break;
+	}
 }
 
 static void print_udev_entry (WacomDevice *device)
 {
-    const WacomMatch **matches, **match;
+	const WacomMatch **matches, **match;
 
-    matches = libwacom_get_matches(device);
-    for (match = matches; *match; match++)
-        print_udev_entry_for_match(device, *match);
+	matches = libwacom_get_matches(device);
+	for (match = matches; *match; match++)
+		print_udev_entry_for_match(device, *match);
 }
 
 static void print_udev_trailer (void)
 {
-    printf ("\n");
-    printf ("# Match all serial wacom tablets with a serial ID starting with WACf\n");
-    printf ("ENV{ID_BUS}==\"tty|pnp\", ATTRS{id}==\"WACf*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"\n");
-    printf ("ENV{ID_BUS}==\"tty|pnp\", ATTRS{id}==\"FUJ*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"\n");
-    printf ("\n");
-    printf ("LABEL=\"libwacom_end\"\n");
+	printf ("\n");
+	printf ("# Match all serial wacom tablets with a serial ID starting with WACf\n");
+	printf ("ENV{ID_BUS}==\"tty|pnp\", ATTRS{id}==\"WACf*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"\n");
+	printf ("ENV{ID_BUS}==\"tty|pnp\", ATTRS{id}==\"FUJ*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"\n");
+	printf ("\n");
+	printf ("LABEL=\"libwacom_end\"\n");
 }
 
 
 int main(int argc, char **argv)
 {
-    WacomDeviceDatabase *db;
-    WacomDevice **list, **p;
+	WacomDeviceDatabase *db;
+	WacomDevice **list, **p;
 
-    db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
 
-    list = libwacom_list_devices_from_database(db, NULL);
-    if (!list) {
-        fprintf(stderr, "Failed to load device database.\n");
-        return 1;
-    }
+	list = libwacom_list_devices_from_database(db, NULL);
+	if (!list) {
+		fprintf(stderr, "Failed to load device database.\n");
+		return 1;
+	}
 
-    print_udev_header ();
-    for (p = list; *p; p++)
-        print_udev_entry ((WacomDevice *) *p);
-    print_udev_trailer ();
+	print_udev_header ();
+	for (p = list; *p; p++)
+		print_udev_entry ((WacomDevice *) *p);
+	print_udev_trailer ();
 
-    libwacom_database_destroy (db);
+	libwacom_database_destroy (db);
 
-    return 0;
+	return 0;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

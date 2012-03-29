@@ -40,6 +40,8 @@ int main(int argc, char **argv)
     const char *str;
 
     db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+    if (!db)
+	    printf("Failed to load data from %s", TOPSRCDIR"/data");
     assert(db);
 
     device = libwacom_new_from_usbid(db, 0, 0, NULL);

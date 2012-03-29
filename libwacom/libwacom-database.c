@@ -115,6 +115,12 @@ bus_to_str (WacomBusType bus)
 	g_assert_not_reached ();
 }
 
+char *
+make_match_string (WacomBusType bus, int vendor_id, int product_id)
+{
+	return g_strdup_printf("%s:%04x:%04x", bus_to_str (bus), vendor_id, product_id);
+}
+
 static int
 libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
 {
@@ -146,7 +152,6 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 	rc = g_key_file_load_from_file(keyfile, path, G_KEY_FILE_NONE, &error);
 	g_assert (rc);
-
 	groups = g_key_file_get_groups (keyfile, NULL);
 	for (i = 0; groups[i]; i++) {
 		WacomStylus *stylus;
@@ -302,7 +307,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 			device = NULL;
 			goto out;
 		}
-		device->match = g_strdup_printf ("%s:%04x:%04x", bus_to_str (device->bus), device->vendor_id, device->product_id);
+		device->match = make_match_string(device->bus, device->vendor_id, device->product_id);
 		g_free (match);
 	}
 

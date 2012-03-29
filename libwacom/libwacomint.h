@@ -109,6 +109,7 @@ void libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id,
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
+char *make_match_string(WacomBusType bus, int vendor_id, int product_id);
 
 
 #endif /* _LIBWACOMINT_H_ */

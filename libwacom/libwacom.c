@@ -209,7 +209,7 @@ libwacom_new (WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusTy
         return NULL;
     }
 
-    match = g_strdup_printf ("%s:%04x:%04x", bus_to_str (bus), vendor_id, product_id);
+    match = make_match_string(bus, vendor_id, product_id);
     device = libwacom_get_device(db, match);
     g_free (match);
 
@@ -343,7 +343,7 @@ libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int 
 	device->product_id = product_id;
 	device->bus = bus;
 	g_free(device->match);
-	device->match = g_strdup_printf("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
+	device->match = make_match_string(device->bus, device->vendor_id, device->product_id);
 }
 
 int libwacom_get_vendor_id(WacomDevice *device)

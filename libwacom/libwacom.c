@@ -510,4 +510,4 @@ void libwacom_stylus_destroy(WacomStylus *stylus)
 	g_free (stylus);
 }
 
-/* vim :noexpandtab shiftwidth=8: */
+/* vim: set noexpandtab tabstop=8 shiftwidth=8: */

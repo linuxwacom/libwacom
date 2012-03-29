@@ -459,4 +459,4 @@ WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
 
 #endif /* _LIBWACOM_H_ */
 
-/* vim: set noexpandtab shiftwidth=8: */
+/* vim: set noexpandtab tabstop=8 shiftwidth=8: */

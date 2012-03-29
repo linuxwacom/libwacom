@@ -295,7 +295,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 		device->match = match;
 	} else {
 		if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus)) {
-			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", device->match, path);
+			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
 			g_free (match);
 			g_free (device);
 			device = NULL;

@@ -95,50 +95,50 @@ typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
  * Possible error codes.
  */
 enum WacomErrorCode {
-    WERROR_NONE,		/**< No error has occured */
-    WERROR_BAD_ALLOC,		/**< Allocation error */
-    WERROR_INVALID_PATH,	/**< A path specified is invalid */
-    WERROR_INVALID_DB,		/**< The passed DB is invalid */
-    WERROR_BAD_ACCESS,		/**< Invalid permissions to access the path */
-    WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
+	WERROR_NONE,		/**< No error has occured */
+	WERROR_BAD_ALLOC,		/**< Allocation error */
+	WERROR_INVALID_PATH,	/**< A path specified is invalid */
+	WERROR_INVALID_DB,		/**< The passed DB is invalid */
+	WERROR_BAD_ACCESS,		/**< Invalid permissions to access the path */
+	WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
 };
 
 /**
  * Bus types for tablets.
  */
 typedef enum {
-    WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
-    WBUSTYPE_USB,		/**< USB tablet */
-    WBUSTYPE_SERIAL,		/**< Serial tablet */
-    WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
+	WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
+	WBUSTYPE_USB,		/**< USB tablet */
+	WBUSTYPE_SERIAL,		/**< Serial tablet */
+	WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
 } WacomBusType;
 
 /**
  * Classes of devices.
  */
 typedef enum {
-    WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
-    WCLASS_INTUOS3,		/**< Any Intuos3 series */
-    WCLASS_INTUOS4,		/**< Any Intuos4 series */
-    WCLASS_INTUOS5,		/**< Any Intuos5 series */
-    WCLASS_CINTIQ,		/**< Any Cintiq device */
-    WCLASS_BAMBOO,		/**< Any Bamboo device */
-    WCLASS_GRAPHIRE,		/**< Any Graphire device */
-    WCLASS_ISDV4,		/**< Any serial ISDV4 device */
+	WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
+	WCLASS_INTUOS3,		/**< Any Intuos3 series */
+	WCLASS_INTUOS4,		/**< Any Intuos4 series */
+	WCLASS_INTUOS5,		/**< Any Intuos5 series */
+	WCLASS_CINTIQ,		/**< Any Cintiq device */
+	WCLASS_BAMBOO,		/**< Any Bamboo device */
+	WCLASS_GRAPHIRE,		/**< Any Graphire device */
+	WCLASS_ISDV4,		/**< Any serial ISDV4 device */
 } WacomClass;
 
 /**
  * Class of stylus
  */
 typedef enum {
-    WSTYLUS_UNKNOWN,
-    WSTYLUS_GENERAL,
-    WSTYLUS_INKING,
-    WSTYLUS_AIRBRUSH,
-    WSTYLUS_CLASSIC,
-    WSTYLUS_MARKER,
-    WSTYLUS_STROKE,
-    WSTYLUS_PUCK
+	WSTYLUS_UNKNOWN,
+	WSTYLUS_GENERAL,
+	WSTYLUS_INKING,
+	WSTYLUS_AIRBRUSH,
+	WSTYLUS_CLASSIC,
+	WSTYLUS_MARKER,
+	WSTYLUS_STROKE,
+	WSTYLUS_PUCK
 } WacomStylusType;
 
 /**
@@ -207,10 +207,10 @@ WacomDeviceDatabase* libwacom_database_new(void);
 WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
 
 /**
-  * Free all memory used by the database.
-  *
-  * @param db A Tablet and Stylus database.
-  */
+ * Free all memory used by the database.
+ *
+ * @param db A Tablet and Stylus database.
+ */
 void libwacom_database_destroy(WacomDeviceDatabase *db);
 
 /**

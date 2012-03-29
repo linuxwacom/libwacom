@@ -33,6 +33,29 @@
 #include "libwacom.h"
 #include <assert.h>
 
+static void check_multiple_match(WacomDevice *device)
+{
+    const WacomMatch **match;
+    int nmatches = 0;
+    int found_bus = 0,
+	found_vendor_id = 0,
+	found_product_id = 0;
+
+    for (match = libwacom_get_matches(device); *match; match++)
+    {
+	    nmatches++;
+	    if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
+		    found_bus = 1;
+	    if (libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
+		    found_vendor_id = 1;
+	    if (libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
+		    found_product_id = 1;
+    }
+
+    assert(nmatches == 2);
+    assert(found_bus && found_vendor_id && found_product_id);
+}
+
 int main(int argc, char **argv)
 {
     WacomDeviceDatabase *db;
@@ -66,6 +89,9 @@ int main(int argc, char **argv)
     assert(!libwacom_is_builtin(device));
     assert(libwacom_get_width(device) == 8);
     assert(libwacom_get_height(device) == 5);
+
+    /* I4 WL has two matches */
+    check_multiple_match(device);
 
     libwacom_destroy(device);
 

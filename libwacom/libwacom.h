@@ -34,6 +34,7 @@
 #define _LIBWACOM_H_
 /** @endcond */
 
+#include <stdint.h>
 /**
  @mainpage
 
@@ -78,6 +79,8 @@
  */
 
 typedef struct _WacomDevice WacomDevice;
+
+typedef struct _WacomMatch WacomMatch;
 
 typedef struct _WacomStylus WacomStylus;
 
@@ -291,9 +294,17 @@ int libwacom_get_vendor_id(WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return The first match for the device in question
+ * @return The current match string used for this device (if set) or the first
+ * match string in the tablet definition.
  */
 const char* libwacom_get_match(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return A pointer to the null-terminated list of possible matches for this device. Do not
+ * modify this pointer or any content!
+ */
+const WacomMatch** libwacom_get_matches(WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -463,6 +474,12 @@ int         libwacom_stylus_has_lens (const WacomStylus *stylus);
  * @return The type of stylus
  */
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
+
+
+WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
+uint32_t libwacom_match_get_product_id(const WacomMatch *match);
+uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);
+const char* libwacom_match_get_match_string(const WacomMatch *match);
 
 #endif /* _LIBWACOM_H_ */
 

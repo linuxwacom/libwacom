@@ -122,21 +122,45 @@ make_match_string (WacomBusType bus, int vendor_id, int product_id)
 }
 
 static int
-libwacom_matchstr_to_ints(const char *match, uint32_t *vendor_id, uint32_t *product_id, WacomBusType *bus)
+libwacom_matchstr_to_matches(WacomDevice *device, const char *match)
 {
-	char busstr[64];
-	int rc;
+	int rc = 1;
+	char **strs;
+	int i, nmatches = 0;
+	WacomBusType first_bus;
+	int first_vendor_id, first_product_id;
 
 	if (match == NULL)
 		return 0;
 
-	rc = sscanf(match, "%63[^:]:%x:%x", busstr, vendor_id, product_id);
-	if (rc != 3)
-		return 0;
+	strs = g_strsplit(match, ";", 0);
+	for (i = 0; strs[i] != NULL; i++) {
+		char busstr[64];
+		int vendor_id, product_id;
+		WacomBusType bus;
+		rc = sscanf(strs[i], "%63[^:]:%x:%x", busstr, &vendor_id, &product_id);
+		if (rc != 3) {
+			DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", strs[i]);
+			continue;
+		}
+		bus = bus_from_str (busstr);
 
-	*bus = bus_from_str (busstr);
+		libwacom_update_match(device, bus, vendor_id, product_id);
 
-	return 1;
+		if (nmatches == 0) {
+			first_bus = bus;
+			first_vendor_id = vendor_id;
+			first_product_id = product_id;
+		}
+		nmatches++;
+	}
+
+	/* set default to first entry */
+	if (nmatches > 1)
+		libwacom_update_match(device, first_bus, first_vendor_id, first_product_id);
+
+	g_strfreev(strs);
+	return i;
 }
 
 static void
@@ -298,18 +322,17 @@ libwacom_parse_tablet_keyfile(const char *path)
 
 	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
 	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
-		device->match = match;
+		libwacom_update_match(device, WBUSTYPE_UNKNOWN, 0, 0);
 	} else {
-		if (!libwacom_matchstr_to_ints(match, &device->vendor_id, &device->product_id, &device->bus)) {
+		if (libwacom_matchstr_to_matches(device, match) == 0) {
 			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
 			g_free (match);
 			g_free (device);
 			device = NULL;
 			goto out;
 		}
-		device->match = make_match_string(device->bus, device->vendor_id, device->product_id);
-		g_free (match);
 	}
+	g_free (match);
 
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
@@ -358,17 +381,17 @@ libwacom_parse_tablet_keyfile(const char *path)
 
 	if (device->features & FEATURE_BUILTIN &&
 	    device->features & FEATURE_REVERSIBLE)
-		g_warning ("Tablet '%s' is both reversible and builtin. This is impossible", device->match);
+		g_warning ("Tablet '%s' is both reversible and builtin. This is impossible", libwacom_get_match(device));
 
 	if (!(device->features & FEATURE_RING) &&
 	    (device->features & FEATURE_RING2))
-		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", device->match);
+		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);
 	if (device->num_buttons == 0 &&
 	    g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
-		g_warning ("Tablet '%s' has no buttons defined, do something!", device->match);
+		g_warning ("Tablet '%s' has no buttons defined, do something!", libwacom_get_match(device));
 		g_clear_error (&error);
 	}
 	if (device->num_buttons > 0) {
@@ -445,13 +468,22 @@ libwacom_database_new_for_path (const char *datadir)
     nfiles = n;
     while(n--) {
 	    WacomDevice *d;
+	    const WacomMatch **matches, **match;
 
 	    path = g_build_filename (datadir, files[n]->d_name, NULL);
 	    d = libwacom_parse_tablet_keyfile(path);
 	    g_free(path);
 
-	    if (d)
-		    g_hash_table_insert (db->device_ht, g_strdup (d->match), d);
+	    if (!d)
+		    continue;
+
+	    matches = libwacom_get_matches(d);
+	    for (match = matches; *match; match++) {
+		    const char *matchstr;
+		    matchstr = libwacom_match_get_match_string(*match);
+		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
+		    d->refcnt++;
+	    }
     }
 
     while(nfiles--)

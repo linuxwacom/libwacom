@@ -172,20 +172,37 @@ bail:
 	return retval;
 }
 
+static WacomMatch *libwacom_copy_match(const WacomMatch *src)
+{
+	WacomMatch *dst;
+
+	dst = g_new0(WacomMatch, 1);
+	dst->match = g_strdup(src->match);
+	dst->bus = src->bus;
+	dst->vendor_id = src->vendor_id;
+	dst->product_id = src->product_id;
+
+	return dst;
+}
+
 static WacomDevice *
 libwacom_copy(const WacomDevice *device)
 {
 	WacomDevice *d;
+	int i;
 
 	d = g_new0 (WacomDevice, 1);
+	g_atomic_int_inc(&d->refcnt);
 	d->name = g_strdup (device->name);
 	d->width = device->width;
 	d->height = device->height;
-	d->match = g_strdup (device->match);
-	d->vendor_id = device->vendor_id;
-	d->product_id = device->product_id;
+	d->nmatches = device->nmatches;
+	d->matches = g_malloc((d->nmatches + 1) * sizeof(WacomMatch*));
+	for (i = 0; i < d->nmatches; i++)
+		d->matches[i] = libwacom_copy_match(device->matches[i]);
+	d->matches[d->nmatches] = NULL;
+	d->match = device->match;
 	d->cls = device->cls;
-	d->bus = device->bus;
 	d->num_strips = device->num_strips;
 	d->features = device->features;
 	d->strips_num_modes = device->strips_num_modes;
@@ -256,10 +273,12 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
 		    g_free (ret->name);
 		    ret->name = name;
 	    }
-	    libwacom_update_match(ret, bus, vendor_id, product_id);
     } else {
 	    g_free (name);
     }
+
+    /* for multiple-match devices, set to the one we requested */
+    libwacom_update_match(ret, bus, vendor_id, product_id);
 
     if (device) {
 	    if (builtin == IS_BUILTIN_TRUE)
@@ -328,9 +347,18 @@ libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *er
 void
 libwacom_destroy(WacomDevice *device)
 {
+	int i;
+
+	if (!g_atomic_int_dec_and_test(&device->refcnt))
+		return;
+
 	g_free (device->name);
 
-	g_free (device->match);
+	for (i = 0; i < device->nmatches; i++) {
+		g_free (device->matches[i]->match);
+		g_free (device->matches[i]);
+	}
+	g_free (device->matches);
 	g_free (device->supported_styli);
 	g_free (device->buttons);
 	g_free (device);
@@ -339,16 +367,40 @@ libwacom_destroy(WacomDevice *device)
 void
 libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int product_id)
 {
-	device->vendor_id = vendor_id;
-	device->product_id = product_id;
-	device->bus = bus;
-	g_free(device->match);
-	device->match = make_match_string(device->bus, device->vendor_id, device->product_id);
+	char *newmatch;
+	int i;
+	WacomMatch match;
+
+	if (bus == WBUSTYPE_UNKNOWN && vendor_id == 0 && product_id == 0)
+		newmatch = g_strdup("generic");
+	else
+		newmatch = make_match_string(bus, vendor_id, product_id);
+
+	match.match = newmatch;
+	match.bus = bus;
+	match.vendor_id = vendor_id;
+	match.product_id = product_id;
+
+	for (i = 0; i < device->nmatches; i++) {
+		if (g_strcmp0(libwacom_match_get_match_string(device->matches[i]), newmatch) == 0) {
+			device->match = i;
+			g_free(newmatch);
+			return;
+		}
+	}
+
+	device->nmatches++;
+
+	device->matches = g_realloc_n(device->matches, device->nmatches + 1, sizeof(WacomMatch));
+	device->matches[device->nmatches] = NULL;
+	device->matches[device->nmatches - 1] = libwacom_copy_match(&match);
+	device->match = device->nmatches - 1;
+	g_free(newmatch);
 }
 
 int libwacom_get_vendor_id(WacomDevice *device)
 {
-    return device->vendor_id;
+    return device->matches[device->match]->vendor_id;
 }
 
 const char* libwacom_get_name(WacomDevice *device)
@@ -358,14 +410,17 @@ const char* libwacom_get_name(WacomDevice *device)
 
 int libwacom_get_product_id(WacomDevice *device)
 {
-    return device->product_id;
+    return device->matches[device->match]->product_id;
 }
 
 const char* libwacom_get_match(WacomDevice *device)
 {
-    /* FIXME make sure this only returns the first match
-     * when we implement multiple matching */
-    return device->match;
+    return device->matches[device->match]->match;
+}
+
+const WacomMatch** libwacom_get_matches(WacomDevice *device)
+{
+    return (const WacomMatch**)device->matches;
 }
 
 int libwacom_get_width(WacomDevice *device)
@@ -447,7 +502,7 @@ int libwacom_is_reversible(WacomDevice *device)
 
 WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
-    return device->bus;
+    return device->matches[device->match]->bus;
 }
 
 WacomButtonFlags
@@ -517,6 +572,27 @@ void libwacom_stylus_destroy(WacomStylus *stylus)
 {
 	g_free (stylus->name);
 	g_free (stylus);
+}
+
+
+WacomBusType libwacom_match_get_bustype(const WacomMatch *match)
+{
+	return match->bus;
+}
+
+uint32_t libwacom_match_get_product_id(const WacomMatch *match)
+{
+	return match->product_id;
+}
+
+uint32_t libwacom_match_get_vendor_id(const WacomMatch *match)
+{
+	return match->vendor_id;
+}
+
+const char* libwacom_match_get_match_string(const WacomMatch *match)
+{
+	return match->match;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

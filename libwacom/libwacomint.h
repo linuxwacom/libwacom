@@ -56,18 +56,26 @@ enum WacomFeature {
 };
 
 /* WARNING: When adding new members to this struct
+ * make sure to update libwacom_copy_match() ! */
+struct _WacomMatch {
+	char *match;
+	WacomBusType bus;
+	uint32_t vendor_id;
+	uint32_t product_id;
+};
+
+/* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy() ! */
 struct _WacomDevice {
 	char *name;
 	int width;
 	int height;
 
-	char *match;
-	uint32_t vendor_id;
-	uint32_t product_id;
+	int match;	/* used match or first match by default */
+	WacomMatch **matches; /* NULL-terminated */
+	int nmatches; /* not counting NULL-terminated element */
 
 	WacomClass cls;
-	WacomBusType bus;
 	int num_strips;
 	uint32_t features;
 
@@ -80,6 +88,8 @@ struct _WacomDevice {
 
 	int num_buttons;
 	WacomButtonFlags *buttons;
+
+	gint refcnt; /* for the db hashtable */
 };
 
 struct _WacomStylus {

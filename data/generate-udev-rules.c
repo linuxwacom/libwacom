@@ -41,11 +41,11 @@ static void print_udev_header (void)
     printf ("\n");
 }
 
-static void print_udev_entry (WacomDevice *device)
+static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *match)
 {
-    WacomBusType type       = libwacom_get_bustype (device);
-    int          vendor     = libwacom_get_vendor_id (device);
-    int          product    = libwacom_get_product_id (device);
+    WacomBusType type       = libwacom_match_get_bustype (match);
+    int          vendor     = libwacom_match_get_vendor_id (match);
+    int          product    = libwacom_match_get_product_id (match);
     int          has_touch  = libwacom_has_touch (device);
     static char *touchpad;
 
@@ -65,6 +65,15 @@ static void print_udev_entry (WacomDevice *device)
             /* Not sure how to deal with serials  */
             break;
     }
+}
+
+static void print_udev_entry (WacomDevice *device)
+{
+    const WacomMatch **matches, **match;
+
+    matches = libwacom_get_matches(device);
+    for (match = matches; *match; match++)
+        print_udev_entry_for_match(device, *match);
 }
 
 static void print_udev_trailer (void)

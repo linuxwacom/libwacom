@@ -100,6 +100,7 @@ get_device_info (const char   *path,
 		sysfs_path = g_build_filename ("/sys/class/input", devname, "device/properties", NULL);
 		if (g_file_get_contents (sysfs_path, &contents, NULL, NULL)) {
 			int flag;
+
 			/* 0x01: POINTER flag
 			 * 0x02: DIRECT flag */
 			flag = atoi(contents);
@@ -255,11 +256,7 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
 		    g_free (ret->name);
 		    ret->name = name;
 	    }
-	    ret->vendor_id = vendor_id;
-	    ret->product_id = product_id;
-	    ret->bus = bus;
-	    g_free (ret->match);
-	    ret->match = g_strdup_printf ("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
+	    libwacom_update_match(ret, bus, vendor_id, product_id);
     } else {
 	    g_free (name);
     }
@@ -337,6 +334,16 @@ libwacom_destroy(WacomDevice *device)
 	g_free (device->supported_styli);
 	g_free (device->buttons);
 	g_free (device);
+}
+
+void
+libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int product_id)
+{
+	device->vendor_id = vendor_id;
+	device->product_id = product_id;
+	device->bus = bus;
+	g_free(device->match);
+	device->match = g_strdup_printf("%s:0x%x:0x%x", bus_to_str (bus), vendor_id, product_id);
 }
 
 int libwacom_get_vendor_id(WacomDevice *device)

@@ -41,13 +41,17 @@ static void print_udev_header (void)
 	printf ("\n");
 }
 
-static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *match)
+static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *match,
+					WacomBusType bus_type_filter)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
 	int          has_touch  = libwacom_has_touch (device);
 	static char *touchpad;
+
+	if (bus_type_filter != type)
+		return;
 
 	if (has_touch)
 		touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
@@ -59,7 +63,9 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 			printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
 			break;
 		case WBUSTYPE_BLUETOOTH:
-			printf ("ENV{ID_BUS}==\"bluetooth\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
+			/* Bluetooth tablets do not have ID_VENDOR_ID/ID_MODEL_ID etc set correctly. They
+			 * do have the PRODUCT set though. */
+			printf ("ENV{PRODUCT}==\"5/%x/%x/*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
 			break;
 		default:
 			/* Not sure how to deal with serials  */
@@ -67,13 +73,13 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	}
 }
 
-static void print_udev_entry (WacomDevice *device)
+static void print_udev_entry (WacomDevice *device, WacomBusType bus_type_filter)
 {
 	const WacomMatch **matches, **match;
 
 	matches = libwacom_get_matches(device);
 	for (match = matches; *match; match++)
-		print_udev_entry_for_match(device, *match);
+		print_udev_entry_for_match(device, *match, bus_type_filter);
 }
 
 static void print_udev_trailer (void)
@@ -102,8 +108,11 @@ int main(int argc, char **argv)
 
 	print_udev_header ();
 	for (p = list; *p; p++)
-		print_udev_entry ((WacomDevice *) *p);
+		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_USB);
 	print_udev_trailer ();
+
+	for (p = list; *p; p++)
+		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
 
 	libwacom_database_destroy (db);
 

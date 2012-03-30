@@ -41,6 +41,13 @@ libwacom_get_device(WacomDeviceDatabase *db, const char *match)
 }
 
 static gboolean
+is_tablet_or_touchpad (GUdevDevice *device)
+{
+	return g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") ||
+		g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD");
+}
+
+static gboolean
 get_device_info (const char   *path,
 		 int          *vendor_id,
 		 int          *product_id,
@@ -69,12 +76,21 @@ get_device_info (const char   *path,
 	}
 
 	/* Touchpads are only for the "Finger" part of Bamboo devices */
-	if (g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") == FALSE &&
-	    g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD") == FALSE) {
-		libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
-		goto bail;
+	if (!is_tablet_or_touchpad(device)) {
+		GUdevDevice *parent;
+
+		parent = g_udev_device_get_parent(device);
+		if (!parent || !is_tablet_or_touchpad(parent)) {
+			libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
+			g_object_unref (parent);
+			goto bail;
+		}
+		g_object_unref (parent);
 	}
 
+	/* FIXME: ID_BUS on the device is usb even for bluetooth devices,
+	 * but ID_BUS on the parent is NULL.
+	 */
 	bus_str = g_udev_device_get_property (device, "ID_BUS");
 	/* Serial devices are weird */
 	if (bus_str == NULL) {

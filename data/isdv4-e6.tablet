@@ -1,0 +1,11 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo ThinkPad x220t
+
+[Device]
+Name=Wacom ISDv4 E6
+DeviceMatch=usb:056a:00e6
+
+[Features]
+Stylus=true
+Touch=true
+BuiltIn=true
+Buttons=0

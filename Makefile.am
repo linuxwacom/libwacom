@@ -1,4 +1,4 @@
-SUBDIRS = libwacom data doc test
+SUBDIRS = libwacom data doc test tools
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libwacom.pc

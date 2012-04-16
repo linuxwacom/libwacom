@@ -329,6 +329,8 @@ int libwacom_has_stylus(WacomDevice *device);
 int libwacom_has_touch(WacomDevice *device);
 
 /**
+ * Tablet buttons are numbered 'A' through to 'A' + number of buttons.
+ *
  * @param device The tablet to query
  * @return The number of buttons on the tablet
  */

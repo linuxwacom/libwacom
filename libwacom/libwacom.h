@@ -54,7 +54,7 @@
 
       db = libwacom_database_new();
       error = libwacom_error_new();
-      device = libwacom_new_from_path(db, "/dev/input/event0", 0, error);
+      device = libwacom_new_from_path(db, "/dev/input/event0", WFALLBACK_NONE, error);
       if (!device)
            return; // should check for error here
 
@@ -161,6 +161,11 @@ typedef enum {
 	WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
 } WacomButtonFlags;
 
+typedef enum {
+	WFALLBACK_NONE = 0,
+	WFALLBACK_GENERIC = 1
+} WacomFallbackFlags;
+
 /**
  * Allocate a new structure for error reporting.
  *
@@ -225,7 +230,7 @@ void libwacom_database_destroy(WacomDeviceDatabase *db);
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, WacomError *error);
+WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.

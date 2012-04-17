@@ -250,7 +250,7 @@ libwacom_new (WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusTy
 }
 
 WacomDevice*
-libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, WacomError *error)
+libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error)
 {
 	int vendor_id, product_id;
 	WacomBusType bus;
@@ -275,10 +275,10 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, int fallback, 
 	device = libwacom_new (db, vendor_id, product_id, bus, error);
 	if (device != NULL)
 		ret = libwacom_copy(device);
-	else if (!fallback)
+	else if (fallback == WFALLBACK_NONE)
 		goto bail;
 
-	if (device == NULL && fallback) {
+	if (device == NULL && fallback == WFALLBACK_GENERIC) {
 		device = libwacom_get_device(db, "generic");
 		if (device == NULL)
 			goto bail;

@@ -6,3 +6,8 @@ generate_udev_rules_LDADD=$(top_builddir)/libwacom/libwacom.la
 
 list_devices_SOURCES = list-devices.c
 list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
+
+bin_PROGRAMS = libwacom-list-local-devices
+libwacom_list_local_devices_SOURCES = list-local-devices.c
+libwacom_list_local_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
+

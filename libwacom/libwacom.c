@@ -56,6 +56,8 @@ get_device_info (const char   *path,
 	const char *bus_str;
 	const char *devname;
 
+	g_type_init();
+
 	retval = FALSE;
 	*builtin = IS_BUILTIN_UNSET;
 	*name = NULL;

@@ -47,16 +47,21 @@
  The usage of libwacom in an application could look like this:
 
  <pre>
+      WacomDeviceDatabase *db;
       WacomDevice *device;
+      WacomError *error;
 
-      device = libwacom_new_from_path("/dev/input/event0");
+      db = libwacom_database_new();
+      error = libwacom_error_new();
+      device = libwacom_new_from_path(db, "/dev/input/event0", 0, error);
       if (!device)
            return; // should check for error here
 
       if (libwacom_device_is_builtin(device))
            printf("This is a built-in device\n");
 
-      libwacom_destroy(&device);
+      libwacom_destroy(device);
+      libwacom_database_destroy(db);
  </pre>
 
  For a full API reference to see libwacom.h.

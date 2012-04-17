@@ -65,7 +65,8 @@ struct _WacomMatch {
 };
 
 /* WARNING: When adding new members to this struct
- * make sure to update libwacom_copy() ! */
+ * make sure to update libwacom_copy() and
+ * libwacom_print_device_description() ! */
 struct _WacomDevice {
 	char *name;
 	int width;

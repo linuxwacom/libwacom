@@ -360,6 +360,118 @@ libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *er
 	return NULL;
 }
 
+static void print_styli_for_device (int fd, WacomDevice *device)
+{
+	int nstyli, *styli;
+	int i;
+
+	if (!libwacom_has_stylus(device))
+		return;
+
+	styli = libwacom_get_supported_styli(device, &nstyli);
+
+	dprintf(fd, "Styli=");
+	for (i = 0; i < nstyli; i++)
+		dprintf(fd, "%#x;", styli[i]);
+	dprintf(fd, "\n");
+}
+
+static void print_button_flag_if(int fd, WacomDevice *device, const char *label, int flag)
+{
+	int nbuttons = libwacom_get_num_buttons(device);
+	char b;
+	dprintf(fd, "%s=", label);
+	for (b = 'A'; b < 'A' + nbuttons; b++)
+		if (libwacom_get_button_flag(device, b) & flag)
+			dprintf(fd, "%c;", b);
+	dprintf(fd, "\n");
+}
+
+static void print_buttons_for_device (int fd, WacomDevice *device)
+{
+	int nbuttons = libwacom_get_num_buttons(device);
+
+	if (nbuttons == 0)
+		return;
+
+	dprintf(fd, "[Buttons]\n");
+
+	print_button_flag_if(fd, device, "Left", WACOM_BUTTON_POSITION_LEFT);
+	print_button_flag_if(fd, device, "Right", WACOM_BUTTON_POSITION_RIGHT);
+	print_button_flag_if(fd, device, "Top", WACOM_BUTTON_POSITION_TOP);
+	print_button_flag_if(fd, device, "Bottom", WACOM_BUTTON_POSITION_BOTTOM);
+	print_button_flag_if(fd, device, "Touchstrip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
+	print_button_flag_if(fd, device, "Touchstrip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH);
+	print_button_flag_if(fd, device, "OLEDs", WACOM_BUTTON_OLED);
+	print_button_flag_if(fd, device, "Ring", WACOM_BUTTON_RING_MODESWITCH);
+	print_button_flag_if(fd, device, "Ring2", WACOM_BUTTON_RING2_MODESWITCH);
+	dprintf(fd, "RingNumModes=%d\n", libwacom_get_ring_num_modes(device));
+	dprintf(fd, "Ring2NumModes=%d\n", libwacom_get_ring2_num_modes(device));
+	dprintf(fd, "StripsNumModes=%d\n", libwacom_get_strips_num_modes(device));
+
+	dprintf(fd, "\n");
+}
+
+void
+libwacom_print_device_description(int fd, WacomDevice *device)
+{
+	const WacomMatch **match;
+	WacomClass class;
+	const char *bus_name, *class_name;
+
+	class  = libwacom_get_class(device);
+	switch(class) {
+		case WCLASS_UNKNOWN:	class_name = "Unknown";	break;
+		case WCLASS_INTUOS3:	class_name = "Intuos3";	break;
+		case WCLASS_INTUOS4:	class_name = "Intuos4";	break;
+		case WCLASS_INTUOS5:	class_name = "Intuos5";	break;
+		case WCLASS_CINTIQ:	class_name = "Cintiq";	break;
+		case WCLASS_BAMBOO:	class_name = "Bamboo";	break;
+		case WCLASS_GRAPHIRE:	class_name = "Graphire";break;
+		case WCLASS_ISDV4:	class_name = "ISDV4";	break;
+		default:		g_assert_not_reached(); break;
+	}
+
+	dprintf(fd, "[Device]\n");
+	dprintf(fd, "Name=%s\n", libwacom_get_name(device));
+	dprintf(fd, "DeviceMatch=");
+	for (match = libwacom_get_matches(device); *match; match++) {
+		WacomBusType type	= libwacom_match_get_bustype(*match);
+		int          vendor     = libwacom_match_get_vendor_id(*match);
+		int          product    = libwacom_match_get_product_id(*match);
+
+		switch(type) {
+			case WBUSTYPE_BLUETOOTH:	bus_name = "bluetooth";	break;
+			case WBUSTYPE_USB:		bus_name = "usb";	break;
+			case WBUSTYPE_SERIAL:		bus_name = "serial";	break;
+			case WBUSTYPE_UNKNOWN:		bus_name = "unknown";	break;
+			default:			g_assert_not_reached(); break;
+		}
+		dprintf(fd, "%s:%04x:%04x;", bus_name, vendor, product);
+	}
+	dprintf(fd, "\n");
+
+	dprintf(fd, "Class=%s\n",		class_name);
+	dprintf(fd, "Width=%d\n",		libwacom_get_width(device));
+	dprintf(fd, "Height=%d\n",		libwacom_get_height(device));
+	print_styli_for_device(fd, device);
+	dprintf(fd, "\n");
+
+	dprintf(fd, "[Features]\n");
+	dprintf(fd, "Reversible=%s\n", libwacom_is_reversible(device)	? "true" : "false");
+	dprintf(fd, "Stylus=%s\n",	 libwacom_has_stylus(device)	? "true" : "false");
+	dprintf(fd, "Ring=%s\n",	 libwacom_has_ring(device)	? "true" : "false");
+	dprintf(fd, "Ring2=%s\n",	 libwacom_has_ring2(device)	? "true" : "false");
+	dprintf(fd, "BuiltIn=%s\n",	 libwacom_is_builtin(device)	? "true" : "false");
+	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
+
+	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
+	dprintf(fd, "Buttons=%d\n",		libwacom_get_num_buttons(device));
+
+	print_buttons_for_device(fd, device);
+}
+
+
 void
 libwacom_destroy(WacomDevice *device)
 {
@@ -581,6 +693,33 @@ WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 		return WSTYLUS_GENERAL;
 	}
 	return stylus->type;
+}
+
+void
+libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
+{
+	const char *type;
+
+	dprintf(fd, "[%#x]\n",	libwacom_stylus_get_id(stylus));
+	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
+	dprintf(fd, "Buttons=%d\n",	libwacom_stylus_get_num_buttons(stylus));
+	dprintf(fd, "HasEraser=%s\n", libwacom_stylus_has_eraser(stylus) ? "true" : "false");
+	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
+	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
+
+	switch(libwacom_stylus_get_type(stylus)) {
+		case WSTYLUS_UNKNOWN:	type = "Unknown";	 break;
+		case WSTYLUS_GENERAL:	type = "General";	 break;
+		case WSTYLUS_INKING:	type = "Inking";	 break;
+		case WSTYLUS_AIRBRUSH:	type = "Airbrush";	 break;
+		case WSTYLUS_CLASSIC:	type = "Classic";	 break;
+		case WSTYLUS_MARKER:	type = "Marker";	 break;
+		case WSTYLUS_STROKE:	type = "Stroke";	 break;
+		case WSTYLUS_PUCK:	type = "Puck";		break;
+		default:		g_assert_not_reached();	break;
+	}
+
+	dprintf(fd, "Type=%s\n", type);
 }
 
 void libwacom_stylus_destroy(WacomStylus *stylus)

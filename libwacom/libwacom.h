@@ -35,6 +35,7 @@
 /** @endcond */
 
 #include <stdint.h>
+#include <stdio.h>
 /**
  @mainpage
 
@@ -273,6 +274,15 @@ WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, W
 WacomDevice** libwacom_list_devices_from_database(WacomDeviceDatabase *db, WacomError *error);
 
 /**
+ * Print the description of this device to the given file.
+ *
+ * @param fd The file descriptor to print to
+ * @param device The device to print the description for.
+ */
+void libwacom_print_device_description (int fd, WacomDevice *device);
+
+
+/**
  * Remove the device and free all memory and references to it.
  *
  * @param device The device to delete
@@ -480,6 +490,13 @@ int         libwacom_stylus_has_lens (const WacomStylus *stylus);
  */
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
 
+/**
+ * Print the description of this stylus to the given file.
+ *
+ * @param fd The file descriptor
+ * @param stylus The stylus to print the description for.
+ */
+void libwacom_print_stylus_description (int fd, const WacomStylus *stylus);
 
 WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
 uint32_t libwacom_match_get_product_id(const WacomMatch *match);

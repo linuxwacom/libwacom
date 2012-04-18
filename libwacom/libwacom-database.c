@@ -37,6 +37,7 @@
 #include <stdio.h>
 
 #define TABLET_SUFFIX ".tablet"
+#define STYLUS_SUFFIX ".stylus"
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 #define BUTTONS_GROUP "Buttons"
@@ -396,6 +397,24 @@ scandir_tablet_filter(const struct dirent *entry)
 	return !strcmp(&name[len - suffix_len], TABLET_SUFFIX);
 }
 
+static int
+scandir_stylus_filter(const struct dirent *entry)
+{
+	const char *name = entry->d_name;
+	int len, suffix_len;
+
+	if (!name || name[0] == '.')
+		return 0;
+
+	len = strlen(name);
+	suffix_len = strlen(STYLUS_SUFFIX);
+	if (len <= suffix_len)
+		return 0;
+
+	return !strcmp(&name[len - suffix_len], STYLUS_SUFFIX);
+}
+
+
 WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
 {
@@ -435,12 +454,26 @@ libwacom_database_new_for_path (const char *datadir)
     free(files);
 
     /* Load styli */
-    path = g_build_filename (datadir, STYLUS_DATA_FILE, NULL);
+    n = scandir(datadir, &files, scandir_stylus_filter, alphasort);
+    if (n <= 0) {
+	    libwacom_database_destroy(db);
+	    return NULL;
+    }
+
     db->stylus_ht = g_hash_table_new_full (g_direct_hash,
 					   g_direct_equal,
 					   NULL,
 					   (GDestroyNotify) libwacom_stylus_destroy);
-    libwacom_parse_stylus_keyfile(db, path);
+    nfiles = n;
+    while(n--) {
+	    path = g_build_filename (datadir, files[n]->d_name, NULL);
+	    libwacom_parse_stylus_keyfile(db, path);
+	    g_free(path);
+    }
+
+    while(nfiles--)
+	    free(files[nfiles]);
+    free(files);
 
     /* If we couldn't load _anything_ then something's wrong */
     if (g_hash_table_size (db->device_ht) == 0 &&

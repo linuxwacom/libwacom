@@ -39,7 +39,6 @@
 	printf(__VA_ARGS__)
 
 #define GENERIC_DEVICE_MATCH "generic"
-#define STYLUS_DATA_FILE "libwacom.stylus"
 
 typedef enum {
 	IS_BUILTIN_UNSET	= -1,

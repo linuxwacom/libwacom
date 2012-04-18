@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define SUFFIX ".tablet"
+#define TABLET_SUFFIX ".tablet"
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 #define BUTTONS_GROUP "Buttons"
@@ -380,7 +380,7 @@ out:
 }
 
 static int
-scandir_filter(const struct dirent *entry)
+scandir_tablet_filter(const struct dirent *entry)
 {
 	const char *name = entry->d_name;
 	int len, suffix_len;
@@ -389,11 +389,11 @@ scandir_filter(const struct dirent *entry)
 		return 0;
 
 	len = strlen(name);
-	suffix_len = strlen(SUFFIX);
+	suffix_len = strlen(TABLET_SUFFIX);
 	if (len <= suffix_len)
 		return 0;
 
-	return !strcmp(&name[len - suffix_len], SUFFIX);
+	return !strcmp(&name[len - suffix_len], TABLET_SUFFIX);
 }
 
 WacomDeviceDatabase *
@@ -412,7 +412,7 @@ libwacom_database_new_for_path (const char *datadir)
 					   g_free,
 					   (GDestroyNotify) libwacom_destroy);
 
-    n = scandir(datadir, &files, scandir_filter, alphasort);
+    n = scandir(datadir, &files, scandir_tablet_filter, alphasort);
     if (n <= 0) {
 	    libwacom_database_destroy(db);
 	    return NULL;

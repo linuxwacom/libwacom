@@ -2,12 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 E3
-DeviceMatch=usb:056a:003e
-
-# FIXME
-# generic stylus is (stylus + 2 buttons + eraser), but this one
-# has (stylus + 1 button + eraser).
-# Styli=???
+DeviceMatch=usb:056a:00e3
 
 [Features]
 Stylus=true

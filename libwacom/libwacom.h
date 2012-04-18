@@ -167,6 +167,11 @@ typedef enum {
 	WFALLBACK_GENERIC = 1
 } WacomFallbackFlags;
 
+typedef enum {
+	WCOMPARE_NORMAL		= 0,		/**< compare the device only */
+	WCOMPARE_MATCHES	= (1 << 1),	/**< compare all possible matches too */
+} WacomCompareFlags;
+
 /**
  * Allocate a new structure for error reporting.
  *
@@ -288,6 +293,17 @@ void libwacom_print_device_description (int fd, WacomDevice *device);
  * @param device The device to delete
  */
 void libwacom_destroy(WacomDevice *device);
+
+/**
+ * Compare the two devices for equal-ness.
+ *
+ * @param a The first device
+ * @param b The second device
+ * @param flags Flags to dictate what constitutes a match
+ *
+ * @return 0 if the devices are identical, nonzero otherwise
+ */
+int libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags);
 
 /**
  * @param device The tablet to query

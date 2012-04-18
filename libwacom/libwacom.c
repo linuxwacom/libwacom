@@ -231,6 +231,78 @@ libwacom_copy(const WacomDevice *device)
 	return d;
 }
 
+
+static int
+compare_matches(WacomDevice *a, WacomDevice *b)
+{
+	const WacomMatch **ma, **mb, **match_a, **match_b;
+
+	ma = libwacom_get_matches(a);
+	mb = libwacom_get_matches(b);
+
+	for (match_a = ma; *match_a; match_a++) {
+		int found = 0;
+		for (match_b = mb; !found && *mb; mb++) {
+			if (strcmp((*match_a)->match, (*match_b)->match) == 0)
+				found = 1;
+		}
+		if (!found)
+			return 1;
+	}
+
+	return 0;
+}
+
+int
+libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
+{
+	if ((a && !b) || (b && !a))
+		return 1;
+
+	if (strcmp(a->name, b->name) != 0)
+		return 1;
+
+	if (a->width != b->width || a->height != b->height)
+		return 1;
+
+	if (a->cls != b->cls)
+		return 1;
+
+	if (a->num_strips != b->num_strips)
+		return 1;
+
+	if (a->features != b->features)
+		return 1;
+
+	if (a->strips_num_modes != b->strips_num_modes)
+		return 1;
+
+	if (a->ring_num_modes != b->ring_num_modes)
+		return 1;
+
+	if (a->ring2_num_modes != b->ring2_num_modes)
+		return 1;
+
+	if (a->num_buttons != b->num_buttons)
+		return 1;
+
+	if (a->num_styli != b->num_styli)
+		return 1;
+
+	if (memcmp(a->supported_styli, b->supported_styli, sizeof(int) * a->num_styli) != 0)
+		return 1;
+
+	if (memcmp(a->buttons, b->buttons, sizeof(WacomButtonFlags) * a->num_buttons) != 0)
+		return 1;
+
+	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
+		return 1;
+	else if (strcmp(a->matches[a->match]->match, b->matches[b->match]->match) != 0)
+		return 1;
+
+	return 0;
+}
+
 static const WacomDevice *
 libwacom_new (WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusType bus, WacomError *error)
 {

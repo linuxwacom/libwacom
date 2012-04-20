@@ -600,6 +600,8 @@ libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int 
 
 int libwacom_get_vendor_id(WacomDevice *device)
 {
+	g_return_val_if_fail(device->match >= 0, -1);
+	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->vendor_id;
 }
 
@@ -610,11 +612,15 @@ const char* libwacom_get_name(WacomDevice *device)
 
 int libwacom_get_product_id(WacomDevice *device)
 {
+	g_return_val_if_fail(device->match >= 0, -1);
+	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->product_id;
 }
 
 const char* libwacom_get_match(WacomDevice *device)
 {
+	g_return_val_if_fail(device->match >= 0, NULL);
+	g_return_val_if_fail(device->match < device->nmatches, NULL);
 	return device->matches[device->match]->match;
 }
 
@@ -701,6 +707,8 @@ int libwacom_is_reversible(WacomDevice *device)
 
 WacomBusType libwacom_get_bustype(WacomDevice *device)
 {
+	g_return_val_if_fail(device->match >= 0, -1);
+	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->bus;
 }
 

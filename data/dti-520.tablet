@@ -1,0 +1,38 @@
+# Wacom
+# DTI-520 Interactive Pen Display
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#           F G H I J
+#      *-----------------*
+#      |                 |
+#      |     DISPLAY     |
+#      |                 |
+#      *-----------------*
+#               D
+#           B A   C B
+#               E
+
+[Device]
+Name=Wacom DTI520UB/L
+DeviceMatch=usb:056a:003a
+Width=14
+Height=12
+Styli=0xfffff;
+
+[Features]
+# This tablet does not appear to support erasers on styli
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+# Actually 11 buttons but the two Ctrl ones send the same scancode
+Buttons=10
+BuiltIn=false
+
+[Buttons]
+Top=F;G;H;I;J
+Bottom=B;A;D;E;C;B

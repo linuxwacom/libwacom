@@ -163,8 +163,8 @@ get_device_info (const char   *path,
 	} else if (*bus == WBUSTYPE_SERIAL) {
 		/* FIXME This matches the declaration in serial-wacf004.tablet
 		 * Might not be good enough though */
-		vendor_id = 0;
-		product_id = 0;
+		*vendor_id = 0;
+		*product_id = 0;
 	} else {
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
 		goto bail;

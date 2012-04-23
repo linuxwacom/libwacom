@@ -33,7 +33,16 @@
 #include <string.h>
 #include <assert.h>
 #include <dirent.h>
+#include <glib/gi18n.h>
+#include <glib.h>
 #include "libwacom.h"
+
+static char *database_path;
+
+static GOptionEntry opts[] = {
+        {"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
+	{NULL}
+};
 
 static int event_devices_only(const struct dirent *dir) {
 	return strncmp("event", dir->d_name, 5) == 0;
@@ -45,8 +54,31 @@ int main(int argc, char **argv)
 	WacomDevice *dev;
 	int i;
 	struct dirent **namelist = NULL;
+	GOptionContext *context;
+	GError *error;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	context = g_option_context_new (NULL);
+
+	g_option_context_add_main_entries (context, opts, NULL);
+	error = NULL;
+
+	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+		if (error != NULL) {
+			fprintf (stderr, "%s\n", error->message);
+			g_error_free (error);
+		}
+		return EXIT_FAILURE;
+	}
+
+	g_option_context_free (context);
+
+	if (database_path) {
+		db = libwacom_database_new_for_path(database_path);
+		g_free (database_path);
+	} else {
+		db = libwacom_database_new();
+	}
+
 	if (!db) {
 		fprintf(stderr, "Failed to initialize device database\n");
 		return 1;

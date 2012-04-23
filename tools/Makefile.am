@@ -10,4 +10,5 @@ list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
 bin_PROGRAMS = libwacom-list-local-devices
 libwacom_list_local_devices_SOURCES = list-local-devices.c
 libwacom_list_local_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
+libwacom_list_local_devices_CFLAGS=$(GLIB_CFLAGS)
 

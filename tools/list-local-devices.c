@@ -47,6 +47,10 @@ int main(int argc, char **argv)
 	struct dirent **namelist = NULL;
 
 	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	if (!db) {
+		fprintf(stderr, "Failed to initialize device database\n");
+		return 1;
+	}
 
 	i = scandir("/dev/input", &namelist, event_devices_only, alphasort);
 

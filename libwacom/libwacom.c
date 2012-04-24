@@ -47,6 +47,34 @@ is_tablet_or_touchpad (GUdevDevice *device)
 		g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD");
 }
 
+static char *
+get_bus (GUdevDevice *device)
+{
+	const char *subsystem;
+	char *bus_str;
+	GUdevDevice *parent;
+
+	subsystem = g_udev_device_get_subsystem (device);
+	parent = g_object_ref (device);
+
+	while (parent && g_strcmp0 (subsystem, "input") == 0) {
+		GUdevDevice *old_parent = parent;
+		parent = g_udev_device_get_parent (old_parent);
+		subsystem = g_udev_device_get_subsystem (parent);
+		g_object_unref (old_parent);
+	}
+
+	if (g_strcmp0 (subsystem, "tty") == 0 || g_strcmp0 (subsystem, "serio") == 0)
+		bus_str = g_strdup ("serial");
+	else
+		bus_str = g_strdup (subsystem);
+
+	if (parent)
+		g_object_unref (parent);
+
+	return bus_str;
+}
+
 static gboolean
 get_device_info (const char   *path,
 		 int          *vendor_id,
@@ -60,7 +88,7 @@ get_device_info (const char   *path,
 	GUdevDevice *device;
 	const char * const subsystems[] = { "input", NULL };
 	gboolean retval;
-	const char *bus_str;
+	char *bus_str;
 	const char *devname;
 
 	g_type_init();
@@ -68,6 +96,7 @@ get_device_info (const char   *path,
 	retval = FALSE;
 	*builtin = IS_BUILTIN_UNSET;
 	*name = NULL;
+	bus_str = NULL;
 	client = g_udev_client_new (subsystems);
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
@@ -88,25 +117,7 @@ get_device_info (const char   *path,
 		g_object_unref (parent);
 	}
 
-	/* FIXME: ID_BUS on the device is usb even for bluetooth devices,
-	 * but ID_BUS on the parent is NULL.
-	 */
-	bus_str = g_udev_device_get_property (device, "ID_BUS");
-	/* Serial devices are weird */
-	if (bus_str == NULL) {
-		if (g_strcmp0 (g_udev_device_get_subsystem (device), "tty") == 0)
-			bus_str = "serial";
-	}
-	/* Poke the parent device for Bluetooth models */
-	if (bus_str == NULL) {
-		GUdevDevice *parent;
-
-		parent = g_udev_device_get_parent (device);
-
-		g_object_unref (device);
-		device = parent;
-		bus_str = "bluetooth";
-	}
+	bus_str = get_bus (device);
 
 	/* Is the device builtin? */
 	devname = g_udev_device_get_name (device);
@@ -179,6 +190,8 @@ get_device_info (const char   *path,
 		retval = TRUE;
 
 bail:
+	if (bus_str != NULL)
+		g_free (bus_str);
 	if (retval == FALSE)
 		g_free (*name);
 	if (device != NULL)

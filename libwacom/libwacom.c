@@ -156,7 +156,8 @@ get_device_info (const char   *path,
 
 		*vendor_id = strtol (vendor_str, NULL, 16);
 		*product_id = strtol (product_str, NULL, 16);
-	} else if (*bus == WBUSTYPE_BLUETOOTH) {
+	} else if (*bus == WBUSTYPE_BLUETOOTH || *bus == WBUSTYPE_SERIAL) {
+		GUdevDevice *parent;
 		const char *product_str;
 		int garbage;
 
@@ -165,17 +166,25 @@ get_device_info (const char   *path,
 		 * into:
 		 * vendor 0x56a
 		 * product 0x81 */
+		parent = g_object_ref (device);
 		product_str = g_udev_device_get_property (device, "PRODUCT");
+
+		while (!product_str && parent) {
+			GUdevDevice *old_parent = parent;
+			parent = g_udev_device_get_parent (old_parent);
+			if (parent)
+				product_str = g_udev_device_get_property (parent, "PRODUCT");
+			g_object_unref (old_parent);
+		}
+
 		g_assert (product_str);
 		if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
 			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+			g_object_unref(parent);
 			goto bail;
 		}
-	} else if (*bus == WBUSTYPE_SERIAL) {
-		/* FIXME This matches the declaration in serial-wacf004.tablet
-		 * Might not be good enough though */
-		*vendor_id = 0;
-		*product_id = 0;
+		if (parent)
+			g_object_unref (parent);
 	} else {
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
 		goto bail;

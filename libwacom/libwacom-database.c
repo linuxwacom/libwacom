@@ -219,6 +219,8 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
 	}
 	g_strfreev (groups);
+	if (keyfile)
+		g_key_file_free (keyfile);
 }
 
 struct {

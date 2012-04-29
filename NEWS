@@ -1,3 +1,11 @@
+libwacom 0.5:
+- Add support for multiple match statements
+- Add support for bluetotooth devices
+- Add libwacom-list-local-devices helper tool
+- Add list-devices helper tool
+- Rename udev generation tool to generate-udev-rules
+- More metadata description updates
+
 libwacom 0.4:
 - More metadata for:
   - Intuos4 WL

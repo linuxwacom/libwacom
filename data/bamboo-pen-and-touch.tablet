@@ -9,8 +9,8 @@ Class=Bamboo
 # There are two widths and heigths, one for pen input, one for touch.
 # The one for pen is bigger, but in linux, only the smaller one works.
 # But as the width is advertised as the bigger one for pen input, I put the pen input here.
-Width=5.8
-Height=3.6
+Width=6
+Height=4
 
 # The other stylusses don't match it, it has two buttons and an eraser.
 Styli=0xfffff

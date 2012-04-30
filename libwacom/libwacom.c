@@ -456,7 +456,8 @@ libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *er
 
 static void print_styli_for_device (int fd, WacomDevice *device)
 {
-	int nstyli, *styli;
+	int nstyli;
+	const int *styli;
 	int i;
 
 	if (!libwacom_has_stylus(device))
@@ -681,7 +682,7 @@ int libwacom_get_num_buttons(WacomDevice *device)
 	return device->num_buttons;
 }
 
-int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli)
+const int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli)
 {
 	*num_styli = device->num_styli;
 	return device->supported_styli;

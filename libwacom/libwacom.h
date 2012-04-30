@@ -388,7 +388,7 @@ int libwacom_get_num_buttons(WacomDevice *device);
  * @param num_styli Return location for the number of listed styli
  * @return an array of Styli IDs supported by the device
  */
-int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli);
+const int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli);
 
 /**
  * @param device The tablet to query

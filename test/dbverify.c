@@ -134,7 +134,8 @@ compare_written_database(WacomDeviceDatabase *db)
 		int i;
 		int fd;
 		char *path = NULL;
-		int nstyli, *styli;
+		int nstyli;
+		const int *styli;
 
 		asprintf(&path, "%s/%d-%04x-%04x.tablet", dirname,
 				libwacom_get_bustype(*device),

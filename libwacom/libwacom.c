@@ -524,6 +524,8 @@ libwacom_print_device_description(int fd, WacomDevice *device)
 		case WCLASS_BAMBOO:	class_name = "Bamboo";	break;
 		case WCLASS_GRAPHIRE:	class_name = "Graphire";break;
 		case WCLASS_ISDV4:	class_name = "ISDV4";	break;
+		case WCLASS_INTUOS:	class_name = "Intuos";	break;
+		case WCLASS_INTUOS2:	class_name = "Intuos2";	break;
 		default:		g_assert_not_reached(); break;
 	}
 

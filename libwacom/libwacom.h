@@ -126,6 +126,8 @@ typedef enum {
 	WCLASS_BAMBOO,		/**< Any Bamboo device */
 	WCLASS_GRAPHIRE,	/**< Any Graphire device */
 	WCLASS_ISDV4,		/**< Any serial ISDV4 device */
+	WCLASS_INTUOS,		/**< Any Intuos series */
+	WCLASS_INTUOS2,		/**< Any Intuos2 series */
 } WacomClass;
 
 /**

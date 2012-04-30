@@ -60,6 +60,10 @@ libwacom_class_string_to_enum(const char *class)
 		return WCLASS_BAMBOO;
 	if (strcmp(class, "Graphire") == 0)
 		return WCLASS_GRAPHIRE;
+	if (strcmp(class, "Intuos") == 0)
+		return WCLASS_INTUOS;
+	if (strcmp(class, "Intuos2") == 0)
+		return WCLASS_INTUOS2;
 
 	return WCLASS_UNKNOWN;
 }

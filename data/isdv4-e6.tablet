@@ -3,6 +3,9 @@
 [Device]
 Name=Wacom ISDv4 E6
 DeviceMatch=usb:056a:00e6
+Class=ISDV4
+Width=11
+Height=6
 
 [Features]
 Stylus=true

@@ -5,6 +5,7 @@
 [Device]
 Name=Wacom DTU-2231
 DeviceMatch=usb:056a:00ce
+Class=PenDisplay
 Width=19
 Height=11
 

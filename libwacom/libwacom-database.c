@@ -66,6 +66,8 @@ libwacom_class_string_to_enum(const char *class)
 		return WCLASS_INTUOS2;
 	if (strcmp(class, "ISDV4") == 0)
 		return WCLASS_ISDV4;
+	if (strcmp(class, "PenDisplay") == 0)
+		return WCLASS_PEN_DISPLAYS;
 
 	return WCLASS_UNKNOWN;
 }

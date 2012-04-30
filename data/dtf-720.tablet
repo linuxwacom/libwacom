@@ -8,6 +8,7 @@ Name=Wacom DTF-720
 DeviceMatch=usb:056a:00c0
 Width=13
 Height=11
+Class=PenDisplay
 
 [Features]
 Stylus=true

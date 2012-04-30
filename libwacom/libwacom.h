@@ -128,6 +128,7 @@ typedef enum {
 	WCLASS_ISDV4,		/**< Any serial ISDV4 device */
 	WCLASS_INTUOS,		/**< Any Intuos series */
 	WCLASS_INTUOS2,		/**< Any Intuos2 series */
+	WCLASS_PEN_DISPLAYS,	/**< Any "interactive pen display" */
 } WacomClass;
 
 /**

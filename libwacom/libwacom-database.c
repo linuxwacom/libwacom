@@ -366,6 +366,10 @@ libwacom_parse_tablet_keyfile(const char *path)
 		}
 		g_strfreev (styli_list);
 		device->supported_styli = (int *) g_array_free (array, FALSE);
+	} else {
+		device->supported_styli = g_new (int, 1);
+		*device->supported_styli = 0xfffff;
+		device->num_styli = 1;
 	}
 
 	/* Features */

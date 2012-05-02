@@ -44,6 +44,7 @@ static void verify_tablet(WacomDevice *device)
 {
 	const char *name;
 	int nstyli;
+	unsigned int product;
 
 	name = libwacom_get_name(device);
 	if (strcmp(name, "Generic") == 0)
@@ -66,7 +67,18 @@ static void verify_tablet(WacomDevice *device)
 	}
 	assert(libwacom_get_num_buttons(device) >= 0);
 	assert(libwacom_get_supported_styli(device, &nstyli) != NULL);
-	assert(nstyli > 0);
+
+	product = libwacom_get_vendor_id(device) << 16 | libwacom_get_product_id(device);
+	switch(product) {
+		/* Devices known not have erasers. */
+		case 0x056a003a: /* DTI520*/
+			assert(nstyli == 1);
+			break;
+		default:
+			assert(nstyli > 1);
+			break;
+	}
+
 	assert(libwacom_get_ring_num_modes(device) >= 0);
 	assert(libwacom_get_ring2_num_modes(device) >= 0);
 	assert(libwacom_get_num_strips(device) >= 0);

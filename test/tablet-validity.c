@@ -43,6 +43,7 @@
 static void verify_tablet(WacomDevice *device)
 {
 	const char *name;
+	const int *styli;
 	int nstyli;
 	unsigned int product;
 
@@ -66,7 +67,9 @@ static void verify_tablet(WacomDevice *device)
 		assert(libwacom_get_height(device) > 0);
 	}
 	assert(libwacom_get_num_buttons(device) >= 0);
-	assert(libwacom_get_supported_styli(device, &nstyli) != NULL);
+
+	styli = libwacom_get_supported_styli(device, &nstyli);
+	assert(styli != NULL);
 
 	product = libwacom_get_vendor_id(device) << 16 | libwacom_get_product_id(device);
 	switch(product) {
@@ -77,6 +80,28 @@ static void verify_tablet(WacomDevice *device)
 		default:
 			assert(nstyli > 1);
 			break;
+	}
+
+	switch(libwacom_get_class(device)) {
+		case WCLASS_BAMBOO:
+		case WCLASS_ISDV4:
+		case WCLASS_PEN_DISPLAYS:
+		case WCLASS_GRAPHIRE:
+			break;
+		case WCLASS_INTUOS:
+		case WCLASS_INTUOS2:
+		case WCLASS_INTUOS3:
+		case WCLASS_INTUOS4:
+		case WCLASS_CINTIQ:
+			{
+				int i;
+				for (i = 0; i < nstyli; i++) {
+					assert(styli[i] != WACOM_STYLUS_FALLBACK_ID);
+					assert(styli[i] != WACOM_ERASER_FALLBACK_ID);
+				}
+			}
+		default:
+			assert(1); /* don't get here */
 	}
 
 	assert(libwacom_get_ring_num_modes(device) >= 0);

@@ -7,3 +7,9 @@ AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(top_srcdir)\""
 load_LDADD=$(top_builddir)/libwacom/libwacom.la
 dbverify_LDADD=$(top_builddir)/libwacom/libwacom.la
 tablet_validity_LDADD=$(top_builddir)/libwacom/libwacom.la
+
+clean-local: clean-local-check
+.PHONY: clean-local-check
+
+clean-local-check:
+	rm -rf tmp.dbverify.*

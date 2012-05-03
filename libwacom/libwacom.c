@@ -60,17 +60,20 @@ get_bus (GUdevDevice *device)
 	while (parent && g_strcmp0 (subsystem, "input") == 0) {
 		GUdevDevice *old_parent = parent;
 		parent = g_udev_device_get_parent (old_parent);
-		subsystem = g_udev_device_get_subsystem (parent);
+		if (parent)
+			subsystem = g_udev_device_get_subsystem (parent);
 		g_object_unref (old_parent);
 	}
 
-	if (g_strcmp0 (subsystem, "tty") == 0 || g_strcmp0 (subsystem, "serio") == 0)
-		bus_str = g_strdup ("serial");
-	else
-		bus_str = g_strdup (subsystem);
+	if (parent) {
+		if (g_strcmp0 (subsystem, "tty") == 0 || g_strcmp0 (subsystem, "serio") == 0)
+			bus_str = g_strdup ("serial");
+		else
+			bus_str = g_strdup (subsystem);
 
-	if (parent)
 		g_object_unref (parent);
+	} else
+		bus_str = strdup("unknown");
 
 	return bus_str;
 }

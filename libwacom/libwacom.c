@@ -47,12 +47,44 @@ is_tablet_or_touchpad (GUdevDevice *device)
 		g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD");
 }
 
+/* Overriding SUBSYSTEM isn't allowed in udev (works sometimes, but not
+ * always). For evemu devices we need to set custom properties to make them
+ * detected by libwacom.
+ */
+static char *
+get_uinput_subsystem (GUdevDevice *device)
+{
+	const char *bus_str;
+	GUdevDevice *parent;
+
+
+	bus_str = NULL;
+	parent = g_object_ref (device);
+
+	while (parent && !g_udev_device_get_property_as_boolean (parent, "UINPUT_DEVICE")) {
+		GUdevDevice *old_parent = parent;
+		parent = g_udev_device_get_parent (old_parent);
+		g_object_unref (old_parent);
+	}
+
+	if (parent) {
+		bus_str = g_udev_device_get_property (parent, "UINPUT_SUBSYSTEM");
+		g_object_unref (parent);
+	}
+
+	return bus_str ? g_strdup (bus_str) : NULL;
+}
+
 static char *
 get_bus (GUdevDevice *device)
 {
 	const char *subsystem;
 	char *bus_str;
 	GUdevDevice *parent;
+
+	bus_str = get_uinput_subsystem (device);
+	if (bus_str)
+		return bus_str;
 
 	subsystem = g_udev_device_get_subsystem (device);
 	parent = g_object_ref (device);

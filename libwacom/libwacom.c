@@ -185,12 +185,27 @@ get_device_info (const char   *path,
 	*bus = bus_from_str (bus_str);
 	if (*bus == WBUSTYPE_USB) {
 		const char *vendor_str, *product_str;
+		GUdevDevice *parent;
 
 		vendor_str = g_udev_device_get_property (device, "ID_VENDOR_ID");
 		product_str = g_udev_device_get_property (device, "ID_MODEL_ID");
 
+		parent = NULL;
+		/* uinput devices have the props set on the parent, there is
+		 * nothing a a udev rule can match on on the child */
+		if (!vendor_str || !product_str) {
+			parent = g_udev_device_get_parent (device);
+			if (parent) {
+				vendor_str = g_udev_device_get_property (parent, "ID_VENDOR_ID");
+				product_str = g_udev_device_get_property (parent, "ID_MODEL_ID");
+			}
+		}
+
 		*vendor_id = strtol (vendor_str, NULL, 16);
 		*product_id = strtol (product_str, NULL, 16);
+
+		if (parent)
+			g_object_unref (parent);
 	} else if (*bus == WBUSTYPE_BLUETOOTH || *bus == WBUSTYPE_SERIAL) {
 		GUdevDevice *parent;
 		const char *product_str;

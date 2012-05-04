@@ -48,7 +48,7 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
 	int          has_touch  = libwacom_has_touch (device);
-	static char *touchpad;
+	char         *touchpad;
 
 	if (bus_type_filter != type)
 		return;

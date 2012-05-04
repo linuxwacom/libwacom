@@ -29,8 +29,18 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "libwacom.h"
+#include <glib/gi18n.h>
+#include <glib.h>
+
+static gboolean need_uinput_rules = FALSE;
+
+static GOptionEntry opts[] = {
+        {"with-uinput-rules", 0, 0, G_OPTION_ARG_NONE, &need_uinput_rules, N_("Print udev rules for uinput devices"), NULL },
+	{NULL}
+};
 
 static void print_udev_header (void)
 {
@@ -73,6 +83,45 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	}
 }
 
+static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,
+					  WacomBusType bus_type_filter)
+{
+	WacomBusType type       = libwacom_match_get_bustype (match);
+	int          vendor     = libwacom_match_get_vendor_id (match);
+	int          product    = libwacom_match_get_product_id (match);
+	const char *subsystem;
+
+	if (bus_type_filter != type)
+		return;
+
+	switch(type) {
+		case WBUSTYPE_USB: subsystem = "usb"; break;
+		case WBUSTYPE_BLUETOOTH: subsystem = "bluetooth"; break;
+		case WBUSTYPE_SERIAL: subsystem = "tty"; break;
+		default:
+				      return;
+	}
+
+	printf("ENV{DEVPATH}==\"/devices/virtual/*\", "
+			"ENV{PRODUCT}==\"*/%x/%x/*\", "
+			"ENV{UINPUT_DEVICE}=\"1\", "
+			"ENV{UINPUT_SUBSYSTEM}=\"%s\", "
+			"ENV{ID_VENDOR_ID}=\"%04x\", "
+			"ENV{ID_MODEL_ID}=\"%04x\", "
+			"\n", vendor, product,
+			subsystem, vendor, product);
+}
+
+static void print_uinput_entry (WacomDevice *device, WacomBusType bus_type_filter)
+{
+	const WacomMatch **matches, **match;
+
+	matches = libwacom_get_matches(device);
+	for (match = matches; *match; match++)
+		print_uinput_entry_for_match(device, *match, bus_type_filter);
+}
+
+
 static void print_udev_entry (WacomDevice *device, WacomBusType bus_type_filter)
 {
 	const WacomMatch **matches, **match;
@@ -97,6 +146,22 @@ int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **list, **p;
+	GOptionContext *context;
+	GError *error;
+
+	context = g_option_context_new (NULL);
+
+	g_option_context_add_main_entries (context, opts, NULL);
+	error = NULL;
+
+	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+		if (error != NULL) {
+			fprintf (stderr, "%s\n", error->message);
+			g_error_free (error);
+		}
+		return EXIT_FAILURE;
+	}
+
 
 	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
 
@@ -109,10 +174,18 @@ int main(int argc, char **argv)
 	print_udev_header ();
 	for (p = list; *p; p++)
 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_USB);
+
 	print_udev_trailer ();
 
 	for (p = list; *p; p++)
 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
+
+	if (need_uinput_rules) {
+		for (p = list; *p; p++)
+			print_uinput_entry ((WacomDevice *) *p, WBUSTYPE_USB);
+		for (p = list; *p; p++)
+			print_uinput_entry ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
+	}
 
 	libwacom_database_destroy (db);
 

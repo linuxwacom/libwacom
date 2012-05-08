@@ -177,11 +177,17 @@ get_device_info (const char   *path,
 			g_object_unref (old_parent);
 		}
 
-		g_assert (product_str);
-		if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
-			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
-			g_object_unref(parent);
-			goto bail;
+		if (product_str) {
+			if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
+				libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
+				g_object_unref(parent);
+				goto bail;
+			}
+		} else {
+			g_assert(*bus == WBUSTYPE_SERIAL);
+
+			*vendor_id = 0;
+			*product_id = 0;
 		}
 		if (parent)
 			g_object_unref (parent);

@@ -179,7 +179,7 @@ get_device_info (const char   *path,
 
 		g_assert (product_str);
 		if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
-			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unimplemented serial bus");
+			libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
 			g_object_unref(parent);
 			goto bail;
 		}

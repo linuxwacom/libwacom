@@ -1,0 +1,12 @@
+# this is for the Wacom pen + touchscreen as found in the Panasonic CF-H2 laptop.
+
+[Device]
+Name=Wacom ISDv4 ED
+DeviceMatch=usb:056a:00ed
+Class=ISDV4
+
+[Features]
+Stylus=true
+Touch=true
+BuiltIn=true
+Buttons=0

@@ -1,0 +1,11 @@
+# this is for the Wacom pen as found in a limited special Tablet PC edition
+
+[Device]
+Name=Wacom ISDv4 EF
+DeviceMatch=usb:056a:00ef
+Class=ISDV4
+
+[Features]
+Stylus=true
+BuiltIn=true
+Buttons=0

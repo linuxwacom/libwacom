@@ -12,9 +12,6 @@ Class=Bamboo
 Width=6
 Height=4
 
-# The other stylusses don't match it, it has two buttons and an eraser.
-Styli=0xfffff;0xffffe;
-
 [Features]
 Stylus=true
 

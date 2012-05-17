@@ -114,18 +114,22 @@ Type=Stroke
 # Intuos and Intuos2
 Name=Classic Pen Eraser
 IsEraser=true
+Type=Classic
 
 [0x85a]
 Name=Intuos2 Grip Pen Eraser
 IsEraser=true
+Type=General
 
 [0x91a]
 Name=Intuos2 Airbrush Pen Eraser
 IsEraser=true
+Type=Airbrush
 
 [0xd1a]
 Name=Intuos Airbrush Pen Eraser
 IsEraser=true
+Type=Airbrush
 
 [0x0fa]
 Name=Eraser

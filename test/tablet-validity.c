@@ -40,12 +40,27 @@
 #include <assert.h>
 #include <unistd.h>
 
-static void verify_tablet(WacomDevice *device)
+static int eraser_is_present(WacomDeviceDatabase *db, const int *styli, int nstyli, WacomStylusType type)
+{
+	int i;
+
+	for (i = 0; i < nstyli; i++) {
+		const WacomStylus *stylus;
+		stylus = libwacom_stylus_get_for_id (db, styli[i]);
+		if (libwacom_stylus_is_eraser (stylus) &&
+		    libwacom_stylus_get_type (stylus) == type)
+			return 1;
+	}
+
+	return 0;
+}
+
+static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 {
 	const char *name;
 	const int *styli;
-	int nstyli;
 	unsigned int product;
+	int nstyli, i;
 
 	name = libwacom_get_name(device);
 	if (strcmp(name, "Generic") == 0)
@@ -70,6 +85,7 @@ static void verify_tablet(WacomDevice *device)
 
 	styli = libwacom_get_supported_styli(device, &nstyli);
 	assert(styli != NULL);
+	assert(nstyli > 0);
 
 	product = libwacom_get_vendor_id(device) << 16 | libwacom_get_product_id(device);
 	switch(product) {
@@ -104,6 +120,19 @@ static void verify_tablet(WacomDevice *device)
 			assert(1); /* don't get here */
 	}
 
+	for (i = 0; i < nstyli; i++) {
+		const WacomStylus *stylus;
+		const char *stylus_name;
+		stylus = libwacom_stylus_get_for_id (db, styli[i]);
+		assert(stylus);
+		stylus_name = libwacom_stylus_get_name (stylus);
+		assert(stylus_name);
+		if (libwacom_stylus_has_eraser (stylus)) {
+			WacomStylusType type;
+			type = libwacom_stylus_get_type (stylus);
+			assert(eraser_is_present (db, styli, nstyli, type));
+		}
+	}
 	assert(libwacom_get_ring_num_modes(device) >= 0);
 	assert(libwacom_get_ring2_num_modes(device) >= 0);
 	assert(libwacom_get_num_strips(device) >= 0);
@@ -126,7 +155,7 @@ int main(int argc, char **argv)
 	assert(*devices);
 
 	for (device = devices; *device; device++)
-		verify_tablet(*device);
+		verify_tablet(db, *device);
 
 	libwacom_database_destroy (db);
 

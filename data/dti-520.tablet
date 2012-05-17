@@ -20,7 +20,8 @@ DeviceMatch=usb:056a:003a
 Class=PenDisplay
 Width=14
 Height=12
-Styli=0xfffff;
+# FIXME does the stylus have an eraser?
+# Styli=0xfffff;
 
 [Features]
 # This tablet does not appear to support erasers on styli

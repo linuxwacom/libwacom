@@ -1,0 +1,18 @@
+# USB tablet PC models:  ASUS R1E and ASUS R1F
+#
+# stylus with one button and eraser
+#
+# Screen size 11.7 x 7.9; 13.3" diagonal
+
+[Device]
+Name=Wacom ISDv4 90
+DeviceMatch=usb:056a:0090;serial:056a:0090
+Class=ISDV4
+Width=12
+Height=8
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0
+BuiltIn=true

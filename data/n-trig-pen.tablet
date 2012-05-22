@@ -1,0 +1,19 @@
+# USB tablet PC models:  HP TouchSmart TX2z, Dell Latitude XT, and Dell Latitude XT2
+#
+# stylus with two buttons and no eraser; 4FGT touchscreen
+#
+# HP Screen size 10.2 x 6.4; 12.1" diagonal
+# Dell Screen size 10.3 x 6.4; 12.1" diagonal
+
+[Device]
+Name=N-Trig Pen
+DeviceMatch=usb:1b96:0001
+Class=ISDV4
+Width=10
+Height=6
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0
+BuiltIn=true

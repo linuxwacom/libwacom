@@ -1,0 +1,23 @@
+# Wacom
+# Bamboo Craft
+# CTH-461
+#
+# first generation BambooPT
+#
+# stylus with two buttons and eraser; 2FG touch
+# Pen active area: 5.8 x 3.62in
+# Touch active area: 4.92 x 3.35in
+
+[Device]
+Name=Wacom Bamboo Craft
+DeviceMatch=usb:056a:00d2
+Class=Bamboo
+Width=6
+Height=4
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+BuiltIn=false

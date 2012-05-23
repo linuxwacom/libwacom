@@ -1,0 +1,23 @@
+# Wacom
+# Bamboo Fun
+# CTH-661
+#
+# first generation BambooPT
+#
+# stylus with two buttons and eraser; 2FG touch
+# Pen active area: 8.53 x 5.40 in
+# Touch active area: 7.48 x 5.12 in
+
+[Device]
+Name=Wacom Bamboo 2FG 6x8
+DeviceMatch=usb:056a:00d3
+Class=Bamboo
+Width=9
+Height=5
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+BuiltIn=false

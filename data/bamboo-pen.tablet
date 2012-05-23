@@ -1,0 +1,22 @@
+# Wacom
+# Bamboo Pen
+# CTL-460
+#
+# first generation BambooPT
+#
+# stylus with two buttons and no eraser
+# Pen active area: 5.8 x 3.62in
+
+[Device]
+Name=Wacom Bamboo Pen
+DeviceMatch=usb:056a:00d4
+Class=Bamboo
+Width=6
+Height=4
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0
+BuiltIn=false

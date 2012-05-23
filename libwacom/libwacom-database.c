@@ -142,7 +142,7 @@ libwacom_matchstr_to_matches(WacomDevice *device, const char *match)
 		return 0;
 
 	strs = g_strsplit(match, ";", 0);
-	for (i = 0; strs[i] != NULL; i++) {
+	for (i = 0; strs[i] != NULL && *strs[i] != '\0'; i++) {
 		char busstr[64];
 		int vendor_id, product_id;
 		WacomBusType bus;

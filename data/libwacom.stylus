@@ -19,13 +19,15 @@ HasEraser=false
 Type=Inking
 
 [0x801]
-Name=Intuos3 Inking Pen
+# Intuos3 and Cintiq 21UX
+Name=Inking Pen
 Buttons=0
 HasEraser=false
 Type=Inking
 
 [0x20802]
-Name=Intuos4 Inking Pen
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Inking Pen
 Buttons=0
 HasEraser=false
 Type=Inking
@@ -45,49 +47,57 @@ Buttons=2
 Type=Classic
 
 [0x842]
-Name=Intuos2 Designer Pen
+# Intuos2
+Name=Designer Pen
 HasEraser=false
 Buttons=2
 Type=General
 
 [0x852]
-Name=Intuos2 Grip Pen
+# Intuos2
+Name=Grip Pen
 HasEraser=true
 Buttons=2
 Type=General
 
 [0x823]
-Name=Intuos3 Grip Pen
+# Intuos3 and Cintiq 21UX
+Name=Grip Pen
 HasEraser=true
 Buttons=2
 Type=General
 
 [0x813]
-Name=Intuos3 Classic Pen
+# Intuos3 and Cintiq 21UX
+Name=Classic Pen
 HasEraser=true
 Buttons=2
 Type=Classic
 
 [0x885]
-Name=Intuos3 6D Art Pen
+# Intuos3 and Cintiq 21UX
+Name=6D Art Pen
 HasEraser=false
 Buttons=0
 Type=Marker
 
 [0x802]
-Name=Intuos4 Grip Pen
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Grip Pen
 HasEraser=true
 Buttons=2
 Type=General
 
 [0x804]
-Name=Intuos4 Art Pen
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Art Pen
 HasEraser=true
 Buttons=2
 Type=Marker
 
 [0x40802]
-Name=Intuos4 Classic Pen
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen
 HasEraser=true
 Buttons=2
 Type=Classic
@@ -117,17 +127,20 @@ IsEraser=true
 Type=Classic
 
 [0x85a]
-Name=Intuos2 Grip Pen Eraser
+# Intuos2
+Name=Grip Pen Eraser
 IsEraser=true
 Type=General
 
 [0x91a]
-Name=Intuos2 Airbrush Pen Eraser
+# Intuos2
+Name=Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
 [0xd1a]
-Name=Intuos Airbrush Pen Eraser
+# Intuos
+Name=Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
@@ -136,49 +149,58 @@ Name=Eraser
 IsEraser=true
 
 [0x82b]
-Name=Intuos3 Grip Pen Eraser
+# Intuos3 and Cintiq 21UX
+Name=Grip Pen Eraser
 IsEraser=true
 Type=General
 
 [0x81b]
-Name=Intuos3 Classic Pen Eraser
+# Intuos3 and Cintiq 21UX
+Name=Classic Pen Eraser
 IsEraser=true
 Type=Classic
 
 [0x91b]
-Name=Intuos3 Airbrush Pen Eraser
+# Intuos3 and Cintiq 21UX
+Name=Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
 [0x80c]
-Name=Intuos4 Art Pen Eraser
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Art Pen Eraser
 IsEraser=true
 Type=Marker
 
 [0x80a]
-Name=Intuos4 Grip Pen Eraser
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Grip Pen Eraser
 IsEraser=true
 Type=General
 
 [0x4080a]
-Name=Intuos4 Classic Pen Eraser
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen Eraser
 IsEraser=true
 Type=Classic
 
 [0x90a]
-Name=Intuos4 Airbrush Pen Eraser
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Airbrush Pen Eraser
 IsEraser=true
 Type=Airbrush
 
 # Airbrush pen has eraser
 [0xd12]
-Name=Intuos Airbrush Pen
+# Intuos
+Name=Airbrush Pen
 HasEraser=true
 Buttons=1
 Type=Airbrush
 
 [0x912]
-Name=Intuos2 Airbrush Pen
+# Intuos2
+Name=Airbrush Pen
 HasEraser=true
 Buttons=1
 Type=Airbrush
@@ -189,13 +211,15 @@ HasEraser=true
 Type=Airbrush
 
 [0x913]
-Name=Intuos3 Airbrush Pen
+# Intuos3 and Cintiq 21UX
+Name=Airbrush Pen
 Buttons=1
 HasEraser=true
 Type=Airbrush
 
 [0x902]
-Name=Intuos4 Airbrush Pen
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Airbrush Pen
 Buttons=1
 HasEraser=true
 Type=Airbrush
@@ -209,13 +233,15 @@ HasLens=True
 Buttons=5
 
 [0x097]
-Name=Intuos3 Lens Cursor
+# Intuos3
+Name=Lens Cursor
 Type=Puck
 HasLens=True
 Buttons=5
 
 [0x006]
-Name=Intuos4 Lens Cursor
+# Intuos4 and Intuos5
+Name=Lens Cursor
 Type=Puck
 HasLens=True
 Buttons=5
@@ -228,19 +254,22 @@ HasLens=False
 Buttons=5
 
 [0x007]
-Name=Intuos2 2D Mouse
+# Intuos3
+Name=2D Mouse
 Type=Puck
 HasLens=False
 Buttons=3
 
 [0x017]
-Name=Intuos3 Mouse
+# Intuos3
+Name=Mouse
 Type=Puck
 HasLens=False
 Buttons=5
 
 [0x806]
-Name=Intuos4 Five Button Mouse
+# Intuos4 and Intuos5
+Name=Five Button Mouse
 Type=Puck
 HasLens=False
 Buttons=5

@@ -334,6 +334,8 @@ compare_matches(WacomDevice *a, WacomDevice *b)
 int
 libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
 {
+	g_return_val_if_fail(a || b, 0);
+
 	if ((a && !b) || (b && !a))
 		return 1;
 

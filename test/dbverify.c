@@ -127,8 +127,8 @@ compare_written_database(WacomDeviceDatabase *db)
 	assert(*devices);
 
 	dirname = strdup("tmp.dbverify.XXXXXX");
-	dirname = mkdtemp(dirname);
-	assert(dirname);
+	assert(mkdtemp(dirname)); /* just check for non-null to avoid
+				     Coverity complaints */
 
 	for (device = devices, i = 0; *device; device++, i++) {
 		int i;

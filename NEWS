@@ -1,3 +1,10 @@
+libwacom 0.6:
+- More metadata for:
+  - NTrig tablet PC
+  - ISDv4 0x93, 0x90, 0xED, 0xEF
+  - Bamboo Pen, Fun, Craft, Touch
+- Support for debugging with uinput devices
+
 libwacom 0.5:
 - Add support for multiple match statements
 - Add support for bluetotooth devices

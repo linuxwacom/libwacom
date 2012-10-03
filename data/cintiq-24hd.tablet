@@ -57,6 +57,7 @@ Buttons=16
 Ring=true
 Ring2=true
 BuiltIn=true
+StatusLEDs=Ring2;Ring
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H

@@ -56,6 +56,7 @@ Ring=false
 NumStrips=2
 Buttons=18
 BuiltIn=true
+StatusLEDs=Touchstrip2;Touchstrip
 
 [Buttons]
 Left=B;C;D;E;A;F;G;H;I

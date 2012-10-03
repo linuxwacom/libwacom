@@ -47,6 +47,7 @@ Stylus=true
 Ring=true
 Buttons=7
 BuiltIn=false
+StatusLEDs=Ring
 
 [Buttons]
 Left=A;B;C;D;E;F;G

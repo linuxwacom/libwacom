@@ -55,6 +55,7 @@ Touch=false
 Buttons=7
 Ring=true
 BuiltIn=false
+StatusLEDs=Ring
 
 [Buttons]
 Left=A;B;C;D;E;F;G

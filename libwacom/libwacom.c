@@ -304,6 +304,8 @@ libwacom_copy(const WacomDevice *device)
 	d->ring2_num_modes = device->ring2_num_modes;
 	d->num_styli = device->num_styli;
 	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
+	d->num_leds = device->num_leds;
+	d->status_leds = g_memdup (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
 	d->num_buttons = device->num_buttons;
 	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
 	return d;
@@ -370,6 +372,12 @@ libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
 		return 1;
 
 	if (memcmp(a->supported_styli, b->supported_styli, sizeof(int) * a->num_styli) != 0)
+		return 1;
+
+	if (a->num_leds != b->num_leds)
+		return 1;
+
+	if (memcmp(a->status_leds, b->status_leds, sizeof(WacomStatusLEDs) * a->num_leds) != 0)
 		return 1;
 
 	if (memcmp(a->buttons, b->buttons, sizeof(WacomButtonFlags) * a->num_buttons) != 0)
@@ -529,6 +537,26 @@ static void print_styli_for_device (int fd, WacomDevice *device)
 	dprintf(fd, "\n");
 }
 
+static void print_supported_leds (int fd, WacomDevice *device)
+{
+	char *leds_name[] = {
+		"Ring",
+		"Ring2",
+		"Touchstrip",
+		"Touchstrip2"
+	};
+	int num_leds;
+	const WacomStatusLEDs *status_leds;
+	int i;
+
+	status_leds = libwacom_get_status_leds(device, &num_leds);
+
+	dprintf(fd, "LEDs=");
+	for (i = 0; i < num_leds; i++)
+		dprintf(fd, "%s;", leds_name [status_leds[i]]);
+	dprintf(fd, "\n");
+}
+
 static void print_button_flag_if(int fd, WacomDevice *device, const char *label, int flag)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
@@ -620,6 +648,7 @@ libwacom_print_device_description(int fd, WacomDevice *device)
 	dprintf(fd, "Ring2=%s\n",	 libwacom_has_ring2(device)	? "true" : "false");
 	dprintf(fd, "BuiltIn=%s\n",	 libwacom_is_builtin(device)	? "true" : "false");
 	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
+	print_supported_leds(fd, device);
 
 	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
 	dprintf(fd, "Buttons=%d\n",		libwacom_get_num_buttons(device));
@@ -644,6 +673,7 @@ libwacom_destroy(WacomDevice *device)
 	}
 	g_free (device->matches);
 	g_free (device->supported_styli);
+	g_free (device->status_leds);
 	g_free (device->buttons);
 	g_free (device);
 }
@@ -777,6 +807,53 @@ int libwacom_get_num_strips(WacomDevice *device)
 int libwacom_get_strips_num_modes(WacomDevice *device)
 {
 	return device->strips_num_modes;
+}
+
+
+const WacomStatusLEDs *libwacom_get_status_leds(WacomDevice *device, int *num_leds)
+{
+	*num_leds = device->num_leds;
+	return device->status_leds;
+}
+
+struct {
+	WacomButtonFlags button_flags;
+	WacomStatusLEDs  status_leds;
+} button_status_leds[] = {
+	{ WACOM_BUTTON_RING_MODESWITCH,		WACOM_STATUS_LED_RING },
+	{ WACOM_BUTTON_RING2_MODESWITCH,	WACOM_STATUS_LED_RING2 },
+	{ WACOM_BUTTON_TOUCHSTRIP_MODESWITCH,	WACOM_STATUS_LED_TOUCHSTRIP },
+	{ WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH,	WACOM_STATUS_LED_TOUCHSTRIP2 }
+};
+
+int libwacom_get_button_led_group (WacomDevice *device,
+				   char         button)
+{
+	int button_index, led_index;
+	WacomButtonFlags button_flags;
+
+	g_return_val_if_fail (device->num_buttons > 0, -1);
+	g_return_val_if_fail (button >= 'A', -1);
+	g_return_val_if_fail (button < 'A' + device->num_buttons, -1);
+
+	button_index = button - 'A';
+	button_flags = device->buttons[button_index];
+
+	if (!(button_flags & WACOM_BUTTON_MODESWITCH))
+		return -1;
+
+	for (led_index = 0; led_index < device->num_leds; led_index++) {
+		guint n;
+
+		for (n = 0; n < G_N_ELEMENTS (button_status_leds); n++) {
+			if ((button_flags & button_status_leds[n].button_flags) &&
+			    (device->status_leds[led_index] == button_status_leds[n].status_leds)) {
+				return led_index;
+			}
+		}
+	}
+
+	return WACOM_STATUS_LED_UNAVAILABLE;
 }
 
 int libwacom_is_builtin(WacomDevice *device)

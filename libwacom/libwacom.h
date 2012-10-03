@@ -175,6 +175,14 @@ typedef enum {
 	WCOMPARE_MATCHES	= (1 << 1),	/**< compare all possible matches too */
 } WacomCompareFlags;
 
+typedef enum {
+	WACOM_STATUS_LED_UNAVAILABLE	= -1,
+	WACOM_STATUS_LED_RING		= 0,
+	WACOM_STATUS_LED_RING2		= 1,
+	WACOM_STATUS_LED_TOUCHSTRIP	= 2,
+	WACOM_STATUS_LED_TOUCHSTRIP2	= 3
+} WacomStatusLEDs;
+
 /**
  * Allocate a new structure for error reporting.
  *
@@ -429,6 +437,22 @@ int libwacom_get_num_strips(WacomDevice *device);
  * @return the number of modes for each of the touchstrips if any
  */
 int libwacom_get_strips_num_modes(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @param num_leds Return location for the number of supported status LEDs
+ * @return an array of status LEDs supported by the device
+ */
+const WacomStatusLEDs *libwacom_get_status_leds(WacomDevice *device, int *num_leds);
+
+/**
+ * @param device The tablet to query
+ * @param button The ID of the button to check for, between 'A' and 'Z'
+ * @return the status LED group id to use
+ * or -1 if no LED is available for the given tablet / button
+ */
+int libwacom_get_button_led_group (WacomDevice *device,
+				   char         button);
 
 /**
  * @param device The tablet to query

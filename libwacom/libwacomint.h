@@ -90,6 +90,9 @@ struct _WacomDevice {
 	int num_buttons;
 	WacomButtonFlags *buttons;
 
+	int num_leds;
+	WacomStatusLEDs *status_leds;
+
 	gint refcnt; /* for the db hashtable */
 };
 

@@ -246,6 +246,16 @@ struct {
 	{ "OLEDs", WACOM_BUTTON_OLED }
 };
 
+struct {
+	const char       *key;
+	WacomStatusLEDs   value;
+} supported_leds[] = {
+	{ "Ring",		WACOM_STATUS_LED_RING },
+	{ "Ring2",		WACOM_STATUS_LED_RING2 },
+	{ "Touchstrip",		WACOM_STATUS_LED_TOUCHSTRIP },
+	{ "Touchstrip2",	WACOM_STATUS_LED_TOUCHSTRIP2 }
+};
+
 static void
 libwacom_parse_buttons_key(WacomDevice      *device,
 			   GKeyFile         *keyfile,
@@ -318,6 +328,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 	char *class;
 	char *match;
 	char **styli_list;
+	char **leds_list;
 
 	keyfile = g_key_file_new();
 
@@ -412,6 +423,25 @@ libwacom_parse_tablet_keyfile(const char *path)
 	if (device->num_buttons > 0) {
 		device->buttons = g_new0 (WacomButtonFlags, device->num_buttons);
 		libwacom_parse_buttons(device, keyfile);
+	}
+
+	leds_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
+	if (leds_list) {
+		GArray *array;
+		guint i, n;
+		array = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
+		device->num_leds = 0;
+		for (i = 0; leds_list[i]; i++) {
+			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
+				if (!strcmp(leds_list[i], supported_leds[n].key)) {
+					g_array_append_val (array, supported_leds[n].value);
+					device->num_leds++;
+					break;
+				}
+			}
+		}
+		g_strfreev (leds_list);
+		device->status_leds = (WacomStatusLEDs *) g_array_free (array, FALSE);
 	}
 
 out:

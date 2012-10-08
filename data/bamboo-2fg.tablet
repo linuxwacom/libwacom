@@ -13,13 +13,13 @@ DeviceMatch=usb:056a:00d0
 Class=Bamboo
 Width=5
 Height=3
+IntegratedIn=
 
 [Features]
 Stylus=false
 Reversible=true
 Touch=true
 Buttons=4
-BuiltIn=false
 
 [Buttons]
 Left=A;B;C;D

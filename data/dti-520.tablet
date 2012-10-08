@@ -22,6 +22,7 @@ Width=14
 Height=12
 # FIXME does the stylus have an eraser?
 # Styli=0xfffff;
+IntegratedIn=Display;System
 
 [Features]
 # This tablet does not appear to support erasers on styli
@@ -33,7 +34,6 @@ Ring2=false
 NumStrips=0
 # Actually 11 buttons but the two Ctrl ones send the same scancode
 Buttons=10
-BuiltIn=true
 
 [Buttons]
 Top=F;G;H;I;J

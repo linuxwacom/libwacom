@@ -9,9 +9,9 @@ DeviceMatch=usb:056a:00f0
 Width=14
 Height=8
 Class=PenDisplay
+IntegratedIn=Display;System
 
 [Features]
 Stylus=true
 Buttons=0
-BuiltIn=true
 

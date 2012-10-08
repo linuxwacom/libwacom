@@ -4,8 +4,8 @@
 Name=Wacom ISDv4 EF
 DeviceMatch=usb:056a:00ef
 Class=ISDV4
+IntegratedIn=Display;System
 
 [Features]
 Stylus=true
-BuiltIn=true
 Buttons=0

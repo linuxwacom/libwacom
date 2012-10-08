@@ -34,6 +34,14 @@ Width=9
 # (Optional) Height in inches, as advertised by the manufacturer
 Height=6
 
+# Integration flags, is the tablet is part of the system, such as a
+# TabletPC or integrated in the screen, ie a screen tablet (most serial
+# tablets, Cintiqs)
+# Note, if unspecified, the integration flags will be taken from the kernel.
+# Using an empty value or "None" forces the intergration flags to remain unset
+# even if the relevant kernel flags would state otherwise.
+IntegratedIn=Display;System
+
 # Styli
 #
 # This is a list of stylus IDs supported by the tablet. This is the
@@ -96,13 +104,6 @@ NumStrips=1
 
 # Number of buttons on the tablet
 Buttons=9
-
-# This tablet is built-in (most serial tablets, Cintiqs)
-#
-# The value within the file is ignored if the WacomDevice
-# is created through the device path, in which case the
-# value comes from kernel properties
-BuiltIn=false
 
 # Metadata about the buttons on the tablet
 # Buttons are "numbered" using upper-case letters

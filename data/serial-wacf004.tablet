@@ -2,9 +2,9 @@
 Name=Wacom Serial Tablet WACf004
 DeviceMatch=serial:0000:0000
 Class=ISDV4
+IntegratedIn=Display;System
 
 [Features]
 Stylus=true
 Ring=false
 Buttons=0
-BuiltIn=true

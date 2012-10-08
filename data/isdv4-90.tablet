@@ -10,9 +10,9 @@ DeviceMatch=usb:056a:0090;serial:056a:0090
 Class=ISDV4
 Width=12
 Height=8
+IntegratedIn=Display;System
 
 [Features]
 Stylus=true
 Touch=false
 Buttons=0
-BuiltIn=true

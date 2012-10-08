@@ -37,6 +37,7 @@ Class=Cintiq
 Width=19
 Height=11
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
+IntegratedIn=Display
 
 [Features]
 Stylus=true
@@ -45,7 +46,6 @@ Touch=false
 Ring=false
 NumStrips=2
 Buttons=18
-BuiltIn=true
 
 [Buttons]
 Left=B;C;D;E;A;F;G;H;I

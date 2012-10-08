@@ -46,6 +46,7 @@ Class=Cintiq
 Width=21
 Height=13
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
+IntegratedIn=Display
 
 [Features]
 Stylus=true
@@ -54,7 +55,6 @@ Touch=true
 Buttons=16
 Ring=true
 Ring2=true
-BuiltIn=true
 StatusLEDs=Ring2;Ring
 
 [Buttons]

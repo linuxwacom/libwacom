@@ -38,6 +38,7 @@ DeviceMatch=usb:056a:00bb
 Class=Intuos4
 Width=19
 Height=12
+IntegratedIn=
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;0x806;0x006;
 
 [Features]
@@ -45,7 +46,6 @@ Reversible=true
 Stylus=true
 Ring=true
 Buttons=9
-BuiltIn=false
 StatusLEDs=Ring
 
 [Buttons]

@@ -48,6 +48,7 @@ DeviceMatch=usb:056a:0028
 Class=Intuos5
 Width=13
 Height=8
+IntegratedIn=
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;0x806;0x006;
 
 [Features]
@@ -56,7 +57,6 @@ Reversible=true
 Touch=true
 Buttons=9
 Ring=true
-BuiltIn=false
 StatusLEDs=Ring
 
 [Buttons]

@@ -4,9 +4,9 @@
 Name=Wacom ISDv4 E3
 DeviceMatch=usb:056a:00e3;serial:056a:00e3
 Class=ISDV4
+IntegratedIn=Display;System
 
 [Features]
 Stylus=true
 Touch=true
-BuiltIn=true
 Buttons=0

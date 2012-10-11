@@ -39,20 +39,14 @@
 	printf(__VA_ARGS__)
 
 #define GENERIC_DEVICE_MATCH "generic"
-
-typedef enum {
-	IS_BUILTIN_UNSET	= -1,
-	IS_BUILTIN_FALSE	= 0,
-	IS_BUILTIN_TRUE		= 1
-} IsBuiltin;
+#define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1)
 
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),
 	FEATURE_RING		= (1 << 2),
 	FEATURE_RING2		= (1 << 3),
-	FEATURE_BUILTIN		= (1 << 4),
-	FEATURE_REVERSIBLE	= (1 << 5)
+	FEATURE_REVERSIBLE	= (1 << 4)
 };
 
 /* WARNING: When adding new members to this struct
@@ -79,6 +73,7 @@ struct _WacomDevice {
 	WacomClass cls;
 	int num_strips;
 	uint32_t features;
+	uint32_t integration_flags;
 
 	int strips_num_modes;
 	int ring_num_modes;

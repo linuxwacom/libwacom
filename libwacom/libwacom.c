@@ -124,13 +124,13 @@ get_bus (GUdevDevice *device)
 }
 
 static gboolean
-get_device_info (const char   *path,
-		 int          *vendor_id,
-		 int          *product_id,
-		 char        **name,
-		 WacomBusType *bus,
-		 IsBuiltin    *builtin,
-		 WacomError   *error)
+get_device_info (const char            *path,
+		 int                   *vendor_id,
+		 int                   *product_id,
+		 char                 **name,
+		 WacomBusType          *bus,
+		 WacomIntegrationFlags *integration_flags,
+		 WacomError            *error)
 {
 	GUdevClient *client;
 	GUdevDevice *device;
@@ -142,7 +142,7 @@ get_device_info (const char   *path,
 	g_type_init();
 
 	retval = FALSE;
-	*builtin = IS_BUILTIN_UNSET;
+	*integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;
 	*name = NULL;
 	bus_str = NULL;
 	client = g_udev_client_new (subsystems);
@@ -167,7 +167,7 @@ get_device_info (const char   *path,
 
 	bus_str = get_bus (device);
 
-	/* Is the device builtin? */
+	/* Is the device integrated in display? */
 	devname = g_udev_device_get_name (device);
 	if (devname != NULL) {
 		char *sysfs_path, *contents;
@@ -185,9 +185,9 @@ get_device_info (const char   *path,
 			 * tablets as well)
 			 */
 			if (flag == (1 << INPUT_PROP_DIRECT))
-				*builtin = IS_BUILTIN_TRUE;
+				*integration_flags = WACOM_DEVICE_INTEGRATED_DISPLAY;
 			else
-				*builtin = IS_BUILTIN_FALSE;
+				*integration_flags = WACOM_DEVICE_INTEGRATED_NONE;
 
 			g_free (contents);
 		}
@@ -312,6 +312,7 @@ libwacom_copy(const WacomDevice *device)
 	d->name = g_strdup (device->name);
 	d->width = device->width;
 	d->height = device->height;
+	d->integration_flags = device->integration_flags;
 	d->layout = g_strdup(device->layout);
 	d->nmatches = device->nmatches;
 	d->matches = g_malloc((d->nmatches + 1) * sizeof(WacomMatch*));
@@ -393,6 +394,9 @@ libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
 	if (!libwacom_same_layouts (a, b))
 		return 1;
 
+	if (a->integration_flags != b->integration_flags)
+		return 1;
+
 	if (a->cls != b->cls)
 		return 1;
 
@@ -462,7 +466,7 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackF
 	WacomBusType bus;
 	const WacomDevice *device;
 	WacomDevice *ret;
-	IsBuiltin builtin;
+	WacomIntegrationFlags integration_flags;
 	char *name;
 
 	if (!db) {
@@ -475,7 +479,7 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackF
 		return NULL;
 	}
 
-	if (!get_device_info (path, &vendor_id, &product_id, &name, &bus, &builtin, error))
+	if (!get_device_info (path, &vendor_id, &product_id, &name, &bus, &integration_flags, error))
 		return NULL;
 
 	device = libwacom_new (db, vendor_id, product_id, bus, error);
@@ -503,10 +507,10 @@ libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackF
 	libwacom_update_match(ret, bus, vendor_id, product_id);
 
 	if (device) {
-		if (builtin == IS_BUILTIN_TRUE)
-			ret->features |= FEATURE_BUILTIN;
-		else if (builtin == IS_BUILTIN_FALSE)
-			ret->features &= ~FEATURE_BUILTIN;
+		if (integration_flags == WACOM_DEVICE_INTEGRATED_DISPLAY)
+			ret->integration_flags |= WACOM_DEVICE_INTEGRATED_DISPLAY;
+		else if (integration_flags == WACOM_DEVICE_INTEGRATED_NONE)
+			ret->integration_flags &= ~WACOM_DEVICE_INTEGRATED_DISPLAY;
 
 		return ret;
 	}
@@ -652,6 +656,24 @@ static void print_buttons_for_device (int fd, WacomDevice *device)
 	dprintf(fd, "\n");
 }
 
+static void print_integrated_flags_for_device (int fd, WacomDevice *device)
+{
+	/*
+	 * If flag is WACOM_DEVICE_INTEGRATED_UNSET, the info is not provided
+	 * by the tablet database but deduced otherwise (e.g. from sysfs device
+	 * properties on Linux)
+	 */
+	if (device->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
+		return;
+	dprintf(fd, "IntegratedIn=");
+	if (device->integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY)
+		dprintf(fd, "Display;");
+	if (device->integration_flags & WACOM_DEVICE_INTEGRATED_SYSTEM)
+		dprintf(fd, "System;");
+	dprintf(fd, "\n");
+}
+
+
 void
 libwacom_print_device_description(int fd, WacomDevice *device)
 {
@@ -697,6 +719,7 @@ libwacom_print_device_description(int fd, WacomDevice *device)
 	dprintf(fd, "Class=%s\n",		class_name);
 	dprintf(fd, "Width=%d\n",		libwacom_get_width(device));
 	dprintf(fd, "Height=%d\n",		libwacom_get_height(device));
+	print_integrated_flags_for_device(fd, device);
 	print_layout_for_device(fd, device);
 	print_styli_for_device(fd, device);
 	dprintf(fd, "\n");
@@ -706,7 +729,6 @@ libwacom_print_device_description(int fd, WacomDevice *device)
 	dprintf(fd, "Stylus=%s\n",	 libwacom_has_stylus(device)	? "true" : "false");
 	dprintf(fd, "Ring=%s\n",	 libwacom_has_ring(device)	? "true" : "false");
 	dprintf(fd, "Ring2=%s\n",	 libwacom_has_ring2(device)	? "true" : "false");
-	dprintf(fd, "BuiltIn=%s\n",	 libwacom_is_builtin(device)	? "true" : "false");
 	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
 	print_supported_leds(fd, device);
 
@@ -875,7 +897,6 @@ int libwacom_get_strips_num_modes(WacomDevice *device)
 	return device->strips_num_modes;
 }
 
-
 const WacomStatusLEDs *libwacom_get_status_leds(WacomDevice *device, int *num_leds)
 {
 	*num_leds = device->num_leds;
@@ -924,12 +945,21 @@ int libwacom_get_button_led_group (WacomDevice *device,
 
 int libwacom_is_builtin(WacomDevice *device)
 {
-	return !!(device->features & FEATURE_BUILTIN);
+	return !!(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 }
 
 int libwacom_is_reversible(WacomDevice *device)
 {
 	return !!(device->features & FEATURE_REVERSIBLE);
+}
+
+WacomIntegrationFlags libwacom_get_integration_flags (WacomDevice *device)
+{
+	/* "unset" is for internal use only */
+	if (device->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
+		return WACOM_DEVICE_INTEGRATED_NONE;
+
+	return device->integration_flags;
 }
 
 WacomBusType libwacom_get_bustype(WacomDevice *device)

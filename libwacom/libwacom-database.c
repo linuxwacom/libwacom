@@ -256,6 +256,14 @@ struct {
 	{ "Touchstrip2",	WACOM_STATUS_LED_TOUCHSTRIP2 }
 };
 
+struct {
+	const char             *key;
+	WacomIntegrationFlags   value;
+} integration_flags[] = {
+	{ "Display",		WACOM_DEVICE_INTEGRATED_DISPLAY },
+	{ "System",		WACOM_DEVICE_INTEGRATED_SYSTEM }
+};
+
 static void
 libwacom_parse_buttons_key(WacomDevice      *device,
 			   GKeyFile         *keyfile,
@@ -329,8 +337,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	char *layout;
 	char *class;
 	char *match;
-	char **styli_list;
-	char **leds_list;
+	char **string_list;
 
 	keyfile = g_key_file_new();
 
@@ -361,31 +368,55 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
 	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
+
+	device->integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;
+	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "IntegratedIn", NULL, NULL);
+	if (string_list) {
+		guint i, n;
+		gboolean found;
+
+		device->integration_flags = WACOM_DEVICE_INTEGRATED_NONE;
+		for (i = 0; string_list[i]; i++) {
+			found = FALSE;
+			for (n = 0; n < G_N_ELEMENTS (integration_flags); n++) {
+				if (!strcmp(string_list[i], integration_flags[n].key)) {
+					device->integration_flags |= integration_flags[n].value;
+					found = TRUE;
+					break;
+				}
+			}
+			if (!found)
+				g_warning ("Unrecognized integration flag '%s'", string_list[i]);
+		}
+		g_strfreev (string_list);
+	}
+
 	layout = g_key_file_get_string(keyfile, DEVICE_GROUP, "Layout", NULL);
 	if (layout) {
 		/* For the layout, we store the full path to the SVG layout */
 		device->layout = g_build_filename (datadir, "layouts", layout, NULL);
 		g_free (layout);
 	}
+
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);
 	device->cls = libwacom_class_string_to_enum(class);
 	g_free(class);
 
-	styli_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
-	if (styli_list) {
+	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
+	if (string_list) {
 		GArray *array;
 		guint i;
 
 		array = g_array_new (FALSE, FALSE, sizeof(int));
 		device->num_styli = 0;
-		for (i = 0; styli_list[i]; i++) {
-			glong long_value = strtol (styli_list[i], NULL, 0);
+		for (i = 0; string_list[i]; i++) {
+			glong long_value = strtol (string_list[i], NULL, 0);
 			int int_value = long_value;
 
 			g_array_append_val (array, int_value);
 			device->num_styli++;
 		}
-		g_strfreev (styli_list);
+		g_strfreev (string_list);
 		device->supported_styli = (int *) g_array_free (array, FALSE);
 	} else {
 		device->supported_styli = g_new (int, 2);
@@ -407,15 +438,13 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring2", NULL))
 		device->features |= FEATURE_RING2;
 
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "BuiltIn", NULL))
-		device->features |= FEATURE_BUILTIN;
-
 	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
 		device->features |= FEATURE_REVERSIBLE;
 
-	if (device->features & FEATURE_BUILTIN &&
+	if (device->integration_flags != WACOM_DEVICE_INTEGRATED_UNSET &&
+	    device->integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY &&
 	    device->features & FEATURE_REVERSIBLE)
-		g_warning ("Tablet '%s' is both reversible and builtin. This is impossible", libwacom_get_match(device));
+		g_warning ("Tablet '%s' is both reversible and integrated in screen. This is impossible", libwacom_get_match(device));
 
 	if (!(device->features & FEATURE_RING) &&
 	    (device->features & FEATURE_RING2))
@@ -433,22 +462,23 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 		libwacom_parse_buttons(device, keyfile);
 	}
 
-	leds_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
-	if (leds_list) {
+	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
+	if (string_list) {
 		GArray *array;
 		guint i, n;
+
 		array = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
 		device->num_leds = 0;
-		for (i = 0; leds_list[i]; i++) {
+		for (i = 0; string_list[i]; i++) {
 			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
-				if (!strcmp(leds_list[i], supported_leds[n].key)) {
+				if (!strcmp(string_list[i], supported_leds[n].key)) {
 					g_array_append_val (array, supported_leds[n].value);
 					device->num_leds++;
 					break;
 				}
 			}
 		}
-		g_strfreev (leds_list);
+		g_strfreev (string_list);
 		device->status_leds = (WacomStatusLEDs *) g_array_free (array, FALSE);
 	}
 

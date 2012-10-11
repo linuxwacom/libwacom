@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 	assert(libwacom_has_ring(device));
 	assert(!libwacom_has_ring2(device));
 	assert(libwacom_get_num_strips(device) == 0);
-	assert(!libwacom_is_builtin(device));
+	assert(libwacom_get_integration_flags (device) == WACOM_DEVICE_INTEGRATED_NONE);
 	assert(libwacom_get_width(device) == 8);
 	assert(libwacom_get_height(device) == 5);
 
@@ -124,8 +124,8 @@ int main(int argc, char **argv)
 
 	device = libwacom_new_from_name(db, "Wacom Serial Tablet WACf004", NULL);
 	assert(device);
-	assert(libwacom_is_builtin(device));
-
+	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
+	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
 	libwacom_database_destroy (db);
 
 	return 0;

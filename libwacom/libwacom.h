@@ -36,6 +36,13 @@
 
 #include <stdint.h>
 #include <stdio.h>
+
+#if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 301)
+#define LIBWACOM_DEPRECATED  __attribute__((deprecated))
+#else
+#define LIBWACOM_DEPRECATED
+#endif /* __GNUC__ */
+
 /**
  @mainpage
 
@@ -113,6 +120,15 @@ typedef enum {
 	WBUSTYPE_SERIAL,		/**< Serial tablet */
 	WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
 } WacomBusType;
+
+/**
+ * Tablet integration.
+ */
+typedef enum {
+	WACOM_DEVICE_INTEGRATED_NONE    = 0,
+	WACOM_DEVICE_INTEGRATED_DISPLAY = (1 << 0),
+	WACOM_DEVICE_INTEGRATED_SYSTEM  = (1 << 1)
+} WacomIntegrationFlags;
 
 /**
  * Classes of devices.
@@ -463,10 +479,11 @@ int libwacom_get_button_led_group (WacomDevice *device,
 
 /**
  * @param device The tablet to query
- * @return non-zero if the device is built-in or zero if the device is an
- * external tablet
+ * @return non-zero if the device is built into the screen (ie a screen tablet)
+ * or zero if the device is an external tablet
+ * @deprecated 0.7 Use libwacom_get_integration_flags() instead.
  */
-int libwacom_is_builtin(WacomDevice *device);
+int libwacom_is_builtin(WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
@@ -474,6 +491,12 @@ int libwacom_is_builtin(WacomDevice *device);
  * (rotated 180 degrees)
  */
 int libwacom_is_reversible(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return the integration flags for the device
+ */
+WacomIntegrationFlags libwacom_get_integration_flags (WacomDevice *device);
 
 /**
  * @param device The tablet to query

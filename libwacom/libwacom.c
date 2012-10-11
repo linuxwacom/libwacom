@@ -34,6 +34,19 @@
 #include <string.h>
 #include <gudev/gudev.h>
 
+#ifdef HAVE_LINUX_INPUT_H
+#include <linux/input.h>
+#endif
+
+/* Defined in linux/input.h but older versions may be missing these definitions */
+#ifndef INPUT_PROP_POINTER
+#define INPUT_PROP_POINTER		0x00	/* needs a pointer */
+#endif
+
+#ifndef INPUT_PROP_DIRECT
+#define INPUT_PROP_DIRECT		0x01	/* direct input devices */
+#endif
+
 static const WacomDevice *
 libwacom_get_device(WacomDeviceDatabase *db, const char *match)
 {
@@ -163,10 +176,19 @@ get_device_info (const char   *path,
 		if (g_file_get_contents (sysfs_path, &contents, NULL, NULL)) {
 			int flag;
 
-			/* 0x01: POINTER flag
-			 * 0x02: DIRECT flag */
 			flag = atoi(contents);
-			*builtin = (flag & 0x02) == 0x02 ? IS_BUILTIN_TRUE : IS_BUILTIN_FALSE;
+			flag &= (1 << INPUT_PROP_DIRECT) | (1 << INPUT_PROP_POINTER);
+			/*
+			 * To ensure we are dealing with a screen tablet, need
+			 * to check that it has DIRECT and non-POINTER (DIRECT
+			 * alone is not sufficient since it's set for drawing
+			 * tablets as well)
+			 */
+			if (flag == (1 << INPUT_PROP_DIRECT))
+				*builtin = IS_BUILTIN_TRUE;
+			else
+				*builtin = IS_BUILTIN_FALSE;
+
 			g_free (contents);
 		}
 		g_free (sysfs_path);

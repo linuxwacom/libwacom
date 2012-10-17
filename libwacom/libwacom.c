@@ -551,7 +551,7 @@ static void print_supported_leds (int fd, WacomDevice *device)
 
 	status_leds = libwacom_get_status_leds(device, &num_leds);
 
-	dprintf(fd, "LEDs=");
+	dprintf(fd, "StatusLEDs=");
 	for (i = 0; i < num_leds; i++)
 		dprintf(fd, "%s;", leds_name [status_leds[i]]);
 	dprintf(fd, "\n");

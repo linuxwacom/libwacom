@@ -100,6 +100,11 @@ int main(int argc, char **argv)
 
 	assert(libwacom_get_button_flag(device, 'A') & WACOM_BUTTON_RING_MODESWITCH);
 	assert(libwacom_get_button_flag(device, 'I') & WACOM_BUTTON_OLED);
+	/*
+	 * I4 WL has only 9 buttons, asking for a 10th button will raise a warning
+	 * in libwacom_get_button_flag() which is expected.
+	 */
+	printf("Following critical warning in libwacom_get_button_flag() is expected\n");
 	assert(libwacom_get_button_flag(device, 'J') == WACOM_BUTTON_NONE);
 	assert(libwacom_get_ring_num_modes(device) == 4);
 

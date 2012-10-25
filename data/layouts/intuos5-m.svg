@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+     style="color:#000000;stroke:#bebebe;fill:#f0f0f0;stroke-linejoin:round;stroke-width:1;font-size:8"
+          id="intuos5-m"                                                  width="380" height="250">
+  <title  id="title"                                                                              >Wacom Intuos5 M Touch</title>
+  <rect   id="ButtonB"       class="B Button"             x="24"  y="40"  width="20" height="12" />
+  <text   id="LabelB"        class="B Label"              x="50"  y="46"                          >A</text>
+  <rect   id="ButtonC"       class="C Button"             x="24"  y="54"  width="20" height="12" />
+  <text   id="LabelC"        class="C Label"              x="50"  y="60"                          >B</text>
+  <rect   id="ButtonD"       class="D Button"             x="24"  y="68"  width="20" height="12" />
+  <text   id="LabelD"        class="D Label"              x="50"  y="74"                          >C</text>
+  <rect   id="ButtonE"       class="E Button"             x="24"  y="82"  width="20" height="12" />
+  <text   id="LabelE"        class="E Label"              x="50"  y="88"                          >D</text>
+  <rect   id="ButtonF"       class="F Button"             x="24"  y="156" width="20" height="12" />
+  <text   id="LabelF"        class="F Label"              x="50"  y="162"                         >E</text>
+  <rect   id="ButtonG"       class="G Button"             x="24"  y="170" width="20" height="12" />
+  <text   id="LabelG"        class="G Label"              x="50"  y="176"                         >F</text>
+  <rect   id="ButtonH"       class="H Button"             x="24"  y="184" width="20" height="12" />
+  <text   id="LabelH"        class="H Label"              x="50"  y="190"                         >G</text>
+  <rect   id="ButtonI"       class="I Button"             x="24"  y="198" width="20" height="12" />
+  <text   id="LabelI"        class="I Label"              x="50"  y="206"                         >H</text>
+  <circle id="Ring"          class="Ring TouchRing"      cx="34" cy="125" r="19.5"               />
+  <text   id="LabelRingUp"   class="RingUp Ring Label"    x="60"  y="105"                         >Up</text>
+  <text   id="LabelRingDown" class="RingDown Ring Label"  x="60"  y="145"                         >Down</text>
+  <circle id="ButtonA"       class="A ModeSwitch Button" cx="34" cy="125" r="9.5"                />
+  <text   id="LabelA"        class="A ModeSwitch Label"   x="60"  y="125"                         >I</text>
+</svg>

@@ -34,6 +34,7 @@ PKG_CHECK_MODULES(GLIB, glib-2.0 gudev-1.0)
 
 AC_CONFIG_FILES([Makefile
                  data/Makefile
+                 data/layouts/Makefile
                  doc/Makefile
                  test/Makefile
                  tools/Makefile

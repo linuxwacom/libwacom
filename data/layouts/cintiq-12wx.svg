@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+     style="color:#000000;stroke:#bebebe;fill:#000000;stroke-linejoin:round;stroke-width:1;font-size:8"
+         id="cintiq-12wx"                                                     width="405" height="270" >
+  <title id="title"                                                                                    >Wacom Cintiq 12WX</title>
+  <rect  id="ButtonA"         class="A Button"                x="40"  y="54"  width="11"  height="17" />
+  <text  id="LabelA"          class="A Label"                 x="60"  y="63"                           >A</text>
+  <rect  id="ButtonB"         class="B Button"                x="40"  y="72"  width="11"  height="17" />
+  <text  id="LabelB"          class="B Label"                 x="60"  y="81"                           >B</text>
+  <rect  id="ButtonC"         class="C Button"                x="28"  y="54"  width="11"  height="35" />
+  <text  id="LabelC"          class="C Label"                 x="60"  y="72"                           >C</text>
+  <rect  id="ButtonD"         class="D Button"                x="28"  y="90"  width="23"  height="11" />
+  <text  id="LabelD"          class="D Label"                 x="60"  y="96"                           >D</text>
+  <rect  id="ButtonE"         class="E Button"                x="352" y="54"  width="11"  height="17" />
+  <text  id="LabelE"          class="E Label"                 x="342" y="63"                           >E</text>
+  <rect  id="ButtonF"         class="F Button"                x="352" y="72"  width="11"  height="17" />
+  <text  id="LabelF"          class="F Label"                 x="342" y="81"                           >F</text>
+  <rect  id="ButtonG"         class="G Button"                x="364" y="54"  width="11"  height="35" />
+  <text  id="LabelG"          class="G Label"                 x="342" y="72"                           >G</text>
+  <rect  id="ButtonH"         class="H Button"                x="352" y="90"  width="23"  height="11" />
+  <text  id="LabelH"          class="H Label"                 x="342" y="96"                           >H</text>
+  <rect  id="ButtonI"         class="I Button"                x="28"  y="42"  width="23"  height="11" />
+  <text  id="LabelI"          class="I Label"                 x="60"  y="51"                           >I</text>
+  <rect  id="ButtonJ"         class="J Button"                x="352" y="42"  width="23"  height="11" />
+  <text  id="LabelJ"          class="J Label"                 x="342" y="51"                           >J</text>
+  <rect  id="Strip"           class="Strip TouchStrip"        x="10"  y="41"  width="12"  height="60" />
+  <text  id="LabelStripUp"    class="StripUp Strip Label"     x="16"  y="30"                           >Up</text>
+  <text  id="LabelStripDown"  class="StripDown Strip Label"   x="16"  y="110"                          >Down</text>
+  <rect  id="Strip2"          class="Strip2 TouchStrip"       x="382" y="41"  width="12"  height="60" />
+  <text  id="LabelStrip2Up"   class="Strip2Up Strip2 Label"   x="388" y="30"                           >Up</text>
+  <text  id="LabelStrip2Down" class="Strip2Down Strip2 Label" x="388" y="110"                          >Down</text>
+</svg>

@@ -1,0 +1,124 @@
+SVG images have a dual purpose, providing an accurate representation of the
+tablets and also providing the size and location of the various controls on
+the device that can be queried by various applications that may need it.
+
+To allow applications to identify each control in the SVG and also apply a
+CSS if desired, the following naming convention applies:
+
+* Buttons
+
+Each button ID in the SVG is built of the string "Button" with ID of the
+button between 'A' and 'Z':
+
+    id="ButtonA"
+    id="ButtonB"
+    ...
+    id="ButtonZ"
+
+The SVG class must contain the button ID of the button between 'A' and 'Z'
+and the more generic class "Button"
+
+    class="A Button"
+    class="B Button"
+    ...
+    class="Z Button"
+
+If the button is a mode-switch button as well, the class list should also
+contain "ModeSwitch":
+
+    class="I ModeSwitch Button"
+
+This would allow to modify the appearance of all the buttons at once via a CSS,
+yet allowing to customize the appearance of single buttons by using the button
+ID.
+
+* Touch Rings/Strips
+
+Touch rings use the following convention:
+
+ - First touch ring:
+
+    id="Ring"
+    class="Ring TouchRing"
+
+ - Second touch ring:
+
+    id="Ring2"
+    class="Ring2 TouchRing"
+
+ - First touch strip:
+
+    id="Strip"
+    class="Strip TouchStrip"
+
+ - Second touch strip:
+
+    id="Strip2"
+    class="Strip2 TouchStrip"
+
+* Labels
+
+The role of the labels in the SVG is to give applications an indication on
+where to place the caption for each button. The actual content of the text
+in the SVG image may not be relevant, what matters is the actual location.
+
+Applications should hide the labels (using CSS) or replace the text with an
+appropriate caption.
+
+ - Button labels
+
+Each button's label ID in the SVG is made of the string "Label" with ID of the
+button to which it applies, between 'A' and 'Z'.
+
+Class includes both the button ID and the string "Label".
+    id="LabelA"
+    class="A Label"
+
+For the special case of mode-switch buttons, the class also list "ModeSwitch":
+
+    id="LabelI"
+    class="I ModeSwitch Label"
+
+ - Touchring button labels
+
+Touch-rings and touch-strips generate Up and Down events, therefore 2 different
+labels are needed for each touch-ring/touch-strip control.
+
+    id="LabelRingUp"
+    class="RingUp Ring Label"
+
+  and
+
+    id="LabelRingDown"
+    class="RingDown Ring Label"
+
+The second touch-ring button is identified by "Ring2" in place of "Ring":
+
+    id="LabelRing2Up"
+    class="Ring2Up Ring2 Label"
+
+  and
+
+    id="LabelRingDown"
+    class="Ring2Down Ring2 Label"
+
+Touchstrips button follow the same naming scheme, using "Strip" and "Strip2"
+to name the first and second touch-strip.
+
+    id="LabelStripUp"
+    class="StripUp Strip Label"
+
+  and
+
+    id="LabelStripDown"
+    class="StripDown Strip Label"
+
+Second touch-strip:
+
+    id="LabelStrip2Up"
+    class="Strip2Up Strip2 Label"
+
+  and
+
+    id="LabelRingDown"
+    class="Strip2Down Strip2 Label"

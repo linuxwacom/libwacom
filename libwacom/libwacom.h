@@ -330,6 +330,13 @@ const char* libwacom_get_name(WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return The full filename including path to the SVG layout of the device
+ * if available, or NULL otherwise
+ */
+const char* libwacom_get_layout_filename(WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The numeric vendor ID for this device
  */
 int libwacom_get_vendor_id(WacomDevice *device);

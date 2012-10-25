@@ -319,12 +319,14 @@ libwacom_parse_buttons(WacomDevice *device,
 }
 
 static WacomDevice*
-libwacom_parse_tablet_keyfile(const char *path)
+libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 {
 	WacomDevice *device = NULL;
 	GKeyFile *keyfile;
 	GError *error = NULL;
 	gboolean rc;
+	char *path;
+	char *layout;
 	char *class;
 	char *match;
 	char **styli_list;
@@ -332,6 +334,7 @@ libwacom_parse_tablet_keyfile(const char *path)
 
 	keyfile = g_key_file_new();
 
+	path = g_build_filename (datadir, filename, NULL);
 	rc = g_key_file_load_from_file(keyfile, path, G_KEY_FILE_NONE, &error);
 
 	if (!rc) {
@@ -358,7 +361,12 @@ libwacom_parse_tablet_keyfile(const char *path)
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
 	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
-
+	layout = g_key_file_get_string(keyfile, DEVICE_GROUP, "Layout", NULL);
+	if (layout) {
+		/* For the layout, we store the full path to the SVG layout */
+		device->layout = g_build_filename (datadir, "layouts", layout, NULL);
+		g_free (layout);
+	}
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);
 	device->cls = libwacom_class_string_to_enum(class);
 	g_free(class);
@@ -445,6 +453,8 @@ libwacom_parse_tablet_keyfile(const char *path)
 	}
 
 out:
+	if (path)
+		g_free(path);
 	if (keyfile)
 		g_key_file_free(keyfile);
 	if (error)
@@ -515,9 +525,7 @@ libwacom_database_new_for_path (const char *datadir)
 	    WacomDevice *d;
 	    const WacomMatch **matches, **match;
 
-	    path = g_build_filename (datadir, files[n]->d_name, NULL);
-	    d = libwacom_parse_tablet_keyfile(path);
-	    g_free(path);
+	    d = libwacom_parse_tablet_keyfile(datadir, files[n]->d_name);
 
 	    if (!d)
 		    continue;

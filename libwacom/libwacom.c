@@ -290,6 +290,7 @@ libwacom_copy(const WacomDevice *device)
 	d->name = g_strdup (device->name);
 	d->width = device->width;
 	d->height = device->height;
+	d->layout = g_strdup(device->layout);
 	d->nmatches = device->nmatches;
 	d->matches = g_malloc((d->nmatches + 1) * sizeof(WacomMatch*));
 	for (i = 0; i < d->nmatches; i++)
@@ -333,6 +334,26 @@ compare_matches(WacomDevice *a, WacomDevice *b)
 	return 0;
 }
 
+/* Compare layouts based on file name, stripping the full path */
+static gboolean
+libwacom_same_layouts (WacomDevice *a, WacomDevice *b)
+{
+	gchar *file1, *file2;
+
+	/* Conveniently handle the null case */
+	if (a->layout == b->layout)
+		return TRUE;
+
+	file1 = NULL;
+	file2 = NULL;
+	if (a->layout != NULL)
+		file1 = g_path_get_basename (a->layout);
+	if (b->layout != NULL)
+		file2 = g_path_get_basename (b->layout);
+
+	return (g_strcmp0 (file1, file2) == 0);
+}
+
 int
 libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
 {
@@ -345,6 +366,9 @@ libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags)
 		return 1;
 
 	if (a->width != b->width || a->height != b->height)
+		return 1;
+
+	if (!libwacom_same_layouts (a, b))
 		return 1;
 
 	if (a->cls != b->cls)
@@ -537,6 +561,19 @@ static void print_styli_for_device (int fd, WacomDevice *device)
 	dprintf(fd, "\n");
 }
 
+static void print_layout_for_device (int fd, WacomDevice *device)
+{
+	const char *layout_filename;
+	gchar      *base_name;
+
+	layout_filename = libwacom_get_layout_filename(device);
+	if (layout_filename) {
+		base_name = g_path_get_basename (layout_filename);
+		dprintf(fd, "Layout=%s\n", base_name);
+		g_free (base_name);
+	}
+}
+
 static void print_supported_leds (int fd, WacomDevice *device)
 {
 	char *leds_name[] = {
@@ -638,6 +675,7 @@ libwacom_print_device_description(int fd, WacomDevice *device)
 	dprintf(fd, "Class=%s\n",		class_name);
 	dprintf(fd, "Width=%d\n",		libwacom_get_width(device));
 	dprintf(fd, "Height=%d\n",		libwacom_get_height(device));
+	print_layout_for_device(fd, device);
 	print_styli_for_device(fd, device);
 	dprintf(fd, "\n");
 
@@ -666,6 +704,7 @@ libwacom_destroy(WacomDevice *device)
 		return;
 
 	g_free (device->name);
+	g_free (device->layout);
 
 	for (i = 0; i < device->nmatches; i++) {
 		g_free (device->matches[i]->match);
@@ -722,6 +761,11 @@ int libwacom_get_vendor_id(WacomDevice *device)
 const char* libwacom_get_name(WacomDevice *device)
 {
 	return device->name;
+}
+
+const char* libwacom_get_layout_filename(WacomDevice *device)
+{
+	return device->layout;
 }
 
 int libwacom_get_product_id(WacomDevice *device)

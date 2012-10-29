@@ -40,6 +40,25 @@
 #include <assert.h>
 #include <unistd.h>
 
+static int buttons_have_direction (WacomDevice *device)
+{
+	char               button;
+	int                num_buttons;
+
+	num_buttons = libwacom_get_num_buttons (device);
+	if (num_buttons == 0)
+		return 1;
+
+	for (button = 'A'; button < 'A' + num_buttons; button++) {
+		WacomButtonFlags  flags;
+		flags = libwacom_get_button_flag(device, button);
+		if (flags & WACOM_BUTTON_DIRECTION)
+			return 1;
+	}
+
+	return 0;
+}
+
 static int eraser_is_present(WacomDeviceDatabase *db, const int *styli, int nstyli, WacomStylusType type)
 {
 	int i;
@@ -126,6 +145,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 	assert(libwacom_get_num_strips(device) >= 0);
 	assert(libwacom_get_strips_num_modes(device) >= 0);
 	assert(libwacom_get_bustype(device) != WBUSTYPE_UNKNOWN);
+	assert(buttons_have_direction(device) > 0);
 }
 
 int main(int argc, char **argv)

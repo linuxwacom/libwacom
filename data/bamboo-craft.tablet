@@ -21,3 +21,6 @@ Reversible=true
 Touch=true
 Buttons=4
 BuiltIn=false
+
+[Buttons]
+Left=A;B;C;D

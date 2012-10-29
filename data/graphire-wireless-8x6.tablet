@@ -11,3 +11,6 @@ Stylus=true
 Ring=false
 Buttons=2
 BuiltIn=false
+
+[Buttons]
+Top=A;B

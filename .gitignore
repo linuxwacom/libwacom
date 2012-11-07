@@ -26,4 +26,5 @@ stamp-h1
 .deps
 .libs
 test/load
+test/tablet-svg-validity
 doc/doxygen.conf

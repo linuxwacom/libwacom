@@ -35,6 +35,9 @@ PKG_CHECK_MODULES(GLIB, glib-2.0 gudev-1.0)
 PKG_CHECK_MODULES(LIBXML, libxml-2.0 glib-2.0, HAVE_LIBXML="yes", HAVE_LIBXML="no")
 AM_CONDITIONAL(HAVE_LIBXML, test x$HAVE_LIBXML = xyes)
 
+PKG_CHECK_MODULES(GTK2, librsvg-2.0 glib-2.0 gtk+-2.0, HAVE_GTK2="yes", HAVE_GTK2="no")
+AM_CONDITIONAL(HAVE_GTK2, test x$HAVE_GTK2 = xyes)
+
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  data/layouts/Makefile

@@ -1,3 +1,9 @@
+libwacom 0.6.1:
+- More/corrected metadata for:
+  - Cintiq 22HD, 24HD, 24HD touch
+  - DTI 520
+  - ISDv4 E5, 100, 101
+
 libwacom 0.6:
 - More metadata for:
   - NTrig tablet PC

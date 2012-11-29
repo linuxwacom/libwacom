@@ -622,7 +622,7 @@ libwacom_database_destroy(WacomDeviceDatabase *db)
 }
 
 WacomDevice**
-libwacom_list_devices_from_database(WacomDeviceDatabase *db, WacomError *error)
+libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *error)
 {
 	GList *cur, *devices;
 	WacomDevice **list, **p;

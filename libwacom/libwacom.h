@@ -263,7 +263,7 @@ void libwacom_database_destroy(WacomDeviceDatabase *db);
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error);
+WacomDevice* libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.
@@ -277,7 +277,7 @@ WacomDevice* libwacom_new_from_path(WacomDeviceDatabase *db, const char *path, W
  *
  * @return A new reference to this device or NULL on errror.
  */
-WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
+WacomDevice* libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
 
 /**
  * Create a new device reference from the given name.
@@ -290,7 +290,7 @@ WacomDevice* libwacom_new_from_usbid(WacomDeviceDatabase *db, int vendor_id, int
  *
  * @return A new reference to this device or NULL on error.
  */
-WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, WacomError *error);
+WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomError *error);
 
 /**
  * Returns the list of devices in the given database.
@@ -303,7 +303,7 @@ WacomDevice* libwacom_new_from_name(WacomDeviceDatabase *db, const char *name, W
  * The content of the list is owned by the database and should not be
  * modified of freed. Use free() to free the list.
  */
-WacomDevice** libwacom_list_devices_from_database(WacomDeviceDatabase *db, WacomError *error);
+WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db, WacomError *error);
 
 /**
  * Print the description of this device to the given file.
@@ -311,7 +311,7 @@ WacomDevice** libwacom_list_devices_from_database(WacomDeviceDatabase *db, Wacom
  * @param fd The file descriptor to print to
  * @param device The device to print the description for.
  */
-void libwacom_print_device_description (int fd, WacomDevice *device);
+void libwacom_print_device_description (int fd, const WacomDevice *device);
 
 
 /**
@@ -330,52 +330,52 @@ void libwacom_destroy(WacomDevice *device);
  *
  * @return 0 if the devices are identical, nonzero otherwise
  */
-int libwacom_compare(WacomDevice *a, WacomDevice *b, WacomCompareFlags flags);
+int libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags flags);
 
 /**
  * @param device The tablet to query
  * @return The class of the device
  */
-WacomClass libwacom_get_class(WacomDevice *device);
+WacomClass libwacom_get_class(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The human-readable name for this device
  */
-const char* libwacom_get_name(WacomDevice *device);
+const char* libwacom_get_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The full filename including path to the SVG layout of the device
  * if available, or NULL otherwise
  */
-const char* libwacom_get_layout_filename(WacomDevice *device);
+const char* libwacom_get_layout_filename(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The numeric vendor ID for this device
  */
-int libwacom_get_vendor_id(WacomDevice *device);
+int libwacom_get_vendor_id(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The current match string used for this device (if set) or the first
  * match string in the tablet definition.
  */
-const char* libwacom_get_match(WacomDevice *device);
+const char* libwacom_get_match(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return A pointer to the null-terminated list of possible matches for this device. Do not
  * modify this pointer or any content!
  */
-const WacomMatch** libwacom_get_matches(WacomDevice *device);
+const WacomMatch** libwacom_get_matches(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The numeric product ID for this device
  */
-int libwacom_get_product_id(WacomDevice *device);
+int libwacom_get_product_id(const WacomDevice *device);
 
 /**
  * Retrieve the width of the device. This is the width of the usable area as
@@ -385,7 +385,7 @@ int libwacom_get_product_id(WacomDevice *device);
  * @param device The tablet to query
  * @return The width of this device in inches
  */
-int libwacom_get_width(WacomDevice *device);
+int libwacom_get_width(const WacomDevice *device);
 
 /**
  * Retrieve the height of the device. This is the height of the usable area as
@@ -395,19 +395,19 @@ int libwacom_get_width(WacomDevice *device);
  * @param device The tablet to query
  * @return The width of this device in inches
  */
-int libwacom_get_height(WacomDevice *device);
+int libwacom_get_height(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device supports styli or zero otherwise
  */
-int libwacom_has_stylus(WacomDevice *device);
+int libwacom_has_stylus(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device supports touch or zero otherwise
  */
-int libwacom_has_touch(WacomDevice *device);
+int libwacom_has_touch(const WacomDevice *device);
 
 /**
  * Tablet buttons are numbered 'A' through to 'A' + number of buttons.
@@ -415,58 +415,58 @@ int libwacom_has_touch(WacomDevice *device);
  * @param device The tablet to query
  * @return The number of buttons on the tablet
  */
-int libwacom_get_num_buttons(WacomDevice *device);
+int libwacom_get_num_buttons(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @param num_styli Return location for the number of listed styli
  * @return an array of Styli IDs supported by the device
  */
-const int *libwacom_get_supported_styli(WacomDevice *device, int *num_styli);
+const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styli);
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device has a touch ring or zero otherwise
  */
-int libwacom_has_ring(WacomDevice *device);
+int libwacom_has_ring(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device has a second touch ring or zero otherwise
  */
-int libwacom_has_ring2(WacomDevice *device);
+int libwacom_has_ring2(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return the number of modes for the touchring if it has a mode switch
  */
-int libwacom_get_ring_num_modes(WacomDevice *device);
+int libwacom_get_ring_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return the number of modes for the second touchring if it has a mode switch
  */
-int libwacom_get_ring2_num_modes(WacomDevice *device);
+int libwacom_get_ring2_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return the number of touch strips on the tablet
  * otherwise
  */
-int libwacom_get_num_strips(WacomDevice *device);
+int libwacom_get_num_strips(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return the number of modes for each of the touchstrips if any
  */
-int libwacom_get_strips_num_modes(WacomDevice *device);
+int libwacom_get_strips_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @param num_leds Return location for the number of supported status LEDs
  * @return an array of status LEDs supported by the device
  */
-const WacomStatusLEDs *libwacom_get_status_leds(WacomDevice *device, int *num_leds);
+const WacomStatusLEDs *libwacom_get_status_leds(const WacomDevice *device, int *num_leds);
 
 /**
  * @param device The tablet to query
@@ -474,8 +474,8 @@ const WacomStatusLEDs *libwacom_get_status_leds(WacomDevice *device, int *num_le
  * @return the status LED group id to use
  * or -1 if no LED is available for the given tablet / button
  */
-int libwacom_get_button_led_group (WacomDevice *device,
-				   char         button);
+int libwacom_get_button_led_group (const WacomDevice *device,
+				   char               button);
 
 /**
  * @param device The tablet to query
@@ -483,34 +483,34 @@ int libwacom_get_button_led_group (WacomDevice *device,
  * or zero if the device is an external tablet
  * @deprecated 0.7 Use libwacom_get_integration_flags() instead.
  */
-int libwacom_is_builtin(WacomDevice *device) LIBWACOM_DEPRECATED;
+int libwacom_is_builtin(const WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device can be used left-handed
  * (rotated 180 degrees)
  */
-int libwacom_is_reversible(WacomDevice *device);
+int libwacom_is_reversible(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return the integration flags for the device
  */
-WacomIntegrationFlags libwacom_get_integration_flags (WacomDevice *device);
+WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device);
 
 /**
  * @param device The tablet to query
  * @return The bustype of this device.
  */
-WacomBusType libwacom_get_bustype(WacomDevice *device);
+WacomBusType libwacom_get_bustype(const WacomDevice *device);
 
 /*
  * @param device The tablet to query
  * @param button The ID of the button to check for, between 'A' and 'Z'
  * @return a WacomButtonFlags with information about the button
  */
-WacomButtonFlags libwacom_get_button_flag(WacomDevice *device,
-					  char         button);
+WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
+					  char               button);
 
 /**
  * Get the WacomStylus for the given tool ID.
@@ -519,7 +519,7 @@ WacomButtonFlags libwacom_get_button_flag(WacomDevice *device,
  * @param id The Tool ID for this stylus
  * @return A WacomStylus representing the stylus. Do not free.
  */
-const WacomStylus *libwacom_stylus_get_for_id (WacomDeviceDatabase *db, int id);
+const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id);
 
 /**
  * @param stylus The stylus to query

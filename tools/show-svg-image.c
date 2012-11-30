@@ -163,10 +163,9 @@ print_button_labels (cairo_t *cairo_context, Tablet *tablet)
 
 		flags = libwacom_get_button_flag(tablet->device, button);
 		sub = g_strdup_printf ("#Label%c", button);
-		if (button == tablet->active_button)
-			label = g_strdup_printf ("<span foreground=\"" ACTIVE_COLOR "\" >Button %c</span>", button);
-		else
-			label = g_strdup_printf ("<span foreground=\"" INACTIVE_COLOR "\" >Button %c</span>", button);
+		label = g_strdup_printf ("<span foreground=\"%s\" >Button %c</span>",
+		                         (button == tablet->active_button) ? ACTIVE_COLOR : INACTIVE_COLOR,
+		                         button);
 		print_label (cairo_context, tablet, sub, label, flags);
 		g_free (label);
 		g_free (sub);

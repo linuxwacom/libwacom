@@ -127,7 +127,7 @@ check_button (xmlNodePtr cur, WacomDevice *device, char button, gchar *type)
 }
 
 static void
-check_touch (xmlNodePtr cur, gchar *id, gchar *type)
+check_touchstrip (xmlNodePtr cur, gchar *id)
 {
 	char             *sub;
 	char             *class;
@@ -136,7 +136,7 @@ check_touch (xmlNodePtr cur, gchar *id, gchar *type)
 	node = verify_has_sub (cur, id);
 	g_assert (node != NULL);
 
-	class = g_strdup_printf ("%s %s", id, type);
+	class = g_strdup_printf ("%s %s", id, "TouchStrip");
 	verify_has_class (node, class);
 	g_free (class);
 
@@ -155,6 +155,76 @@ check_touch (xmlNodePtr cur, gchar *id, gchar *type)
 	g_free (sub);
 
 	class = g_strdup_printf ("%sDown %s Label", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sUp", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sUp %s Leader", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sDown", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sDown %s Leader", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+}
+
+
+static void
+check_touchring (xmlNodePtr cur, gchar *id)
+{
+	char             *sub;
+	char             *class;
+	xmlNodePtr        node;
+
+	node = verify_has_sub (cur, id);
+	g_assert (node != NULL);
+
+	class = g_strdup_printf ("%s %s", id, "TouchRing");
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Label%sCCW", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sCCW %s Label", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Label%sCW", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sCW %s Label", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sCCW", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sCCW %s Leader", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sCW", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sCW %s Leader", id, id);
 	verify_has_class (node, class);
 	g_free (class);
 }
@@ -203,18 +273,19 @@ verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
 		check_button (cur, device, button, "Button");
 		check_button (cur, device, button, "Label");
+		check_button (cur, device, button, "Leader");
 	}
 
 	/* Touch rings */
 	if (libwacom_has_ring(device))
-		check_touch (cur, "Ring", "TouchRing");
+		check_touchring (cur, "Ring");
 	if (libwacom_has_ring2(device))
-		check_touch (cur, "Ring2", "TouchRing");
+		check_touchring (cur, "Ring2");
 	/* Touch strips */
 	if (libwacom_get_num_strips(device) > 0)
-		check_touch (cur, "Strip", "TouchStrip");
+		check_touchstrip (cur, "Strip");
 	if (libwacom_get_num_strips(device) > 1)
-		check_touch (cur, "Strip2", "TouchStrip");
+		check_touchstrip (cur, "Strip2");
 
 	xmlFreeDoc(doc);
 

@@ -56,6 +56,56 @@ Touch rings use the following convention:
     id="Strip2"
     class="Strip2 TouchStrip"
 
+Note: Additional "fake" buttons (ie actual controls not found on the real
+device) can be added to touch controls to help showing the type of action
+expected on the control, like for example circular motion on a touch ring
+or vertical motion on a touch strip.
+
+These controls can be named:
+
+ - First touch ring, rotating clockwise:
+
+    id="RingCW"
+    class="RingCW Button"
+
+ - First touch ring, rotating counter clockwise:
+
+    id="RingCCW"
+    class="RingCCW Button"
+
+ - Second touch ring, rotating clockwise:
+
+    id="Ring2CW"
+    class="Ring2CW Button"
+
+ - Second touch ring, rotating counter clockwise:
+
+    id="Ring2CCW"
+    class="Ring2CCW Button"
+
+ - First touch strip, moving up:
+
+    id="StripUp"
+    class="StripUp Button"
+
+ - First touch strip, moving down:
+
+    id="StripDown"
+    class="StripDown Button"
+
+ - Second touch strip, moving up:
+
+    id="Strip2Up"
+    class="Strip2Up Button"
+
+ - Second touch strip, moving down:
+
+    id="Strip2Down"
+    class="Strip2Down Button"
+
+The use of those "fake" buttons is left at the discretion of the designer
+and is not mandatory nor enforced.
+
 * Labels
 
 The role of the labels in the SVG is to give applications an indication on
@@ -71,6 +121,7 @@ Each button's label ID in the SVG is made of the string "Label" with ID of the
 button to which it applies, between 'A' and 'Z'.
 
 Class includes both the button ID and the string "Label".
+
     id="LabelA"
     class="A Label"
 
@@ -84,23 +135,23 @@ For the special case of mode-switch buttons, the class also list "ModeSwitch":
 Touch-rings and touch-strips generate Up and Down events, therefore 2 different
 labels are needed for each touch-ring/touch-strip control.
 
-    id="LabelRingUp"
-    class="RingUp Ring Label"
+    id="LabelRingCCW"
+    class="RingCCW Ring Label"
 
   and
 
-    id="LabelRingDown"
-    class="RingDown Ring Label"
+    id="LabelRingCW"
+    class="RingCW Ring Label"
 
 The second touch-ring button is identified by "Ring2" in place of "Ring":
 
-    id="LabelRing2Up"
-    class="Ring2Up Ring2 Label"
+    id="LabelRing2CCW"
+    class="Ring2CCW Ring2 Label"
 
   and
 
-    id="LabelRingDown"
-    class="Ring2Down Ring2 Label"
+    id="LabelRingCW"
+    class="Ring2CW Ring2 Label"
 
 Touchstrips button follow the same naming scheme, using "Strip" and "Strip2"
 to name the first and second touch-strip.
@@ -120,5 +171,59 @@ Second touch-strip:
 
   and
 
-    id="LabelRingDown"
+    id="LabelRingCW"
     class="Strip2Down Strip2 Label"
+
+ - Caption leader lines
+
+To match the buttons with their corresponding labels, the SVG must also
+provide a leader line for each label in the form of a line that links
+each button and its label.
+
+Each leader line follows the same naming convention as the labels, using
+the special name "Leader" in place of "Label", ie:
+
+    id="LeaderA"
+    class="A Leader"
+
+Touch-rings and touch-strips have 2 different labels and therefore 2 leader
+lines.
+
+    id="LeaderRingCCW"
+    class="RingCCW Ring Leader"
+
+  and
+
+    id="LeaderRingCW"
+    class="RingCW Ring Leader"
+
+The second touch-ring button is identified by "Ring2" in place of "Ring":
+
+    id="LeaderRing2CCW"
+    class="Ring2CCW Ring2 Leader"
+
+  and
+
+    id="LeaderRingCW"
+    class="Ring2CW Ring2 Leader"
+
+Touchstrips button follow the same naming scheme, using "Strip" and "Strip2"
+to name the first and second touch-strip.
+
+    id="LeaderStripUp"
+    class="StripUp Strip Leader"
+
+  and
+
+    id="LeaderStripDown"
+    class="StripDown Strip Leader"
+
+Second touch-strip:
+
+    id="LeaderStrip2Up"
+    class="Strip2Up Strip2 Leader"
+
+  and
+
+    id="LeaderStrip2Down"
+    class="Strip2Down Strip2 Leader"

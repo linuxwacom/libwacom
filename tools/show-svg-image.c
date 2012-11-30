@@ -100,74 +100,75 @@ get_sub_location (cairo_t *cairo_context, RsvgHandle *handle, const char *sub, d
 }
 
 static void
-print_button_labels (cairo_t *cairo_context, Tablet *tablet)
+print_label (cairo_t *cairo_context, Tablet *tablet, const char *sub, const char *markup, WacomButtonFlags flags)
 {
-	char button;
-	GtkWidget *widget;
-	GtkAllocation allocation;
+	GtkWidget        *widget;
+	GtkAllocation     allocation;
+	GtkStyle         *style;
+	PangoContext     *pango_context;
+	PangoLayout      *pango_layout;
+	PangoRectangle    pango_rect;
+	double            label_x, label_y;
+	int               x, y;
+
+	if (!get_sub_location (cairo_context, tablet->handle, sub, &label_x, &label_y, NULL, NULL))
+		return;
 
 	widget = GTK_WIDGET(tablet->widget);
 	gtk_widget_get_allocation(widget, &allocation);
+	style = gtk_widget_get_style (widget);
+	pango_context = gtk_widget_get_pango_context (widget);
+	pango_layout  = pango_layout_new (pango_context);
+
+	pango_layout_set_markup (pango_layout, markup, -1);
+	pango_layout_get_pixel_extents (pango_layout, NULL, &pango_rect);
+
+	if (flags & WACOM_BUTTON_POSITION_LEFT) {
+		pango_layout_set_alignment (pango_layout, PANGO_ALIGN_LEFT);
+		x = (int) label_x + pango_rect.x;
+		y = (int) label_y + pango_rect.y - pango_rect.height / 2;
+	} else if (flags & WACOM_BUTTON_POSITION_RIGHT) {
+		pango_layout_set_alignment (pango_layout, PANGO_ALIGN_RIGHT);
+		x = (int) label_x + pango_rect.x - pango_rect.width;
+		y = (int) label_y + pango_rect.y - pango_rect.height / 2;
+	} else {
+		pango_layout_set_alignment (pango_layout, PANGO_ALIGN_CENTER);
+		x = (int) label_x + pango_rect.x - pango_rect.width / 2;
+		y = (int) label_y + pango_rect.y;
+	}
+
+	gtk_paint_layout (style,
+		          gtk_widget_get_window (widget),
+		          0,
+		          TRUE,
+			  &allocation,
+		          widget,
+		          NULL,
+		          x,
+		          y,
+		          pango_layout);
+
+	g_object_unref (pango_layout);
+}
+
+static void
+print_button_labels (cairo_t *cairo_context, Tablet *tablet)
+{
+	char button;
 
 	for (button = 'A'; button < 'A' + tablet->num_buttons; button++) {
 		WacomButtonFlags  flags;
-		GtkStyle        *style;
-		PangoContext     *pango_context;
-		PangoLayout      *pango_layout;
-		PangoRectangle    pango_rect;
-		double            label_x, label_y;
-		int               x, y;
 		gchar            *sub;
-		gchar            *markup;
+		gchar            *label;
 
 		flags = libwacom_get_button_flag(tablet->device, button);
 		sub = g_strdup_printf ("#Label%c", button);
-		if (!get_sub_location (cairo_context, tablet->handle, sub, &label_x, &label_y, NULL, NULL)) {
-			g_warning ("Failed to retrieve %s position", sub);
-			goto next;
-		}
-
-		/* Write the label */
-		style = gtk_widget_get_style (widget);
-		pango_context = gtk_widget_get_pango_context (widget);
-		pango_layout  = pango_layout_new (pango_context);
 		if (button == tablet->active_button)
-			markup = g_strdup_printf ("<span foreground=\"" ACTIVE_COLOR "\" weight=\"bold\">Button %c</span>", button);
+			label = g_strdup_printf ("<span foreground=\"" ACTIVE_COLOR "\" >Button %c</span>", button);
 		else
-			markup = g_strdup_printf ("<span foreground=\"" INACTIVE_COLOR "\" weight=\"bold\">Button %c</span>", button);
-		pango_layout_set_markup (pango_layout, markup, -1);
-		g_free (markup);
-
-		pango_layout_get_pixel_extents (pango_layout, NULL, &pango_rect);
-
-		if (flags & WACOM_BUTTON_POSITION_LEFT) {
-			pango_layout_set_alignment (pango_layout, PANGO_ALIGN_LEFT);
-			x = (int) label_x;
-			y = (int) label_y + pango_rect.height / 2;
-		} else if (flags & WACOM_BUTTON_POSITION_RIGHT) {
-			pango_layout_set_alignment (pango_layout, PANGO_ALIGN_RIGHT);
-			x = (int) label_x - pango_rect.width;
-			y = (int) label_y + pango_rect.height / 2;
-
-		} else {
-			pango_layout_set_alignment (pango_layout, PANGO_ALIGN_CENTER);
-			x = (int) label_x - pango_rect.width / 2;
-			y = (int) label_y;
-		}
-
-		gtk_paint_layout (style,
-			          gtk_widget_get_window (widget),
-			          0,
-			          TRUE,
-				  &allocation,
-			          widget,
-			          NULL,
-			          x,
-			          y,
-			          pango_layout);
-
-		g_object_unref (pango_layout);
-next:
+			label = g_strdup_printf ("<span foreground=\"" INACTIVE_COLOR "\" >Button %c</span>", button);
+		print_label (cairo_context, tablet, sub, label, flags);
+		g_free (label);
 		g_free (sub);
 	}
 }

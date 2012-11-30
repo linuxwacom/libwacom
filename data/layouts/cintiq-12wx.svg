@@ -1,94 +1,345 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-     style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
-            id="cintiq-12wx"                                                                width="405" height="270"        >
-  <title    id="title"                                                                                                      >Wacom Cintiq 12WX</title>
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="cintiq-12wx"
+   width="405"
+   height="270">
+  <title
+     id="title">Wacom Cintiq 12WX</title>
   <g>
-    <rect   id="ButtonA"          class="A Button" rx=".5" ry=".5" x="40"     y="54"  width="11"  height="17"               />
-    <path   id="LeaderA"          class="A Leader"                 d="M 53 63 L 65 63 L 65 72 L 78 72"                      />
-    <text   id="LabelA"           class="A Label"                  x="80"     y="72"   style="text-anchor:start;"           >A</text>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       rx=".5"
+       ry=".5"
+       x="40"
+       y="54"
+       width="11"
+       height="17" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 53 63 L 65 63 L 65 72 L 78 72" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="80"
+       y="72"
+       style="text-anchor:start;">A</text>
   </g>
   <g>
-    <rect   id="ButtonB"          class="B Button" rx=".5" ry=".5" x="40"     y="72"   width="11"  height="17"              />
-    <circle id="DotB1"                                            cx="45.5"  cy="77.5" r=".5"                               />
-    <circle id="DotB2"                                            cx="45.5"  cy="80.5" r=".5"                               />
-    <circle id="DotB3"                                            cx="45.5"  cy="83.5" r=".5"                               />
-    <path   id="LeaderB"          class="B Leader"                 d="M 53 81 L 65 81 L 65 87 L 78 87"                      />
-    <text   id="LabelB"           class="B Label"                  x="80"     y="87"   style="text-anchor:start;"            >B</text>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       rx=".5"
+       ry=".5"
+       x="40"
+       y="72"
+       width="11"
+       height="17" />
+    <circle
+       id="DotB1"
+       cx="45.5"
+       cy="77.5"
+       r=".5" />
+    <circle
+       id="DotB2"
+       cx="45.5"
+       cy="80.5"
+       r=".5" />
+    <circle
+       id="DotB3"
+       cx="45.5"
+       cy="83.5"
+       r=".5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 53 81 L 65 81 L 65 87 L 78 87" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="80"
+       y="87"
+       style="text-anchor:start;">B</text>
   </g>
   <g>
-    <rect   id="ButtonC"          class="C Button"                 x="28"     y="54"
-                                                                  rx=".5"    ry=".5"   width="11"  height="35"              />
-    <path   id="LeaderC"          class="C Leader"                 d="M 26 72 L 25 72 L 25 35 L 65 35 L 65 42 L 78 42"      />
-    <text   id="LabelC"           class="C Label"                  x="80"     y="42"   style="text-anchor:start;"            >C</text>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="28"
+       y="54"
+       rx=".5"
+       ry=".5"
+       width="11"
+       height="35" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 26 72 L 25 72 L 25 35 L 65 35 L 65 42 L 78 42" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="80"
+       y="42"
+       style="text-anchor:start;">C</text>
   </g>
   <g>
-    <rect   id="ButtonD"          class="D Button"                 x="28"     y="90"
-                                                                  rx=".5"    ry=".5"   width="23"  height="11"               />
-    <path   id="LeaderD"          class="D Leader"                 d="M 53 96 L 65 96 L 65 102 L 78 102"                     />
-    <text   id="LabelD"           class="D Label"                  x="80"     y="102"   style="text-anchor:start;"            >D</text>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="28"
+       y="90"
+       rx=".5"
+       ry=".5"
+       width="23"
+       height="11" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 53 96 L 65 96 L 65 102 L 78 102" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="80"
+       y="102"
+       style="text-anchor:start;">D</text>
   </g>
   <g>
-    <rect   id="ButtonE"          class="E Button"                 x="352"    y="54"
-                                                                  rx=".5"    ry=".5"   width="11"  height="17"               />
-    <path   id="LeaderE"          class="E Leader"                 d="M 350 63 L 338 63 L 338 72 L 324 72"                   />
-    <text   id="LabelE"           class="E Label"                  x="322"    y="72"   style="text-anchor:end;"               >E</text>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="352"
+       y="54"
+       rx=".5"
+       ry=".5"
+       width="11"
+       height="17" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="M 350 63 L 338 63 L 338 72 L 324 72" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="322"
+       y="72"
+       style="text-anchor:end;">E</text>
   </g>
   <g>
-    <rect   id="ButtonF"          class="F Button"                 x="352"    y="72"
-                                                                  rx=".5"    ry=".5"   width="11"  height="17"               />
-    <circle id="DotF1"                                            cx="357.5" cy="77.5" r=".5"                                />
-    <circle id="DotF2"                                            cx="357.5" cy="80.5" r=".5"                                />
-    <circle id="DotF3"                                            cx="357.5" cy="83.5" r=".5"                                />
-    <path   id="LeaderF"          class="F Leader"                 d="M 350 81 L 338 81 L 338 87 L 324 87"                   />
-    <text   id="LabelF"           class="F Label"                  x="322"    y="87"   style="text-anchor:end;"               >F</text>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="352"
+       y="72"
+       rx=".5"
+       ry=".5"
+       width="11"
+       height="17" />
+    <circle
+       id="DotF1"
+       cx="357.5"
+       cy="77.5"
+       r=".5" />
+    <circle
+       id="DotF2"
+       cx="357.5"
+       cy="80.5"
+       r=".5" />
+    <circle
+       id="DotF3"
+       cx="357.5"
+       cy="83.5"
+       r=".5" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="M 350 81 L 338 81 L 338 87 L 324 87" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="322"
+       y="87"
+       style="text-anchor:end;">F</text>
   </g>
   <g>
-    <rect   id="ButtonG"          class="G Button"                 x="364"    y="54"
-                                                                  rx=".5"    ry=".5"   width="11"  height="35"               />
-    <path   id="LeaderG"          class="G Leader"                 d="M 377 72 L 378 72 L 378 35 L 338 35 L 338 42 L 324 42" />
-    <text   id="LabelG"           class="G Label"                  x="322"    y="42"   style="text-anchor:end;"               >G</text>
+    <rect
+       id="ButtonG"
+       class="G Button"
+       x="364"
+       y="54"
+       rx=".5"
+       ry=".5"
+       width="11"
+       height="35" />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="M 377 72 L 378 72 L 378 35 L 338 35 L 338 42 L 324 42" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="322"
+       y="42"
+       style="text-anchor:end;">G</text>
   </g>
   <g>
-    <rect   id="ButtonH"          class="H Button"                 x="352"    y="90"
-                                                                  rx=".5"    ry=".5"   width="23"  height="11"               />
-    <path   id="LeaderH"          class="H Leader"                 d="M 350 96 L 338 96 L 338 102 L 324 102"                 />
-    <text   id="LabelH"           class="H Label"                  x="322"    y="102"   style="text-anchor:end;"              >H</text>
+    <rect
+       id="ButtonH"
+       class="H Button"
+       x="352"
+       y="90"
+       rx=".5"
+       ry=".5"
+       width="23"
+       height="11" />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="M 350 96 L 338 96 L 338 102 L 324 102" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="322"
+       y="102"
+       style="text-anchor:end;">H</text>
   </g>
   <g>
-    <rect   id="ButtonI"          class="I Button"                 x="28"     y="42"
-                                                                  rx=".5"    ry=".5"   width="23"  height="11"               />
-    <circle id="DotI1"                                            cx="36.5"  cy="47.5" r=".5"                                />
-    <circle id="DotI2"                                            cx="39.5"  cy="47.5" r=".5"                                />
-    <circle id="DotI3"                                            cx="42.5"  cy="47.5" r=".5"                                />
-    <path   id="LeaderI"          class="I Leader"                 d="M 53 48 L 65 48 L 65 57 L 78 57"                       />
-    <text   id="LabelI"           class="I Label"                  x="80"     y="57"   style="text-anchor:start;"             >I</text>
+    <rect
+       id="ButtonI"
+       class="I Button"
+       x="28"
+       y="42"
+       rx=".5"
+       ry=".5"
+       width="23"
+       height="11" />
+    <circle
+       id="DotI1"
+       cx="36.5"
+       cy="47.5"
+       r=".5" />
+    <circle
+       id="DotI2"
+       cx="39.5"
+       cy="47.5"
+       r=".5" />
+    <circle
+       id="DotI3"
+       cx="42.5"
+       cy="47.5"
+       r=".5" />
+    <path
+       id="LeaderI"
+       class="I Leader"
+       d="M 53 48 L 65 48 L 65 57 L 78 57" />
+    <text
+       id="LabelI"
+       class="I Label"
+       x="80"
+       y="57"
+       style="text-anchor:start;">I</text>
   </g>
   <g>
-    <rect   id="ButtonJ"          class="J Button"                 x="352"    y="42"
-                                                                  rx=".5"    ry=".5"   width="23"  height="11"               />
-    <circle id="DotJ1"                                            cx="360.5" cy="47.5" r=".5"                                />
-    <circle id="DotJ2"                                            cx="363.5" cy="47.5" r=".5"                                />
-    <circle id="DotJ3"                                            cx="366.5" cy="47.5" r=".5"                                />
-    <path   id="LeaderJ"          class="J Leader"                d="M 350 48 L 338 48 L 338 57 L 324 57"                    />
-    <text   id="LabelJ"           class="J Label"                 x="322"    y="57"    style="text-anchor:end;"               >J</text>
+    <rect
+       id="ButtonJ"
+       class="J Button"
+       x="352"
+       y="42"
+       rx=".5"
+       ry=".5"
+       width="23"
+       height="11" />
+    <circle
+       id="DotJ1"
+       cx="360.5"
+       cy="47.5"
+       r=".5" />
+    <circle
+       id="DotJ2"
+       cx="363.5"
+       cy="47.5"
+       r=".5" />
+    <circle
+       id="DotJ3"
+       cx="366.5"
+       cy="47.5"
+       r=".5" />
+    <path
+       id="LeaderJ"
+       class="J Leader"
+       d="M 350 48 L 338 48 L 338 57 L 324 57" />
+    <text
+       id="LabelJ"
+       class="J Label"
+       x="322"
+       y="57"
+       style="text-anchor:end;">J</text>
   </g>
   <g>
-    <rect   id="Strip"            class="Strip TouchStrip"         x="10"     y="41"
-                                                                  rx="1"     ry="1"    width="12"  height="60"               />
-    <path   id="LeaderStripUp"    class="StripUp Strip Leader"     d="M 16 39 L 16 27 L 78 27"                               />
-    <text   id="LabelStripUp"     class="StripUp Strip Label"      x="80"     y="27"   style="text-anchor:start;"             >Up</text>
-    <path   id="LeaderStripDown"  class="StripDown Strip Leader"   d="M 16 103 L 16 117 L 78 117"                            />
-    <text   id="LabelStripDown"   class="StripDown Strip Label"    x="80"     y="117"  style="text-anchor:start;"             >Down</text>
+    <rect
+       id="Strip"
+       class="Strip TouchStrip"
+       x="10"
+       y="41"
+       rx="1"
+       ry="1"
+       width="12"
+       height="60" />
+    <path
+       id="LeaderStripUp"
+       class="StripUp Strip Leader"
+       d="M 16 39 L 16 27 L 78 27" />
+    <text
+       id="LabelStripUp"
+       class="StripUp Strip Label"
+       x="80"
+       y="27"
+       style="text-anchor:start;">Up</text>
+    <path
+       id="LeaderStripDown"
+       class="StripDown Strip Leader"
+       d="M 16 103 L 16 117 L 78 117" />
+    <text
+       id="LabelStripDown"
+       class="StripDown Strip Label"
+       x="80"
+       y="117"
+       style="text-anchor:start;">Down</text>
   </g>
   <g>
-    <rect   id="Strip2"           class="Strip2 TouchStrip"        x="382"    y="41"
-                                                                  rx="1"     ry="1"    width="12"  height="60"               />
-    <path   id="LeaderStrip2Up"   class="Strip2Up Strip2 Leader"   d="M 388 39 L 388 27 L 325 27"                            />
-    <text   id="LabelStrip2Up"    class="Strip2Up Strip2 Label"    x="322"    y="27"   style="text-anchor:end;"               >Up</text>
-    <path   id="LeaderStrip2Down" class="Strip2Down Strip2 Leader" d="M 388 103 L 388 117 L 325 117"                         />
-    <text   id="LabelStrip2Down"  class="Strip2Down Strip2 Label"  x="322"    y="117"  style="text-anchor:end;"               >Down</text>
+    <rect
+       id="Strip2"
+       class="Strip2 TouchStrip"
+       x="382"
+       y="41"
+       rx="1"
+       ry="1"
+       width="12"
+       height="60" />
+    <path
+       id="LeaderStrip2Up"
+       class="Strip2Up Strip2 Leader"
+       d="M 388 39 L 388 27 L 325 27" />
+    <text
+       id="LabelStrip2Up"
+       class="Strip2Up Strip2 Label"
+       x="322"
+       y="27"
+       style="text-anchor:end;">Up</text>
+    <path
+       id="LeaderStrip2Down"
+       class="Strip2Down Strip2 Leader"
+       d="M 388 103 L 388 117 L 325 117" />
+    <text
+       id="LabelStrip2Down"
+       class="Strip2Down Strip2 Label"
+       x="322"
+       y="117"
+       style="text-anchor:end;">Down</text>
   </g>
 </svg>

@@ -37,10 +37,10 @@
 #include "libwacom.h"
 
 
-#define INACTIVE_COLOR		"#2d2d2d"
-#define ACTIVE_COLOR		"#ffffff"
-#define STROKE_COLOR		"#b4b4b4"
-#define DARK_COLOR		"#141414"
+#define INACTIVE_COLOR		"#ededed"
+#define ACTIVE_COLOR		"#729fcf"
+#define STROKE_COLOR		"#000000"
+#define DARK_COLOR		"#535353"
 #define BACK_COLOR		"#000000"
 
 /* Convenient struct to store our stuff around */
@@ -219,8 +219,9 @@ update_tablet (Tablet *tablet)
 	                    "      fill:    none !important;\n"
 	                    "    }\n",
 	                    "    .Button {\n"
-	                    "      stroke: ", STROKE_COLOR," !important;\n"
-	                    "      fill:   ", INACTIVE_COLOR," !important;\n"
+	                    "      stroke-width: 0.25;\n"
+	                    "      stroke: ", INACTIVE_COLOR, ";\n"
+	                    "      fill:   ", INACTIVE_COLOR, ";\n"
 	                    "    }\n",
 	                    NULL);
 	g_free (width);
@@ -231,8 +232,8 @@ update_tablet (Tablet *tablet)
 		if (button == tablet->active_button) {
 			data = g_strconcat (data,
 			                    "    .", class, " {\n"
-			                    "      stroke: ", STROKE_COLOR," !important;\n"
-			                    "      fill:   ", button == tablet->active_button ? ACTIVE_COLOR : INACTIVE_COLOR, " !important;\n"
+			                    "      stroke: ", ACTIVE_COLOR, " !important;\n"
+			                    "      fill:   ", ACTIVE_COLOR, " !important;\n"
 			                    "    }\n",
 			                    NULL);
 	    }
@@ -243,12 +244,16 @@ update_tablet (Tablet *tablet)
 	                    "      fill:    none !important;\n"
 	                    "    }\n",
 	                    "    .Label {\n"
-	                    "      stroke: none !important;\n"
-	                    "      fill:   ", BACK_COLOR, "  !important;\n"
+	                    "      stroke: none      !important;\n"
+	                    "      stroke-width: 0.1 !important;\n"
+	                    "      opacity:   .0     !important;\n"
+	                    "      font-size: .1     !important;\n"
+	                    "      fill:   ", BACK_COLOR,    " !important;\n"
 	                    "    }\n",
 	                    "    .TouchStrip,.TouchRing {\n"
+	                    "      stroke-width: 0.1   !important;\n"
 	                    "      stroke: ", INACTIVE_COLOR," !important;\n"
-	                    "      fill:   ", DARK_COLOR, "  !important;\n"
+	                    "      fill:   ", DARK_COLOR,    " !important;\n"
 	                    "    }\n",
 	                    "  </style>\n"
 	                    "  <xi:include href=\"", libwacom_get_layout_filename (tablet->device), "\"/>\n"

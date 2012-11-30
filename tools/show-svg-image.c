@@ -192,8 +192,13 @@ update_tablet (Tablet *tablet)
 	                    "     xmlns:xi=\"http://www.w3.org/2001/XInclude\"\n"
 	                    "     width=\"", width, "\"\n"
 	                    "     height=\"", height, "\">\n"
-	                    "  <style type=\"text/css\">\n"
-	                    "    * {\n"
+	                    "  <style type=\"text/css\">\n",
+	                    "    .Leader {\n"
+	                    "      stroke-width: .5 !important;\n"
+	                    "      stroke: ", INACTIVE_COLOR, ";\n"
+	                    "      fill:    none !important;\n"
+	                    "    }\n",
+	                    "    .Button {\n"
 	                    "      stroke: ", STROKE_COLOR," !important;\n"
 	                    "      fill:   ", INACTIVE_COLOR," !important;\n"
 	                    "    }\n",
@@ -213,8 +218,10 @@ update_tablet (Tablet *tablet)
 	    }
 	}
 
-	/* Hide the existing labels */
 	data = g_strconcat (data,
+	                    "    .Leader {\n"
+	                    "      fill:    none !important;\n"
+	                    "    }\n",
 	                    "    .Label {\n"
 	                    "      stroke: none !important;\n"
 	                    "      fill:   ", BACK_COLOR, "  !important;\n"

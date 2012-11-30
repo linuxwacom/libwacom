@@ -378,7 +378,7 @@ main (int argc, char **argv)
 
 	g_signal_connect (tablet->widget, "expose-event", G_CALLBACK(on_expose_cb), tablet);
 	g_signal_connect (tablet->widget, "delete-event", G_CALLBACK(on_delete_cb), tablet);
-	tablet->timeout = g_timeout_add(500 /* ms */, (GSourceFunc) on_timer_cb, tablet);
+	tablet->timeout = g_timeout_add(750 /* ms */, (GSourceFunc) on_timer_cb, tablet);
 
 	gtk_widget_show (tablet->widget);
 

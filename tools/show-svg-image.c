@@ -171,6 +171,25 @@ print_button_labels (cairo_t *cairo_context, Tablet *tablet)
 		g_free (label);
 		g_free (sub);
 	}
+
+	/* Touch rings */
+	if (libwacom_has_ring(tablet->device)) {
+		print_label (cairo_context, tablet, "#LabelRingCCW", "<span foreground=\"" INACTIVE_COLOR "\" >Ring Counter Clockwise</span>", WACOM_BUTTON_POSITION_LEFT);
+		print_label (cairo_context, tablet, "#LabelRingCW", "<span foreground=\"" INACTIVE_COLOR "\" >Ring Clockwise</span>", WACOM_BUTTON_POSITION_LEFT);
+	}
+	if (libwacom_has_ring2(tablet->device)) {
+		print_label (cairo_context, tablet, "#LabelRing2CCW", "<span foreground=\"" INACTIVE_COLOR "\" >2nd Ring Counter Clockwise</span>", WACOM_BUTTON_POSITION_RIGHT);
+		print_label (cairo_context, tablet, "#LabelRing2CW", "<span foreground=\"" INACTIVE_COLOR "\" >2nd Ring Clockwise</span>", WACOM_BUTTON_POSITION_RIGHT);
+	}
+	/* Touch strips */
+	if (libwacom_get_num_strips(tablet->device) > 0) {
+		print_label (cairo_context, tablet, "#LabelStripUp", "<span foreground=\"" INACTIVE_COLOR "\" >Strip Up</span>", WACOM_BUTTON_POSITION_LEFT);
+		print_label (cairo_context, tablet, "#LabelStripDown", "<span foreground=\"" INACTIVE_COLOR "\" >Strip Down</span>", WACOM_BUTTON_POSITION_LEFT);
+	}
+	if (libwacom_get_num_strips(tablet->device) > 1) {
+		print_label (cairo_context, tablet, "#LabelStrip2Up", "<span foreground=\"" INACTIVE_COLOR "\" >2nd Strip Up</span>", WACOM_BUTTON_POSITION_RIGHT);
+		print_label (cairo_context, tablet, "#LabelStrip2Down", "<span foreground=\"" INACTIVE_COLOR "\" >2nd Strip Down</span>", WACOM_BUTTON_POSITION_RIGHT);
+	}
 }
 
 static void

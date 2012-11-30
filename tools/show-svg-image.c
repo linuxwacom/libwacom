@@ -33,9 +33,14 @@
 #include <gtk/gtk.h>
 #include <cairo.h>
 #include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
 #include "libwacom.h"
 
+#ifndef LIBRSVG_CHECK_VERSION
+#include <librsvg/librsvg-features.h>
+#endif
+#if !LIBRSVG_CHECK_VERSION(2,36,2)
+#include <librsvg/rsvg-cairo.h>
+#endif
 
 #define INACTIVE_COLOR		"#ededed"
 #define ACTIVE_COLOR		"#729fcf"

@@ -142,6 +142,7 @@ get_device_info (const char            *path,
 	g_type_init();
 
 	retval = FALSE;
+	/* The integration flags from device info are unset by default */
 	*integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;
 	*name = NULL;
 	bus_str = NULL;
@@ -507,10 +508,9 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	libwacom_update_match(ret, bus, vendor_id, product_id);
 
 	if (device) {
-		if (integration_flags == WACOM_DEVICE_INTEGRATED_DISPLAY)
-			ret->integration_flags |= WACOM_DEVICE_INTEGRATED_DISPLAY;
-		else if (integration_flags == WACOM_DEVICE_INTEGRATED_NONE)
-			ret->integration_flags &= ~WACOM_DEVICE_INTEGRATED_DISPLAY;
+		/* if unset, use the kernel flags. Could be unset as well. */
+		if (ret->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
+			ret->integration_flags = integration_flags;
 
 		return ret;
 	}

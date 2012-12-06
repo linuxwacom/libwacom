@@ -1,0 +1,137 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Designed after data from http://www.wacom-asia.com/intuos3/intuos3_431w.html
+   Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="intuos3-4x6"
+   width="270"
+   height="216">
+  <title
+     id="title">Wacom Intuos3 4x6</title>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       rx=".5"
+       ry=".5"
+       x="22"
+       y="41"
+       width="11"
+       height="17" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 28 39 l 0 -10 l 32 0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="62"
+       y="29"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       rx=".5"
+       ry=".5"
+       x="22"
+       y="59"
+       width="11"
+       height="17" />
+    <circle
+       id="DotB"
+       cx="27.5"
+       cy="67.5"
+       r=".5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 32 68 l 2 0 l 0 32 l 26 0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="62"
+       y="100"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="10"
+       y="41"
+       rx=".5"
+       ry=".5"
+       width="11"
+       height="35" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 8 58 l -1 0 l 0 -48 l 53 0 " />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="62"
+       y="10"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="10"
+       y="77"
+       rx=".5"
+       ry=".5"
+       width="23"
+       height="11" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 22 90 l 0 29 l 38 0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="62"
+       y="119"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="Strip"
+       class="Strip TouchStrip"
+       x="35"
+       y="41"
+       rx="1"
+       ry="1"
+       width="12"
+       height="47" />
+    <path
+       id="LeaderStripUp"
+       class="StripUp Strip Leader"
+       d="M 41 39 l 0 -1 l 10 0 l 0 10 l 9 0" />
+    <text
+       id="LabelStripUp"
+       class="StripUp Strip Label"
+       x="62"
+       y="48"
+       style="text-anchor:start;">Up</text>
+    <path
+       id="LeaderStripDown"
+       class="StripDown Strip Leader"
+       d="M 41 90 l 0 1 l 10 0 l 0 -10 l 9 0" />
+    <text
+       id="LabelStripDown"
+       class="StripDown Strip Label"
+       x="62"
+       y="81"
+       style="text-anchor:start;">Down</text>
+  </g>
+</svg>

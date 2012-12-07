@@ -1,0 +1,457 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Designed after data from http://www.wacom.com/~/media/Files/Manuals/Cintiq-22HD-Manual.pdf
+   Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="cintiq-22hd"
+   width="650"
+   height="400">
+  <title
+     id="title">Wacom Cintiq 22HD</title>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="139"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 46 145 l 5 0 l 0 -49 l 20 0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="73"
+       y="96"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="152"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 46 158 l 10 0 l 0 -36 l 15 0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="73"
+       y="122"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="165"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 46 171 l 15 0 l 0 -23 l 10 0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="73"
+       y="148"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="178"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="M 46 184 l 20 0 l 0 -10 l 5 0" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="73"
+       y="174"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="25"
+       y="195"
+       width="18"
+       height="10" />
+    <path
+       id="LeaderA"
+       class="A ModeSwitch Leader"
+       d="M 46 200 l 25 0" />
+    <text
+       id="LabelA"
+       class="A ModeSwitch Label"
+       x="73"
+       y="200"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="210"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="M 46 216 l 20 0 l 0 10 l 5 0" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="73"
+       y="226"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonG"
+       class="G Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="223"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="M 46 230 l 15 0 l 0 23 l 10 0" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="73"
+       y="252"
+       style="text-anchor:start;">G</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonH"
+       class="H Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="236"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="M 46 242 l 10 0 l 0 36 l 15 0" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="73"
+       y="278"
+       style="text-anchor:start;">H</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonI"
+       class="I Button"
+       rx=".5"
+       ry=".5"
+       x="24"
+       y="249"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderI"
+       class="I Leader"
+       d="M 46 255 l 5 0 l 0 49 l 20 0" />
+    <text
+       id="LabelI"
+       class="I Label"
+       x="73"
+       y="304"
+       style="text-anchor:start;">I</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonK"
+       class="K Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="139"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderK"
+       class="K Leader"
+       d="M 604 145 l -5 0 l 0 -49 l -20 0" />
+    <text
+       id="LabelK"
+       class="K Label"
+       x="577"
+       y="96"
+       style="text-anchor:end;">K</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonL"
+       class="L Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="152"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderL"
+       class="L Leader"
+       d="M 604 158 l -10 0 l 0 -36 l -15 0" />
+    <text
+       id="LabelL"
+       class="L Label"
+       x="577"
+       y="122"
+       style="text-anchor:end;">L</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonM"
+       class="M Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="165"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderM"
+       class="M Leader"
+       d="M 604 171 l -15 0 l 0 -23 l -10 0" />
+    <text
+       id="LabelM"
+       class="M Label"
+       x="577"
+       y="148"
+       style="text-anchor:end;">M</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonN"
+       class="N Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="178"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderN"
+       class="N Leader"
+       d="M 604 184 l -20 0 l 0 -10 l -5 0" />
+    <text
+       id="LabelN"
+       class="N Label"
+       x="577"
+       y="174"
+       style="text-anchor:end;">N</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonJ"
+       class="J ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="607"
+       y="195"
+       width="18"
+       height="10" />
+    <path
+       id="LeaderJ"
+       class="J ModeSwitch Leader"
+       d="M 604 200 l -25 0" />
+    <text
+       id="LabelJ"
+       class="J ModeSwitch Label"
+       x="577"
+       y="200"
+       style="text-anchor:end;">J</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonO"
+       class="O Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="210"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderO"
+       class="O Leader"
+       d="M 604 216 l -20 0 l 0 10 l -5 0" />
+    <text
+       id="LabelO"
+       class="O Label"
+       x="577"
+       y="226"
+       style="text-anchor:end;">O</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonP"
+       class="P Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="223"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderP"
+       class="P Leader"
+       d="M 604 230 l -15 0 l 0 23 l -10 0" />
+    <text
+       id="LabelP"
+       class="P Label"
+       x="577"
+       y="252"
+       style="text-anchor:end;">P</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonQ"
+       class="Q Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="236"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderQ"
+       class="Q Leader"
+       d="M 604 242 l -10 0 l 0 36 l -15 0" />
+    <text
+       id="LabelQ"
+       class="Q Label"
+       x="577"
+       y="278"
+       style="text-anchor:end;">Q</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonR"
+       class="R Button"
+       rx=".5"
+       ry=".5"
+       x="606"
+       y="249"
+       width="20"
+       height="12" />
+    <path
+       id="LeaderR"
+       class="R Leader"
+       d="M 604 255 l -5 0 l 0 49 l -20 0" />
+    <text
+       id="LabelR"
+       class="R Label"
+       x="577"
+       y="304"
+       style="text-anchor:end;">R</text>
+  </g>
+  <g>
+    <rect
+       id="Strip"
+       class="Strip TouchStrip"
+       x="5"
+       y="170"
+       rx="1"
+       ry="1"
+       width="12"
+       height="60" />
+    <path
+       id="LeaderStripUp"
+       class="StripUp Strip Leader"
+       d="M 11 168 l 0 -98 l 60 0" />
+    <text
+       id="LabelStripUp"
+       class="StripUp Strip Label"
+       x="73"
+       y="70"
+       style="text-anchor:start;">Up</text>
+    <path
+       id="LeaderStripDown"
+       class="StripDown Strip Leader"
+       d="M 11 232 l 0 98 l 60 0" />
+    <text
+       id="LabelStripDown"
+       class="StripDown Strip Label"
+       x="73"
+       y="330"
+       style="text-anchor:start;">Down</text>
+  </g>
+  <g>
+    <rect
+       id="Strip2"
+       class="Strip2 TouchStrip"
+       x="633"
+       y="170"
+       rx="1"
+       ry="1"
+       width="12"
+       height="60" />
+    <path
+       id="LeaderStrip2Up"
+       class="Strip2Up Strip2 Leader"
+       d="M 639 168 l 0 -98 l -60 0" />
+    <text
+       id="LabelStrip2Up"
+       class="Strip2Up Strip2 Label"
+       x="577"
+       y="70"
+       style="text-anchor:end;">Up</text>
+    <path
+       id="LeaderStrip2Down"
+       class="Strip2Down Strip2 Leader"
+       d="M 639 232 l 0 98 l -60 0" />
+    <text
+       id="LabelStrip2Down"
+       class="Strip2Down Strip2 Label"
+       x="577"
+       y="330"
+       style="text-anchor:end;">Down</text>
+  </g>
+</svg>

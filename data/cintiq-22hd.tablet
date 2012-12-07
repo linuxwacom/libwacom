@@ -1,4 +1,4 @@
-# Wacom
+ # Wacom
 # Cintiq 22HD
 # DTK-2200
 #
@@ -36,6 +36,7 @@ DeviceMatch=usb:056a:00fa
 Class=Cintiq
 Width=19
 Height=11
+Layout=cintiq-22hd.svg
 Styli=0x802;0x80c;0x804;0x80a;0x40802;0x4080a;0x902;0x90a;0x20802;
 IntegratedIn=Display
 

@@ -198,12 +198,12 @@
     <path
        id="LeaderI"
        class="I Leader"
-       d="M 46 240 L 50 240" />
+       d="M 46 238 L 50 238" />
     <text
        id="LabelI"
        class="I Label"
        x="52"
-       y="240"
+       y="238"
        style="text-anchor:start;">I</text>
   </g>
   <g>

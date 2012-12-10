@@ -1,0 +1,515 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Designed after data from http://www.wacom.asia/cintiq24hd/specifications
+   Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="cintiq-24hd"
+   width="770"
+   height="464">
+  <title
+     id="title">Wacom Cintq 24HD</title>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="10"
+       y="155"
+       width="12"
+       height="10" />
+    <rect
+       id="DotA"
+       rx="1"
+       ry="1"
+       x="14"
+       y="159.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderA"
+       class="A ModeSwitch Leader"
+       d="M 8 160 l -1 0 l 0 -60 l 91 0" />
+    <text
+       id="LabelA"
+       class="A ModeSwitch Label"
+       x="100"
+       y="100"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="10"
+       y="170"
+       width="12"
+       height="10" />
+    <rect
+       id="DotB"
+       rx="1"
+       ry="1"
+       x="14"
+       y="174.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderB"
+       class="B ModeSwitch Leader"
+       d="M 24 175 l 1 0 l 0 -50 l 73 0" />
+    <text
+       id="LabelB"
+       class="B ModeSwitch Label"
+       x="100"
+       y="125"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="10"
+       y="185"
+       width="12"
+       height="10" />
+    <rect
+       id="DotC"
+       rx="1"
+       ry="1"
+       x="14"
+       y="189.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderC"
+       class="C ModeSwitch Leader"
+       d="M 8 190 l -1 0 l 0 10 l 91 0" />
+    <text
+       id="LabelC"
+       class="C ModeSwitch Label"
+       x="100"
+       y="200"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       rx="3"
+       ry="3"
+       x="10"
+       y="205"
+       width="12"
+       height="46" />
+    <rect
+       id="DotD"
+       rx="1"
+       ry="1"
+       x="15.5"
+       y="225"
+       width="1"
+       height="6" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 8 228 l -1 0 l 0 97 l 91 0 " />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="100"
+       y="325"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       rx="3"
+       ry="3"
+       x="26"
+       y="205"
+       width="12"
+       height="46" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="M 32 253 l 0 47 l 66 0 " />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="100"
+       y="300"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       rx="3"
+       ry="3"
+       x="42"
+       y="205"
+       width="30"
+       height="12" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="M 74 211 l 15 0 l 0 14 l 9 0" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="100"
+       y="225"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonG"
+       class="G Button"
+       rx="3"
+       ry="3"
+       x="42"
+       y="222"
+       width="30"
+       height="12" />
+    <rect
+       id="DotG"
+       rx="1"
+       ry="1"
+       x="54"
+       y="227.5"
+       width="6"
+       height="1" />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="M 74 228 l 11 0 l 0 22 l 13 0" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="100"
+       y="250"
+       style="text-anchor:start;">G</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonH"
+       class="H Button"
+       rx="3"
+       ry="3"
+       x="42"
+       y="239"
+       width="30"
+       height="12" />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="M 74 245 l 6 0 l 0 30 l 18 0" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="100"
+       y="275"
+       style="text-anchor:start;">H</text>
+  </g>
+  <g>
+    <circle
+       id="Ring"
+       class="Ring TouchRing"
+       cx="50"
+       cy="175"
+       r="19.5" />
+   <circle
+       id="DotRing"
+       cx="50"
+       cy="175"
+       r="9.5" />
+    <path
+       id="LeaderRingCCW"
+       class="RingCCW Ring Leader"
+       d="M 50 155 l 0 -5 l 48 0" />
+    <text
+       id="LabelRingCCW"
+       class="RingCCW Ring Label"
+       x="100"
+       y="150"
+       style="text-anchor:start;">CCW</text>
+    <path
+       id="RingCCW"
+       class="RingCCW Button"
+       d="M 47 161 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 1 5 1.5 a 6.5 6.5 0 0 0 -5 -0.5 l 0 1 z" />
+    <path
+       id="LeaderRingCW"
+       class="RingCW Ring Leader"
+       d="M 50 195 l 0 2 l 34 0 l 0 -22 l 14 0" />
+    <text
+       id="LabelRingCW"
+       class="RingCW Ring Label"
+       x="100"
+       y="175"
+       style="text-anchor:start;">CW</text>
+    <path
+       id="RingCW"
+       class="RingCW Button"
+       d="M 47 189 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 0 5 -1 a 6.5 6.5 0 0 1 -5 2 l 0 1 z" />
+  </g>
+  <g>
+    <rect
+       id="ButtonI"
+       class="I ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="748"
+       y="155"
+       width="12"
+       height="10" />
+    <rect
+       id="DotI"
+       rx="1"
+       ry="1"
+       x="752"
+       y="159.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderI"
+       class="I ModeSwitch Leader"
+       d="M 762 160 l 1 0 l 0 -60 l -91 0" />
+    <text
+       id="LabelI"
+       class="I ModeSwitch Label"
+       x="670"
+       y="100"
+       style="text-anchor:end;">I</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonJ"
+       class="J ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="748"
+       y="170"
+       width="12"
+       height="10" />
+    <rect
+       id="DotJ"
+       rx="1"
+       ry="1"
+       x="752"
+       y="174.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderJ"
+       class="J ModeSwitch Leader"
+       d="M 746 175 l -1 0 l 0 -50 l -73 0" />
+    <text
+       id="LabelJ"
+       class="J ModeSwitch Label"
+       x="670"
+       y="125"
+       style="text-anchor:end;">J</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonK"
+       class="K ModeSwitch Button"
+       rx="3"
+       ry="3"
+       x="748"
+       y="185"
+       width="12"
+       height="10" />
+    <rect
+       id="DotK"
+       rx="1"
+       ry="1"
+       x="752"
+       y="189.5"
+       width="4"
+       height="1" />
+    <path
+       id="LeaderK"
+       class="K ModeSwitch Leader"
+       d="M 762 190 l 1 0 l 0 10 l -91 0" />
+    <text
+       id="LabelK"
+       class="K ModeSwitch Label"
+       x="670"
+       y="200"
+       style="text-anchor:end;">K</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonL"
+       class="L Button"
+       rx="3"
+       ry="3"
+       x="748"
+       y="205"
+       width="12"
+       height="46" />
+    <rect
+       id="DotL"
+       rx="1"
+       ry="1"
+       x="753.5"
+       y="225"
+       width="1"
+       height="6" />
+    <path
+       id="LeaderL"
+       class="L Leader"
+       d="M 762 228 l 1 0 l 0 97 l -91 0 " />
+    <text
+       id="LabelL"
+       class="L Label"
+       x="670"
+       y="325"
+       style="text-anchor:end;">L</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonM"
+       class="M Button"
+       rx="3"
+       ry="3"
+       x="732"
+       y="205"
+       width="12"
+       height="46" />
+    <path
+       id="LeaderM"
+       class="M Leader"
+       d="M 738 253 l 0 47 l -66 0 " />
+    <text
+       id="LabelM"
+       class="M Label"
+       x="670"
+       y="300"
+       style="text-anchor:end;">M</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonN"
+       class="N Button"
+       rx="3"
+       ry="3"
+       x="698"
+       y="205"
+       width="30"
+       height="12" />
+    <path
+       id="LeaderN"
+       class="N Leader"
+       d="M 696 211 l -15 0 l 0 14 l -9 0" />
+    <text
+       id="LabelN"
+       class="N Label"
+       x="670"
+       y="225"
+       style="text-anchor:end;">N</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonO"
+       class="O Button"
+       rx="3"
+       ry="3"
+       x="698"
+       y="222"
+       width="30"
+       height="12" />
+    <rect
+       id="DotO"
+       rx="1"
+       ry="1"
+       x="710"
+       y="227.5"
+       width="6"
+       height="1" />
+    <path
+       id="LeaderO"
+       class="O Leader"
+       d="M 696 228 l -11 0 l 0 22 l -13 0" />
+    <text
+       id="LabelO"
+       class="O Label"
+       x="670"
+       y="250"
+       style="text-anchor:end;">O</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonP"
+       class="P Button"
+       rx="3"
+       ry="3"
+       x="698"
+       y="239"
+       width="30"
+       height="12" />
+    <path
+       id="LeaderP"
+       class="P Leader"
+       d="M 696 245 l -6 0 l 0 30 l -18 0" />
+    <text
+       id="LabelP"
+       class="P Label"
+       x="670"
+       y="275"
+       style="text-anchor:end;">P</text>
+  </g>
+  <g>
+    <circle
+       id="Ring2"
+       class="Ring2 TouchRing"
+       cx="720"
+       cy="175"
+       r="19.5" />
+   <circle
+       id="DotRing2"
+       cx="720"
+       cy="175"
+       r="9.5" />
+    <path
+       id="LeaderRing2CCW"
+       class="Ring2CCW Ring2 Leader"
+       d="M 720 155 l 0 -5 l -48 0" />
+    <text
+       id="LabelRing2CCW"
+       class="Ring2CCW Ring2 Label"
+       x="670"
+       y="150"
+       style="text-anchor:end;">CCW</text>
+    <path
+       id="Ring2CCW"
+       class="Ring2CCW Button"
+       d="M 717 161 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 1 5 1.5 a 6.5 6.5 0 0 0 -5 -0.5 l 0 1 z" />
+    <path
+       id="LeaderRing2CW"
+       class="Ring2CW Ring2 Leader"
+       d="M 720 195 l 0 2 l -34 0 l 0 -22 l -14 0" />
+    <text
+       id="LabelRing2CW"
+       class="Ring2CW Ring2 Label"
+       x="670"
+       y="175"
+       style="text-anchor:end;">CW</text>
+    <path
+       id="Ring2CW"
+       class="Ring2CW Button"
+       d="M 717 189 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 0 5 -1 a 6.5 6.5 0 0 1 -5 2 l 0 1 z" />
+  </g>
+</svg>

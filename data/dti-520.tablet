@@ -20,6 +20,7 @@ DeviceMatch=usb:056a:003a
 Class=PenDisplay
 Width=14
 Height=12
+Layout=dti-520.svg
 # FIXME does the stylus have an eraser?
 # Styli=0xfffff;
 IntegratedIn=Display;System

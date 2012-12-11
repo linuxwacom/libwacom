@@ -14,6 +14,7 @@ DeviceMatch=usb:056a:00d1
 Class=Bamboo
 Width=6
 Height=4
+Layout=bamboo-2fg-4x5.svg
 IntegratedIn=
 
 [Features]

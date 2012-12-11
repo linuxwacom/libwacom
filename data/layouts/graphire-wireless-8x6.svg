@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Designed after data from http://www.wacom-asia.com/download/manuals/GBT_e_EN.pdf
+   Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="graphire-wireless-8x6"
+   width="257"
+   height="280">
+  <title
+     id="title">Wacom Graphire Wireless</title>
+  <path
+     d="M 86 0 a 50 33 0 0 0 85 0" />
+  <g>
+    <path
+       id="ButtonA"
+       class="A Button"
+       d="M 98 10 a 42 18 0 0 0 30 7 l 0 6 a 42 15 0 0 1 -34 -8 z" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 111 22 l -62 31 l 0 10 m -5 0 l 10 0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="49"
+       y="73"
+       style="text-anchor:middle;">A</text>
+  </g>
+  <g>
+    <path
+       id="ButtonB"
+       class="B Button"
+       d="M 159 10 a 42 18 0 0 1 -30 7 l 0 6 a 42 15 0 0 0 34 -8 z" />
+   <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 146 22 l 62 31 l 0 10 m -5 0 l 10 0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="208"
+       y="73"
+       style="text-anchor:middle;">B</text>
+  </g>
+</svg>

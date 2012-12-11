@@ -4,6 +4,7 @@ DeviceMatch=bluetooth:056a:81
 Class=Graphire
 Width=8
 Height=6
+Layout=graphire-wireless-8x6.svg
 IntegratedIn=
 
 [Features]

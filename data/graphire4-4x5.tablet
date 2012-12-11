@@ -22,6 +22,7 @@ DeviceMatch=usb:056a:0015
 Class=Graphire
 Width=5
 Height=4
+Layout=graphire4-4x5.svg
 
 [Features]
 Stylus=true

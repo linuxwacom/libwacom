@@ -1,13 +1,17 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+    Designed after data from http://www.wacom-asia.com/files/intuos4.pdf
+    Size and positions of controls may not be accurate
+ -->
 <svg
    xmlns="http://www.w3.org/2000/svg"
    version="1.1"
    style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
    id="intuos4-m"
    width="370"
-   height="245">
+   height="253">
   <title
      id="title">Wacom Intuos4 M</title>
   <g>
@@ -16,14 +20,14 @@
        class="B Button"
        rx=".5"
        ry=".5"
-       x="14"
+       x="11"
        y="40"
        width="22"
        height="12" />
     <path
        id="LeaderB"
        class="B Leader"
-       d="M 38 46 L 60 46" />
+       d="M 35 46 l 25 0" />
     <text
        id="LabelB"
        class="B Label"
@@ -39,14 +43,14 @@
        class="C Button"
        rx=".5"
        ry=".5"
-       x="14"
+       x="11"
        y="53"
        width="22"
        height="12" />
     <path
        id="LeaderC"
        class="C Leader"
-       d="M 38 59 L 60 59" />
+       d="M 35 59 l 25 0" />
     <text
        id="LabelC"
        class="C Label"
@@ -60,14 +64,14 @@
        class="D Button"
        rx=".5"
        ry=".5"
-       x="14"
+       x="11"
        y="66"
        width="22"
        height="12" />
     <path
        id="LeaderD"
        class="D Leader"
-       d="M 38 72 L 60 72" />
+       d="M 35 72 l 25 0" />
     <text
        id="LabelD"
        class="D Label"
@@ -81,14 +85,14 @@
        class="E Button"
        rx=".5"
        ry=".5"
-       x="14"
+       x="11"
        y="79"
        width="22"
        height="12" />
     <path
        id="LeaderE"
        class="E Leader"
-       d="M 38 85 L 60 85" />
+       d="M 35 85 l 25 0" />
     <text
        id="LabelE"
        class="E Label"
@@ -102,19 +106,19 @@
        class="F Button"
        rx=".5"
        ry=".5"
-       x="14"
-       y="151"
+       x="11"
+       y="162"
        width="22"
        height="12" />
     <path
        id="LeaderF"
        class="F Leader"
-       d="M 38 157 L 60 157" />
+       d="M 35 168 l 25 0" />
     <text
        id="LabelF"
        class="F Label"
        x="62"
-       y="157"
+       y="168"
        style="text-anchor:start;">F</text>
   </g>
   <g>
@@ -123,19 +127,19 @@
        class="G Button"
        rx=".5"
        ry=".5"
-       x="14"
-       y="164"
+       x="11"
+       y="175"
        width="22"
        height="12" />
      <path
        id="LeaderG"
        class="G Leader"
-       d="M 38 170 L 60 170" />
+       d="M 35 181 l 25 0" />
     <text
        id="LabelG"
        class="G Label"
        x="62"
-       y="170"
+       y="181"
        style="text-anchor:start;">G</text>
   </g>
   <g>
@@ -144,19 +148,19 @@
        class="H Button"
        rx=".5"
        ry=".5"
-       x="14"
-       y="177"
+       x="11"
+       y="188"
        width="22"
        height="12" />
     <path
        id="LeaderH"
        class="H Leader"
-       d="M 38 183 L 60 183" />
+       d="M 35 194 l 25 0" />
     <text
        id="LabelH"
        class="H Label"
        x="62"
-       y="183"
+       y="194"
        style="text-anchor:start;">H</text>
   </g>
   <g>
@@ -165,73 +169,73 @@
        class="I Button"
        rx=".5"
        ry=".5"
-       x="14"
-       y="190"
+       x="11"
+       y="201"
        width="22"
        height="12" />
     <path
        id="LeaderI"
        class="I Leader"
-       d="M 38 196 L 60 196" />
+       d="M 35 207 l 25 0" />
     <text
        id="LabelI"
        class="I Label"
        x="62"
-       y="196"
+       y="207"
        style="text-anchor:start;">I</text>
   </g>
   <g>
     <circle
        id="Ring"
        class="Ring TouchRing"
-       cx="34"
-       cy="121"
+       cx="31"
+       cy="126.5"
        r="19.5" />
     <path
        id="LeaderRingCCW"
        class="RingCCW Ring Leader"
-       d="M 34 101 L 34 99 L 60 99" />
+       d="M 31 106.5 l 0 -2 l 29 0" />
     <text
        id="LabelRingCCW"
        class="RingCCW Ring Label"
        x="62"
-       y="99"
+       y="104.5"
        style="text-anchor:start;">CCW</text>
     <path
        id="RingCCW"
        class="RingCCW Button"
-       d="M 31 107 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 1 5 1.5 a 6.5 6.5 0 0 0 -5 -0.5 l 0 1 z" />
+       d="M 28 112.5 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 1 5 1.5 a 6.5 6.5 0 0 0 -5 -0.5 l 0 1 z" />
     <path
        id="LeaderRingCW"
        class="RingCW Ring Leader"
-       d="M 34 141 L 34 143 L 60 143" />
+       d="M 31 146.5 l 0 2 l 29 0" />
     <text
        id="LabelRingCW"
        class="RingCW Ring Label"
        x="62"
-       y="143"
+       y="148.5"
        style="text-anchor:start;">CW</text>
     <path
        id="RingCW"
        class="RingCW Button"
-       d="M 31 135 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 0 5 -1 a 6.5 6.5 0 0 1 -5 2 l 0 1 z" />
+       d="M 28 141.5 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 0 5 -1 a 6.5 6.5 0 0 1 -5 2 l 0 1 z" />
   </g>
   <g>
     <circle
        id="ButtonA"
        class="A ModeSwitch Button"
-       cx="34"
-       cy="121"
+       cx="31"
+       cy="126.5"
        r="9.5" />
     <path
        id="LeaderA"
        class="A ModeSwitch Leader"
-       d="M 56 121 L 60 121" />
+       d="M 53 126.5 l 7 0" />
     <text
        id="LabelA"
        class="A ModeSwitch Label"
        x="62"
-       y="121"
+       y="126.5"
        style="text-anchor:start;">A</text>
   </g>
 </svg>

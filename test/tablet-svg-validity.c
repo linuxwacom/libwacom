@@ -245,8 +245,13 @@ verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
 		return;
 
 	filename = libwacom_get_layout_filename(device);
-	if (filename == NULL)
+	num_buttons = libwacom_get_num_buttons (device);
+
+	if (filename == NULL) {
+		if (num_buttons > 0)
+			g_warning ("device '%s' has buttons but no layout", name);
 		return;
+	}
 
 	g_message ("Verifying device '%s', SVG file '%s'", name, filename);
 
@@ -269,7 +274,6 @@ verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
 	g_assert (prop != NULL);
 	xmlFree(prop);
 
-	num_buttons = libwacom_get_num_buttons (device);
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
 		check_button (cur, device, button, "Button");
 		check_button (cur, device, button, "Label");

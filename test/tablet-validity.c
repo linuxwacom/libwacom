@@ -40,6 +40,8 @@
 #include <assert.h>
 #include <unistd.h>
 
+typedef int (*NumModesFn) (const WacomDevice *device);
+
 static int buttons_have_direction (WacomDevice *device)
 {
 	char               button;
@@ -57,6 +59,42 @@ static int buttons_have_direction (WacomDevice *device)
 	}
 
 	return 0;
+}
+
+static int match_mode_switch (WacomDevice *device, NumModesFn get_num_modes, WacomButtonFlags flag)
+{
+	char               button;
+	int                num_buttons;
+	int                num_switches;
+	int                num_modes;
+
+	num_buttons  = libwacom_get_num_buttons (device);
+	num_modes    = get_num_modes (device);
+	num_switches = 0;
+
+	for (button = 'A'; button < 'A' + num_buttons; button++) {
+		WacomButtonFlags  flags;
+		flags = libwacom_get_button_flag(device, button);
+
+		if (flags & flag)
+			num_switches++;
+	}
+
+	/*
+	 * If we have more than one mode-switch button, then the
+	 * number of modes must match the number of mode-switch buttons.
+	 */
+	if (num_switches > 1 && num_modes != num_switches)
+		return 0;
+
+	/*
+	 * If we have more than one mode, then we should find at least
+	 * one mode-switch button.
+	 */
+	if (num_modes > 1 && num_switches == 0)
+		return 0;
+
+	return 1;
 }
 
 static int eraser_is_present(WacomDeviceDatabase *db, const int *styli, int nstyli, WacomStylusType type)
@@ -146,6 +184,14 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 	assert(libwacom_get_strips_num_modes(device) >= 0);
 	assert(libwacom_get_bustype(device) != WBUSTYPE_UNKNOWN);
 	assert(buttons_have_direction(device) > 0);
+	if (libwacom_has_ring(device))
+		assert(match_mode_switch (device, libwacom_get_ring_num_modes, WACOM_BUTTON_RING_MODESWITCH));
+	if (libwacom_has_ring2(device))
+		assert(match_mode_switch (device, libwacom_get_ring2_num_modes, WACOM_BUTTON_RING2_MODESWITCH));
+	if (libwacom_get_num_strips(device) > 1)
+		assert(match_mode_switch (device, libwacom_get_strips_num_modes, WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH));
+	if (libwacom_get_num_strips(device) > 0)
+		assert(match_mode_switch (device, libwacom_get_strips_num_modes, WACOM_BUTTON_TOUCHSTRIP_MODESWITCH));
 }
 
 int main(int argc, char **argv)

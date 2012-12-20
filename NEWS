@@ -1,3 +1,12 @@
+libwacom 0.7:
+- New devices: 
+  - Cintiq 22HD, 24HD touch, 
+  - ISDv4 E5, 100, 101
+- Support for SVG layouts of the tablets
+- New APIs for:
+  - list status LEDs
+  - list integration flags (differ between builtin and screen-tablets)
+
 libwacom 0.6:
 - More metadata for:
   - NTrig tablet PC

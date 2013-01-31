@@ -564,6 +564,14 @@ libwacom_database_new_for_path (const char *datadir)
 	    for (match = matches; *match; match++) {
 		    const char *matchstr;
 		    matchstr = libwacom_match_get_match_string(*match);
+		    /* no duplicate matches allowed */
+		    if (g_hash_table_lookup(db->device_ht, matchstr) != NULL) {
+			    g_critical("Duplicate match of '%s' on device '%s'.",
+					matchstr, libwacom_get_name(d));
+			    libwacom_database_destroy(db);
+			    db = NULL;
+			    goto end;
+		    }
 		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
 		    d->refcnt++;
 	    }
@@ -591,16 +599,17 @@ libwacom_database_new_for_path (const char *datadir)
 	    g_free(path);
     }
 
-    while(nfiles--)
-	    free(files[nfiles]);
-    free(files);
-
     /* If we couldn't load _anything_ then something's wrong */
     if (g_hash_table_size (db->device_ht) == 0 &&
 	g_hash_table_size (db->stylus_ht) == 0) {
 	    libwacom_database_destroy(db);
-	    return NULL;
+	    db = NULL;
     }
+
+end:
+    while(nfiles--)
+	    free(files[nfiles]);
+    free(files);
 
     return db;
 }

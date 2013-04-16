@@ -1,3 +1,8 @@
+libwacom 0.7.1:
+- New devices:
+  - ISDv4 10d
+- Better checks to prevent bad databases
+
 libwacom 0.7:
 - New devices: 
   - Cintiq 22HD, 24HD touch, 

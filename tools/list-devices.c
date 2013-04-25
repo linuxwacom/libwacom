@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <unistd.h>
 #include "libwacom.h"
 
 static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter)
@@ -40,7 +41,7 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 	for (match = libwacom_get_matches(device); *match; match++) {
 		WacomBusType type = libwacom_match_get_bustype(*match);
 		if (type != bus_type_filter)
-			libwacom_print_device_description(0, device);
+			libwacom_print_device_description(STDOUT_FILENO, device);
 	}
 }
 

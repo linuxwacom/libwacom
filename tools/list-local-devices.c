@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <assert.h>
 #include <dirent.h>
 #include <glib/gi18n.h>
@@ -98,10 +99,10 @@ int main(int argc, char **argv)
 		dev = libwacom_new_from_path(db, fname, WFALLBACK_NONE, NULL);
 		if (!dev)
 			continue;
-		libwacom_print_device_description(0, dev);
+		libwacom_print_device_description(STDOUT_FILENO, dev);
 		libwacom_destroy(dev);
 
-		fprintf(stdout, "---------------------------------------------------------------\n");
+		dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
 	}
 
 out:

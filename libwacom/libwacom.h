@@ -504,7 +504,7 @@ WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device)
  */
 WacomBusType libwacom_get_bustype(const WacomDevice *device);
 
-/*
+/**
  * @param device The tablet to query
  * @param button The ID of the button to check for, between 'A' and 'Z'
  * @return a WacomButtonFlags with information about the button

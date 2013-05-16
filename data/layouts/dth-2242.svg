@@ -1,0 +1,139 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="dth-2242"
+   width="650.0"
+   height="400.0"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="title">Wacom DTH-2242</title>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="33.5"
+       y="22.0"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 35.0 34.5 35.0 40.068811l 1.5 0.0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="38.0"
+       y="43.0"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="244.5"
+       y="21.5"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 246.5 34.5 246.5 64.354001l 1.5 0.0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="249.5"
+       y="67.0"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="276.5"
+       y="21.5"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 278.0 34.5 278.0 55.458668l 1.5 0.0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="281.0"
+       y="58.5"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="308.5"
+       y="21.5"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 310.5 34.5 310.5 47.617719l 1.5 0.0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="313.5"
+       y="50.5"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="340.5"
+       y="21.5"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="M 342.0 34.5 342.0 39.99695l 1.5 0.0" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="345.0"
+       y="42.5"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="372.5"
+       y="21.5"
+       width="20.0"
+       height="11.0"
+       rx="2.0"
+       ry="2.5" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="m 394.5 27.0 4.0 0.0" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="400.5"
+       y="30.0"
+       style="text-anchor:start;">F</text>
+  </g>
+</svg>

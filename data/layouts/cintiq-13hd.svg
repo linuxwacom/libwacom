@@ -8,13 +8,26 @@
 
 <svg
   id="cintiq-13hd"
-  width="650.0"
-  height="400.0"
+  width="380.0"
+  height="250.0"
   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
   version="1.1"
   xmlns="http://www.w3.org/2000/svg">
   <title
     id="title">Wacom Cintiq 13HD</title>
+  <circle
+    id="Ring"
+    class="Ring"
+    cy="125.0"
+    cx="34.0"
+    r="19.5"
+    style="fill:none;" />
+  <circle
+    id="InnerRing"
+    class="Inner Ring"
+    cy="125.0"
+    cx="34.0"
+    r="7.0" />
   <g>
     <rect
       id="ButtonB"
@@ -168,18 +181,6 @@
       cx="33.5"
       r="1.0" />
   </g>
-  <circle
-    id="Ring"
-    class="Ring TouchRing"
-    cy="125.0"
-    cx="34.0"
-    r="19.5" />
-  <circle
-    id="InnerRing"
-    class="Inner Ring"
-    cy="125.0"
-    cx="34.0"
-    r="7.0" />
   <g>
     <rect
       id="ButtonA"

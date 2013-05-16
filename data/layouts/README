@@ -227,3 +227,26 @@ Second touch-strip:
 
     id="LeaderStrip2Down"
     class="Strip2Down Strip2 Leader"
+
+* Tips For Creating New Layouts
+
+Layouts use very simple SVG rules. WISIWYG editors such as Inkscape are
+very convenient to design new layouts but usually produce a much more
+complex SVG markup so files that are produced with those editors should
+be cleaned. To help with this task, there is a script called clean_svg.py
+in the tools folder.
+Besides cleaning the markup and removing editor specific tags, clean_svg.py
+also automates the naming of the elements.
+
+  * Automatic Naming with Inkscape and clean_svg.py
+
+  On Inkscape, be sure to group the button, leader and label elements
+  and assign the group's ID to the desired logical name. E.g.: Assigning
+  "A" to the group's ID and running the clean_svg.py script with that
+  SVG, will assign "ButtonA"/"B Button" to the ID and class of the first
+  rect/circle element found in the group; it also analogously assigns the ID and class of the first path and text elements found in that group.
+
+clean_svg.py needs two arguments, the SVG file path and the name of
+the tablet, e.g.:
+
+  ./clean_svg.py /path/to/svg_file.svg "My Brand New Tablet Name"

@@ -25,8 +25,8 @@ Buttons=0
 HasEraser=false
 Type=Inking
 
-[0x20802]
-# Intuos4, 5 and Cintiq 21UX2, 24HD
+[0x120802]
+# Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Inking Pen
 Buttons=0
 HasEraser=false
@@ -95,12 +95,33 @@ HasEraser=true
 Buttons=2
 Type=Marker
 
-[0x40802]
+[0x100804]
+# Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
+Name=Art Pen
+HasEraser=true
+Buttons=2
+Type=Marker
+
+[0x140802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
 HasEraser=true
 Buttons=2
 Type=Classic
+
+[0x160802]
+# Cintiq 13HD Pro Pen
+Name=Pro Pen
+HasEraser=true
+Buttons=2
+Type=Pro
+
+[0x180802]
+# DTH2242 Pen
+Name=Pen
+HasEraser=true
+Buttons=2
+Type=General
 
 [0x022]
 Name=Pen
@@ -178,11 +199,35 @@ Name=Grip Pen Eraser
 IsEraser=true
 Type=General
 
-[0x4080a]
+[0x14080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
 IsEraser=true
 Type=Classic
+
+[0x10080c]
+# Intuos4, 5 and 13HD, 24HD Art Pen
+Name=Art Pen Eraser
+IsEraser=true
+Type=Marker
+
+[0x16080a]
+# Cintiq 13HD
+Name=Pro Pen Eraser
+IsEraser=true
+Type=Pro
+
+[0x18080a]
+# DTH2242 Eraser
+Name=Pen Eraser
+IsEraser=true
+Type=General
+
+[0x10090a]
+# Intuos4, 5 and Cintiq 13HD, 22HD, 24HD Airbrush Eraser
+Name=Airbrush Pen Eraser
+IsEraser=true
+Type=Airbrush
 
 [0x90a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
@@ -219,6 +264,13 @@ Type=Airbrush
 
 [0x902]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Airbrush Pen
+Buttons=1
+HasEraser=true
+Type=Airbrush
+
+[0x100902]
+# Intuos4, 5 and Cintiq 13HD, 21UX2, 22HD, 24HD
 Name=Airbrush Pen
 Buttons=1
 HasEraser=true

@@ -1,0 +1,38 @@
+# Wacom
+# DTK-2241 Interactive Pen Display
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#       A   B C D E F
+#      *-----------------*
+#      |                 |
+#      |     DISPLAY     |
+#      |                 |
+#      *-----------------*
+#
+
+[Device]
+Name=Wacom DTK2241
+DeviceMatch=usb:056a:0057
+Class=PenDisplay
+Width=19
+Height=11
+Layout=dth-2242.svg
+Styli=0x180802;0x18080a;
+IntegratedIn=Display;System
+
+[Features]
+# This tablet supports two stylus models:
+# a pen without eraser and a pen with eraser
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+# Actually 7 buttons but one is reserved for onscreen menus
+Buttons=6
+
+[Buttons]
+Top=A;B;C;D;E;F

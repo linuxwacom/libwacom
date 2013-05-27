@@ -1,4 +1,4 @@
-AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(top_srcdir)\""
+AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(abs_top_srcdir)\""
 
 noinst_PROGRAMS = generate-udev-rules list-devices
 

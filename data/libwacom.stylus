@@ -25,6 +25,13 @@ Buttons=0
 HasEraser=false
 Type=Inking
 
+[0x20802]
+# Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
+Name=Inking Pen
+Buttons=0
+HasEraser=false
+Type=Inking
+
 [0x120802]
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Inking Pen
@@ -101,6 +108,13 @@ Name=Art Pen
 HasEraser=true
 Buttons=2
 Type=Marker
+
+[0x40802]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen
+HasEraser=true
+Buttons=2
+Type=Classic
 
 [0x140802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
@@ -198,6 +212,12 @@ Type=Marker
 Name=Grip Pen Eraser
 IsEraser=true
 Type=General
+
+[0x4080a]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen Eraser
+IsEraser=true
+Type=Classic
 
 [0x14080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD

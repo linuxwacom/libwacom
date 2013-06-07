@@ -1,0 +1,57 @@
+# Wacom
+# Cintiq 22HD touch
+# DTH-2200
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  B |                       | K
+#  C |                       | L
+#  D |                       | M
+#  E |                       | N
+#  A |        DISPLAY        | J
+#  F |                       | O
+#  G |                       | P
+#  H |                       | Q
+#  I |                       | R
+#    |                       |
+#    *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    @-----------------------@
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    @-----------------------@
+#
+# Note: touch data comes through the usb:056a:005e interface
+
+[Device]
+Name=Wacom Cintiq 22HD touch
+DeviceMatch=usb:056a:0x5b
+Class=Cintiq
+Width=19
+Height=11
+Layout=cintiq-22hd.svg
+Styli=0x802;0x80c;0x804;0x80a;0x140802;0x14080a;0x902;0x90a;0x120802;0x40802;0x4080a;0x20802;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+NumStrips=2
+Buttons=18
+
+[Buttons]
+Left=B;C;D;E;A;F;G;H;I
+Right=K;L;M;N;J;O;P;Q;R
+
+Touchstrip=A
+Touchstrip2=J

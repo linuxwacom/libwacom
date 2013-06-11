@@ -175,11 +175,14 @@
       y="165.0"
       x="51.5"
       style="text-anchor:start;">D</text>
-    <circle
+    <rect
       id="DotD"
-      cy="163.5"
-      cx="33.5"
-      r="1.0" />
+      rx="1.0"
+      ry="1.0"
+      height="8.0"
+      width="8.0"
+      y="160.0"
+      x="30.0" />
   </g>
   <g>
     <rect
@@ -222,13 +225,10 @@
       width="20.0"
       y="176.0"
       x="24.0" />
-    <rect
+    <circle
       id="DotE"
-      rx="1.0"
-      ry="1.0"
-      height="8.0"
-      width="8.0"
-      y="179.0"
-      x="30.0" />
+      cy="183.0"
+      cx="34.0"
+      r="1.0" />
   </g>
 </svg>

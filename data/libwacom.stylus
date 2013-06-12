@@ -109,6 +109,12 @@ HasEraser=true
 Buttons=2
 Type=Marker
 
+[0x100802]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Grip Pen
+IsEraser=true
+Type=General
+
 [0x40802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
@@ -230,6 +236,12 @@ Type=Classic
 Name=Art Pen Eraser
 IsEraser=true
 Type=Marker
+
+[0x10080a]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Grip Pen Eraser
+IsEraser=true
+Type=General
 
 [0x16080a]
 # Cintiq 13HD

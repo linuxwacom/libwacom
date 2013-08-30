@@ -1,0 +1,16 @@
+# Wacom
+# DTU-1931 Interactive Pen Display
+#
+
+[Device]
+Name=Wacom DTU-1931
+DeviceMatch=usb:056a:00c7
+Width=15
+Height=12
+Class=PenDisplay
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Buttons=0
+BuiltIn=true

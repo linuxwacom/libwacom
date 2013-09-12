@@ -134,7 +134,7 @@ Type=Classic
 Name=Pro Pen
 HasEraser=true
 Buttons=2
-Type=Pro
+Type=Classic
 
 [0x180802]
 # DTH2242 Pen
@@ -247,7 +247,7 @@ Type=General
 # Cintiq 13HD
 Name=Pro Pen Eraser
 IsEraser=true
-Type=Pro
+Type=Classic
 
 [0x18080a]
 # DTH2242 Eraser

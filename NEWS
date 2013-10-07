@@ -1,3 +1,10 @@
+libwacom 0.8.0:
+- New devices:
+  - Cintiq 13HD, 22HD touch
+  - DTH-2242, DTU-1931,
+  - ISDv4 EC, ED, 10F
+  - Intuos Pro
+
 libwacom 0.7.1:
 - New devices:
   - ISDv4 10d

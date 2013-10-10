@@ -1,0 +1,45 @@
+# Wacom
+# Cintiq Companion Hybrid
+# DTH-A1300
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    B     |                       |
+#    C     |                       |
+#          |                       |
+#    G     |                       |
+#  H A F   |        DISPLAY        |
+#    I     |                       |
+#          |                       |
+#    D     |                       |
+#    E     |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Note: Buttons F, G, H, I are on a circle
+#
+# Note: touch data comes through the usb:056a:0309 interface
+#
+
+[Device]
+Name=Wacom Cintiq Companion Hybrid
+Class=Cintiq
+DeviceMatch=usb:056a:0307
+Width=12
+Height=7
+Layout=cintiq-companion-hybrid.svg
+Styli=0x913;0x91b;0x813;0x81b;0x823;0x82b;0x801;0x885;0x120802;0x100804;0x10080c;0x140802;0x14080a;0x100902;0x10090a;0x160802;0x16080a;0x100802;0x10080a;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=9
+
+[Buttons]
+Left=B;C;G;H;A;F;I;D;E

@@ -24,10 +24,6 @@
  *	Peter Hutterer (peter.hutterer@redhat.com)
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 
 /** @cond hide_from_doxygen */
 #ifndef _LIBWACOM_H_

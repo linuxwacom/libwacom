@@ -572,6 +572,8 @@ uint32_t libwacom_match_get_product_id(const WacomMatch *match);
 uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);
 const char* libwacom_match_get_match_string(const WacomMatch *match);
 
+/** @cond hide_from_doxygen */
 #endif /* _LIBWACOM_H_ */
+/** @endcond */
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

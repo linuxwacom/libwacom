@@ -1,0 +1,26 @@
+# Wacom
+# Bamboo Pen & Touch
+# CTH-470
+#
+# second generation BambooPT
+#
+# stylus with two buttons and eraser; 16FG touch
+# Pen active area: 5.8 x 3.62in
+# Touch active area: 4.92 x 3.35in
+[Device]
+Name=Wacom Bamboo 16FG 4x5
+DeviceMatch=usb:056a:00de
+Class=Bamboo
+Width=6
+Height=4
+Layout=bamboo-16fg-4x5.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D

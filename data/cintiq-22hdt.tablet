@@ -33,7 +33,7 @@
 
 [Device]
 Name=Wacom Cintiq 22HD touch
-DeviceMatch=usb:056a:0x5b
+DeviceMatch=usb:056a:005b
 Class=Cintiq
 Width=19
 Height=11

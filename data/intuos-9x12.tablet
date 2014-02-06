@@ -1,5 +1,5 @@
 [Device]
-Name=Wacom Intuos2 9x12
+Name=Wacom Intuos 9x12
 DeviceMatch=usb:056a:0022
 Class=Intuos
 Width=12

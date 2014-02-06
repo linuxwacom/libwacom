@@ -448,7 +448,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 
 	if (!(device->features & FEATURE_RING) &&
 	    (device->features & FEATURE_RING2))
-		g_warning ("Table '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
+		g_warning ("Tablet '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);

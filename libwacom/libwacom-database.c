@@ -441,6 +441,9 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
 		device->features |= FEATURE_REVERSIBLE;
 
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "TouchSwitch", NULL))
+		device->features |= FEATURE_TOUCHSWITCH;
+
 	if (device->integration_flags != WACOM_DEVICE_INTEGRATED_UNSET &&
 	    device->integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY &&
 	    device->features & FEATURE_REVERSIBLE)
@@ -449,6 +452,10 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	if (!(device->features & FEATURE_RING) &&
 	    (device->features & FEATURE_RING2))
 		g_warning ("Tablet '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
+
+	if (!(device->features & FEATURE_TOUCH) &&
+	    (device->features & FEATURE_TOUCHSWITCH))
+		g_warning ("Tablet '%s' has touch switch but no touch tool. This is impossible", libwacom_get_match(device));
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);

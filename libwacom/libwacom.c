@@ -730,6 +730,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "Ring=%s\n",	 libwacom_has_ring(device)	? "true" : "false");
 	dprintf(fd, "Ring2=%s\n",	 libwacom_has_ring2(device)	? "true" : "false");
 	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
+	dprintf(fd, "TouchSwitch=%s\n",	libwacom_has_touchswitch(device)? "true" : "false");
 	print_supported_leds(fd, device);
 
 	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
@@ -950,6 +951,11 @@ int libwacom_is_builtin(const WacomDevice *device)
 int libwacom_is_reversible(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_REVERSIBLE);
+}
+
+int libwacom_has_touchswitch(const WacomDevice *device)
+{
+	return !!(device->features & FEATURE_TOUCHSWITCH);
 }
 
 WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device)

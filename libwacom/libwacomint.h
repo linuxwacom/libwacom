@@ -46,7 +46,8 @@ enum WacomFeature {
 	FEATURE_TOUCH		= (1 << 1),
 	FEATURE_RING		= (1 << 2),
 	FEATURE_RING2		= (1 << 3),
-	FEATURE_REVERSIBLE	= (1 << 4)
+	FEATURE_REVERSIBLE	= (1 << 4),
+	FEATURE_TOUCHSWITCH	= (1 << 5)
 };
 
 /* WARNING: When adding new members to this struct

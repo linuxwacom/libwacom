@@ -1,0 +1,36 @@
+# Wacom
+# Intuos Pen Small
+# CTL-480
+#
+# Successor of Bamboo3 series
+#
+# stylus with two buttons and eraser
+# Pen active area: 6.0 x 3.7in
+#
+# Button Map:
+# (A=RIGHT, B=LEFT, C=FORWARD, D=BACKWARD)
+#
+#     A                     C
+#     B                     D
+#    *-----------------------*
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Intuos Pen Small
+DeviceMatch=usb:056a:030e
+Class=Bamboo
+Width=6
+Height=4
+#Layout=intuos-s-p.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=4
+
+[Buttons]
+Top=A;B;C;D

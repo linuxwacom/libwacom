@@ -85,6 +85,7 @@ int main(int argc, char **argv)
 	assert(!libwacom_has_touch(device));
 	assert(libwacom_has_ring(device));
 	assert(!libwacom_has_ring2(device));
+	assert(!libwacom_has_touchswitch(device));
 	assert(libwacom_get_num_strips(device) == 0);
 	assert(libwacom_get_integration_flags (device) == WACOM_DEVICE_INTEGRATED_NONE);
 	assert(libwacom_get_width(device) == 8);

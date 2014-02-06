@@ -434,6 +434,12 @@ int libwacom_has_ring2(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return non-zero if the device has a touch switch or zero otherwise
+ */
+int libwacom_has_touchswitch(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return the number of modes for the touchring if it has a mode switch
  */
 int libwacom_get_ring_num_modes(const WacomDevice *device);

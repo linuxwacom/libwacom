@@ -91,6 +91,9 @@ Reversible=true
 # This tablet supports touch.
 Touch=false
 
+# This tablet provides a hardware touch switch.
+TouchSwitch=false
+
 # This tablet has a touch ring (Intuos4 and Cintiq 24HD)
 # A touch ring is a circular button that responds to touch
 # (rather than clicks):

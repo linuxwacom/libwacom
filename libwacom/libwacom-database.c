@@ -906,6 +906,19 @@ libwacom_database_destroy(WacomDeviceDatabase *db)
 	g_free (db);
 }
 
+static gint
+device_compare(gconstpointer pa, gconstpointer pb)
+{
+	const WacomDevice *a = pa,
+		          *b = pb;
+	int cmp;
+
+	cmp = libwacom_get_vendor_id(a) - libwacom_get_vendor_id(b);
+	if (cmp == 0)
+		cmp = libwacom_get_product_id(a) - libwacom_get_product_id(b);
+	return cmp;
+}
+
 WacomDevice**
 libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *error)
 {
@@ -924,6 +937,8 @@ libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *e
 		g_list_free (devices);
 		return NULL;
 	}
+
+	devices = g_list_sort (devices, device_compare);
 
 	for (p = list, cur = devices; cur; cur = g_list_next (cur))
 		*p++ = (WacomDevice *) cur->data;

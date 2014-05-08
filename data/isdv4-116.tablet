@@ -1,0 +1,12 @@
+[Device]
+Name=Wacom ISDv4 116
+DeviceMatch=usb:056a:0116
+Class=ISDV4
+Width=8
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

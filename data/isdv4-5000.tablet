@@ -1,0 +1,12 @@
+[Device]
+Name=Wacom ISDv4 5000
+DeviceMatch=usb:056a:5000
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

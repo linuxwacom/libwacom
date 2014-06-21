@@ -1,0 +1,11 @@
+[Device]
+Name=Wacom ISDv4 12C
+DeviceMatch=usb:056a:012c
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Buttons=0

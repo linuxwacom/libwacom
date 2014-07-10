@@ -102,7 +102,8 @@ get_bus (GUdevDevice *device)
 	subsystem = g_udev_device_get_subsystem (device);
 	parent = g_object_ref (device);
 
-	while (parent && g_strcmp0 (subsystem, "input") == 0) {
+	while (parent && ((g_strcmp0 (subsystem, "input") == 0) ||
+			  (g_strcmp0 (subsystem, "hid") == 0)) ){
 		GUdevDevice *old_parent = parent;
 		parent = g_udev_device_get_parent (old_parent);
 		if (parent)

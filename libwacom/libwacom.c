@@ -88,6 +88,67 @@ get_uinput_subsystem (GUdevDevice *device)
 	return bus_str ? g_strdup (bus_str) : NULL;
 }
 
+static gboolean
+get_bus_vid_pid (GUdevDevice  *device,
+		 WacomBusType *bus,
+		 int          *vendor_id,
+		 int          *product_id,
+		 WacomError   *error)
+{
+	GUdevDevice *parent;
+	const char *product_str;
+	gchar **splitted_product = NULL;
+	unsigned int bus_id;
+	gboolean retval = FALSE;
+
+	/* Parse that:
+	 * E: PRODUCT=5/56a/81/100
+	 * into:
+	 * vendor 0x56a
+	 * product 0x81 */
+	parent = g_object_ref (device);
+	product_str = g_udev_device_get_property (device, "PRODUCT");
+
+	while (!product_str && parent) {
+		GUdevDevice *old_parent = parent;
+		parent = g_udev_device_get_parent (old_parent);
+		if (parent)
+			product_str = g_udev_device_get_property (parent, "PRODUCT");
+		g_object_unref (old_parent);
+	}
+
+	if (!product_str)
+		/* PRODUCT not found, hoping the old method will work */
+		goto out;
+
+	splitted_product = g_strsplit (product_str, "/", 4);
+	if (g_strv_length (splitted_product) != 4) {
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
+		goto out;
+	}
+
+	bus_id = (int)strtoul (splitted_product[0], NULL, 10);
+	*vendor_id = (int)strtol (splitted_product[1], NULL, 16);
+	*product_id = (int)strtol (splitted_product[2], NULL, 16);
+
+	switch (bus_id) {
+	case 3:
+		*bus = WBUSTYPE_USB;
+		retval = TRUE;
+		break;
+	case 5:
+		*bus = WBUSTYPE_BLUETOOTH;
+		retval = TRUE;
+		break;
+	}
+
+out:
+	if (splitted_product)
+		g_strfreev (splitted_product);
+	g_object_unref (parent);
+	return retval;
+}
+
 static char *
 get_bus (GUdevDevice *device)
 {
@@ -151,7 +212,7 @@ get_device_info (const char            *path,
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
 		libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
-		goto bail;
+		goto out;
 	}
 
 	/* Touchpads are only for the "Finger" part of Bamboo devices */
@@ -162,12 +223,10 @@ get_device_info (const char            *path,
 		if (!parent || !is_tablet_or_touchpad(parent)) {
 			libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
 			g_object_unref (parent);
-			goto bail;
+			goto out;
 		}
 		g_object_unref (parent);
 	}
-
-	bus_str = get_bus (device);
 
 	/* Is the device integrated in display? */
 	devname = g_udev_device_get_name (device);
@@ -206,79 +265,24 @@ get_device_info (const char            *path,
 		g_object_unref (parent);
 	}
 
+	/* Parse the PRODUCT attribute (for Bluetooth and USB) */
+	retval = get_bus_vid_pid (device, bus, vendor_id, product_id, error);
+	if (retval)
+		goto out;
+
+	bus_str = get_bus (device);
 	*bus = bus_from_str (bus_str);
-	if (*bus == WBUSTYPE_USB) {
-		const char *vendor_str, *product_str;
-		GUdevDevice *parent;
 
-		vendor_str = g_udev_device_get_property (device, "ID_VENDOR_ID");
-		product_str = g_udev_device_get_property (device, "ID_MODEL_ID");
-
-		parent = NULL;
-		/* uinput devices have the props set on the parent, there is
-		 * nothing a a udev rule can match on on the child */
-		if (!vendor_str || !product_str) {
-			parent = g_udev_device_get_parent (device);
-			if (parent) {
-				vendor_str = g_udev_device_get_property (parent, "ID_VENDOR_ID");
-				product_str = g_udev_device_get_property (parent, "ID_MODEL_ID");
-			}
-		}
-
-		*vendor_id = strtol (vendor_str, NULL, 16);
-		*product_id = strtol (product_str, NULL, 16);
-
-		if (parent)
-			g_object_unref (parent);
-	} else if (*bus == WBUSTYPE_BLUETOOTH || *bus == WBUSTYPE_SERIAL) {
-		GUdevDevice *parent;
-		const char *product_str;
-		int garbage;
-
-		/* Parse that:
-		 * E: PRODUCT=5/56a/81/100
-		 * into:
-		 * vendor 0x56a
-		 * product 0x81 */
-		parent = g_object_ref (device);
-		product_str = g_udev_device_get_property (device, "PRODUCT");
-
-		while (!product_str && parent) {
-			GUdevDevice *old_parent = parent;
-			parent = g_udev_device_get_parent (old_parent);
-			if (parent)
-				product_str = g_udev_device_get_property (parent, "PRODUCT");
-			g_object_unref (old_parent);
-		}
-
-		if (product_str) {
-			if (sscanf(product_str, "%d/%x/%x/%d", &garbage, vendor_id, product_id, &garbage) != 4) {
-				libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
-				g_object_unref(parent);
-				goto bail;
-			}
-		} else {
-			g_assert(*bus == WBUSTYPE_SERIAL);
-
-			*vendor_id = 0;
-			*product_id = 0;
-		}
-		if (parent)
-			g_object_unref (parent);
+	if (*bus == WBUSTYPE_SERIAL) {
+		/* The serial bus uses 0:0 as the vid/pid */
+		*vendor_id = 0;
+		*product_id = 0;
+		retval = TRUE;
 	} else {
 		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
-		goto bail;
 	}
 
-	if (*bus != WBUSTYPE_UNKNOWN &&
-	    vendor_id != 0 &&
-	    product_id != 0)
-		retval = TRUE;
-	/* The serial bus uses 0:0 as the vid/pid */
-	if (*bus == WBUSTYPE_SERIAL)
-		retval = TRUE;
-
-bail:
+out:
 	if (bus_str != NULL)
 		g_free (bus_str);
 	if (retval == FALSE)

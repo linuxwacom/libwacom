@@ -1,0 +1,234 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Button layout of Cintiq Companion is identical to Cintiq 13HD.
+   Layout copied from cintiq-13hd.svg
+ -->
+
+<svg
+  id="cintiq-companion"
+  width="380.0"
+  height="250.0"
+  style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg">
+  <title
+    id="title">Wacom Cintiq Companion</title>
+  <circle
+    id="Ring"
+    class="Ring"
+    cy="125.0"
+    cx="34.0"
+    r="19.5"
+    style="fill:none;" />
+  <circle
+    id="InnerRing"
+    class="Inner Ring"
+    cy="125.0"
+    cx="34.0"
+    r="7.0" />
+  <g>
+    <rect
+      id="ButtonB"
+      class="B Button"
+      rx="2.0"
+      ry="2.0"
+      height="14.5"
+      width="20.0"
+      y="59.5"
+      x="24.0" />
+    <path
+      id="LeaderB"
+      class="B Leader"
+      d="m 46.0 68.0 4.0 0.0" />
+    <text
+      id="LabelB"
+      class="B Label"
+      y="68.0"
+      x="52.0"
+      style="text-anchor:start;">B</text>
+    <circle
+      id="DotB"
+      cy="67.0"
+      cx="34.0"
+      r="1.0" />
+  </g>
+  <g>
+    <path
+      id="LeaderC"
+      class="C Leader"
+      d="m 46.0 86.5 4.0 0.0" />
+    <text
+      id="LabelC"
+      class="C Label"
+      y="86.5"
+      x="52.0"
+      style="text-anchor:start;">C</text>
+    <rect
+      id="ButtonC"
+      class="C Button"
+      rx="2.0"
+      ry="2.0"
+      height="14.5"
+      width="20.0"
+      y="79.0"
+      x="24.0" />
+    <rect
+      id="SquareC"
+      rx="1.0"
+      ry="1.0"
+      height="8.0"
+      width="8.0"
+      y="82.5"
+      x="30.0" />
+  </g>
+  <g>
+    <path
+      id="LeaderH"
+      class="H Leader"
+      d="m 19.5 128.5 0.0 7.5 41.0 0.0" />
+    <text
+      id="LabelH"
+      class="H Label"
+      y="136.0"
+      x="62.0"
+      style="text-anchor:start;">H</text>
+    <circle
+      id="ButtonH"
+      class="H Button"
+      cy="125.0"
+      cx="17.5"
+      r="1.5" />
+  </g>
+  <g>
+    <path
+      id="LeaderG"
+      class="G Leader"
+      d="m 34.0 105.0 0.0 -2.0 26.0 0.0" />
+    <text
+      id="LabelG"
+      class="G Label"
+      y="103.0"
+      x="62.0"
+      style="text-anchor:start;">G</text>
+    <circle
+      id="ButtonG"
+      class="G Button"
+      cy="108.5"
+      cx="34.0"
+      r="1.5" />
+  </g>
+  <g>
+    <path
+      id="LeaderF"
+      class="F Leader"
+      d="m 56.0 125.0 4.0 0.0" />
+    <text
+      id="LabelF"
+      class="F Label"
+      y="125.0"
+      x="62.0"
+      style="text-anchor:start;">F</text>
+    <circle
+      id="ButtonF"
+      class="F Button"
+      cy="125.0"
+      cx="50.5"
+      r="1.5" />
+  </g>
+  <g>
+    <path
+      id="LeaderI"
+      class="I Leader"
+      d="m 34.0 145.0 0.0 2.0 26.0 0.0" />
+    <text
+      id="LabelI"
+      class="I Label"
+      y="147.0"
+      x="62.0"
+      style="text-anchor:start;">I</text>
+    <circle
+      id="ButtonI"
+      class="I Button"
+      cy="141.5"
+      cx="34.0"
+      r="1.5" />
+  </g>
+  <g>
+    <rect
+      id="ButtonD"
+      class="D Button"
+      rx="2.0"
+      ry="2.0"
+      height="14.5"
+      width="20.0"
+      y="156.5"
+      x="23.5" />
+    <path
+      id="LeaderD"
+      class="D Leader"
+      d="m 45.5 165.0 4.0 0.0" />
+    <text
+      id="LabelD"
+      class="D Label"
+      y="165.0"
+      x="51.5"
+      style="text-anchor:start;">D</text>
+    <rect
+      id="DotD"
+      rx="1.0"
+      ry="1.0"
+      height="8.0"
+      width="8.0"
+      y="160.0"
+      x="30.0" />
+  </g>
+  <g>
+    <rect
+      id="ButtonA"
+      class="A Button"
+      rx="1.0"
+      ry="1.0"
+      height="8.0"
+      width="8.0"
+      y="121.0"
+      x="30.0" />
+    <path
+      id="LeaderA"
+      class="A Leader"
+      d="m 34.0 116.5 0.0 -3.0 26.0 0.0" />
+    <text
+      id="LabelA"
+      class="A Label"
+      y="113.5"
+      x="62.0"
+      style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <path
+      id="LeaderE"
+      class="E Leader"
+      d="m 45.5 183.0 4.0 0.0" />
+    <text
+      id="LabelE"
+      class="E Label"
+      y="183.0"
+      x="51.5"
+      style="text-anchor:start;">E</text>
+    <rect
+      id="ButtonE"
+      class="E Button"
+      rx="2.0"
+      ry="2.0"
+      height="14.5"
+      width="20.0"
+      y="176.0"
+      x="24.0" />
+    <circle
+      id="DotE"
+      cy="183.0"
+      cx="34.0"
+      r="1.0" />
+  </g>
+</svg>

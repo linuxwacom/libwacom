@@ -1,3 +1,8 @@
+libwacom 0.11:
+- Better detection of wireless tablets on kernels 3.18
+- New devices:
+  - Cintiq Companion
+
 libwacom 0.10:
 - Fixed bus detection of Bluetooth tablets on kernels 3.14
   and later (bbe317540)

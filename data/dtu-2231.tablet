@@ -8,7 +8,7 @@ DeviceMatch=usb:056a:00ce
 Class=PenDisplay
 Width=19
 Height=11
-IntegratedIn=Display;System
+IntegratedIn=Display
 
 [Features]
 Stylus=true

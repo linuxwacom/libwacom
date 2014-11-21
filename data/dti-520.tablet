@@ -23,7 +23,7 @@ Height=12
 Layout=dti-520.svg
 # FIXME does the stylus have an eraser?
 # Styli=0xfffff;
-IntegratedIn=Display;System
+IntegratedIn=Display
 
 [Features]
 # This tablet does not appear to support erasers on styli

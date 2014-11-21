@@ -21,7 +21,7 @@ Width=19
 Height=11
 Layout=dth-2242.svg
 Styli=0x180802;0x18080a;
-IntegratedIn=Display;System
+IntegratedIn=Display
 
 [Features]
 # This tablet supports two stylus models:

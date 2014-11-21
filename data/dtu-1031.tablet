@@ -20,7 +20,7 @@ Class=PenDisplay
 Width=9
 Height=5
 #Layout=dtu-1031.svg
-IntegratedIn=Display;System
+IntegratedIn=Display
 
 [Features]
 # This tablet supports two stylus models:

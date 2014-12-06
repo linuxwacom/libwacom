@@ -19,7 +19,7 @@ DeviceMatch=usb:056a:00fb
 Class=PenDisplay
 Width=9
 Height=5
-#Layout=dtu-1031.svg
+Layout=dtu-1031.svg
 IntegratedIn=Display
 
 [Features]

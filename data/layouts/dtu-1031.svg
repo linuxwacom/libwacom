@@ -1,0 +1,85 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="dtu-1031"
+   width="310"
+   height="211">
+  <title
+     id="title">Wacom DTU1031</title>
+  <g>
+    <circle
+       id="ButtonA"
+       class="A Button"
+       cx="25"
+       cy="40"
+       r="5" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 35 40 l 50 0 l 0 -3 l 0 6" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="91"
+       y="42.5"
+       style="text-anchor:middle;">A</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonB"
+       class="B Button"
+       cx="25"
+       cy="60"
+       r="5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 35 60 l 50 0 l 0 -3 l 0 6" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="91"
+       y="62.5"
+       style="text-anchor:middle;">B</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonC"
+       class="C Button"
+       cx="25"
+       cy="80"
+       r="5" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 35 80 l 50 0 l 0 -3 l 0 6" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="91"
+       y="82.5"
+       style="text-anchor:middle;">C</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonD"
+       class="D Button"
+       cx="25"
+       cy="100"
+       r="5" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 35 100 l 50 0 l 0 -3 l 0 6" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="91"
+       y="102.5"
+       style="text-anchor:middle;">D</text>
+  </g>
+</svg>

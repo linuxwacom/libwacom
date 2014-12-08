@@ -1,0 +1,39 @@
+# Wacom
+# Intuos Pen Medium
+# CTL-680
+#
+# Successor of Bamboo3 series
+#
+# stylus with two buttons and eraser
+# Pen active area: 8.5 x 5.3in
+#
+# Button Map:
+# (A=RIGHT, B=LEFT, C=FORWARD, D=BACKWARD)
+#
+#     A                     C
+#     B                     D
+#    *-----------------------*
+#    |                       |
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Intuos Pen Medium
+DeviceMatch=usb:056a:0323
+Class=Bamboo
+Width=9
+Height=5
+Layout=intuos-m-p.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=4
+
+[Buttons]
+Left=A;B
+Right=C;D

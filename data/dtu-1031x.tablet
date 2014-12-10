@@ -1,0 +1,22 @@
+# Wacom
+# DTU-1031X Interactive Pen Display
+#
+
+[Device]
+Name=Wacom DTU1031X
+DeviceMatch=usb:056a:032f
+Class=PenDisplay
+Width=9
+Height=5
+IntegratedIn=Display
+
+[Features]
+# This tablet supports two stylus models:
+# a pen without eraser and a pen with eraser
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=0

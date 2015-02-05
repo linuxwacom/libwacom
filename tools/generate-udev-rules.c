@@ -82,7 +82,8 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 			return;
 	}
 
-	printf("ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", touchpad);
+	/* unset joystick, set tablet and possibly touchpad */
+	printf("ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", touchpad);
 }
 
 static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,

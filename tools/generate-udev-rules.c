@@ -70,17 +70,19 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 
 	switch (type) {
 		case WBUSTYPE_USB:
-			printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
+			printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ", vendor, product);
 			break;
 		case WBUSTYPE_BLUETOOTH:
 			/* Bluetooth tablets do not have ID_VENDOR_ID/ID_MODEL_ID etc set correctly. They
 			 * do have the PRODUCT set though. */
-			printf ("ENV{PRODUCT}==\"5/%x/%x/*\", ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", vendor, product, touchpad);
+			printf ("ENV{PRODUCT}==\"5/%x/%x/*\", ", vendor, product);
 			break;
 		default:
 			/* Not sure how to deal with serials  */
-			break;
+			return;
 	}
+
+	printf("ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", touchpad);
 }
 
 static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,

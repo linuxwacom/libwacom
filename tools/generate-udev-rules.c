@@ -79,6 +79,7 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 			return;
 	}
 
+	printf ("# %s\n", libwacom_get_name (device));
 	/* unset joystick, set tablet */
 	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", matchstr);
 

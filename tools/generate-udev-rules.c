@@ -58,17 +58,10 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
-	int          has_touch  = libwacom_has_touch (device);
-	char         *touchpad,
-		     *matchstr;
+	char         *matchstr;
 
 	if (bus_type_filter != type)
 		return;
-
-	if (has_touch)
-		touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
-	else
-		touchpad = "";
 
 	switch (type) {
 		case WBUSTYPE_USB:
@@ -86,8 +79,11 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 			return;
 	}
 
-	/* unset joystick, set tablet and possibly touchpad */
-	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", matchstr, touchpad);
+	/* unset joystick, set tablet */
+	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", matchstr);
+
+	if (libwacom_has_touch (device))
+		printf( "ATTRS{name}==\"* Finger\", %s ENV{ID_INPUT_TOUCHPAD}=\"1\"\n", matchstr);
 
 	/* set ID_INPUT_TABLET_PAD for pads */
 	if (libwacom_get_num_buttons (device) > 0)

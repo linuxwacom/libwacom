@@ -59,7 +59,8 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
 	int          has_touch  = libwacom_has_touch (device);
-	char         *touchpad;
+	char         *touchpad,
+		     *matchstr;
 
 	if (bus_type_filter != type)
 		return;
@@ -71,12 +72,14 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 
 	switch (type) {
 		case WBUSTYPE_USB:
-			printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ", vendor, product);
+			matchstr = g_strdup_printf ("ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"%04x\", ENV{ID_MODEL_ID}==\"%04x\", ", vendor, product);
+			g_assert(matchstr != NULL);
 			break;
 		case WBUSTYPE_BLUETOOTH:
 			/* Bluetooth tablets do not have ID_VENDOR_ID/ID_MODEL_ID etc set correctly. They
 			 * do have the PRODUCT set though. */
-			printf ("ENV{PRODUCT}==\"5/%x/%x/*\", ", vendor, product);
+			matchstr = g_strdup_printf ("ENV{PRODUCT}==\"5/%x/%x/*\", ", vendor, product);
+			g_assert(matchstr != NULL);
 			break;
 		default:
 			/* Not sure how to deal with serials  */
@@ -84,7 +87,13 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	}
 
 	/* unset joystick, set tablet and possibly touchpad */
-	printf("ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", touchpad);
+	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"%s\n", matchstr, touchpad);
+
+	/* set ID_INPUT_TABLET_PAD for pads */
+	if (libwacom_get_num_buttons (device) > 0)
+		printf ("ATTRS{name}==\"* Pad\", %s ENV{ID_INPUT_TABLET_PAD}=\"1\"\n", matchstr);
+
+	g_free (matchstr);
 }
 
 static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,

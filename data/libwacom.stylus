@@ -313,7 +313,7 @@ Type=Airbrush
 Name=Airbrush Pen
 HasEraser=true
 Buttons=1
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
 [0x912]
@@ -321,7 +321,7 @@ Type=Airbrush
 Name=Airbrush Pen
 HasEraser=true
 Buttons=1
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
 [0x112]
@@ -343,7 +343,7 @@ Type=Airbrush
 Name=Airbrush Pen
 Buttons=1
 HasEraser=true
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
 [0x100902]
@@ -351,7 +351,7 @@ Type=Airbrush
 Name=Airbrush Pen
 Buttons=1
 HasEraser=true
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
 # Puck devices

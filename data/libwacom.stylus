@@ -314,6 +314,7 @@ Type=Airbrush
 Name=Lens Cursor
 Type=Puck
 HasLens=true
+HasWheel=false
 Buttons=5
 
 [0x097]
@@ -321,6 +322,7 @@ Buttons=5
 Name=Lens Cursor
 Type=Puck
 HasLens=true
+HasWheel=false
 Buttons=5
 
 [0x006]
@@ -328,6 +330,7 @@ Buttons=5
 Name=Lens Cursor
 Type=Puck
 HasLens=true
+HasWheel=false
 Buttons=5
 
 [0x094]
@@ -335,6 +338,7 @@ Buttons=5
 Name=4D Mouse
 Type=Puck
 HasLens=false
+HasWheel=false
 Buttons=5
 
 [0x007]
@@ -342,6 +346,7 @@ Buttons=5
 Name=2D Mouse
 Type=Puck
 HasLens=false
+HasWheel=true
 Buttons=3
 
 [0x017]
@@ -349,6 +354,7 @@ Buttons=3
 Name=Mouse
 Type=Puck
 HasLens=false
+HasWheel=true
 Buttons=5
 
 [0x806]
@@ -356,4 +362,5 @@ Buttons=5
 Name=Five Button Mouse
 Type=Puck
 HasLens=false
+HasWheel=true
 Buttons=5

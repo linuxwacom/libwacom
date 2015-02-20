@@ -220,10 +220,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
 			g_clear_error (&error);
+			stylus->has_wheel = g_key_file_get_boolean(keyfile, groups[i], "HasWheel", &error);
+			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
+			g_clear_error (&error);
 		} else {
 			stylus->num_buttons = 0;
 			stylus->has_eraser = FALSE;
 			stylus->has_lens = FALSE;
+			stylus->has_wheel = FALSE;
 		}
 
 		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);

@@ -561,6 +561,12 @@ int         libwacom_stylus_has_lens (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
+ * @return Whether the stylus has a relative mouse wheel
+ */
+int         libwacom_stylus_has_wheel (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
  * @return The type of stylus
  */
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);

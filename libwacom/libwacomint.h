@@ -101,6 +101,7 @@ struct _WacomStylus {
 	gboolean has_eraser;
 	gboolean is_eraser;
 	gboolean has_lens;
+	gboolean has_wheel;
 	WacomStylusType type;
 };
 

@@ -1032,6 +1032,11 @@ int libwacom_stylus_has_lens (const WacomStylus *stylus)
 	return stylus->has_lens;
 }
 
+int libwacom_stylus_has_wheel (const WacomStylus *stylus)
+{
+	return stylus->has_wheel;
+}
+
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {
@@ -1052,6 +1057,7 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	dprintf(fd, "HasEraser=%s\n", libwacom_stylus_has_eraser(stylus) ? "true" : "false");
 	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
 	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
+	dprintf(fd, "HasWheel=%s\n",	libwacom_stylus_has_wheel(stylus) ? "true" : "false");
 
 	switch(libwacom_stylus_get_type(stylus)) {
 		case WSTYLUS_UNKNOWN:	type = "Unknown";	 break;

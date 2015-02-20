@@ -177,6 +177,19 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 			type = libwacom_stylus_get_type (stylus);
 			assert(eraser_is_present (db, styli, nstyli, type));
 		}
+
+		if (libwacom_stylus_get_type (stylus) == WSTYLUS_PUCK) {
+			int has_wheel = libwacom_stylus_has_wheel (stylus);
+			int has_lens = libwacom_stylus_has_lens (stylus);
+			/* 4D mouse is the only one with neither, everything
+			 * else has either wheel or lens */
+			if (styli[i] == 0x94) {
+				assert (!has_wheel);
+				assert (!has_lens);
+			} else {
+				assert (has_wheel != has_lens);
+			}
+		}
 	}
 	assert(libwacom_get_ring_num_modes(device) >= 0);
 	assert(libwacom_get_ring2_num_modes(device) >= 0);

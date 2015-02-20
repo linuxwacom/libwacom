@@ -1037,6 +1037,11 @@ int libwacom_stylus_has_wheel (const WacomStylus *stylus)
 	return stylus->has_wheel;
 }
 
+WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus)
+{
+	return stylus->axes;
+}
+
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {
@@ -1050,6 +1055,7 @@ void
 libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 {
 	const char *type;
+	WacomAxisTypeFlags axes;
 
 	dprintf(fd, "[%#x]\n",	libwacom_stylus_get_id(stylus));
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
@@ -1058,6 +1064,19 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
 	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
 	dprintf(fd, "HasWheel=%s\n",	libwacom_stylus_has_wheel(stylus) ? "true" : "false");
+	axes = libwacom_stylus_get_axes(stylus);
+	dprintf(fd, "Axes=");
+	if (axes & WACOM_AXIS_TYPE_TILT)
+		dprintf(fd, "Tilt;");
+	if (axes & WACOM_AXIS_TYPE_ROTATION_Z)
+		dprintf(fd, "RotationZ;");
+	if (axes & WACOM_AXIS_TYPE_DISTANCE)
+		dprintf(fd, "Distance;");
+	if (axes & WACOM_AXIS_TYPE_PRESSURE)
+		dprintf(fd, "Pressure;");
+	if (axes & WACOM_AXIS_TYPE_SLIDER)
+		dprintf(fd, "Slider;");
+	dprintf(fd, "\n");
 
 	switch(libwacom_stylus_get_type(stylus)) {
 		case WSTYLUS_UNKNOWN:	type = "Unknown";	 break;

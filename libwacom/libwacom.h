@@ -177,6 +177,23 @@ typedef enum {
 	WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
 } WacomButtonFlags;
 
+/**
+ * Axis type for a stylus. Note that x/y is implied.
+ */
+typedef enum {
+	WACOM_AXIS_TYPE_NONE                = 0,
+	/** Tilt in x and y direction */
+	WACOM_AXIS_TYPE_TILT                = (1 << 1),
+	/** Rotation in the z-axis */
+	WACOM_AXIS_TYPE_ROTATION_Z          = (1 << 2),
+	/** Distance to surface */
+	WACOM_AXIS_TYPE_DISTANCE            = (1 << 3),
+	/** Tip pressure */
+	WACOM_AXIS_TYPE_PRESSURE            = (1 << 4),
+	/** A absolute-position slider like the wheel on the airbrush */
+	WACOM_AXIS_TYPE_SLIDER              = (1 << 5),
+} WacomAxisTypeFlags;
+
 typedef enum {
 	WFALLBACK_NONE = 0,
 	WFALLBACK_GENERIC = 1
@@ -564,6 +581,12 @@ int         libwacom_stylus_has_lens (const WacomStylus *stylus);
  * @return Whether the stylus has a relative mouse wheel
  */
 int         libwacom_stylus_has_wheel (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The flags specifying the list of absolute axes
+ */
+WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query

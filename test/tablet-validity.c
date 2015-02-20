@@ -168,6 +168,8 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 	for (i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus;
 		const char *stylus_name;
+		WacomAxisTypeFlags axes;
+
 		stylus = libwacom_stylus_get_for_id (db, styli[i]);
 		assert(stylus);
 		stylus_name = libwacom_stylus_get_name (stylus);
@@ -189,6 +191,17 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 			} else {
 				assert (has_wheel != has_lens);
 			}
+		}
+
+		axes = libwacom_stylus_get_axes (stylus);
+		if (libwacom_stylus_get_type (stylus) == WSTYLUS_PUCK) {
+			assert(axes & WACOM_AXIS_TYPE_TILT);
+			assert((axes & WACOM_AXIS_TYPE_PRESSURE) == 0);
+			assert((axes & WACOM_AXIS_TYPE_DISTANCE) == 0);
+		} else {
+			assert(axes & WACOM_AXIS_TYPE_TILT);
+			assert(axes & WACOM_AXIS_TYPE_PRESSURE);
+			assert(axes & WACOM_AXIS_TYPE_DISTANCE);
 		}
 	}
 	assert(libwacom_get_ring_num_modes(device) >= 0);

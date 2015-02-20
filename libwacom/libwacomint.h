@@ -103,6 +103,7 @@ struct _WacomStylus {
 	gboolean has_lens;
 	gboolean has_wheel;
 	WacomStylusType type;
+	WacomAxisTypeFlags axes;
 };
 
 struct _WacomDeviceDatabase {

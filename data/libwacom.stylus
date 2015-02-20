@@ -98,7 +98,7 @@ Type=Classic
 Name=6D Art Pen
 HasEraser=false
 Buttons=0
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
 
 [0x802]
@@ -114,7 +114,7 @@ Type=General
 Name=Art Pen
 HasEraser=true
 Buttons=2
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
 
 [0x100804]
@@ -122,7 +122,7 @@ Type=Marker
 Name=Art Pen
 HasEraser=true
 Buttons=2
-Axes=Tilt;Pressure;Distance;
+Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
 
 [0x100802]

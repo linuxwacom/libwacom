@@ -201,16 +201,25 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->id = id;
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 
-		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", NULL);
+		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", &error);
+		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
+		g_clear_error (&error);
 
 		if (stylus->is_eraser == FALSE) {
-			stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", NULL);
+			stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", &error);
+			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
+			g_clear_error (&error);
 			stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
 			if (stylus->num_buttons == 0 && error != NULL) {
 				stylus->num_buttons = -1;
 				g_clear_error (&error);
 			}
-			stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", NULL);
+			stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
+			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
+			g_clear_error (&error);
 		} else {
 			stylus->num_buttons = 0;
 			stylus->has_eraser = FALSE;

@@ -313,47 +313,47 @@ Type=Airbrush
 # Intuos and Intuos2
 Name=Lens Cursor
 Type=Puck
-HasLens=True
+HasLens=true
 Buttons=5
 
 [0x097]
 # Intuos3
 Name=Lens Cursor
 Type=Puck
-HasLens=True
+HasLens=true
 Buttons=5
 
 [0x006]
 # Intuos4 and Intuos5
 Name=Lens Cursor
 Type=Puck
-HasLens=True
+HasLens=true
 Buttons=5
 
 [0x094]
 # Intuos and Intuos2
 Name=4D Mouse
 Type=Puck
-HasLens=False
+HasLens=false
 Buttons=5
 
 [0x007]
 # Intuos3
 Name=2D Mouse
 Type=Puck
-HasLens=False
+HasLens=false
 Buttons=3
 
 [0x017]
 # Intuos3
 Name=Mouse
 Type=Puck
-HasLens=False
+HasLens=false
 Buttons=5
 
 [0x806]
 # Intuos4 and Intuos5
 Name=Five Button Mouse
 Type=Puck
-HasLens=False
+HasLens=false
 Buttons=5

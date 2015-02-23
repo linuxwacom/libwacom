@@ -128,7 +128,8 @@ Type=Marker
 [0x100802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen
-IsEraser=true
+HasEraser=true
+Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 

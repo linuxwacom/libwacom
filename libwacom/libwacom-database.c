@@ -212,11 +212,6 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
 			g_clear_error (&error);
-			stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
-			if (stylus->num_buttons == 0 && error != NULL) {
-				stylus->num_buttons = -1;
-				g_clear_error (&error);
-			}
 			stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
 			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
@@ -226,10 +221,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
 			g_clear_error (&error);
 		} else {
-			stylus->num_buttons = 0;
 			stylus->has_eraser = FALSE;
 			stylus->has_lens = FALSE;
 			stylus->has_wheel = FALSE;
+		}
+
+		stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
+		if (stylus->num_buttons == 0 && error != NULL) {
+			stylus->num_buttons = -1;
+			g_clear_error (&error);
 		}
 
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "Axes", NULL, NULL);

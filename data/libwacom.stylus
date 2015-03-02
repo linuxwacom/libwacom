@@ -377,7 +377,7 @@ Type=Airbrush
 [0x096]
 # Intuos and Intuos2
 Name=Lens Cursor
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=true
 HasWheel=false
@@ -386,7 +386,7 @@ Buttons=5
 [0x097]
 # Intuos3
 Name=Lens Cursor
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=true
 HasWheel=false
@@ -395,7 +395,7 @@ Buttons=5
 [0x006]
 # Intuos4 and Intuos5
 Name=Lens Cursor
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=true
 HasWheel=false
@@ -404,7 +404,7 @@ Buttons=5
 [0x094]
 # Intuos and Intuos2
 Name=4D Mouse
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=false
 HasWheel=false
@@ -413,7 +413,7 @@ Buttons=5
 [0x007]
 # Intuos3
 Name=2D Mouse
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=false
 HasWheel=true
@@ -422,7 +422,7 @@ Buttons=3
 [0x017]
 # Intuos3
 Name=Mouse
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=false
 HasWheel=true
@@ -431,7 +431,7 @@ Buttons=5
 [0x806]
 # Intuos4 and Intuos5
 Name=Five Button Mouse
-Axes=Tilt;
+Axes=Tilt;Distance;
 Type=Puck
 HasLens=false
 HasWheel=true

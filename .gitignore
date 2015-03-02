@@ -25,7 +25,13 @@ stamp-h1
 *.swp
 .deps
 .libs
+test-driver
 test/load
 test/tablet-svg-validity
+test/dbverify
+test/tablet-validity
 tools/show-svg-image
+tools/generate-udev-rules
+tools/libwacom-list-local-devices
+tools/list-devices
 doc/doxygen.conf

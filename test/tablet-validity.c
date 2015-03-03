@@ -193,6 +193,9 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 			}
 		}
 
+		if (libwacom_stylus_is_eraser (stylus))
+			assert (libwacom_stylus_get_num_buttons (stylus) > 0);
+
 		axes = libwacom_stylus_get_axes (stylus);
 		if (libwacom_stylus_get_type (stylus) == WSTYLUS_PUCK) {
 			assert(axes & WACOM_AXIS_TYPE_TILT);

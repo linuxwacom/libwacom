@@ -1,0 +1,22 @@
+# Wacom
+# Cintiq 27QHD touch
+# DTH-2700
+#
+# Note: touch data comes through the usb:056a:032c interface
+
+[Device]
+Name=Wacom Cintiq 27QHD touch
+DeviceMatch=usb:056a:032b
+Class=Cintiq
+Width=24
+Height=12
+Styli=0x100802;0x100804;0x10080a;0x10080c;0x100902;0x10090a;0x120802;0x140802;0x14080a;0x160802;0x16080a;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Buttons=0
+Ring=false
+Ring2=false

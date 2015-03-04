@@ -1,0 +1,21 @@
+# Wacom
+# Cintiq 27QHD
+# DTK-2700
+#
+
+[Device]
+Name=Wacom Cintiq 27QHD
+DeviceMatch=usb:056a:032a
+Class=Cintiq
+Width=24
+Height=12
+Styli=0x100802;0x100804;0x10080a;0x10080c;0x100902;0x10090a;0x120802;0x140802;0x14080a;0x160802;0x16080a;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=0
+Ring=false
+Ring2=false

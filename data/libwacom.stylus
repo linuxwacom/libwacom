@@ -377,7 +377,7 @@ Type=Airbrush
 [0x096]
 # Intuos and Intuos2
 Name=Lens Cursor
-Axes=Tilt;Distance;
+Axes=Distance;
 Type=Puck
 HasLens=true
 HasWheel=false
@@ -386,7 +386,7 @@ Buttons=5
 [0x097]
 # Intuos3
 Name=Lens Cursor
-Axes=Tilt;Distance;
+Axes=Distance;
 Type=Puck
 HasLens=true
 HasWheel=false
@@ -395,7 +395,7 @@ Buttons=5
 [0x006]
 # Intuos4 and Intuos5
 Name=Lens Cursor
-Axes=Tilt;Distance;
+Axes=Distance;
 Type=Puck
 HasLens=true
 HasWheel=false

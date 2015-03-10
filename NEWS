@@ -1,3 +1,15 @@
+libwacom 0.12:
+- Added libwacom_stylus_has_wheel() for relative wheel detection
+- Added libwacom_stylus_get_axes() for a list of supported axes
+- New devices:
+  - Cintiq 27QHD, Cintiq 27QHD Touch
+  - DTU-1031X
+  - Intuos Pen Medium
+- Reworked udev rules
+  - be more restrictive when to set ID_INPUT_TOUCHPAD
+  - unset ID_INPUT_JOYSTICK on tablet devices
+  - tag the Pad device as ID_INPUT_TABLET_PAD
+
 libwacom 0.11:
 - Better detection of wireless tablets on kernels 3.18
 - New devices:

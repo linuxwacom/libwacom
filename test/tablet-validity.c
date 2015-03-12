@@ -153,6 +153,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 		case WCLASS_INTUOS2:
 		case WCLASS_INTUOS3:
 		case WCLASS_INTUOS4:
+		case WCLASS_INTUOS5:
 		case WCLASS_CINTIQ:
 			{
 				int i;

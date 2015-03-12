@@ -389,7 +389,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 {
 	g_return_val_if_fail(a || b, 0);
 
-	if ((a && !b) || (b && !a))
+	if (!a || !b)
 		return 1;
 
 	if (strcmp(a->name, b->name) != 0)

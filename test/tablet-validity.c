@@ -161,6 +161,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 					assert(styli[i] != WACOM_ERASER_FALLBACK_ID);
 				}
 			}
+			break;
 		default:
 			assert(1); /* don't get here */
 	}

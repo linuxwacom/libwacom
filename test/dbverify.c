@@ -170,6 +170,7 @@ compare_written_database(WacomDeviceDatabase *db)
 
 	rmtmpdir(dirname);
 	free(dirname);
+	free(devices);
 }
 
 

@@ -164,7 +164,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 			}
 			break;
 		default:
-			assert(1); /* don't get here */
+			abort(); /* don't get here */
 	}
 
 	for (i = 0; i < nstyli; i++) {

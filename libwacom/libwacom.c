@@ -806,7 +806,7 @@ libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, i
 
 	device->nmatches++;
 
-	device->matches = g_realloc_n(device->matches, device->nmatches + 1, sizeof(WacomMatch));
+	device->matches = g_realloc_n(device->matches, device->nmatches + 1, sizeof(WacomMatch*));
 	device->matches[device->nmatches] = NULL;
 	device->matches[device->nmatches - 1] = libwacom_copy_match(&match);
 	device->match = device->nmatches - 1;

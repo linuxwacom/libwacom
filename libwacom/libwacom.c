@@ -472,7 +472,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	int vendor_id, product_id;
 	WacomBusType bus;
 	const WacomDevice *device;
-	WacomDevice *ret;
+	WacomDevice *ret = NULL;
 	WacomIntegrationFlags integration_flags;
 	char *name, *match_name;
 

@@ -369,6 +369,7 @@ static gboolean
 libwacom_same_layouts (const WacomDevice *a, const WacomDevice *b)
 {
 	gchar *file1, *file2;
+	gboolean rc;
 
 	/* Conveniently handle the null case */
 	if (a->layout == b->layout)
@@ -381,7 +382,12 @@ libwacom_same_layouts (const WacomDevice *a, const WacomDevice *b)
 	if (b->layout != NULL)
 		file2 = g_path_get_basename (b->layout);
 
-	return (g_strcmp0 (file1, file2) == 0);
+	rc = (g_strcmp0 (file1, file2) == 0);
+
+	g_free (file1);
+	g_free (file2);
+
+	return rc;
 }
 
 int

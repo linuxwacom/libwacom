@@ -129,46 +129,32 @@ make_match_string (WacomBusType bus, int vendor_id, int product_id)
 	return g_strdup_printf("%s:%04x:%04x", bus_to_str (bus), vendor_id, product_id);
 }
 
-static int
-libwacom_matchstr_to_matches(WacomDevice *device, const char *match)
+static gboolean
+libwacom_matchstr_to_match(WacomDevice *device, const char *match)
 {
 	int rc = 1;
-	char **strs;
-	int i, nmatches = 0;
-	WacomBusType first_bus;
-	int first_vendor_id, first_product_id;
+	char busstr[64];
+	int vendor_id, product_id;
+	WacomBusType bus;
 
 	if (match == NULL)
-		return 0;
+		return FALSE;
 
-	strs = g_strsplit(match, ";", 0);
-	for (i = 0; strs[i] != NULL && *strs[i] != '\0'; i++) {
-		char busstr[64];
-		int vendor_id, product_id;
-		WacomBusType bus;
-		rc = sscanf(strs[i], "%63[^:]:%x:%x", busstr, &vendor_id, &product_id);
-		if (rc != 3) {
-			DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", strs[i]);
-			continue;
-		}
-		bus = bus_from_str (busstr);
-
-		libwacom_update_match(device, bus, vendor_id, product_id);
-
-		if (nmatches == 0) {
-			first_bus = bus;
-			first_vendor_id = vendor_id;
-			first_product_id = product_id;
-		}
-		nmatches++;
+	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
+		libwacom_update_match(device, WBUSTYPE_UNKNOWN, 0, 0);
+		return TRUE;
 	}
 
-	/* set default to first entry */
-	if (nmatches > 1)
-		libwacom_update_match(device, first_bus, first_vendor_id, first_product_id);
+	rc = sscanf(match, "%63[^:]:%x:%x", busstr, &vendor_id, &product_id);
+	if (rc != 3) {
+		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", match);
+		return 0;
+	}
+	bus = bus_from_str (busstr);
 
-	g_strfreev(strs);
-	return i;
+	libwacom_update_match(device, bus, vendor_id, product_id);
+
+	return TRUE;
 }
 
 static void
@@ -382,7 +368,6 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	char *path;
 	char *layout;
 	char *class;
-	char *match;
 	char **string_list;
 
 	keyfile = g_key_file_new();
@@ -397,19 +382,30 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 
 	device = g_new0 (WacomDevice, 1);
 
-	match = g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL);
-	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
-		libwacom_update_match(device, WBUSTYPE_UNKNOWN, 0, 0);
-	} else {
-		if (libwacom_matchstr_to_matches(device, match) == 0) {
-			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", match, path);
-			g_free (match);
-			g_free (device);
-			device = NULL;
-			goto out;
+	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "DeviceMatch", NULL, NULL);
+	if (string_list) {
+		guint i;
+		guint nmatches = 0;
+		guint first_valid_match = 0;
+		for (i = 0; string_list[i]; i++) {
+			if (libwacom_matchstr_to_match (device, string_list[i]))
+				nmatches++;
+			if (nmatches == 1)
+				first_valid_match = i;
 		}
+		if (nmatches == 0) {
+			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", string_list[i], path);
+				g_strfreev (string_list);
+				g_free (device);
+				device = NULL;
+				goto out;
+		}
+		if (nmatches > 1) {
+			/* set default to first entry */
+			libwacom_matchstr_to_match(device, string_list[first_valid_match]);
+		}
+		g_strfreev (string_list);
 	}
-	g_free (match);
 
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);

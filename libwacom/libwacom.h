@@ -602,6 +602,7 @@ WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
  */
 void libwacom_print_stylus_description (int fd, const WacomStylus *stylus);
 
+const char *libwacom_match_get_name(const WacomMatch *match);
 WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
 uint32_t libwacom_match_get_product_id(const WacomMatch *match);
 uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);

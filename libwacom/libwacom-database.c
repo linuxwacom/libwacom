@@ -124,16 +124,21 @@ bus_to_str (WacomBusType bus)
 }
 
 char *
-make_match_string (WacomBusType bus, int vendor_id, int product_id)
+make_match_string (const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
-	return g_strdup_printf("%s:%04x:%04x", bus_to_str (bus), vendor_id, product_id);
+	return g_strdup_printf("%s:%04x:%04x%s%s",
+				bus_to_str (bus),
+				vendor_id, product_id,
+				name ? ":" : "",
+				name ? name : "");
 }
 
 static gboolean
 libwacom_matchstr_to_match(WacomDevice *device, const char *match)
 {
 	int rc = 1;
-	char busstr[64];
+	char busstr[64], namestr[64];
+	char *name;
 	int vendor_id, product_id;
 	WacomBusType bus;
 
@@ -141,18 +146,24 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *match)
 		return FALSE;
 
 	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
-		libwacom_update_match(device, WBUSTYPE_UNKNOWN, 0, 0);
+		libwacom_update_match(device, NULL, WBUSTYPE_UNKNOWN, 0, 0);
 		return TRUE;
 	}
 
-	rc = sscanf(match, "%63[^:]:%x:%x", busstr, &vendor_id, &product_id);
-	if (rc != 3) {
+	memset(namestr, 0, sizeof(namestr));
+
+	rc = sscanf(match, "%63[^:]:%x:%x:%63c", busstr, &vendor_id, &product_id, namestr);
+	if (rc == 4) {
+		name = namestr;
+	} else if (rc == 3) {
+		name = NULL;
+	} else {
 		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", match);
 		return 0;
 	}
 	bus = bus_from_str (busstr);
 
-	libwacom_update_match(device, bus, vendor_id, product_id);
+	libwacom_update_match(device, name, bus, vendor_id, product_id);
 
 	return TRUE;
 }

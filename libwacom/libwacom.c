@@ -300,6 +300,7 @@ static WacomMatch *libwacom_copy_match(const WacomMatch *src)
 
 	dst = g_new0(WacomMatch, 1);
 	dst->match = g_strdup(src->match);
+	dst->name = g_strdup(src->name);
 	dst->bus = src->bus;
 	dst->vendor_id = src->vendor_id;
 	dst->product_id = src->product_id;
@@ -448,7 +449,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 }
 
 static const WacomDevice *
-libwacom_new (const WacomDeviceDatabase *db, int vendor_id, int product_id, WacomBusType bus, WacomError *error)
+libwacom_new (const WacomDeviceDatabase *db, const char *name, int vendor_id, int product_id, WacomBusType bus, WacomError *error)
 {
 	const WacomDevice *device;
 	char *match;
@@ -458,7 +459,7 @@ libwacom_new (const WacomDeviceDatabase *db, int vendor_id, int product_id, Waco
 		return NULL;
 	}
 
-	match = make_match_string(bus, vendor_id, product_id);
+	match = make_match_string(name, bus, vendor_id, product_id);
 	device = libwacom_get_device(db, match);
 	g_free (match);
 
@@ -473,7 +474,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	const WacomDevice *device;
 	WacomDevice *ret;
 	WacomIntegrationFlags integration_flags;
-	char *name;
+	char *name, *match_name;
 
 	if (!db) {
 		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
@@ -488,7 +489,12 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	if (!get_device_info (path, &vendor_id, &product_id, &name, &bus, &integration_flags, error))
 		return NULL;
 
-	device = libwacom_new (db, vendor_id, product_id, bus, error);
+	match_name = name;
+	device = libwacom_new (db, match_name, vendor_id, product_id, bus, error);
+	if (device == NULL) {
+		match_name = NULL;
+		device = libwacom_new (db, match_name, vendor_id, product_id, bus, error);
+	}
 	if (device != NULL)
 		ret = libwacom_copy(device);
 	else if (fallback == WFALLBACK_NONE)
@@ -503,14 +509,14 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 
 		if (name != NULL) {
 			g_free (ret->name);
-			ret->name = name;
+			ret->name = g_strdup(name);
 		}
-	} else {
-		g_free (name);
 	}
 
 	/* for multiple-match devices, set to the one we requested */
-	libwacom_update_match(ret, bus, vendor_id, product_id);
+	libwacom_update_match(ret, match_name, bus, vendor_id, product_id);
+
+	g_free (name);
 
 	if (device) {
 		/* if unset, use the kernel flags. Could be unset as well. */
@@ -536,7 +542,7 @@ libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int produc
 		return NULL;
 	}
 
-	device = libwacom_new(db, vendor_id, product_id, WBUSTYPE_USB, error);
+	device = libwacom_new(db, NULL, vendor_id, product_id, WBUSTYPE_USB, error);
 
 	if (device)
 		return libwacom_copy(device);
@@ -706,6 +712,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "Name=%s\n", libwacom_get_name(device));
 	dprintf(fd, "DeviceMatch=");
 	for (match = libwacom_get_matches(device); *match; match++) {
+		const char  *name       = libwacom_match_get_name(*match);
 		WacomBusType type	= libwacom_match_get_bustype(*match);
 		int          vendor     = libwacom_match_get_vendor_id(*match);
 		int          product    = libwacom_match_get_product_id(*match);
@@ -717,7 +724,10 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 			case WBUSTYPE_UNKNOWN:		bus_name = "unknown";	break;
 			default:			g_assert_not_reached(); break;
 		}
-		dprintf(fd, "%s:%04x:%04x;", bus_name, vendor, product);
+		dprintf(fd, "%s:%04x:%04x", bus_name, vendor, product);
+		if (name)
+			dprintf(fd, ":%s", name);
+		dprintf(fd, ";");
 	}
 	dprintf(fd, "\n");
 
@@ -758,6 +768,7 @@ libwacom_destroy(WacomDevice *device)
 
 	for (i = 0; i < device->nmatches; i++) {
 		g_free (device->matches[i]->match);
+		g_free (device->matches[i]->name);
 		g_free (device->matches[i]);
 	}
 	g_free (device->matches);
@@ -768,18 +779,19 @@ libwacom_destroy(WacomDevice *device)
 }
 
 void
-libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int product_id)
+libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
 	char *newmatch;
 	int i;
 	WacomMatch match;
 
-	if (bus == WBUSTYPE_UNKNOWN && vendor_id == 0 && product_id == 0)
+	if (name == NULL && bus == WBUSTYPE_UNKNOWN && vendor_id == 0 && product_id == 0)
 		newmatch = g_strdup("generic");
 	else
-		newmatch = make_match_string(bus, vendor_id, product_id);
+		newmatch = make_match_string(name, bus, vendor_id, product_id);
 
 	match.match = newmatch;
+	match.name = g_strdup(name);
 	match.bus = bus;
 	match.vendor_id = vendor_id;
 	match.product_id = product_id;
@@ -1099,6 +1111,11 @@ void libwacom_stylus_destroy(WacomStylus *stylus)
 	g_free (stylus);
 }
 
+
+const char *libwacom_match_get_name(const WacomMatch *match)
+{
+	return match->name;
+}
 
 WacomBusType libwacom_match_get_bustype(const WacomMatch *match)
 {

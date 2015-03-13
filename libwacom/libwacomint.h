@@ -54,6 +54,7 @@ enum WacomFeature {
  * make sure to update libwacom_copy_match() ! */
 struct _WacomMatch {
 	char *match;
+	char *name;
 	WacomBusType bus;
 	uint32_t vendor_id;
 	uint32_t product_id;
@@ -119,12 +120,11 @@ struct _WacomError {
 /* INTERNAL */
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_stylus_destroy(WacomStylus *stylus);
-void libwacom_update_match(WacomDevice *device, WacomBusType bus, int vendor_id, int product_id);
+void libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, int vendor_id, int product_id);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
-char *make_match_string(WacomBusType bus, int vendor_id, int product_id);
-
+char *make_match_string(const char *name, WacomBusType bus, int vendor_id, int product_id);
 
 #endif /* _LIBWACOMINT_H_ */
 

@@ -100,6 +100,7 @@ verify_has_class (xmlNodePtr cur, const gchar *expected)
 
 	g_strfreev (classes_present);
 	g_strfreev (classes_expected);
+	xmlFree (prop);
 }
 
 static void
@@ -314,6 +315,7 @@ int main(int argc, char **argv)
 	for (device = devices; *device; device++)
 		verify_tablet_layout(db, *device);
 
+	free(devices);
 	libwacom_database_destroy (db);
 
 	return 0;

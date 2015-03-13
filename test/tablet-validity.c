@@ -242,6 +242,8 @@ int main(int argc, char **argv)
 
 	libwacom_database_destroy (db);
 
+	free(devices);
+
 	return 0;
 }
 

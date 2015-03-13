@@ -127,6 +127,7 @@ int main(int argc, char **argv)
 	assert(device);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	libwacom_destroy(device);
 	libwacom_database_destroy (db);
 
 	return 0;

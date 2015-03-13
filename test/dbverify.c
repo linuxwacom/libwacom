@@ -111,6 +111,9 @@ compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 		assert(old_matched[i]);
 	}
 
+	free(old_matched);
+	free(oldall);
+	free(newall);
 }
 
 /* write out the current db, read it back in, compare */
@@ -160,6 +163,7 @@ compare_written_database(WacomDeviceDatabase *db)
 			assert(fd_stylus >= 0);
 			libwacom_print_stylus_description(fd_stylus, stylus);
 			close(fd_stylus);
+			free(path);
 		}
 	}
 

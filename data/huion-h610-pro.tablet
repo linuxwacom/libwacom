@@ -1,0 +1,22 @@
+# HUION
+# H610 Pro
+#
+
+[Device]
+Name=Huion H610 Pro
+DeviceMatch=usb:256c:006e:HUION PenTablet Pen;usb:256c:006e:HUION PenTablet Pad
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=huion-h610-pro.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H

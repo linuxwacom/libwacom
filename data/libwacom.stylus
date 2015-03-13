@@ -13,6 +13,13 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
+[0xffffd]
+Name=General Pen with no Eraser
+HasEraser=false
+Buttons=2
+Axes=Pressure;
+Type=General
+
 # Inking pen have no eraser
 [0x812]
 # Intuos and Intuos2

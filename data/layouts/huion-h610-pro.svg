@@ -1,0 +1,153 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="intuos-pro-m"
+   width="355"
+   height="250">
+  <title
+     id="title">Huion H610 Pro</title>
+  <g>
+    <circle
+       id="ButtonA"
+       class="A ModeSwitch Button"
+       cx="29"
+       cy="56"
+       r="7.5" />
+    <path
+       id="LeaderA"
+       class="A ModeSwitch Leader"
+       d="m 51,56 4,0" />
+    <text
+       id="LabelA"
+       class="A ModeSwitch Label"
+       x="57"
+       y="56"
+       style="text-anchor:start">A</text>
+  </g>
+  <g>
+    <circle
+       r="7.5"
+       cy="75"
+       cx="29"
+       class="B ModeSwitch Button"
+       id="ButtonB" />
+    <path
+       d="m 51,75 4,0"
+       class="B ModeSwitch Leader"
+       id="LeaderB" />
+    <text
+       style="text-anchor:start"
+       y="75"
+       x="57"
+       class="B ModeSwitch Label"
+       id="LabelB">B</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonC"
+       class="C ModeSwitch Button"
+       cx="29"
+       cy="94"
+       r="7.5" />
+    <path
+       id="LeaderC"
+       class="C ModeSwitch Leader"
+       d="m 51,94 4,0" />
+    <text
+       id="LabelC"
+       class="C ModeSwitch Label"
+       x="57"
+       y="94"
+       style="text-anchor:start">C</text>
+  </g>
+  <g>
+    <path
+       id="ButtonD"
+       class="D ModeSwitch Button"
+       d="m 18.056792,123.54602 c 0.300764,-2.53638 1.528708,-4.99316 3.165033,-6.65348 1.990614,-1.99061 4.740609,-3.22183 7.778175,-3.22183 3.037566,0 5.787566,1.23122 7.778174,3.22183 1.772939,2.1284 2.827481,4.24769 3.165034,6.65348 -10.929806,-3.03352 -12.689135,3.86 -21.886416,0 z"/>
+    <path
+       id="LeaderD"
+       class="D ModeSwitch Leader"
+       d="m 51,118 4,0" />
+    <text
+       id="LabelD"
+       class="D ModeSwitch Label"
+       x="57"
+       y="118"
+       style="text-anchor:start">D</text>
+  </g>
+  <g>
+    <path
+       d="m 39.943205,125.91036 c -0.30076,2.53638 -1.5287,4.99316 -3.16503,6.65348 -1.99061,1.99061 -4.74061,3.22183 -7.77817,3.22183 -3.03757,0 -5.78757,-1.23122 -7.77818,-3.22183 -1.77294,-2.1284 -2.82748,-4.24769 -3.16503,-6.65348 10.9298,3.03352 12.68913,-3.86 21.88641,0 z"
+       id="ButtonE"
+       class="E ModeSwitch Button" />
+    <path
+       id="LeaderE"
+       class="E ModeSwitch Leader"
+       d="m 51,132 4,0" />
+    <text
+       id="LabelE"
+       class="E ModeSwitch Label"
+       x="57"
+       y="132"
+       style="text-anchor:start">E</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonF"
+       class="F ModeSwitch Button"
+       cx="29"
+       cy="156"
+       r="7.5" />
+    <path
+       id="LeaderF"
+       class="F ModeSwitch Leader"
+       d="m 51,156 4,0" />
+    <text
+       id="LabelF"
+       class="F ModeSwitch Label"
+       x="57"
+       y="156"
+       style="text-anchor:start">F</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonG"
+       class="G ModeSwitch Button"
+       cx="29"
+       cy="175"
+       r="7.5" />
+    <path
+       id="LeaderG"
+       class="G ModeSwitch Leader"
+       d="m 51,175 4,0" />
+    <text
+       id="LabelG"
+       class="G ModeSwitch Label"
+       x="57"
+       y="175"
+       style="text-anchor:start">G</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonH"
+       class="H ModeSwitch Button"
+       cx="29"
+       cy="194"
+       r="7.5" />
+    <path
+       id="LeaderH"
+       class="H ModeSwitch Leader"
+       d="m 51,194 4,0" />
+    <text
+       id="LabelH"
+       class="H ModeSwitch Label"
+       x="57"
+       y="194"
+       style="text-anchor:start">H</text>
+  </g>
+</svg>

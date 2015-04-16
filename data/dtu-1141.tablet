@@ -1,0 +1,37 @@
+# Wacom
+# DTU-1141 Interactive Pen Display
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#            A B C D
+#      *-----------------*
+#      |                 |
+#      |                 |
+#      |     DISPLAY     |
+#      |                 |
+#      |                 |
+#      *-----------------*
+#
+
+[Device]
+Name=Wacom DTU1141
+DeviceMatch=usb:056a:0336
+Class=PenDisplay
+Width=9
+Height=5
+Layout=dtu-1141.svg
+IntegratedIn=Display
+
+[Features]
+# This tablet supports two stylus models:
+# a pen without eraser and a pen with eraser
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=4
+
+[Buttons]
+Top=A;B;C;D

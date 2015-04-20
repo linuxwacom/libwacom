@@ -1,3 +1,11 @@
+libwacom 0.13:
+- New devices:
+  - DTU-1141
+  - Huion H610 Pro
+- Several memory leak fixes
+- Added libwacom_match_get_name() to allow data-file matching on the name as
+  well as the pid/vid
+
 libwacom 0.12:
 - Added libwacom_stylus_has_wheel() for relative wheel detection
 - Added libwacom_stylus_get_axes() for a list of supported axes

@@ -44,7 +44,7 @@ IntegratedIn=Display
 [Features]
 Stylus=true
 Reversible=false
-Touch=false
+Touch=true
 Ring=false
 NumStrips=2
 Buttons=18

@@ -1,0 +1,43 @@
+# Wacom
+# Cintiq 13HD touch
+# DTH-1300
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    B     |                       |
+#    C     |                       |
+#          |                       |
+#    G     |                       |
+#  H A F   |        DISPLAY        |
+#    I     |                       |
+#          |                       |
+#    D     |                       |
+#    E     |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Note: Buttons F, G, H, I are on a circle
+#       touch data comes through the usb:056a:0335 interface
+
+[Device]
+Name=Wacom Cintiq 13HD touch
+Class=Cintiq
+DeviceMatch=usb:056a:0333
+Width=12
+Height=7
+Layout=cintiq-13hd.svg
+Styli=0x802;0x804;0x80a;0x80c;0x902;0x90a;0x100802;0x100804;0x10080a;0x10080c;0x100902;0x10090a;0x120802;0x140802;0x14080a;0x160802;0x16080a;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=9
+
+[Buttons]
+Left=B;C;G;H;A;F;I;D;E

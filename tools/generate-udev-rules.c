@@ -83,8 +83,12 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	/* unset joystick, set tablet */
 	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", matchstr);
 
-	if (libwacom_has_touch (device))
-		printf( "ATTRS{name}==\"* Finger\", %s ENV{ID_INPUT_TOUCHPAD}=\"1\"\n", matchstr);
+	if (libwacom_has_touch (device)) {
+		const char *touchtype = "ID_INPUT_TOUCHPAD";
+		if (libwacom_get_integration_flags (device) != WACOM_DEVICE_INTEGRATED_NONE)
+			touchtype = "ID_INPUT_TOUCHSCREEN";
+		printf( "ATTRS{name}==\"* Finger\", %s ENV{%s}=\"1\"\n", matchstr, touchtype);
+	}
 
 	/* set ID_INPUT_TABLET_PAD for pads */
 	if (libwacom_get_num_buttons (device) > 0)

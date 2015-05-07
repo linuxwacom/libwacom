@@ -96,33 +96,31 @@ static void print_udev_entry_matchstr(WacomDevice *device, const char *matchstr)
 		printf ("ATTRS{name}==\"* Pad\", %s ENV{ID_INPUT_TABLET_PAD}=\"1\"\n", matchstr);
 }
 
-static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,
-					  WacomBusType bus_type_filter)
+static char * generate_uinput_match (WacomDevice *device, const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
 	const char *subsystem;
-
-	if (bus_type_filter != type)
-		return;
+	char *matchstr;
 
 	switch(type) {
 		case WBUSTYPE_USB: subsystem = "usb"; break;
 		case WBUSTYPE_BLUETOOTH: subsystem = "bluetooth"; break;
 		case WBUSTYPE_SERIAL: subsystem = "tty"; break;
 		default:
-				      return;
+			return NULL;
 	}
 
-	printf("ENV{DEVPATH}==\"/devices/virtual/*\", "
-			"ENV{PRODUCT}==\"*/%x/%x/*\", "
-			"ENV{UINPUT_DEVICE}=\"1\", "
-			"ENV{UINPUT_SUBSYSTEM}=\"%s\", "
-			"ENV{ID_VENDOR_ID}=\"%04x\", "
-			"ENV{ID_MODEL_ID}=\"%04x\", "
-			"\n", vendor, product,
-			subsystem, vendor, product);
+	matchstr = g_strdup_printf("ENV{DEVPATH}==\"/devices/virtual/*\", "
+				   "ENV{PRODUCT}==\"*/%x/%x/*\", "
+				   "ENV{UINPUT_DEVICE}=\"1\", "
+				   "ENV{UINPUT_SUBSYSTEM}=\"%s\", "
+				   "ENV{ID_VENDOR_ID}=\"%04x\", "
+				   "ENV{ID_MODEL_ID}=\"%04x\", ",
+				   vendor, product,
+				   subsystem, vendor, product);
+	return matchstr;
 }
 
 static void print_uinput_entry (WacomDevice *device, WacomBusType bus_type_filter)
@@ -130,8 +128,20 @@ static void print_uinput_entry (WacomDevice *device, WacomBusType bus_type_filte
 	const WacomMatch **matches, **match;
 
 	matches = libwacom_get_matches(device);
-	for (match = matches; *match; match++)
-		print_uinput_entry_for_match(device, *match, bus_type_filter);
+	for (match = matches; *match; match++) {
+		WacomBusType type = libwacom_match_get_bustype (*match);
+		char *matchstr;
+
+		if (bus_type_filter != type)
+			continue;
+
+		matchstr = generate_uinput_match (device, *match);
+		if (matchstr == NULL)
+			continue;
+
+		print_udev_entry_matchstr (device, matchstr);
+		g_free (matchstr);
+	}
 }
 
 

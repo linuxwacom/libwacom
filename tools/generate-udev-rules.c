@@ -113,7 +113,8 @@ static char * generate_uinput_match (WacomDevice *device, const WacomMatch *matc
 	}
 
 	matchstr = g_strdup_printf("ENV{DEVPATH}==\"/devices/virtual/*\", "
-				   "ENV{PRODUCT}==\"*/%x/%x/*\", "
+				   "ATTRS{id/vendor}==\"%04x\", "
+				   "ATTRS{id/product}==\"%04x\", "
 				   "ENV{UINPUT_DEVICE}=\"1\", "
 				   "ENV{UINPUT_SUBSYSTEM}=\"%s\", "
 				   "ENV{ID_VENDOR_ID}=\"%04x\", "

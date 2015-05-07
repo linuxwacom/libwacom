@@ -195,6 +195,7 @@ int main(int argc, char **argv)
 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
 
 	if (need_uinput_rules) {
+		printf("\n# Start of uinput rules\n");
 		for (p = list; *p; p++)
 			print_uinput_entry ((WacomDevice *) *p, WBUSTYPE_USB);
 		for (p = list; *p; p++)

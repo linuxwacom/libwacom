@@ -52,16 +52,12 @@ static void print_udev_header (void)
 	printf ("\n");
 }
 
-static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *match,
-					WacomBusType bus_type_filter)
+static char * generate_device_match(WacomDevice *device, const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
 	int          product    = libwacom_match_get_product_id (match);
-	char         *matchstr;
-
-	if (bus_type_filter != type)
-		return;
+	char         *matchstr = NULL;
 
 	switch (type) {
 		case WBUSTYPE_USB:
@@ -76,9 +72,14 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 			break;
 		default:
 			/* Not sure how to deal with serials  */
-			return;
+			return NULL;
 	}
 
+	return matchstr;
+}
+
+static void print_udev_entry_matchstr(WacomDevice *device, const char *matchstr)
+{
 	printf ("# %s\n", libwacom_get_name (device));
 	/* unset joystick, set tablet */
 	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", matchstr);
@@ -93,8 +94,6 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
 	/* set ID_INPUT_TABLET_PAD for pads */
 	if (libwacom_get_num_buttons (device) > 0)
 		printf ("ATTRS{name}==\"* Pad\", %s ENV{ID_INPUT_TABLET_PAD}=\"1\"\n", matchstr);
-
-	g_free (matchstr);
 }
 
 static void print_uinput_entry_for_match (WacomDevice *device, const WacomMatch *match,
@@ -141,8 +140,20 @@ static void print_udev_entry (WacomDevice *device, WacomBusType bus_type_filter)
 	const WacomMatch **matches, **match;
 
 	matches = libwacom_get_matches(device);
-	for (match = matches; *match; match++)
-		print_udev_entry_for_match(device, *match, bus_type_filter);
+	for (match = matches; *match; match++) {
+		WacomBusType type = libwacom_match_get_bustype (*match);
+		char *matchstr;
+
+		if (bus_type_filter != type)
+			continue;
+
+		matchstr = generate_device_match (device, *match);
+		if (matchstr == NULL)
+			continue;
+
+		print_udev_entry_matchstr (device, matchstr);
+		g_free (matchstr);
+	}
 }
 
 static void print_udev_trailer (void)

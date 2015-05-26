@@ -805,8 +805,7 @@ libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, i
 	for (i = 0; i < device->nmatches; i++) {
 		if (g_strcmp0(libwacom_match_get_match_string(device->matches[i]), newmatch) == 0) {
 			device->match = i;
-			g_free(newmatch);
-			return;
+			goto out;
 		}
 	}
 
@@ -816,7 +815,9 @@ libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, i
 	device->matches[device->nmatches] = NULL;
 	device->matches[device->nmatches - 1] = libwacom_copy_match(&match);
 	device->match = device->nmatches - 1;
+out:
 	g_free(newmatch);
+	g_free(match.name);
 }
 
 int libwacom_get_vendor_id(const WacomDevice *device)

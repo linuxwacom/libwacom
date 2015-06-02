@@ -40,6 +40,11 @@ AM_CONDITIONAL(HAVE_LIBXML, test x$HAVE_LIBXML = xyes)
 PKG_CHECK_MODULES(GTK2, librsvg-2.0 glib-2.0 gtk+-2.0, HAVE_GTK2="yes", HAVE_GTK2="no")
 AM_CONDITIONAL(HAVE_GTK2, test x$HAVE_GTK2 = xyes)
 
+PKG_CHECK_MODULES(GLIB_236, [glib-2.0 >= 2.36], HAVE_GLIB236="yes", HAVE_GLIB236="no")
+if test "x$HAVE_GLIB236" != "xyes"; then
+    AC_DEFINE(NEED_G_TYPE_INIT, 1, [Need g_type_init() call])
+fi
+
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  data/layouts/Makefile

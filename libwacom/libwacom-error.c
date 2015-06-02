@@ -75,7 +75,8 @@ libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg,
 	if (msg) {
 		va_list ap;
 		va_start(ap, msg);
-		vasprintf(&error->msg, msg, ap);
+		if (vasprintf(&error->msg, msg, ap) == -1)
+			error->msg = NULL;
 		va_end(ap);
 	}
 }

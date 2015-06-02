@@ -1,3 +1,9 @@
+libwacom 0.14:
+- New devices:
+  - Cintiq 13HD touch
+- Fixes to the udev rule set to tag uinput devices correctly too
+- Integrated tabled are not marked as ID_INPUT_TOUCHPAD anymore now
+
 libwacom 0.13:
 - New devices:
   - DTU-1141

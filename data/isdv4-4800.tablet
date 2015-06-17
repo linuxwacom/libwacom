@@ -1,0 +1,12 @@
+# Active electrostatic (AES) sensor used by the Dell Venue 10 5050
+
+[Device]
+Name=Wacom ISDv4 4800
+DeviceMatch=i2c:056a:4800
+Class=ISDV4
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

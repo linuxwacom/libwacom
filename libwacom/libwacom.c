@@ -127,7 +127,7 @@ get_bus_vid_pid (GUdevDevice  *device,
 		goto out;
 	}
 
-	bus_id = (int)strtoul (splitted_product[0], NULL, 10);
+	bus_id = (int)strtoul (splitted_product[0], NULL, 16);
 	*vendor_id = (int)strtol (splitted_product[1], NULL, 16);
 	*product_id = (int)strtol (splitted_product[2], NULL, 16);
 

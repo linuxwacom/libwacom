@@ -103,6 +103,8 @@ bus_from_str (const char *str)
 		return WBUSTYPE_SERIAL;
 	if (strcmp (str, "bluetooth") == 0)
 		return WBUSTYPE_BLUETOOTH;
+	if (strcmp (str, "i2c") == 0)
+		return WBUSTYPE_I2C;
 	return WBUSTYPE_UNKNOWN;
 }
 
@@ -119,6 +121,8 @@ bus_to_str (WacomBusType bus)
 		return "serial";
 	case WBUSTYPE_BLUETOOTH:
 		return "bluetooth";
+	case WBUSTYPE_I2C:
+		return "i2c";
 	}
 	g_assert_not_reached ();
 }

@@ -114,7 +114,8 @@ typedef enum {
 	WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
 	WBUSTYPE_USB,		/**< USB tablet */
 	WBUSTYPE_SERIAL,		/**< Serial tablet */
-	WBUSTYPE_BLUETOOTH		/**< Bluetooth tablet */
+	WBUSTYPE_BLUETOOTH,		/**< Bluetooth tablet */
+	WBUSTYPE_I2C,		/**< I2C tablet */
 } WacomBusType;
 
 /**

@@ -140,6 +140,10 @@ get_bus_vid_pid (GUdevDevice  *device,
 		*bus = WBUSTYPE_BLUETOOTH;
 		retval = TRUE;
 		break;
+	case 24:
+		*bus = WBUSTYPE_I2C;
+		retval = TRUE;
+		break;
 	}
 
 out:
@@ -267,7 +271,7 @@ get_device_info (const char            *path,
 		g_object_unref (parent);
 	}
 
-	/* Parse the PRODUCT attribute (for Bluetooth and USB) */
+	/* Parse the PRODUCT attribute (for Bluetooth, USB, I2C) */
 	retval = get_bus_vid_pid (device, bus, vendor_id, product_id, error);
 	if (retval)
 		goto out;
@@ -729,6 +733,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 			case WBUSTYPE_BLUETOOTH:	bus_name = "bluetooth";	break;
 			case WBUSTYPE_USB:		bus_name = "usb";	break;
 			case WBUSTYPE_SERIAL:		bus_name = "serial";	break;
+			case WBUSTYPE_I2C:		bus_name = "i2c";	break;
 			case WBUSTYPE_UNKNOWN:		bus_name = "unknown";	break;
 			default:			g_assert_not_reached(); break;
 		}

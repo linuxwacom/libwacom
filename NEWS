@@ -1,3 +1,8 @@
+libwacom 0.15:
+- New devices:
+  - ISDv4 0x4800 (Dell Venue 10 5050 Android tablet)
+- Bustype i2c is now supported
+
 libwacom 0.14:
 - New devices:
   - Cintiq 13HD touch

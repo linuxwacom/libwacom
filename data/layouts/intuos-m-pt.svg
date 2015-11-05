@@ -2,8 +2,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!--
  -->
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="intuos-m-p" width="275" height="222">
-  <title id="title">Wacom Intuos Pen Medium (CTL-680)</title>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="intuos-m-pt" width="275" height="222">
+  <title id="title">Wacom Intuos PT Medium (CTH-680)</title>
   <g>
     <path id="ButtonA" class="A Button" d="M 35 35   a 8  8           0            0           1      9 -9   l 14 0   l 0 20   l -23 0   z"/>
     <circle id="DotA" cx="47" cy="36" r=".5"/>

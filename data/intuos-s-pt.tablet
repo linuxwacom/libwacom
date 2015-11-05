@@ -39,7 +39,7 @@ DeviceMatch=usb:056a:0302
 Class=Bamboo
 Width=6
 Height=4
-#Layout=intuos-s-pt.svg
+Layout=intuos-s-pt.svg
 IntegratedIn=
 
 [Features]

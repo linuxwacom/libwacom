@@ -1,0 +1,41 @@
+# Wacom
+# Intuos Pen Medium
+# CTL-690
+#
+# Successor of Bamboo3 series while stylus
+# is in Intuos stylus format
+#
+# stylus with two buttons and no eraser
+# Pen active area: 8.5 x 5.3in
+#
+# Button Map:
+# (A=RIGHT, B=LEFT, C=FORWARD, D=BACKWARD)
+#
+#     A                     C
+#      B                   D
+#    *-----------------------*
+#    |                       |
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Intuos Pen Medium
+DeviceMatch=usb:056a:033d
+Class=Intuos
+Width=9
+Height=5
+Layout=intuos-m-p2.svg
+IntegratedIn=
+Styli=0x8e2;
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=4
+
+[Buttons]
+Left=A;B
+Right=C;D

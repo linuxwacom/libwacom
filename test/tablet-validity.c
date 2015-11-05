@@ -201,7 +201,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 		axes = libwacom_stylus_get_axes (stylus);
 		if (libwacom_stylus_get_type (stylus) == WSTYLUS_PUCK) {
 			assert((axes & WACOM_AXIS_TYPE_PRESSURE) == 0);
-		} else if (styli[i] != 0xffffd) {
+		} else if ((styli[i] != 0xffffd) && (styli[i] != 0x8e2)) {
 			assert(axes & WACOM_AXIS_TYPE_TILT);
 			assert(axes & WACOM_AXIS_TYPE_PRESSURE);
 			assert(axes & WACOM_AXIS_TYPE_DISTANCE);

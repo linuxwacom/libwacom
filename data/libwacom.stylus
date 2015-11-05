@@ -69,6 +69,14 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
 
+[0x8e2]
+# Intuos P/PT 2
+Name=Intuos Pen
+HasEraser=false
+Buttons=2
+Axes=Pressure;Distance;
+Type=General
+
 [0x842]
 # Intuos2
 Name=Designer Pen

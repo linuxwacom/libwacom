@@ -1,3 +1,7 @@
+libwacom 0.16:
+- Data files for Intuos and Intuos 2 series added
+- New stylus ID 0x8e2
+
 libwacom 0.15:
 - New devices:
   - ISDv4 0x4800 (Dell Venue 10 5050 Android tablet)

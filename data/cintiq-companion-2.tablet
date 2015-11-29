@@ -1,0 +1,46 @@
+# Wacom
+# Cintiq Companion
+# DTH-W1310
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    B     |                       |
+#    C     |                       |
+#    D     |                       |
+#          |                       |
+#    I     |                       |
+#  J A H   |        DISPLAY        |
+#    K     |                       |
+#          |                       |
+#    E     |                       |
+#    F     |                       |
+#    G     |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Note: Buttons H, I, J, K are on a circle
+#
+# Note: touch data comes through the usb:056a:0326 interface
+#
+
+[Device]
+Name=Wacom Cintiq Companion 2
+Class=Cintiq
+DeviceMatch=usb:056a:0325
+Width=12
+Height=7
+Layout=cintiq-companion-2.svg
+Styli=0x802;0x804;0x80a;0x80c;0x902;0x90a;0x100802;0x100804;0x10080a;0x10080c;0x100902;0x10090a;0x120802;0x140802;0x14080a;0x160802;0x16080a;
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Ring=false
+Buttons=11
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K

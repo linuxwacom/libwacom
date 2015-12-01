@@ -717,6 +717,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 		case WCLASS_INTUOS:	class_name = "Intuos";	break;
 		case WCLASS_INTUOS2:	class_name = "Intuos2";	break;
 		case WCLASS_PEN_DISPLAYS:	class_name = "PenDisplay";	break;
+		case WCLASS_REMOTE:	class_name = "Remote";	break;
 		default:		g_assert_not_reached(); break;
 	}
 

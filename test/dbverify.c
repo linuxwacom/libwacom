@@ -151,6 +151,9 @@ compare_written_database(WacomDeviceDatabase *db)
 		close(fd);
 		free(path);
 
+		if (!libwacom_has_stylus(*device))
+			continue;
+
 		styli = libwacom_get_supported_styli(*device, &nstyli);
 		for (i = 0; i < nstyli; i++) {
 			int fd_stylus;

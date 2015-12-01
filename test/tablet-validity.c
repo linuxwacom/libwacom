@@ -133,21 +133,26 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 	assert(libwacom_get_matches(device) != NULL);
 
 	/* ISDv4 are built-in, they may be of varying size */
-	if (libwacom_get_class(device) != WCLASS_ISDV4) {
+	if (libwacom_get_class(device) != WCLASS_ISDV4 &&
+	    libwacom_get_class(device) != WCLASS_REMOTE) {
 		assert(libwacom_get_width(device) > 0);
 		assert(libwacom_get_height(device) > 0);
 	}
 	assert(libwacom_get_num_buttons(device) >= 0);
 
 	styli = libwacom_get_supported_styli(device, &nstyli);
-	assert(styli != NULL);
-	assert(nstyli >= 1);
+
+	if (libwacom_has_stylus(device)) {
+		assert(styli != NULL);
+		assert(nstyli >= 1);
+	}
 
 	switch(libwacom_get_class(device)) {
 		case WCLASS_BAMBOO:
 		case WCLASS_ISDV4:
 		case WCLASS_PEN_DISPLAYS:
 		case WCLASS_GRAPHIRE:
+		case WCLASS_REMOTE:
 			break;
 		case WCLASS_INTUOS:
 		case WCLASS_INTUOS2:

@@ -142,6 +142,7 @@ typedef enum {
 	WCLASS_INTUOS,		/**< Any Intuos series */
 	WCLASS_INTUOS2,		/**< Any Intuos2 series */
 	WCLASS_PEN_DISPLAYS,	/**< Any "interactive pen display" */
+	WCLASS_REMOTE,		/**< Any Wacom Remote */
 } WacomClass;
 
 /**

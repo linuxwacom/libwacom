@@ -1,3 +1,9 @@
+libwacom 0.17:
+- New devices:
+  - Cintiq Companion 2 (DTH-1310)
+  - ExpressKey Remote
+- New WacomClass: WCLASS_REMOTE
+
 libwacom 0.16:
 - Data files for Intuos and Intuos 2 series added
 - New stylus ID 0x8e2

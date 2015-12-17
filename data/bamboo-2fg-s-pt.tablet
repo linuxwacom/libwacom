@@ -1,20 +1,20 @@
 # Wacom
-# Bamboo Fun small / Bamboo Craft
-# CTH-461
+# Bamboo
+# CTH-460
 #
 # first generation BambooPT
 #
-# stylus with two buttons and eraser (LP161E); 2FG touch
+# stylus with two buttons and eraser (LP160E); 2FG touch
 # Pen active area: 5.8 x 3.62in
 # Touch active area: 4.92 x 3.35in
 
 [Device]
-Name=Wacom Bamboo Fun small (2FG)
-DeviceMatch=usb:056a:00d2
+Name=Wacom Bamboo (2FG)
+DeviceMatch=usb:056a:00d1
 Class=Bamboo
 Width=6
 Height=4
-Layout=bamboo-craft.svg
+Layout=bamboo-2fg-s-pt.svg
 IntegratedIn=
 
 [Features]

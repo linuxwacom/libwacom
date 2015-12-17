@@ -1,15 +1,15 @@
 # Wacom
-# Bamboo Pen & Touch
+# Bamboo
 # CTH-460
 #
 # first generation BambooPT
 #
-# stylus with two buttons and eraser; 2FG touch
+# stylus with two buttons and eraser (LP160E); 2FG touch
 # Pen active area: 5.8 x 3.62in
 # Touch active area: 4.92 x 3.35in
 
 [Device]
-Name=Wacom Bamboo 2FG 4x5
+Name=Wacom Bamboo (2FG)
 DeviceMatch=usb:056a:00d1
 Class=Bamboo
 Width=6

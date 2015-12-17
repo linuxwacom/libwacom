@@ -1,14 +1,15 @@
 # Wacom
-# Bamboo Pen & Touch
+# Bamboo Capture
 # CTH-470
 #
-# second generation BambooPT
+# third generation BambooPT
 #
-# stylus with two buttons and eraser; 16FG touch
+# stylus with one button no eraser (LP170G); 16FG touch
 # Pen active area: 5.8 x 3.62in
 # Touch active area: 4.92 x 3.35in
+
 [Device]
-Name=Wacom Bamboo 16FG 4x5
+Name=Wacom Bamboo Capture
 DeviceMatch=usb:056a:00de
 Class=Bamboo
 Width=6

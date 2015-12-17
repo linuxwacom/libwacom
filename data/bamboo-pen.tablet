@@ -4,15 +4,16 @@
 #
 # first generation BambooPT
 #
-# stylus with two buttons and no eraser
+# stylus with two buttons and no eraser (LP160)
 # Pen active area: 5.8 x 3.62in
 
 [Device]
-Name=Wacom Bamboo Pen
+Name=Wacom Bamboo Pen small
 DeviceMatch=usb:056a:00d4
 Class=Bamboo
 Width=6
 Height=4
+# No pad buttons, so no layout
 IntegratedIn=
 
 [Features]

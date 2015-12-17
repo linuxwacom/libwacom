@@ -8,7 +8,7 @@
 # Touch active area: 4.92 x 3.35in
 
 [Device]
-Name=Wacom Bamboo 2FG
+Name=Wacom Bamboo Touch (2FG)
 DeviceMatch=usb:056a:00d0
 Class=Bamboo
 Width=5

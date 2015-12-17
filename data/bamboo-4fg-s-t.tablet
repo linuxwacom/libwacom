@@ -1,0 +1,26 @@
+# Wacom
+# Bamboo Touch
+# CTT-460(A)
+#
+# second generation BambooPT
+#
+# no stylus; 2FG touch (4FG gesture)
+# Touch active area: 4.92 x 3.35in
+
+[Device]
+Name=Wacom Bamboo (2+FG)
+DeviceMatch=usb:056a:00d9
+Class=Bamboo
+Width=5
+Height=3
+Layout=bamboo-4fg-s-t.svg
+IntegratedIn=
+
+[Features]
+Stylus=false
+Reversible=true
+Touch=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D

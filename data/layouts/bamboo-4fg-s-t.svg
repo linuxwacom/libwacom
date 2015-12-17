@@ -1,0 +1,128 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+    Designed after data from http://www.wacom-asia.com/download/manuals/BambooUsersManual.pdf
+    Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="bamboo-4fg-s-t"
+   width="208"
+   height="136">
+  <title
+     id="title">Wacom Bamboo 2FG (CTT-460(A))</title>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       rx=".5"
+       ry=".5"
+       x="17"
+       y="11"
+       width="28"
+       height="36" />
+    <circle
+       id="DotA"
+       cx="30.5"
+       cy="28.5"
+       r=".5" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 47 29 l 20 0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="69"
+       y="29"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       rx=".5"
+       ry=".5"
+       x="17"
+       y="48"
+       width="28"
+       height="18" />
+    <circle
+       id="DotB"
+       cx="30.5"
+       cy="57.5"
+       r=".5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 47 58 l 20 0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="69"
+       y="58"
+       style="text-anchor:start;">B</text>
+  </g>
+  <rect
+      rx="1"
+      ry="1"
+      x="17"
+      y="67"
+      width="28"
+      height="2" />
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="17"
+       y="70"
+       rx=".5"
+       ry=".5"
+       width="28"
+       height="18" />
+    <circle
+       id="DotC"
+       cx="30.5"
+       cy="79.5"
+       r=".5" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 47 80 l 20 0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="69"
+       y="80"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="17"
+       y="89"
+       rx=".5"
+       ry=".5"
+       width="28"
+       height="36" />
+    <circle
+       id="DotD"
+       cx="30.5"
+       cy="106.5"
+       r=".5" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 47 107 l 20 0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="69"
+       y="107"
+       style="text-anchor:start;">D</text>
+  </g>
+</svg>

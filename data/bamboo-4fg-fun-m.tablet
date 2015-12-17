@@ -1,0 +1,27 @@
+# Wacom
+# Bamboo Fun medium / Bamboo Comic
+# CTH-661(A)
+#
+# second generation BambooPT
+#
+# stylus with two buttons and eraser (LP161E); 2FG touch (4FG gesture)
+# Pen active area: 8.52 x 5.39 in
+# Touch active area: 7.48 x 5.12 in
+
+[Device]
+Name=Wacom Bamboo Fun medium (2+FG)
+DeviceMatch=usb:056a:00d8
+Class=Bamboo
+Width=9
+Height=5
+Layout=bamboo-4fg-fun-m-pt.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D

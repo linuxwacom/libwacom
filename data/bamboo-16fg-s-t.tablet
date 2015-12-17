@@ -1,0 +1,26 @@
+# Wacom
+# Bamboo Touch
+# CTT-470
+#
+# third generation BambooPT
+#
+# no stylus; 16FG touch
+# Touch active area: 4.92 x 3.35in
+
+[Device]
+Name=Wacom Bamboo 16FG 4x5
+DeviceMatch=usb:056a:00dc
+Class=Bamboo
+Width=6
+Height=4
+Layout=bamboo-16fg-s-t.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D

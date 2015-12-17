@@ -1,0 +1,27 @@
+# Wacom
+# Bamboo Create
+# CTH-670
+#
+# third generation BambooPT
+#
+# stylus with two buttons and eraser (LP170ES); 16FG touch
+# Pen active area: 8.52 x 5.39 in
+# Touch active area: 7.48 x 5.12 in
+
+[Device]
+Name=Wacom Bamboo Create
+DeviceMatch=usb:056a:00df
+Class=Bamboo
+Width=6
+Height=4
+Layout=bamboo-16fg-m-pt.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D

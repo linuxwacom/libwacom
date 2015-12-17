@@ -1,0 +1,23 @@
+# Wacom
+# Bamboo Connect
+# CTL-470
+#
+# third generation BambooPT
+#
+# stylus with one button and no eraser (LP170G)
+# Pen active area: 5.8 x 3.62in
+
+[Device]
+Name=Wacom Bamboo Connect
+DeviceMatch=usb:056a:00dd
+Class=Bamboo
+Width=6
+Height=4
+# No pad buttons, so no layout
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0

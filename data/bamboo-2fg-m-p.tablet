@@ -1,0 +1,23 @@
+# Wacom
+# Bamboo Pen medium
+# CTL-660
+#
+# first generation BambooPT
+#
+# stylus with two buttons and no eraser (LP160)
+# Pen active area: 8.52 x 5.39 in
+
+[Device]
+Name=Wacom Bamboo Pen medium
+DeviceMatch=usb:056a:00d5
+Class=Bamboo
+Width=6
+Height=4
+# No pad buttons, so no layout
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0

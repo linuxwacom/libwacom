@@ -1,3 +1,17 @@
+libwacom 0.18:
+- Renamed ".tablet" files for Bamboo devices
+- Modified user-visible names of Bamboo devices
+  - "Wacom Bamboo 16FG 4x5" -> "Wacom Bamboo Capture"
+  - "Wacom Bamboo 2FG 4x5" -> "Wacom Bamboo (2FG)"
+  - "Wacom Bamboo 2FG 6x8" -> "Wacom Bamboo Fun medium (2FG)"
+  - "Wacom Bamboo 2FG" -> "Wacom Bamboo Touch (2FG)"
+  - "Wacom Bamboo Craft" -> "Wacom Bamboo Fun small (2FG)"
+  - "Wacom Bamboo Pen" -> "Wacom Bamboo Pen small"
+- New devices:
+  - Missing gen-1 Bamboo (0xd5)
+  - Missing gen-2.5 Bamboos (0xd6, 0xd7, 0xd8, 0xd9, 0xda, 0xdb)
+  - Missing gen-3 Bamboos (0xdc, 0xdd, 0dxf)
+
 libwacom 0.17:
 - New devices:
   - Cintiq Companion 2 (DTH-1310)

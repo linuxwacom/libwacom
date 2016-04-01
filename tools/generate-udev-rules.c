@@ -52,6 +52,17 @@ static void print_udev_header (void)
 	printf ("\n");
 }
 
+static void print_huion_quirk (void)
+{
+	/* Huion tablets have a "consumer control" device with the same
+	 * VID/PID as the tablet but only a few buttons and no axes.
+	 *
+	 */
+	printf("# HUION consumer control devices are not tablets.\n");
+	printf("ATTRS{name}==\"HUION * Consumer Control\", GOTO=\"libwacom_end\"\n");
+	printf ("\n");
+}
+
 static char * generate_device_match(WacomDevice *device, const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
@@ -208,6 +219,7 @@ int main(int argc, char **argv)
 	}
 
 	print_udev_header ();
+	print_huion_quirk ();
 	for (p = list; *p; p++)
 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_USB);
 

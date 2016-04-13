@@ -1,0 +1,34 @@
+# Wacom
+# DTK-1651 Interactive Pen Display
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------*
+#      |                 | D
+#      |                 | C
+#      |     DISPLAY     |
+#      |                 | B
+#      |                 | A
+#      *-----------------*
+#
+
+[Device]
+Name=Wacom DTK1651
+DeviceMatch=usb:056a:0343
+Class=PenDisplay
+Width=14
+Height=8
+Layout=dtk-1651.svg
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=4
+
+[Buttons]
+Right=A;B;C;D

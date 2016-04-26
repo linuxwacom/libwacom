@@ -1,3 +1,9 @@
+libwacom 0.19:
+- New devices:
+  - DTK-1651, ISDv4 0x504a
+- Quirk added to prevent udev tagging HUION Consumer Control devices as
+  tablets
+
 libwacom 0.18:
 - Renamed ".tablet" files for Bamboo devices
 - Modified user-visible names of Bamboo devices

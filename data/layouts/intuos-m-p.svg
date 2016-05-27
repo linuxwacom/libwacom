@@ -22,7 +22,7 @@
     <path id="ButtonC" class="C Button" d="M 185 26   l 14 0   a 8  -8           0            0           1      9 9    l 0 11   l -23 0   z"/>
     <circle id="DotC" cx="197" cy="36" r=".5"/>
     <path id="LeaderC" class="C Leader" d="M 160 35 l 20 0"/>
-    <text id="LabelC" class="C Label" x="145" y="40" style="text-anchor:start;">C</text>
+    <text id="LabelC" class="C Label" x="157" y="40" style="text-anchor:end;">C</text>
   </g>
 
 
@@ -30,7 +30,7 @@
     <path id="ButtonD" class="D Button" d="M 185 47.5   l 23 0   l 0 20   l -23 0   z"/>
     <circle id="DotD" cx="197" cy="57.5" r=".5"/>
     <path id="LeaderD" class="D Leader" d="M 160 59 l 20 0"/>
-    <text id="LabelD" class="D Label" x="145" y="64" style="text-anchor:start;">D</text>
+    <text id="LabelD" class="D Label" x="157" y="64" style="text-anchor:end;">D</text>
   </g>
 
 </svg>

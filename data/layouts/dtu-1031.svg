@@ -26,7 +26,7 @@
        class="A Label"
        x="91"
        y="42.5"
-       style="text-anchor:middle;">A</text>
+       style="text-anchor:start;">A</text>
   </g>
   <g>
     <circle
@@ -44,7 +44,7 @@
        class="B Label"
        x="91"
        y="62.5"
-       style="text-anchor:middle;">B</text>
+       style="text-anchor:start;">B</text>
   </g>
   <g>
     <circle
@@ -62,7 +62,7 @@
        class="C Label"
        x="91"
        y="82.5"
-       style="text-anchor:middle;">C</text>
+       style="text-anchor:start;">C</text>
   </g>
   <g>
     <circle
@@ -80,6 +80,6 @@
        class="D Label"
        x="91"
        y="102.5"
-       style="text-anchor:middle;">D</text>
+       style="text-anchor:start;">D</text>
   </g>
 </svg>

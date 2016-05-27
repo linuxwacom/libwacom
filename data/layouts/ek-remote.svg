@@ -30,401 +30,480 @@
      id="title">Wacom ExpressKey Remote</title>
 
   <path
-     id="ButtonB"
-     class="B Button"
-     d="m 111,39.5 a 30,30 0 0 0 0,40 l 8,-6 a 20,20 0 0 1 0,-28 l -8,-6"
-      />
+     id="LED0"
+     d="m 114.39258,40.509766 0.0605,2.09375 3.50977,3.146484 a 21.473726,21.473726 0 0 1 1.67969,-1.683594 l -3.13867,-3.511718 -2.11133,-0.04492 z"
+     style="fill:#ffffff" />
   <path
-     id="ButtonE"
-     class="E Button"
-     d="m 157.87831,39.500803 a 30.478094,29.624531 0 0 1 0,39.499377 l -8.12747,-5.92491 a 20.31873,19.749687 0 0 0 0,-27.64956 l 8.12747,-5.924907"
-      />
+     id="LED1"
+     d="m 133.98047,32.400391 -1.4375,1.523437 0.25586,4.644531 A 21.473726,21.473726 0 0 1 134,38.525391 a 21.473726,21.473726 0 0 1 1.18164,0.05859 l 0.25977,-4.660156 -1.46094,-1.523437 z"
+     style="fill:#ffffff" />
   <path
-     id="ButtonF"
-     class="F Button"
-     d="m 111.99446,80.28266 a 30.007371,27.700507 0 0 0 45.01106,0 l -8.00197,-5.5401 a 20.004914,18.467004 0 0 1 -29.00712,0 l -8.00197,5.5401"
-      />
-  <path
-     d="m 114.99747,35.267115 a 29.592561,29.014789 0 0 1 17.75554,-6.770118 l 0,10.638757 a 19.728374,19.343193 0 0 0 -10.85061,3.868638 l -6.90493,-7.737277"
-     id="ButtonC"
-	class="C Button"
-      />
-  <path
-     d="m 138,28.5 a 30,30 0 0 1 17,7 l -8,8 a 20,20 0 0 0 -10,-4 l 1,-11"
-     id="ButtonD"
-	class="D Button"
-      />
-
-<g id="right side labels"
-   >
-    <path
-       id="LeaderF"
-       class="F Leader"
-       d="m 132,83 -39,-6 -12,0"
-       stroke="grey"
-       />
-    <text
-       id="LabelF"
-       class="F Label"
-       x="69"
-       y="76"
-       style="text-anchor:start">F</text>
-</g>
-
+     id="LED2"
+     d="m 153.57812,40.521484 -2.09374,0.06055 -3.12305,3.484375 a 21.473726,21.473726 0 0 1 1.67383,1.691406 l 3.49804,-3.126953 0.0449,-2.109375 z"
+     style="fill:#ffffff" />
+  <circle
+     r="19.716301"
+     cy="60"
+     cx="134"
+     class="Ring TouchRing"
+     id="Ring" />
+  <circle
+     r="0"
+     cy="59"
+     cx="134"
+     class="Ring TouchRing"
+     id="Ring Buttons" />
   <g
-     id="g3675">
-    <circle
-       id="Ring"
-       class="Ring TouchRing"
-       cx="134"
-       cy="60"
-       r="19.5" />
-    <path
-       id="LeaderRingCCW"
-       class="RingCCW Ring Leader"
-       stroke="grey"
-       d="m 134,44 0,-2 67,0" />
-    <text
-       id="LabelRingCCW"
-       class="RingCCW Ring Label"
-       x="203"
-       y="42"
-       style="text-anchor:start">CCW</text>
-    <path
-       id="RingCCW"
-       class="RingCCW Button"
-       d="m 131,45 3,-1.5 0,1 a 7.5,7.5 0 0 1 5,1.5 6.5,6.5 0 0 0 -5,-0.5 l 0,1 z" />
-    <path
-       id="LeaderRingCW"
-       class="RingCW Ring Leader"
-       stroke="grey"
-       d="m 134,74 0,2 67,0" />
-    <text
-       id="LabelRingCW"
-       class="RingCW Ring Label"
-       x="203"
-       y="76"
-       style="text-anchor:start">CW</text>
-    <path
-       id="RingCW"
-       class="RingCW Button"
-       d="m 131,73 3,-1.5 0,1 a 7.5,7.5 0 0 0 5,-1 6.5,6.5 0 0 1 -5,2 l 0,1 z" />
-  </g>
-  <g
-     id="g3699">
-
-    <path
-       id="LeaderG"
-       class="G Leader"
-       stroke="grey"
-       d="m 110,96 -27,0 " />
-    <text
-       id="LabelG"
-       class="G Label"
-       x="70"
-       y="96"
-       style="text-anchor:start">G</text>
-	<path
-	id="ButtonG"
-	class="G Button"
-	d="m 105,78 A 30,30 0 0 0 120,89
-	L 120,104
-	L 105,104
-	L 105,78"
-	/>
-    <path
-       id="LeaderH"
-       class="H Leader"
-       stroke="grey"
-       d="m 137,103 50,50 5,0"
-       />
-    <text
-       id="LabelH"
-       class="H Label"
-       x="193"
-       y="153"
-       style="text-anchor:start">H</text>
-	<path
-	id="ButtonH"
-	class="H Button"
-	d="m 123,101 A 10,10 0 0 1 143,101 L 143,111 L 123, 111   L 123, 101"
-	/>
-    <path
-       id="LeaderI"
-       class="I Leader"
-       stroke="grey"
-       d="m 156,93 48,0 "
-       />
-    <text
-       id="LabelI"
-       class="I Label"
-       x="205"
-       y="92"
-       style="text-anchor:start">I</text>
-	<path
-	id ="ButtonI"
-	class="I Button"
-	d="m 146,89 A 30,30 0 0 0 161,78 L 161,104  L 146,104 L 146,89"
-	/>
-    <path
-       id="LeaderJ"
-       class="J Leader"
-       stroke="grey"
-       d="m 110,122 -27,0 " />
-    <text
-       id="LabelJ"
-       class="J Label"
-       x="75"
-       y="121"
-       style="text-anchor:start">J</text>
-	<path
-	id="ButtonJ"
-	class="J Button"
-	d="m 105,106  L 120,106  L 120,126 L 105,126 L 105,106"
-	/>
-    <path
-       id="LeaderK"
-       class="K Leader"
-       stroke="grey"
-       d="m 137,116 50,50 5,0"
-       />
-    <text
-       id="LabelK"
-       class="K Label"
-       x="193"
-       y="172"
-       style="text-anchor:start">K</text>
-	<path
-	id="ButtonK"
-	class="K Button"
-	d="m 123, 113 L 143,113 L 143, 126   L 123, 126 L 123, 113"
-	/>
-    <path
-       id="LeaderL"
-       class="L Leader"
-       stroke="grey"
-       d="m 157,112 50,0"
-       />
-    <text
-       id="LabelL"
-       class="L Label"
-       x="204"
-       y="110"
-       style="text-anchor:start">L</text>
-	<path
-	id ="ButtonL"
-	class="L Button"
-	d="m 146,106  L 161,106  L 161,126 L 146,126 L 146,106"
-	/>
-  </g>
-
-  <g
-     id="g3700">
-    <path
-       id="LeaderM"
-       class="M Leader"
-       stroke="grey"
-       d="m 110,142 -27,0 " />
-    <text
-       id="LabelM"
-       class="M Label"
-       x="70"
-       y="140"
-       style="text-anchor:start">M</text>
-	<path
-	id="ButtonM"
-	class="M Button"
-	d="m 105,128  L 120,128  L 120,148 L 105,148 L 105,128"
-	/>
-    <path
-       id="LeaderN"
-       class="N Leader"
-       stroke="grey"
-       d="m 130,135  -40,30 -5,0"
-       />
-    <text
-       id="LabelN"
-       class="N Label"
-       x="70"
-       y="165"
-       style="text-anchor:start">N</text>
-	<path
-	id="ButtonN"
-	class="N Button"
-	d="m 123, 128 L 143,128 L 143, 142 L 123, 142 L 123, 128"
-	/>
-    <path
-       id="LeaderO"
-       class="O Leader"
-       stroke="grey"
-       d="m 152,140  40,56"
-       />
-    <text
-       id="LabelO"
-       class="O Label"
-       x="190"
-       y="208"
-       style="text-anchor:start">O</text>
-	<path
-	id ="ButtonO"
-	class="O Button"
-	d="m 146,128
-	 L 161,128
-	 L 161,148
-	 L 146,148
-	L 146,128"
-	/>
-  </g>
-
-  <g
-     id="g3701">
-    <path
-       id="LeaderQ"
-       class="Q Leader"
-       stroke="grey"
-       d="m 117,175 0,20 "
-       />
-    <text
-       id="LabelQ"
-       class="Q Label"
-       x="111"
-       y="209"
-       style="text-anchor:start">Q</text>
-	<path
-	id="ButtonQ"
-	class="Q Button"
-	d="m 105,150
-	L 120,150 A 12,12 0 0 0 132,164
-	L 132,180
-	L 118, 180 A 15,15 0 0 1 105,164
-	L 105,150"
-	/>
-    <path
-       id="LeaderP"
-       class="P Leader"
-       stroke="grey"
-       d="m 130,155  -60,40"
-       />
-    <text
-       id="LabelP"
-       class="P Label"
-       x="63"
-       y="208"
-       style="text-anchor:start">P</text>
-	<path
-	id="ButtonP"
-	class="P Button"
-	d="m 123,152 A 10,10 0 0 0 143,152
-	 L 143,144
-	 L 123,144
-	 L 123,152"
-	/>
-    <path
-       id="LeaderR"
-       class="R Leader"
-       stroke="grey"
-       d="m 147,175 0,20 "
-       />
-    <text
-       id="LabelR"
-       class="R Label"
-       x="141"
-       y="209"
-       style="text-anchor:start">R</text>
-	<path
-	id="ButtonR"
-	class="R Button"
-	d="m 161,150
-	 L 146,150 A 12,12 0 0 1 134,164
-	 L 134,180
-	L 150, 180 A 15,15 0 0 0 161,164
-	L 161,150"
-	/>
-  </g>
-  <g
-     id="g3684">
+     id="GroupA">
     <circle
        id="ButtonA"
        class="A ModeSwitch Button"
        cx="134"
-       cy="59"
-       r="6.5" />
+       cy="60"
+       r="7.6896539" />
     <path
        id="LeaderA"
        class="A ModeSwitch Leader"
-       stroke="grey"
-       d="m 134,59 -30,-18 -24,0" />
+       d="m 133.9375,60 -34.091752,-18.125 -19.75736,0"
+       style="stroke:#808080"
+        />
     <text
        id="LabelA"
        class="A ModeSwitch Label"
-       x="69"
-       y="39"
-       style="text-anchor:start">A</text>
+       x="74"
+       y="41.650352"
+       style="text-anchor:end">A</text>
   </g>
   <g
-     id="g3689">
-    <circle
-       id="Ring Buttons"
-       class="Ring TouchRing"
-       cx="134"
-       cy="59"
-       r="0" />
+     id="GroupB">
+    <path
+       d="M 112.03906,38.470703 A 30.783125,30.783125 0 0 0 103.2168,60 a 30.783125,30.783125 0 0 0 8.55078,21.275391 l 6.73633,-6.419922 A 21.473726,21.473726 0 0 1 112.52539,60 21.473726,21.473726 0 0 1 117.82812,45.894531 l -3.61914,-3.189453 -0.0312,-2.125 -2.13867,-2.109375 z"
+       class="B Button"
+       id="ButtonB"
+        />
     <path
        id="LeaderB"
        class="B Leader"
-       stroke="grey"
-       d="m 80,59 30,0" />
+       d="m 80.088388,60.06066 28.161612,0"
+       style="stroke:#808080"
+        />
     <text
        id="LabelB"
        class="B Label"
-       x="70"
-       y="59"
-       style="text-anchor:start">B</text>
+       x="74"
+       y="59.969845"
+       style="text-anchor:end">B</text>
+  </g>
+  <g
+     id="GroupD">
     <path
-       id="LeaderC"
-       class="C Leader"
-       stroke="grey"
-       d="m 80,20 20,0 25,12"/>
-    <text
-       id="LabelC"
-       class="C Label"
-       x="70"
-       y="20"
-       style="text-anchor:start">C</text>
+       d="m 134.25586,29.230469 -0.0293,3.130859 1.42188,1.46875 -0.30469,4.761719 a 21.473726,21.473726 0 0 1 12.86328,5.332031 l 3.1543,-3.591797 2.125,-0.03516 2.13867,-2.169922 a 30.783125,30.783125 0 0 0 -21.36914,-8.896484 z"
+       class="D Button"
+       id="ButtonD"
+        />
     <path
        id="LeaderD"
        class="D Leader"
-       stroke="grey"
-       d="m 145,35 0,-10 5,-5 50,0" />
+       d="m 145,35 0,-10 5,-5 38.10138,0"
+       style="stroke:#808080"
+        />
     <text
        id="LabelD"
        class="D Label"
-       x="203"
+       x="195"
        y="20"
        style="text-anchor:start">D</text>
+  </g>
+  <g
+     id="GroupE">
+    <path
+       d="m 155.95312,38.431641 -2.17968,2.148437 -0.0312,2.125 -3.60157,3.173828 A 21.473726,21.473726 0 0 1 155.47461,60 21.473726,21.473726 0 0 1 149.46094,74.869141 l 6.73047,6.414062 A 30.783125,30.783125 0 0 0 164.7832,60 30.783125,30.783125 0 0 0 155.95312,38.431641 Z"
+       class="E Button"
+       id="ButtonE"
+        />
     <path
        id="LeaderE"
        class="E Leader"
-       stroke="grey"
-       d="m 162,59 39,0"
-       />
+       d="m 160,60.06066 28.10722,0"
+       style="stroke:#808080"
+        />
     <text
        id="LabelE"
        class="E Label"
-       x="203"
-       y="59"
+       x="194"
+       y="59.969845"
        style="text-anchor:start">E</text>
   </g>
-  <path
-     style="fill:white"
-     d="m 114.13253,36.257524 6.85981,7.45701 -1.31919,1.028553 -7.91517,-6.171319 z"
-     id="LED0" />
-  <path
-     style="fill:white"
-     d="m 134.02961,38.991736 -0.27117,-10.733474 2.98286,0 -0.54234,10.733474 z"
-     id="LED1" />
-  <path
-     style="fill:white"
-     d="m 148,43.249999 7.25,-6.75 1.75,2.5 -7.5,5.75 z"
-     id="LED2" />
+  <g
+     id="GroupF">
+    <path
+       d="m 119.26758,75.587891 -6.40625,6.738281 A 30.783125,30.783125 0 0 0 134,90.783203 30.783125,30.783125 0 0 0 155.13477,82.355469 l -6.41016,-6.742188 A 21.473726,21.473726 0 0 1 134,81.474609 21.473726,21.473726 0 0 1 119.26758,75.587891 Z"
+       class="F Button"
+       id="ButtonF"
+        />
+    <path
+       style="stroke:#808080"
+       d="M 133.98874,86.270369 99.875,78.104854 l -19.803078,0"
+       class="F Leader"
+       id="LeaderF"
+        />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="74"
+       y="77.948448"
+       style="text-anchor:end">F</text>
+  </g>
+  <g
+     id="GroupQ">
+    <path
+       d="m 106,152 15,0 a 12,12 0 0 0 12,14 l 0,16 -14,0 a 15,15 0 0 1 -13,-16 l 0,-14"
+       class="Q Button"
+       id="ButtonQ"
+        />
+    <path
+       id="LeaderQ"
+       class="Q Leader"
+       d="M 118,174.65771 118,197"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelQ"
+       class="Q Label"
+       x="118"
+       y="204.625"
+       style="text-anchor:end">Q</text>
+  </g>
+  <g
+     id="GroupR">
+    <path
+       d="m 162,152 -15,0 a 12,12 0 0 1 -12,14 l 0,16 16,0 a 15,15 0 0 0 11,-16 l 0,-14"
+       class="R Button"
+       id="ButtonR"
+        />
+    <path
+       id="LeaderR"
+       class="R Leader"
+       d="M 148,174.65771 148,197"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelR"
+       class="R Label"
+       x="147.375"
+       y="205"
+       style="text-anchor:start">R</text>
+  </g>
+  <g
+     id="GroupC">
+    <path
+       d="m 133.69336,29.228516 a 30.783125,30.783125 0 0 0 -21.35156,8.916015 l 2.12109,2.152344 2.125,0.03516 3.18164,3.623047 a 21.473726,21.473726 0 0 1 12.83399,-5.378906 l -0.30274,-4.746094 1.42188,-1.46875 -0.0293,-3.132812 z"
+       class="C Button"
+       id="ButtonC"
+        />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="74"
+       y="19.996094"
+       style="text-anchor:end">C</text>
+    <path
+       style="stroke:#808080"
+       d="m 123.98322,35 0,-10 -5,-5 -38.896875,0"
+       class="C Leader"
+       id="LeaderC"
+        />
+  </g>
+  <g
+     id="GroupG">
+    <path
+       d="m 106,80 a 30,30 0 0 0 15,11 l 0,15 -15,0 0,-26"
+       class="G Button"
+       id="ButtonG"
+        />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="m 111,95.75 -30.933281,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="74"
+       y="95.738853"
+       style="text-anchor:end">G</text>
+    <circle
+       r="1"
+       cx="113.5"
+       cy="96.750008"
+       id="DotG" />
+  </g>
+  <g
+     id="GroupI">
+    <path
+       d="m 147,91 a 30,30 0 0 0 15,-11 l 0,26 -15,0 0,-15"
+       class="I Button"
+       id="ButtonI"
+        />
+    <path
+       id="LeaderI"
+       class="I Leader"
+       d="m 157,95.75 31.10827,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelI"
+       class="I Label"
+       x="194"
+       y="95.727127"
+       style="text-anchor:start">I</text>
+    <circle
+       id="DotI"
+       cy="96.750008"
+       cx="154.5"
+       r="1" />
+  </g>
+  <g
+     id="GroupJ">
+    <path
+       d="m 106,108 15,0 0,20 -15,0 0,-20"
+       class="J Button"
+       id="ButtonJ"
+        />
+    <path
+       id="LeaderJ"
+       class="J Leader"
+       d="m 111,115.25 -31.24264,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelJ"
+       class="J Label"
+       x="74"
+       y="115.27344"
+       style="text-anchor:end">J</text>
+    <rect
+       x="110.0625"
+       y="113"
+       width="6.875"
+       height="10"
+       ry="1"
+       rx="1"
+       id="RectangleJ" />
+  </g>
+  <g
+     id="GroupL">
+    <path
+       d="m 147,108 15,0 0,20 -15,0 0,-20"
+       class="L Button"
+       id="ButtonL"
+        />
+    <path
+       id="LeaderL"
+       class="L Leader"
+       d="m 158,115.25 30.08755,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelL"
+       class="L Label"
+       x="194"
+       y="115.25"
+       style="text-anchor:start">L</text>
+    <rect
+       id="RectangleL"
+       rx="1"
+       ry="1"
+       height="10"
+       width="6.875"
+       y="113"
+       x="151.0625" />
+  </g>
+  <g
+     id="GroupM">
+    <path
+       d="m 106,130 15,0 0,20 -15,0 0,-20"
+       class="M Button"
+       id="ButtonM"
+        />
+    <path
+       id="LeaderM"
+       class="M Leader"
+       d="m 111,140.625 -31.24264,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelM"
+       class="M Label"
+       x="74"
+       y="140.65123"
+       style="text-anchor:end">M</text>
+    <rect
+       id="LineM"
+       rx="0.74478507"
+       ry="1"
+       height="9.9337091"
+       width="1.5"
+       y="135.03314"
+       x="112.75" />
+  </g>
+  <g
+     id="GroupO">
+    <path
+       d="m 147,130 15,0 0,20 -15,0 0,-20"
+       class="O Button"
+       id="ButtonO"
+        />
+    <path
+       id="LeaderO"
+       class="O Leader"
+       d="m 152.75,145.125 21.86675,22.04353 13.47365,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelO"
+       class="O Label"
+       x="194"
+       y="166.95488"
+       style="text-anchor:start">O</text>
+    <rect
+       x="153.75"
+       y="135.03314"
+       width="1.5"
+       height="9.9337091"
+       ry="1"
+       rx="0.74478507"
+       id="LineO" />
+  </g>
+  <g
+     id="GroupH">
+    <path
+       d="m 124,103 a 10,10 0 1 1 20,0 l 0,10 -20,0 0,-10"
+       class="H Button"
+       id="ButtonH"
+        />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="m 138,105.35355 35.15076,35.06237 14.9375,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="194"
+       y="140.32753"
+       style="text-anchor:start">H</text>
+    <circle
+       r="1"
+       cx="134"
+       cy="103.875"
+       id="DotH" />
+  </g>
+  <g
+     id="GroupK">
+    <path
+       d="m 124,115 20,0 0,13 -20,0 0,-13"
+       class="K Button"
+       id="ButtonK"
+        />
+    <path
+       id="LeaderK"
+       class="K Leader"
+       d="m 138,118 35.47474,35.34974 14.57551,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelK"
+       class="K Label"
+       x="194"
+       y="153.40901"
+       style="text-anchor:start">K</text>
+  </g>
+  <g
+     id="GroupN">
+    <path
+       d="m 124,130 20,0 0,14 -20,0 0,-14"
+       class="N Button"
+       id="ButtonN"
+        />
+    <path
+       id="LeaderN"
+       class="N Leader"
+       d="M 130.02773,137.7955 100.81111,167 79.724428,167"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelN"
+       class="N Label"
+       x="74"
+       y="167"
+       style="text-anchor:end">N</text>
+    <circle
+       id="DotN"
+       cy="137"
+       cx="134"
+       r="1" />
+  </g>
+  <g
+     id="GroupP">
+    <path
+       d="m 124,154 a 10,10 0 0 0 20,0 l 0,-8 -20,0 0,8"
+       class="P Button"
+       id="ButtonP"
+        />
+    <path
+       id="LeaderP"
+       class="P Leader"
+       d="m 130.02773,157.35355 -30.132588,30.16467 -20.233084,0.0242"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelP"
+       class="P Label"
+       x="74"
+       y="187.5"
+       style="text-anchor:end">P</text>
+  </g>
+  <g
+     id="GroupRingCCW">
+    <path
+       id="LeaderRingCCW"
+       class="RingCCW Ring Leader"
+       d="m 134,44 0,-2 54.10722,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelRingCCW"
+       class="RingCCW Ring Label"
+       x="194"
+       y="41.646446"
+       style="text-anchor:start">CCW</text>
+    <path
+       id="RingCCW"
+       class="RingCCW Button"
+       d="m 131,47.077255 3,-1.5 0,1 a 7.5,7.5 0 0 1 5,1.5 6.5,6.5 0 0 0 -5,-0.5 l 0,1 z"
+        />
+  </g>
+  <g
+     id="GroupRingCW">
+    <path
+       id="LeaderRingCW"
+       class="RingCW Ring Leader"
+       d="m 134,76.12132 0,2 54.10722,0"
+       style="stroke:#808080"
+        />
+    <text
+       id="LabelRingCW"
+       class="RingCW Ring Label"
+       x="194"
+       y="77.944542"
+       style="text-anchor:start">CW</text>
+    <path
+       id="RingCW"
+       class="RingCW Button"
+       d="m 131,73.06291 3,-1.5 0,1 a 7.5,7.5 0 0 0 5,-1 6.5,6.5 0 0 1 -5,2 l 0,1 z"
+        />
+  </g>
 </svg>

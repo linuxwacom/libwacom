@@ -29,6 +29,7 @@ AC_PROG_INSTALL
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG(SED, sed)
 AC_PATH_PROG(GREP, grep)
+AC_PATH_PROGS(GIT, git false) # fail any git command if we can't find git
 
 AC_CHECK_PROG(HAVE_DOXYGEN, [doxygen], [yes], [no])
 AM_CONDITIONAL(HAVE_DOXYGEN, test "x$HAVE_DOXYGEN" = xyes)

@@ -63,6 +63,22 @@ static void print_huion_quirk (void)
 	printf ("\n");
 }
 
+static void print_wireless_kit_quirk (void)
+{
+	/* Bamboo and Intuos devices connected to the system via Wacom's
+	 * Wireless Accessory Kit appear to udev as having the PID of the
+	 * dongle rather than the actual tablet. Make sure we properly tag
+	 * such devices.
+	 */
+	char *match = "ENV{ID_BUS}==\"usb\", ENV{ID_VENDOR_ID}==\"056a\", ENV{ID_MODEL_ID}==\"0084\"";
+
+	printf("# Wacom Wireless Accessory Kit\n");
+	printf("%s, ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", match);
+	printf("ATTRS{name}==\"* Finger\", %s,  ENV{ID_INPUT_TOUCHPAD}=\"1\"\n", match);
+	printf("ATTRS{name}==\"* Pad\", %s,  ENV{ID_INPUT_TABLET_PAD}=\"1\"\n", match);
+	printf("\n");
+}
+
 static char * generate_device_match(WacomDevice *device, const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
@@ -220,6 +236,7 @@ int main(int argc, char **argv)
 
 	print_udev_header ();
 	print_huion_quirk ();
+	print_wireless_kit_quirk ();
 	for (p = list; *p; p++)
 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_USB);
 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+   Designed from photograph available online
+  Size and positions of controls may not be accurate
+ -->
+
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="193mm"
+   height="180mm"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:0.25;font-size:8">
+  <title
+     id="title">Wacom Bamboo MTE-450</title>
+  <g>
+    <path
+       id="ButtonA"
+       class="A Button"
+       d="m 180.5,0.0 0,73.0 94.5,0 a 68.0,68.0 0 0 1 65.0,-67.5 l 0,-5.5 -160.0,0 z" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="m 178.0,38.0 l -25.0 0.0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="151.0"
+       y="38.0"
+       style="text-anchor:end;">
+      A
+    </text>
+    <path
+       id="ButtonAArrow"
+       d="m 234.0,28.5 -7.0,7.0 7.0,7.0" />
+  </g>
+  <g>
+    <path
+       id="ButtonB"
+       class="B Button"
+       d="m 344.0,0.0 0,5.5 a 68.0,68.0 0 0 1 67.0,67.5 l 92.5,0 0,-73.0 -159.5,0 z" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="m 532.0,38.0 l -25.0 0.0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="534.0"
+       y="38.0"
+       style="text-anchor:start;">
+      B
+    </text>
+    <path
+       id="ButtonBArrow"
+       d="m 446.5,28.5 7.0,7.0 -7.0,7.0" />
+  </g>
+  <g>
+    <path
+       d="m 180.5,76.5 0,72.5 160.0,0 0,-8.5 a 68.0,68.0 0 0 1 -65.0,-64.5 l -95.0,0 z"
+       id="ButtonC"
+       class="C Button" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="m 178.0,115.0 l -25.0 0.0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="151.0"
+       y="115.0"
+       style="text-anchor:end;">
+      C
+    </text>
+  </g>
+  <g>
+    <path
+       id="ButtonD"
+       class="D Button"
+       d="m 410.5,76.5 a 68.0,68.0 0 0 1 -66.5,64.5 l 0,8.0 159.5,0 0,-72.5 -92.5,0 z" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="m 532.0,115.0 l -25.0 0.0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="534.0"
+       y="115.0"
+       style="text-anchor:start;">
+      D
+    </text>
+  </g>
+  <g>
+    <circle
+       id="Ring"
+       class="Ring TouchRing"
+       cx="342.0"
+       cy="74.5"
+       r="50.5" />
+    <path
+       id="RingCCW"
+       class="RingCW Button"
+       d="m 372.5,103.0 -3.5,-3.5 c 17.5,-17.5 7.0,-42.5 3.5,-53.1 7.0,7.0 21.5,39.0 0,56.5 z" />
+    <path
+       id="RingDown"
+       class="RingCCW Button"
+       d="m 340.0,35.5 -3.5,7.0 7.0,0 z" />
+    <path
+       id="LeaderRingCCW"
+       class="RingCCW Ring Leader"
+       d="m 372.5,110.0 l 0.0,55.0 l 30.0,0.0" />
+    <text
+       id="LabelRingCCW"
+       class="RingCCW Ring Label"
+       x="404.0"
+       y="165.0"
+       style="text-anchor:start;">
+      CCW
+    </text>
+    <path
+       id="RingCW"
+       class="RingCW Button"
+       d="m 312.0,46.0 3.5,3.5 c -17.5,17.5 -7.0,42.5 -3.5,53.0 -7.0,-7.0 -21.5,-39.0 0,-56.5 z" />
+    <path
+       id="RingUp"
+       class="RingCW Button"
+       d="m 340.0,117.0 -3.5,-7.0 7.0,0 z" />
+    <path
+       id="LeaderRingCW"
+       class="RingCW Ring Leader"
+       d="m 312.0,110.0 l 0.0,55.0 l -30.0,0.0" />
+    <text
+       id="LabelRingCW"
+       class="RingCW Ring Label"
+       x="280.0"
+       y="165.0"
+       style="text-anchor:end;">
+      CW
+    </text>
+  </g>
+</svg>

@@ -1,3 +1,7 @@
+libwacom 0.20:
+- New devices: "One by wacom"
+- Layout fixes, especially for the Express Key Remote
+
 libwacom 0.19:
 - New devices:
   - DTK-1651, ISDv4 0x504a

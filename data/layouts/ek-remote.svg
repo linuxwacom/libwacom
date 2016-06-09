@@ -77,6 +77,24 @@
      class="Ring TouchRing"
      id="Ring Buttons" />
   <g
+     id="GroupB">
+    <path
+       d="M 112.03906,38.470703 A 30.783125,30.783125 0 0 0 103.2168,60 a 30.783125,30.783125 0 0 0 8.55078,21.275391 l 6.73633,-6.419922 A 21.473726,21.473726 0 0 1 112.52539,60 21.473726,21.473726 0 0 1 117.82812,45.894531 l -3.61914,-3.189453 -0.0312,-2.125 -2.13867,-2.109375 z"
+       class="B Button"
+       id="ButtonB" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="m 80.088388,60.06066 28.161612,0"
+       style="stroke:#808080" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="74"
+       y="59.969845"
+       style="text-anchor:end">B</text>
+  </g>
+  <g
      id="GroupA">
     <circle
        id="ButtonA"
@@ -95,24 +113,6 @@
        x="74"
        y="41.650352"
        style="text-anchor:end">A</text>
-  </g>
-  <g
-     id="GroupB">
-    <path
-       d="M 112.03906,38.470703 A 30.783125,30.783125 0 0 0 103.2168,60 a 30.783125,30.783125 0 0 0 8.55078,21.275391 l 6.73633,-6.419922 A 21.473726,21.473726 0 0 1 112.52539,60 21.473726,21.473726 0 0 1 117.82812,45.894531 l -3.61914,-3.189453 -0.0312,-2.125 -2.13867,-2.109375 z"
-       class="B Button"
-       id="ButtonB" />
-    <path
-       id="LeaderB"
-       class="B Leader"
-       d="m 80.088388,60.06066 28.161612,0"
-       style="stroke:#808080" />
-    <text
-       id="LabelB"
-       class="B Label"
-       x="74"
-       y="59.969845"
-       style="text-anchor:end">B</text>
   </g>
   <g
      id="GroupD">
@@ -383,19 +383,6 @@
   </g>
   <g
      id="g4258">
-    <path
-       sodipodi:nodetypes="ccc"
-       id="LeaderN"
-       class="N Leader"
-       d="m 130.02773,136.4291 -29.50793,16.8965 -20.795372,0"
-       style="stroke:#808080"
-       inkscape:connector-curvature="0" />
-    <text
-       id="LabelN"
-       class="N Label"
-       x="74"
-       y="153.32561"
-       style="text-anchor:end">N</text>
     <g
        id="g4230">
       <path
@@ -409,28 +396,19 @@
          cy="137"
          id="DotN" />
     </g>
-  </g>
-  <g
-     id="GroupP"
-     transform="translate(0,0.14565678)">
     <path
-       d="m 124,154 a 10,10 0 0 0 20,0 l 0,-8 -20,0 0,8"
-       class="P Button"
-       id="ButtonP"
-       inkscape:connector-curvature="0" />
-    <path
-       id="LeaderP"
-       class="P Leader"
-       d="m 130.02773,152.76537 -29.61913,14.21525 -20.746542,0.0242"
+       sodipodi:nodetypes="ccc"
+       id="LeaderN"
+       class="N Leader"
+       d="m 130.02773,136.4291 -29.50793,16.8965 -20.795372,0"
        style="stroke:#808080"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       inkscape:connector-curvature="0" />
     <text
-       id="LabelP"
-       class="P Label"
+       id="LabelN"
+       class="N Label"
        x="74"
-       y="166.9624"
-       style="text-anchor:end">P</text>
+       y="153.32561"
+       style="text-anchor:end">N</text>
   </g>
   <g
      id="GroupRingCCW">
@@ -501,5 +479,27 @@
        x="74"
        class="Q Label"
        id="LabelQ">Q</text>
+  </g>
+  <g
+     id="GroupP"
+     transform="translate(0,0.14565678)">
+    <path
+       d="m 124,154 a 10,10 0 0 0 20,0 l 0,-8 -20,0 0,8"
+       class="P Button"
+       id="ButtonP"
+       inkscape:connector-curvature="0" />
+    <path
+       id="LeaderP"
+       class="P Leader"
+       d="m 130.02773,152.76537 -29.61913,14.21525 -20.746542,0.0242"
+       style="stroke:#808080"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <text
+       id="LabelP"
+       class="P Label"
+       x="74"
+       y="166.9624"
+       style="text-anchor:end">P</text>
   </g>
 </svg>

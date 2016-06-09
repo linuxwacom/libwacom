@@ -5,13 +5,37 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
    id="ek-remote"
    width="350"
    height="275"
->
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="ek-remote.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1136"
+     id="namedview99"
+     showgrid="false"
+     inkscape:zoom="4.8546094"
+     inkscape:cx="108.51468"
+     inkscape:cy="183.5394"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="ek-remote"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata3448">
     <rdf:RDF>
@@ -20,15 +44,14 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Wacom ExpressKey Remote</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs3446" />
-
   <title
      id="title">Wacom ExpressKey Remote</title>
-
   <path
      id="LED0"
      d="m 114.39258,40.509766 0.0605,2.09375 3.50977,3.146484 a 21.473726,21.473726 0 0 1 1.67969,-1.683594 l -3.13867,-3.511718 -2.11133,-0.04492 z"
@@ -65,8 +88,7 @@
        id="LeaderA"
        class="A ModeSwitch Leader"
        d="m 133.9375,60 -34.091752,-18.125 -19.75736,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelA"
        class="A ModeSwitch Label"
@@ -79,14 +101,12 @@
     <path
        d="M 112.03906,38.470703 A 30.783125,30.783125 0 0 0 103.2168,60 a 30.783125,30.783125 0 0 0 8.55078,21.275391 l 6.73633,-6.419922 A 21.473726,21.473726 0 0 1 112.52539,60 21.473726,21.473726 0 0 1 117.82812,45.894531 l -3.61914,-3.189453 -0.0312,-2.125 -2.13867,-2.109375 z"
        class="B Button"
-       id="ButtonB"
-        />
+       id="ButtonB" />
     <path
        id="LeaderB"
        class="B Leader"
        d="m 80.088388,60.06066 28.161612,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelB"
        class="B Label"
@@ -99,14 +119,12 @@
     <path
        d="m 134.25586,29.230469 -0.0293,3.130859 1.42188,1.46875 -0.30469,4.761719 a 21.473726,21.473726 0 0 1 12.86328,5.332031 l 3.1543,-3.591797 2.125,-0.03516 2.13867,-2.169922 a 30.783125,30.783125 0 0 0 -21.36914,-8.896484 z"
        class="D Button"
-       id="ButtonD"
-        />
+       id="ButtonD" />
     <path
        id="LeaderD"
        class="D Leader"
        d="m 145,35 0,-10 5,-5 38.10138,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelD"
        class="D Label"
@@ -119,14 +137,12 @@
     <path
        d="m 155.95312,38.431641 -2.17968,2.148437 -0.0312,2.125 -3.60157,3.173828 A 21.473726,21.473726 0 0 1 155.47461,60 21.473726,21.473726 0 0 1 149.46094,74.869141 l 6.73047,6.414062 A 30.783125,30.783125 0 0 0 164.7832,60 30.783125,30.783125 0 0 0 155.95312,38.431641 Z"
        class="E Button"
-       id="ButtonE"
-        />
+       id="ButtonE" />
     <path
        id="LeaderE"
        class="E Leader"
        d="m 160,60.06066 28.10722,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelE"
        class="E Label"
@@ -139,14 +155,12 @@
     <path
        d="m 119.26758,75.587891 -6.40625,6.738281 A 30.783125,30.783125 0 0 0 134,90.783203 30.783125,30.783125 0 0 0 155.13477,82.355469 l -6.41016,-6.742188 A 21.473726,21.473726 0 0 1 134,81.474609 21.473726,21.473726 0 0 1 119.26758,75.587891 Z"
        class="F Button"
-       id="ButtonF"
-        />
+       id="ButtonF" />
     <path
        style="stroke:#808080"
        d="M 133.98874,86.270369 99.875,78.104854 l -19.803078,0"
        class="F Leader"
-       id="LeaderF"
-        />
+       id="LeaderF" />
     <text
        id="LabelF"
        class="F Label"
@@ -154,53 +168,17 @@
        y="77.948448"
        style="text-anchor:end">F</text>
   </g>
-  <g
-     id="GroupQ">
-    <path
-       d="m 106,152 15,0 a 12,12 0 0 0 12,14 l 0,16 -14,0 a 15,15 0 0 1 -13,-16 l 0,-14"
-       class="Q Button"
-       id="ButtonQ"
-        />
-    <path
-       id="LeaderQ"
-       class="Q Leader"
-       d="M 118,174.65771 118,197"
-       style="stroke:#808080"
-        />
-    <text
-       id="LabelQ"
-       class="Q Label"
-       x="118"
-       y="204.625"
-       style="text-anchor:end">Q</text>
-  </g>
-  <g
-     id="GroupR">
-    <path
-       d="m 162,152 -15,0 a 12,12 0 0 1 -12,14 l 0,16 16,0 a 15,15 0 0 0 11,-16 l 0,-14"
-       class="R Button"
-       id="ButtonR"
-        />
-    <path
-       id="LeaderR"
-       class="R Leader"
-       d="M 148,174.65771 148,197"
-       style="stroke:#808080"
-        />
-    <text
-       id="LabelR"
-       class="R Label"
-       x="147.375"
-       y="205"
-       style="text-anchor:start">R</text>
-  </g>
+  <path
+     inkscape:connector-curvature="0"
+     id="ButtonR"
+     class="R Button"
+     d="m 162,152 -15,0 a 12,12 0 0 1 -12,14 l 0,16 16,0 a 15,15 0 0 0 11,-16 l 0,-14" />
   <g
      id="GroupC">
     <path
        d="m 133.69336,29.228516 a 30.783125,30.783125 0 0 0 -21.35156,8.916015 l 2.12109,2.152344 2.125,0.03516 3.18164,3.623047 a 21.473726,21.473726 0 0 1 12.83399,-5.378906 l -0.30274,-4.746094 1.42188,-1.46875 -0.0293,-3.132812 z"
        class="C Button"
-       id="ButtonC"
-        />
+       id="ButtonC" />
     <text
        id="LabelC"
        class="C Label"
@@ -211,22 +189,19 @@
        style="stroke:#808080"
        d="m 123.98322,35 0,-10 -5,-5 -38.896875,0"
        class="C Leader"
-       id="LeaderC"
-        />
+       id="LeaderC" />
   </g>
   <g
      id="GroupG">
     <path
        d="m 106,80 a 30,30 0 0 0 15,11 l 0,15 -15,0 0,-26"
        class="G Button"
-       id="ButtonG"
-        />
+       id="ButtonG" />
     <path
        id="LeaderG"
        class="G Leader"
        d="m 111,95.75 -30.933281,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelG"
        class="G Label"
@@ -244,14 +219,12 @@
     <path
        d="m 147,91 a 30,30 0 0 0 15,-11 l 0,26 -15,0 0,-15"
        class="I Button"
-       id="ButtonI"
-        />
+       id="ButtonI" />
     <path
        id="LeaderI"
        class="I Leader"
        d="m 157,95.75 31.10827,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelI"
        class="I Label"
@@ -269,14 +242,12 @@
     <path
        d="m 106,108 15,0 0,20 -15,0 0,-20"
        class="J Button"
-       id="ButtonJ"
-        />
+       id="ButtonJ" />
     <path
        id="LeaderJ"
        class="J Leader"
        d="m 111,115.25 -31.24264,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelJ"
        class="J Label"
@@ -297,14 +268,12 @@
     <path
        d="m 147,108 15,0 0,20 -15,0 0,-20"
        class="L Button"
-       id="ButtonL"
-        />
+       id="ButtonL" />
     <path
        id="LeaderL"
        class="L Leader"
        d="m 158,115.25 30.08755,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelL"
        class="L Label"
@@ -325,14 +294,12 @@
     <path
        d="m 106,130 15,0 0,20 -15,0 0,-20"
        class="M Button"
-       id="ButtonM"
-        />
+       id="ButtonM" />
     <path
        id="LeaderM"
        class="M Leader"
        d="m 111,140.625 -31.24264,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelM"
        class="M Label"
@@ -348,47 +315,42 @@
        y="135.03314"
        x="112.75" />
   </g>
-  <g
-     id="GroupO">
-    <path
-       d="m 147,130 15,0 0,20 -15,0 0,-20"
-       class="O Button"
-       id="ButtonO"
-        />
-    <path
-       id="LeaderO"
-       class="O Leader"
-       d="m 152.75,145.125 21.86675,22.04353 13.47365,0"
-       style="stroke:#808080"
-        />
-    <text
-       id="LabelO"
-       class="O Label"
-       x="194"
-       y="166.95488"
-       style="text-anchor:start">O</text>
-    <rect
-       x="153.75"
-       y="135.03314"
-       width="1.5"
-       height="9.9337091"
-       ry="1"
-       rx="0.74478507"
-       id="LineO" />
-  </g>
+  <path
+     inkscape:connector-curvature="0"
+     id="ButtonO"
+     class="O Button"
+     d="m 147,130 15,0 0,20 -15,0 0,-20" />
+  <path
+     inkscape:connector-curvature="0"
+     style="stroke:#808080"
+     d="m 152.75,145.125 21.86675,22.04353 13.47365,0"
+     class="O Leader"
+     id="LeaderO" />
+  <text
+     style="text-anchor:start"
+     y="166.95488"
+     x="194"
+     class="O Label"
+     id="LabelO">O</text>
+  <rect
+     id="LineO"
+     rx="0.74478507"
+     ry="1"
+     height="9.9337091"
+     width="1.5"
+     y="135.03314"
+     x="153.75" />
   <g
      id="GroupH">
     <path
        d="m 124,103 a 10,10 0 1 1 20,0 l 0,10 -20,0 0,-10"
        class="H Button"
-       id="ButtonH"
-        />
+       id="ButtonH" />
     <path
        id="LeaderH"
        class="H Leader"
        d="m 138,105.35355 35.15076,35.06237 14.9375,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelH"
        class="H Label"
@@ -406,14 +368,12 @@
     <path
        d="m 124,115 20,0 0,13 -20,0 0,-13"
        class="K Button"
-       id="ButtonK"
-        />
+       id="ButtonK" />
     <path
        id="LeaderK"
        class="K Leader"
        d="m 138,118 35.47474,35.34974 14.57551,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelK"
        class="K Label"
@@ -422,48 +382,54 @@
        style="text-anchor:start">K</text>
   </g>
   <g
-     id="GroupN">
+     id="g4258">
     <path
-       d="m 124,130 20,0 0,14 -20,0 0,-14"
-       class="N Button"
-       id="ButtonN"
-        />
-    <path
+       sodipodi:nodetypes="ccc"
        id="LeaderN"
        class="N Leader"
-       d="M 130.02773,137.7955 100.81111,167 79.724428,167"
+       d="m 130.02773,136.4291 -29.50793,16.8965 -20.795372,0"
        style="stroke:#808080"
-        />
+       inkscape:connector-curvature="0" />
     <text
        id="LabelN"
        class="N Label"
        x="74"
-       y="167"
+       y="153.32561"
        style="text-anchor:end">N</text>
-    <circle
-       id="DotN"
-       cy="137"
-       cx="134"
-       r="1" />
+    <g
+       id="g4230">
+      <path
+         inkscape:connector-curvature="0"
+         id="ButtonN"
+         class="N Button"
+         d="m 124,130 20,0 0,14 -20,0 0,-14" />
+      <circle
+         r="1"
+         cx="134"
+         cy="137"
+         id="DotN" />
+    </g>
   </g>
   <g
-     id="GroupP">
+     id="GroupP"
+     transform="translate(0,0.14565678)">
     <path
        d="m 124,154 a 10,10 0 0 0 20,0 l 0,-8 -20,0 0,8"
        class="P Button"
        id="ButtonP"
-        />
+       inkscape:connector-curvature="0" />
     <path
        id="LeaderP"
        class="P Leader"
-       d="m 130.02773,157.35355 -30.132588,30.16467 -20.233084,0.0242"
+       d="m 130.02773,152.76537 -29.61913,14.21525 -20.746542,0.0242"
        style="stroke:#808080"
-        />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
     <text
        id="LabelP"
        class="P Label"
        x="74"
-       y="187.5"
+       y="166.9624"
        style="text-anchor:end">P</text>
   </g>
   <g
@@ -472,8 +438,7 @@
        id="LeaderRingCCW"
        class="RingCCW Ring Leader"
        d="m 134,44 0,-2 54.10722,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelRingCCW"
        class="RingCCW Ring Label"
@@ -483,8 +448,7 @@
     <path
        id="RingCCW"
        class="RingCCW Button"
-       d="m 131,47.077255 3,-1.5 0,1 a 7.5,7.5 0 0 1 5,1.5 6.5,6.5 0 0 0 -5,-0.5 l 0,1 z"
-        />
+       d="m 131,47.077255 3,-1.5 0,1 a 7.5,7.5 0 0 1 5,1.5 6.5,6.5 0 0 0 -5,-0.5 l 0,1 z" />
   </g>
   <g
      id="GroupRingCW">
@@ -492,8 +456,7 @@
        id="LeaderRingCW"
        class="RingCW Ring Leader"
        d="m 134,76.12132 0,2 54.10722,0"
-       style="stroke:#808080"
-        />
+       style="stroke:#808080" />
     <text
        id="LabelRingCW"
        class="RingCW Ring Label"
@@ -503,7 +466,40 @@
     <path
        id="RingCW"
        class="RingCW Button"
-       d="m 131,73.06291 3,-1.5 0,1 a 7.5,7.5 0 0 0 5,-1 6.5,6.5 0 0 1 -5,2 l 0,1 z"
-        />
+       d="m 131,73.06291 3,-1.5 0,1 a 7.5,7.5 0 0 0 5,-1 6.5,6.5 0 0 1 -5,2 l 0,1 z" />
+  </g>
+  <text
+     id="LabelR"
+     class="R Label"
+     x="194"
+     y="186.95488"
+     style="text-anchor:start">R</text>
+  <path
+     inkscape:connector-curvature="0"
+     style="stroke:#808080"
+     d="m 151.7304,170.29582 22.88635,16.87271 13.47365,0"
+     class="R Leader"
+     id="LeaderR"
+     sodipodi:nodetypes="ccc" />
+  <g
+     id="g4265">
+    <path
+       d="m 106,152 15,0 a 12,12 0 0 0 12,14 l 0,16 -14,0 a 15,15 0 0 1 -13,-16 l 0,-14"
+       class="Q Button"
+       id="ButtonQ"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="ccc"
+       inkscape:connector-curvature="0"
+       style="stroke:#808080"
+       d="m 118.01105,170.21638 -17.60245,16.9099 -20.746542,0.0242"
+       class="Q Leader"
+       id="LeaderQ" />
+    <text
+       style="text-anchor:end"
+       y="187.10806"
+       x="74"
+       class="Q Label"
+       id="LabelQ">Q</text>
   </g>
 </svg>

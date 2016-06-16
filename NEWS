@@ -1,3 +1,8 @@
+libwcaom 0.21:
+- New devices:
+  - MTE-450 "Bamboo", Lenovo ThinkPad Tablet 10
+- Layout fixes for the Express Key Remote, Intuos series
+
 libwacom 0.20:
 - New devices: "One by wacom"
 - Layout fixes, especially for the Express Key Remote

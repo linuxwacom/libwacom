@@ -1,0 +1,14 @@
+# EMR sensor used by the Lenovo Thinkpad 10
+
+[Device]
+Name=Wacom ISDv4 114
+DeviceMatch=i2c:056a:0114
+Class=ISDV4
+IntegratedIn=Display;System
+Width=9
+Height=5
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0

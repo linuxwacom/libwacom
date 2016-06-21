@@ -206,10 +206,15 @@ update_tablet (Tablet *tablet)
 	char        *width, *height;
 	char         button;
 	GError      *error;
-	gchar       *data;
+	gchar       *file_data, *escaped_file_data, *data;
+	gsize        file_len;
 
 	if (tablet->handle)
 		g_object_unref (tablet->handle);
+
+	if (!g_file_get_contents (libwacom_get_layout_filename (tablet->device), &file_data, &file_len, NULL))
+		return;
+	escaped_file_data = g_markup_escape_text (file_data, file_len);
 
 	width = g_strdup_printf ("%d", tablet->area.width);
 	height = g_strdup_printf ("%d", tablet->area.height);
@@ -264,12 +269,14 @@ update_tablet (Tablet *tablet)
 	                    "      fill:   ", DARK_COLOR,    " !important;\n"
 	                    "    }\n",
 	                    "  </style>\n"
-	                    "  <xi:include href=\"", libwacom_get_layout_filename (tablet->device), "\"/>\n"
+	                    "  <xi:include href=\"data:text/xml,", escaped_file_data, "\"/>\n"
 	                    "</svg>",
 	                    NULL);
 
 	tablet->handle = rsvg_handle_new_from_data ((guint8 *) data, strlen(data), &error);
 	g_free (data);
+	g_free (escaped_file_data);
+	g_free (file_data);
 }
 
 static void

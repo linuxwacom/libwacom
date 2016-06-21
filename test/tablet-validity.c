@@ -112,6 +112,29 @@ static int eraser_is_present(WacomDeviceDatabase *db, const int *styli, int nsty
 	return 0;
 }
 
+static int tablet_has_lr_buttons(WacomDevice *device)
+{
+	int nleft = 0;
+	int nright = 0;
+	int num_buttons;
+	char button;
+
+	num_buttons  = libwacom_get_num_buttons (device);
+
+	for (button = 'A'; button < 'A' + num_buttons; button++) {
+		WacomButtonFlags f = libwacom_get_button_flag(device, button);
+		if (f & WACOM_BUTTON_POSITION_LEFT)
+			nleft++;
+		if (f & WACOM_BUTTON_POSITION_RIGHT)
+			nright++;
+	}
+
+	if (nleft > 0 || nright > 0)
+		return 1;
+
+	return 0;
+}
+
 static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 {
 	const char *name;
@@ -226,6 +249,9 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 		assert(match_mode_switch (device, libwacom_get_strips_num_modes, WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH));
 	if (libwacom_get_num_strips(device) > 0)
 		assert(match_mode_switch (device, libwacom_get_strips_num_modes, WACOM_BUTTON_TOUCHSTRIP_MODESWITCH));
+
+	if (libwacom_is_reversible(device) && libwacom_get_num_buttons(device) > 0)
+		assert(tablet_has_lr_buttons(device));
 }
 
 int main(int argc, char **argv)

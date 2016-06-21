@@ -415,6 +415,7 @@ main (int argc, char **argv)
 	gdk_color_parse (BACK_COLOR, &black);
 	gdk_window_set_background (gdk_win, &black);
 	gtk_window_set_default_size (GTK_WINDOW (tablet->widget), 800, 600);
+	gtk_window_set_title (GTK_WINDOW (tablet->widget), libwacom_get_name (device));
 
 	g_signal_connect (tablet->widget, "expose-event", G_CALLBACK(on_expose_cb), tablet);
 	g_signal_connect (tablet->widget, "delete-event", G_CALLBACK(on_delete_cb), tablet);

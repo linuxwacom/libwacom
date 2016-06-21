@@ -50,7 +50,7 @@ Layout=bamboo-0fg-s-p.svg
 
 [Features]
 Stylus=true
-Reversible=true
+Reversible=false
 Touch=false
 Buttons=4
 Ring=true

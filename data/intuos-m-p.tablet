@@ -31,7 +31,7 @@ IntegratedIn=
 
 [Features]
 Stylus=true
-Reversible=true
+Reversible=false
 Buttons=4
 
 [Buttons]

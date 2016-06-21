@@ -44,7 +44,7 @@ IntegratedIn=
 
 [Features]
 Stylus=true
-Reversible=true
+Reversible=false
 Touch=true
 Buttons=4
 TouchSwitch=true

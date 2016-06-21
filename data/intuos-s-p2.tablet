@@ -31,7 +31,7 @@ Styli=0x8e2;
 
 [Features]
 Stylus=true
-Reversible=true
+Reversible=false
 Buttons=4
 
 [Buttons]

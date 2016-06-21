@@ -2,35 +2,26 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!--
  -->
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="intuos-m-pt2" width="275" height="222">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="intuos-s-pt" width="281" height="212">
   <title id="title">Wacom Intuos PT Medium (CTH-690)</title>
-  <g>
-    <path id="ButtonA" class="A Button" d="M 35 35   a 8  8           0            0           1      9 -9   l 14 0   l 0 20   l -23 0   z"/>
-    <circle id="DotA" cx="47" cy="36" r=".5"/>
-    <path id="LeaderA" class="A Leader" d="M 65 35 l 20 0"/>
-    <text id="LabelA" class="A Label" x="87" y="40" style="text-anchor:start;">A</text>
-  </g>
-
-  <g>
-    <path id="ButtonB" class="B Button" d="M 35 47.5   l 23 0   l 0 20   l -23 0   z"/>
-    <circle id="DotB" cx="47" cy="57.5" r=".5"/>
-    <path id="LeaderB" class="B Leader" d="M 65 59 l 20 0"/>
-    <text id="LabelB" class="B Label" x="87" y="64" style="text-anchor:start;">B</text>
-  </g>
-
-  <g>
-    <path id="ButtonC" class="C Button" d="M 185 26   l 14 0   a 8  -8           0            0           1      9 9    l 0 11   l -23 0   z"/>
-    <circle id="DotC" cx="197" cy="36" r=".5"/>
-    <path id="LeaderC" class="C Leader" d="M 160 35 l 20 0"/>
-    <text id="LabelC" class="C Label" x="158" y="40" style="text-anchor:end;">C</text>
-  </g>
-
-
-  <g>
-    <path id="ButtonD" class="D Button" d="M 185 47.5   l 23 0   l 0 20   l -23 0   z"/>
-    <circle id="DotD" cx="197" cy="57.5" r=".5"/>
-    <path id="LeaderD" class="D Leader" d="M 160 59 l 20 0"/>
-    <text id="LabelD" class="D Label" x="158" y="64" style="text-anchor:end;">D</text>
-  </g>
-
+    <g>
+      <path id="ButtonA" class="A Button" d="m 13.0,25.25 12.25,-12.25 -4.75,-4.75 C 12.75,0.5 0.25,12.5 8.25,20.75 Z" />
+      <path id="LeaderA" class="A Leader" d="M 40,11.5 l 20,0"/>
+      <text id="LabelA" class="A Label" x="62" y="11.5" style="text-anchor:start;">A</text>
+    </g>
+    <g>
+      <path id="ButtonB" class="B Button" d="m 25.75,13.5 -12.25,12.25 4.75,4.75 c 8.0,8.0 20.5,-4.25 12.25,-12.25 z" />
+      <path id="LeaderB" class="B Leader" d="M 40,31.5 l 20,0"/>
+      <text id="LabelB" class="B Label" x="62" y="31.5" style="text-anchor:start;">B</text>
+    </g>
+    <g>
+      <path id="ButtonC" class="C Button" d="m 268.0,25.25 -12.25,-12.25 4.75,-4.75 c 8.0,-8.0 20.5,4.25 12.25,12.25 z" />
+      <path id="LeaderC" class="C Leader" d="M 233,11.5 l -20,0"/>
+      <text id="LabelC" class="C Label" x="211" y="11.5" style="text-anchor:end;">C</text>
+    </g>
+    <g>
+      <path id="ButtonD" class="D Button" d="m 255.25,13.75 12.25,12.25 -4.75,4.75 c -8.0,8.0 -20.5,-4.25 -12.25,-12.25 z" />
+      <path id="LeaderD" class="D Leader" d="M 233,31.5 l -20,0"/>
+      <text id="LabelD" class="D Label" x="211" y="31.5" style="text-anchor:end;">D</text>
+    </g>
 </svg>

@@ -54,11 +54,11 @@ static int buttons_have_direction (WacomDevice *device)
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
 		WacomButtonFlags  flags;
 		flags = libwacom_get_button_flag(device, button);
-		if (flags & WACOM_BUTTON_DIRECTION)
-			return 1;
+		if (!(flags & WACOM_BUTTON_DIRECTION))
+			return 0;
 	}
 
-	return 0;
+	return 1;
 }
 
 static int match_mode_switch (WacomDevice *device, NumModesFn get_num_modes, WacomButtonFlags flag)

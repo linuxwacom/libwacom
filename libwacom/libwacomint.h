@@ -121,6 +121,7 @@ struct _WacomError {
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_stylus_destroy(WacomStylus *stylus);
 void libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, int vendor_id, int product_id);
+void libwacom_match_destroy(WacomMatch *match);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

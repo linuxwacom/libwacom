@@ -60,6 +60,7 @@ int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice *device;
+	const WacomMatch *match;
 	const char *str;
 
 	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
@@ -128,8 +129,18 @@ int main(int argc, char **argv)
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
 	libwacom_destroy(device);
-	libwacom_database_destroy (db);
 
+	/* 24HDT has one paired device */
+	device = libwacom_new_from_usbid(db, 0x56a, 0x00f8, NULL);
+	assert(device);
+
+	match = libwacom_get_paired_device(device);
+	assert(match != NULL);
+	assert(libwacom_match_get_vendor_id(match) == 0x56a);
+	assert(libwacom_match_get_product_id(match) == 0xf6);
+	assert(libwacom_match_get_bustype(match) == WBUSTYPE_USB);
+
+	libwacom_database_destroy (db);
 	return 0;
 }
 

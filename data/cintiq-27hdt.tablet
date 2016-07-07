@@ -7,6 +7,7 @@
 [Device]
 Name=Wacom Cintiq 27QHD touch
 DeviceMatch=usb:056a:032b
+PairedID=usb:056a:032c
 Class=Cintiq
 Width=24
 Height=12

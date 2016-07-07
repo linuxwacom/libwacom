@@ -333,6 +333,8 @@ libwacom_copy(const WacomDevice *device)
 		d->matches[i] = libwacom_copy_match(device->matches[i]);
 	d->matches[d->nmatches] = NULL;
 	d->match = device->match;
+	if (device->paired)
+		d->paired = libwacom_copy_match(device->paired);
 	d->cls = device->cls;
 	d->num_strips = device->num_strips;
 	d->features = device->features;
@@ -752,6 +754,12 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 		print_match(fd, *match);
 	dprintf(fd, "\n");
 
+	if (libwacom_get_paired_device(device)) {
+		dprintf(fd, "PairedID=");
+		print_match(fd, libwacom_get_paired_device(device));
+		dprintf(fd, "\n");
+	}
+
 	dprintf(fd, "Class=%s\n",		class_name);
 	dprintf(fd, "Width=%d\n",		libwacom_get_width(device));
 	dprintf(fd, "Height=%d\n",		libwacom_get_height(device));
@@ -793,6 +801,8 @@ libwacom_destroy(WacomDevice *device)
 
 	g_free (device->name);
 	g_free (device->layout);
+	if (device->paired)
+		libwacom_match_destroy(device->paired);
 	for (i = 0; i < device->nmatches; i++)
 		libwacom_match_destroy(device->matches[i]);
 	g_free (device->matches);
@@ -878,6 +888,11 @@ const char* libwacom_get_match(const WacomDevice *device)
 const WacomMatch** libwacom_get_matches(const WacomDevice *device)
 {
 	return (const WacomMatch**)device->matches;
+}
+
+const WacomMatch* libwacom_get_paired_device(const WacomDevice *device)
+{
+	return (const WacomMatch*)device->paired;
 }
 
 int libwacom_get_width(const WacomDevice *device)

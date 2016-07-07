@@ -189,6 +189,26 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 	return TRUE;
 }
 
+static gboolean
+libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
+{
+	char *name = NULL;
+	int vendor_id, product_id;
+	WacomBusType bus;
+
+	g_return_val_if_fail(device->paired == NULL, FALSE);
+
+	if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+		DBG("failed to match '%s' for product/vendor IDs. Ignoring.\n", matchstr);
+		return FALSE;
+	}
+
+	device->paired = libwacom_match_new(name, bus, vendor_id, product_id);
+
+	free(name);
+	return TRUE;
+}
+
 static void
 libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 {
@@ -400,6 +420,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	char *path;
 	char *layout;
 	char *class;
+	char *paired;
 	char **string_list;
 
 	keyfile = g_key_file_new();
@@ -440,6 +461,12 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 			libwacom_matchstr_to_match(device, string_list[first_valid_match]);
 		}
 		g_strfreev (string_list);
+	}
+
+	paired = g_key_file_get_string(keyfile, DEVICE_GROUP, "PairedID", NULL);
+	if (paired) {
+		libwacom_matchstr_to_paired(device, paired);
+		g_free(paired);
 	}
 
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);

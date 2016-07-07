@@ -387,6 +387,22 @@ const char* libwacom_get_match(const WacomDevice *device);
 const WacomMatch** libwacom_get_matches(const WacomDevice *device);
 
 /**
+ * Return the match string of the paired device for this device. A paired
+ * device is a device with a different match string but that shares the
+ * physical device with this device.
+ *
+ * If the return value is NULL, no device is paired with this device or all
+ * paired devices have the same WacomMatch as this device.
+ *
+ * The returned device may not be a libwacom device itself.
+ *
+ * @param device The tablet to query
+ * @return A pointer to paired device for this device. Do not
+ * modify this pointer or any content!
+ */
+const WacomMatch* libwacom_get_paired_device(const WacomDevice *device);
+
+/**
  * @param device The tablet to query
  * @return The numeric product ID for this device
  */

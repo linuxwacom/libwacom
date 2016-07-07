@@ -72,6 +72,8 @@ struct _WacomDevice {
 	WacomMatch **matches; /* NULL-terminated */
 	int nmatches; /* not counting NULL-terminated element */
 
+	WacomMatch *paired;
+
 	WacomClass cls;
 	int num_strips;
 	uint32_t features;

@@ -28,6 +28,7 @@
 Name=Wacom Cintiq Companion Hybrid
 Class=Cintiq
 DeviceMatch=usb:056a:0307
+PairedID=usb:056a:0309
 Width=12
 Height=7
 Layout=cintiq-companion-hybrid.svg

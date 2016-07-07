@@ -26,6 +26,7 @@
 Name=Wacom Cintiq 13HD touch
 Class=Cintiq
 DeviceMatch=usb:056a:0333
+PairedID=usb:056a:0335
 Width=12
 Height=7
 Layout=cintiq-13hd.svg

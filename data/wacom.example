@@ -23,6 +23,13 @@ Name=Wacom Intuos4 6x9
 # so it has exactly 4 digits.
 DeviceMatch=usb:056a:00bc
 
+# Paired PID includes the match line of any device that share the same
+# physical device but has different product or vendor ids (e.g. the touch
+# device on the 24HDT). The format of the match line is identical to
+# DeviceMatch but only one value is permitted.
+# Note: the PIDs listed may not be libwacom devices themselves.
+PairedIDs=usb:056a:0335
+
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
 # If unsure, or not applicable (the tablet isn't stand-alone for
 # example), just leave it out.

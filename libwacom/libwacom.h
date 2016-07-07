@@ -100,10 +100,10 @@ typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
  */
 enum WacomErrorCode {
 	WERROR_NONE,		/**< No error has occured */
-	WERROR_BAD_ALLOC,		/**< Allocation error */
+	WERROR_BAD_ALLOC,	/**< Allocation error */
 	WERROR_INVALID_PATH,	/**< A path specified is invalid */
-	WERROR_INVALID_DB,		/**< The passed DB is invalid */
-	WERROR_BAD_ACCESS,		/**< Invalid permissions to access the path */
+	WERROR_INVALID_DB,	/**< The passed DB is invalid */
+	WERROR_BAD_ACCESS,	/**< Invalid permissions to access the path */
 	WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
 };
 
@@ -111,10 +111,10 @@ enum WacomErrorCode {
  * Bus types for tablets.
  */
 typedef enum {
-	WBUSTYPE_UNKNOWN,		/**< Unknown/unsupported bus type */
+	WBUSTYPE_UNKNOWN,	/**< Unknown/unsupported bus type */
 	WBUSTYPE_USB,		/**< USB tablet */
-	WBUSTYPE_SERIAL,		/**< Serial tablet */
-	WBUSTYPE_BLUETOOTH,		/**< Bluetooth tablet */
+	WBUSTYPE_SERIAL,	/**< Serial tablet */
+	WBUSTYPE_BLUETOOTH,	/**< Bluetooth tablet */
 	WBUSTYPE_I2C,		/**< I2C tablet */
 } WacomBusType;
 

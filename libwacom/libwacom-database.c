@@ -400,7 +400,10 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	device = g_new0 (WacomDevice, 1);
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "DeviceMatch", NULL, NULL);
-	if (string_list) {
+	if (!string_list) {
+		DBG("Missing DeviceMatch= line in '%s'\n", path);
+		goto out;
+	} else {
 		guint i;
 		guint nmatches = 0;
 		guint first_valid_match = 0;

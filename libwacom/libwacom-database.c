@@ -161,26 +161,29 @@ match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *produ
 }
 
 static gboolean
-libwacom_matchstr_to_match(WacomDevice *device, const char *match)
+libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 {
 	char *name = NULL;
 	int vendor_id, product_id;
 	WacomBusType bus;
+	WacomMatch *match;
 
-	if (match == NULL)
+	if (matchstr == NULL)
 		return FALSE;
 
-	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
+	if (g_strcmp0 (matchstr, GENERIC_DEVICE_MATCH) == 0) {
 		name = NULL;
 		bus = WBUSTYPE_UNKNOWN;
 		vendor_id = 0;
 		product_id = 0;
-	} else if (!match_from_string(match, &bus, &vendor_id, &product_id, &name)) {
-		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", match);
+	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", matchstr);
 		return FALSE;
 	}
 
-	libwacom_update_match(device, name, bus, vendor_id, product_id);
+	match = libwacom_match_new(name, bus, vendor_id, product_id);
+	libwacom_update_match(device, match);
+	libwacom_match_destroy(match);
 
 	free(name);
 	return TRUE;

@@ -72,6 +72,8 @@ struct _WacomDevice {
 	WacomMatch **matches; /* NULL-terminated */
 	int nmatches; /* not counting NULL-terminated element */
 
+	WacomMatch *paired;
+
 	WacomClass cls;
 	int num_strips;
 	uint32_t features;
@@ -120,7 +122,9 @@ struct _WacomError {
 /* INTERNAL */
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_stylus_destroy(WacomStylus *stylus);
-void libwacom_update_match(WacomDevice *device, const char *name, WacomBusType bus, int vendor_id, int product_id);
+void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
+WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
+void libwacom_match_destroy(WacomMatch *match);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

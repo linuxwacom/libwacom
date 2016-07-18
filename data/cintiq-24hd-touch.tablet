@@ -42,6 +42,7 @@
 [Device]
 Name=Wacom Cintiq 24HD touch
 DeviceMatch=usb:056a:00f8
+PairedID=usb:056a:00f6
 Class=Cintiq
 Width=21
 Height=13

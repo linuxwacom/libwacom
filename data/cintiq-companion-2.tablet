@@ -30,6 +30,7 @@
 Name=Wacom Cintiq Companion 2
 Class=Cintiq
 DeviceMatch=usb:056a:0325
+PairedID=usb:056a:0326
 Width=12
 Height=7
 Layout=cintiq-companion-2.svg

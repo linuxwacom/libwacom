@@ -140,37 +140,72 @@ make_match_string (const char *name, WacomBusType bus, int vendor_id, int produc
 }
 
 static gboolean
-libwacom_matchstr_to_match(WacomDevice *device, const char *match)
+match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *product_id, char **name)
 {
 	int rc = 1;
 	char busstr[64], namestr[64];
-	char *name;
-	int vendor_id, product_id;
-	WacomBusType bus;
-
-	if (match == NULL)
-		return FALSE;
-
-	if (g_strcmp0 (match, GENERIC_DEVICE_MATCH) == 0) {
-		libwacom_update_match(device, NULL, WBUSTYPE_UNKNOWN, 0, 0);
-		return TRUE;
-	}
 
 	memset(namestr, 0, sizeof(namestr));
 
-	rc = sscanf(match, "%63[^:]:%x:%x:%63c", busstr, &vendor_id, &product_id, namestr);
+	rc = sscanf(str, "%63[^:]:%x:%x:%63c", busstr, vendor_id, product_id, namestr);
 	if (rc == 4) {
-		name = namestr;
+		*name = g_strdup(namestr);
 	} else if (rc == 3) {
-		name = NULL;
+		*name = NULL;
 	} else {
-		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", match);
-		return 0;
+		return FALSE;
 	}
-	bus = bus_from_str (busstr);
+	*bus = bus_from_str (busstr);
 
-	libwacom_update_match(device, name, bus, vendor_id, product_id);
+	return TRUE;
+}
 
+static gboolean
+libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
+{
+	char *name = NULL;
+	int vendor_id, product_id;
+	WacomBusType bus;
+	WacomMatch *match;
+
+	if (matchstr == NULL)
+		return FALSE;
+
+	if (g_strcmp0 (matchstr, GENERIC_DEVICE_MATCH) == 0) {
+		name = NULL;
+		bus = WBUSTYPE_UNKNOWN;
+		vendor_id = 0;
+		product_id = 0;
+	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", matchstr);
+		return FALSE;
+	}
+
+	match = libwacom_match_new(name, bus, vendor_id, product_id);
+	libwacom_update_match(device, match);
+	libwacom_match_destroy(match);
+
+	free(name);
+	return TRUE;
+}
+
+static gboolean
+libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
+{
+	char *name = NULL;
+	int vendor_id, product_id;
+	WacomBusType bus;
+
+	g_return_val_if_fail(device->paired == NULL, FALSE);
+
+	if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+		DBG("failed to match '%s' for product/vendor IDs. Ignoring.\n", matchstr);
+		return FALSE;
+	}
+
+	device->paired = libwacom_match_new(name, bus, vendor_id, product_id);
+
+	free(name);
 	return TRUE;
 }
 
@@ -385,6 +420,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	char *path;
 	char *layout;
 	char *class;
+	char *paired;
 	char **string_list;
 
 	keyfile = g_key_file_new();
@@ -400,7 +436,10 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	device = g_new0 (WacomDevice, 1);
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "DeviceMatch", NULL, NULL);
-	if (string_list) {
+	if (!string_list) {
+		DBG("Missing DeviceMatch= line in '%s'\n", path);
+		goto out;
+	} else {
 		guint i;
 		guint nmatches = 0;
 		guint first_valid_match = 0;
@@ -422,6 +461,12 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 			libwacom_matchstr_to_match(device, string_list[first_valid_match]);
 		}
 		g_strfreev (string_list);
+	}
+
+	paired = g_key_file_get_string(keyfile, DEVICE_GROUP, "PairedID", NULL);
+	if (paired) {
+		libwacom_matchstr_to_paired(device, paired);
+		g_free(paired);
 	}
 
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);

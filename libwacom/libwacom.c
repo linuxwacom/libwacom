@@ -267,6 +267,8 @@ get_device_info (const char            *path,
 		GUdevDevice *parent;
 
 		parent = g_udev_device_get_parent (device);
+		if (!parent)
+			goto out;
 		*name = g_strdup (g_udev_device_get_sysfs_attr (parent, "name"));
 		g_object_unref (parent);
 	}

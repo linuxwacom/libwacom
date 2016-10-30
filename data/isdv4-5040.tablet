@@ -1,0 +1,17 @@
+# this is for the Wacom pen + touchscreen 
+# as found in the Lenovo Thinkpad X1 Yoga
+# 14" WQHD display, measuring 310x174mm
+# pen with 2 buttons, no eraser
+
+[Device]
+Name=Wacom ISDv4 5040
+DeviceMatch=usb:056a:5040
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

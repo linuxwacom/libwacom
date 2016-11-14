@@ -1,0 +1,58 @@
+# Wacom
+# MobileStudio Pro 13
+# DTH-W1320
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    A     |                       |
+#    B     |                       |
+#    C     |                       |
+#          |                       |
+#    I     |                       |
+#  J G H   |        DISPLAY        |
+#    K     |                       |
+#          |                       |
+#    D     |                       |
+#    E     |                       |
+#    F     |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+# Note: Buttons H, I, J, K are on a circle
+#
+
+[Device]
+Name=Wacom MobileStudio Pro 13
+Class=Cintiq
+DeviceMatch=usb:056a:034d
+PairedID=usb:056a:034a
+Width=12
+Height=7
+Layout=mobilestudio-pro-13.svg
+Styli=0x842;0x84a;0x160802;0x16080a;0x100802;0x10080a;0x140802;0x14080a;0x120802;0x100804;0x10080c;0x100902;0x10090a
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Ring=true
+Buttons=11
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K
+
+# This tablet has mode buttons but no LEDs to signal the current mode to the
+# user and thus requires the caller to display an on-screen notification.
+Ring=H;I;J;K

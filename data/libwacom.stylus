@@ -77,10 +77,16 @@ Buttons=2
 Axes=Pressure;Distance;
 Type=General
 
-[0x842]
+# Superseded by 0x842 for the MobileStudio Pro
+# [0x842]
 # Intuos2
-Name=Designer Pen
-HasEraser=false
+# Name=Designer Pen
+# HasEraser=false
+
+[0x842]
+# MobileStudio Pro
+Name=Pro Pen
+HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -208,6 +214,14 @@ IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
+
+[0x84a]
+# MobileStudio Pro
+Name=Pro Pen Eraser
+IsEraser=true
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
 
 [0x85a]
 # Intuos2

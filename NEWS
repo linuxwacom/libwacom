@@ -1,3 +1,8 @@
+libwacom 0.23:
+- New devices:
+  - ISDV4 5040, MobileStudio Pro
+- The 22HD(T) is now marked as having strip modes
+
 libwacom 0.22:
 - New API: libwacom_get_paired_device()
 - The EKR has the modes enabled now

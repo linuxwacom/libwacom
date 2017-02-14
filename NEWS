@@ -1,3 +1,8 @@
+libwacom 0.24
+- New devices:
+  - Second generation Intuos Pro M
+  - Second generation Intuos Pro L
+
 libwacom 0.23:
 - New devices:
   - ISDV4 5040, MobileStudio Pro

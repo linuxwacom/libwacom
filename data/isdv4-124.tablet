@@ -1,0 +1,15 @@
+# this is for the Wacom pen as found in the Fujitsu ARROWS Tab QH55/M
+# the touchscreen is 056a:5008
+
+[Device]
+Name=Wacom ISDv4 124
+DeviceMatch=i2c:056a:0124
+Class=ISDV4
+Width=9
+Height=5
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0

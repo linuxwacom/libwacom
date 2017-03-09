@@ -1,0 +1,14 @@
+# this is for the Wacom pen + touchscreen as found in the Panasonic Toughbook CF-C2
+
+[Device]
+Name=Wacom ISDv4 117
+DeviceMatch=usb:056a:0117
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

@@ -1,0 +1,14 @@
+# this is for the Wacom pen found in the HP Pavillion dv6
+
+[Device]
+Name=Wacom ISDv4 E2
+DeviceMatch=usb:056a:00e2
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0

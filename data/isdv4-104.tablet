@@ -1,0 +1,14 @@
+# this is for the Wacom pen as found in the Cube i7 Stylus
+
+[Device]
+Name=Wacom ISDv4 104
+DeviceMatch=i2c:056a:0104
+Class=ISDV4
+Width=9
+Height=5
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0

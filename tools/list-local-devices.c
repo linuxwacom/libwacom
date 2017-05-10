@@ -93,9 +93,9 @@ int main(int argc, char **argv)
 	}
 
 	while (i--) {
-		char fname[64];
+		char fname[PATH_MAX];
 
-		snprintf(fname, 63, "/dev/input/%s", namelist[i]->d_name);
+		snprintf(fname, sizeof(fname), "/dev/input/%s", namelist[i]->d_name);
 		dev = libwacom_new_from_path(db, fname, WFALLBACK_NONE, NULL);
 		if (!dev)
 			continue;

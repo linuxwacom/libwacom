@@ -1,6 +1,6 @@
 # Initialize Autoconf
 AC_PREREQ([2.60])
-AC_INIT([libwacom], [0.24])
+AC_INIT([libwacom], [0.25])
 AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake
@@ -17,7 +17,7 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-LIBWACOM_LT_VERSION=7:2:5
+LIBWACOM_LT_VERSION=7:3:5
 AC_SUBST(LIBWACOM_LT_VERSION)
 
 # Initialize libtool

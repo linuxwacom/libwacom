@@ -1,3 +1,9 @@
+libwacom 0.25:
+- New devices:
+  - ISDV4 104, 10E, 117, 124, 4814, 5013, 5014, 503E, 503F, 5048, 5044
+  - USB Graphire
+  - Cintiq Pro 13, 16
+
 libwacom 0.24
 - New devices:
   - Second generation Intuos Pro M

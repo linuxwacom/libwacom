@@ -1,5 +1,5 @@
 # Wacom
-# Intuos Pro 2 L
+# Intuos Pro 2 L WL
 # PTH-860
 #
 # Button Map:
@@ -43,8 +43,8 @@
 #
 
 [Device]
-Name=Wacom Intuos Pro 2 L
-DeviceMatch=usb:056a:0358
+Name=Wacom Intuos Pro 2 L WL
+DeviceMatch=bluetooth:056a:0361
 Class=Intuos5
 Width=12
 Height=8

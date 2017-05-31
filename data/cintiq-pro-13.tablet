@@ -31,8 +31,8 @@ Name=Wacom Cintiq Pro 13
 Class=Cintiq
 DeviceMatch=usb:056a:034F
 PairedID=usb:056a:0353
-Width=14
-Height=9
+Width=12
+Height=7
 # No pad buttons, so no layout
 Styli=0x842;0x84a;0x160802;0x16080a;0x100802;0x10080a;0x140802;0x14080a;0x120802;0x100804;0x10080c;0x100902;0x10090a
 IntegratedIn=Display

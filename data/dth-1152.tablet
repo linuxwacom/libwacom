@@ -1,0 +1,23 @@
+# Wacom
+# DTH-1152 Interactive Pen Display
+#
+# Note: Stylus does not have an eraser
+
+[Device]
+Name=Wacom DTH1152
+DeviceMatch=usb:056a:035a
+PairedID=usb:056a:0368
+Class=PenDisplay
+Width=9
+Height=5
+#No ExpressKeys, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=0

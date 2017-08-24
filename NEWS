@@ -1,3 +1,9 @@
+libwacom 0.26:
+- New devices:
+  - DTH-1152
+  - Wireless Intuos Pro 2nd Generation
+  - ISDV4 4809, 481a 4822, 4824, 484c, 5010
+
 libwacom 0.25:
 - New devices:
   - ISDV4 104, 10E, 117, 124, 4814, 5013, 5014, 503E, 503F, 5048, 5044

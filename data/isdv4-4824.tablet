@@ -1,0 +1,14 @@
+# Active electrostatic (AES) sensor used by the Dell Venue 8 Pro 5855
+
+[Device]
+Name=Wacom ISDv4 4824
+DeviceMatch=i2c:056a:4824
+Class=ISDV4
+Width=4
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

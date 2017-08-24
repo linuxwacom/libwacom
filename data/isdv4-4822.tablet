@@ -1,0 +1,14 @@
+# Active electrostatic (AES) sensor used by the Dell XPS 12 9250
+
+[Device]
+Name=Wacom ISDv4 4822
+DeviceMatch=i2c:056a:4822
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

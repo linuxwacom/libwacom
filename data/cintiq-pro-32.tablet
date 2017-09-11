@@ -1,0 +1,45 @@
+# Wacom
+# Cintiq Pro 32
+# DTH-3220
+#
+#                       K K K K K
+#          *-----------------------*
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |        DISPLAY        |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Note: The device has 5 keys as shown above. Their
+#       intended uses are, from left to right,:
+#       1. Change display source (DisplayPort, USB-C, etc.)
+#       2. Wacom Desktop Center
+#       3. On screen keyboard
+#       4. Wacom display settings
+#       5. Touch on/off
+#
+
+[Device]
+Name=Wacom Cintiq Pro 32
+Class=Cintiq
+DeviceMatch=usb:056a:0352
+PairedID=usb:056a:0356
+Width=27
+Height=15
+# No pad buttons, so no layout
+Styli=0x842;0x84a;0x160802;0x16080a;0x100802;0x10080a;0x140802;0x14080a;0x120802;0x100804;0x10080c;0x100902;0x10090a;0x80842
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=0

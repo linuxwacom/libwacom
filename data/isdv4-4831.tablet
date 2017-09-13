@@ -1,0 +1,14 @@
+# Active electrostatic (AES) sensor used by the Dell XPS 13 9365
+
+[Device]
+Name=Wacom ISDv4 4831
+DeviceMatch=i2c:056a:4831
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

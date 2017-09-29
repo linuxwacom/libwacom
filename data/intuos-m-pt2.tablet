@@ -37,7 +37,7 @@
 [Device]
 Name=Intuos Pen & Touch Medium
 DeviceMatch=usb:056a:033e
-Class=Intuos
+Class=Bamboo
 Width=9
 Height=5
 Layout=intuos-m-pt2.svg

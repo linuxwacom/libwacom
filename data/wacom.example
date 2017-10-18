@@ -123,6 +123,9 @@ Left=A;B
 Right=C;D
 Top=
 Bottom=
+# The evdev codes for the buttons in order A, B, C, ...
+# The code must be defined for all buttons or this line is ignored
+EvdevCodes=0x110;0x112;0x111;0x113
 
 #####################
 # ADVANCED FEATURES #

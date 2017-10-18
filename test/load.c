@@ -28,6 +28,8 @@
 #include "config.h"
 #endif
 
+#include "input-event-codes.h"
+
 #include <stdio.h>
 #include <string.h>
 #include "libwacom.h"
@@ -139,6 +141,27 @@ int main(int argc, char **argv)
 	assert(libwacom_match_get_vendor_id(match) == 0x56a);
 	assert(libwacom_match_get_product_id(match) == 0xf6);
 	assert(libwacom_match_get_bustype(match) == WBUSTYPE_USB);
+
+	device = libwacom_new_from_name(db, "Wacom Cintiq 13HD", NULL);
+	assert(device);
+	assert(libwacom_get_button_evdev_code(device, 'A') == BTN_0);
+	assert(libwacom_get_button_evdev_code(device, 'B') == BTN_1);
+	assert(libwacom_get_button_evdev_code(device, 'C') == BTN_2);
+	assert(libwacom_get_button_evdev_code(device, 'D') == BTN_3);
+	assert(libwacom_get_button_evdev_code(device, 'E') == BTN_4);
+	assert(libwacom_get_button_evdev_code(device, 'F') == BTN_5);
+	assert(libwacom_get_button_evdev_code(device, 'G') == BTN_6);
+	assert(libwacom_get_button_evdev_code(device, 'H') == BTN_7);
+	assert(libwacom_get_button_evdev_code(device, 'I') == BTN_8);
+	libwacom_destroy(device);
+
+	device = libwacom_new_from_name(db, "Wacom Bamboo Pen", NULL);
+	assert(device);
+	assert(libwacom_get_button_evdev_code(device, 'A') == BTN_BACK);
+	assert(libwacom_get_button_evdev_code(device, 'B') == BTN_FORWARD);
+	assert(libwacom_get_button_evdev_code(device, 'C') == BTN_LEFT);
+	assert(libwacom_get_button_evdev_code(device, 'D') == BTN_RIGHT);
+	libwacom_destroy(device);
 
 	libwacom_database_destroy (db);
 	return 0;

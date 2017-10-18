@@ -550,6 +550,15 @@ WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
 					  char               button);
 
 /**
+ * @param device The tablet to query
+ * @param button The ID of the button to check for, between 'A' and 'Z'
+ * @return The evdev event code sent when the button is pressed or 0 if
+ * unknown.
+ */
+int libwacom_get_button_evdev_code(const WacomDevice *device,
+				   char               button);
+
+/**
  * Get the WacomStylus for the given tool ID.
  *
  * @param db A Tablet and Stylus database.

@@ -21,3 +21,4 @@ Stylus=true
 Reversible=true
 Touch=false
 Buttons=0
+EvdevCodes=0x110;0x115;0x116;0x111

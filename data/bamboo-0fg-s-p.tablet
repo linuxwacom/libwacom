@@ -57,3 +57,4 @@ Ring=true
 
 [Buttons]
 Top=A;B;C;D
+EvdevCodes=0x116;0x115;0x110;0x111

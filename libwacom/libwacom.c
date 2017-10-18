@@ -349,6 +349,7 @@ libwacom_copy(const WacomDevice *device)
 	d->status_leds = g_memdup (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
 	d->num_buttons = device->num_buttons;
 	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
+	d->button_codes = g_memdup (device->button_codes, sizeof(int) * device->num_buttons);
 	return d;
 }
 
@@ -454,6 +455,9 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 		return 1;
 
 	if (memcmp(a->buttons, b->buttons, sizeof(WacomButtonFlags) * a->num_buttons) != 0)
+		return 1;
+
+	if (memcmp(a->button_codes, b->button_codes, sizeof(int) * a->num_buttons) != 0)
 		return 1;
 
 	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
@@ -661,6 +665,16 @@ static void print_button_flag_if(int fd, const WacomDevice *device, const char *
 	dprintf(fd, "\n");
 }
 
+static void print_button_evdev_codes(int fd, const WacomDevice *device)
+{
+	int nbuttons = libwacom_get_num_buttons(device);
+	char b;
+	dprintf(fd, "EvdevCodes=");
+	for (b = 'A'; b < 'A' + nbuttons; b++)
+		dprintf(fd, "0x%x;", libwacom_get_button_evdev_code(device, b));
+	dprintf(fd, "\n");
+}
+
 static void print_buttons_for_device (int fd, const WacomDevice *device)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
@@ -679,6 +693,7 @@ static void print_buttons_for_device (int fd, const WacomDevice *device)
 	print_button_flag_if(fd, device, "OLEDs", WACOM_BUTTON_OLED);
 	print_button_flag_if(fd, device, "Ring", WACOM_BUTTON_RING_MODESWITCH);
 	print_button_flag_if(fd, device, "Ring2", WACOM_BUTTON_RING2_MODESWITCH);
+	print_button_evdev_codes(fd, device);
 	dprintf(fd, "RingNumModes=%d\n", libwacom_get_ring_num_modes(device));
 	dprintf(fd, "Ring2NumModes=%d\n", libwacom_get_ring2_num_modes(device));
 	dprintf(fd, "StripsNumModes=%d\n", libwacom_get_strips_num_modes(device));
@@ -811,6 +826,7 @@ libwacom_destroy(WacomDevice *device)
 	g_free (device->supported_styli);
 	g_free (device->status_leds);
 	g_free (device->buttons);
+	g_free (device->button_codes);
 	g_free (device);
 }
 
@@ -1051,6 +1067,20 @@ libwacom_get_button_flag(const WacomDevice *device, char button)
 	index = button - 'A';
 
 	return device->buttons[index];
+}
+
+int
+libwacom_get_button_evdev_code(const WacomDevice *device, char button)
+{
+	int index;
+
+	g_return_val_if_fail (device->num_buttons > 0, 0);
+	g_return_val_if_fail (button >= 'A', 0);
+	g_return_val_if_fail (button < 'A' + device->num_buttons, 0);
+
+	index = button - 'A';
+
+	return device->button_codes[index];
 }
 
 const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)

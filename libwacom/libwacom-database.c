@@ -29,10 +29,13 @@
 #endif
 
 #include "libwacomint.h"
+#include "input-event-codes.h"
 
+#include <assert.h>
 #include <glib.h>
 #include <dirent.h>
 #include <string.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -377,6 +380,96 @@ libwacom_parse_buttons_key(WacomDevice      *device,
 	g_strfreev (vals);
 }
 
+static inline bool
+set_button_codes_from_string(WacomDevice *device, char **strvals)
+{
+	gint i;
+
+	assert(strvals);
+
+	for (i = 0; i < device->num_buttons; i++) {
+		glong val;
+
+		if (!strvals[i]) {
+			g_error ("%s: Missing EvdevCode for button %d, ignoring all codes\n",
+				 device->name, i);
+			return false;
+		}
+
+		val = strtol (strvals[i], NULL, 0);
+		if (val < BTN_MISC || val >= BTN_DIGI) {
+			g_warning ("%s: Invalid EvdevCode %ld for button %d, ignoring all codes\n",
+				   device->name, val, i);
+			return false;
+		}
+		device->button_codes[i] = (int)val;
+	}
+
+	return true;
+}
+
+static inline void
+set_button_codes_from_heuristics(WacomDevice *device)
+{
+	gint i;
+	for (i = 0; i < device->num_buttons; i++) {
+		if (device->cls == WCLASS_BAMBOO ||
+		    device->cls == WCLASS_GRAPHIRE) {
+			switch (i) {
+			case 0:
+				device->button_codes[i] = BTN_LEFT;
+				break;
+			case 1:
+				device->button_codes[i] = BTN_RIGHT;
+				break;
+			case 2:
+				device->button_codes[i] = BTN_FORWARD;
+				break;
+			case 3:
+				device->button_codes[i] = BTN_BACK;
+				break;
+			default:
+				device->button_codes[i] = 0;
+				break;
+			}
+		} else {
+			/* Assume traditional ExpressKey ordering */
+			switch (i) {
+			case 0 ... 9:
+				device->button_codes[i] = BTN_0 + i;
+				break;
+			case 10 ... 15:
+				device->button_codes[i] = BTN_A + (i-10);
+				break;
+			case 16:
+			case 17:
+				device->button_codes[i] = BTN_BASE + (i-16);
+				break;
+			default:
+				device->button_codes[i] = 0;
+				break;
+			}
+		}
+
+		if (device->button_codes[i] == 0)
+			g_warning ("Unable to determine evdev code for button %d (%s)", i, device->name);
+	}
+}
+
+static void
+libwacom_parse_button_codes(WacomDevice *device,
+			    GKeyFile    *keyfile)
+{
+	char **vals;
+
+	vals = g_key_file_get_string_list(keyfile, BUTTONS_GROUP, "EvdevCodes", NULL, NULL);
+	if (!vals ||
+	    !set_button_codes_from_string(device, vals))
+		set_button_codes_from_heuristics(device);
+
+	g_strfreev (vals);
+}
+
 static int
 libwacom_parse_num_modes (WacomDevice      *device,
 			  GKeyFile         *keyfile,
@@ -404,6 +497,8 @@ libwacom_parse_buttons(WacomDevice *device,
 
 	for (i = 0; i < G_N_ELEMENTS (options); i++)
 		libwacom_parse_buttons_key(device, keyfile, options[i].key, options[i].flag);
+
+	libwacom_parse_button_codes(device, keyfile);
 
 	device->ring_num_modes = libwacom_parse_num_modes(device, keyfile, "RingNumModes", WACOM_BUTTON_RING_MODESWITCH);
 	device->ring2_num_modes = libwacom_parse_num_modes(device, keyfile, "Ring2NumModes", WACOM_BUTTON_RING2_MODESWITCH);
@@ -570,6 +665,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	}
 	if (device->num_buttons > 0) {
 		device->buttons = g_new0 (WacomButtonFlags, device->num_buttons);
+		device->button_codes = g_new0 (gint, device->num_buttons);
 		libwacom_parse_buttons(device, keyfile);
 	}
 

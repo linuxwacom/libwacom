@@ -24,3 +24,4 @@ Buttons=4
 
 [Buttons]
 Left=A;B;C;D
+EvdevCodes=0x111;0x116;0x115;0x110

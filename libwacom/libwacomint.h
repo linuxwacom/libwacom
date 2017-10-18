@@ -88,6 +88,7 @@ struct _WacomDevice {
 
 	int num_buttons;
 	WacomButtonFlags *buttons;
+	int *button_codes;
 
 	int num_leds;
 	WacomStatusLEDs *status_leds;

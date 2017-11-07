@@ -1,0 +1,37 @@
+# Dell
+# Canvas 27
+#
+#
+#
+#          *-----------------------*
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |        DISPLAY        |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          *-----------------------*
+#
+
+[Device]
+Name=Dell Canvas 27
+Class=Cintiq
+DeviceMatch=usb:056a:4200
+PairedID=usb:2575:0204
+Width=23
+Height=13
+# No pad buttons, so no layout
+Styli=0xffffd;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=0

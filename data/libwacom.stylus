@@ -97,7 +97,7 @@ Name=Pro Pen 3D
 HasEraser=false
 Buttons=3
 Axes=Tilt;Pressure;Distance;
-Type=General
+Type=3D
 
 [0x852]
 # Intuos2

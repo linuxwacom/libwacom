@@ -1177,6 +1177,7 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 		case WSTYLUS_MARKER:	type = "Marker";	 break;
 		case WSTYLUS_STROKE:	type = "Stroke";	 break;
 		case WSTYLUS_PUCK:	type = "Puck";		break;
+		case WSTYLUS_3D:	type = "3D";		break;
 		default:		g_assert_not_reached();	break;
 	}
 

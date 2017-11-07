@@ -96,6 +96,8 @@ type_from_str (const char *type)
 		return WSTYLUS_STROKE;
 	if (strcmp (type, "Puck") == 0)
 		return WSTYLUS_PUCK;
+	if (strcmp (type, "3D") == 0)
+		return WSTYLUS_3D;
 	return WSTYLUS_UNKNOWN;
 }
 

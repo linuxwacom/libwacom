@@ -91,6 +91,14 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
+[0x80842]
+# MobileStudio Pro
+Name=Pro Pen 3D
+HasEraser=false
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+
 [0x852]
 # Intuos2
 Name=Grip Pen

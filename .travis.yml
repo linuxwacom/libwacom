@@ -1,0 +1,16 @@
+language: c
+
+compiler:
+  - gcc
+  - clang
+
+addons:
+  apt:
+    packages:
+      - libgudev-1.0-dev
+      - libxml++2.6-dev
+env:
+  - CFLAGS="-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
+
+script:
+  - ./autogen.sh && make && make check

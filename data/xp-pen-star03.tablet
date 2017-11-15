@@ -1,0 +1,23 @@
+# XP-Pen
+# Star 03
+#
+
+[Device]
+Name=XP-Pen Star 03
+DeviceMatch=usb:5543:0081:UC-Logic TABLET 1060N Pen;usb:5543:0081:UC-Logic TABLET 1060N Pad
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=xp-pen-star03.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

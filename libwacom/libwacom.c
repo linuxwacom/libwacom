@@ -144,6 +144,10 @@ get_bus_vid_pid (GUdevDevice  *device,
 		*bus = WBUSTYPE_I2C;
 		retval = TRUE;
 		break;
+	case 68:
+		*bus = WBUSTYPE_MEI;
+		retval = TRUE;
+		break;
 	}
 
 out:
@@ -731,6 +735,7 @@ static void print_match(int fd, const WacomMatch *match)
 		case WBUSTYPE_USB:		bus_name = "usb";	break;
 		case WBUSTYPE_SERIAL:		bus_name = "serial";	break;
 		case WBUSTYPE_I2C:		bus_name = "i2c";	break;
+		case WBUSTYPE_MEI:		bus_name = "mei";	break;
 		case WBUSTYPE_UNKNOWN:		bus_name = "unknown";	break;
 		default:			g_assert_not_reached(); break;
 	}

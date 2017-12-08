@@ -1,3 +1,12 @@
+libwacom 0.27:
+- New devices:
+  - Dell Canvas 27
+  - Pro Pen 3D stylus
+  - XP-Pen Star 03
+  - ISDv4 4831 (Dell XPS 13 9365)
+- New API: libwacom_get_button_evdev_code() and the matching EvdevCodes
+  entry in the .tablet files
+
 libwacom 0.26:
 - New devices:
   - DTH-1152

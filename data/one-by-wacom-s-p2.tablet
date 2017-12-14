@@ -1,0 +1,35 @@
+# Wacom
+# One by Wacom (small), 2nd gen
+# CTL-472
+#
+# Device IDs: http://linuxwacom.sourceforge.net/wiki/index.php/Device_IDs
+# Example .tablet file: https://github.com/linuxwacom/libwacom/blob/master/data/wacom.example
+#
+# Description:
+# tablet is matt black, with a grid of white dots
+# the back of the tablet is red
+# stylus has two button and no eraser
+# single power led sits above the micro usb port
+# micro usb used for power and data (no bluetooth)
+#
+# Terminal output:
+# $ lsusb | grep Wacom
+# Bus 003 Device 003: ID 056a:037a Wacom Co., Ltd
+#
+# $ uname -r
+# 4.13.0-16-generic
+#
+
+[Device]
+Name=One by Wacom (small), 2nd gen
+DeviceMatch=usb:056a:037a
+Class=Bamboo
+Width=6
+Height=4
+IntegratedIn=None
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0

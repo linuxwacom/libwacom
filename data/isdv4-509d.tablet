@@ -1,0 +1,14 @@
+# this is for the Wacom pen + touchscreen as found in some versions of the Lenovo ThinkPad Yoga 370
+
+[Device]
+Name=Wacom ISDv4 509D
+DeviceMatch=usb:056a:509d
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

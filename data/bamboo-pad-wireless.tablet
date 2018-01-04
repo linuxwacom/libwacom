@@ -1,0 +1,23 @@
+# Wacom
+# Bamboo Pad Wireless
+# CTH-300
+#
+# Button events sent from touch interface
+
+[Device]
+Name=Wacom Bamboo Pad Wireless
+DeviceMatch=usb:056a:0319
+Class=Bamboo
+Width=4
+Height=3
+Layout=bamboo-pad.svg
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Buttons=2
+
+[Buttons]
+Bottom=A;B
+EvdevCodes=0x110;0x111

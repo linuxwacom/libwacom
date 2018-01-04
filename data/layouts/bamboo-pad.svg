@@ -1,0 +1,59 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--
+   Designed after data from http://www.wacom-asia.com/download/manuals/G4_QSG_EN.pdf
+   Size and positions of controls may not be accurate
+ -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="bamboo-pad"
+   width="208"
+   height="204">
+  <title
+     id="title">Wacom Bamboo Pad</title>
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       rx=".5"
+       ry=".5"
+       x="55"
+       y="184"
+       width="48"
+       height="10" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 73 172 l -23 -23 l 0 -10 m -5 0 l 10 0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="50"
+       y="129"
+       style="text-anchor:middle;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       rx=".5"
+       ry=".5"
+       x="105"
+       y="184"
+       width="48"
+       height="10" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 135 172 l 23 -23 l 0 -10 m -5 0 l 10 0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="158"
+       y="129"
+       style="text-anchor:middle;">B</text>
+  </g>
+</svg>

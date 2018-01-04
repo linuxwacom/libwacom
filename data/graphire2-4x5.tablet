@@ -1,0 +1,28 @@
+# Wacom
+# Graphire2 4x5
+# ET-0405A
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *----------------------*
+#      |                      |
+#      |                      |
+#      |                      |
+#      |        TABLET        |
+#      |                      |
+#      |                      |
+#      |                      |
+#      *----------------------*
+#
+
+[Device]
+Name=Wacom Graphire2 4x5
+DeviceMatch=usb:056a:0011
+Class=Graphire
+Width=5
+Height=4
+
+[Features]
+Stylus=true
+Buttons=0

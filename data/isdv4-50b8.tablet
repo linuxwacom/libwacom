@@ -1,0 +1,14 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo ThinkPad X1 Yoga (2nd-gen)
+
+[Device]
+Name=Wacom ISDv4 50b8
+DeviceMatch=usb:056a:50b8
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

@@ -1,0 +1,144 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+    id="dth-2452"
+    width="275"
+    height="222">
+  <title
+    id="title">Wacom DTH-2452</title>
+  <defs>
+    <clipPath id="ClipA">
+      <rect width="8" height="12.5" x="256" y="57" />
+    </clipPath>
+    <clipPath id="ClipB">
+      <rect width="8" height="12.5" x="256" y="69.5" />
+    </clipPath>
+    <clipPath id="ClipC">
+      <rect width="8" height="12.5" x="256" y="133" />
+    </clipPath>
+    <clipPath id="ClipD">
+      <rect width="8" height="12.5" x="256" y="145.5" />
+    </clipPath>
+  </defs>
+
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       width="7.75"
+       height="24.75"
+       x="256.125"
+       y="57.125"
+       rx="4"
+       ry="4"
+       clip-path="url(#ClipA)" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="M 254 61 L 244 61" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="242"
+       y="61"
+       style="text-anchor:end;">
+      A
+    </text>
+    <circle
+       id="DotA1"
+       cx="260"
+       cy="61"
+       r="0.875" />
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       width="7.75"
+       height="24.75"
+       x="256.125"
+       y="57.125"
+       rx="4"
+       ry="4"
+       clip-path="url(#ClipB)" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 254 78 L 244 78" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="242"
+       y="78"
+       style="text-anchor:end;">
+      B
+    </text>
+    <circle
+       id="DotB1"
+       cx="260"
+       cy="78"
+       r="0.875" />
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       width="7.75"
+       height="24.75"
+       x="256.125"
+       y="133.125"
+       rx="4"
+       ry="4"
+       clip-path="url(#ClipC)" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 254 137 L 244 137" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="242"
+       y="137"
+       style="text-anchor:end;">
+      C
+    </text>
+    <circle
+       id="DotC1"
+       cx="260"
+       cy="137"
+       r="0.875" />
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       width="7.75"
+       height="24.75"
+       x="256.125"
+       y="133.125"
+       rx="4"
+       ry="4"
+       clip-path="url(#ClipD)" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 254 154 L 244 154" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="242"
+       y="154"
+       style="text-anchor:end;">
+      D
+    </text>
+    <circle
+       id="DotD1"
+       cx="260"
+       cy="154"
+       r="0.875" />
+  </g>
+</svg>

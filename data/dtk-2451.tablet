@@ -1,0 +1,36 @@
+# Wacom
+# DTK-2451 Interactive Pen Display
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------*
+#      |                 | A
+#      |                 | B
+#      |     DISPLAY     |
+#      |                 | C
+#      |                 | D
+#      *-----------------*
+#
+
+[Device]
+Name=Wacom DTK2451
+DeviceMatch=usb:056a:0382
+Class=PenDisplay
+Width=20
+Height=12
+Layout=dtk-2451.svg
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Ring2=false
+NumStrips=0
+# Actually 5 buttons but one is reserved for onscreen menus
+Buttons=4
+
+[Buttons]
+Right=A;B;C;D

@@ -1,0 +1,23 @@
+# Wacom
+# One by Wacom (medium)
+# CTL-672
+#
+# third generation BambooPT; Second-generation "One by Wacom"
+#
+# stylus with one button and no eraser
+# Pen active area: 8.5 x 5.31in
+
+[Device]
+Name=One by Wacom (medium)
+DeviceMatch=usb:056a:037b
+Class=Bamboo
+Width=9
+Height=5
+# No pad buttons, so no layout
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0

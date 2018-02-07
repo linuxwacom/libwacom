@@ -1,3 +1,11 @@
+libwacom 0.28:
+- New devices:
+  - Cintiq Pro 24, Cintiq Pro 32
+  - ISDV4 5099, 50b6, 509d, 5090, 50f1, 50f8, 5110, 508b
+  - Bamboo Pad
+  - DTK-2451, 2452
+  - One by Wacom (2nd gen)
+
 libwacom 0.27:
 - New devices:
   - Dell Canvas 27

@@ -460,6 +460,11 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (memcmp(a->button_codes, b->button_codes, sizeof(int) * a->num_buttons) != 0)
 		return 1;
 
+	if ((a->paired == NULL && b->paired != NULL) ||
+	    (a->paired != NULL && b->paired == NULL) ||
+	    (a->paired && b->paired && strcmp(a->paired->match, b->paired->match) != 0))
+		return 1;
+
 	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
 		return 1;
 	else if (strcmp(a->matches[a->match]->match, b->matches[b->match]->match) != 0)

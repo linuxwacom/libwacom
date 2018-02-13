@@ -16,7 +16,7 @@
 [Device]
 Name=Wacom DTH2452
 DeviceMatch=usb:056a:037d
-PairedID=056a:037e
+PairedID=usb:056a:037e
 Class=PenDisplay
 Width=20
 Height=12

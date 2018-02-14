@@ -20,5 +20,4 @@ Buttons=8
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H
-# FIXME: This needs to be verified by someone with an actual device
 EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

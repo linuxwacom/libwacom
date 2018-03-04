@@ -1,3 +1,7 @@
+libwacom 0.29:
+- New devices:
+  - ISDv4 50b4
+
 libwacom 0.28:
 - New devices:
   - Cintiq Pro 24, Cintiq Pro 32

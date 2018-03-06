@@ -77,6 +77,14 @@ Buttons=2
 Axes=Pressure;Distance;
 Type=General
 
+[0x862]
+# Intuos P/PT 2
+Name=Intuos Pen
+HasEraser=false
+Buttons=2
+Axes=Pressure;Distance;
+Type=General
+
 # Superseded by 0x842 for the MobileStudio Pro
 # [0x842]
 # Intuos2

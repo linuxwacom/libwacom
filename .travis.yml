@@ -28,5 +28,5 @@ before_script:
 
 script:
   - if [[ x"$TRAVIS_EVENT_TYPE" = "xcron" ]]; then export DO_COVERITY="YES"; fi
-  - if [[ x"$BUILDTYPE" = "xcoverity" && x"$DO_COVERITY" = "xYES" ]]; then curl -s "$COVERITY_URL" | bash; fi
+  - if [[ x"$BUILDTYPE" = "xcoverity" && x"$DO_COVERITY" = "xYES" ]]; then COVERITY_SCRIPT=$(curl -fs "$COVERITY_URL") && echo "$COVERITY_SCRIPT" | bash; fi
   - if [[ x"$BUILDTYPE" != "xcoverity" ]]; then make && make check; fi

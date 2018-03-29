@@ -854,6 +854,7 @@ libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *e
 	list = calloc (g_list_length (devices) + 1, sizeof (WacomDevice *));
 	if (!list) {
 		libwacom_error_set(error, WERROR_BAD_ALLOC, "Memory allocation failed");
+		g_list_free (devices);
 		return NULL;
 	}
 

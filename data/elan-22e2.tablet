@@ -1,0 +1,18 @@
+# Used in the HP Spectre X360
+
+[Device]
+Name=ELAN 22E2
+DeviceMatch=i2c:04f3:22e2
+Class=ISDV4
+IntegratedIn=Display;System
+Styli=0xfffff;0xffffe
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=0

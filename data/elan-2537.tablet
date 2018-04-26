@@ -1,0 +1,14 @@
+# ELAN touchscreen/pen sensor present in the HP ENVY x360 Convertible 15m-bq1xx
+
+[Device]
+Name=ELAN 2537
+DeviceMatch=i2c:04f3:2537
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

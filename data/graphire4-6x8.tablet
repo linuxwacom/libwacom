@@ -1,0 +1,33 @@
+# Wacom
+# Graphire4 6x8
+# CTE-640
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#               AA  BB
+#      *----------------------*
+#      |                      |
+#      |                      |
+#      |                      |
+#      |        TABLET        |
+#      |                      |
+#      |                      |
+#      |                      |
+#      *----------------------*
+#
+[Device]
+Name=Wacom Graphire4 6x8
+DeviceMatch=usb:056a:0016
+Class=Graphire
+Width=8
+Height=6
+Layout=graphire4-6x8.svg
+
+[Features]
+Stylus=true
+Buttons=2
+
+[Buttons]
+Top=A;B
+EvdevCodes=0x116;0x115

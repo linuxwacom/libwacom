@@ -1,3 +1,9 @@
+libwacom 0.30:
+- New devices:
+  - Lenovo X1 Yoga 3rd
+  - HP Spectre x360, HP Elite x1012 G2, HP Envy x360
+  - Turcom TS-6610
+
 libwacom 0.29:
 - New devices:
   - ISDv4 50b4

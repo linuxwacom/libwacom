@@ -544,12 +544,12 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	libwacom_update_match(ret, match);
 	libwacom_match_destroy(match);
 
-	g_free (name);
-
 	if (device) {
 		/* if unset, use the kernel flags. Could be unset as well. */
 		if (ret->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
 			ret->integration_flags = integration_flags;
+
+		g_free (name);
 
 		return ret;
 	}

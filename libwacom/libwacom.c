@@ -364,7 +364,7 @@ compare_matches(const WacomDevice *a, const WacomDevice *b)
 
 	for (match_a = ma; *match_a; match_a++) {
 		int found = 0;
-		for (match_b = mb; !found && *mb; mb++) {
+		for (match_b = mb; !found && *match_b; match_b++) {
 			if (strcmp((*match_a)->match, (*match_b)->match) == 0)
 				found = 1;
 		}

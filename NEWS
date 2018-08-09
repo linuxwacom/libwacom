@@ -1,3 +1,8 @@
+libwacom 0.31:
+- New devices:
+  - Graphire4 6x8
+  - ISDv4 50fd, 4807
+
 libwacom 0.30:
 - New devices:
   - Lenovo X1 Yoga 3rd

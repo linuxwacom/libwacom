@@ -1,0 +1,14 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo 300e 81FY
+
+[Device]
+Name=Wacom ISDv4 5122
+DeviceMatch=i2c:056a:5122
+Class=ISDV4
+Width=10
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

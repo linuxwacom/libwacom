@@ -1,3 +1,11 @@
+libwacom 0.32:
+- New devices:
+  - Lenovo Yoga 730, X380, 300e
+  - Dell XPS 15 9575
+  - HP Spectre x360
+  - Toshiba Portege X20W-D
+  - DTU-1141B
+
 libwacom 0.31:
 - New devices:
   - Graphire4 6x8

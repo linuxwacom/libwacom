@@ -171,6 +171,14 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
+[0x100842]
+# MobileStudio Pro, Cintiq Pro, Intuos Pro
+Name=Pro Pen Slim
+HasEraser=true
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
 [0x40802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
@@ -334,6 +342,14 @@ Type=Marker
 [0x10080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
+IsEraser=true
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x10084a]
+# MobileStudio Pro, Cintiq Pro, Intuos Pro
+Name=Pro Pen Slim
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;

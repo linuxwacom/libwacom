@@ -216,6 +216,18 @@ typedef enum {
 } WacomStatusLEDs;
 
 /**
+  Wacom Hardware key types. These are the buttons on the top right of the
+  tablets, with icons representing the type of key.
+ */
+typedef enum {
+	WACOM_KEY_TYPE_INFO = 1,
+	WACOM_KEY_TYPE_KEYBOARD,
+	WACOM_KEY_TYPE_WRENCH,
+	WACOM_KEY_TYPE_TOUCH,
+	WACOM_KEY_TYPE_MENU,
+} WacomKeyType;
+
+/**
  * Allocate a new structure for error reporting.
  *
  * @return A newly allocated error structure or NULL if the allocation
@@ -572,6 +584,15 @@ WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
  */
 int libwacom_get_button_evdev_code(const WacomDevice *device,
 				   char               button);
+
+/**
+ * @param device The tablet to query
+ * @param type The key to return the evdev code for
+ * @return The evdev event code sent when the key is pressed or 0 if
+ * unknown.
+ */
+int libwacom_get_key_evdev_code(const WacomDevice *device,
+				WacomKeyType       type);
 
 /**
  * Get the WacomStylus for the given tool ID.

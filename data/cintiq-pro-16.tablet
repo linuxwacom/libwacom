@@ -44,3 +44,10 @@ Reversible=false
 Touch=true
 Ring=false
 Buttons=0
+
+[Keys]
+# Display switch button handled in firmware
+Wrench=0x240    # KEY_BUTTONCONFIG
+Keyboard=0x278  # KEY_ONSCREEN_KEYBOARD
+Menu=0x243      # KEY_CONTROLPANEL
+# Touch switch button sends SW_MUTE_DEVICE

@@ -57,3 +57,11 @@ Touchstrip=A
 Touchstrip2=J
 # Note: no physical LEDs to show mode
 StripsNumModes=4
+
+[Keys]
+# KEY_PROG3, KEY_PROG2, KEY_PROG1
+# The "menu" button is handled by the firmware to open up the monitor
+# controls and doesn't actually generate an event
+# Menu=0xca
+Wrench=0x95
+Info=0x94

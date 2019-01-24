@@ -171,6 +171,18 @@ int main(void)
 	assert(libwacom_get_button_evdev_code(device, 'C') == BTN_LEFT);
 	assert(libwacom_get_button_evdev_code(device, 'D') == BTN_RIGHT);
 	assert(strcmp(libwacom_get_model_name(device), "MTE-450") == 0);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_INFO) == 0);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_KEYBOARD) == 0);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_WRENCH) == 0);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_MENU) == 0);
+	libwacom_destroy(device);
+
+	device = libwacom_new_from_name(db, "Wacom Cintiq 24HD", NULL);
+	assert(device);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_INFO) == KEY_PROG3);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_KEYBOARD) == KEY_PROG2);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_WRENCH) == KEY_PROG1);
+	assert(libwacom_get_key_evdev_code(device, WACOM_KEY_TYPE_MENU) == 0);
 	libwacom_destroy(device);
 
 	libwacom_database_destroy (db);

@@ -44,6 +44,7 @@
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 #define BUTTONS_GROUP "Buttons"
+#define KEYS_GROUP "Keys"
 
 static WacomClass
 libwacom_class_string_to_enum(const char *class)
@@ -473,6 +474,43 @@ libwacom_parse_button_codes(WacomDevice *device,
 	g_strfreev (vals);
 }
 
+static void
+libwacom_parse_key_codes(WacomDevice *device,
+			 GKeyFile    *keyfile)
+{
+	struct map {
+		WacomKeyType type;
+		const char *name;
+	} maps[] = {
+		{ WACOM_KEY_TYPE_INFO,		"Info" },
+		{ WACOM_KEY_TYPE_KEYBOARD,	"Keyboard" },
+		{ WACOM_KEY_TYPE_WRENCH,	"Wrench" },
+		{ WACOM_KEY_TYPE_TOUCH,		"Touch" },
+		{ WACOM_KEY_TYPE_MENU,		"Menu" },
+		{ 0, NULL },
+	};
+	struct map *m;
+
+	if (!g_key_file_has_group(keyfile, KEYS_GROUP))
+		return;
+
+	for (m = maps; m->name; m++) {
+		const char *hex;
+		char *endptr;
+		gint key;
+
+		hex = g_key_file_get_value(keyfile, KEYS_GROUP, m->name, NULL);
+		if (!hex)
+			continue;
+
+		key = strtol(hex, &endptr, 16);
+		if (*endptr || key < 0 || key > 0x2ff) /* KEY_MAX */
+			g_warning ("Invalid key mapping '%s' for %s", hex, m->name);
+		else
+			device->key_codes[m->type - WACOM_KEY_TYPE_INFO] = key;
+	}
+}
+
 static int
 libwacom_parse_num_modes (WacomDevice      *device,
 			  GKeyFile         *keyfile,
@@ -736,6 +774,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		device->status_leds = (WacomStatusLEDs *) g_array_free (array, FALSE);
 	}
 
+	libwacom_parse_key_codes(device, keyfile);
 out:
 	if (path)
 		g_free(path);

@@ -66,3 +66,9 @@ Right=I;J;K;L;M;N;O;P
 
 Ring=A;B;C
 Ring2=I;J;K
+
+[Keys]
+# KEY_PROG3, KEY_PROG2, KEY_PROG1
+Info=0xca
+Keyboard=0x95
+Touch=0x94

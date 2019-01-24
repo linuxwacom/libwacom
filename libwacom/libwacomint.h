@@ -43,6 +43,8 @@
 #define GENERIC_DEVICE_MATCH "generic"
 #define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1U)
 
+#define N_HW_KEYS (WACOM_KEY_TYPE_MENU - WACOM_KEY_TYPE_INFO + 1)
+
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),
@@ -92,6 +94,8 @@ struct _WacomDevice {
 	int num_buttons;
 	WacomButtonFlags *buttons;
 	int *button_codes;
+
+	int key_codes[N_HW_KEYS];
 
 	int num_leds;
 	WacomStatusLEDs *status_leds;

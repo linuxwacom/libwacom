@@ -71,3 +71,8 @@ global:
 local:
         *;
 };
+
+LIBWACOM_0.34 {
+global:
+    libwacom_get_key_evdev_code;
+} LIBWACOM_0.33;

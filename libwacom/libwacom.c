@@ -358,6 +358,7 @@ libwacom_copy(const WacomDevice *device)
 	d->num_buttons = device->num_buttons;
 	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
 	d->button_codes = g_memdup (device->button_codes, sizeof(int) * device->num_buttons);
+	memcpy(d->key_codes, device->key_codes, sizeof(device->key_codes));
 	return d;
 }
 
@@ -739,6 +740,28 @@ static void print_buttons_for_device (int fd, const WacomDevice *device)
 	dprintf(fd, "\n");
 }
 
+static void print_keys_for_device (int fd, const WacomDevice *device)
+{
+	WacomKeyType t;
+	gboolean have_header = FALSE;
+	const char *names[] = {"Info", "Keyboard", "Wrench", "Touch", "Menu"};
+
+	for (t = WACOM_KEY_TYPE_INFO; t <= WACOM_KEY_TYPE_MENU; t++) {
+		unsigned int idx = t - WACOM_KEY_TYPE_INFO;
+		if (device->key_codes[idx] == 0)
+			continue;
+
+		if (!have_header) {
+			have_header = TRUE;
+			dprintf(fd, "[Keys]\n");
+		}
+
+		dprintf(fd, "%s=%#x\n", names[idx], device->key_codes[idx]);
+	}
+
+	dprintf(fd, "\n");
+}
+
 static void print_integrated_flags_for_device (int fd, const WacomDevice *device)
 {
 	/*
@@ -838,6 +861,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "\n");
 
 	print_buttons_for_device(fd, device);
+	print_keys_for_device(fd, device);
 }
 
 LIBWACOM_EXPORT void
@@ -1155,6 +1179,15 @@ libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 	index = button - 'A';
 
 	return device->button_codes[index];
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_key_evdev_code(const WacomDevice *device, WacomKeyType type)
+{
+	g_return_val_if_fail (type >= WACOM_KEY_TYPE_INFO, 0);
+	g_return_val_if_fail (type <= WACOM_KEY_TYPE_MENU, 0);
+
+	return device->key_codes[type - WACOM_KEY_TYPE_INFO];
 }
 
 LIBWACOM_EXPORT const

@@ -43,7 +43,7 @@
 #
 
 [Device]
-Name=Wacom Intuos Pro 2 L WL
+Name=Wacom Intuos Pro L WL
 DeviceMatch=bluetooth:056a:0361
 Class=Intuos5
 Width=12

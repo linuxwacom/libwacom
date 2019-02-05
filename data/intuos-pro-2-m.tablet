@@ -43,7 +43,7 @@
 #
 
 [Device]
-Name=Wacom Intuos Pro 2 M
+Name=Wacom Intuos Pro M
 DeviceMatch=usb:056a:0357
 Class=Intuos5
 Width=9

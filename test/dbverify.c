@@ -122,7 +122,7 @@ compare_written_database(WacomDeviceDatabase *db)
 {
 	char *dirname;
 	WacomDeviceDatabase *db_new;
-        WacomDevice **device, **devices;
+	WacomDevice **device, **devices;
 	int i;
 
 	devices = libwacom_list_devices_from_database(db, NULL);
@@ -140,10 +140,8 @@ compare_written_database(WacomDeviceDatabase *db)
 		int nstyli;
 		const int *styli;
 
-		assert(asprintf(&path, "%s/%d-%04x-%04x.tablet", dirname,
-				libwacom_get_bustype(*device),
-				libwacom_get_vendor_id(*device),
-				libwacom_get_product_id(*device)) != -1);
+		assert(asprintf(&path, "%s/%s.tablet", dirname,
+				libwacom_get_match(*device)) != -1);
 		assert(path);
 		fd = open(path, O_WRONLY|O_CREAT, S_IRWXU);
 		assert(fd >= 0);

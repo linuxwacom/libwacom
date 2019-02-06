@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="huion-h420"
+   width="355"
+   height="250">
+  <title
+     id="title">Huion H410</title>
+  <g>
+    <circle
+       r="7.5"
+       cy="75"
+       cx="29"
+       class="A ModeSwitch Button"
+       id="ButtonA" />
+    <path
+       d="m 51,75 4,0"
+       class="A ModeSwitch Leader"
+       id="LeaderA" />
+    <text
+       style="text-anchor:start"
+       y="75"
+       x="57"
+       class="A ModeSwitch Label"
+       id="LabelA">A</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonB"
+       class="B ModeSwitch Button"
+       cx="29"
+       cy="121.25"
+       r="7.5" />
+    <path
+       id="LeaderB"
+       class="B ModeSwitch Leader"
+       d="m 51,121.25 4,0" />
+    <text
+       id="LabelB"
+       class="B ModeSwitch Label"
+       x="57"
+       y="121.25"
+       style="text-anchor:start">B</text>
+  </g>
+  <g>
+    <circle
+       id="ButtonC"
+       class="C ModeSwitch Button"
+       cx="29"
+       cy="175"
+       r="7.5" />
+    <path
+       id="LeaderC"
+       class="C ModeSwitch Leader"
+       d="m 51,175 4,0" />
+    <text
+       id="LabelC"
+       class="C ModeSwitch Label"
+       x="57"
+       y="175"
+       style="text-anchor:start">C</text>
+  </g>
+</svg>

@@ -27,7 +27,7 @@
 #
 
 [Device]
-Name=Wacom Cintiq Pro 24 PT
+Name=Wacom Cintiq Pro 24
 Class=Cintiq
 DeviceMatch=usb:056a:0351
 PairedID=usb:056a:0355

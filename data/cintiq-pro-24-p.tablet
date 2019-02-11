@@ -27,7 +27,7 @@
 #
 
 [Device]
-Name=Wacom Cintiq Pro 24 P
+Name=Wacom Cintiq Pro 24
 Class=Cintiq
 DeviceMatch=usb:056a:037c
 Width=20

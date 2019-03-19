@@ -182,10 +182,15 @@ compare_written_database(WacomDeviceDatabase *db)
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	assert(db);
 
 

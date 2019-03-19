@@ -31,6 +31,7 @@
 #include "input-event-codes.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "libwacom.h"
 #include <assert.h>
@@ -64,10 +65,15 @@ int main(int argc, char **argv)
 	WacomDevice *device;
 	const WacomMatch *match;
 	const char *str;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	assert(db);
 
 	device = libwacom_new_from_usbid(db, 0, 0, NULL);

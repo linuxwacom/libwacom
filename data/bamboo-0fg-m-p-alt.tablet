@@ -1,6 +1,6 @@
 # Wacom
 # Bamboo Fun
-# CTE-450
+# CTE-650
 #
 # Button Map:
 # (A=1, B=2, C=3, ...)
@@ -36,15 +36,14 @@
 #
 # first generation Bamboo
 #
-# stylus with two buttons and eraser (LP160E)
-# Pen active area: 5.8 x 3.62in
+# Pen active area: 8.52 x 5.33in
 
 [Device]
-Name=Wacom Bamboo Fun small
-DeviceMatch=usb:056a:0017
+Name=Wacom Bamboo Fun medium
+DeviceMatch=usb:056a:0018
 Class=Bamboo
-Width=6
-Height=4
+Width=9
+Height=5
 IntegratedIn=
 Layout=bamboo-0fg-s-p-alt.svg
 

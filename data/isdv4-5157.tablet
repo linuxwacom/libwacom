@@ -1,7 +1,7 @@
 # this is for the Wacom pen + touchscreen as found in some versions of the Lenovo ThinkPad L380 Yoga
 
 [Device]
-Name=Wacom Co.,Ltd. Pen and multitouch sensor
+Name=Wacom ISDv4 5157
 DeviceMatch=usb:056a:5157;
 Class=ISDV4
 Width=12

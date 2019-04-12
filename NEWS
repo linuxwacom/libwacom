@@ -1,3 +1,12 @@
+libwacom 0.33:
+- New devices:
+  - Wacom Bamboo Fun 4x5, Bamboo Fun 6x8, Bamboo1 5x8, Cintiq 16
+  - HP EliteBook x360, x2, HP Envy x360
+  - Acer Switch SA5
+  - Huion H420
+  - Lenovo Thinkpad L380 Yoga, L390 Yoga, Ideapad Flex, Yoga 730
+  - Dell Latitude 7390
+
 libwacom 0.32:
 - New devices:
   - Lenovo Yoga 730, X380, 300e

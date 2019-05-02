@@ -34,4 +34,5 @@ tools/show-svg-image
 tools/generate-udev-rules
 tools/libwacom-list-local-devices
 tools/list-devices
+tools/list-compatible-styli
 doc/doxygen.conf

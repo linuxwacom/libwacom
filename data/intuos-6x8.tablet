@@ -1,3 +1,7 @@
+# Wacom
+# Intuos 6x8
+# GD-0608
+
 [Device]
 Name=Wacom Intuos 6x8
 DeviceMatch=usb:056a:0021

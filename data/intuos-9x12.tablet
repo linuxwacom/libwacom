@@ -1,3 +1,7 @@
+# Wacom
+# Intuos 9x12
+# GD-0912
+
 [Device]
 Name=Wacom Intuos 9x12
 DeviceMatch=usb:056a:0022

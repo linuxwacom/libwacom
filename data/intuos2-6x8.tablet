@@ -1,3 +1,7 @@
+# Wacom
+# Intuos2 6x8
+# XD-0608
+
 [Device]
 Name=Wacom Intuos2 6x8
 # FIXME add missing usb:0056a:0047 match

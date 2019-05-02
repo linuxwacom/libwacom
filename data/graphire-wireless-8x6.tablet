@@ -1,3 +1,7 @@
+# Wacom
+# Graphire Wireless
+# CTE-630BT
+
 [Device]
 Name=Wacom Graphire Wireless
 DeviceMatch=bluetooth:056a:81

@@ -1,3 +1,7 @@
+# Wacom
+# Intuos 12x18
+# GD-1218
+
 [Device]
 Name=Wacom Intuos 12x18
 DeviceMatch=usb:056a:0024

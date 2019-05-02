@@ -1,3 +1,7 @@
+# Wacom
+# Intuos2 4x5
+# XD-0405
+
 [Device]
 Name=Wacom Intuos2 4x5
 DeviceMatch=usb:056a:0041

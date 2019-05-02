@@ -1,5 +1,8 @@
+# Wacom
+# Bamboo One
+# CTF-430
+
 [Device]
-# Bamboo One (CTF-430/SO-B)
 Name=Bamboo One
 DeviceMatch=usb:056a:0069
 Class=Bamboo

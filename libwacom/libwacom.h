@@ -317,7 +317,7 @@ WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *n
  * @return A NULL terminated list of pointers to all the devices inside the
  * database.
  * The content of the list is owned by the database and should not be
- * modified of freed. Use free() to free the list.
+ * modified or freed. Use free() to free the list.
  */
 WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db, WacomError *error);
 

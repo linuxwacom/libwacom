@@ -9,6 +9,7 @@
 
 [Device]
 Name=Wacom Bamboo Pen small
+ModelName=CTL-460
 DeviceMatch=usb:056a:00d4
 Class=Bamboo
 Width=6

@@ -362,6 +362,12 @@ const char* libwacom_get_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return The vendor-specific model name (e.g. CTE-650 for a Bamboo Fun), or NULL if none is set
+ */
+const char* libwacom_get_model_name(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The full filename including path to the SVG layout of the device
  * if available, or NULL otherwise
  */

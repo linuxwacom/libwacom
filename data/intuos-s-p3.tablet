@@ -19,6 +19,7 @@
 
 [Device]
 Name=Wacom Intuos S
+ModelName=CTL-4100
 DeviceMatch=usb:056a:0374
 Class=Bamboo
 Width=8

@@ -567,6 +567,13 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 	}
 
 	device->name = g_key_file_get_string(keyfile, DEVICE_GROUP, "Name", NULL);
+	device->model_name = g_key_file_get_string(keyfile, DEVICE_GROUP, "ModelName", NULL);
+	/* ModelName= would give us the empty string, let's make it NULL
+	 * instead */
+	if (device->model_name && strlen(device->model_name) == 0) {
+		free(device->model_name);
+		device->model_name = NULL;
+	}
 	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
 	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
 

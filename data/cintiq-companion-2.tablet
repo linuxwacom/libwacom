@@ -28,6 +28,7 @@
 
 [Device]
 Name=Wacom Cintiq Companion 2
+ModelName=DTH-W1310
 Class=Cintiq
 DeviceMatch=usb:056a:0325
 PairedID=usb:056a:0326

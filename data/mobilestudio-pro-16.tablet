@@ -37,6 +37,7 @@
 
 [Device]
 Name=Wacom MobileStudio Pro 16
+ModelName=DTH-W1620
 Class=Cintiq
 DeviceMatch=usb:056a:034e
 PairedID=usb:056a:034b

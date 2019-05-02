@@ -4,6 +4,7 @@
 
 [Device]
 Name=Wacom Intuos2 4x5
+ModelName=XD-0405
 DeviceMatch=usb:056a:0041
 Class=Intuos2
 Width=5

@@ -30,6 +30,7 @@
 #
 [Device]
 Name=Wacom Intuos3 9x12
+ModelName=PTZ-930
 DeviceMatch=usb:056a:00b2
 Class=Intuos3
 Width=12

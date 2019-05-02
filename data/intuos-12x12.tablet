@@ -4,6 +4,7 @@
 
 [Device]
 Name=Wacom Intuos 12x12
+ModelName=GD-1212
 DeviceMatch=usb:056a:0023
 Class=Intuos
 Width=12

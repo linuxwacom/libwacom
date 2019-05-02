@@ -6,6 +6,7 @@
 
 [Device]
 Name=Wacom ISDv4 93
+ModelName=
 DeviceMatch=usb:056a:0093;serial:056a:0093
 Class=ISDV4
 Width=10

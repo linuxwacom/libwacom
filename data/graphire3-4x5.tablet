@@ -2,6 +2,7 @@
 [Device]
 # Model CTE-430 (Sapphire) (CTE-430/B)
 Name=Wacom Graphire3 4x5
+ModelName=CTE-430
 
 DeviceMatch=usb:056a:0013
 

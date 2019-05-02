@@ -35,6 +35,7 @@
 
 [Device]
 Name=Wacom MobileStudio Pro 13
+ModelName=DTH-W1320
 Class=Cintiq
 DeviceMatch=usb:056a:034d
 PairedID=usb:056a:034a

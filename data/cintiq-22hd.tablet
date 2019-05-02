@@ -32,6 +32,7 @@
 
 [Device]
 Name=Wacom Cintiq 22HD
+ModelName=DTK-2200
 DeviceMatch=usb:056a:00fa
 Class=Cintiq
 Width=19

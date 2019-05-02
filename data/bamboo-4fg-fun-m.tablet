@@ -10,6 +10,7 @@
 
 [Device]
 Name=Wacom Bamboo Fun medium (2+FG)
+ModelName=CTH-661(A)
 DeviceMatch=usb:056a:00d8
 Class=Bamboo
 Width=9

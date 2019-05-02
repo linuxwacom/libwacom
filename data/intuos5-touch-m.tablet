@@ -44,6 +44,7 @@
 
 [Device]
 Name=Wacom Intuos5 touch M
+ModelName=PTH-650
 DeviceMatch=usb:056a:0027
 Class=Intuos5
 Width=9

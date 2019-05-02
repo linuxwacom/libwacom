@@ -41,6 +41,7 @@
 
 [Device]
 Name=Wacom Bamboo Fun small
+ModelName=CTE-450
 DeviceMatch=usb:056a:0017
 Class=Bamboo
 Width=6

@@ -36,6 +36,7 @@
 
 [Device]
 Name=Intuos Pen & Touch Medium
+ModelName=CTH-690
 DeviceMatch=usb:056a:033e
 Class=Bamboo
 Width=9

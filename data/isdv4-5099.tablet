@@ -2,6 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 5099
+ModelName=
 DeviceMatch=i2c:056a:5099
 Class=ISDV4
 Width=10

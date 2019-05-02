@@ -2,6 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 ED
+ModelName=
 DeviceMatch=usb:056a:00ed
 Class=ISDV4
 IntegratedIn=Display;System

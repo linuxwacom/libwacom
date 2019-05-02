@@ -16,6 +16,7 @@
 
 [Device]
 Name=Wacom DTI520UB/L
+ModelName=DTI-520
 DeviceMatch=usb:056a:003a
 Class=PenDisplay
 Width=14

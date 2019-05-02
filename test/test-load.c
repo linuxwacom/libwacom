@@ -136,6 +136,7 @@ int main(int argc, char **argv)
 	assert(device);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	assert(libwacom_get_model_name (device) == NULL);
 	libwacom_destroy(device);
 
 	/* 24HDT has one paired device */
@@ -159,6 +160,7 @@ int main(int argc, char **argv)
 	assert(libwacom_get_button_evdev_code(device, 'G') == BTN_6);
 	assert(libwacom_get_button_evdev_code(device, 'H') == BTN_7);
 	assert(libwacom_get_button_evdev_code(device, 'I') == BTN_8);
+	assert(strcmp(libwacom_get_model_name(device), "DTK-1300") == 0);
 	libwacom_destroy(device);
 
 	device = libwacom_new_from_name(db, "Wacom Bamboo Pen", NULL);
@@ -167,6 +169,7 @@ int main(int argc, char **argv)
 	assert(libwacom_get_button_evdev_code(device, 'B') == BTN_FORWARD);
 	assert(libwacom_get_button_evdev_code(device, 'C') == BTN_LEFT);
 	assert(libwacom_get_button_evdev_code(device, 'D') == BTN_RIGHT);
+	assert(strcmp(libwacom_get_model_name(device), "MTE-450") == 0);
 	libwacom_destroy(device);
 
 	libwacom_database_destroy (db);

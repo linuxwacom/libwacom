@@ -44,6 +44,7 @@
 
 [Device]
 Name=Wacom Intuos Pro M
+ModelName=PTH-651
 DeviceMatch=usb:056a:0315
 Class=Intuos5
 Width=9

@@ -7,6 +7,7 @@
 
 [Device]
 Name=N-Trig Pen
+ModelName=
 DeviceMatch=usb:1b96:0001
 Class=ISDV4
 Width=10

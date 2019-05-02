@@ -5,6 +5,7 @@
 
 [Device]
 Name=Wacom DTF-720
+ModelName=DTF-720
 DeviceMatch=usb:056a:00c0
 Width=13
 Height=11

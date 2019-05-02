@@ -26,6 +26,7 @@
 
 [Device]
 Name=Wacom Cintiq Companion Hybrid
+ModelName=DTH-A1300
 Class=Cintiq
 DeviceMatch=usb:056a:0307
 PairedID=usb:056a:0309

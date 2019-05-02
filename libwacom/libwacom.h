@@ -317,7 +317,7 @@ WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *n
  * @return A NULL terminated list of pointers to all the devices inside the
  * database.
  * The content of the list is owned by the database and should not be
- * modified of freed. Use free() to free the list.
+ * modified or freed. Use free() to free the list.
  */
 WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db, WacomError *error);
 
@@ -359,6 +359,12 @@ WacomClass libwacom_get_class(const WacomDevice *device);
  * @return The human-readable name for this device
  */
 const char* libwacom_get_name(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return The vendor-specific model name (e.g. CTE-650 for a Bamboo Fun), or NULL if none is set
+ */
+const char* libwacom_get_model_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query

@@ -1,5 +1,10 @@
+# Wacom
+# Graphire Wireless
+# CTE-630BT
+
 [Device]
 Name=Wacom Graphire Wireless
+ModelName=CTE-630BT
 DeviceMatch=bluetooth:056a:81
 Class=Graphire
 Width=8

@@ -1,5 +1,6 @@
 [Device]
 Name=Wacom ISDv4 116
+ModelName=
 DeviceMatch=usb:056a:0116
 Class=ISDV4
 Width=8

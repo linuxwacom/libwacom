@@ -44,6 +44,7 @@
 
 [Device]
 Name=Wacom Intuos5 touch L
+ModelName=PTH-850
 DeviceMatch=usb:056a:0028
 Class=Intuos5
 Width=13

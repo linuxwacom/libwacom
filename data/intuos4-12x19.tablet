@@ -34,6 +34,7 @@
 
 [Device]
 Name=Wacom Intuos4 12x19
+ModelName=PTK-1240
 DeviceMatch=usb:056a:00bb
 Class=Intuos4
 Width=19

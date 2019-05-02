@@ -6,6 +6,7 @@
 
 [Device]
 Name=Wacom Cintiq 27QHD touch
+ModelName=DTH-2700
 DeviceMatch=usb:056a:032b
 PairedID=usb:056a:032c
 Class=Cintiq

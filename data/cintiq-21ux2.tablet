@@ -44,6 +44,7 @@
 
 [Device]
 Name=Wacom Cintiq 21UX2
+ModelName=DTK-2100
 DeviceMatch=usb:056a:00cc
 Class=Cintiq
 Width=17

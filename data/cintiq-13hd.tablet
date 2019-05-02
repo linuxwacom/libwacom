@@ -23,6 +23,7 @@
 
 [Device]
 Name=Wacom Cintiq 13HD
+ModelName=DTK-1300
 Class=Cintiq
 DeviceMatch=usb:056a:0304
 Width=12

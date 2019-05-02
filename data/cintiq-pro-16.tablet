@@ -28,6 +28,7 @@
 
 [Device]
 Name=Wacom Cintiq Pro 16
+ModelName=DTH-1620
 Class=Cintiq
 DeviceMatch=usb:056a:0350
 PairedID=usb:056a:0354

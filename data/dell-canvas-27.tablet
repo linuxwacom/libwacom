@@ -20,6 +20,7 @@
 
 [Device]
 Name=Dell Canvas 27
+ModelName=
 Class=Cintiq
 DeviceMatch=usb:056a:4200
 PairedID=usb:2575:0204

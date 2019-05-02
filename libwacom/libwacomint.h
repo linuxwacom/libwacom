@@ -65,6 +65,7 @@ struct _WacomMatch {
  * libwacom_print_device_description() ! */
 struct _WacomDevice {
 	char *name;
+	char *model_name;
 	int width;
 	int height;
 

@@ -26,6 +26,7 @@
 
 [Device]
 Name=Wacom Cintiq Companion
+ModelName=DTH-W1300
 Class=Cintiq
 DeviceMatch=usb:056a:030a
 PairedID=usb:056a:030c

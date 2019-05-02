@@ -34,6 +34,7 @@
 
 [Device]
 Name=Wacom Intuos4 6x9
+ModelName=PTK-640
 DeviceMatch=usb:056a:00b9
 Class=Intuos4
 Width=9

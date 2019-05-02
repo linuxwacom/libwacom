@@ -42,6 +42,7 @@
 
 [Device]
 Name=Wacom Intuos5 touch S
+ModelName=PTH-450
 DeviceMatch=usb:056a:0026
 Class=Intuos5
 Width=6

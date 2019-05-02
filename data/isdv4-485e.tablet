@@ -2,6 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 485e
+ModelName=
 DeviceMatch=i2c:056a:485e
 Class=ISDV4
 Width=10

@@ -325,6 +325,7 @@ libwacom_copy(const WacomDevice *device)
 	d = g_new0 (WacomDevice, 1);
 	g_atomic_int_inc(&d->refcnt);
 	d->name = g_strdup (device->name);
+	d->model_name = g_strdup (device->model_name);
 	d->width = device->width;
 	d->height = device->height;
 	d->integration_flags = device->integration_flags;
@@ -771,6 +772,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 
 	dprintf(fd, "[Device]\n");
 	dprintf(fd, "Name=%s\n", libwacom_get_name(device));
+	dprintf(fd, "ModelName=%s\n", libwacom_get_model_name(device) ? libwacom_get_model_name(device) : "");
 	dprintf(fd, "DeviceMatch=");
 	for (match = libwacom_get_matches(device); *match; match++)
 		print_match(fd, *match);
@@ -887,6 +889,11 @@ int libwacom_get_vendor_id(const WacomDevice *device)
 const char* libwacom_get_name(const WacomDevice *device)
 {
 	return device->name;
+}
+
+const char* libwacom_get_model_name(const WacomDevice *device)
+{
+	return device->model_name;
 }
 
 const char* libwacom_get_layout_filename(const WacomDevice *device)

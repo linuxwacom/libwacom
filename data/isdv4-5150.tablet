@@ -2,6 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 5150
+ModelName=
 DeviceMatch=usb:056a:5150
 Class=ISDV4
 Width=12

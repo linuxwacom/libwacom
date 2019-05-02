@@ -32,6 +32,7 @@
 
 [Device]
 Name=Wacom Cintiq 12WX
+ModelName=DTZ-1200W
 Class=Cintiq
 DeviceMatch=usb:056a:00c6
 Width=10

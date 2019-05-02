@@ -31,6 +31,7 @@
 
 [Device]
 Name=Wacom Intuos3 12x12
+ModelName=PTZ-1230
 DeviceMatch=usb:056a:00b3
 Class=Intuos3
 Width=12

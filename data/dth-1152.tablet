@@ -5,6 +5,7 @@
 
 [Device]
 Name=Wacom DTH1152
+ModelName=DTH-1152
 DeviceMatch=usb:056a:035a
 PairedID=usb:056a:0368
 Class=PenDisplay

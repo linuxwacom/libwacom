@@ -9,6 +9,7 @@
 
 [Device]
 Name=One by Wacom (medium)
+ModelName=CTL-672
 DeviceMatch=usb:056a:037b
 Class=Bamboo
 Width=9

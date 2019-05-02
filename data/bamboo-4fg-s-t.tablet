@@ -9,6 +9,7 @@
 
 [Device]
 Name=Wacom Bamboo (2+FG)
+ModelName=CTT-460(A)
 DeviceMatch=usb:056a:00d9
 Class=Bamboo
 Width=5

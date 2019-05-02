@@ -2,6 +2,7 @@
 
 [Device]
 Name=Wacom ISDv4 114
+ModelName=
 DeviceMatch=i2c:056a:0114
 Class=ISDV4
 IntegratedIn=Display;System

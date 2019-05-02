@@ -28,6 +28,7 @@
 
 [Device]
 Name=Wacom Cintiq Pro 24
+ModelName=DTH-2420
 Class=Cintiq
 DeviceMatch=usb:056a:0351
 PairedID=usb:056a:0355

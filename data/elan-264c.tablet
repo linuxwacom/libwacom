@@ -2,6 +2,7 @@
 
 [Device]
 Name=ELAN 264C
+ModelName=
 DeviceMatch=i2c:04f3:264c
 Class=ISDV4
 Width=14

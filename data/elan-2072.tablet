@@ -4,6 +4,8 @@
 Name=ELAN 2072
 ModelName=
 DeviceMatch=usb:04f3:2072
+Width=12
+Height=7
 Class=PenDisplay
 IntegratedIn=Display;System
 Styli=0xffffd

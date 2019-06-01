@@ -1,0 +1,14 @@
+# This is for the Microsoft Surface Book 2 13.5-inch model
+
+[Device]
+Name=Microsoft Surface Book 2 (13.5")
+DeviceMatch=mei:045E:0021
+Class=ISDV4
+Width=11
+Height=7
+IntegratedIn=Display;System;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

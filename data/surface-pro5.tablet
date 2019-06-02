@@ -2,7 +2,7 @@
 
 [Device]
 Name=Microsoft Surface Pro 5
-DeviceMatch=mei:045E:001F
+DeviceMatch=mei:1B96:001F
 Class=ISDV4
 Width=10
 Height=6

@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo YOGA 520-14IKB
+
+[Device]
+Name=Wacom ISDv4 50db
+ModelName=
+DeviceMatch=i2c:056a:50db
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

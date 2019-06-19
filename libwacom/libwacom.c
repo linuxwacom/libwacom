@@ -29,6 +29,7 @@
 #endif
 
 #include "libwacomint.h"
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -615,16 +616,22 @@ static void print_styli_for_device (int fd, const WacomDevice *device)
 	int nstyli;
 	const int *styli;
 	int i;
+	int idx = 0;
+	char buf[1024] = {0};
 
 	if (!libwacom_has_stylus(device))
 		return;
 
 	styli = libwacom_get_supported_styli(device, &nstyli);
 
-	dprintf(fd, "Styli=");
-	for (i = 0; i < nstyli; i++)
-		dprintf(fd, "%#x;", styli[i]);
-	dprintf(fd, "\n");
+	for (i = 0; i < nstyli; i++) {
+		/* 20 digits for a stylus are enough, right */
+		assert(idx < sizeof(buf) - 20);
+
+		idx += snprintf(buf + idx, 20, "%#x;", styli[i]);
+	}
+
+	dprintf(fd, "Styli=%s\n", buf);
 }
 
 static void print_layout_for_device (int fd, const WacomDevice *device)
@@ -643,42 +650,54 @@ static void print_layout_for_device (int fd, const WacomDevice *device)
 static void print_supported_leds (int fd, const WacomDevice *device)
 {
 	char *leds_name[] = {
-		"Ring",
-		"Ring2",
-		"Touchstrip",
-		"Touchstrip2"
+		"Ring;",
+		"Ring2;",
+		"Touchstrip;",
+		"Touchstrip2;"
 	};
 	int num_leds;
 	const WacomStatusLEDs *status_leds;
 	int i;
+	char buf[256] = {0};
 
 	status_leds = libwacom_get_status_leds(device, &num_leds);
 
-	dprintf(fd, "StatusLEDs=");
 	for (i = 0; i < num_leds; i++)
-		dprintf(fd, "%s;", leds_name [status_leds[i]]);
-	dprintf(fd, "\n");
+		strcat(buf, leds_name[status_leds[i]]);
+
+	dprintf(fd, "StatusLEDs=%s\n", buf);
 }
 
 static void print_button_flag_if(int fd, const WacomDevice *device, const char *label, int flag)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
+	char buf[nbuttons * 2 + 1];
+	int idx = 0;
 	char b;
-	dprintf(fd, "%s=", label);
-	for (b = 'A'; b < 'A' + nbuttons; b++)
-		if (libwacom_get_button_flag(device, b) & flag)
-			dprintf(fd, "%c;", b);
-	dprintf(fd, "\n");
+
+	for (b = 'A'; b < 'A' + nbuttons; b++) {
+		if (libwacom_get_button_flag(device, b) & flag) {
+			buf[idx++] = b;
+			buf[idx++] = ';';
+		}
+	}
+	buf[idx] = '\0';
+	dprintf(fd, "%s=%s\n", label, buf);
 }
 
 static void print_button_evdev_codes(int fd, const WacomDevice *device)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
 	char b;
-	dprintf(fd, "EvdevCodes=");
-	for (b = 'A'; b < 'A' + nbuttons; b++)
-		dprintf(fd, "0x%x;", libwacom_get_button_evdev_code(device, b));
-	dprintf(fd, "\n");
+	char buf[1024] = {0};
+	int idx = 0;
+
+	for (b = 'A'; b < 'A' + nbuttons; b++) {
+		assert(idx < sizeof(buf) - 30);
+		idx += snprintf(buf + idx, 30, "0x%x;",
+				libwacom_get_button_evdev_code(device, b));
+	}
+	dprintf(fd, "EvdevCodes=%s\n", buf);
 }
 
 static void print_buttons_for_device (int fd, const WacomDevice *device)

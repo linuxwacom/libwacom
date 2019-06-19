@@ -803,6 +803,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 
 	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
 	dprintf(fd, "Buttons=%d\n",		libwacom_get_num_buttons(device));
+	dprintf(fd, "\n");
 
 	print_buttons_for_device(fd, device);
 }

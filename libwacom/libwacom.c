@@ -31,6 +31,7 @@
 #include "libwacomint.h"
 #include <assert.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <gudev/gudev.h>
@@ -659,13 +660,16 @@ static void print_supported_leds (int fd, const WacomDevice *device)
 	const WacomStatusLEDs *status_leds;
 	int i;
 	char buf[256] = {0};
+	bool have_led = false;
 
 	status_leds = libwacom_get_status_leds(device, &num_leds);
 
-	for (i = 0; i < num_leds; i++)
+	for (i = 0; i < num_leds; i++) {
 		strcat(buf, leds_name[status_leds[i]]);
+		have_led = true;
+	}
 
-	dprintf(fd, "StatusLEDs=%s\n", buf);
+	dprintf(fd, "%sStatusLEDs=%s\n", have_led ? "" : "# ", buf);
 }
 
 static void print_button_flag_if(int fd, const WacomDevice *device, const char *label, int flag)
@@ -674,15 +678,17 @@ static void print_button_flag_if(int fd, const WacomDevice *device, const char *
 	char buf[nbuttons * 2 + 1];
 	int idx = 0;
 	char b;
+	bool have_flag = false;
 
 	for (b = 'A'; b < 'A' + nbuttons; b++) {
 		if (libwacom_get_button_flag(device, b) & flag) {
 			buf[idx++] = b;
 			buf[idx++] = ';';
+			have_flag = true;
 		}
 	}
 	buf[idx] = '\0';
-	dprintf(fd, "%s=%s\n", label, buf);
+	dprintf(fd, "%s%s=%s\n", have_flag ? "" : "# ", label, buf);
 }
 
 static void print_button_evdev_codes(int fd, const WacomDevice *device)

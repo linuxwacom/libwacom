@@ -151,7 +151,8 @@ get_bus_vid_pid (GUdevDevice  *device,
 out:
 	if (splitted_product)
 		g_strfreev (splitted_product);
-	g_object_unref (parent);
+	if (parent)
+		g_object_unref (parent);
 	return retval;
 }
 

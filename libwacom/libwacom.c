@@ -56,10 +56,22 @@ libwacom_get_device(const WacomDeviceDatabase *db, const char *match)
 }
 
 static gboolean
+is_tablet (GUdevDevice *device)
+{
+	return g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET");
+}
+
+static gboolean
+is_touchpad (GUdevDevice *device)
+{
+	return g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD");
+}
+
+
+static gboolean
 is_tablet_or_touchpad (GUdevDevice *device)
 {
-	return g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET") ||
-		g_udev_device_get_property_as_boolean (device, "ID_INPUT_TOUCHPAD");
+	return is_touchpad (device) || is_tablet (device);
 }
 
 /* Overriding SUBSYSTEM isn't allowed in udev (works sometimes, but not
@@ -285,6 +297,9 @@ get_device_info (const char            *path,
 	*bus = bus_from_str (bus_str);
 
 	if (*bus == WBUSTYPE_SERIAL) {
+		if (is_touchpad (device))
+			goto out;
+
 		/* The serial bus uses 0:0 as the vid/pid */
 		*vendor_id = 0;
 		*product_id = 0;

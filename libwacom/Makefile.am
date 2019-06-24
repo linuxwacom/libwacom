@@ -3,7 +3,8 @@ lib_LTLIBRARIES=libwacom.la
 AM_CPPFLAGS = \
 	      -DDATADIR="\"$(datadir)/libwacom\"" \
 	      -DG_LOG_DOMAIN="\"$(PACKAGE)\"" \
-	      -I$(top_srcdir)/include
+	      -I$(top_srcdir)/include \
+	      -fvisibility=hidden
 
 libwacom_la_SOURCES = \
                       $(top_srcdir)/include/linux/input-event-codes.h \
@@ -16,7 +17,7 @@ libwacom_la_SOURCES = \
 libwacom_la_LIBADD = $(GLIB_LIBS)
 libwacom_la_CFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS)
 
-libwacom_la_LDFLAGS = -version-info $(LIBWACOM_LT_VERSION) -export-symbols-regex '^libwacom_'
+libwacom_la_LDFLAGS = -version-info $(LIBWACOM_LT_VERSION)
 
 libwacomincludedir = $(includedir)/libwacom-1.0/libwacom/
 libwacominclude_HEADERS = libwacom.h

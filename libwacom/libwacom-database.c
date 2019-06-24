@@ -875,7 +875,7 @@ end:
 }
 
 
-WacomDeviceDatabase *
+LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
 {
     WacomDeviceDatabase *db;
@@ -890,13 +890,13 @@ libwacom_database_new_for_path (const char *datadir)
     return db;
 }
 
-WacomDeviceDatabase *
+LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
 	return libwacom_database_new_for_path (DATADIR);
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_database_destroy(WacomDeviceDatabase *db)
 {
 	if (db->device_ht)
@@ -919,7 +919,7 @@ device_compare(gconstpointer pa, gconstpointer pb)
 	return cmp;
 }
 
-WacomDevice**
+LIBWACOM_EXPORT WacomDevice**
 libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *error)
 {
 	GList *cur, *devices;

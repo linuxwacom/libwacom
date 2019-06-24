@@ -409,7 +409,7 @@ libwacom_same_layouts (const WacomDevice *a, const WacomDevice *b)
 	return rc;
 }
 
-int
+LIBWACOM_EXPORT int
 libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags flags)
 {
 	g_return_val_if_fail(a || b, 0);
@@ -499,7 +499,7 @@ libwacom_new (const WacomDeviceDatabase *db, const char *name, int vendor_id, in
 	return device;
 }
 
-WacomDevice*
+LIBWACOM_EXPORT WacomDevice*
 libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error)
 {
 	int vendor_id, product_id;
@@ -568,7 +568,7 @@ bail:
 	return NULL;
 }
 
-WacomDevice*
+LIBWACOM_EXPORT WacomDevice*
 libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error)
 {
 	const WacomDevice *device;
@@ -587,7 +587,7 @@ libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int produc
 	return NULL;
 }
 
-WacomDevice*
+LIBWACOM_EXPORT WacomDevice*
 libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomError *error)
 {
 	const WacomDevice *device;
@@ -778,7 +778,7 @@ static void print_match(int fd, const WacomMatch *match)
 	dprintf(fd, ";");
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_print_device_description(int fd, const WacomDevice *device)
 {
 	const WacomMatch **match;
@@ -840,7 +840,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	print_buttons_for_device(fd, device);
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_match_destroy(WacomMatch *match)
 {
 	g_free (match->match);
@@ -848,7 +848,7 @@ libwacom_match_destroy(WacomMatch *match)
 	g_free (match);
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_destroy(WacomDevice *device)
 {
 	int i;
@@ -871,7 +871,7 @@ libwacom_destroy(WacomDevice *device)
 	g_free (device);
 }
 
-WacomMatch*
+LIBWACOM_EXPORT WacomMatch*
 libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
 	WacomMatch *match;
@@ -892,7 +892,7 @@ libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int produc
 	return match;
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_update_match(WacomDevice *device, const WacomMatch *newmatch)
 {
 	int i;
@@ -913,119 +913,141 @@ libwacom_update_match(WacomDevice *device, const WacomMatch *newmatch)
 	device->match = device->nmatches - 1;
 }
 
-int libwacom_get_vendor_id(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_vendor_id(const WacomDevice *device)
 {
 	g_return_val_if_fail(device->match >= 0, -1);
 	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->vendor_id;
 }
 
-const char* libwacom_get_name(const WacomDevice *device)
+LIBWACOM_EXPORT const char*
+libwacom_get_name(const WacomDevice *device)
 {
 	return device->name;
 }
 
-const char* libwacom_get_model_name(const WacomDevice *device)
+LIBWACOM_EXPORT const char*
+libwacom_get_model_name(const WacomDevice *device)
 {
 	return device->model_name;
 }
 
-const char* libwacom_get_layout_filename(const WacomDevice *device)
+LIBWACOM_EXPORT const char*
+libwacom_get_layout_filename(const WacomDevice *device)
 {
 	return device->layout;
 }
 
-int libwacom_get_product_id(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_product_id(const WacomDevice *device)
 {
 	g_return_val_if_fail(device->match >= 0, -1);
 	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->product_id;
 }
 
-const char* libwacom_get_match(const WacomDevice *device)
+LIBWACOM_EXPORT const char*
+libwacom_get_match(const WacomDevice *device)
 {
 	g_return_val_if_fail(device->match >= 0, NULL);
 	g_return_val_if_fail(device->match < device->nmatches, NULL);
 	return device->matches[device->match]->match;
 }
 
-const WacomMatch** libwacom_get_matches(const WacomDevice *device)
+LIBWACOM_EXPORT const WacomMatch**
+libwacom_get_matches(const WacomDevice *device)
 {
 	return (const WacomMatch**)device->matches;
 }
 
-const WacomMatch* libwacom_get_paired_device(const WacomDevice *device)
+LIBWACOM_EXPORT const WacomMatch*
+libwacom_get_paired_device(const WacomDevice *device)
 {
 	return (const WacomMatch*)device->paired;
 }
 
-int libwacom_get_width(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_width(const WacomDevice *device)
 {
 	return device->width;
 }
 
-int libwacom_get_height(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_height(const WacomDevice *device)
 {
 	return device->height;
 }
 
-WacomClass libwacom_get_class(const WacomDevice *device)
+LIBWACOM_EXPORT WacomClass
+libwacom_get_class(const WacomDevice *device)
 {
 	return device->cls;
 }
 
-int libwacom_has_stylus(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_has_stylus(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_STYLUS);
 }
 
-int libwacom_has_touch(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_has_touch(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_TOUCH);
 }
 
-int libwacom_get_num_buttons(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_num_buttons(const WacomDevice *device)
 {
 	return device->num_buttons;
 }
 
-const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styli)
+LIBWACOM_EXPORT const int *
+libwacom_get_supported_styli(const WacomDevice *device, int *num_styli)
 {
 	*num_styli = device->num_styli;
 	return device->supported_styli;
 }
 
-int libwacom_has_ring(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_has_ring(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_RING);
 }
 
-int libwacom_has_ring2(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_has_ring2(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_RING2);
 }
 
-int libwacom_get_ring_num_modes(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_ring_num_modes(const WacomDevice *device)
 {
 	return device->ring_num_modes;
 }
 
-int libwacom_get_ring2_num_modes(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_ring2_num_modes(const WacomDevice *device)
 {
 	return device->ring2_num_modes;
 }
 
-int libwacom_get_num_strips(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_num_strips(const WacomDevice *device)
 {
 	return device->num_strips;
 }
 
-int libwacom_get_strips_num_modes(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_get_strips_num_modes(const WacomDevice *device)
 {
 	return device->strips_num_modes;
 }
 
-const WacomStatusLEDs *libwacom_get_status_leds(const WacomDevice *device, int *num_leds)
+LIBWACOM_EXPORT const WacomStatusLEDs *
+libwacom_get_status_leds(const WacomDevice *device, int *num_leds)
 {
 	*num_leds = device->num_leds;
 	return device->status_leds;
@@ -1041,7 +1063,8 @@ struct {
 	{ WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH,	WACOM_STATUS_LED_TOUCHSTRIP2 }
 };
 
-int libwacom_get_button_led_group (const WacomDevice *device, char button)
+LIBWACOM_EXPORT int
+libwacom_get_button_led_group (const WacomDevice *device, char button)
 {
 	int button_index, led_index;
 	WacomButtonFlags button_flags;
@@ -1070,22 +1093,26 @@ int libwacom_get_button_led_group (const WacomDevice *device, char button)
 	return WACOM_STATUS_LED_UNAVAILABLE;
 }
 
-int libwacom_is_builtin(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_is_builtin(const WacomDevice *device)
 {
 	return !!(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 }
 
-int libwacom_is_reversible(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_is_reversible(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_REVERSIBLE);
 }
 
-int libwacom_has_touchswitch(const WacomDevice *device)
+LIBWACOM_EXPORT int
+libwacom_has_touchswitch(const WacomDevice *device)
 {
 	return !!(device->features & FEATURE_TOUCHSWITCH);
 }
 
-WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device)
+LIBWACOM_EXPORT WacomIntegrationFlags
+libwacom_get_integration_flags (const WacomDevice *device)
 {
 	/* "unset" is for internal use only */
 	if (device->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
@@ -1094,14 +1121,15 @@ WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device)
 	return device->integration_flags;
 }
 
-WacomBusType libwacom_get_bustype(const WacomDevice *device)
+LIBWACOM_EXPORT WacomBusType
+libwacom_get_bustype(const WacomDevice *device)
 {
 	g_return_val_if_fail(device->match >= 0, -1);
 	g_return_val_if_fail(device->match < device->nmatches, -1);
 	return device->matches[device->match]->bus;
 }
 
-WacomButtonFlags
+LIBWACOM_EXPORT WacomButtonFlags
 libwacom_get_button_flag(const WacomDevice *device, char button)
 {
 	int index;
@@ -1115,7 +1143,7 @@ libwacom_get_button_flag(const WacomDevice *device, char button)
 	return device->buttons[index];
 }
 
-int
+LIBWACOM_EXPORT int
 libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 {
 	int index;
@@ -1129,22 +1157,26 @@ libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 	return device->button_codes[index];
 }
 
-const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
+LIBWACOM_EXPORT const
+WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
 {
 	return g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER(id));
 }
 
-int libwacom_stylus_get_id (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_get_id (const WacomStylus *stylus)
 {
 	return stylus->id;
 }
 
-const char *libwacom_stylus_get_name (const WacomStylus *stylus)
+LIBWACOM_EXPORT const char *
+libwacom_stylus_get_name (const WacomStylus *stylus)
 {
 	return stylus->name;
 }
 
-int libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 {
 	if (stylus->num_buttons == -1) {
 		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->id);
@@ -1153,32 +1185,38 @@ int libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 	return stylus->num_buttons;
 }
 
-int libwacom_stylus_has_eraser (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_has_eraser (const WacomStylus *stylus)
 {
 	return stylus->has_eraser;
 }
 
-int libwacom_stylus_is_eraser (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_is_eraser (const WacomStylus *stylus)
 {
 	return stylus->is_eraser;
 }
 
-int libwacom_stylus_has_lens (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_has_lens (const WacomStylus *stylus)
 {
 	return stylus->has_lens;
 }
 
-int libwacom_stylus_has_wheel (const WacomStylus *stylus)
+LIBWACOM_EXPORT int
+libwacom_stylus_has_wheel (const WacomStylus *stylus)
 {
 	return stylus->has_wheel;
 }
 
-WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus)
+LIBWACOM_EXPORT WacomAxisTypeFlags
+libwacom_stylus_get_axes (const WacomStylus *stylus)
 {
 	return stylus->axes;
 }
 
-WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
+LIBWACOM_EXPORT WacomStylusType
+libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {
 		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->id);
@@ -1187,7 +1225,7 @@ WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus)
 	return stylus->type;
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 {
 	const char *type;
@@ -1230,7 +1268,8 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	dprintf(fd, "Type=%s\n", type);
 }
 
-void libwacom_stylus_destroy(WacomStylus *stylus)
+LIBWACOM_EXPORT void
+libwacom_stylus_destroy(WacomStylus *stylus)
 {
 	g_free (stylus->name);
 	g_free (stylus->group);
@@ -1238,27 +1277,32 @@ void libwacom_stylus_destroy(WacomStylus *stylus)
 }
 
 
-const char *libwacom_match_get_name(const WacomMatch *match)
+LIBWACOM_EXPORT const char *
+libwacom_match_get_name(const WacomMatch *match)
 {
 	return match->name;
 }
 
-WacomBusType libwacom_match_get_bustype(const WacomMatch *match)
+LIBWACOM_EXPORT WacomBusType
+libwacom_match_get_bustype(const WacomMatch *match)
 {
 	return match->bus;
 }
 
-uint32_t libwacom_match_get_product_id(const WacomMatch *match)
+LIBWACOM_EXPORT uint32_t
+libwacom_match_get_product_id(const WacomMatch *match)
 {
 	return match->product_id;
 }
 
-uint32_t libwacom_match_get_vendor_id(const WacomMatch *match)
+LIBWACOM_EXPORT uint32_t
+libwacom_match_get_vendor_id(const WacomMatch *match)
 {
 	return match->vendor_id;
 }
 
-const char* libwacom_match_get_match_string(const WacomMatch *match)
+LIBWACOM_EXPORT const char*
+libwacom_match_get_match_string(const WacomMatch *match)
 {
 	return match->match;
 }

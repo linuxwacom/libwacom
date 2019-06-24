@@ -6,7 +6,11 @@ libwacomstylusdir = $(datadir)/libwacom
 stylus_files = $(shell find $(top_srcdir)/data -name "*.stylus" -printf "%P\n")
 dist_libwacomstylus_DATA = $(stylus_files)
 
-EXTRA_DIST = wacom.example
+EXTRA_DIST = \
+             wacom.example \
+             check-files-in-git.sh \
+             check-svg-exists.sh \
+             check-data-in-meson.build.sh
 
 SUBDIRS = layouts
 

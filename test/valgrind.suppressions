@@ -1,0 +1,25 @@
+{
+   <g_type_register_static>
+   Memcheck:Leak
+   ...
+   fun:g_type_register_static
+}
+{
+   <g_type_register_static>
+   Memcheck:Leak
+   ...
+   fun:g_type_register_fundamental
+}
+{
+   <g_type_register_static>
+   Memcheck:Leak
+   ...
+   fun:g_malloc0
+}
+{
+   <g_get_language_names_malloc>
+   Memcheck:Leak
+   fun:malloc
+   ...
+   fun:g_get_language_names_with_category
+}

@@ -31,6 +31,7 @@ test/test-load
 test/test-tablet-svg-validity
 test/test-dbverify
 test/test-tablet-validity
+test/test-soname
 tools/show-svg-image
 tools/generate-udev-rules
 tools/libwacom-list-local-devices

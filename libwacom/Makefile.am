@@ -1,7 +1,6 @@
 lib_LTLIBRARIES=libwacom.la
 
 AM_CPPFLAGS = \
-	      $(GLIB_CFLAGS) \
 	      -DDATADIR="\"$(datadir)/libwacom\"" \
 	      -DG_LOG_DOMAIN="\"$(PACKAGE)\"" \
 	      -I$(top_srcdir)/include
@@ -15,6 +14,7 @@ libwacom_la_SOURCES = \
 		      libwacom-database.c
 
 libwacom_la_LIBADD = $(GLIB_LIBS)
+libwacom_la_CFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS)
 
 libwacom_la_LDFLAGS = -version-info $(LIBWACOM_LT_VERSION) -export-symbols-regex '^libwacom_'
 

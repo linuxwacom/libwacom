@@ -77,7 +77,7 @@ libwacom_class_string_to_enum(const char *class)
 	return WCLASS_UNKNOWN;
 }
 
-WacomStylusType
+static WacomStylusType
 type_from_str (const char *type)
 {
 	if (type == NULL)

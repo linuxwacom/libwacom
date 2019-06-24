@@ -479,7 +479,7 @@ libwacom_parse_num_modes (WacomDevice      *device,
 			  WacomButtonFlags  flag)
 {
 	int num;
-	guint i;
+	int i;
 
 	num = g_key_file_get_integer (keyfile, BUTTONS_GROUP, key, NULL);
 	if (num > 0)

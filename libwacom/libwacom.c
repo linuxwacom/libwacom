@@ -617,7 +617,7 @@ static void print_styli_for_device (int fd, const WacomDevice *device)
 	int nstyli;
 	const int *styli;
 	int i;
-	int idx = 0;
+	unsigned idx = 0;
 	char buf[1024] = {0};
 
 	if (!libwacom_has_stylus(device))
@@ -696,7 +696,7 @@ static void print_button_evdev_codes(int fd, const WacomDevice *device)
 	int nbuttons = libwacom_get_num_buttons(device);
 	char b;
 	char buf[1024] = {0};
-	int idx = 0;
+	unsigned idx = 0;
 
 	for (b = 'A'; b < 'A' + nbuttons; b++) {
 		assert(idx < sizeof(buf) - 30);

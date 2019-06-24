@@ -1,4 +1,4 @@
-noinst_PROGRAMS=test-load test-dbverify test-tablet-validity
+noinst_PROGRAMS=test-load test-dbverify test-tablet-validity test-ltversion
 
 TESTS=$(noinst_PROGRAMS)
 
@@ -16,6 +16,8 @@ test_dbverify_LDFLAGS = -no-install
 test_tablet_validity_SOURCES = test-tablet-validity.c
 test_tablet_validity_LDADD=$(top_builddir)/libwacom/libwacom.la
 test_tablet_validity_LDFLAGS = -no-install
+test_ltversion_SOURCES = test-ltversion.c
+test_ltversion_CFLAGS = $(AM_CFLAGS) -DLIBWACOM_LT_VERSION="\"$(LIBWACOM_LT_VERSION)\""
 
 if HAVE_LIBXML
 noinst_PROGRAMS += test-tablet-svg-validity

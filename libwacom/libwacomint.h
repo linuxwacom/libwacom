@@ -35,6 +35,8 @@
 #include <stdint.h>
 #include <glib.h>
 
+#define LIBWACOM_EXPORT __attribute__ ((visibility("default")))
+
 #define DBG(...) \
 	printf(__VA_ARGS__)
 

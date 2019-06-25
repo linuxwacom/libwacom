@@ -24,6 +24,7 @@ Type=General
 [0x812]
 # Intuos and Intuos2
 Name=Inking Pen
+Group=intuos
 Buttons=0
 HasEraser=false
 Axes=Tilt;Pressure;Distance;
@@ -66,6 +67,7 @@ Type=Inking
 [0x822]
 # Intuos and Intuos2
 Name=Classic Pen
+Group=intuos
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -230,6 +232,7 @@ HasEraser=true
 [0x832]
 #Intuos and Intuos2
 Name=Stroke Pen
+Group=intuos
 HasEraser=false
 Buttons=0
 Axes=Tilt;Pressure;Distance;
@@ -245,6 +248,7 @@ Type=Stroke
 [0x82a]
 # Intuos and Intuos2
 Name=Classic Pen Eraser
+Group=intuos
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -461,6 +465,7 @@ Type=Airbrush
 [0x096]
 # Intuos and Intuos2
 Name=Lens Cursor
+Group=intuos
 Axes=Distance;
 Type=Puck
 HasLens=true
@@ -489,6 +494,7 @@ Buttons=5
 [0x094]
 # Intuos and Intuos2
 Name=4D Mouse
+Group=intuos
 Axes=Tilt;Distance;
 Type=Puck
 HasLens=false

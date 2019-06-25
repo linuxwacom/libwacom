@@ -844,7 +844,7 @@ libwacom_database_new_for_path (const char *datadir)
 
     db = g_new0 (WacomDeviceDatabase, 1);
 
-    if (!load_tablet_files(db, datadir) || !load_stylus_files(db, datadir)) {
+    if (!load_stylus_files(db, datadir) || !load_tablet_files(db, datadir)) {
 	    libwacom_database_destroy(db);
 	    db = NULL;
     }

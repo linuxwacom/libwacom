@@ -50,7 +50,7 @@ Class=Cintiq
 Width=17
 Height=13
 Layout=cintiq-21ux2.svg
-Styli=0x802;0x804;0x80a;0x80c;0x902;0x90a;@intuos5;
+Styli=@intuos5;@intuos4;
 IntegratedIn=Display
 
 [Features]

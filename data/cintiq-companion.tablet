@@ -33,7 +33,7 @@ PairedID=usb:056a:030c
 Width=12
 Height=7
 Layout=cintiq-companion.svg
-Styli=0x802;0x804;0x80a;0x80c;0x902;0x90a;@intuos5;
+Styli=@intuos5;@intuos4;
 IntegratedIn=Display;System
 
 [Features]

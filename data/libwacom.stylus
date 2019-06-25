@@ -32,6 +32,7 @@ Type=Inking
 [0x801]
 # Intuos3 and Cintiq 21UX
 Name=Inking Pen
+Group=intuos3
 Buttons=0
 HasEraser=false
 Axes=Tilt;Pressure;Distance;
@@ -118,6 +119,7 @@ Type=General
 [0x823]
 # Intuos3 and Cintiq 21UX
 Name=Grip Pen
+Group=intuos3
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -126,6 +128,7 @@ Type=General
 [0x813]
 # Intuos3 and Cintiq 21UX
 Name=Classic Pen
+Group=intuos3
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -134,6 +137,7 @@ Type=Classic
 [0x885]
 # Intuos3 and Cintiq 21UX
 Name=6D Art Pen
+Group=intuos3
 HasEraser=false
 Buttons=0
 Axes=Tilt;Pressure;Distance;RotationZ;
@@ -278,6 +282,7 @@ IsEraser=true
 [0x82b]
 # Intuos3 and Cintiq 21UX
 Name=Grip Pen Eraser
+Group=intuos3
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -286,6 +291,7 @@ Type=General
 [0x81b]
 # Intuos3 and Cintiq 21UX
 Name=Classic Pen Eraser
+Group=intuos3
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -294,6 +300,7 @@ Type=Classic
 [0x91b]
 # Intuos3 and Cintiq 21UX
 Name=Airbrush Pen Eraser
+Group=intuos3
 IsEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;
@@ -413,6 +420,7 @@ Type=Airbrush
 [0x913]
 # Intuos3 and Cintiq 21UX
 Name=Airbrush Pen
+Group=intuos3
 Buttons=1
 HasEraser=true
 Axes=Tilt;Pressure;Distance;

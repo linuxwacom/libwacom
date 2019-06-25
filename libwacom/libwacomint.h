@@ -102,6 +102,7 @@ struct _WacomDevice {
 struct _WacomStylus {
 	int id;
 	char *name;
+	char *group;
 	int num_buttons;
 	gboolean has_eraser;
 	gboolean is_eraser;

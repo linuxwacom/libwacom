@@ -244,6 +244,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus = g_new0 (WacomStylus, 1);
 		stylus->id = id;
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
+		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
 
 		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", &error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
@@ -515,7 +516,8 @@ styli_id_sort(gconstpointer pa, gconstpointer pb)
 }
 
 static void
-libwacom_parse_styli_list(WacomDevice *device, char **ids)
+libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
+			  char **ids)
 {
 	GArray *array;
 	guint i;
@@ -523,11 +525,29 @@ libwacom_parse_styli_list(WacomDevice *device, char **ids)
 	array = g_array_new (FALSE, FALSE, sizeof(int));
 	device->num_styli = 0;
 	for (i = 0; ids[i]; i++) {
-		glong long_value = strtol (ids[i], NULL, 0);
-		int int_value = long_value;
+		const char *id = ids[i];
 
-		g_array_append_val (array, int_value);
-		device->num_styli++;
+		if (strneq(id, "0x", 2)) {
+			glong long_value = strtol (ids[i], NULL, 0);
+			int int_value = long_value;
+			g_array_append_val (array, int_value);
+			device->num_styli++;
+		} else if (strneq(id, "@", 1)) {
+			const char *group = &id[1];
+			GHashTableIter iter;
+			gpointer key, value;
+
+			g_hash_table_iter_init(&iter, db->stylus_ht);
+			while (g_hash_table_iter_next (&iter, &key, &value)) {
+				WacomStylus *stylus = value;
+				if (stylus->group && streq(group, stylus->group)) {
+					g_array_append_val (array, stylus->id);
+					device->num_styli++;
+				}
+			}
+		} else {
+			g_warning ("Invalid prefix for '%s'!", id);
+		}
 	}
 	/* Using groups means we don't get the styli in ascending order.
 	   Sort it so the output is predictable */
@@ -536,7 +556,9 @@ libwacom_parse_styli_list(WacomDevice *device, char **ids)
 }
 
 static WacomDevice*
-libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
+libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
+			      const char *datadir,
+			      const char *filename)
 {
 	WacomDevice *device = NULL;
 	GKeyFile *keyfile;
@@ -640,7 +662,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (string_list) {
-		libwacom_parse_styli_list(device, string_list);
+		libwacom_parse_styli_list(db, device, string_list);
 		g_strfreev (string_list);
 	} else {
 		device->supported_styli = g_new (int, 2);
@@ -780,7 +802,7 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 	    WacomDevice *d;
 	    const WacomMatch **matches, **match;
 
-	    d = libwacom_parse_tablet_keyfile(datadir, files[n]->d_name);
+	    d = libwacom_parse_tablet_keyfile(db, datadir, files[n]->d_name);
 
 	    if (!d)
 		    continue;

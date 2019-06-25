@@ -49,9 +49,9 @@ static void check_multiple_match(WacomDevice *device)
 		nmatches++;
 		if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
 			found_bus = 1;
-		if (libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
+		if ((int)libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
 			found_vendor_id = 1;
-		if (libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
+		if ((int)libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
 			found_product_id = 1;
 	}
 

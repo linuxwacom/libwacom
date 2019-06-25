@@ -76,6 +76,7 @@ Type=Classic
 [0x8e2]
 # Intuos P/PT 2
 Name=Intuos Pen
+Group=intuospt
 HasEraser=false
 Buttons=2
 Axes=Pressure;Distance;

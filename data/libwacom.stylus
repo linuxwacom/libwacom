@@ -455,6 +455,7 @@ Buttons=5
 [0x097]
 # Intuos3
 Name=Lens Cursor
+Group=intuos3-pucks
 Axes=Distance;
 Type=Puck
 HasLens=true
@@ -491,6 +492,7 @@ Buttons=3
 [0x017]
 # Intuos3
 Name=Mouse
+Group=intuos3-pucks
 Axes=Tilt;Distance;
 Type=Puck
 HasLens=false

@@ -9,15 +9,12 @@ int main(void) {
 	rc = sscanf(version, "%d:%d:%d", &C, &R, &A);
 	assert(rc == 3);
 
-	assert(C >= 8);
-	assert(R >= 0);
-	assert(A >= 6);
-
-	/* Binary compatibility broken? */
-	assert(R != 0 || A != 0);
-
-	/* The first stable API in 0.3 had 2:0:0  */
-	assert(C - A == 2);
+        /* we don't change the soname anymore, we use symbol maps instead.
+           So these can stay fixed until we properly break the ABI and bump
+           the soname.  */
+	assert(C == 8);
+	assert(R == 1);
+	assert(A == 6);
 
 	return 0;
 }

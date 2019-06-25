@@ -10,13 +10,7 @@ AM_MAINTAINER_MODE([enable])
 # Enable silent build when available (Automake 1.11)
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-# Before making a release, the LIBWACOM_LT_VERSION string should be modified.
-# The string is of the form C:R:A.
-# - If interfaces have been changed or added, but binary compatibility has
-#   been preserved, change to C+1:0:A+1
-# - If binary compatibility has been broken (eg removed or changed interfaces)
-#   change to C+1:0:0
-# - If the interface is the same as the previous version, change to C:R+1:A
+# Do not modify this, use symbol versioning instead.
 LIBWACOM_LT_VERSION=8:1:6
 AC_SUBST(LIBWACOM_LT_VERSION)
 

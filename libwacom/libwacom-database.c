@@ -507,6 +507,24 @@ libwacom_parse_buttons(WacomDevice *device,
 	device->strips_num_modes = libwacom_parse_num_modes(device, keyfile, "StripsNumModes", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
 }
 
+static void
+libwacom_parse_styli_list(WacomDevice *device, char **ids)
+{
+	GArray *array;
+	guint i;
+
+	array = g_array_new (FALSE, FALSE, sizeof(int));
+	device->num_styli = 0;
+	for (i = 0; ids[i]; i++) {
+		glong long_value = strtol (ids[i], NULL, 0);
+		int int_value = long_value;
+
+		g_array_append_val (array, int_value);
+		device->num_styli++;
+	}
+	device->supported_styli = (int *) g_array_free (array, FALSE);
+}
+
 static WacomDevice*
 libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 {
@@ -612,20 +630,8 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (string_list) {
-		GArray *array;
-		guint i;
-
-		array = g_array_new (FALSE, FALSE, sizeof(int));
-		device->num_styli = 0;
-		for (i = 0; string_list[i]; i++) {
-			glong long_value = strtol (string_list[i], NULL, 0);
-			int int_value = long_value;
-
-			g_array_append_val (array, int_value);
-			device->num_styli++;
-		}
+		libwacom_parse_styli_list(device, string_list);
 		g_strfreev (string_list);
-		device->supported_styli = (int *) g_array_free (array, FALSE);
 	} else {
 		device->supported_styli = g_new (int, 2);
 		device->supported_styli[0] = WACOM_STYLUS_FALLBACK_ID;

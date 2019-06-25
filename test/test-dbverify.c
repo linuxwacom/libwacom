@@ -90,7 +90,7 @@ compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 	{
 		int found = 0;
 		printf("Matching %s\n", libwacom_get_name(*n));
-		for (o = oldall, i = 0; *o && !found; o++, i++)
+		for (o = oldall, i = 0; *o && !found; o++, i++) {
 			/* devices with multiple matches will have multiple
 			 * devices in the list */
 			if (old_matched[i] == 0 &&
@@ -98,6 +98,7 @@ compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 				found = 1;
 				old_matched[i] = 1;
 			}
+		}
 
 		if (!found)
 			printf("Failed to match '%s'\n", libwacom_get_name(*n));

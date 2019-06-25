@@ -10,7 +10,7 @@ DeviceMatch=usb:056a:0042
 Class=Intuos2
 Width=8
 Height=6
-Styli=0x007;0x842;0x852;0x85a;0x912;0x91a;@intuos;
+Styli=0x842;@intuos;@intuos2;
 
 [Features]
 Stylus=true

@@ -115,6 +115,7 @@ Type=3D
 [0x852]
 # Intuos2
 Name=Grip Pen
+Group=intuos2
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -268,6 +269,7 @@ Type=General
 [0x85a]
 # Intuos2
 Name=Grip Pen Eraser
+Group=intuos2
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -276,6 +278,7 @@ Type=General
 [0x91a]
 # Intuos2
 Name=Airbrush Pen Eraser
+Group=intuos2
 IsEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;
@@ -429,6 +432,7 @@ Type=Airbrush
 [0x912]
 # Intuos2
 Name=Airbrush Pen
+Group=intuos2
 HasEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
@@ -510,6 +514,7 @@ Buttons=5
 [0x007]
 # Intuos3
 Name=2D Mouse
+Group=intuos2
 Axes=Tilt;Distance;
 Type=Puck
 HasLens=false

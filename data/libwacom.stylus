@@ -535,6 +535,7 @@ Buttons=5
 [0x806]
 # Intuos4 and Intuos5
 Name=Five Button Mouse
+Group=intuos4-puck
 Axes=Tilt;Distance;
 Type=Puck
 HasLens=false

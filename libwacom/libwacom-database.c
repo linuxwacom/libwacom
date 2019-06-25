@@ -507,6 +507,13 @@ libwacom_parse_buttons(WacomDevice *device,
 	device->strips_num_modes = libwacom_parse_num_modes(device, keyfile, "StripsNumModes", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
 }
 
+static int
+styli_id_sort(gconstpointer pa, gconstpointer pb)
+{
+	const int *a = pa, *b = pb;
+	return *a > *b ? 1 : *a == *b ? 0 : -1;
+}
+
 static void
 libwacom_parse_styli_list(WacomDevice *device, char **ids)
 {
@@ -522,6 +529,9 @@ libwacom_parse_styli_list(WacomDevice *device, char **ids)
 		g_array_append_val (array, int_value);
 		device->num_styli++;
 	}
+	/* Using groups means we don't get the styli in ascending order.
+	   Sort it so the output is predictable */
+	g_array_sort(array, styli_id_sort);
 	device->supported_styli = (int *) g_array_free (array, FALSE);
 }
 
@@ -634,8 +644,8 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 		g_strfreev (string_list);
 	} else {
 		device->supported_styli = g_new (int, 2);
-		device->supported_styli[0] = WACOM_STYLUS_FALLBACK_ID;
-		device->supported_styli[1] = WACOM_ERASER_FALLBACK_ID;
+		device->supported_styli[0] = WACOM_ERASER_FALLBACK_ID;
+		device->supported_styli[1] = WACOM_STYLUS_FALLBACK_ID;
 		device->num_styli = 2;
 	}
 

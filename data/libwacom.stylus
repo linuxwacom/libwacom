@@ -104,6 +104,7 @@ Type=General
 [0x80842]
 # MobileStudio Pro
 Name=Pro Pen 3D
+Group=mobilestudio
 HasEraser=false
 Buttons=3
 Axes=Tilt;Pressure;Distance;
@@ -181,6 +182,7 @@ Type=General
 [0x100842]
 # MobileStudio Pro, Cintiq Pro, Intuos Pro
 Name=Pro Pen Slim
+Group=mobilestudio
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -251,6 +253,7 @@ Type=Classic
 [0x84a]
 # MobileStudio Pro
 Name=Pro Pen Eraser
+Group=mobilestudio
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -365,6 +368,7 @@ Type=General
 [0x10084a]
 # MobileStudio Pro, Cintiq Pro, Intuos Pro
 Name=Pro Pen Slim
+Group=mobilestudio
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;

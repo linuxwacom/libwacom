@@ -35,7 +35,7 @@ PairedID=usb:056a:0354
 Width=14
 Height=8
 # No pad buttons, so no layout
-Styli=0x842;0x84a;0x80842;0x100842;0x10084a;@intuos5;
+Styli=0x842;@intuos5;@mobilestudio;
 IntegratedIn=Display
 
 [Features]

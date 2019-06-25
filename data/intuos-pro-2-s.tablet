@@ -38,7 +38,7 @@ Width=6
 Height=4
 Layout=intuos-pro-2-s.svg
 IntegratedIn=
-Styli=0x842;0x84a;0x80842;0x100842;0x10084a;@intuos5;
+Styli=0x842;@intuos5;@mobilestudio;
 
 [Features]
 Stylus=true

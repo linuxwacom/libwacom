@@ -302,10 +302,15 @@ int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **device, **devices;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	g_assert(db);
 
 	devices = libwacom_list_devices_from_database(db, NULL);

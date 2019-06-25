@@ -41,7 +41,7 @@ Width=9
 Height=6
 Layout=intuos4-6x9.svg
 IntegratedIn=
-Styli=0x806;@intuos5;@intuos4;
+Styli=@intuos4-puck;@intuos5;@intuos4;
 
 [Features]
 Reversible=true

@@ -743,28 +743,21 @@ scandir_stylus_filter(const struct dirent *entry)
 	return streq(&name[len - suffix_len], STYLUS_SUFFIX);
 }
 
-
-WacomDeviceDatabase *
-libwacom_database_new_for_path (const char *datadir)
+static bool
+load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 {
     int n, nfiles;
     struct dirent **files;
-    WacomDeviceDatabase *db;
-    char *path;
+    bool success = false;
 
-    db = g_new0 (WacomDeviceDatabase, 1);
-
-    /* Load tablets */
     db->device_ht = g_hash_table_new_full (g_str_hash,
 					   g_str_equal,
 					   g_free,
 					   (GDestroyNotify) libwacom_destroy);
 
     n = scandir(datadir, &files, scandir_tablet_filter, alphasort);
-    if (n <= 0) {
-	    libwacom_database_destroy(db);
-	    return NULL;
-    }
+    if (n <= 0)
+	    return false;
 
     nfiles = n;
     while(n--) {
@@ -784,25 +777,36 @@ libwacom_database_new_for_path (const char *datadir)
 		    if (g_hash_table_lookup(db->device_ht, matchstr) != NULL) {
 			    g_critical("Duplicate match of '%s' on device '%s'.",
 					matchstr, libwacom_get_name(d));
-			    libwacom_database_destroy(db);
-			    db = NULL;
-			    goto end;
+			    goto out;
 		    }
 		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
 		    d->refcnt++;
 	    }
     }
 
+    if (g_hash_table_size (db->device_ht) == 0)
+	    goto out;
+
+    success = true;
+
+out:
     while(nfiles--)
 	    free(files[nfiles]);
     free(files);
 
-    /* Load styli */
+    return success;
+}
+
+static bool
+load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
+{
+    int n, nfiles;
+    struct dirent **files;
+    bool success = false;
+
     n = scandir(datadir, &files, scandir_stylus_filter, alphasort);
-    if (n <= 0) {
-	    libwacom_database_destroy(db);
-	    return NULL;
-    }
+    if (n <= 0)
+	    return false;
 
     db->stylus_ht = g_hash_table_new_full (g_direct_hash,
 					   g_direct_equal,
@@ -810,22 +814,40 @@ libwacom_database_new_for_path (const char *datadir)
 					   (GDestroyNotify) libwacom_stylus_destroy);
     nfiles = n;
     while(n--) {
+	    char *path;
+
 	    path = g_build_filename (datadir, files[n]->d_name, NULL);
 	    libwacom_parse_stylus_keyfile(db, path);
 	    g_free(path);
     }
 
     /* If we couldn't load _anything_ then something's wrong */
-    if (g_hash_table_size (db->device_ht) == 0 &&
-	g_hash_table_size (db->stylus_ht) == 0) {
-	    libwacom_database_destroy(db);
-	    db = NULL;
-    }
+    if (g_hash_table_size (db->stylus_ht) == 0)
+	    goto end;
+
+    success = true;
 
 end:
     while(nfiles--)
 	    free(files[nfiles]);
     free(files);
+
+
+    return success;
+}
+
+
+WacomDeviceDatabase *
+libwacom_database_new_for_path (const char *datadir)
+{
+    WacomDeviceDatabase *db;
+
+    db = g_new0 (WacomDeviceDatabase, 1);
+
+    if (!load_tablet_files(db, datadir) || !load_stylus_files(db, datadir)) {
+	    libwacom_database_destroy(db);
+	    db = NULL;
+    }
 
     return db;
 }

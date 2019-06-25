@@ -36,18 +36,7 @@
 #include <string.h>
 #include <gudev/gudev.h>
 
-#ifdef HAVE_LINUX_INPUT_H
-#include <linux/input.h>
-#endif
-
-/* Defined in linux/input.h but older versions may be missing these definitions */
-#ifndef INPUT_PROP_POINTER
-#define INPUT_PROP_POINTER		0x00	/* needs a pointer */
-#endif
-
-#ifndef INPUT_PROP_DIRECT
-#define INPUT_PROP_DIRECT		0x01	/* direct input devices */
-#endif
+#include <linux/input-event-codes.h>
 
 static const WacomDevice *
 libwacom_get_device(const WacomDeviceDatabase *db, const char *match)

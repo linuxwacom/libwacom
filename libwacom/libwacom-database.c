@@ -29,7 +29,7 @@
 #endif
 
 #include "libwacomint.h"
-#include "input-event-codes.h"
+#include <linux/input-event-codes.h>
 
 #include <assert.h>
 #include <glib.h>

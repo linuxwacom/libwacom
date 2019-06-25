@@ -1,9 +1,13 @@
 lib_LTLIBRARIES=libwacom.la
 
-AM_CPPFLAGS = $(GLIB_CFLAGS) -DDATADIR="\"$(datadir)/libwacom\"" -DG_LOG_DOMAIN="\"$(PACKAGE)\""
+AM_CPPFLAGS = \
+	      $(GLIB_CFLAGS) \
+	      -DDATADIR="\"$(datadir)/libwacom\"" \
+	      -DG_LOG_DOMAIN="\"$(PACKAGE)\"" \
+	      -I$(top_srcdir)/include
 
 libwacom_la_SOURCES = \
-                      input-event-codes.h \
+                      $(top_srcdir)/include/linux/input-event-codes.h \
                       libwacom.h \
                       libwacomint.h \
                       libwacom.c \

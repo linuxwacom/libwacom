@@ -28,7 +28,7 @@
 #include "config.h"
 #endif
 
-#include "input-event-codes.h"
+#include <linux/input-event-codes.h>
 
 #include <stdio.h>
 #include <stdlib.h>

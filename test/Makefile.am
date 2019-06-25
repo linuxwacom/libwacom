@@ -2,7 +2,10 @@ noinst_PROGRAMS=test-load test-dbverify test-tablet-validity
 
 TESTS=$(noinst_PROGRAMS)
 
-AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(abs_top_srcdir)\""
+AM_CPPFLAGS= \
+	     -I$(top_srcdir)/libwacom \
+	     -I$(top_srcdir)/include \
+	     -DTOPSRCDIR="\"$(abs_top_srcdir)\""
 
 test_load_SOURCES = test-load.c
 test_load_LDADD=$(top_builddir)/libwacom/libwacom.la

@@ -376,6 +376,10 @@ const char* libwacom_get_layout_filename(const WacomDevice *device);
 /**
  * @param device The tablet to query
  * @return The numeric vendor ID for this device
+ *
+ * @bug The return value is a signed int but libwacom_match_get_vendor_id()
+ * returns an unsigned int. This may cause compiler warnings, but the
+ * effective range for vendor IDs is 16-bit only anyway.
  */
 int libwacom_get_vendor_id(const WacomDevice *device);
 
@@ -412,6 +416,10 @@ const WacomMatch* libwacom_get_paired_device(const WacomDevice *device);
 /**
  * @param device The tablet to query
  * @return The numeric product ID for this device
+ *
+ * @bug The return value is a signed int but libwacom_match_get_product_id()
+ * returns an unsigned int. This may cause compiler warning, but the
+ * effective range for product IDs is 16-bit only anyway.
  */
 int libwacom_get_product_id(const WacomDevice *device);
 

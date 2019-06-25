@@ -51,27 +51,27 @@ libwacom_class_string_to_enum(const char *class)
 	if (class == NULL || *class == '\0')
 		return WCLASS_UNKNOWN;
 
-	if (strcmp(class, "Intuos3") == 0)
+	if (streq(class, "Intuos3"))
 		return WCLASS_INTUOS3;
-	if (strcmp(class, "Intuos4") == 0)
+	if (streq(class, "Intuos4"))
 		return WCLASS_INTUOS4;
-	if (strcmp(class, "Intuos5") == 0)
+	if (streq(class, "Intuos5"))
 		return WCLASS_INTUOS5;
-	if (strcmp(class, "Cintiq") == 0)
+	if (streq(class, "Cintiq"))
 		return WCLASS_CINTIQ;
-	if (strcmp(class, "Bamboo") == 0)
+	if (streq(class, "Bamboo"))
 		return WCLASS_BAMBOO;
-	if (strcmp(class, "Graphire") == 0)
+	if (streq(class, "Graphire"))
 		return WCLASS_GRAPHIRE;
-	if (strcmp(class, "Intuos") == 0)
+	if (streq(class, "Intuos"))
 		return WCLASS_INTUOS;
-	if (strcmp(class, "Intuos2") == 0)
+	if (streq(class, "Intuos2"))
 		return WCLASS_INTUOS2;
-	if (strcmp(class, "ISDV4") == 0)
+	if (streq(class, "ISDV4"))
 		return WCLASS_ISDV4;
-	if (strcmp(class, "PenDisplay") == 0)
+	if (streq(class, "PenDisplay"))
 		return WCLASS_PEN_DISPLAYS;
-	if (strcmp(class, "Remote") == 0)
+	if (streq(class, "Remote"))
 		return WCLASS_REMOTE;
 
 	return WCLASS_UNKNOWN;
@@ -82,21 +82,21 @@ type_from_str (const char *type)
 {
 	if (type == NULL)
 		return WSTYLUS_UNKNOWN;
-	if (strcmp (type, "General") == 0)
+	if (streq(type, "General"))
 		return WSTYLUS_GENERAL;
-	if (strcmp (type, "Inking") == 0)
+	if (streq(type, "Inking"))
 		return WSTYLUS_INKING;
-	if (strcmp (type, "Airbrush") == 0)
+	if (streq(type, "Airbrush"))
 		return WSTYLUS_AIRBRUSH;
-	if (strcmp (type, "Classic") == 0)
+	if (streq(type, "Classic"))
 		return WSTYLUS_CLASSIC;
-	if (strcmp (type, "Marker") == 0)
+	if (streq(type, "Marker"))
 		return WSTYLUS_MARKER;
-	if (strcmp (type, "Stroke") == 0)
+	if (streq(type, "Stroke"))
 		return WSTYLUS_STROKE;
-	if (strcmp (type, "Puck") == 0)
+	if (streq(type, "Puck"))
 		return WSTYLUS_PUCK;
-	if (strcmp (type, "3D") == 0)
+	if (streq(type, "3D"))
 		return WSTYLUS_3D;
 	return WSTYLUS_UNKNOWN;
 }
@@ -104,13 +104,13 @@ type_from_str (const char *type)
 WacomBusType
 bus_from_str (const char *str)
 {
-	if (strcmp (str, "usb") == 0)
+	if (streq(str, "usb"))
 		return WBUSTYPE_USB;
-	if (strcmp (str, "serial") == 0)
+	if (streq(str, "serial"))
 		return WBUSTYPE_SERIAL;
-	if (strcmp (str, "bluetooth") == 0)
+	if (streq(str, "bluetooth"))
 		return WBUSTYPE_BLUETOOTH;
-	if (strcmp (str, "i2c") == 0)
+	if (streq(str, "i2c"))
 		return WBUSTYPE_I2C;
 	return WBUSTYPE_UNKNOWN;
 }
@@ -176,7 +176,7 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 	if (matchstr == NULL)
 		return FALSE;
 
-	if (g_strcmp0 (matchstr, GENERIC_DEVICE_MATCH) == 0) {
+	if (streq(matchstr, GENERIC_DEVICE_MATCH)) {
 		name = NULL;
 		bus = WBUSTYPE_UNKNOWN;
 		vendor_id = 0;
@@ -282,15 +282,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 			for (i = 0; string_list[i]; i++) {
 				WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
-				if (strcmp (string_list[i], "Tilt") == 0) {
+				if (streq(string_list[i], "Tilt")) {
 					flag = WACOM_AXIS_TYPE_TILT;
-				} else if (strcmp (string_list[i], "RotationZ") == 0) {
+				} else if (streq(string_list[i], "RotationZ")) {
 					flag = WACOM_AXIS_TYPE_ROTATION_Z;
-				} else if (strcmp (string_list[i], "Distance") == 0) {
+				} else if (streq(string_list[i], "Distance")) {
 					flag = WACOM_AXIS_TYPE_DISTANCE;
-				} else if (strcmp (string_list[i], "Pressure") == 0) {
+				} else if (streq(string_list[i], "Pressure")) {
 					flag = WACOM_AXIS_TYPE_PRESSURE;
-				} else if (strcmp (string_list[i], "Slider") == 0) {
+				} else if (streq(string_list[i], "Slider")) {
 					flag = WACOM_AXIS_TYPE_SLIDER;
 				} else {
 					g_warning ("Invalid axis %s for stylus ID %s\n",
@@ -587,7 +587,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 		for (i = 0; string_list[i]; i++) {
 			found = FALSE;
 			for (n = 0; n < G_N_ELEMENTS (integration_flags); n++) {
-				if (!strcmp(string_list[i], integration_flags[n].key)) {
+				if (streq(string_list[i], integration_flags[n].key)) {
 					device->integration_flags |= integration_flags[n].value;
 					found = TRUE;
 					break;
@@ -687,7 +687,7 @@ libwacom_parse_tablet_keyfile(const char *datadir, const char *filename)
 		device->num_leds = 0;
 		for (i = 0; string_list[i]; i++) {
 			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
-				if (!strcmp(string_list[i], supported_leds[n].key)) {
+				if (streq(string_list[i], supported_leds[n].key)) {
 					g_array_append_val (array, supported_leds[n].value);
 					device->num_leds++;
 					break;
@@ -723,7 +723,7 @@ scandir_tablet_filter(const struct dirent *entry)
 	if (len <= suffix_len)
 		return 0;
 
-	return !strcmp(&name[len - suffix_len], TABLET_SUFFIX);
+	return streq(&name[len - suffix_len], TABLET_SUFFIX);
 }
 
 static int
@@ -740,7 +740,7 @@ scandir_stylus_filter(const struct dirent *entry)
 	if (len <= suffix_len)
 		return 0;
 
-	return !strcmp(&name[len - suffix_len], STYLUS_SUFFIX);
+	return streq(&name[len - suffix_len], STYLUS_SUFFIX);
 }
 
 

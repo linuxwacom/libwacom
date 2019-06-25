@@ -98,6 +98,7 @@ Type=General
 [0x842]
 # MobileStudio Pro
 Name=Pro Pen
+Group=mobilestudio
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;

@@ -502,6 +502,7 @@ Buttons=5
 [0x006]
 # Intuos4 and Intuos5
 Name=Lens Cursor
+Group=intuos4-lens
 Axes=Distance;
 Type=Puck
 HasLens=true

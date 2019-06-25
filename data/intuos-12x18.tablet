@@ -9,7 +9,7 @@ DeviceMatch=usb:056a:0024
 Class=Intuos
 Width=18
 Height=12
-Styli=0xd12;0xd1a;@intuos;
+Styli=@intuos-airbrush;@intuos;
 
 [Features]
 Stylus=true

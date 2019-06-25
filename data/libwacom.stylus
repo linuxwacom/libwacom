@@ -288,6 +288,7 @@ Type=Airbrush
 [0xd1a]
 # Intuos
 Name=Airbrush Pen Eraser
+Group=intuos-airbrush
 IsEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;
@@ -425,6 +426,7 @@ Type=Airbrush
 [0xd12]
 # Intuos
 Name=Airbrush Pen
+Group=intuos-airbrush
 HasEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;

@@ -223,6 +223,7 @@ Type=Classic
 [0x180802]
 # DTH2242 Pen
 Name=Pen
+Group=dth2242
 HasEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -399,6 +400,7 @@ Type=Classic
 [0x18080a]
 # DTH2242 Eraser
 Name=Pen Eraser
+Group=dth2242
 IsEraser=true
 Buttons=2
 Axes=Tilt;Pressure;Distance;

@@ -37,7 +37,7 @@ Class=Intuos3
 Width=19
 Height=12
 Layout=intuos3-12x19.svg
-Styli=0x017;0x097;@intuos3;
+Styli=@intuos3-pucks;@intuos3;
 
 [Features]
 Stylus=true

@@ -148,6 +148,7 @@ int main(int argc, char **argv)
 	assert(libwacom_match_get_vendor_id(match) == 0x56a);
 	assert(libwacom_match_get_product_id(match) == 0xf6);
 	assert(libwacom_match_get_bustype(match) == WBUSTYPE_USB);
+	libwacom_destroy(device);
 
 	device = libwacom_new_from_name(db, "Wacom Cintiq 13HD", NULL);
 	assert(device);

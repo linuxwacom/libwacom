@@ -868,6 +868,7 @@ libwacom_destroy(WacomDevice *device)
 		return;
 
 	g_free (device->name);
+	g_free (device->model_name);
 	g_free (device->layout);
 	if (device->paired)
 		libwacom_match_destroy(device->paired);
@@ -1243,6 +1244,7 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 void libwacom_stylus_destroy(WacomStylus *stylus)
 {
 	g_free (stylus->name);
+	g_free (stylus->group);
 	g_free (stylus);
 }
 

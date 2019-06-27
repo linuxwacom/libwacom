@@ -30,4 +30,4 @@ before_script:
 script:
   - if [[ x"$TRAVIS_EVENT_TYPE" = "xcron" ]]; then export DO_COVERITY="YES"; fi
   - if [[ x"$BUILDTYPE" = "xcoverity" && x"$DO_COVERITY" = "xYES" ]]; then bash ./coverity.sh; fi
-  - if [[ x"$BUILDTYPE" != "xcoverity" ]]; then make && make check; fi
+  - if [[ x"$BUILDTYPE" != "xcoverity" ]]; then make && make check || (cat **/test-suite.log && false); fi

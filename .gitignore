@@ -24,6 +24,7 @@ stamp-h1
 *.la
 *.swp
 *.trs
+*.log
 .deps
 .libs
 test-driver

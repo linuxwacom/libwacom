@@ -64,18 +64,7 @@ libwacom_error_get_message(WacomError *error)
 	return error->msg;
 }
 
-/* This wasn't supposed to have been exported, but ...*/
 __attribute__ ((format (printf, 3, 4)))
-LIBWACOM_EXPORT void
-libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
-{
-	if (!error)
-		return;
-
-	error->code = code;
-	asprintf(&error->msg, "%s has been deprecated\n", __func__);
-}
-
 void
 set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
 {

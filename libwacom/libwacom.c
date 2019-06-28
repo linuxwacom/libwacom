@@ -873,14 +873,6 @@ libwacom_destroy(WacomDevice *device)
 	libwacom_unref(device);
 }
 
-LIBWACOM_EXPORT void
-libwacom_match_destroy(WacomMatch *match)
-{
-	/* This function intentionally does nothing. It was accidentally
-	 * exported but never intended to be used by callers, only our
-	 * internal database may destroy a match */
-}
-
 WacomMatch*
 libwacom_match_ref(WacomMatch *match)
 {
@@ -898,12 +890,6 @@ libwacom_match_unref(WacomMatch *match)
 	g_free (match->name);
 	g_free (match);
 
-	return NULL;
-}
-
-LIBWACOM_EXPORT WacomMatch*
-libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id)
-{
 	return NULL;
 }
 
@@ -927,14 +913,6 @@ libwacom_match_create(const char *name, WacomBusType bus, int vendor_id, int pro
 	match->product_id = product_id;
 
 	return match;
-}
-
-LIBWACOM_EXPORT void
-libwacom_update_match(WacomDevice *device, const WacomMatch *newmatch)
-{
-	/* This function intentionally does nothing. It was accidentally
-	 * exported but never intended to be used by callers, only our
-	 * internal database may destroy a match */
 }
 
 void
@@ -1311,14 +1289,6 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	}
 
 	dprintf(fd, "Type=%s\n", type);
-}
-
-LIBWACOM_EXPORT void
-libwacom_stylus_destroy(WacomStylus *stylus)
-{
-	/* This function intentionally does nothing. It was accidentally
-	 * exported but never intended to be used by callers, only our
-	 * internal database may destroy a stylus */
 }
 
 WacomStylus*

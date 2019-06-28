@@ -1231,10 +1231,10 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	const char *type;
 	WacomAxisTypeFlags axes;
 
-	dprintf(fd, "[%#x]\n",	libwacom_stylus_get_id(stylus));
+	dprintf(fd, "[%#x]\n",		libwacom_stylus_get_id(stylus));
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
 	dprintf(fd, "Buttons=%d\n",	libwacom_stylus_get_num_buttons(stylus));
-	dprintf(fd, "HasEraser=%s\n", libwacom_stylus_has_eraser(stylus) ? "true" : "false");
+	dprintf(fd, "HasEraser=%s\n",	libwacom_stylus_has_eraser(stylus) ? "true" : "false");
 	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
 	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
 	dprintf(fd, "HasWheel=%s\n",	libwacom_stylus_has_wheel(stylus) ? "true" : "false");

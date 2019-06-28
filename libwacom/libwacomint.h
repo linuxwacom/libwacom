@@ -125,12 +125,13 @@ struct _WacomError {
 	char *msg;
 };
 
-/* INTERNAL */
+/* Note: these functions accidentally became part of the ABI, do not modify */
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_stylus_destroy(WacomStylus *stylus);
 void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
 WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
 void libwacom_match_destroy(WacomMatch *match);
+/* End of ABI */
 
 WacomDevice* libwacom_ref(WacomDevice *device);
 WacomDevice* libwacom_unref(WacomDevice *device);

@@ -131,6 +131,9 @@ void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
 WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
 void libwacom_match_destroy(WacomMatch *match);
 
+WacomDevice* libwacom_ref(WacomDevice *device);
+WacomDevice* libwacom_unref(WacomDevice *device);
+
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
 char *make_match_string(const char *name, WacomBusType bus, int vendor_id, int product_id);

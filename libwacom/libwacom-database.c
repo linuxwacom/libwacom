@@ -825,7 +825,7 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 			    goto out;
 		    }
 		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
-		    d->refcnt++;
+		    libwacom_ref(d);
 	    }
     }
 

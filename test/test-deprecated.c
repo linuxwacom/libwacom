@@ -31,6 +31,27 @@
 
 #include "libwacom.h"
 
+/**
+ * The normal symbols are hidden now when linking against a new library.
+ * We know which version they're in though so we can remap them for this
+ * test - if we get an unresolved symbol something has gone wrong.
+ */
+asm(".symver libwacom_match_destroy,libwacom_match_destroy@LIBWACOM_0.33");
+asm(".symver libwacom_match_new,libwacom_match_new@LIBWACOM_0.33");
+asm(".symver libwacom_error_set,libwacom_error_set@LIBWACOM_0.33");
+asm(".symver libwacom_update_match,libwacom_update_match@LIBWACOM_0.33");
+asm(".symver libwacom_stylus_destroy,libwacom_stylus_destroy@LIBWACOM_0.33");
+
+/* Only generally matches the real functions, but since they're all noops
+ * anyway it doesn't matter that we only have generic pointers. The basic
+ * signatures are the same.
+ */
+extern void libwacom_match_destroy(void*);
+void* libwacom_match_new(void *, int, int, int);
+void libwacom_error_set(void *error, int, char *, ...);
+void libwacom_stylus_destroy(void *);
+void libwacom_update_match(void *, const void *);
+
 int main(void) {
     const char *syms[] = {
         "libwacom_match_destroy",
@@ -48,8 +69,16 @@ int main(void) {
 
     for (const char **s = syms; *s; s++) {
         sym = dlsym(lib, *s);
-        assert(sym != NULL);
+        assert(sym == NULL);
     }
+
+    /* These are all noops, so all we're looking for is not getting a linker
+     * error */
+    libwacom_match_destroy(NULL);
+    libwacom_match_new(NULL, 0, 0, 0);
+    libwacom_error_set(NULL, 0, NULL);
+    libwacom_stylus_destroy(NULL);
+    libwacom_update_match(NULL, NULL);
 
     return 0;
 }

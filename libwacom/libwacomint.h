@@ -102,6 +102,7 @@ struct _WacomDevice {
 };
 
 struct _WacomStylus {
+	gint refcnt;
 	int id;
 	char *name;
 	char *group;
@@ -133,6 +134,8 @@ void libwacom_match_destroy(WacomMatch *match);
 
 WacomDevice* libwacom_ref(WacomDevice *device);
 WacomDevice* libwacom_unref(WacomDevice *device);
+WacomStylus* libwacom_stylus_ref(WacomStylus *stylus);
+WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

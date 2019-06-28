@@ -857,13 +857,20 @@ libwacom_match_destroy(WacomMatch *match)
 	g_free (match);
 }
 
-LIBWACOM_EXPORT void
-libwacom_destroy(WacomDevice *device)
+WacomDevice *
+libwacom_ref(WacomDevice *device)
+{
+	g_atomic_int_inc(&device->refcnt);
+	return device;
+}
+
+WacomDevice *
+libwacom_unref(WacomDevice *device)
 {
 	int i;
 
 	if (!g_atomic_int_dec_and_test(&device->refcnt))
-		return;
+		return NULL;
 
 	g_free (device->name);
 	g_free (device->model_name);
@@ -878,6 +885,14 @@ libwacom_destroy(WacomDevice *device)
 	g_free (device->buttons);
 	g_free (device->button_codes);
 	g_free (device);
+
+	return NULL;
+}
+
+LIBWACOM_EXPORT void
+libwacom_destroy(WacomDevice *device)
+{
+	libwacom_unref(device);
 }
 
 LIBWACOM_EXPORT WacomMatch*

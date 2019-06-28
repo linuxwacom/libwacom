@@ -808,6 +808,13 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 		    continue;
 
 	    matches = libwacom_get_matches(d);
+	    if (!matches || !*matches) {
+		    g_critical("Device '%s' has no matches defined\n",
+			       libwacom_get_name(d));
+		    libwacom_destroy(d);
+		    goto out;
+	    }
+
 	    for (match = matches; *match; match++) {
 		    const char *matchstr;
 		    matchstr = libwacom_match_get_match_string(*match);

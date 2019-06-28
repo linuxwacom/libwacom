@@ -105,6 +105,7 @@ enum WacomErrorCode {
 	WERROR_INVALID_DB,	/**< The passed DB is invalid */
 	WERROR_BAD_ACCESS,	/**< Invalid permissions to access the path */
 	WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
+	WERROR_BUG_CALLER,	/**< A bug in the caller */
 };
 
 /**

@@ -73,6 +73,16 @@ libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg,
 		return;
 
 	error->code = code;
+	asprintf(&error->msg, "%s has been deprecated\n", __func__);
+}
+
+void
+set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
+{
+	if (!error)
+		return;
+
+	error->code = code;
 	if (msg) {
 		va_list ap;
 		va_start(ap, msg);

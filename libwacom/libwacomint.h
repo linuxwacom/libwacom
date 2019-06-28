@@ -126,7 +126,8 @@ struct _WacomError {
 };
 
 /* Note: these functions accidentally became part of the ABI, do not modify */
-void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
+LIBWACOM_DEPRECATED void
+libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_stylus_destroy(WacomStylus *stylus);
 void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
 WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
@@ -137,6 +138,8 @@ WacomDevice* libwacom_ref(WacomDevice *device);
 WacomDevice* libwacom_unref(WacomDevice *device);
 WacomStylus* libwacom_stylus_ref(WacomStylus *stylus);
 WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
+
+void set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

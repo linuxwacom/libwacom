@@ -242,6 +242,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		}
 
 		stylus = g_new0 (WacomStylus, 1);
+		stylus->refcnt = 1;
 		stylus->id = id;
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
@@ -842,6 +843,12 @@ out:
     return success;
 }
 
+static void
+stylus_destroy(void *data)
+{
+	libwacom_stylus_unref((WacomStylus*)data);
+}
+
 static bool
 load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 {
@@ -856,7 +863,7 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
     db->stylus_ht = g_hash_table_new_full (g_direct_hash,
 					   g_direct_equal,
 					   NULL,
-					   (GDestroyNotify) libwacom_stylus_destroy);
+					   (GDestroyNotify) stylus_destroy);
     nfiles = n;
     while(n--) {
 	    char *path;

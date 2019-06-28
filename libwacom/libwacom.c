@@ -1295,11 +1295,29 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 LIBWACOM_EXPORT void
 libwacom_stylus_destroy(WacomStylus *stylus)
 {
+	libwacom_stylus_unref(stylus);
+}
+
+WacomStylus*
+libwacom_stylus_ref(WacomStylus *stylus)
+{
+	g_atomic_int_inc(&stylus->refcnt);
+
+	return stylus;
+}
+
+WacomStylus*
+libwacom_stylus_unref(WacomStylus *stylus)
+{
+	if (!g_atomic_int_dec_and_test(&stylus->refcnt))
+		return NULL;
+
 	g_free (stylus->name);
 	g_free (stylus->group);
 	g_free (stylus);
-}
 
+	return NULL;
+}
 
 LIBWACOM_EXPORT const char *
 libwacom_match_get_name(const WacomMatch *match)

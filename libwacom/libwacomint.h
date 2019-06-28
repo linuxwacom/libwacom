@@ -55,6 +55,7 @@ enum WacomFeature {
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy_match() ! */
 struct _WacomMatch {
+	gint refcnt;
 	char *match;
 	char *name;
 	WacomBusType bus;
@@ -130,8 +131,11 @@ LIBWACOM_DEPRECATED void
 libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 LIBWACOM_DEPRECATED void
 libwacom_stylus_destroy(WacomStylus *stylus);
-void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
-WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
+LIBWACOM_DEPRECATED void
+libwacom_update_match(WacomDevice *device, const WacomMatch *match);
+LIBWACOM_DEPRECATED WacomMatch*
+libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
+LIBWACOM_DEPRECATED
 void libwacom_match_destroy(WacomMatch *match);
 /* End of ABI */
 
@@ -139,8 +143,13 @@ WacomDevice* libwacom_ref(WacomDevice *device);
 WacomDevice* libwacom_unref(WacomDevice *device);
 WacomStylus* libwacom_stylus_ref(WacomStylus *stylus);
 WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
+WacomMatch* libwacom_match_ref(WacomMatch *match);
+WacomMatch* libwacom_match_unref(WacomMatch *match);
 
 void set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
+void libwacom_add_match(WacomDevice *device, WacomMatch *newmatch);
+WacomMatch* libwacom_match_create(const char *name, WacomBusType bus,
+				  int vendor_id, int product_id);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);

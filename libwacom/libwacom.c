@@ -309,20 +309,6 @@ out:
 	return retval;
 }
 
-static WacomMatch *libwacom_copy_match(const WacomMatch *src)
-{
-	WacomMatch *dst;
-
-	dst = g_new0(WacomMatch, 1);
-	dst->match = g_strdup(src->match);
-	dst->name = g_strdup(src->name);
-	dst->bus = src->bus;
-	dst->vendor_id = src->vendor_id;
-	dst->product_id = src->product_id;
-
-	return dst;
-}
-
 static WacomDevice *
 libwacom_copy(const WacomDevice *device)
 {
@@ -340,11 +326,11 @@ libwacom_copy(const WacomDevice *device)
 	d->nmatches = device->nmatches;
 	d->matches = g_malloc((d->nmatches + 1) * sizeof(WacomMatch*));
 	for (i = 0; i < d->nmatches; i++)
-		d->matches[i] = libwacom_copy_match(device->matches[i]);
+		d->matches[i] = libwacom_match_ref(device->matches[i]);
 	d->matches[d->nmatches] = NULL;
 	d->match = device->match;
 	if (device->paired)
-		d->paired = libwacom_copy_match(device->paired);
+		d->paired = libwacom_match_ref(device->paired);
 	d->cls = device->cls;
 	d->num_strips = device->num_strips;
 	d->features = device->features;
@@ -557,9 +543,9 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	}
 
 	/* for multiple-match devices, set to the one we requested */
-	match = libwacom_match_new(match_name, bus, vendor_id, product_id);
-	libwacom_update_match(ret, match);
-	libwacom_match_destroy(match);
+	match = libwacom_match_create(match_name, bus, vendor_id, product_id);
+	libwacom_add_match(ret, match);
+	libwacom_match_unref(match);
 
 	if (device) {
 		/* if unset, use the kernel flags. Could be unset as well. */
@@ -849,14 +835,6 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	print_buttons_for_device(fd, device);
 }
 
-LIBWACOM_EXPORT void
-libwacom_match_destroy(WacomMatch *match)
-{
-	g_free (match->match);
-	g_free (match->name);
-	g_free (match);
-}
-
 WacomDevice *
 libwacom_ref(WacomDevice *device)
 {
@@ -876,9 +854,9 @@ libwacom_unref(WacomDevice *device)
 	g_free (device->model_name);
 	g_free (device->layout);
 	if (device->paired)
-		libwacom_match_destroy(device->paired);
+		libwacom_match_unref(device->paired);
 	for (i = 0; i < device->nmatches; i++)
-		libwacom_match_destroy(device->matches[i]);
+		libwacom_match_unref(device->matches[i]);
 	g_free (device->matches);
 	g_free (device->supported_styli);
 	g_free (device->status_leds);
@@ -895,13 +873,48 @@ libwacom_destroy(WacomDevice *device)
 	libwacom_unref(device);
 }
 
+LIBWACOM_EXPORT void
+libwacom_match_destroy(WacomMatch *match)
+{
+	/* This function intentionally does nothing. It was accidentally
+	 * exported but never intended to be used by callers, only our
+	 * internal database may destroy a match */
+}
+
+WacomMatch*
+libwacom_match_ref(WacomMatch *match)
+{
+	g_atomic_int_inc(&match->refcnt);
+	return match;
+}
+
+WacomMatch*
+libwacom_match_unref(WacomMatch *match)
+{
+	if (!g_atomic_int_dec_and_test(&match->refcnt))
+		return NULL;
+
+	g_free (match->match);
+	g_free (match->name);
+	g_free (match);
+
+	return NULL;
+}
+
 LIBWACOM_EXPORT WacomMatch*
 libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id)
+{
+	return NULL;
+}
+
+WacomMatch*
+libwacom_match_create(const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
 	WacomMatch *match;
 	char *newmatch;
 
 	match = g_malloc(sizeof(*match));
+	match->refcnt = 1;
 	if (name == NULL && bus == WBUSTYPE_UNKNOWN && vendor_id == 0 && product_id == 0)
 		newmatch = g_strdup("generic");
 	else
@@ -919,6 +932,14 @@ libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int produc
 LIBWACOM_EXPORT void
 libwacom_update_match(WacomDevice *device, const WacomMatch *newmatch)
 {
+	/* This function intentionally does nothing. It was accidentally
+	 * exported but never intended to be used by callers, only our
+	 * internal database may destroy a match */
+}
+
+void
+libwacom_add_match(WacomDevice *device, WacomMatch *newmatch)
+{
 	int i;
 
 	for (i = 0; i < device->nmatches; i++) {
@@ -933,7 +954,7 @@ libwacom_update_match(WacomDevice *device, const WacomMatch *newmatch)
 
 	device->matches = g_realloc_n(device->matches, device->nmatches + 1, sizeof(WacomMatch*));
 	device->matches[device->nmatches] = NULL;
-	device->matches[device->nmatches - 1] = libwacom_copy_match(newmatch);
+	device->matches[device->nmatches - 1] = libwacom_match_ref(newmatch);
 	device->match = device->nmatches - 1;
 }
 

@@ -510,6 +510,15 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	char *name, *match_name;
 	WacomMatch *match;
 
+	switch (fallback) {
+		case WFALLBACK_NONE:
+		case WFALLBACK_GENERIC:
+			break;
+		default:
+			libwacom_error_set(error, WERROR_BUG_CALLER, "invalid fallback flags");
+			return NULL;
+	}
+
 	if (!db) {
 		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;

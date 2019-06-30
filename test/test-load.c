@@ -59,7 +59,7 @@ static void check_multiple_match(WacomDevice *device)
 	assert(found_bus && found_vendor_id && found_product_id);
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice *device;

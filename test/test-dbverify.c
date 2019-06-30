@@ -180,7 +180,7 @@ compare_written_database(WacomDeviceDatabase *db)
 }
 
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	const char *datadir;

@@ -298,7 +298,7 @@ verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
 }
 
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **device, **devices;

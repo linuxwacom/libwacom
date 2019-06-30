@@ -254,7 +254,7 @@ static void verify_tablet(WacomDeviceDatabase *db, WacomDevice *device)
 		assert(tablet_has_lr_buttons(device));
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **device, **devices;

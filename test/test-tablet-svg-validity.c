@@ -231,7 +231,7 @@ check_touchring (xmlNodePtr cur, gchar *id)
 }
 
 static void
-verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
+verify_tablet_layout (WacomDevice *device)
 {
 	const char *name;
 	const char *filename;
@@ -318,7 +318,7 @@ int main(void)
 	g_assert(*devices);
 
 	for (device = devices; *device; device++)
-		verify_tablet_layout(db, *device);
+		verify_tablet_layout(*device);
 
 	free(devices);
 	libwacom_database_destroy (db);

@@ -28,6 +28,7 @@
 #include "config.h"
 #endif
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
@@ -62,10 +63,16 @@ print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
     }
 }
 
-int
-main(void) {
+int main(int argc, char **argv)
+{
 	WacomDeviceDatabase *db;
 	WacomDevice **list, **p;
+
+	if (argc > 1) {
+		printf("Usage: %s [--help] - list all supported devices\n",
+		       basename(argv[0]));
+	       return !!(strcmp(argv[1], "--help"));
+	}
 
 	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
 

@@ -79,7 +79,7 @@ static void print_wireless_kit_quirk (void)
 	printf("\n");
 }
 
-static char * generate_device_match(WacomDevice *device, const WacomMatch *match)
+static char * generate_device_match(const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
@@ -123,7 +123,7 @@ static void print_udev_entry_matchstr(WacomDevice *device, const char *matchstr)
 		printf ("ATTRS{name}==\"* Pad\", %s ENV{ID_INPUT_TABLET_PAD}=\"1\"\n", matchstr);
 }
 
-static char * generate_uinput_match (WacomDevice *device, const WacomMatch *match)
+static char * generate_uinput_match (const WacomMatch *match)
 {
 	WacomBusType type       = libwacom_match_get_bustype (match);
 	int          vendor     = libwacom_match_get_vendor_id (match);
@@ -163,7 +163,7 @@ static void print_uinput_entry (WacomDevice *device, WacomBusType bus_type_filte
 		if (bus_type_filter != type)
 			continue;
 
-		matchstr = generate_uinput_match (device, *match);
+		matchstr = generate_uinput_match (*match);
 		if (matchstr == NULL)
 			continue;
 
@@ -185,7 +185,7 @@ static void print_udev_entry (WacomDevice *device, WacomBusType bus_type_filter)
 		if (bus_type_filter != type)
 			continue;
 
-		matchstr = generate_device_match (device, *match);
+		matchstr = generate_device_match (*match);
 		if (matchstr == NULL)
 			continue;
 

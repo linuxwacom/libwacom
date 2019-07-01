@@ -1295,7 +1295,9 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 LIBWACOM_EXPORT void
 libwacom_stylus_destroy(WacomStylus *stylus)
 {
-	libwacom_stylus_unref(stylus);
+	/* This function intentionally does nothing. It was accidentally
+	 * exported but never intended to be used by callers, only our
+	 * internal database may destroy a stylus */
 }
 
 WacomStylus*

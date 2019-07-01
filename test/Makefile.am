@@ -1,4 +1,4 @@
-noinst_PROGRAMS=test-load test-dbverify test-tablet-validity test-ltversion
+noinst_PROGRAMS=test-load test-dbverify test-tablet-validity test-ltversion test-deprecated
 
 TESTS=$(noinst_PROGRAMS)
 
@@ -18,6 +18,9 @@ test_tablet_validity_LDADD=$(top_builddir)/libwacom/libwacom.la
 test_tablet_validity_LDFLAGS = -no-install
 test_ltversion_SOURCES = test-ltversion.c
 test_ltversion_CFLAGS = $(AM_CFLAGS) -DLIBWACOM_LT_VERSION="\"$(LIBWACOM_LT_VERSION)\""
+test_deprecated_SOURCES = test-deprecated.c
+test_deprecated_LDADD=$(top_builddir)/libwacom/libwacom.la $(DL_LIBS)
+test_deprecated_LDFLAGS = -no-install
 
 if HAVE_LIBXML
 noinst_PROGRAMS += test-tablet-svg-validity

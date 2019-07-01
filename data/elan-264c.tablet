@@ -4,7 +4,7 @@
 Name=HP Envy x360 Convertible
 ModelName=ELAN-264C
 DeviceMatch=i2c:04f3:264c
-Class=PenDisplay
+Class=ISDV4
 Width=14
 Height=8
 IntegratedIn=Display;System

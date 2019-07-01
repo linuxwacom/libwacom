@@ -31,6 +31,7 @@ test-driver
 test/test-load
 test/test-tablet-svg-validity
 test/test-dbverify
+test/test-deprecated
 test/test-tablet-validity
 test/test-soname
 tools/show-svg-image

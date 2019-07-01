@@ -1,12 +1,15 @@
 # ELAN touchscreen/pen sensor present in the HP Envy x360 Convertible 15-cp0XXX
 
 [Device]
-Name=ELAN 264C
+Name=HP Envy x360 Convertible
+ModelName=ELAN-264C
 DeviceMatch=i2c:04f3:264c
-Class=ISDV4
+Class=PenDisplay
 Width=14
 Height=8
 IntegratedIn=Display;System
+# This device supports both pens with eraser and without eraser
+Styli=0xffffd;0xffffe;0xfffff;
 
 [Features]
 Stylus=true

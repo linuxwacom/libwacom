@@ -29,6 +29,7 @@
 #endif
 
 #define _GNU_SOURCE
+#include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,8 +38,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "libwacom.h"
-#include <assert.h>
 #include <unistd.h>
+
+static WacomDeviceDatabase *db_old;
+static WacomDeviceDatabase *db_new;
 
 static int
 scandir_filter(const struct dirent *entry)
@@ -56,83 +59,121 @@ rmtmpdir(const char *dir)
 	nfiles = scandir(dir, &files, scandir_filter, alphasort);
 	while(nfiles--)
 	{
-		assert(asprintf(&path, "%s/%s", dir, files[nfiles]->d_name) != -1);
-		assert(path);
-		assert(remove(path) != -1);
+		g_assert(asprintf(&path, "%s/%s", dir, files[nfiles]->d_name) != -1);
+		g_assert(path);
+		g_assert(remove(path) != -1);
 		free(files[nfiles]);
 		free(path);
 		path = NULL;
 	}
 
 	free(files);
-	assert(remove(dir) != -1);
+	g_assert(remove(dir) != -1);
 }
 
+static void
+find_matching(gconstpointer data)
+{
+	WacomDevice **devs_old, **devs_new;
+	WacomDevice **devices, **d;
+	WacomDevice *other;
+	gboolean found = FALSE;
+	int index = GPOINTER_TO_INT(data);
+
+	devs_old = libwacom_list_devices_from_database(db_old, NULL);
+	devs_new = libwacom_list_devices_from_database(db_new, NULL);
+
+	/* Make sure each device in old has a device in new */
+	devices = devs_old;
+	other = devs_new[index];
+	for (d = devices; *d; d++) {
+		if (libwacom_compare(other, *d, WCOMPARE_MATCHES) == 0) {
+			found = TRUE;
+			break;
+		}
+	}
+	g_assert_true(found);
+
+	/* Make sure each device in new has a device in old */
+	devices = devs_new;
+	other = devs_old[index];
+	found = FALSE;
+	for (d = devices; *d; d++) {
+		/* devices with multiple matches will have multiple
+		 * devices in the list */
+		if (libwacom_compare(other, *d, WCOMPARE_MATCHES) == 0) {
+			found = TRUE;
+			break;
+		}
+	}
+	g_assert_true(found);
+
+	free(devs_old);
+	free(devs_new);
+}
 
 static void
+test_database_size(void)
+{
+	int sz1, sz2;
+	WacomDevice **d1, **d2;
+
+	d1 = libwacom_list_devices_from_database(db_old, NULL);
+	d2 = libwacom_list_devices_from_database(db_new, NULL);
+	g_assert_nonnull(d1);
+	g_assert_nonnull(d2);
+
+	sz1 = 0;
+	for (WacomDevice **d = d1; *d; d++)
+		sz1++;
+	sz2 = 0;
+	for (WacomDevice **d = d2; *d; d++)
+		sz2++;
+	g_assert_cmpint(sz1, ==, sz2);
+
+	free(d1);
+	free(d2);
+}
+
+static int
 compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 {
-	int ndevices = 0, i;
-	WacomDevice **oldall, **o;
-	WacomDevice **newall, **n;
-	char *old_matched;
+	int i, rc;
+	WacomDevice **devs_new, **n;
 
-	oldall = libwacom_list_devices_from_database(orig, NULL);
-	newall = libwacom_list_devices_from_database(new, NULL);
+	g_test_add_func("/dbverify/database-sizes", test_database_size);
 
-	for (o = oldall; *o; o++)
-		ndevices++;
+	devs_new = libwacom_list_devices_from_database(new, NULL);
 
-	old_matched = calloc(ndevices, sizeof(char));
-	assert(old_matched);
-
-	for (n = newall; *n; n++)
+	for (n = devs_new, i = 0 ; *n; n++, i++)
 	{
-		int found = 0;
-		printf("Matching %s\n", libwacom_get_name(*n));
-		for (o = oldall, i = 0; *o && !found; o++, i++) {
-			/* devices with multiple matches will have multiple
-			 * devices in the list */
-			if (old_matched[i] == 0 &&
-			    libwacom_compare(*n, *o, WCOMPARE_MATCHES) == 0) {
-				found = 1;
-				old_matched[i] = 1;
-			}
-		}
+		char buf[1024];
 
-		if (!found)
-			printf("Failed to match '%s'\n", libwacom_get_name(*n));
-		assert(found);
+		/* We need to add the test index to avoid duplicate
+		   test names */
+		snprintf(buf, sizeof(buf), "/dbverify/%03d/%04x:%04x-%s",
+			 i,
+			 libwacom_get_vendor_id(*n),
+			 libwacom_get_product_id(*n),
+			 libwacom_get_name(*n));
+		g_test_add_data_func(buf, GINT_TO_POINTER(i), find_matching);
 	}
 
-	for (i = 0; i < ndevices; i++) {
-		if (!old_matched[i])
-			printf("No match for %s\n",
-					libwacom_get_name(oldall[i]));
-		assert(old_matched[i]);
-	}
-
-	free(old_matched);
-	free(oldall);
-	free(newall);
+	rc = g_test_run();
+	free(devs_new);
+	return rc;
 }
 
 /* write out the current db, read it back in, compare */
 static void
-compare_written_database(WacomDeviceDatabase *db)
+duplicate_database(WacomDeviceDatabase *db, const char *dirname)
 {
-	char *dirname;
-	WacomDeviceDatabase *db_new;
 	WacomDevice **device, **devices;
 	int i;
 
 	devices = libwacom_list_devices_from_database(db, NULL);
-	assert(devices);
-	assert(*devices);
-
-	dirname = strdup("tmp.dbverify.XXXXXX");
-	assert(mkdtemp(dirname)); /* just check for non-null to avoid
-				     Coverity complaints */
+	g_assert(devices);
+	g_assert(*devices);
 
 	for (device = devices, i = 0; *device; device++, i++) {
 		int i;
@@ -141,11 +182,11 @@ compare_written_database(WacomDeviceDatabase *db)
 		int nstyli;
 		const int *styli;
 
-		assert(asprintf(&path, "%s/%s.tablet", dirname,
+		g_assert(asprintf(&path, "%s/%s.tablet", dirname,
 				libwacom_get_match(*device)) != -1);
-		assert(path);
+		g_assert(path);
 		fd = open(path, O_WRONLY|O_CREAT, S_IRWXU);
-		assert(fd >= 0);
+		g_assert(fd >= 0);
 		libwacom_print_device_description(fd, *device);
 		close(fd);
 		free(path);
@@ -158,29 +199,22 @@ compare_written_database(WacomDeviceDatabase *db)
 			int fd_stylus;
 			const WacomStylus *stylus;
 
-			assert(asprintf(&path, "%s/%#x.stylus", dirname, styli[i]) != -1);
+			g_assert(asprintf(&path, "%s/%#x.stylus", dirname, styli[i]) != -1);
 			stylus = libwacom_stylus_get_for_id(db, styli[i]);
-			assert(stylus);
+			g_assert(stylus);
 			fd_stylus = open(path, O_WRONLY|O_CREAT, S_IRWXU);
-			assert(fd_stylus >= 0);
+			g_assert(fd_stylus >= 0);
 			libwacom_print_stylus_description(fd_stylus, stylus);
 			close(fd_stylus);
 			free(path);
 		}
 	}
 
-	db_new = libwacom_database_new_for_path(dirname);
-	assert(db_new);
-	compare_databases(db, db_new);
-	libwacom_database_destroy(db_new);
-
-	rmtmpdir(dirname);
-	free(dirname);
 	free(devices);
 }
 
-
-int main(void)
+static WacomDeviceDatabase *
+load_database(void)
 {
 	WacomDeviceDatabase *db;
 	const char *datadir;
@@ -192,13 +226,39 @@ int main(void)
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
 		printf("Failed to load data from %s", datadir);
-	assert(db);
 
+	g_assert(db);
+	return db;
+}
 
-	compare_written_database(db);
-	libwacom_database_destroy (db);
+int main(int argc, char **argv)
+{
+	WacomDeviceDatabase *db;
+	char *dirname;
+	int rc;
 
-	return 0;
+	g_test_init(&argc, &argv, NULL);
+	g_test_set_nonfatal_assertions();
+
+	db = load_database();
+
+	dirname = strdup("tmp.dbverify.XXXXXX");
+	g_assert(mkdtemp(dirname)); /* just check for non-null to avoid
+				       Coverity complaints */
+
+	duplicate_database(db, dirname);
+	db_new = libwacom_database_new_for_path(dirname);
+	g_assert(db_new);
+
+	db_old = db;
+	rc = compare_databases(db_old, db_new);
+	libwacom_database_destroy(db_new);
+	libwacom_database_destroy(db_old);
+
+	rmtmpdir(dirname);
+	free(dirname);
+
+	return rc;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

@@ -543,7 +543,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	}
 
 	/* for multiple-match devices, set to the one we requested */
-	match = libwacom_match_create(match_name, bus, vendor_id, product_id);
+	match = libwacom_match_new(match_name, bus, vendor_id, product_id);
 	libwacom_add_match(ret, match);
 	libwacom_match_unref(match);
 
@@ -894,7 +894,7 @@ libwacom_match_unref(WacomMatch *match)
 }
 
 WacomMatch*
-libwacom_match_create(const char *name, WacomBusType bus, int vendor_id, int product_id)
+libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
 	WacomMatch *match;
 	char *newmatch;

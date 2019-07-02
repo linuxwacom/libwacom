@@ -65,6 +65,7 @@ libwacom_error_get_message(WacomError *error)
 }
 
 /* This wasn't supposed to have been exported, but ...*/
+__attribute__ ((format (printf, 3, 4)))
 LIBWACOM_EXPORT void
 libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
 {

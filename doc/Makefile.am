@@ -11,6 +11,8 @@ doxygen.conf: doxygen.conf.in
 doxygen: $(top_srcdir)/libwacom/libwacom.h doxygen.conf
 	$(AM_V_GEN) doxygen $(builddir)/doxygen.conf
 
+html: doxygen
+
 clean-local:
 	rm -rf html
 

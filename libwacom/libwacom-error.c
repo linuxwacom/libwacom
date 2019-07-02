@@ -66,7 +66,8 @@ libwacom_error_get_message(WacomError *error)
 
 __attribute__ ((format (printf, 3, 4)))
 void
-set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
+libwacom_set_error(WacomError *error, enum WacomErrorCode code,
+		   const char *msg, ...)
 {
 	if (!error)
 		return;

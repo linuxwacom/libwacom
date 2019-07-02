@@ -126,7 +126,7 @@ get_bus_vid_pid (GUdevDevice  *device,
 
 	splitted_product = g_strsplit (product_str, "/", 4);
 	if (g_strv_length (splitted_product) != 4) {
-		set_error(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
+		libwacom_set_error(error, WERROR_UNKNOWN_MODEL, "Unable to parse model identification");
 		goto out;
 	}
 
@@ -221,7 +221,7 @@ get_device_info (const char            *path,
 	client = g_udev_client_new (subsystems);
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
-		set_error(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
+		libwacom_set_error(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
 		goto out;
 	}
 
@@ -231,7 +231,7 @@ get_device_info (const char            *path,
 
 		parent = g_udev_device_get_parent(device);
 		if (!parent || !is_tablet_or_touchpad(parent)) {
-			set_error(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
+			libwacom_set_error(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
 			g_object_unref (parent);
 			goto out;
 		}
@@ -294,7 +294,7 @@ get_device_info (const char            *path,
 		*product_id = 0;
 		retval = TRUE;
 	} else {
-		set_error(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
+		libwacom_set_error(error, WERROR_UNKNOWN_MODEL, "Unsupported bus '%s'", bus_str);
 	}
 
 out:
@@ -474,7 +474,7 @@ libwacom_new (const WacomDeviceDatabase *db, const char *name, int vendor_id, in
 	char *match;
 
 	if (!db) {
-		set_error(error, WERROR_INVALID_DB, "db is NULL");
+		libwacom_set_error(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;
 	}
 
@@ -501,17 +501,17 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 		case WFALLBACK_GENERIC:
 			break;
 		default:
-			set_error(error, WERROR_BUG_CALLER, "invalid fallback flags");
+			libwacom_set_error(error, WERROR_BUG_CALLER, "invalid fallback flags");
 			return NULL;
 	}
 
 	if (!db) {
-		set_error(error, WERROR_INVALID_DB, "db is NULL");
+		libwacom_set_error(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;
 	}
 
 	if (!path) {
-		set_error(error, WERROR_INVALID_PATH, "path is NULL");
+		libwacom_set_error(error, WERROR_INVALID_PATH, "path is NULL");
 		return NULL;
 	}
 
@@ -559,7 +559,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 
 bail:
 	g_free (name);
-	set_error(error, WERROR_UNKNOWN_MODEL, NULL);
+	libwacom_set_error(error, WERROR_UNKNOWN_MODEL, NULL);
 	return NULL;
 }
 
@@ -569,7 +569,7 @@ libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int produc
 	const WacomDevice *device;
 
 	if (!db) {
-		set_error(error, WERROR_INVALID_DB, "db is NULL");
+		libwacom_set_error(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;
 	}
 
@@ -578,7 +578,7 @@ libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int produc
 	if (device)
 		return libwacom_copy(device);
 
-	set_error(error, WERROR_UNKNOWN_MODEL, NULL);
+	libwacom_set_error(error, WERROR_UNKNOWN_MODEL, NULL);
 	return NULL;
 }
 
@@ -589,7 +589,7 @@ libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomErr
 	GList *keys, *l;
 
 	if (!db) {
-		set_error(error, WERROR_INVALID_DB, "db is NULL");
+		libwacom_set_error(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;
 	}
 
@@ -610,7 +610,7 @@ libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomErr
 	if (device)
 		return libwacom_copy(device);
 
-	set_error(error, WERROR_UNKNOWN_MODEL, NULL);
+	libwacom_set_error(error, WERROR_UNKNOWN_MODEL, NULL);
 	return NULL;
 }
 

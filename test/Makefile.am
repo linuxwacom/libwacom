@@ -8,8 +8,9 @@ AM_CPPFLAGS= \
 	     -DTOPSRCDIR="\"$(abs_top_srcdir)\""
 
 test_load_SOURCES = test-load.c
-test_load_LDADD=$(top_builddir)/libwacom/libwacom.la
+test_load_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 test_load_LDFLAGS = -no-install
+test_load_CFLAGS=$(AM_CFLAGS) $(GLIB_CFLAGS)
 test_dbverify_SOURCES = test-dbverify.c
 test_dbverify_LDADD=$(top_builddir)/libwacom/libwacom.la
 test_dbverify_LDFLAGS = -no-install

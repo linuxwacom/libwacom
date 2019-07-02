@@ -186,7 +186,7 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 		return FALSE;
 	}
 
-	match = libwacom_match_create(name, bus, vendor_id, product_id);
+	match = libwacom_match_new(name, bus, vendor_id, product_id);
 	libwacom_add_match(device, match);
 	libwacom_match_unref(match);
 
@@ -208,7 +208,7 @@ libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
 		return FALSE;
 	}
 
-	device->paired = libwacom_match_create(name, bus, vendor_id, product_id);
+	device->paired = libwacom_match_new(name, bus, vendor_id, product_id);
 
 	free(name);
 	return TRUE;

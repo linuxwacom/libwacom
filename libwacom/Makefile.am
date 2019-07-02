@@ -24,3 +24,5 @@ libwacom_la_LDFLAGS = \
 
 libwacomincludedir = $(includedir)/libwacom-1.0/libwacom/
 libwacominclude_HEADERS = libwacom.h
+
+EXTRA_DIST = libwacom.sym

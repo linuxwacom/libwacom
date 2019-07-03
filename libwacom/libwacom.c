@@ -660,16 +660,17 @@ static void print_supported_leds (int fd, const WacomDevice *device)
 	};
 	int num_leds;
 	const WacomStatusLEDs *status_leds;
-	int i;
 	char buf[256] = {0};
 	bool have_led = false;
 
 	status_leds = libwacom_get_status_leds(device, &num_leds);
 
-	for (i = 0; i < num_leds; i++) {
-		strcat(buf, leds_name[status_leds[i]]);
-		have_led = true;
-	}
+	snprintf(buf, sizeof(buf), "%s%s%s%s",
+		 num_leds > 0 ? leds_name[status_leds[0]] : "",
+		 num_leds > 1 ? leds_name[status_leds[1]] : "",
+		 num_leds > 2 ? leds_name[status_leds[2]] : "",
+		 num_leds > 3 ? leds_name[status_leds[3]] : "");
+	have_led = num_leds > 0;
 
 	dprintf(fd, "%sStatusLEDs=%s\n", have_led ? "" : "# ", buf);
 }

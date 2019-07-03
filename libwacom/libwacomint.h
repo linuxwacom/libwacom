@@ -133,7 +133,7 @@ WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
 WacomMatch* libwacom_match_ref(WacomMatch *match);
 WacomMatch* libwacom_match_unref(WacomMatch *match);
 
-void libwacom_set_error(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
+void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
 void libwacom_add_match(WacomDevice *device, WacomMatch *newmatch);
 WacomMatch* libwacom_match_new(const char *name, WacomBusType bus,
 			       int vendor_id, int product_id);

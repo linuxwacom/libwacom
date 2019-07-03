@@ -58,14 +58,14 @@ rmtmpdir(const char *dir)
 	{
 		assert(asprintf(&path, "%s/%s", dir, files[nfiles]->d_name) != -1);
 		assert(path);
-		remove(path);
+		assert(remove(path) != -1);
 		free(files[nfiles]);
 		free(path);
 		path = NULL;
 	}
 
 	free(files);
-	remove(dir);
+	assert(remove(dir) != -1);
 }
 
 

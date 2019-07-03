@@ -104,7 +104,7 @@ verify_has_class (xmlNodePtr cur, const gchar *expected)
 }
 
 static void
-check_button (xmlNodePtr cur, WacomDevice *device, char button, gchar *type)
+check_button (xmlNodePtr cur, const WacomDevice *device, char button, gchar *type)
 {
 	char             *sub;
 	char             *class;
@@ -230,78 +230,164 @@ check_touchring (xmlNodePtr cur, gchar *id)
 	g_free (class);
 }
 
+struct fixture {
+	xmlDocPtr doc;
+	xmlNodePtr root;
+};
+
 static void
-verify_tablet_layout (WacomDevice *device)
+test_filename(struct fixture *f, gconstpointer data)
+{
+    const WacomDevice *device = data;
+    const char *filename;
+
+    filename = libwacom_get_layout_filename(device);
+    if (libwacom_get_num_buttons(device) > 0) {
+	    g_assert_nonnull(filename);
+	    g_assert_cmpstr(filename, !=, "");
+    }
+}
+
+static void
+test_svg(struct fixture *f, gconstpointer data)
+{
+    g_assert_nonnull(f->doc);
+    g_assert_nonnull(f->root);
+    g_assert_cmpint(xmlStrcmp(f->root->name, (const xmlChar*) "svg"), ==, 0);
+}
+
+static void
+test_dimensions(struct fixture *f, gconstpointer data)
+{
+	xmlChar *prop;
+
+	/* width is provided */
+	prop = xmlGetProp(f->root, (xmlChar *) "width") ;
+	g_assert_nonnull(prop);
+	xmlFree(prop);
+
+	/* height is provided */
+	prop = xmlGetProp(f->root, (xmlChar *) "height") ;
+	g_assert_nonnull(prop);
+	xmlFree(prop);
+}
+
+static void
+test_rings(struct fixture *f, gconstpointer data)
+{
+	const WacomDevice *device = data;
+
+	if (libwacom_has_ring(device))
+		check_touchring(f->root, "Ring");
+	if (libwacom_has_ring2(device))
+		check_touchring(f->root, "Ring2");
+}
+
+static void
+test_strips(struct fixture *f, gconstpointer data)
+{
+	const WacomDevice *device = data;
+
+	if (libwacom_get_num_strips(device) > 0)
+		check_touchstrip(f->root, "Strip");
+	if (libwacom_get_num_strips(device) > 1)
+		check_touchstrip(f->root, "Strip2");
+}
+
+static void
+test_buttons(struct fixture *f, gconstpointer data)
+{
+	const WacomDevice *device = data;
+	int num_buttons = libwacom_get_num_buttons (device);
+
+	for (char button = 'A'; button < 'A' + num_buttons; button++) {
+		check_button(f->root, device, button, "Button");
+		check_button(f->root, device, button, "Label");
+		check_button(f->root, device, button, "Leader");
+	}
+}
+
+static void
+setup_svg(struct fixture *f, gconstpointer data)
+{
+	const WacomDevice *device = data;
+	const char *filename = libwacom_get_layout_filename(device);
+	xmlDocPtr doc;
+
+	if (!filename)
+		return;
+
+	doc = xmlParseFile(filename);
+	f->doc = doc;
+	f->root = doc ? xmlDocGetRootElement(doc) : NULL;
+}
+
+static void
+teardown_svg(struct fixture *f, gconstpointer data)
+{
+	if (f->doc)
+		xmlFreeDoc(f->doc);
+}
+
+typedef void (*testfunc)(struct fixture *f, gconstpointer d);
+
+/* Wrapper function to make adding tests simpler. g_test requires
+ * a unique test case name so we assemble that from the test function and
+ * the tablet data.
+ */
+static inline void
+_add_test(WacomDevice *device, testfunc func, const char *funcname)
+{
+	char buf[128];
+	static int count; /* guarantee unique test case names */
+	const char *prefix;
+
+	/* tests must be test_foobar */
+	g_assert(strncmp(funcname, "test_", 5) == 0);
+	prefix = &funcname[5];
+
+	snprintf(buf, 128, "/svg/%s/%03d/%04x:%04x-%s",
+		 prefix,
+		 ++count,
+		 libwacom_get_vendor_id(device),
+		 libwacom_get_product_id(device),
+		 libwacom_get_name(device));
+
+	g_test_add(buf, struct fixture, device,
+		   setup_svg, func, teardown_svg);
+}
+#define add_test(device_, func_) \
+	_add_test(device_, func_, #func_)
+
+#define add_test(device_, func_) \
+	_add_test(device_, func_, #func_)
+
+static void setup_tests(WacomDevice *device)
 {
 	const char *name;
-	const char *filename;
-	xmlChar    *prop;
-	xmlDocPtr   doc;
-	xmlNodePtr  cur;
-	char        button;
-	int         num_buttons;
 
 	name = libwacom_get_name(device);
 	if (strcmp(name, "Generic") == 0)
 		return;
 
-	filename = libwacom_get_layout_filename(device);
-	num_buttons = libwacom_get_num_buttons (device);
-
-	if (filename == NULL) {
-		if (num_buttons > 0)
-			g_warning ("device '%s' has buttons but no layout", name);
+	add_test(device, test_filename);
+	if (!libwacom_get_layout_filename(device))
 		return;
-	}
 
-	g_message ("Verifying device '%s', SVG file '%s'", name, filename);
-
-	doc = xmlParseFile(filename);
-	g_assert (doc != NULL );
-
-	cur = xmlDocGetRootElement(doc);
-	g_assert (cur != NULL);
-
-	/* Check we got an SVG layout */
-	g_assert (xmlStrcmp(cur->name, (const xmlChar *) "svg") == 0);
-
-	/* width is provided */
-	prop = xmlGetProp(cur, (xmlChar *) "width") ;
-	g_assert (prop != NULL);
-	xmlFree(prop);
-
-	/* height is provided */
-	prop = xmlGetProp(cur, (xmlChar *) "height") ;
-	g_assert (prop != NULL);
-	xmlFree(prop);
-
-	for (button = 'A'; button < 'A' + num_buttons; button++) {
-		check_button (cur, device, button, "Button");
-		check_button (cur, device, button, "Label");
-		check_button (cur, device, button, "Leader");
-	}
-
-	/* Touch rings */
-	if (libwacom_has_ring(device))
-		check_touchring (cur, "Ring");
-	if (libwacom_has_ring2(device))
-		check_touchring (cur, "Ring2");
-	/* Touch strips */
+	add_test(device, test_svg);
+	add_test(device, test_dimensions);
+	if (libwacom_get_num_buttons(device) > 0)
+		add_test(device, test_buttons);
+	if (libwacom_has_ring(device) || libwacom_has_ring2(device))
+		add_test(device, test_rings);
 	if (libwacom_get_num_strips(device) > 0)
-		check_touchstrip (cur, "Strip");
-	if (libwacom_get_num_strips(device) > 1)
-		check_touchstrip (cur, "Strip2");
-
-	xmlFreeDoc(doc);
-
-	return;
+		add_test(device, test_strips);
 }
 
-
-int main(void)
+static WacomDeviceDatabase *
+load_database(void)
 {
 	WacomDeviceDatabase *db;
-	WacomDevice **device, **devices;
 	const char *datadir;
 
 	datadir = getenv("LIBWACOM_DATA_DIR");
@@ -311,17 +397,33 @@ int main(void)
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
 		printf("Failed to load data from %s", datadir);
+
 	g_assert(db);
+	return db;
+}
+
+int main(int argc, char **argv)
+{
+	WacomDeviceDatabase *db;
+	WacomDevice **devices;
+	int rc;
+
+        g_test_init(&argc, &argv, NULL);
+
+        db = load_database();
 
 	devices = libwacom_list_devices_from_database(db, NULL);
 	g_assert(devices);
 	g_assert(*devices);
 
-	for (device = devices; *device; device++)
-		verify_tablet_layout(*device);
+	for (WacomDevice **device = devices; *device; device++)
+		setup_tests(*device);
+
+	rc = g_test_run();
 
 	free(devices);
 	libwacom_database_destroy (db);
 
-	return 0;
+	return rc;
 }
+/* vim: set noexpandtab tabstop=8 shiftwidth=8: */

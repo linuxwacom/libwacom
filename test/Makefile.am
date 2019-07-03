@@ -1,4 +1,11 @@
-noinst_PROGRAMS=test-load test-dbverify test-tablet-validity test-ltversion test-deprecated
+noinst_PROGRAMS= \
+		 test-load \
+		 test-dbverify \
+		 test-tablet-validity \
+		 test-stylus-validity \
+		 test-ltversion \
+		 test-deprecated \
+		 $(NULL)
 
 TESTS=$(noinst_PROGRAMS)
 
@@ -16,8 +23,13 @@ test_dbverify_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 test_dbverify_LDFLAGS = -no-install
 test_dbverify_CFLAGS=$(AM_CFLAGS) $(GLIB_CFLAGS)
 test_tablet_validity_SOURCES = test-tablet-validity.c
-test_tablet_validity_LDADD=$(top_builddir)/libwacom/libwacom.la
+test_tablet_validity_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 test_tablet_validity_LDFLAGS = -no-install
+test_tablet_validity_CFLAGS = $(AM_CFLAGS) $(GLIB_CFLAGS)
+test_stylus_validity_SOURCES = test-stylus-validity.c
+test_stylus_validity_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
+test_stylus_validity_LDFLAGS = -no-install
+test_stylus_validity_CFLAGS = $(AM_CFLAGS) $(GLIB_CFLAGS)
 test_ltversion_SOURCES = test-ltversion.c
 test_ltversion_CFLAGS = $(AM_CFLAGS) -DLIBWACOM_LT_VERSION="\"$(LIBWACOM_LT_VERSION)\""
 test_deprecated_SOURCES = test-deprecated.c

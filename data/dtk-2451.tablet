@@ -15,6 +15,7 @@
 
 [Device]
 Name=Wacom DTK2451
+ModelName=DTK-2451
 DeviceMatch=usb:056a:0382
 Class=PenDisplay
 Width=20

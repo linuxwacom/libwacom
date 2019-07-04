@@ -1,10 +1,15 @@
+# Wacom
+# Intuos 12x12
+# GD-1212
+
 [Device]
 Name=Wacom Intuos 12x12
+ModelName=GD-1212
 DeviceMatch=usb:056a:0023
 Class=Intuos
 Width=12
 Height=12
-Styli=0xd12;0xd1a;0x822;0x82a;0x812;0x832;0x096;0x094;
+Styli=@intuos-airbrush;@intuos;
 
 [Features]
 Stylus=true

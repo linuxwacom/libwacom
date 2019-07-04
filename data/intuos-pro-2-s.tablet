@@ -1,0 +1,52 @@
+# Wacom
+# Intuos Pro 2 S
+# PTH-460
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |                       |
+#  C |                       |
+#  G |        TABLET         |
+#  D |                       |
+#  E |                       |
+#  F |                       |
+#    |                       |
+#    *-----------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+# LED Map:
+# No changeable LEDs or modes
+
+[Device]
+Name=Wacom Intuos Pro S
+ModelName=PTH-460
+DeviceMatch=usb:056a:0392;bluetooth:056a:0393;
+Class=Intuos5
+Width=6
+Height=4
+Layout=intuos-pro-2-s.svg
+IntegratedIn=
+Styli=@intuos5;@mobilestudio;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+Buttons=7
+Ring=true
+
+[Buttons]
+Left=A;B;C;D;E;F;G
+# This device has a ring, but the button inside the ring is not a modesiwtch

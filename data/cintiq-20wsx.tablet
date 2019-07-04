@@ -35,12 +35,13 @@
 
 [Device]
 Name=Wacom Cintiq 20WSX
+ModelName=DTZ-2000W
 DeviceMatch=usb:056a:00c5
 Class=Cintiq
 Width=17
 Height=11
 Layout=cintiq-20wsx.svg
-Styli=0x913;0x91b;0x813;0x81b;0x823;0x82b;0x801;0x885;
+Styli=@intuos3;
 IntegratedIn=Display
 
 [Features]

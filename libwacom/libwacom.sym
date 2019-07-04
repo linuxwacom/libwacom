@@ -1,0 +1,73 @@
+/* in alphabetical order! */
+
+LIBWACOM_0.33 {
+global:
+    libwacom_compare;
+    libwacom_database_destroy;
+    libwacom_database_new;
+    libwacom_database_new_for_path;
+    libwacom_destroy;
+    libwacom_error_free;
+    libwacom_error_get_code;
+    libwacom_error_get_message;
+    libwacom_error_new;
+    libwacom_error_set;
+    libwacom_get_bustype;
+    libwacom_get_button_evdev_code;
+    libwacom_get_button_flag;
+    libwacom_get_button_led_group;
+    libwacom_get_class;
+    libwacom_get_height;
+    libwacom_get_integration_flags;
+    libwacom_get_layout_filename;
+    libwacom_get_match;
+    libwacom_get_matches;
+    libwacom_get_model_name;
+    libwacom_get_name;
+    libwacom_get_num_buttons;
+    libwacom_get_num_strips;
+    libwacom_get_paired_device;
+    libwacom_get_product_id;
+    libwacom_get_ring2_num_modes;
+    libwacom_get_ring_num_modes;
+    libwacom_get_status_leds;
+    libwacom_get_strips_num_modes;
+    libwacom_get_supported_styli;
+    libwacom_get_vendor_id;
+    libwacom_get_width;
+    libwacom_has_ring;
+    libwacom_has_ring2;
+    libwacom_has_stylus;
+    libwacom_has_touch;
+    libwacom_has_touchswitch;
+    libwacom_is_builtin;
+    libwacom_is_reversible;
+    libwacom_list_devices_from_database;
+    libwacom_match_destroy;
+    libwacom_match_get_bustype;
+    libwacom_match_get_match_string;
+    libwacom_match_get_name;
+    libwacom_match_get_product_id;
+    libwacom_match_get_vendor_id;
+    libwacom_match_new;
+    libwacom_new_from_name;
+    libwacom_new_from_path;
+    libwacom_new_from_usbid;
+    libwacom_print_device_description;
+    libwacom_print_stylus_description;
+    libwacom_stylus_destroy;
+    libwacom_stylus_get_axes;
+    libwacom_stylus_get_for_id;
+    libwacom_stylus_get_id;
+    libwacom_stylus_get_name;
+    libwacom_stylus_get_num_buttons;
+    libwacom_stylus_get_type;
+    libwacom_stylus_has_eraser;
+    libwacom_stylus_has_lens;
+    libwacom_stylus_has_wheel;
+    libwacom_stylus_is_eraser;
+    libwacom_update_match;
+
+local:
+        *;
+};

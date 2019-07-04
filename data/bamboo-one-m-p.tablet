@@ -1,0 +1,20 @@
+# Wacom
+# Bamboo One
+# CTE-660
+#
+# Pen active area: 5.31x8.5 in
+
+[Device]
+Name=Wacom Bamboo1 5x8 Pen
+ModelName=CTE-660
+DeviceMatch=usb:056a:006b
+Class=Bamboo
+Width=8
+Height=5
+# No pad buttons, so no layout
+IntegratedIn=
+
+[Features]
+Stylus=true
+Touch=false
+Buttons=0

@@ -35,13 +35,14 @@
 
 [Device]
 Name=Intuos Pen & Touch Small
+ModelName=CTH-490
 DeviceMatch=usb:056a:033c
 Class=Bamboo
 Width=6
 Height=4
 Layout=intuos-s-pt2.svg
 IntegratedIn=
-Styli=0x8e2;
+Styli=@intuospt;
 
 [Features]
 Stylus=true

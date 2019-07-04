@@ -35,11 +35,13 @@
 #include <stdint.h>
 #include <glib.h>
 
+#define LIBWACOM_EXPORT __attribute__ ((visibility("default")))
+
 #define DBG(...) \
 	printf(__VA_ARGS__)
 
 #define GENERIC_DEVICE_MATCH "generic"
-#define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1)
+#define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1U)
 
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
@@ -53,6 +55,7 @@ enum WacomFeature {
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy_match() ! */
 struct _WacomMatch {
+	gint refcnt;
 	char *match;
 	char *name;
 	WacomBusType bus;
@@ -65,6 +68,7 @@ struct _WacomMatch {
  * libwacom_print_device_description() ! */
 struct _WacomDevice {
 	char *name;
+	char *model_name;
 	int width;
 	int height;
 
@@ -99,8 +103,10 @@ struct _WacomDevice {
 };
 
 struct _WacomStylus {
+	gint refcnt;
 	int id;
 	char *name;
+	char *group;
 	int num_buttons;
 	gboolean has_eraser;
 	gboolean is_eraser;
@@ -120,16 +126,24 @@ struct _WacomError {
 	char *msg;
 };
 
-/* INTERNAL */
+WacomDevice* libwacom_ref(WacomDevice *device);
+WacomDevice* libwacom_unref(WacomDevice *device);
+WacomStylus* libwacom_stylus_ref(WacomStylus *stylus);
+WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
+WacomMatch* libwacom_match_ref(WacomMatch *match);
+WacomMatch* libwacom_match_unref(WacomMatch *match);
+
 void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
-void libwacom_stylus_destroy(WacomStylus *stylus);
-void libwacom_update_match(WacomDevice *device, const WacomMatch *match);
-WacomMatch* libwacom_match_new(const char *name, WacomBusType bus, int vendor_id, int product_id);
-void libwacom_match_destroy(WacomMatch *match);
+void libwacom_add_match(WacomDevice *device, WacomMatch *newmatch);
+WacomMatch* libwacom_match_new(const char *name, WacomBusType bus,
+			       int vendor_id, int product_id);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
 char *make_match_string(const char *name, WacomBusType bus, int vendor_id, int product_id);
+
+#define streq(s1, s2) (strcmp((s1), (s2)) == 0)
+#define strneq(s1, s2, n) (strncmp((s1), (s2), (n)) == 0)
 
 #endif /* _LIBWACOMINT_H_ */
 

@@ -209,6 +209,8 @@ update_tablet (Tablet *tablet)
 	gchar       *file_data, *escaped_file_data, *data;
 	gsize        file_len;
 
+	error = NULL;
+
 	if (tablet->handle)
 		g_object_unref (tablet->handle);
 

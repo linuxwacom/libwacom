@@ -1,0 +1,61 @@
+# Wacom
+# Bamboo Fun
+# CTE-450
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          AAAA   BBBB
+#          CCCC   DDDD
+#   *-----------------------*
+#   |                       |
+#   |                       |
+#   |                       |
+#   |        TABLET         |
+#   |                       |
+#   |                       |
+#   |                       |
+#   |                       |
+#   *-----------------------*
+#
+# Default button assignments:
+# A: Back
+# B: Forward
+# C: Left
+# D: Right
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#               A
+#   *-----------------------*
+#   |                       |
+#   |        TABLET         |
+#   |                       |
+#   *-----------------------*
+#
+# first generation Bamboo
+#
+# stylus with two buttons and eraser (LP160E)
+# Pen active area: 5.8 x 3.62in
+
+[Device]
+Name=Wacom Bamboo Fun small
+ModelName=CTE-450
+DeviceMatch=usb:056a:0017
+Class=Bamboo
+Width=6
+Height=4
+IntegratedIn=
+Layout=bamboo-0fg-s-p-alt.svg
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=4
+Ring=true
+
+[Buttons]
+Top=A;B;C;D
+EvdevCodes=0x116;0x115;0x110;0x111

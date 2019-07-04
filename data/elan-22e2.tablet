@@ -2,10 +2,11 @@
 
 [Device]
 Name=ELAN 22E2
+ModelName=
 DeviceMatch=i2c:04f3:22e2
 Class=ISDV4
 IntegratedIn=Display;System
-Styli=0xfffff;0xffffe
+Styli=0xffffe;0xfffff;
 
 [Features]
 Stylus=true

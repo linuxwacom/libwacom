@@ -9,6 +9,7 @@
 
 [Device]
 Name=Wacom Bamboo 16FG 4x5
+ModelName=CTT-470
 DeviceMatch=usb:056a:00dc
 Class=Bamboo
 Width=6

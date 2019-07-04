@@ -96,9 +96,12 @@ int main(int argc, char **argv)
 		char fname[PATH_MAX];
 
 		snprintf(fname, sizeof(fname), "/dev/input/%s", namelist[i]->d_name);
+
 		dev = libwacom_new_from_path(db, fname, WFALLBACK_NONE, NULL);
 		if (!dev)
 			continue;
+
+		dprintf(STDOUT_FILENO, "# Device node: %s\n", fname);
 		libwacom_print_device_description(STDOUT_FILENO, dev);
 		libwacom_destroy(dev);
 

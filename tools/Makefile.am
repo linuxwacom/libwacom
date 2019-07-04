@@ -1,6 +1,6 @@
 AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(abs_top_srcdir)\""
 
-noinst_PROGRAMS = generate-udev-rules list-devices
+noinst_PROGRAMS = generate-udev-rules list-devices list-compatible-styli
 
 generate_udev_rules_SOURCES = generate-udev-rules.c
 generate_udev_rules_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
@@ -8,6 +8,9 @@ generate_udev_rules_CFLAGS=$(GLIB_CFLAGS)
 
 list_devices_SOURCES = list-devices.c
 list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
+
+list_compatible_styli_SOURCES = list-compatible-styli.c
+list_compatible_styli_LDADD=$(top_builddir)/libwacom/libwacom.la
 
 bin_PROGRAMS = libwacom-list-local-devices
 libwacom_list_local_devices_SOURCES = list-local-devices.c

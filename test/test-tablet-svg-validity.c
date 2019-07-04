@@ -231,7 +231,7 @@ check_touchring (xmlNodePtr cur, gchar *id)
 }
 
 static void
-verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
+verify_tablet_layout (WacomDevice *device)
 {
 	const char *name;
 	const char *filename;
@@ -298,14 +298,19 @@ verify_tablet_layout (WacomDeviceDatabase *db, WacomDevice *device)
 }
 
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **device, **devices;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	g_assert(db);
 
 	devices = libwacom_list_devices_from_database(db, NULL);
@@ -313,7 +318,7 @@ int main(int argc, char **argv)
 	g_assert(*devices);
 
 	for (device = devices; *device; device++)
-		verify_tablet_layout(db, *device);
+		verify_tablet_layout(*device);
 
 	free(devices);
 	libwacom_database_destroy (db);

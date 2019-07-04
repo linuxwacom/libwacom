@@ -34,13 +34,14 @@
 
 [Device]
 Name=Wacom Intuos4 WL
+ModelName=PTK-540WL
 DeviceMatch=usb:056a:00bc;bluetooth:056a:00bd
 Class=Intuos4
 Width=8
 Height=5
 IntegratedIn=
 Layout=intuos4-6x9-wl.svg
-Styli=0x802;0x804;0x806;0x80a;0x80c;0x902;0x90a;0x100802;0x100804;0x10080a;0x10080c;0x100902;0x10090a;0x120802;0x140802;0x14080a;0x160802;0x16080a;
+Styli=@intuos4-puck;@intuos5;@intuos4;
 
 [Features]
 Reversible=true

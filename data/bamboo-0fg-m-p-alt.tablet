@@ -1,0 +1,60 @@
+# Wacom
+# Bamboo Fun
+# CTE-650
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          AAAA   BBBB
+#          CCCC   DDDD
+#   *-----------------------*
+#   |                       |
+#   |                       |
+#   |                       |
+#   |        TABLET         |
+#   |                       |
+#   |                       |
+#   |                       |
+#   |                       |
+#   *-----------------------*
+#
+# Default button assignments:
+# A: Back
+# B: Forward
+# C: Left
+# D: Right
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#               A
+#   *-----------------------*
+#   |                       |
+#   |        TABLET         |
+#   |                       |
+#   *-----------------------*
+#
+# first generation Bamboo
+#
+# Pen active area: 8.52 x 5.33in
+
+[Device]
+Name=Wacom Bamboo Fun medium
+ModelName=CTE-650
+DeviceMatch=usb:056a:0018
+Class=Bamboo
+Width=9
+Height=5
+IntegratedIn=
+Layout=bamboo-0fg-s-p-alt.svg
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=4
+Ring=true
+
+[Buttons]
+Top=A;B;C;D
+EvdevCodes=0x116;0x115;0x110;0x111

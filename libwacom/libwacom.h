@@ -105,6 +105,7 @@ enum WacomErrorCode {
 	WERROR_INVALID_DB,	/**< The passed DB is invalid */
 	WERROR_BAD_ACCESS,	/**< Invalid permissions to access the path */
 	WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
+	WERROR_BUG_CALLER,	/**< A bug in the caller */
 };
 
 /**
@@ -317,7 +318,7 @@ WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *n
  * @return A NULL terminated list of pointers to all the devices inside the
  * database.
  * The content of the list is owned by the database and should not be
- * modified of freed. Use free() to free the list.
+ * modified or freed. Use free() to free the list.
  */
 WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db, WacomError *error);
 
@@ -362,6 +363,12 @@ const char* libwacom_get_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
+ * @return The vendor-specific model name (e.g. CTE-650 for a Bamboo Fun), or NULL if none is set
+ */
+const char* libwacom_get_model_name(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
  * @return The full filename including path to the SVG layout of the device
  * if available, or NULL otherwise
  */
@@ -370,6 +377,10 @@ const char* libwacom_get_layout_filename(const WacomDevice *device);
 /**
  * @param device The tablet to query
  * @return The numeric vendor ID for this device
+ *
+ * @bug The return value is a signed int but libwacom_match_get_vendor_id()
+ * returns an unsigned int. This may cause compiler warnings, but the
+ * effective range for vendor IDs is 16-bit only anyway.
  */
 int libwacom_get_vendor_id(const WacomDevice *device);
 
@@ -406,6 +417,10 @@ const WacomMatch* libwacom_get_paired_device(const WacomDevice *device);
 /**
  * @param device The tablet to query
  * @return The numeric product ID for this device
+ *
+ * @bug The return value is a signed int but libwacom_match_get_product_id()
+ * returns an unsigned int. This may cause compiler warning, but the
+ * effective range for product IDs is 16-bit only anyway.
  */
 int libwacom_get_product_id(const WacomDevice *device);
 

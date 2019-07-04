@@ -1,11 +1,17 @@
+# Wacom
+# Intuos2 6x8
+# XD-0608
+
 [Device]
 Name=Wacom Intuos2 6x8
+ModelName=XD-0608
 # FIXME add missing usb:0056a:0047 match
 DeviceMatch=usb:056a:0042
 Class=Intuos2
 Width=8
 Height=6
-Styli=0x912;0x91a;0x822;0x82a;0x842;0x852;0x85a;0x812;0x832;0x096;0x094;0x007;
+# ID 0x842 was re-used, listed here explicitly
+Styli=0x842;@intuos;@intuos2;
 
 [Features]
 Stylus=true

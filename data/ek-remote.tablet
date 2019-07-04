@@ -13,6 +13,7 @@
 
 [Device]
 Name=Wacom ExpressKey Remote
+ModelName=ACK-411050
 DeviceMatch=usb:056a:0331
 Layout=ek-remote.svg
 Class=Remote
@@ -26,6 +27,7 @@ StatusLEDs=Ring
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109;0x130;0x131;0x132;0x133;0x134;0x135;0x126;0x127
 
 #Note that though this device has 3 ring modes
 #this mode selection does not function the same

@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-WacomError*
+LIBWACOM_EXPORT WacomError*
 libwacom_error_new(void)
 {
 	WacomError *error = malloc(sizeof(*error));
@@ -44,7 +44,7 @@ libwacom_error_new(void)
 	return error;
 }
 
-void
+LIBWACOM_EXPORT void
 libwacom_error_free(WacomError **error)
 {
 	free((*error)->msg);
@@ -52,21 +52,22 @@ libwacom_error_free(WacomError **error)
 	*error = NULL;
 }
 
-enum WacomErrorCode
+LIBWACOM_EXPORT enum WacomErrorCode
 libwacom_error_get_code(WacomError *error)
 {
 	return error->code;
 }
 
-const char*
+LIBWACOM_EXPORT const char*
 libwacom_error_get_message(WacomError *error)
 {
 	return error->msg;
 }
 
-/* INTERNAL */
+__attribute__ ((format (printf, 3, 4)))
 void
-libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...)
+libwacom_error_set(WacomError *error, enum WacomErrorCode code,
+		   const char *msg, ...)
 {
 	if (!error)
 		return;

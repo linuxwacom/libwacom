@@ -36,13 +36,14 @@
 
 [Device]
 Name=Intuos Pen & Touch Medium
+ModelName=CTH-690
 DeviceMatch=usb:056a:033e
 Class=Bamboo
 Width=9
 Height=5
 Layout=intuos-m-pt2.svg
 IntegratedIn=
-Styli=0x8e2;
+Styli=@intuospt;
 
 [Features]
 Stylus=true

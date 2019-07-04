@@ -19,13 +19,14 @@
 
 [Device]
 Name=Wacom Intuos BT S
+ModelName=CTL-4100WL
 DeviceMatch=usb:056a:0376;bluetooth:056a:0377
 Class=Bamboo
 Width=8
 Height=6
 Layout=intuos-s-p3.svg
 IntegratedIn=
-Styli=0x862;
+Styli=@intuospt3;
 
 [Features]
 Stylus=true

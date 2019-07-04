@@ -4,6 +4,7 @@
 
 [Device]
 Name=XP-Pen Star 03
+ModelName=
 DeviceMatch=usb:5543:0081:UC-Logic TABLET 1060N Pen;usb:5543:0081:UC-Logic TABLET 1060N Pad
 Class=Bamboo
 Width=10

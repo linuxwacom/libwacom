@@ -15,13 +15,14 @@
 
 [Device]
 Name=Wacom DTH2242
+ModelName=DTH-2242
 DeviceMatch=usb:056a:0059
 PairedID=usb:056a:005d
 Class=PenDisplay
 Width=19
 Height=11
 Layout=dth-2242.svg
-Styli=0x180802;0x18080a;
+Styli=@dth2242;
 IntegratedIn=Display
 
 [Features]

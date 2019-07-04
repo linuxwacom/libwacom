@@ -1,0 +1,20 @@
+# Wacom
+# DTK-1660E
+
+[Device]
+Name=Wacom DTK-1660E
+ModelName=DTK-1660E
+Class=Cintiq
+DeviceMatch=usb:056a:0396
+Width=14
+Height=8
+# No pad buttons, so no layout
+Styli=@intuos5;@mobilestudio;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Buttons=0

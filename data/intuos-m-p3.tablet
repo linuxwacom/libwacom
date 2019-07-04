@@ -19,13 +19,14 @@
 
 [Device]
 Name=Wacom Intuos M
+ModelName=CTL-6100
 DeviceMatch=usb:056a:0375
 Class=Bamboo
 Width=10
 Height=8
 Layout=intuos-m-p3.svg
 IntegratedIn=
-Styli=0x862;
+Styli=@intuospt3;
 
 [Features]
 Stylus=true

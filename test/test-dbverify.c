@@ -90,7 +90,7 @@ compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 	{
 		int found = 0;
 		printf("Matching %s\n", libwacom_get_name(*n));
-		for (o = oldall, i = 0; *o && !found; o++, i++)
+		for (o = oldall, i = 0; *o && !found; o++, i++) {
 			/* devices with multiple matches will have multiple
 			 * devices in the list */
 			if (old_matched[i] == 0 &&
@@ -98,6 +98,7 @@ compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
 				found = 1;
 				old_matched[i] = 1;
 			}
+		}
 
 		if (!found)
 			printf("Failed to match '%s'\n", libwacom_get_name(*n));
@@ -122,7 +123,7 @@ compare_written_database(WacomDeviceDatabase *db)
 {
 	char *dirname;
 	WacomDeviceDatabase *db_new;
-        WacomDevice **device, **devices;
+	WacomDevice **device, **devices;
 	int i;
 
 	devices = libwacom_list_devices_from_database(db, NULL);
@@ -140,10 +141,8 @@ compare_written_database(WacomDeviceDatabase *db)
 		int nstyli;
 		const int *styli;
 
-		assert(asprintf(&path, "%s/%d-%04x-%04x.tablet", dirname,
-				libwacom_get_bustype(*device),
-				libwacom_get_vendor_id(*device),
-				libwacom_get_product_id(*device)) != -1);
+		assert(asprintf(&path, "%s/%s.tablet", dirname,
+				libwacom_get_match(*device)) != -1);
 		assert(path);
 		fd = open(path, O_WRONLY|O_CREAT, S_IRWXU);
 		assert(fd >= 0);
@@ -181,13 +180,18 @@ compare_written_database(WacomDeviceDatabase *db)
 }
 
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	assert(db);
 
 

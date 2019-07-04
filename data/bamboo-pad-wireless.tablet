@@ -6,6 +6,7 @@
 
 [Device]
 Name=Wacom Bamboo Pad Wireless
+ModelName=CTH-300
 DeviceMatch=usb:056a:0319
 Class=Bamboo
 Width=4

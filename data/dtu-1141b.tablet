@@ -15,6 +15,7 @@
 
 [Device]
 Name=Wacom DTU1141B
+ModelName=DTU-1141B
 DeviceMatch=usb:056a:0359
 Class=PenDisplay
 Width=9

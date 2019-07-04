@@ -28,9 +28,10 @@
 #include "config.h"
 #endif
 
-#include "input-event-codes.h"
+#include <linux/input-event-codes.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "libwacom.h"
 #include <assert.h>
@@ -48,9 +49,9 @@ static void check_multiple_match(WacomDevice *device)
 		nmatches++;
 		if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
 			found_bus = 1;
-		if (libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
+		if ((int)libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
 			found_vendor_id = 1;
-		if (libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
+		if ((int)libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
 			found_product_id = 1;
 	}
 
@@ -58,16 +59,21 @@ static void check_multiple_match(WacomDevice *device)
 	assert(found_bus && found_vendor_id && found_product_id);
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice *device;
 	const WacomMatch *match;
 	const char *str;
+	const char *datadir;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	datadir = getenv("LIBWACOM_DATA_DIR");
+	if (!datadir)
+		datadir = TOPSRCDIR"/data";
+
+	db = libwacom_database_new_for_path(datadir);
 	if (!db)
-		printf("Failed to load data from %s", TOPSRCDIR"/data");
+		printf("Failed to load data from %s", datadir);
 	assert(db);
 
 	device = libwacom_new_from_usbid(db, 0, 0, NULL);
@@ -130,6 +136,7 @@ int main(int argc, char **argv)
 	assert(device);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
 	assert(libwacom_get_integration_flags (device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	assert(libwacom_get_model_name (device) == NULL);
 	libwacom_destroy(device);
 
 	/* 24HDT has one paired device */
@@ -141,6 +148,7 @@ int main(int argc, char **argv)
 	assert(libwacom_match_get_vendor_id(match) == 0x56a);
 	assert(libwacom_match_get_product_id(match) == 0xf6);
 	assert(libwacom_match_get_bustype(match) == WBUSTYPE_USB);
+	libwacom_destroy(device);
 
 	device = libwacom_new_from_name(db, "Wacom Cintiq 13HD", NULL);
 	assert(device);
@@ -153,6 +161,7 @@ int main(int argc, char **argv)
 	assert(libwacom_get_button_evdev_code(device, 'G') == BTN_6);
 	assert(libwacom_get_button_evdev_code(device, 'H') == BTN_7);
 	assert(libwacom_get_button_evdev_code(device, 'I') == BTN_8);
+	assert(strcmp(libwacom_get_model_name(device), "DTK-1300") == 0);
 	libwacom_destroy(device);
 
 	device = libwacom_new_from_name(db, "Wacom Bamboo Pen", NULL);
@@ -161,6 +170,7 @@ int main(int argc, char **argv)
 	assert(libwacom_get_button_evdev_code(device, 'B') == BTN_FORWARD);
 	assert(libwacom_get_button_evdev_code(device, 'C') == BTN_LEFT);
 	assert(libwacom_get_button_evdev_code(device, 'D') == BTN_RIGHT);
+	assert(strcmp(libwacom_get_model_name(device), "MTE-450") == 0);
 	libwacom_destroy(device);
 
 	libwacom_database_destroy (db);

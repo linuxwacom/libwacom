@@ -32,6 +32,20 @@ script:
 
 jobs:
   include:
+    - stage: test
+      install:
+        - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind
+        - sudo pip3 install meson
+      script:
+        - meson builddir
+        - ninja -C builddir test || (cat builddir/meson-logs/testlog.txt && false)
+        - ninja -C builddir dist
+        - meson configure builddir -Db_sanitize=address,undefined
+        - ninja -C builddir test || (cat builddir/meson-logs/testlog.txt && false)
+        - meson configure builddir -Db_sanitize=none
+        - pushd builddir > /dev/null
+        - meson test --setup=valgrind --suite=valgrind || (cat meson-logs/testlog-valgrind.txt && false)
+        - popd > /dev/null
     - stage: coverity
       compiler: 'gcc'
       env:

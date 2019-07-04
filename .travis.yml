@@ -1,3 +1,5 @@
+sudo: required
+dist: xenial
 language: c
 
 compiler:
@@ -10,24 +12,43 @@ addons:
       - libgudev-1.0-dev
       - libxml++2.6-dev
 
-before_install:
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+stages:
+  - test
+  - name: coverity
+    if: type = cron
 
 env:
   global:
-    - secure: 'd0i9vJa6/lNDlCYMbKjNI77j1xnhw0ktBDAz0C10QbzIx17EsaYXOuAgO2ffWdIdGU7cP7yCH3gZGTRLnaPZfj7z1n7W81A8Hlosfc7AGcSW+EAo8T+CSxdFw1BfEPPWctsBP2y02INrOCno9k00pnW1shHlT7QzPxnHIsuPmHv21AbyUGbGk3nmvnfGg60dIYOLPdkZFNCGTNf6XtE0KVB0TLwS03/K8R1GnMtm5Qs0FXIDYMfASn1kKTPQOERYUIDABMCeYBfgHtiRvAzZkcxRnjVdoZvByDCfTeOtA3gS0bQ+nMt2UEHz2zzUS2egRGfAOafEqhvMrxEAdU9+HXNZIoPJfkLZWkUoe+3U/+Zj3NoIK/mpmtRFtHLyISp7kL/kQ9g8+cJPL5EI2RvIRM5cdf5Z47kI0Y0tQjceONz/7cHHCozZsrCLTjB4rlgWOxhbu+UL9C8vKYO1AX6rl1R/4J/WKc/ODztmNQem3u/GQEfHXyKVO+zrehAjtKb08wjQEGyMJYB7hxS3tDCb9/cCHkdi81Sx2WtF8mXp4TjCJafx7vyBo4VVlDuExvjodrZh/50KrzzZ+wGDE0tN42tJsuMGvJVTteNNk1pQ7r6XSlTOjbGsAQE+ri6Q8XBx63ES5Y1oN0bkA38KqhCfOrZIKXtx7QMLpPv2QKCaccg='
     - CFLAGS="-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
 
-matrix:
-  include:
-    - compiler: "gcc"
-      env: BUILDTYPE="coverity", COVERITY_SCAN_PROJECT_NAME="linuxwacom/libwacom", COVERITY_SCAN_NOTIFICATION_EMAIL="killertofu@gmail.com", COVERITY_SCAN_BUILD_COMMAND_PREPEND="", COVERITY_SCAN_BUILD_COMMAND="make", COVERITY_SCAN_BRANCH_PATTERN=".*", COVERITY_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
-
-before_script:
-  - if [[ -n "$COVERITY_URL" ]]; then curl -fs "$COVERITY_URL" > coverity.sh && sed -i 's/"$status_code" != "201"/"$status_code" -lt 200 -o "$status_code" -ge 300/' coverity.sh && chmod +x coverity.sh; fi
-  - ./autogen.sh --disable-silent-rules
-
 script:
-  - if [[ x"$TRAVIS_EVENT_TYPE" = "xcron" ]]; then export DO_COVERITY="YES"; fi
-  - if [[ x"$BUILDTYPE" = "xcoverity" && x"$DO_COVERITY" = "xYES" ]]; then bash ./coverity.sh; fi
-  - if [[ x"$BUILDTYPE" != "xcoverity" ]]; then make && make check || (cat **/test-suite.log && false); fi
+  - mkdir _build
+  - pushd _build > /dev/null
+  - ../autogen.sh --disable-silent-rules
+  - make
+  - make check || (cat **/test-suite.log && false)
+  - make distcheck
+  - popd > /dev/null
+
+jobs:
+  include:
+    - stage: coverity
+      compiler: 'gcc'
+      env:
+        - BUILDTYPE="coverity"
+        - COVERITY_SCAN_PROJECT_NAME="linuxwacom/libwacom"
+        - COVERITY_SCAN_NOTIFICATION_EMAIL="killertofu@gmail.com"
+        - COVERITY_SCAN_BUILD_COMMAND_PREPEND=""
+        - COVERITY_SCAN_BUILD_COMMAND="make"
+        - COVERITY_SCAN_BRANCH_PATTERN=".*"
+        - COVERITY_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
+        - secure: 'd0i9vJa6/lNDlCYMbKjNI77j1xnhw0ktBDAz0C10QbzIx17EsaYXOuAgO2ffWdIdGU7cP7yCH3gZGTRLnaPZfj7z1n7W81A8Hlosfc7AGcSW+EAo8T+CSxdFw1BfEPPWctsBP2y02INrOCno9k00pnW1shHlT7QzPxnHIsuPmHv21AbyUGbGk3nmvnfGg60dIYOLPdkZFNCGTNf6XtE0KVB0TLwS03/K8R1GnMtm5Qs0FXIDYMfASn1kKTPQOERYUIDABMCeYBfgHtiRvAzZkcxRnjVdoZvByDCfTeOtA3gS0bQ+nMt2UEHz2zzUS2egRGfAOafEqhvMrxEAdU9+HXNZIoPJfkLZWkUoe+3U/+Zj3NoIK/mpmtRFtHLyISp7kL/kQ9g8+cJPL5EI2RvIRM5cdf5Z47kI0Y0tQjceONz/7cHHCozZsrCLTjB4rlgWOxhbu+UL9C8vKYO1AX6rl1R/4J/WKc/ODztmNQem3u/GQEfHXyKVO+zrehAjtKb08wjQEGyMJYB7hxS3tDCb9/cCHkdi81Sx2WtF8mXp4TjCJafx7vyBo4VVlDuExvjodrZh/50KrzzZ+wGDE0tN42tJsuMGvJVTteNNk1pQ7r6XSlTOjbGsAQE+ri6Q8XBx63ES5Y1oN0bkA38KqhCfOrZIKXtx7QMLpPv2QKCaccg='
+      before_install:
+        - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+      before_script:
+        - if [[ -n "$COVERITY_URL" ]]; then curl -fs "$COVERITY_URL" > coverity.sh && sed -i 's/"$status_code" != "201"/"$status_code" -lt 200 -o "$status_code" -ge 300/' coverity.sh && chmod +x coverity.sh; fi
+      script:
+        - ./autogen.sh --disable-silent-rules
+        - bash ./coverity.sh
+
+# vim: set expandtab tabstop=8 shiftwidth=2:

@@ -1,0 +1,21 @@
+# Wacom
+# Cintiq 22
+# DTK-2260
+
+[Device]
+Name=Wacom Cintiq 22
+ModelName=DTK-2260
+Class=Cintiq
+DeviceMatch=usb:056a:0391
+Width=19
+Height=10
+# No pad buttons, so no layout
+Styli=@intuos5;@mobilestudio;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Buttons=0

@@ -123,6 +123,7 @@ data_files = [
 	'data/cintiq-21ux.tablet',
 	'data/cintiq-22hd.tablet',
 	'data/cintiq-22hdt.tablet',
+	'data/cintiq-22.tablet',
 	'data/cintiq-24hd.tablet',
 	'data/cintiq-24hd-touch.tablet',
 	'data/cintiq-27hd.tablet',

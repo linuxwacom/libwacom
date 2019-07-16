@@ -17,7 +17,7 @@ Name=Wacom Intuos4 6x9
 # will give you the device match below.
 #
 # You can find a full list of known Device IDs at:
-# https://sourceforge.net/apps/mediawiki/linuxwacom/index.php?title=Device_IDs
+# https://github.com/linuxwacom/input-wacom/wiki/Device-IDs
 #
 # Do not add 0x in front of the hex numbers, make sure to pad each ID
 # so it has exactly 4 digits.

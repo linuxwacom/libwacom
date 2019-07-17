@@ -147,14 +147,13 @@ make_match_string (const char *name, WacomBusType bus, int vendor_id, int produc
 static gboolean
 match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *product_id, char **name)
 {
-	int rc = 1;
-	char busstr[64], namestr[64];
+	int rc = 1, len = 0;
+	char busstr[64];
 
-	memset(namestr, 0, sizeof(namestr));
-
-	rc = sscanf(str, "%63[^:]:%x:%x:%63c", busstr, vendor_id, product_id, namestr);
-	if (rc == 4) {
-		*name = g_strdup(namestr);
+	rc = sscanf(str, "%63[^:]:%x:%x:%n", busstr, vendor_id, product_id, &len);
+	if (len > 0) {
+		/* Grumble grumble scanf handling of %n */
+		*name = g_strdup(str+len);
 	} else if (rc == 3) {
 		*name = NULL;
 	} else {

@@ -116,6 +116,14 @@ test_tilt(gconstpointer data)
 }
 
 static void
+test_no_tilt(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	gboolean has_tilt = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_TILT;
+	g_assert_false(has_tilt);
+}
+
+static void
 test_pressure(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
@@ -124,11 +132,27 @@ test_pressure(gconstpointer data)
 }
 
 static void
+test_no_pressure(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	gboolean has_pressure = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_PRESSURE;
+	g_assert_false(has_pressure);
+}
+
+static void
 test_distance(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
 	gboolean has_distance = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
 	g_assert_true(has_distance);
+}
+
+static void
+test_no_distance(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	gboolean has_distance = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
+	g_assert_false(has_distance);
 }
 
 static void
@@ -145,6 +169,14 @@ test_buttons(gconstpointer data)
 	const WacomStylus *stylus = data;
 
 	g_assert_cmpint(libwacom_stylus_get_num_buttons(stylus), >, 0);
+}
+
+static void
+test_no_buttons(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	g_assert_cmpint(libwacom_stylus_get_num_buttons(stylus), ==, 0);
 }
 
 /* Wrapper function to make adding tests simpler. g_test requires
@@ -176,28 +208,63 @@ setup_tests(const WacomStylus *stylus)
 	add_test(stylus, test_name);
 	add_test(stylus, test_type);
 
+	/* Button checks */
+	switch (libwacom_stylus_get_type(stylus)) {
+		case WSTYLUS_PUCK:
+			add_test(stylus, test_puck);
+			add_test(stylus, test_buttons);
+			break;
+		case WSTYLUS_INKING:
+		case WSTYLUS_STROKE:
+			add_test(stylus, test_no_buttons);
+			break;
+		default:
+			switch (libwacom_stylus_get_id(stylus)) {
+				case 0x885:
+					add_test(stylus, test_no_buttons);
+					break;
+				default:
+					add_test(stylus, test_buttons);
+			}
+	}
+
+	/* Axes checks */
+	switch (libwacom_stylus_get_id(stylus)) {
+		case 0xffffd:
+			add_test(stylus, test_pressure);
+			add_test(stylus, test_no_distance);
+			add_test(stylus, test_no_tilt);
+			break;
+		case 0x006:
+		case 0x096:
+		case 0x097:
+			add_test(stylus, test_no_pressure);
+			add_test(stylus, test_distance);
+			add_test(stylus, test_no_tilt);
+			break;
+		case 0x007:
+		case 0x017:
+		case 0x094:
+		case 0x806:
+			add_test(stylus, test_no_pressure);
+			add_test(stylus, test_distance);
+			add_test(stylus, test_tilt);
+			break;
+		case 0x8e2:
+		case 0x862:
+			add_test(stylus, test_pressure);
+			add_test(stylus, test_distance);
+			add_test(stylus, test_no_tilt);
+			break;
+		default:
+			add_test(stylus, test_pressure);
+			add_test(stylus, test_tilt);
+			add_test(stylus, test_distance);
+			break;
+	}
+
 	if (libwacom_stylus_has_eraser(stylus))
 		add_test(stylus, test_eraser);
-
-	if (libwacom_stylus_get_type(stylus) == WSTYLUS_PUCK)
-		add_test(stylus, test_puck);
-
-	if (libwacom_stylus_is_eraser(stylus))
-		add_test(stylus, test_buttons);
-
-	if (libwacom_stylus_get_type(stylus) != WSTYLUS_PUCK) {
-		switch (libwacom_stylus_get_id(stylus)) {
-			case 0xffffd:
-			case 0x8e2:
-			case 0x862:
-				break;
-			default:
-				add_test(stylus, test_tilt);
-				add_test(stylus, test_pressure);
-				add_test(stylus, test_distance);
-				break;
-		}
-	}
 }
 
 /**

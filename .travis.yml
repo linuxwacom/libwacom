@@ -60,7 +60,7 @@ jobs:
       before_install:
         - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       before_script:
-        - if [[ -n "$COVERITY_URL" ]]; then curl -fs "$COVERITY_URL" > coverity.sh && sed -i 's/"$status_code" != "201"/"$status_code" -lt 200 -o "$status_code" -ge 300/' coverity.sh && chmod +x coverity.sh; fi
+        - curl -fs "$COVERITY_URL" > coverity.sh && sed -i 's/"$status_code" != "201"/"$status_code" -lt 200 -o "$status_code" -ge 300/' coverity.sh && chmod +x coverity.sh
       script:
         - ./autogen.sh --disable-silent-rules
         - bash ./coverity.sh

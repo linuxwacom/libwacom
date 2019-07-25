@@ -6,17 +6,16 @@ project('libwacom', 'c',
 
 libwacom_version = meson.project_version().split('.')
 
-dir_data = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
+dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
 dir_layouts = join_paths(dir_data, 'layouts')
-dir_man1 = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
-dir_src  = join_paths(meson.source_root(), 'libwacom')
-dir_test = join_paths(meson.source_root(), 'test')
+dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
+dir_src     = join_paths(meson.source_root(), 'libwacom')
+dir_test    = join_paths(meson.source_root(), 'test')
 
 # Do not modify this, use symbol versioning instead.
 libwacom_lt_c=8
 libwacom_lt_r=1
 libwacom_lt_a=6
-
 # convert ltversion to soname
 libwacom_so_version = '@0@.@1@.@2@'.format((libwacom_lt_c - libwacom_lt_a),
                                             libwacom_lt_a, libwacom_lt_r)
@@ -29,13 +28,13 @@ add_project_arguments(cflags, language: 'c')
 add_project_arguments(cppflags, language: 'cpp')
 
 # Dependencies
-pkgconfig = import('pkgconfig')
-dep_gudev = dependency('gudev-1.0')
-dep_glib = dependency('glib-2.0')
+pkgconfig   = import('pkgconfig')
+dep_gudev   = dependency('gudev-1.0')
+dep_glib    = dependency('glib-2.0')
 dep_librsvg = dependency('librsvg-2.0')
-dep_libxml = dependency('libxml-2.0', required: false)
-dep_gtk2 = dependency('gtk+-2.0', required: false)
-dep_dl = meson.get_compiler('c').find_library('dl')
+dep_libxml  = dependency('libxml-2.0', required: false)
+dep_gtk2    = dependency('gtk+-2.0', required: false)
+dep_dl      = meson.get_compiler('c').find_library('dl')
 
 # includes_include = include_directories('include')
 includes_src = include_directories('libwacom')

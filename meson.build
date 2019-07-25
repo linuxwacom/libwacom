@@ -32,7 +32,7 @@ add_project_arguments(cflags, language: 'c')
 pkgconfig   = import('pkgconfig')
 dep_gudev   = dependency('gudev-1.0')
 dep_glib    = dependency('glib-2.0')
-dep_librsvg = dependency('librsvg-2.0')
+dep_librsvg = dependency('librsvg-2.0', required: false)
 dep_gtk2    = dependency('gtk+-2.0', required: false)
 
 # includes_include = include_directories('include')
@@ -425,7 +425,7 @@ executable('list-compatible-styli',
 	   c_args: tools_cflags,
 	   install: false)
 
-if dep_gtk2.found()
+if dep_gtk2.found() and dep_librsvg.found()
 	executable('show-svg-image',
 		   'tools/show-svg-image.c',
 		   dependencies: [dep_libwacom, dep_gtk2, dep_librsvg],

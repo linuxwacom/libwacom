@@ -33,9 +33,7 @@ pkgconfig   = import('pkgconfig')
 dep_gudev   = dependency('gudev-1.0')
 dep_glib    = dependency('glib-2.0')
 dep_librsvg = dependency('librsvg-2.0')
-dep_libxml  = dependency('libxml-2.0', required: false)
 dep_gtk2    = dependency('gtk+-2.0', required: false)
-dep_dl      = meson.get_compiler('c').find_library('dl')
 
 # includes_include = include_directories('include')
 includes_src = include_directories('libwacom')
@@ -463,42 +461,45 @@ if doxygen.found()
 endif
 ############# tests ############################
 
-tests_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
-
-test_load = executable('test-load',
-		       'test/test-load.c',
-		       dependencies: [dep_libwacom, dep_glib],
-		       include_directories: [includes_src],
-		       c_args: tests_cflags,
-		       install: false)
-test('test-load', test_load, suite: ['all', 'valgrind'])
-
-test_dbverify = executable('test-dbverify',
-			   'test/test-dbverify.c',
-			   dependencies: [dep_libwacom, dep_glib],
-			   include_directories: [includes_src],
-			   c_args: tests_cflags,
-			   install: false)
-test('test-dbverify', test_dbverify, suite: ['all', 'valgrind'])
-
-test_tablet_validity = executable('test-tablet-validity',
-				  'test/test-tablet-validity.c',
-				  dependencies: [dep_libwacom, dep_glib],
-				  include_directories: [includes_src],
-				  c_args: tests_cflags,
-				  install: false)
-test('test-tablet-validity', test_tablet_validity, suite: ['all', 'valgrind'])
-
-test_stylus_validity= executable('test-stylus-validity',
-				 'test/test-stylus-validity.c',
-				 dependencies: [dep_libwacom, dep_glib],
-				 include_directories: [includes_src],
-				 c_args: tests_cflags,
-				 install: false)
-test('test-stylus-validity', test_stylus_validity, suite: ['all', 'valgrind'])
+if get_option('tests')
+	dep_libxml  = dependency('libxml-2.0')
+	dep_dl      = meson.get_compiler('c').find_library('dl')
 
 
-if dep_libxml.found()
+	tests_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
+
+	test_load = executable('test-load',
+			       'test/test-load.c',
+			       dependencies: [dep_libwacom, dep_glib],
+			       include_directories: [includes_src],
+			       c_args: tests_cflags,
+			       install: false)
+	test('test-load', test_load, suite: ['all', 'valgrind'])
+
+	test_dbverify = executable('test-dbverify',
+				   'test/test-dbverify.c',
+				   dependencies: [dep_libwacom, dep_glib],
+				   include_directories: [includes_src],
+				   c_args: tests_cflags,
+				   install: false)
+	test('test-dbverify', test_dbverify, suite: ['all', 'valgrind'])
+
+	test_tablet_validity = executable('test-tablet-validity',
+					  'test/test-tablet-validity.c',
+					  dependencies: [dep_libwacom, dep_glib],
+					  include_directories: [includes_src],
+					  c_args: tests_cflags,
+					  install: false)
+	test('test-tablet-validity', test_tablet_validity, suite: ['all', 'valgrind'])
+
+	test_stylus_validity= executable('test-stylus-validity',
+					 'test/test-stylus-validity.c',
+					 dependencies: [dep_libwacom, dep_glib],
+					 include_directories: [includes_src],
+					 c_args: tests_cflags,
+					 install: false)
+	test('test-stylus-validity', test_stylus_validity, suite: ['all', 'valgrind'])
+
 	test_svg_validity = executable('test-svg-validity',
 				       'test/test-tablet-svg-validity.c',
 				       dependencies: [dep_libwacom, dep_libxml, dep_glib],
@@ -506,35 +507,36 @@ if dep_libxml.found()
 				       c_args: tests_cflags,
 				       install: false)
 	test('test-svg-validity', test_svg_validity, suite: ['all', 'valgrind'])
+
+	valgrind = find_program('valgrind', required : false)
+	if valgrind.found()
+		valgrind_suppressions_file = join_paths(dir_test, 'valgrind.suppressions')
+		add_test_setup('valgrind',
+			       exe_wrapper: [valgrind,
+					     '--leak-check=full',
+					     '--gen-suppressions=all',
+					     '--error-exitcode=3',
+					     '--suppressions=' + valgrind_suppressions_file ],
+			       timeout_multiplier : 100)
+	else
+		message('valgrind not found, disabling valgrind test suite')
+	endif
+
+	test_deprecated = executable('test-deprecated',
+				     'test/test-deprecated.c',
+				     dependencies: [dep_libwacom, dep_dl],
+				     include_directories: [includes_src],
+				     c_args: tests_cflags,
+				     install: false)
+	test('test-deprecated', test_deprecated, suite: ['all'])
 endif
 
+# This is a non-optional test
 lt_version = '@0@:@1@:@2@'.format( libwacom_lt_c, libwacom_lt_r, libwacom_lt_a)
 test_ltversion = executable('test-ltversion',
 			    'test/test-ltversion.c',
 			    c_args: ['-DLIBWACOM_LT_VERSION="@0@"'.format(lt_version)],
 			    install: false)
 test('test-ltversion', test_ltversion, suite: ['all'])
-
-test_deprecated = executable('test-deprecated',
-			     'test/test-deprecated.c',
-			     dependencies: [dep_libwacom, dep_dl],
-			     include_directories: [includes_src],
-			     c_args: tests_cflags,
-			     install: false)
-test('test-deprecated', test_deprecated, suite: ['all'])
-
-valgrind = find_program('valgrind', required : false)
-if valgrind.found()
-	valgrind_suppressions_file = join_paths(dir_test, 'valgrind.suppressions')
-	add_test_setup('valgrind',
-		       exe_wrapper: [valgrind,
-				     '--leak-check=full',
-				     '--gen-suppressions=all',
-				     '--error-exitcode=3',
-				     '--suppressions=' + valgrind_suppressions_file ],
-		       timeout_multiplier : 100)
-else
-	message('valgrind not found, disabling valgrind test suite')
-endif
 
 # vim: set noexpandtab tabstop=8 shiftwidth=8:

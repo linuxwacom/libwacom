@@ -216,7 +216,7 @@ update_tablet (Tablet *tablet)
 
 	if (!g_file_get_contents (libwacom_get_layout_filename (tablet->device), &file_data, &file_len, NULL))
 		return;
-	escaped_file_data = g_markup_escape_text (file_data, file_len);
+	escaped_file_data = g_base64_encode ((guchar*) file_data, file_len);
 
 	width = g_strdup_printf ("%d", tablet->area.width);
 	height = g_strdup_printf ("%d", tablet->area.height);
@@ -271,7 +271,7 @@ update_tablet (Tablet *tablet)
 	                    "      fill:   ", DARK_COLOR,    " !important;\n"
 	                    "    }\n",
 	                    "  </style>\n"
-	                    "  <xi:include href=\"data:text/xml,", escaped_file_data, "\"/>\n"
+	                    "  <xi:include href=\"data:text/xml;base64,", escaped_file_data, "\"/>\n"
 	                    "</svg>",
 	                    NULL);
 

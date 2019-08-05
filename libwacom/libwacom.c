@@ -848,6 +848,9 @@ libwacom_unref(WacomDevice *device)
 {
 	int i;
 
+	if (device == NULL)
+		return NULL;
+
 	if (!g_atomic_int_dec_and_test(&device->refcnt))
 		return NULL;
 

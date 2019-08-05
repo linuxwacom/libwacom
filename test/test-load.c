@@ -238,6 +238,19 @@ test_bamboopen(struct fixture *f, gconstpointer user_data)
 	g_assert_cmpint(libwacom_get_button_evdev_code(device, 'C'), ==, BTN_LEFT);
 	g_assert_cmpint(libwacom_get_button_evdev_code(device, 'D'), ==, BTN_RIGHT);
 	g_assert_cmpstr(libwacom_get_model_name(device), ==, "MTE-450");
+
+	libwacom_destroy(device);
+}
+
+static void
+test_dellcanvas(struct fixture *f, gconstpointer user_data)
+{
+	WacomDevice *device = libwacom_new_from_name(f->db, "Dell Canvas 27", NULL);
+
+	g_assert_nonnull(device);
+	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
+	g_assert_false(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+
 	libwacom_destroy(device);
 }
 
@@ -285,6 +298,9 @@ int main(int argc, char **argv)
 		   fixture_teardown);
 	g_test_add("/load/056a:0065", struct fixture, NULL,
 		   fixture_setup, test_bamboopen,
+		   fixture_teardown);
+	g_test_add("/load/056a:4200", struct fixture, NULL,
+		   fixture_setup, test_dellcanvas,
 		   fixture_teardown);
 	g_test_add("/load/056a:WACf004", struct fixture, NULL,
 		   fixture_setup, test_wacf004,

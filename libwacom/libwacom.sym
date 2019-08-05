@@ -77,3 +77,13 @@ global:
     libwacom_stylus_get_eraser_type;
     libwacom_stylus_get_paired_ids;
 } LIBWACOM_0.33;
+
+LIBWACOM_1.6 {
+    libwacom_match_edid;
+    libwacom_edid_destroy;
+    libwacom_edid_new;
+    libwacom_edid_set_manufacturer_id;
+    libwacom_edid_set_product_code;
+    libwacom_edid_set_product_name;
+    libwacom_edid_set_serial_number;
+} LIBWACOM_1.4;

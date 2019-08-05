@@ -30,6 +30,7 @@
 
 #include "libwacomint.h"
 #include <assert.h>
+#include <fnmatch.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -340,9 +341,11 @@ libwacom_copy(const WacomDevice *device)
 	d->num_buttons = device->num_buttons;
 	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
 	d->button_codes = g_memdup (device->button_codes, sizeof(int) * device->num_buttons);
+	d->edid = g_memdup(device->edid, device->num_edid * sizeof (*device->edid));
+	d->num_edid = device->num_edid;
+
 	return d;
 }
-
 
 static int
 compare_matches(const WacomDevice *a, const WacomDevice *b)
@@ -389,6 +392,41 @@ libwacom_same_layouts (const WacomDevice *a, const WacomDevice *b)
 	g_free (file2);
 
 	return rc;
+}
+
+static gboolean
+libwacom_same_edid (const WacomDevice *da, const WacomDevice *db)
+{
+	const WacomEDID *a, *b;
+	int i, j;
+
+	if (da->num_edid != db->num_edid)
+		return FALSE;
+
+	for (i = 0; i < da->num_edid; i++) {
+		gboolean found = FALSE;
+		a = &da->edid[i];
+		for (j = 0; j < db->num_edid; j++) {
+			b = &db->edid[j];
+
+			if (a->flags != b->flags ||
+			    a->product_code != b->product_code ||
+			    a->serial_number != b->serial_number)
+				continue;
+
+			if (g_strcmp0(a->manufacturer_id, b->manufacturer_id) != 0 ||
+			    g_strcmp0(a->product_name, b->product_name) != 0)
+				continue;
+
+			found = TRUE;
+			break;
+		}
+
+		if (!found)
+			return FALSE;
+	}
+
+	return TRUE;
 }
 
 LIBWACOM_EXPORT int
@@ -453,6 +491,9 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if ((a->paired == NULL && b->paired != NULL) ||
 	    (a->paired != NULL && b->paired == NULL) ||
 	    (a->paired && b->paired && !streq(a->paired->match, b->paired->match)))
+		return 1;
+
+	if (!libwacom_same_edid(a, b))
 		return 1;
 
 	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
@@ -752,6 +793,36 @@ static void print_integrated_flags_for_device (int fd, const WacomDevice *device
 	dprintf(fd, "\n");
 }
 
+static void print_edid_for_device(int fd, const WacomDevice *device)
+{
+	int i;
+	if (device->num_edid == 0)
+		return;
+
+	dprintf(fd, "EDIDMatch=");
+	for (i = 0; i < device->num_edid; i++) {
+		const WacomEDID *edid = &device->edid[i];
+
+		if (edid->flags & WACOM_EDID_FLAG_GLOB_MANUFACTURER)
+			dprintf(fd, "*:");
+		else
+			dprintf(fd, "%s:", edid->manufacturer_id);
+		if (edid->flags & WACOM_EDID_FLAG_GLOB_PRODUCT_CODE)
+			dprintf(fd, "*:");
+		else
+			dprintf(fd, "%x:", edid->product_code);
+		if (edid->flags & WACOM_EDID_FLAG_GLOB_SERIAL_NUMBER)
+			dprintf(fd, "*:");
+		else
+			dprintf(fd, "%x:", edid->serial_number);
+		if (edid->flags & WACOM_EDID_FLAG_GLOB_NAME)
+			dprintf(fd, "*;");
+		else
+			dprintf(fd, "%s;", edid->product_name);
+	}
+	dprintf(fd, "\n");
+}
+
 static void print_match(int fd, const WacomMatch *match)
 {
 	const char  *name       = libwacom_match_get_name(match);
@@ -816,6 +887,8 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "Width=%d\n",		libwacom_get_width(device));
 	dprintf(fd, "Height=%d\n",		libwacom_get_height(device));
 	print_integrated_flags_for_device(fd, device);
+	print_edid_for_device(fd, device);
+
 	print_layout_for_device(fd, device);
 	print_styli_for_device(fd, device);
 	dprintf(fd, "\n");
@@ -870,6 +943,7 @@ libwacom_unref(WacomDevice *device)
 	g_free (device->status_leds);
 	g_free (device->buttons);
 	g_free (device->button_codes);
+	g_free (device->edid);
 	g_free (device);
 
 	return NULL;
@@ -1379,6 +1453,100 @@ LIBWACOM_EXPORT const char*
 libwacom_match_get_match_string(const WacomMatch *match)
 {
 	return match->match;
+}
+
+LIBWACOM_EXPORT WacomEDID *
+libwacom_edid_new(void)
+{
+	return g_new0(WacomEDID, 1);
+}
+
+LIBWACOM_EXPORT void
+libwacom_edid_destroy(WacomEDID *edid)
+{
+	g_free(edid);
+}
+
+LIBWACOM_EXPORT bool
+libwacom_match_edid(WacomDevice *device, const WacomEDID *match)
+{
+	int i;
+
+	g_return_val_if_fail(match->flags & (WACOM_EDID_FLAG_HAS_MANUFACTURER|
+					     WACOM_EDID_FLAG_HAS_NAME|
+					     WACOM_EDID_FLAG_HAS_PRODUCT_CODE|
+					     WACOM_EDID_FLAG_HAS_SERIAL_NUMBER), FALSE);
+
+	for (i = 0; i < device->num_edid; i++) {
+		const WacomEDID *edid = &device->edid[i];
+
+		if ((edid->flags & WACOM_EDID_FLAG_GLOB_MANUFACTURER) == 0) {
+			if (match->flags & WACOM_EDID_FLAG_HAS_MANUFACTURER &&
+			    !streq(edid->manufacturer_id, match->manufacturer_id))
+			    continue;
+		}
+
+		if ((edid->flags & WACOM_EDID_FLAG_GLOB_NAME) == 0) {
+		    if (match->flags & WACOM_EDID_FLAG_HAS_NAME &&
+			fnmatch(edid->product_name, match->product_name, 0) != 0)
+			    continue;
+		}
+
+		if ((edid->flags & WACOM_EDID_FLAG_GLOB_PRODUCT_CODE) == 0) {
+		    if (match->flags & WACOM_EDID_FLAG_HAS_PRODUCT_CODE &&
+			edid->product_code != match->product_code)
+			    continue;
+		}
+
+		if ((edid->flags & WACOM_EDID_FLAG_GLOB_SERIAL_NUMBER) == 0) {
+		    if (match->flags & WACOM_EDID_FLAG_HAS_SERIAL_NUMBER &&
+			edid->serial_number != match->serial_number)
+			    continue;
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+LIBWACOM_EXPORT  void
+libwacom_edid_set_manufacturer_id(WacomEDID *edid,
+				  const char *manufacturer_id)
+{
+	g_return_if_fail(manufacturer_id != NULL);
+	g_return_if_fail(strlen(manufacturer_id) <= 3);
+
+	memset(edid->manufacturer_id, 0, sizeof(edid->manufacturer_id));
+	strncpy(edid->manufacturer_id, manufacturer_id, 3);
+
+	edid->flags |= WACOM_EDID_FLAG_HAS_MANUFACTURER;
+}
+
+LIBWACOM_EXPORT  void
+libwacom_edid_set_product_code(WacomEDID *edid,
+			       uint16_t product_code)
+{
+	edid->product_code = product_code;
+	edid->flags |= WACOM_EDID_FLAG_HAS_PRODUCT_CODE;
+}
+
+LIBWACOM_EXPORT  void
+libwacom_edid_set_serial_number(WacomEDID *edid,
+			        uint32_t serial_number)
+{
+	edid->serial_number = serial_number;
+	edid->flags |= WACOM_EDID_FLAG_HAS_SERIAL_NUMBER;
+}
+
+LIBWACOM_EXPORT  void
+libwacom_edid_set_product_name(WacomEDID *edid,
+			       const char *product_name)
+{
+	g_return_if_fail(product_name != NULL);
+
+	g_snprintf(edid->product_name, sizeof(edid->product_name), "%s", product_name);
+	edid->flags |= WACOM_EDID_FLAG_HAS_NAME;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

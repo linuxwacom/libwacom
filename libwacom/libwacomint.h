@@ -34,6 +34,7 @@
 #include "libwacom.h"
 #include <stdint.h>
 #include <glib.h>
+#include <string.h>
 
 #define LIBWACOM_EXPORT __attribute__ ((visibility("default")))
 
@@ -63,6 +64,27 @@ struct _WacomMatch {
 	uint32_t product_id;
 };
 
+typedef enum {
+	WACOM_EDID_FLAG_NONE			= 0,
+	WACOM_EDID_FLAG_GLOB_MANUFACTURER	= (1 << 1),
+	WACOM_EDID_FLAG_GLOB_NAME		= (1 << 2),
+	WACOM_EDID_FLAG_GLOB_PRODUCT_CODE	= (1 << 3),
+	WACOM_EDID_FLAG_GLOB_SERIAL_NUMBER	= (1 << 4),
+
+	WACOM_EDID_FLAG_HAS_MANUFACTURER	= (1 << 10),
+	WACOM_EDID_FLAG_HAS_NAME		= (1 << 11),
+	WACOM_EDID_FLAG_HAS_PRODUCT_CODE	= (1 << 12),
+	WACOM_EDID_FLAG_HAS_SERIAL_NUMBER	= (1 << 13),
+} WacomEDIDFlags;
+
+struct _WacomEDID {
+	uint16_t product_code;
+	uint32_t serial_number;
+	char manufacturer_id[4]; /* 3 chars + null byte */
+	char product_name[14]; /* EDID: 13 bytes max + null byte */
+	uint32_t flags;
+};
+
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy() and
  * libwacom_print_device_description() ! */
@@ -82,6 +104,9 @@ struct _WacomDevice {
 	int num_strips;
 	uint32_t features;
 	uint32_t integration_flags;
+
+	WacomEDID *edid;
+	int num_edid;
 
 	int strips_num_modes;
 	int ring_num_modes;

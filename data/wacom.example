@@ -97,6 +97,42 @@ IntegratedIn=Display;System
 # Filename of the SVG representing this tablet. Only needed for tablets with
 # pad buttons.
 Layout=bamboo-16fg-m-pt.svg
+
+# EDID information if IntegratedIn is Display or System.
+# These are the 8 bytes in the EDID 1.4 struct comprising manufacturer ID,
+# product code and serial number. For reference, edid-decode output:
+# Extracted contents:
+# header:          00 ff ff ff ff ff ff 00
+# serial number:   10 ac 12 ab 4c 56 4a 30 16 16...
+#                  ^^^^^ ^^^^^ ^^^^^^^^^^^
+#                   Man   Prod   Serial
+#
+# The ProductName is separate in the EDID Other Monitor Descriptors as code
+# 0xFC.
+#
+# A match group is defined as string in the format: <Man>:<Prod>:<Name>:<Serial>.
+#
+# Manufacturer ID: a 3-byte string, e.g. DEL. These are three 5-bit chars from
+#                  the 15 least-significant bits of the first two bytes in the
+#                  EDID struct where 'A' == 1, 'B' == 2, etc. See the EDID
+#                  documentation. Example:
+#                  DEL == (4 << 10) | (5 << 5) | 12 == 0x10ac
+# Product code: a 4-character (16-bit) hex string in little endian order,
+#                 e.g. 12ab
+# Serial number: a 8-character (32-bit) hex string in little endian order,
+#                e.g. 4c564a30
+# Name: a string length 13 or less (shell globs supported)
+#
+# Any or all fields can be omitted using a literal '*'.
+#
+# The EDIDMatch contains one or more match groups, separated by
+# semicolons, e.g.
+# EDIDMatch=DEL:12ab:*:*;LEN:*:*:Lenovo Some Monitor;*:1234:01020304:*foo*:
+#
+# EDIDMatches are not exclusive, multiple tablets may have the same
+# EDIDMatch entries.
+EDIDMatch=DEL:12ab:*:*
+
 # Styli
 #
 # This is a list of stylus IDs supported by the tablet. Non-Wacom devices

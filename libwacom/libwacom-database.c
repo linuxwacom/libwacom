@@ -569,6 +569,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	char *class;
 	char *paired;
 	char **string_list;
+	bool success = FALSE;
 
 	keyfile = g_key_file_new();
 
@@ -581,6 +582,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	}
 
 	device = g_new0 (WacomDevice, 1);
+	device->refcnt = 1;
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "DeviceMatch", NULL, NULL);
 	if (!string_list) {
@@ -598,10 +600,8 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		}
 		if (nmatches == 0) {
 			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", string_list[i], path);
-				g_strfreev (string_list);
-				g_free (device);
-				device = NULL;
-				goto out;
+			g_strfreev (string_list);
+			goto out;
 		}
 		if (nmatches > 1) {
 			/* set default to first entry */
@@ -736,6 +736,8 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		device->status_leds = (WacomStatusLEDs *) g_array_free (array, FALSE);
 	}
 
+	success = TRUE;
+
 out:
 	if (path)
 		g_free(path);
@@ -743,6 +745,8 @@ out:
 		g_key_file_free(keyfile);
 	if (error)
 		g_error_free(error);
+	if (!success)
+		device = libwacom_unref(device);
 
 	return device;
 }
@@ -827,6 +831,7 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
 		    libwacom_ref(d);
 	    }
+	    libwacom_unref(d);
     }
 
     if (g_hash_table_size (db->device_ht) == 0)

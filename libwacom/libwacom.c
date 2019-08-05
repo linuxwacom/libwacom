@@ -839,6 +839,8 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 WacomDevice *
 libwacom_ref(WacomDevice *device)
 {
+	assert(device->refcnt >= 1);
+
 	g_atomic_int_inc(&device->refcnt);
 	return device;
 }
@@ -850,6 +852,8 @@ libwacom_unref(WacomDevice *device)
 
 	if (device == NULL)
 		return NULL;
+
+	assert(device->refcnt >= 1);
 
 	if (!g_atomic_int_dec_and_test(&device->refcnt))
 		return NULL;

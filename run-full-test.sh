@@ -42,6 +42,12 @@ if git diff --exit-code -s; then
     make && make check
     make install
     make distcheck
+    echo "############### running meson off tarball"
+    mkdir -p _tarball_dir
+    tar xf libwacom-*.tar.bz2 -C _tarball_dir
+    pushd _tarball_dir/libwacom-*/ > /dev/null
+    meson $builddir && ninja -C $builddir test
+    popd > /dev/null
     popd > /dev/null
     popd > /dev/null
 else

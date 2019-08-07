@@ -1,3 +1,17 @@
+libwacom 0.99.901:
+- New devices
+    - Lenovo YOGA 720, YOGA 520, IdeaPad FLEX 5, MIIX 520
+    - Dell XPS 15 9570, Latitude 5175
+    - HP Spectre x360, Envy x360 Convertible
+    - Wacom Intuos Pro 2 S, Cintiq 22, DTK-1660E
+    - Huion 610 Pro v2
+    - Samsung 930QAA
+- New API: libwacom_get_model_name()
+- meson build system support
+- fixed symbol versioning
+- EKR button ordering fixed
+- Stylus grouping added
+
 libwacom 0.33:
 - New devices:
   - Wacom Bamboo Fun 4x5, Bamboo Fun 6x8, Bamboo1 5x8, Cintiq 16

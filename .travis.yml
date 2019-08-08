@@ -46,7 +46,7 @@ jobs:
         - pushd builddir > /dev/null
         - meson test --setup=valgrind --suite=valgrind || (cat meson-logs/testlog-valgrind.txt && false)
         - popd > /dev/null
-    #  build from a tarball
+    #  build from a tarball with meson
     - stage: test
       install:
         - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind
@@ -61,6 +61,34 @@ jobs:
         - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
         - pushd _tarball_dir/libwacom-*/ > /dev/null
         - meson builddir && ninja -C builddir test
+        - popd > /dev/null
+    #  build from a tarball with autotools
+    - stage: test
+      script:
+        - mkdir _build
+        - pushd _build > /dev/null
+        - ../autogen.sh --disable-silent-rules
+        - make && make dist
+        - popd > /dev/null
+        - mkdir -p _tarball_dir
+        - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
+        - pushd _tarball_dir/libwacom-*/ > /dev/null
+        - ./autogen.sh --disable-silent-rules
+        - make
+        - popd > /dev/null
+    #  build from a tarball with configure only
+    - stage: test
+      script:
+        - mkdir _build
+        - pushd _build > /dev/null
+        - ../autogen.sh --disable-silent-rules
+        - make && make dist
+        - popd > /dev/null
+        - mkdir -p _tarball_dir
+        - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
+        - pushd _tarball_dir/libwacom-*/ > /dev/null
+        - ./configure
+        - make
         - popd > /dev/null
     - stage: coverity
       compiler: 'gcc'

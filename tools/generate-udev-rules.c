@@ -211,13 +211,16 @@ int main(int argc, char **argv)
 	WacomDevice **list, **p;
 	GOptionContext *context;
 	GError *error;
+	gboolean rc;
 
 	context = g_option_context_new (NULL);
 
 	g_option_context_add_main_entries (context, opts, NULL);
 	error = NULL;
 
-	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+	rc = g_option_context_parse (context, &argc, &argv, &error);
+	g_option_context_free (context);
+	if (!rc) {
 		if (error != NULL) {
 			fprintf (stderr, "%s\n", error->message);
 			g_error_free (error);
@@ -253,6 +256,7 @@ int main(int argc, char **argv)
 			print_uinput_entry ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
 	}
 
+	g_free(list);
 	libwacom_database_destroy (db);
 
 	return 0;

@@ -55,7 +55,7 @@ jobs:
         - mkdir _build
         - pushd _build > /dev/null
         - ../autogen.sh --disable-silent-rules
-        - make dist
+        - make && make dist
         - popd > /dev/null
         - mkdir -p _tarball_dir
         - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir

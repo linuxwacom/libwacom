@@ -41,6 +41,19 @@ if test "x$HAVE_GLIB236" != "xyes"; then
     AC_DEFINE(NEED_G_TYPE_INIT, 1, [Need g_type_init() call])
 fi
 
+udev_dir_default="$libdir/udev"
+AC_ARG_WITH(udev-dir,
+            AS_HELP_STRING([--with-udev-dir=DIR],
+                           [udev base directory [[default=$udev_dir_default]]]),
+            [],
+            [with_udev_dir="yes"])
+AS_CASE($with_udev_dir,
+        [no|""], [AC_MSG_ERROR([You must define a udev base directory])],
+        [yes], [udevdir="$udev_dir_default"],
+        [udevdir="$with_udev_dir"])
+UDEV_DIR=${udevdir}
+AC_SUBST(UDEV_DIR)
+
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  data/layouts/Makefile

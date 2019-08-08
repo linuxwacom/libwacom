@@ -25,3 +25,13 @@ show_svg_image_CFLAGS = $(GTK2_CFLAGS)
 endif
 
 dist_man1_MANS = libwacom-list-local-devices.man
+
+rules = 65-libwacom.rules
+udev_rulesdir=$(UDEV_DIR)/rules.d
+dist_udev_rules_DATA = $(rules)
+
+$(rules): generate-udev-rules
+	$(builddir)/$< > $@
+
+CLEANFILES = $(rules)
+EXTRA_DIST = $(rules)

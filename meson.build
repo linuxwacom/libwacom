@@ -11,6 +11,12 @@ dir_layouts = join_paths(dir_data, 'layouts')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
 dir_src     = join_paths(meson.source_root(), 'libwacom')
 dir_test    = join_paths(meson.source_root(), 'test')
+dir_sys_udev= join_paths(get_option('prefix'), 'lib', 'udev')
+
+dir_udev = get_option('udev-dir')
+if dir_udev == ''
+	dir_udev = dir_sys_udev
+endif
 
 # Do not modify this, use symbol versioning instead.
 libwacom_lt_c=8
@@ -405,12 +411,18 @@ executable('libwacom-list-local-devices',
 
 tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
 
-executable('generate-udev-rules',
-	   'tools/generate-udev-rules.c',
-	   dependencies: [dep_libwacom, dep_glib],
-	   include_directories: [includes_src],
-	   c_args: tools_cflags,
-	   install: false)
+gen_udev_rules = executable('generate-udev-rules',
+			    'tools/generate-udev-rules.c',
+			    dependencies: [dep_libwacom, dep_glib],
+			    include_directories: [includes_src],
+			    c_args: tools_cflags,
+			    install: false)
+custom_target('udev-rules',
+	      command: gen_udev_rules,
+	      capture: true,
+	      output: '65-libwacom.rules',
+	      install: true,
+	      install_dir: join_paths(dir_udev, 'rules.d'))
 
 executable('list-devices',
 	   'tools/list-devices.c',

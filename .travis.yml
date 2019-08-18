@@ -49,9 +49,11 @@ jobs:
     #  build from a tarball with meson
     - stage: test
       install:
-        - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind
+        - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind tree
         - sudo pip3 install meson
       script:
+        - export INSTALLDIR="$PWD/_inst"
+        - mkdir -p "$INSTALLDIR"
         - mkdir _build
         - pushd _build > /dev/null
         - ../autogen.sh --disable-silent-rules
@@ -60,11 +62,16 @@ jobs:
         - mkdir -p _tarball_dir
         - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
         - pushd _tarball_dir/libwacom-*/ > /dev/null
-        - meson builddir && ninja -C builddir test
+        - meson builddir --prefix="$INSTALLDIR" && ninja -C builddir test && ninja -C builddir install
         - popd > /dev/null
+        - tree "$INSTALLDIR"
     #  build from a tarball with autotools
     - stage: test
+      install:
+        - sudo apt-get install -y tree
       script:
+        - export INSTALLDIR="$PWD/_inst"
+        - mkdir -p "$INSTALLDIR"
         - mkdir _build
         - pushd _build > /dev/null
         - ../autogen.sh --disable-silent-rules
@@ -73,12 +80,17 @@ jobs:
         - mkdir -p _tarball_dir
         - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
         - pushd _tarball_dir/libwacom-*/ > /dev/null
-        - ./autogen.sh --disable-silent-rules
-        - make
+        - ./autogen.sh --disable-silent-rules --prefix="$INSTALLDIR"
+        - make && make install
         - popd > /dev/null
+        - tree "$INSTALLDIR"
     #  build from a tarball with configure only
     - stage: test
+      install:
+        - sudo apt-get install -y tree
       script:
+        - export INSTALLDIR="$PWD/_inst"
+        - mkdir -p "$INSTALLDIR"
         - mkdir _build
         - pushd _build > /dev/null
         - ../autogen.sh --disable-silent-rules
@@ -87,9 +99,10 @@ jobs:
         - mkdir -p _tarball_dir
         - tar xf _build/libwacom-*.tar.bz2 -C _tarball_dir
         - pushd _tarball_dir/libwacom-*/ > /dev/null
-        - ./configure
-        - make
+        - ./configure --prefix="$INSTALLDIR"
+        - make && make install
         - popd > /dev/null
+        - tree "$INSTALLDIR"
     - stage: coverity
       compiler: 'gcc'
       env:

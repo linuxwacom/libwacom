@@ -4,8 +4,6 @@ project('libwacom', 'c',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.47.0')
 
-libwacom_version = meson.project_version().split('.')
-
 dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
 dir_layouts = join_paths(dir_data, 'layouts')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')

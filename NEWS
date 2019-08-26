@@ -1,3 +1,6 @@
+libwacom 1.0:
+- udev rules are now installed by default
+
 libwacom 0.99.901:
 - New devices
     - Lenovo YOGA 720, YOGA 520, IdeaPad FLEX 5, MIIX 520

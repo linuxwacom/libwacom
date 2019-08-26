@@ -1,6 +1,6 @@
 # Initialize Autoconf
 AC_PREREQ([2.60])
-AC_INIT([libwacom], [0.99.901]) # change meson.build as well
+AC_INIT([libwacom], [1.0]) # change meson.build as well
 AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake

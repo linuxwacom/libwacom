@@ -250,6 +250,7 @@ setup_tests(const WacomStylus *stylus)
 			add_test(stylus, test_distance);
 			add_test(stylus, test_tilt);
 			break;
+		case 0x021:
 		case 0x8e2:
 		case 0x862:
 			add_test(stylus, test_pressure);

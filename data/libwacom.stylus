@@ -548,3 +548,10 @@ Type=Puck
 HasLens=false
 HasWheel=true
 Buttons=5
+
+[0x21]
+Name=Thinkpad Pro Pen
+Buttons=2
+HasEraser=false
+Axes=Pressure;Distance;
+Type=General

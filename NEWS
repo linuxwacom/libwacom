@@ -1,3 +1,7 @@
+libwacom 1.1:
+- New devices: Wacom HID 5115
+- Button codes defined for the 3rd gen Intuos S
+
 libwacom 1.0:
 - udev rules are now installed by default
 

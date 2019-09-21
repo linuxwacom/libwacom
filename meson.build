@@ -85,6 +85,7 @@ pkgconfig.generate(filebase: 'libwacom',
 		   description: 'Wacom model feature query library',
 		   version: meson.project_version(),
 		   subdirs: 'libwacom-1.0',
+		   requires_private: deps_libwacom,
 		   libraries: lib_libwacom)
 
 #################### data files ########################

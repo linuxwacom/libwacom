@@ -81,7 +81,7 @@ dep_libwacom = declare_dependency(link_with: lib_libwacom)
 install_headers('libwacom/libwacom.h', subdir: 'libwacom-1.0/libwacom')
 
 pkgconfig.generate(filebase: 'libwacom',
-		   name: 'Libwacom',
+		   name: 'libwacom',
 		   description: 'Wacom model feature query library',
 		   version: meson.project_version(),
 		   subdirs: 'libwacom-1.0',

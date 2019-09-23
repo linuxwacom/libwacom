@@ -163,6 +163,7 @@ data_files = [
 	'data/elan-2072.tablet',
 	'data/elan-2537.tablet',
 	'data/elan-2627.tablet',
+	'data/elan-2628.tablet',
 	'data/elan-5515.tablet',
 	'data/generic.tablet',
 	'data/graphire2-4x5.tablet',

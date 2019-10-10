@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Dell XPS 13 7390
+
+[Device]
+Name=Wacom ISDv4 48ed
+ModelName=
+DeviceMatch=i2c:056a:48ed
+Class=ISDV4
+Width=11
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

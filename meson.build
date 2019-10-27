@@ -460,7 +460,8 @@ install_man(configure_file(input: 'tools/libwacom-list-local-devices.man',
 			   copy: true))
 
 ############### docs ###########################
-doxygen = find_program('doxygen', required: false)
+docs_feature = get_option('documentation')
+doxygen = find_program('doxygen', required: docs_feature)
 if doxygen.found()
 	src_doxygen = [
 		join_paths(dir_src, 'libwacom.h'),

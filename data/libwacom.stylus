@@ -20,6 +20,204 @@ Buttons=2
 Axes=Pressure;
 Type=General
 
+[0x1]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x11]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_CHRG
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x19]
+# Lenovo ; VID_LENOVO   | 0x60A8 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x21]
+# HP     ; VID_NONE     | 0x0000 | BAT_SWAP
+# Huawei ; VID_NONE     | 0x0000 | BAT_SWAP
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x31]
+# Dell   ; VID_BROADCOM | 0x81B9 | BAT_SWAP
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x39]
+# Huawei ; VID_HUAWEI   | 0x1091 | BAT_SWAP ("Huawei MatePen" / AF61)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x49]
+# Wacom  ; VID_WACOM    | 0x035F | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink" / CS321A)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x71]
+# Wacom  ; VID_WACOM    | 0x035F | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink" / CS321A1)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x221]
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x231]
+# Dell   ; VID_BROADCOM | 0x81C6 | BAT_SWAP | LONGPRESS (Dell PN557W)
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x271]
+# Wacom  ; VID_NONE     | 0x0000 | BAT_SWAP ("Wacom Bamboo Ink" / CS323A)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x421]
+# HP     ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x431]
+# Dell   ; VID_BROADCOM | 0x81B9 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x621]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x631]
+# Dell   ; VID_NONE     | 0x0000 | BAT_SWAP | LONGPRESS (Dell PN557W)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Pressure
+Type=Mobile
+
+[0x8051]
+# Google ; VID_NONE     | 0x0000 | BAT_SWAP ("Google Pixelbook Pen" / C0B)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=0
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x805B]
+# Dell   ; VID_BROADCOM | 0x81D5 | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS (Dell PN579X)
+# Lenovo ; VID_LENOVO   | 0x60C5 | BAT_SWAP | BAT_GATT | BAT_SHARED
+# Toshiba; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x806B]
+# HP     ; VID_CHICONY  | 0x1728 | BAT_CHRG | BAT_PROX | BAT_SHARED | LONGPRESS | PROX ("HP Rechargeable Active Pen" / HP Active Pen G2 / 4KL69AA)
+# Huawei ; VID_NONE     | 0x0000 | BAT_SWAP
+# Lenovo ; VID_LENOVO   | 0x60C2 | BAT_CHRG | BAT_GATT | BAT_SHARED
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x807B]
+# Wacom  ; VID_WACOM    | 0x0397 | BAT_CHRG | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink Plus" / CS322A)
+Name=Bamboo Ink Plus
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x826B]
+# HP     ; VID_CHICONY  | 0x1728 | BAT_CHRG | BAT_PROX | BAT_SHARED | LONGPRESS | PROX
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x846B]
+# HP     ; VID_CHICONY  | 0x1850 | BAT_CHRG | BAT_GATT | BAT_SHARED | LONGPRESS | PROX ("HP Rechargeable Active Pen G3" / HP Active Pen G3 / GSG43AA)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+IsEraser=true
+Axes=Tilt;Pressure
+Type=Mobile
+
 # Inking pen have no eraser
 [0x812]
 # Intuos and Intuos2
@@ -521,10 +719,3 @@ Type=Puck
 HasLens=false
 HasWheel=true
 Buttons=5
-
-[0x21]
-Name=Thinkpad Pro Pen
-Buttons=2
-HasEraser=false
-Axes=Pressure;Distance;
-Type=General

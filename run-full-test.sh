@@ -30,6 +30,7 @@ echo "####################################### running make distcheck"
 # previously. So let's only do this where we have a clean tree that we can
 # clone.
 if git diff --exit-code -s; then
+    unset GIT_WORK_TREE
     mkdir -p "$builddir/autotools/build"
     mkdir -p "$builddir/autotools/inst"
     pushd "$builddir/autotools" > /dev/null

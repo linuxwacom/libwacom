@@ -159,6 +159,7 @@ typedef enum {
 	WSTYLUS_STROKE,
 	WSTYLUS_PUCK,
 	WSTYLUS_3D,
+	WSTYLUS_MOBILE,
 } WacomStylusType;
 
 /**

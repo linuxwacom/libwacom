@@ -53,11 +53,20 @@ test_type(gconstpointer data)
 	case WSTYLUS_STROKE:
 	case WSTYLUS_PUCK:
 	case WSTYLUS_3D:
+	case WSTYLUS_MOBILE:
 		break;
 	case WSTYLUS_UNKNOWN:
 	default:
 		g_test_fail();
 	}
+}
+
+static void
+test_mobile(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	g_assert_cmpint(libwacom_stylus_get_type(stylus), ==, WSTYLUS_MOBILE);
 }
 
 static void
@@ -203,6 +212,21 @@ _add_test(const WacomStylus *stylus, GTestDataFunc func, const char *funcname)
 	_add_test(stylus, func_, #func_)
 
 static void
+setup_aes_tests(const WacomStylus *stylus)
+{
+	add_test(stylus, test_mobile);
+
+	add_test(stylus, test_pressure);
+	add_test(stylus, test_no_distance);
+
+	if (libwacom_stylus_get_id(stylus) < 0x8000) {
+		add_test(stylus, test_no_tilt);
+	} else {
+		add_test(stylus, test_tilt);
+	}
+}
+
+static void
 setup_emr_tests(const WacomStylus *stylus)
 {
 	switch (libwacom_stylus_get_id(stylus)) {
@@ -260,6 +284,7 @@ setup_tests(const WacomStylus *stylus)
 		default:
 			switch (libwacom_stylus_get_id(stylus)) {
 				case 0x885:
+				case 0x8051:
 					add_test(stylus, test_no_buttons);
 					break;
 				default:
@@ -267,7 +292,12 @@ setup_tests(const WacomStylus *stylus)
 			}
 	}
 
-	setup_emr_tests(stylus);
+	/* Technology-specific tests */
+	if (libwacom_stylus_get_type(stylus) == WSTYLUS_MOBILE) {
+		setup_aes_tests(stylus);
+	} else {
+		setup_emr_tests(stylus);
+	}
 
 	if (libwacom_stylus_has_eraser(stylus))
 		add_test(stylus, test_eraser);

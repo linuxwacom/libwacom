@@ -98,6 +98,8 @@ type_from_str (const char *type)
 		return WSTYLUS_PUCK;
 	if (streq(type, "3D"))
 		return WSTYLUS_3D;
+	if (streq(type, "Mobile"))
+		return WSTYLUS_MOBILE;
 	return WSTYLUS_UNKNOWN;
 }
 

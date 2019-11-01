@@ -203,32 +203,8 @@ _add_test(const WacomStylus *stylus, GTestDataFunc func, const char *funcname)
 	_add_test(stylus, func_, #func_)
 
 static void
-setup_tests(const WacomStylus *stylus)
+setup_emr_tests(const WacomStylus *stylus)
 {
-	add_test(stylus, test_name);
-	add_test(stylus, test_type);
-
-	/* Button checks */
-	switch (libwacom_stylus_get_type(stylus)) {
-		case WSTYLUS_PUCK:
-			add_test(stylus, test_puck);
-			add_test(stylus, test_buttons);
-			break;
-		case WSTYLUS_INKING:
-		case WSTYLUS_STROKE:
-			add_test(stylus, test_no_buttons);
-			break;
-		default:
-			switch (libwacom_stylus_get_id(stylus)) {
-				case 0x885:
-					add_test(stylus, test_no_buttons);
-					break;
-				default:
-					add_test(stylus, test_buttons);
-			}
-	}
-
-	/* Axes checks */
 	switch (libwacom_stylus_get_id(stylus)) {
 		case 0xffffd:
 			add_test(stylus, test_pressure);
@@ -263,6 +239,35 @@ setup_tests(const WacomStylus *stylus)
 			add_test(stylus, test_distance);
 			break;
 	}
+}
+
+static void
+setup_tests(const WacomStylus *stylus)
+{
+	add_test(stylus, test_name);
+	add_test(stylus, test_type);
+
+	/* Button checks */
+	switch (libwacom_stylus_get_type(stylus)) {
+		case WSTYLUS_PUCK:
+			add_test(stylus, test_puck);
+			add_test(stylus, test_buttons);
+			break;
+		case WSTYLUS_INKING:
+		case WSTYLUS_STROKE:
+			add_test(stylus, test_no_buttons);
+			break;
+		default:
+			switch (libwacom_stylus_get_id(stylus)) {
+				case 0x885:
+					add_test(stylus, test_no_buttons);
+					break;
+				default:
+					add_test(stylus, test_buttons);
+			}
+	}
+
+	setup_emr_tests(stylus);
 
 	if (libwacom_stylus_has_eraser(stylus))
 		add_test(stylus, test_eraser);

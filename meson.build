@@ -543,13 +543,18 @@ if get_option('tests')
 		message('valgrind not found, disabling valgrind test suite')
 	endif
 
-	test_deprecated = executable('test-deprecated',
-				     'test/test-deprecated.c',
-				     dependencies: [dep_libwacom, dep_dl],
-				     include_directories: [includes_src],
-				     c_args: tests_cflags,
-				     install: false)
-	test('test-deprecated', test_deprecated, suite: ['all'])
+	# because of the tricks we use in calling the function and exposing
+	# it to begin with, LTO gets confused and this fails to link.
+	# Let's just disable it here.
+	if not get_option('b_lto')
+		test_deprecated = executable('test-deprecated',
+					     'test/test-deprecated.c',
+					     dependencies: [dep_libwacom, dep_dl],
+					     include_directories: [includes_src],
+					     c_args: tests_cflags,
+					     install: false)
+		test('test-deprecated', test_deprecated, suite: ['all'])
+	endif
 endif
 
 # This is a non-optional test

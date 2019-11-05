@@ -56,13 +56,6 @@ HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Inking
 
-[0x012]
-Name=Inking Pen
-Buttons=0
-HasEraser=false
-Axes=Tilt;Pressure;Distance;
-Type=Inking
-
 # Regular pen has eraser
 [0x822]
 # Intuos and Intuos2
@@ -231,10 +224,6 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x022]
-Name=Pen
-HasEraser=true
-
 # Stroke pen has no eraser
 [0x832]
 #Intuos and Intuos2
@@ -242,12 +231,6 @@ Name=Stroke Pen
 Group=intuos
 HasEraser=false
 Buttons=0
-Axes=Tilt;Pressure;Distance;
-Type=Stroke
-
-[0x032]
-Name=Stroke Pen
-HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Stroke
 
@@ -296,10 +279,6 @@ IsEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
-
-[0x0fa]
-Name=Eraser
-IsEraser=true
 
 [0x82b]
 # Intuos3 and Cintiq 21UX
@@ -443,12 +422,6 @@ Group=intuos2
 HasEraser=true
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
-Type=Airbrush
-
-[0x112]
-Name=Airbrush Pen
-HasEraser=true
-Axes=Tilt;Pressure;Distance;
 Type=Airbrush
 
 [0x913]

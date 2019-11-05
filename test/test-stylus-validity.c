@@ -70,6 +70,22 @@ test_mobile(gconstpointer data)
 }
 
 static void
+test_eraser_type(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	switch (libwacom_stylus_get_eraser_type(stylus)) {
+	case WACOM_ERASER_NONE:
+	case WACOM_ERASER_INVERT:
+	case WACOM_ERASER_BUTTON:
+		break;
+	case WACOM_ERASER_UNKNOWN:
+	default:
+		g_test_fail();
+	}
+}
+
+static void
 test_eraser(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
@@ -97,6 +113,24 @@ test_eraser(gconstpointer data)
 	}
 
 	g_assert_true(matching_eraser_found);
+}
+
+static void
+test_eraser_inverted(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+
+	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_INVERT);
+}
+
+static void
+test_eraser_button(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+
+	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_BUTTON);
 }
 
 static void
@@ -224,6 +258,9 @@ setup_aes_tests(const WacomStylus *stylus)
 	} else {
 		add_test(stylus, test_tilt);
 	}
+
+	if (libwacom_stylus_is_eraser(stylus))
+		add_test(stylus, test_eraser_button);
 }
 
 static void
@@ -263,6 +300,9 @@ setup_emr_tests(const WacomStylus *stylus)
 			add_test(stylus, test_distance);
 			break;
 	}
+
+	if (libwacom_stylus_is_eraser(stylus))
+		add_test(stylus, test_eraser_inverted);
 }
 
 static void
@@ -301,6 +341,9 @@ setup_tests(const WacomStylus *stylus)
 
 	if (libwacom_stylus_has_eraser(stylus))
 		add_test(stylus, test_eraser);
+
+	if (libwacom_stylus_is_eraser(stylus))
+		add_test(stylus, test_eraser_type);
 }
 
 /**

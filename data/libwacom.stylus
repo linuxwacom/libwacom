@@ -8,7 +8,7 @@ Type=General
 
 [0xffffe]
 Name=General Pen Eraser
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -25,7 +25,7 @@ Type=General
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -34,7 +34,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -43,7 +43,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -54,7 +54,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -64,7 +64,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -73,7 +73,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -82,7 +82,7 @@ Type=Mobile
 Name=Bamboo Ink
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -91,7 +91,7 @@ Type=Mobile
 Name=Bamboo Ink
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -101,7 +101,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -111,7 +111,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -120,7 +120,7 @@ Type=Mobile
 Name=Bamboo Ink
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -129,7 +129,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -138,7 +138,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -147,7 +147,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -156,7 +156,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Pressure
 Type=Mobile
 
@@ -165,7 +165,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=0
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -176,7 +176,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -187,7 +187,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -196,7 +196,7 @@ Type=Mobile
 Name=Bamboo Ink Plus
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -205,7 +205,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -214,7 +214,7 @@ Type=Mobile
 Name=AES Pen
 Group=isdv4-aes
 Buttons=1
-IsEraser=true
+EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
@@ -437,7 +437,7 @@ Type=Stroke
 # Intuos and Intuos2
 Name=Classic Pen Eraser
 Group=intuos
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -446,7 +446,7 @@ Type=Classic
 # MobileStudio Pro
 Name=Pro Pen Eraser
 Group=mobilestudio
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -455,7 +455,7 @@ Type=General
 # Intuos2
 Name=Grip Pen Eraser
 Group=intuos2
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -464,7 +464,7 @@ Type=General
 # Intuos2
 Name=Airbrush Pen Eraser
 Group=intuos2
-IsEraser=true
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -473,7 +473,7 @@ Type=Airbrush
 # Intuos
 Name=Airbrush Pen Eraser
 Group=intuos-airbrush
-IsEraser=true
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -482,7 +482,7 @@ Type=Airbrush
 # Intuos3 and Cintiq 21UX
 Name=Grip Pen Eraser
 Group=intuos3
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -491,7 +491,7 @@ Type=General
 # Intuos3 and Cintiq 21UX
 Name=Classic Pen Eraser
 Group=intuos3
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -500,7 +500,7 @@ Type=Classic
 # Intuos3 and Cintiq 21UX
 Name=Airbrush Pen Eraser
 Group=intuos3
-IsEraser=true
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -509,7 +509,7 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Art Pen Eraser
 Group=intuos4
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Marker
@@ -518,7 +518,7 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
 Group=intuos4
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -526,7 +526,7 @@ Type=General
 [0x4080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -535,7 +535,7 @@ Type=Classic
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
 Group=intuos5
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -544,7 +544,7 @@ Type=Classic
 # Intuos4, 5 and 13HD, 24HD Art Pen
 Name=Art Pen Eraser
 Group=intuos5
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Marker
@@ -553,7 +553,7 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
 Group=intuos5
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -562,7 +562,7 @@ Type=General
 # MobileStudio Pro, Cintiq Pro, Intuos Pro
 Name=Pro Pen Slim
 Group=mobilestudio
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -571,7 +571,7 @@ Type=General
 # Cintiq 13HD
 Name=Pro Pen Eraser
 Group=intuos5
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -580,7 +580,7 @@ Type=Classic
 # DTH2242 Eraser
 Name=Pen Eraser
 Group=dth2242
-IsEraser=true
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -589,7 +589,7 @@ Type=General
 # Intuos4, 5 and Cintiq 13HD, 22HD, 24HD Airbrush Eraser
 Name=Airbrush Pen Eraser
 Group=intuos5
-IsEraser=true
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -598,7 +598,7 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Airbrush Pen Eraser
 Group=intuos4
-IsEraser=true
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush

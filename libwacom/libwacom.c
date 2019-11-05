@@ -1225,7 +1225,7 @@ libwacom_stylus_has_eraser (const WacomStylus *stylus)
 LIBWACOM_EXPORT int
 libwacom_stylus_is_eraser (const WacomStylus *stylus)
 {
-	return stylus->is_eraser;
+	return libwacom_stylus_get_eraser_type(stylus) != WACOM_ERASER_NONE;
 }
 
 LIBWACOM_EXPORT int
@@ -1256,6 +1256,12 @@ libwacom_stylus_get_type (const WacomStylus *stylus)
 	return stylus->type;
 }
 
+LIBWACOM_EXPORT WacomEraserType
+libwacom_stylus_get_eraser_type (const WacomStylus *stylus)
+{
+	return stylus->eraser_type;
+}
+
 LIBWACOM_EXPORT void
 libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 {
@@ -1266,7 +1272,14 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
 	dprintf(fd, "Buttons=%d\n",	libwacom_stylus_get_num_buttons(stylus));
 	dprintf(fd, "HasEraser=%s\n",	libwacom_stylus_has_eraser(stylus) ? "true" : "false");
-	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
+	switch (libwacom_stylus_get_eraser_type(stylus)) {
+		case WACOM_ERASER_UNKNOWN: type = "Unknown";       break;
+		case WACOM_ERASER_NONE:    type = "None";          break;
+		case WACOM_ERASER_INVERT:  type = "Invert";        break;
+		case WACOM_ERASER_BUTTON:  type = "Button";        break;
+		default:                   g_assert_not_reached(); break;
+	}
+	dprintf(fd, "EraserType=%s\n", type);
 	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
 	dprintf(fd, "HasWheel=%s\n",	libwacom_stylus_has_wheel(stylus) ? "true" : "false");
 	axes = libwacom_stylus_get_axes(stylus);

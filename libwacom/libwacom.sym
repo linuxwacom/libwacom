@@ -71,3 +71,8 @@ global:
 local:
         *;
 };
+
+LIBWACOM_1.2 {
+global:
+    libwacom_stylus_get_eraser_type;
+} LIBWACOM_0.33;

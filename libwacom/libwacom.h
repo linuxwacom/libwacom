@@ -163,6 +163,16 @@ typedef enum {
 } WacomStylusType;
 
 /**
+ * Type of eraser on a stylus
+ */
+typedef enum {
+	WACOM_ERASER_UNKNOWN,
+	WACOM_ERASER_NONE,      /**< No eraser is present on the stylus */
+	WACOM_ERASER_INVERT,	/**< Eraser is a seperate tool on the opposite end of the stylus */
+	WACOM_ERASER_BUTTON,	/**< Eraser is a button alongside any other stylus buttons */
+} WacomEraserType;
+
+/**
  * Capabilities of the various tablet buttons
  */
 typedef enum {
@@ -637,6 +647,12 @@ WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus);
  * @return The type of stylus
  */
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The type of eraser on the stylus
+ */
+WacomEraserType libwacom_stylus_get_eraser_type (const WacomStylus *stylus);
 
 /**
  * Print the description of this stylus to the given file.

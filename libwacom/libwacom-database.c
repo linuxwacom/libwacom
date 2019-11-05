@@ -103,6 +103,20 @@ type_from_str (const char *type)
 	return WSTYLUS_UNKNOWN;
 }
 
+static WacomEraserType
+eraser_type_from_str (const char *type)
+{
+	if (type == NULL)
+		return WACOM_ERASER_NONE;
+	if (streq(type, "None"))
+		return WACOM_ERASER_NONE;
+	if (streq(type, "Invert"))
+		return WACOM_ERASER_INVERT;
+	if (streq(type, "Button"))
+		return WACOM_ERASER_BUTTON;
+	return WACOM_ERASER_UNKNOWN;
+}
+
 WacomBusType
 bus_from_str (const char *str)
 {
@@ -248,12 +262,11 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
 
-		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", &error);
-		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-		g_clear_error (&error);
+		type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
+		stylus->eraser_type = eraser_type_from_str (type);
+		g_free (type);
 
-		if (stylus->is_eraser == FALSE) {
+		if (stylus->eraser_type == WACOM_ERASER_NONE) {
 			stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", &error);
 			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);

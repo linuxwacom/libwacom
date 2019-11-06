@@ -318,6 +318,7 @@ data_files = [
 	'data/one-by-wacom-s-p.tablet',
 	'data/one-by-wacom-s-p2.tablet',
 	'data/serial-wacf004.tablet',
+	'data/wacom-one.tablet',
 	'data/xp-pen-star03.tablet',
 ]
 

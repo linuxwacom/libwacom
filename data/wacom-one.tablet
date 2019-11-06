@@ -1,0 +1,20 @@
+# Wacom
+# Wacom One Pen Display 13
+# DTC133
+
+[Device]
+Name=Wacom One Pen Display 13
+ModelName=DTC133
+Class=PenDisplay
+DeviceMatch=usb:056a:03a6
+Width=11
+Height=6
+# No pad buttons, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Buttons=0

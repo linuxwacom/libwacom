@@ -293,6 +293,7 @@ data_files = [
 	'data/isdv4-5157.tablet',
 	'data/isdv4-5158.tablet',
 	'data/isdv4-5169.tablet',
+	'data/isdv4-5196.tablet',
 	'data/isdv4-e2.tablet',
 	'data/isdv4-e3.tablet',
 	'data/isdv4-e5.tablet',

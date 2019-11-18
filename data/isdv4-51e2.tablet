@@ -1,0 +1,16 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo Yoga C940-14IIL
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/71
+
+[Device]
+Name=Wacom ISDv4 51E2
+ModelName=
+DeviceMatch=i2c:056a:51e2
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

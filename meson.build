@@ -309,6 +309,7 @@ data_files = [
 	'data/mobilestudio-pro-13-2.tablet',
 	'data/mobilestudio-pro-16.tablet',
 	'data/mobilestudio-pro-16-2.tablet',
+	'data/mobilestudio-pro-16-3.tablet',
 	'data/n-trig-pen.tablet',
 	'data/one-by-wacom-m-p.tablet',
 	'data/one-by-wacom-m-p2.tablet',

@@ -1,0 +1,61 @@
+# Wacom
+# MobileStudio Pro 16
+# DTH-W1620
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    A     |                       |
+#    B     |                       |
+#    C     |                       |
+#    D     |                       |
+#          |                       |
+#    K     |                       |
+#  L I J   |        DISPLAY        |
+#    M     |                       |
+#          |                       |
+#    E     |                       |
+#    F     |                       |
+#    G     |                       |
+#    H     |                       |
+#          |                       |
+#          *-----------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+# Note: Buttons J, K, L, M are on a circle
+#
+
+[Device]
+Name=Wacom MobileStudio Pro 16
+ModelName=DTH-W1620
+Class=Cintiq
+DeviceMatch=usb:056a:03aa
+PairedID=usb:056a:03ac
+Width=14
+Height=8
+Layout=mobilestudio-pro-16.svg
+Styli=@intuos5;@mobilestudio;
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Ring=true
+Buttons=13
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K;L;M
+
+# This tablet has mode buttons but no LEDs to signal the current mode to the
+# user and thus requires the caller to display an on-screen notification.
+Ring=J;K;L;M

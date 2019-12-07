@@ -1,0 +1,18 @@
+# ELAN touchscreen/pen sensor present in the ASUS ZenBook Pro Duo UX581GV
+# this is the main / top touchscreen
+# 345mm x 194mm
+# 13.59in x 7.64in
+
+[Device]
+Name=ELAN 29B6
+ModelName=
+DeviceMatch=i2c:04F3:29B6
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

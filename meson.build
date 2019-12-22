@@ -159,6 +159,8 @@ data_files = [
 	'data/ek-remote.tablet',
 	'data/elan-22e2.tablet',
 	'data/elan-24db.tablet',
+	'data/elan-29a1.tablet',
+	'data/elan-29b6.tablet',
 	'data/elan-264c.tablet',
 	'data/elan-2072.tablet',
 	'data/elan-2537.tablet',

@@ -7,7 +7,7 @@ option('udev-dir',
        value: '',
        description: 'udev base directory [default=$prefix/lib/udev]')
 option('tests',
-       type: 'boolean',
-       value: true,
-       description: 'Build the tests [default=true]')
+       type: 'feature',
+       value: 'enabled',
+       description: 'Build the tests [default=enabled]')
 

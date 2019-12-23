@@ -491,7 +491,7 @@ if doxygen.found()
 endif
 ############# tests ############################
 
-if get_option('tests')
+if get_option('tests').enabled()
 	dep_libxml  = dependency('libxml-2.0')
 	dep_dl      = meson.get_compiler('c').find_library('dl')
 

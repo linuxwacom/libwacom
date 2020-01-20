@@ -126,6 +126,15 @@ test('svg-layout-exists',
      args: [meson.source_root()],
      suite: ['all'])
 
+# This is a generic pytest invocation. If we end up with more than one
+# pytest-compatible test somewhere, we'll conveniently run that one too.
+pytest = find_program('pytest-3', required: false)
+if pytest.found()
+	test('receiver-id-test', pytest,
+	     workdir: meson.source_root(),
+	     env: ['LIBWACOM_DATA_DIR=@0@'.format(join_paths(meson.source_root(), 'data'))])
+endif
+
 ############### tools ###########################
 
 executable('libwacom-list-local-devices',

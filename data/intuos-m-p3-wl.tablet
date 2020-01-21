@@ -20,7 +20,7 @@
 [Device]
 Name=Wacom Intuos BT M
 ModelName=CTL-6100WL
-DeviceMatch=usb:056a:0378;bluetooth:056a:0379
+DeviceMatch=usb:056a:0378;bluetooth:056a:0379;usb:2d1f:0378
 Class=Bamboo
 Width=10
 Height=8

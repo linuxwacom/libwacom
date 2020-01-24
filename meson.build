@@ -254,6 +254,7 @@ data_files = [
 	'data/isdv4-116.tablet',
 	'data/isdv4-117.tablet',
 	'data/isdv4-124.tablet',
+	'data/isdv4-149.tablet',
 	'data/isdv4-481a.tablet',
 	'data/isdv4-484c.tablet',
 	'data/isdv4-485e.tablet',

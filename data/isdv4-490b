@@ -1,4 +1,4 @@
-# this is for the Wacom pen + touchscreen as found in the Dell XPS 15 9590
+# this is for the Wacom pen + touchscreen as found in the Dell XPS 15 (9590)
 
 [Device]
 Name=Wacom ISDv4 490b

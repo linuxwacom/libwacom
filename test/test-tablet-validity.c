@@ -165,8 +165,8 @@ test_vidpid(gconstpointer data)
 
 	switch (libwacom_get_bustype(device)) {
 		case WBUSTYPE_SERIAL:
-			g_assert_cmpint(libwacom_get_vendor_id(device), ==, 0);
-			g_assert_cmpint(libwacom_get_product_id(device), ==, 0);
+			g_assert_cmpint(libwacom_get_vendor_id(device), >=, 0);
+			g_assert_cmpint(libwacom_get_product_id(device), >=, 0);
 			break;
 		case WBUSTYPE_USB:
 		case WBUSTYPE_BLUETOOTH:

@@ -169,6 +169,9 @@ test_vidpid(gconstpointer data)
 			g_assert_cmpint(libwacom_get_product_id(device), >=, 0);
 			break;
 		case WBUSTYPE_USB:
+			if (libwacom_get_vendor_id(device) == 0x056A)
+				g_assert_cmpint(libwacom_get_product_id(device), !=, 0x84); /* wireless dongle */
+			/* fall through */
 		case WBUSTYPE_BLUETOOTH:
 		case WBUSTYPE_I2C:
 			g_assert_cmpint(libwacom_get_vendor_id(device), >, 0);

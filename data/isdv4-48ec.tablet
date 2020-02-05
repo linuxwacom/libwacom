@@ -1,0 +1,15 @@
+# this is for the alternate Wacom pen + touchscreen as found in the Dell XPS 13 7390
+
+[Device]
+Name=Wacom HID 48EC
+ModelName=
+DeviceMatch=i2c:056a:48ec
+Class=ISDV4
+Width=11
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

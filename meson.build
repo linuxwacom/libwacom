@@ -224,6 +224,7 @@ data_files = [
 	'data/intuos-s-p3-wl.tablet',
 	'data/intuos-s-pt.tablet',
 	'data/intuos-s-pt2.tablet',
+	'data/isdv4-2d1f-001e.tablet',
 	'data/isdv4-2d1f-002e.tablet',
 	'data/isdv4-10d.tablet',
 	'data/isdv4-10e.tablet',

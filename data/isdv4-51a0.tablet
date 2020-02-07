@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo ThinkPad X1 Extreme 2nd
+
+[Device]
+Name=Wacom ISDv4 51a0
+ModelName=
+DeviceMatch=usb:056a:51a0
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

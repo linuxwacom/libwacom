@@ -1,0 +1,15 @@
+# EMR (?) sensor used by the Samsung 940X5N (Samsung Notebook 9 Pro)
+# Wacom-alternate VID
+
+[Device]
+Name=Wacom ISDv4 1E
+ModelName=
+DeviceMatch=i2c:2d1f:001e
+Class=ISDV4
+Width=13
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Buttons=0

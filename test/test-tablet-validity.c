@@ -159,23 +159,21 @@ test_name(gconstpointer data)
 }
 
 static void
-test_vidpid(gconstpointer data)
+assert_vidpid(WacomBusType bus, int vid, int pid)
 {
-	WacomDevice *device = (WacomDevice*)data;
-
-	switch (libwacom_get_bustype(device)) {
+	switch (bus) {
 		case WBUSTYPE_SERIAL:
-			g_assert_cmpint(libwacom_get_vendor_id(device), >=, 0);
-			g_assert_cmpint(libwacom_get_product_id(device), >=, 0);
+			g_assert_cmpint(vid, >=, 0);
+			g_assert_cmpint(pid, >=, 0);
 			break;
 		case WBUSTYPE_USB:
-			if (libwacom_get_vendor_id(device) == 0x056A)
-				g_assert_cmpint(libwacom_get_product_id(device), !=, 0x84); /* wireless dongle */
+			if (vid == 0x056A)
+				g_assert_cmpint(pid, !=, 0x84); /* wireless dongle */
 			/* fall through */
 		case WBUSTYPE_BLUETOOTH:
 		case WBUSTYPE_I2C:
-			g_assert_cmpint(libwacom_get_vendor_id(device), >, 0);
-			g_assert_cmpint(libwacom_get_product_id(device), >, 0);
+			g_assert_cmpint(vid, >, 0);
+			g_assert_cmpint(pid, >, 0);
 			break;
 		case WBUSTYPE_UNKNOWN:
 		default:
@@ -185,12 +183,34 @@ test_vidpid(gconstpointer data)
 }
 
 static void
+test_vidpid(gconstpointer data)
+{
+	WacomDevice *device = (WacomDevice*)data;
+	WacomBusType bus = libwacom_get_bustype(device);
+
+	assert_vidpid(bus, libwacom_get_vendor_id(device), libwacom_get_product_id(device));
+}
+
+static void
 test_matches(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
 
 	g_assert_nonnull(libwacom_get_match(device));
 	g_assert_nonnull(libwacom_get_matches(device));
+}
+
+static void
+test_matches_vidpid(gconstpointer data)
+{
+	WacomDevice *device = (WacomDevice*)data;
+	const WacomMatch **match = libwacom_get_matches(device);
+
+	while (*match) {
+		WacomBusType bus = libwacom_match_get_bustype(*match);
+		assert_vidpid(bus, libwacom_match_get_vendor_id(*match), libwacom_match_get_product_id(*match));
+		match++;
+	}
 }
 
 static void
@@ -308,6 +328,7 @@ static void setup_tests(WacomDevice *device)
 	add_test(device, test_name);
 	add_test(device, test_vidpid);
 	add_test(device, test_matches);
+	add_test(device, test_matches_vidpid);
 	add_test(device, test_buttons);
 	add_test(device, test_styli);
 	add_test(device, test_rings);

@@ -28,6 +28,9 @@ files. These are text files. For most tablets, adding a new device is a
 simple as copying+renaming an existing file and modifying the entries.
 
 If you do so, please submit a Pull Request instead of this issue.
+
+You will also need a new (alphabetically sorted) entry in the meson.build
+file.
 -->
 
 **udevadm info output**

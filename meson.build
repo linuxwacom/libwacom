@@ -39,7 +39,7 @@ dep_glib    = dependency('glib-2.0')
 dep_librsvg = dependency('librsvg-2.0', required: false)
 dep_gtk2    = dependency('gtk+-2.0', required: false)
 
-# includes_include = include_directories('include')
+includes_include = include_directories('include')
 includes_src = include_directories('libwacom')
 
 #################### libwacom.so ########################
@@ -59,6 +59,7 @@ deps_libwacom = [
 ]
 
 inc_libwacom = [
+	     includes_include,
 	     includes_src,
 ]
 
@@ -511,7 +512,7 @@ if get_option('tests').enabled()
 	test_load = executable('test-load',
 			       'test/test-load.c',
 			       dependencies: [dep_libwacom, dep_glib],
-			       include_directories: [includes_src],
+			       include_directories: [includes_include, includes_src],
 			       c_args: tests_cflags,
 			       install: false)
 	test('test-load', test_load, suite: ['all', 'valgrind'])

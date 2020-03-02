@@ -503,7 +503,7 @@ endif
 ############# tests ############################
 
 if get_option('tests').enabled()
-	dep_libxml  = dependency('libxml-2.0')
+	dep_libxml  = dependency('libxml-2.0', required : false)
 	dep_dl      = meson.get_compiler('c').find_library('dl')
 
 
@@ -541,13 +541,15 @@ if get_option('tests').enabled()
 					 install: false)
 	test('test-stylus-validity', test_stylus_validity, suite: ['all', 'valgrind'])
 
-	test_svg_validity = executable('test-svg-validity',
-				       'test/test-tablet-svg-validity.c',
-				       dependencies: [dep_libwacom, dep_libxml, dep_glib],
-				       include_directories: [includes_src],
-				       c_args: tests_cflags,
-				       install: false)
-	test('test-svg-validity', test_svg_validity, suite: ['all', 'valgrind'])
+	if dep_libxml.found()
+		test_svg_validity = executable('test-svg-validity',
+					       'test/test-tablet-svg-validity.c',
+					       dependencies: [dep_libwacom, dep_libxml, dep_glib],
+					       include_directories: [includes_src],
+					       c_args: tests_cflags,
+					       install: false)
+		test('test-svg-validity', test_svg_validity, suite: ['all', 'valgrind'])
+	endif
 
 	valgrind = find_program('valgrind', required : false)
 	if valgrind.found()

@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -e
 
 date=`date +"%Y-%m-%d-%H.%M.%S"`
 builddir="build.$date"

@@ -1,9 +1,9 @@
 libwacomtabletdir = $(datadir)/libwacom
-tablet_files = $(shell find $(top_srcdir)/data -name "*.tablet" -printf "%P\n")
+tablet_files = $(shell cd $(top_srcdir)/data; printf '%s\n' *.tablet)
 dist_libwacomtablet_DATA =  $(tablet_files)
 
 libwacomstylusdir = $(datadir)/libwacom
-stylus_files = $(shell find $(top_srcdir)/data -name "*.stylus" -printf "%P\n")
+stylus_files = $(shell cd $(top_srcdir)/data; printf '%s\n' *.stylus)
 dist_libwacomstylus_DATA = $(stylus_files)
 
 EXTRA_DIST = \

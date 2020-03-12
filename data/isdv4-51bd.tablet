@@ -1,0 +1,17 @@
+# Lenovo
+# Known PID, but unknown details (assume similar to other private
+# reports received at the same time: e.g. isdv4-51BB.tablet)
+
+[Device]
+Name=ISDv4 51BD
+ModelName=
+DeviceMatch=usb:056A:51BD
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

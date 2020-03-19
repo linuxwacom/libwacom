@@ -1,0 +1,42 @@
+# Wacom
+# Intuos Pen Medium
+# CTL-6100
+# (Android Mode)
+#
+# This is the third generation "Intuos", a successor to
+# the CTL-690. It has a Stylus with two buttons and no
+# eraser. The device has no touch.
+#
+# Buttons are no loger RIGHT, LEFT, FORWARD, and BACKWARD.
+# The buttons are now reported as numbered buttons as with
+# the Intuos Pro series.
+#
+#      A   B           C   D
+#    *-----------------------*
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+# This definition is for the special "Android Mode" which changes the
+# tablet's vendor ID and active area. For more information, see:
+# https://github.com/linuxwacom/xf86-input-wacom/wiki/Known-Issues#android-misdetect
+
+[Device]
+Name=Wacom Intuos M (Android Mode)
+ModelName=CTL-6100
+DeviceMatch=usb:2d1f:0375
+Class=Bamboo
+Width=3
+Height=5
+Layout=intuos-m-p3.svg
+IntegratedIn=
+Styli=@intuospt3;
+
+[Features]
+Stylus=true
+Reversible=false
+Buttons=4
+
+[Buttons]
+Top=A;B;C;D

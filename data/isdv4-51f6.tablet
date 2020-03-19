@@ -1,0 +1,16 @@
+# this is for the Wacom pen + touchscreen as found in the ThinkPad L13 Yoga
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/78
+
+[Device]
+Name=Wacom ISDv4 F1F6
+ModelName=
+DeviceMatch=usb:056a:51f6
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

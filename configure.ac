@@ -1,6 +1,6 @@
 # Initialize Autoconf
 AC_PREREQ([2.60])
-AC_INIT([libwacom], [1.0]) # change meson.build as well
+AC_INIT([libwacom], [1.2]) # change meson.build as well
 AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake
@@ -19,6 +19,7 @@ AC_PROG_LIBTOOL
 
 # Checks for programs.
 AC_PROG_CC
+AC_PROG_CC_C99
 AC_PROG_INSTALL
 PKG_PROG_PKG_CONFIG
 

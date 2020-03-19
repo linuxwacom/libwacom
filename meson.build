@@ -1,5 +1,5 @@
 project('libwacom', 'c',
-	version: '1.0', # change configure.ac as well
+	version: '1.2', # change configure.ac as well
 	license: 'MIT/Expat',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.47.0')
@@ -39,7 +39,7 @@ dep_glib    = dependency('glib-2.0')
 dep_librsvg = dependency('librsvg-2.0', required: false)
 dep_gtk2    = dependency('gtk+-2.0', required: false)
 
-# includes_include = include_directories('include')
+includes_include = include_directories('include')
 includes_src = include_directories('libwacom')
 
 #################### libwacom.so ########################
@@ -59,6 +59,7 @@ deps_libwacom = [
 ]
 
 inc_libwacom = [
+	     includes_include,
 	     includes_src,
 ]
 
@@ -81,10 +82,11 @@ dep_libwacom = declare_dependency(link_with: lib_libwacom)
 install_headers('libwacom/libwacom.h', subdir: 'libwacom-1.0/libwacom')
 
 pkgconfig.generate(filebase: 'libwacom',
-		   name: 'Libwacom',
+		   name: 'libwacom',
 		   description: 'Wacom model feature query library',
 		   version: meson.project_version(),
 		   subdirs: 'libwacom-1.0',
+		   requires_private: deps_libwacom,
 		   libraries: lib_libwacom)
 
 #################### data files ########################
@@ -158,10 +160,14 @@ data_files = [
 	'data/ek-remote.tablet',
 	'data/elan-22e2.tablet',
 	'data/elan-24db.tablet',
+	'data/elan-29a1.tablet',
+	'data/elan-29b6.tablet',
+	'data/elan-262b.tablet',
 	'data/elan-264c.tablet',
 	'data/elan-2072.tablet',
 	'data/elan-2537.tablet',
 	'data/elan-2627.tablet',
+	'data/elan-2628.tablet',
 	'data/elan-5515.tablet',
 	'data/generic.tablet',
 	'data/graphire2-4x5.tablet',
@@ -219,11 +225,14 @@ data_files = [
 	'data/intuos-s-p3-wl.tablet',
 	'data/intuos-s-pt.tablet',
 	'data/intuos-s-pt2.tablet',
+	'data/isdv4-2d1f-001e.tablet',
 	'data/isdv4-2d1f-002e.tablet',
 	'data/isdv4-10d.tablet',
 	'data/isdv4-10e.tablet',
 	'data/isdv4-10f.tablet',
 	'data/isdv4-12c.tablet',
+	'data/isdv4-48c9.tablet',
+	'data/isdv4-48ec.tablet',
 	'data/isdv4-48ed.tablet',
 	'data/isdv4-48ee.tablet',
 	'data/isdv4-50b4.tablet',
@@ -231,9 +240,30 @@ data_files = [
 	'data/isdv4-50b8.tablet',
 	'data/isdv4-50db.tablet',
 	'data/isdv4-50e9.tablet',
+	'data/isdv4-50ef.tablet',
 	'data/isdv4-50f1.tablet',
 	'data/isdv4-50f8.tablet',
 	'data/isdv4-50fd.tablet',
+	'data/isdv4-51a0.tablet',
+	'data/isdv4-51af.tablet',
+	'data/isdv4-51b0.tablet',
+	'data/isdv4-51b1.tablet',
+	'data/isdv4-51b2.tablet',
+	'data/isdv4-51b3.tablet',
+	'data/isdv4-51b6.tablet',
+	'data/isdv4-51b7.tablet',
+	'data/isdv4-51b8.tablet',
+	'data/isdv4-51b9.tablet',
+	'data/isdv4-51ba.tablet',
+	'data/isdv4-51bb.tablet',
+	'data/isdv4-51bc.tablet',
+	'data/isdv4-51bd.tablet',
+	'data/isdv4-51be.tablet',
+	'data/isdv4-51bf.tablet',
+	'data/isdv4-51c4.tablet',
+	'data/isdv4-51e2.tablet',
+	'data/isdv4-51f5.tablet',
+	'data/isdv4-51f6.tablet',
 	'data/isdv4-90.tablet',
 	'data/isdv4-93.tablet',
 	'data/isdv4-100.tablet',
@@ -243,6 +273,7 @@ data_files = [
 	'data/isdv4-116.tablet',
 	'data/isdv4-117.tablet',
 	'data/isdv4-124.tablet',
+	'data/isdv4-149.tablet',
 	'data/isdv4-481a.tablet',
 	'data/isdv4-484c.tablet',
 	'data/isdv4-485e.tablet',
@@ -257,6 +288,7 @@ data_files = [
 	'data/isdv4-515a.tablet',
 	'data/isdv4-516b.tablet',
 	'data/isdv4-517d.tablet',
+	'data/isdv4-521f.tablet',
 	'data/isdv4-4004.tablet',
 	'data/isdv4-4800.tablet',
 	'data/isdv4-4806.tablet',
@@ -269,6 +301,7 @@ data_files = [
 	'data/isdv4-4841.tablet',
 	'data/isdv4-4865.tablet',
 	'data/isdv4-4870.tablet',
+	'data/isdv4-4875.tablet',
 	'data/isdv4-5000.tablet',
 	'data/isdv4-5002.tablet',
 	'data/isdv4-5010.tablet',
@@ -284,10 +317,14 @@ data_files = [
 	'data/isdv4-5122.tablet',
 	'data/isdv4-5128.tablet',
 	'data/isdv4-5146.tablet',
+	'data/isdv4-5147.tablet',
 	'data/isdv4-5150.tablet',
 	'data/isdv4-5157.tablet',
 	'data/isdv4-5158.tablet',
 	'data/isdv4-5169.tablet',
+	'data/isdv4-5196.tablet',
+	'data/isdv4-5221.tablet',
+	'data/isdv4-5222.tablet',
 	'data/isdv4-e2.tablet',
 	'data/isdv4-e3.tablet',
 	'data/isdv4-e5.tablet',
@@ -296,13 +333,17 @@ data_files = [
 	'data/isdv4-ed.tablet',
 	'data/isdv4-ef.tablet',
 	'data/mobilestudio-pro-13.tablet',
+	'data/mobilestudio-pro-13-2.tablet',
 	'data/mobilestudio-pro-16.tablet',
+	'data/mobilestudio-pro-16-2.tablet',
+	'data/mobilestudio-pro-16-3.tablet',
 	'data/n-trig-pen.tablet',
 	'data/one-by-wacom-m-p.tablet',
 	'data/one-by-wacom-m-p2.tablet',
 	'data/one-by-wacom-s-p.tablet',
 	'data/one-by-wacom-s-p2.tablet',
 	'data/serial-wacf004.tablet',
+	'data/wacom-one.tablet',
 	'data/xp-pen-star03.tablet',
 ]
 
@@ -453,7 +494,8 @@ install_man(configure_file(input: 'tools/libwacom-list-local-devices.man',
 			   copy: true))
 
 ############### docs ###########################
-doxygen = find_program('doxygen', required: false)
+docs_feature = get_option('documentation')
+doxygen = find_program('doxygen', required: docs_feature)
 if doxygen.found()
 	src_doxygen = [
 		join_paths(dir_src, 'libwacom.h'),
@@ -475,8 +517,8 @@ if doxygen.found()
 endif
 ############# tests ############################
 
-if get_option('tests')
-	dep_libxml  = dependency('libxml-2.0')
+if get_option('tests').enabled()
+	dep_libxml  = dependency('libxml-2.0', required : false)
 	dep_dl      = meson.get_compiler('c').find_library('dl')
 
 
@@ -485,7 +527,7 @@ if get_option('tests')
 	test_load = executable('test-load',
 			       'test/test-load.c',
 			       dependencies: [dep_libwacom, dep_glib],
-			       include_directories: [includes_src],
+			       include_directories: [includes_include, includes_src],
 			       c_args: tests_cflags,
 			       install: false)
 	test('test-load', test_load, suite: ['all', 'valgrind'])
@@ -514,13 +556,15 @@ if get_option('tests')
 					 install: false)
 	test('test-stylus-validity', test_stylus_validity, suite: ['all', 'valgrind'])
 
-	test_svg_validity = executable('test-svg-validity',
-				       'test/test-tablet-svg-validity.c',
-				       dependencies: [dep_libwacom, dep_libxml, dep_glib],
-				       include_directories: [includes_src],
-				       c_args: tests_cflags,
-				       install: false)
-	test('test-svg-validity', test_svg_validity, suite: ['all', 'valgrind'])
+	if dep_libxml.found()
+		test_svg_validity = executable('test-svg-validity',
+					       'test/test-tablet-svg-validity.c',
+					       dependencies: [dep_libwacom, dep_libxml, dep_glib],
+					       include_directories: [includes_src],
+					       c_args: tests_cflags,
+					       install: false)
+		test('test-svg-validity', test_svg_validity, suite: ['all', 'valgrind'])
+	endif
 
 	valgrind = find_program('valgrind', required : false)
 	if valgrind.found()
@@ -536,13 +580,18 @@ if get_option('tests')
 		message('valgrind not found, disabling valgrind test suite')
 	endif
 
-	test_deprecated = executable('test-deprecated',
-				     'test/test-deprecated.c',
-				     dependencies: [dep_libwacom, dep_dl],
-				     include_directories: [includes_src],
-				     c_args: tests_cflags,
-				     install: false)
-	test('test-deprecated', test_deprecated, suite: ['all'])
+	# because of the tricks we use in calling the function and exposing
+	# it to begin with, LTO gets confused and this fails to link.
+	# Let's just disable it here.
+	if not get_option('b_lto')
+		test_deprecated = executable('test-deprecated',
+					     'test/test-deprecated.c',
+					     dependencies: [dep_libwacom, dep_dl],
+					     include_directories: [includes_src],
+					     c_args: tests_cflags,
+					     install: false)
+		test('test-deprecated', test_deprecated, suite: ['all'])
+	endif
 endif
 
 # This is a non-optional test

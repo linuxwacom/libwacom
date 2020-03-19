@@ -1,3 +1,16 @@
+libwacom 1.2:
+- New devices:
+  - Wacom Moile Studio Pro (2nd gen)
+  - Dell Latitude 7400 2-in-1, XPS 13 2-in-1
+  - Elan 2628
+  - Lenovo X1 Yoga 4th, X1 Yoga 3d, Yoga 720, Yoga C930, Yoga C940, X390
+    Yoga, IdeaPad FLEX-14API
+  - ASUS ZenBook Pro Duo 
+
+libwacom 1.1:
+- New devices: Wacom HID 5115
+- Button codes defined for the 3rd gen Intuos S
+
 libwacom 1.0:
 - udev rules are now installed by default
 

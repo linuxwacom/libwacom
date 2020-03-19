@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo X1 Yoga 4th-gen
+
+[Device]
+Name=Wacom ISDv4 51BE
+ModelName=
+DeviceMatch=usb:056a:51be
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

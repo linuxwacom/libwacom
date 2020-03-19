@@ -1,4 +1,4 @@
-# Active electrostatic (AES) sensor used by the Dell XPS 13 2 in 1 7390 (FHD)
+# this is for the Wacom pen + touchscreen as found in the Dell XPS 13 7390
 
 [Device]
 Name=Wacom ISDv4 48ed

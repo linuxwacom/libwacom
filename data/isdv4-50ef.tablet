@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Lenovo YOGA 720-13IKB
+
+[Device]
+Name=Wacom ISDv4 50ef
+ModelName=
+DeviceMatch=i2c:056a:50ef
+Class=ISDV4
+Width=12
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

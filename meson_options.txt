@@ -1,9 +1,13 @@
+option('documentation',
+       type: 'feature',
+       value: 'auto',
+       description: 'Build doxygen documentation [default=auto]')
 option('udev-dir',
        type: 'string',
        value: '',
        description: 'udev base directory [default=$prefix/lib/udev]')
 option('tests',
-       type: 'boolean',
-       value: true,
-       description: 'Build the tests [default=true]')
+       type: 'feature',
+       value: 'enabled',
+       description: 'Build the tests [default=enabled]')
 

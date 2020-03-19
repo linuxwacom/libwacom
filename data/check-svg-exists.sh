@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Usage: check-svg-exists.sh /path/to/libwacom/
 

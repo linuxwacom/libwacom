@@ -1,3 +1,13 @@
+libwacom 1.3:
+- New devices:
+  - Wacom One Pen Display 13
+  - Lenovo Thinkpad L13 Yoga, X1 Yoga 4th, X1 Extreme 2nd, X13 Yoga, Yoga 370
+  - Dell XPS 9575, 7390
+  - Toshiba z20t-c
+  - HP Envy x360
+  - Samsung Notebook 9 Pro
+- Android mode for 3rd gen Intuos devices is now handled
+
 libwacom 1.2:
 - New devices:
   - Wacom Moile Studio Pro (2nd gen)

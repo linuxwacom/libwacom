@@ -8,7 +8,7 @@ Name=Wacom ISDv4 5044
 ModelName=
 DeviceMatch=usb:056a:5044
 Class=ISDV4
-Width=10
+Width=11
 Height=6
 IntegratedIn=Display;System
 

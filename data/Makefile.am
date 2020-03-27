@@ -9,8 +9,7 @@ dist_libwacomstylus_DATA = $(stylus_files)
 EXTRA_DIST = \
              wacom.example \
              check-files-in-git.sh \
-             check-svg-exists.sh \
-             check-data-in-meson.build.sh
+             check-svg-exists.sh
 
 SUBDIRS = layouts
 

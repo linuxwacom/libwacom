@@ -61,6 +61,7 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  test/Makefile
                  tools/Makefile
+                 tools/65-libwacom.rules
                  libwacom/Makefile
                  libwacom.pc])
 AC_OUTPUT

@@ -119,18 +119,24 @@ executable('libwacom-list-local-devices',
 
 tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
 
-gen_udev_rules = executable('generate-udev-rules',
-			    'tools/generate-udev-rules.c',
-			    dependencies: [dep_libwacom, dep_glib],
-			    include_directories: [includes_src],
-			    c_args: tools_cflags,
-			    install: false)
-custom_target('udev-rules',
-	      command: gen_udev_rules,
+gen_hwdb = executable('generate-hwdb',
+		      'tools/generate-hwdb.c',
+		      dependencies: [dep_libwacom, dep_glib],
+		      include_directories: [includes_src],
+		      c_args: tools_cflags,
+		      install: false)
+custom_target('hwdb',
+	      command: gen_hwdb,
 	      capture: true,
-	      output: '65-libwacom.rules',
+	      output: '65-libwacom.hwdb',
 	      install: true,
-	      install_dir: join_paths(dir_udev, 'rules.d'))
+	      install_dir: join_paths(dir_udev, 'hwdb.d'))
+
+configure_file(input: 'tools/65-libwacom.rules.in',
+	       output: '65-libwacom.rules',
+	       copy: true,
+	       install: true,
+	       install_dir: join_paths(dir_udev, 'rules.d'))
 
 executable('list-devices',
 	   'tools/list-devices.c',

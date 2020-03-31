@@ -3,19 +3,6 @@ libwacom is a library to identify Wacom tablets and their model-specific feature
 
 This functionality is currently used by e.g. GNOME to map built-in tablets to the correct screen.
 
-# Debugging libwacom with uinput devices
-libwacom by default will not recognise uinput devices. To debug and test, a physical device must be connected.
-
-Custom udev rules are provided to help debug uinput device. Run `generate-udev-rules --with-uinput-rules` to generate these rules and apply them locally. Devices will then be tagged as required and can be debugged.
-
-## Some limitations:
-* For these rules to work, the device must be listed in the database
-* libwacom will check UINPUT_* properties on the uinput device, if they do
-  not get applied, the device will not be visible
-
-**DO NOT USE THESE UINPUT RULES unless you are debugging with uinput devices.**
-Remove the rules once debugging is done.
-
 # Adding tablet descriptions to libwacom
 A common indicator that a device is not supported by libwacom is that it works normally in a GNOME session, but the device is not correctly mapped to the screen.
 

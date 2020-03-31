@@ -1,0 +1,24 @@
+# udev rules for libwacom supported devices
+
+ACTION!="add|change", GOTO="libwacom_end"
+KERNEL!="event[0-9]*", GOTO="libwacom_end"
+
+# HUION consumer control devices are not tablets.
+ATTRS{name}=="HUION * Consumer Control", GOTO="libwacom_end"
+
+# Match all serial wacom tablets with a serial ID starting with WACf
+ENV{ID_BUS}=="tty|pnp", ATTRS{id}=="WACf*", ENV{ID_INPUT}="1", ENV{ID_INPUT_TABLET}="1", GOTO="libwacom_end"
+ENV{ID_BUS}=="tty|pnp", ATTRS{id}=="FUJ*", ENV{ID_INPUT}="1", ENV{ID_INPUT_TABLET}="1", GOTO="libwacom_end"
+
+# use the /sys/class/input/eventXXX/device/modalias as lookup key, prefixed
+# by libwacom:<device name>:
+# This lookup key is a contract between the udev rules and the hwdb entries.
+# It is not considered public API and may change.
+KERNELS=="input*", \
+  IMPORT{builtin}="hwdb --subsystem=input '--lookup-prefix=libwacom:name:$attr{name}:'"
+
+# We can't unset properties through the hwdb but we can set them to zero.
+# So let's have a rule that converts the 0 properties to unset ones.
+ENV{ID_INPUT_JOYSTICK}="0", ENV{ID_INPUT_JOYSTICK}=""
+
+LABEL="libwacom_end"

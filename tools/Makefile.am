@@ -1,10 +1,10 @@
 AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(abs_top_srcdir)\""
 
-noinst_PROGRAMS = generate-udev-rules list-devices list-compatible-styli
+noinst_PROGRAMS = generate-hwdb list-devices list-compatible-styli
 
-generate_udev_rules_SOURCES = generate-udev-rules.c
-generate_udev_rules_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
-generate_udev_rules_CFLAGS=$(GLIB_CFLAGS)
+generate_hwdb_SOURCES = generate-hwdb.c
+generate_hwdb_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
+generate_hwdb_CFLAGS=$(GLIB_CFLAGS)
 
 list_devices_SOURCES = list-devices.c
 list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
@@ -30,8 +30,12 @@ rules = 65-libwacom.rules
 udev_rulesdir=$(UDEV_DIR)/rules.d
 dist_udev_rules_DATA = $(rules)
 
-$(rules): generate-udev-rules
+hwdb = 65-libwacom.hwdb
+udev_hwdbdir=$(UDEV_DIR)/hwdb.d
+dist_udev_hwdb_DATA = $(hwdb)
+
+$(hwdb): generate-hwdb
 	$(builddir)/$< > $@
 
-CLEANFILES = $(rules)
-EXTRA_DIST = $(rules)
+CLEANFILES = $(hwdb)
+EXTRA_DIST = $(rules) $(hwdb)

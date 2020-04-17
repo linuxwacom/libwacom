@@ -1,0 +1,18 @@
+# HUION
+# H420
+#
+
+[Device]
+Name=Huion 420
+ModelName=
+DeviceMatch=usb:256c:006e:HUION 420 Pen;usb:256c:006e:HUION 420 Pad;
+Class=Bamboo
+Width=4
+Height=2
+IntegratedIn=
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=0

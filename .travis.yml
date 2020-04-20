@@ -34,8 +34,8 @@ jobs:
   include:
     - stage: test
       install:
-        - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind
-        - sudo pip3 install meson
+        - sudo apt-get install -y python3-pip python3-setuptools valgrind
+        - sudo pip3 install meson ninja
       script:
         - meson builddir || (cat builddir/meson-logs/meson-log.txt && false)
         - ninja -C builddir test || (cat builddir/meson-logs/testlog.txt && false)
@@ -49,8 +49,8 @@ jobs:
     #  build from a tarball with meson
     - stage: test
       install:
-        - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind tree
-        - sudo pip3 install meson
+        - sudo apt-get install -y python3-pip python3-setuptools valgrind tree
+        - sudo pip3 install meson ninja
       script:
         - export INSTALLDIR="$PWD/_inst"
         - mkdir -p "$INSTALLDIR"

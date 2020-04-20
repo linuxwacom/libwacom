@@ -37,7 +37,7 @@ jobs:
         - sudo apt-get install -y ninja-build python3-pip python3-setuptools valgrind
         - sudo pip3 install meson
       script:
-        - meson builddir
+        - meson builddir || (cat builddir/meson-logs/meson-log.txt && false)
         - ninja -C builddir test || (cat builddir/meson-logs/testlog.txt && false)
         - ninja -C builddir dist
         - meson configure builddir -Db_sanitize=address,undefined

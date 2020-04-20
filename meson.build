@@ -2,7 +2,7 @@ project('libwacom', 'c',
 	version: '1.3', # change configure.ac as well
 	license: 'MIT/Expat',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
-	meson_version: '>= 0.47.0')
+	meson_version: '>= 0.50.0')
 
 dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')

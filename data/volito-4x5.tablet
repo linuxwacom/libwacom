@@ -1,0 +1,15 @@
+# Wacom
+# Volito 4x5
+# FT-0405
+
+[Device]
+Name=Wacom Volito 4x5
+ModelName=FT-0405
+DeviceMatch=usb:056a:0060
+Width=5
+Height=4
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Buttons=0

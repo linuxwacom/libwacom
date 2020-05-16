@@ -1,0 +1,16 @@
+# Active electrostatic (AES) sensor used by the HP ZBook Studio x360 G5
+
+[Device]
+Name=Wacom ISDv4 48d6
+ModelName=
+DeviceMatch=i2c:056a:48d6
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

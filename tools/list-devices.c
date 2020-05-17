@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <libgen.h>
 #include <unistd.h>
 #include "libwacom.h"
 

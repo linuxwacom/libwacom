@@ -2,6 +2,10 @@ sudo: required
 dist: xenial
 language: c
 
+os:
+  - linux
+  - freebsd
+
 compiler:
   - gcc
   - clang
@@ -21,6 +25,13 @@ env:
   global:
     - CFLAGS="-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
 
+before_install:
+  - |
+    if [ "$TRAVIS_OS_NAME" == freebsd ]; then
+      sudo pkg install -y evdev-proto libgudev libxml++
+      sudo ln -sf $(which gmake) $(which make)
+    fi
+
 script:
   - mkdir _build
   - pushd _build > /dev/null
@@ -32,6 +43,16 @@ script:
 
 jobs:
   include:
+    # only test build using meson on freebsd, the rest is covered by linux
+    - stage: test
+      os: freebsd
+      compiler: clang
+      install:
+        - sudo pkg install -y meson
+      script:
+        - meson builddir || (cat builddir/meson-logs/meson-log.txt && false)
+        - ninja -C builddir test || (cat builddir/meson-logs/testlog.txt && false)
+        - ninja -C builddir dist
     - stage: test
       install:
         - sudo apt-get install -y python3-pip python3-setuptools valgrind

@@ -10,12 +10,6 @@ compiler:
   - gcc
   - clang
 
-addons:
-  apt:
-    packages:
-      - libgudev-1.0-dev
-      - libxml++2.6-dev
-
 stages:
   - test
   - name: coverity
@@ -26,6 +20,11 @@ env:
     - CFLAGS="-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
 
 before_install:
+  - |
+    if [ "$TRAVIS_OS_NAME" == linux ]; then
+      sudo apt-get install -yq --no-install-suggests --no-install-recommends \
+        libgudev-1.0-dev libxml++2.6-dev
+    fi
   - |
     if [ "$TRAVIS_OS_NAME" == freebsd ]; then
       sudo pkg install -y evdev-proto libgudev libxml++

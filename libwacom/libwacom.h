@@ -608,6 +608,13 @@ const char *libwacom_stylus_get_name (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
+ * @param num_paired_ids The length of the returned list
+ * @return The list of other IDs paired to this stylus
+ */
+const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids);
+
+/**
+ * @param stylus The stylus to query
  * @return The number of buttons on the stylus
  */
 int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);

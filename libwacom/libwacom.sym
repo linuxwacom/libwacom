@@ -75,4 +75,5 @@ local:
 LIBWACOM_1.2 {
 global:
     libwacom_stylus_get_eraser_type;
+    libwacom_stylus_get_paired_ids;
 } LIBWACOM_0.33;

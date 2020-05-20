@@ -109,6 +109,8 @@ struct _WacomStylus {
 	char *group;
 	int num_buttons;
 	gboolean has_eraser;
+	int num_ids;
+	int *paired_ids;
 	WacomEraserType eraser_type;
 	gboolean has_lens;
 	gboolean has_wheel;

@@ -89,26 +89,26 @@ static void
 test_eraser(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	WacomStylusType type;
 	gboolean matching_eraser_found = FALSE;
+	const int *ids;
+	int count;
+	int i;
 
 	/* A stylus cannot be an eraser and have an eraser at the same time */
 	g_assert_true(libwacom_stylus_has_eraser(stylus));
 	g_assert_false(libwacom_stylus_is_eraser(stylus));
 
-	/* Search for another stylus with the same type as ours that is an
-	   eraser.
-	   FIXME: This is imprecise. Multiple pens share the same type but
-	   we are happy with the first eraser of that type we find. So once
-	   we have an eraser for each type, this will always be true, even if
-	   we forget to add the right eraser for a new pen.
-	 */
-	type = libwacom_stylus_get_type (stylus);
-	for (const WacomStylus **s = all_styli; *s; s++) {
-		if (libwacom_stylus_is_eraser(*s) &&
-		    libwacom_stylus_get_type(*s) == type) {
-			matching_eraser_found = TRUE;
-			break;
+	/* Search for the linked eraser */
+	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	g_assert_cmpint(count, >, 0);
+
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			if (libwacom_stylus_get_id(*s) == ids[i] &&
+			    libwacom_stylus_is_eraser(*s)) {
+				matching_eraser_found = TRUE;
+				break;
+			}
 		}
 	}
 
@@ -220,6 +220,41 @@ test_no_buttons(gconstpointer data)
 	const WacomStylus *stylus = data;
 
 	g_assert_cmpint(libwacom_stylus_get_num_buttons(stylus), ==, 0);
+}
+
+static void
+test_mutually_paired(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	int stylus_id;
+	const int *stylus_pairings;
+	int count;
+	int i;
+
+	stylus_id = libwacom_stylus_get_id(stylus);
+	stylus_pairings = libwacom_stylus_get_paired_ids(stylus, &count);
+
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			gboolean match_found = FALSE;
+			const int *pair_ids;
+			int pair_count;
+			int j;
+
+			if (libwacom_stylus_get_id(*s) != stylus_pairings[i])
+				continue;
+
+			pair_ids = libwacom_stylus_get_paired_ids(*s, &pair_count);
+			for (j = 0; j < pair_count; j++) {
+				if (pair_ids[j] == stylus_id) {
+					match_found = TRUE;
+					break;
+				}
+			}
+
+			g_assert_true(match_found);
+		}
+	}
 }
 
 /* Wrapper function to make adding tests simpler. g_test requires
@@ -344,6 +379,8 @@ setup_tests(const WacomStylus *stylus)
 
 	if (libwacom_stylus_is_eraser(stylus))
 		add_test(stylus, test_eraser_type);
+
+	add_test(stylus, test_mutually_paired);
 }
 
 /**

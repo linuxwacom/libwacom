@@ -86,7 +86,7 @@ test_eraser_type(gconstpointer data)
 }
 
 static void
-test_eraser(gconstpointer data)
+test_has_eraser(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
 	gboolean matching_eraser_found = FALSE;
@@ -113,6 +113,56 @@ test_eraser(gconstpointer data)
 	}
 
 	g_assert_true(matching_eraser_found);
+}
+
+static void
+test_eraser_link(const WacomStylus *stylus, gboolean linked)
+{
+	gboolean matching_stylus_found = FALSE;
+	const int *ids;
+	int count;
+	int i;
+
+	/* A stylus cannot be an eraser and have an eraser at the same time */
+	g_assert_false(libwacom_stylus_has_eraser(stylus));
+	g_assert_true(libwacom_stylus_is_eraser(stylus));
+
+	/* Verify the link count */
+	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	if (!linked) {
+		g_assert_cmpint(count, ==, 0);
+		return;
+	}
+
+	/* If we're supposed to be linked, ensure its to a non-eraser */
+	g_assert_cmpint(count, >, 0);
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			if (libwacom_stylus_get_id(*s) == ids[i] &&
+			    libwacom_stylus_has_eraser(*s)) {
+				matching_stylus_found = TRUE;
+				break;
+			}
+		}
+	}
+
+	g_assert_true(matching_stylus_found);
+}
+
+static void
+test_is_eraser_unlinked(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	test_eraser_link(stylus, FALSE);
+}
+
+static void
+test_is_eraser_linked(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	test_eraser_link(stylus, TRUE);
 }
 
 static void
@@ -294,8 +344,10 @@ setup_aes_tests(const WacomStylus *stylus)
 		add_test(stylus, test_tilt);
 	}
 
-	if (libwacom_stylus_is_eraser(stylus))
+	if (libwacom_stylus_is_eraser(stylus)) {
+		add_test(stylus, test_is_eraser_unlinked);
 		add_test(stylus, test_eraser_button);
+	}
 }
 
 static void
@@ -336,8 +388,10 @@ setup_emr_tests(const WacomStylus *stylus)
 			break;
 	}
 
-	if (libwacom_stylus_is_eraser(stylus))
+	if (libwacom_stylus_is_eraser(stylus)) {
+		add_test(stylus, test_is_eraser_linked);
 		add_test(stylus, test_eraser_inverted);
+	}
 }
 
 static void
@@ -375,7 +429,7 @@ setup_tests(const WacomStylus *stylus)
 	}
 
 	if (libwacom_stylus_has_eraser(stylus))
-		add_test(stylus, test_eraser);
+		add_test(stylus, test_has_eraser);
 
 	if (libwacom_stylus_is_eraser(stylus))
 		add_test(stylus, test_eraser_type);

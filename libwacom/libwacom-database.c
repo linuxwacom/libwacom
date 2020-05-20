@@ -28,7 +28,9 @@
 #include "config.h"
 #endif
 
+#define _GNU_SOURCE 1
 #include "libwacomint.h"
+#include "util-strings.h"
 #include <linux/input-event-codes.h>
 
 #include <assert.h>
@@ -250,8 +252,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		int id;
 		char **string_list;
 
-		id = strtol (groups[i], NULL, 16);
-		if (id == 0) {
+		if (!safe_atoi_base (groups[i], &id, 16)) {
 			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
 			continue;
 		}
@@ -273,11 +274,9 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 			array = g_array_new (FALSE, FALSE, sizeof(int));
 			for (j = 0; string_list[j]; j++) {
-				char *endptr;
-				long val;
+				int val;
 
-				val = strtol (string_list[j], &endptr, 0);
-				if (*endptr == '\0') {
+				if (safe_atoi_base (string_list[j], &val, 16)) {
 					g_array_append_val (array, val);
 					stylus->num_ids++;
 				} else {
@@ -448,7 +447,7 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 	assert(strvals);
 
 	for (i = 0; i < device->num_buttons; i++) {
-		glong val;
+		gint val;
 
 		if (!strvals[i]) {
 			g_error ("%s: Missing EvdevCode for button %d, ignoring all codes\n",
@@ -456,13 +455,12 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 			return false;
 		}
 
-		val = strtol (strvals[i], NULL, 0);
-		if (val < BTN_MISC || val >= BTN_DIGI) {
-			g_warning ("%s: Invalid EvdevCode %ld for button %d, ignoring all codes\n",
-				   device->name, val, i);
+		if (!safe_atoi_base (strvals[i], &val, 16) || val < BTN_MISC || val >= BTN_DIGI) {
+			g_warning ("%s: Invalid EvdevCode %s for button %d, ignoring all codes\n",
+				   device->name, strvals[i], i);
 			return false;
 		}
-		device->button_codes[i] = (int)val;
+		device->button_codes[i] = val;
 	}
 
 	return true;
@@ -585,10 +583,11 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 		const char *id = ids[i];
 
 		if (strneq(id, "0x", 2)) {
-			glong long_value = strtol (ids[i], NULL, 0);
-			int int_value = long_value;
-			g_array_append_val (array, int_value);
-			device->num_styli++;
+			int int_value;
+			if (safe_atoi_base (ids[i], &int_value, 16)) {
+				g_array_append_val (array, int_value);
+				device->num_styli++;
+			}
 		} else if (strneq(id, "@", 1)) {
 			const char *group = &id[1];
 			GHashTableIter iter;

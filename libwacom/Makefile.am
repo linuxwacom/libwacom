@@ -10,6 +10,7 @@ libwacom_la_SOURCES = \
                       $(top_srcdir)/include/linux/input-event-codes.h \
                       libwacom.h \
                       libwacomint.h \
+                      util-strings.h \
                       libwacom.c \
                       libwacom-error.c \
                       libwacom-database.c \

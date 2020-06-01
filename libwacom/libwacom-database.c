@@ -28,7 +28,9 @@
 #include "config.h"
 #endif
 
+#define _GNU_SOURCE 1
 #include "libwacomint.h"
+#include "util-strings.h"
 #include <linux/input-event-codes.h>
 
 #include <assert.h>
@@ -98,7 +100,23 @@ type_from_str (const char *type)
 		return WSTYLUS_PUCK;
 	if (streq(type, "3D"))
 		return WSTYLUS_3D;
+	if (streq(type, "Mobile"))
+		return WSTYLUS_MOBILE;
 	return WSTYLUS_UNKNOWN;
+}
+
+static WacomEraserType
+eraser_type_from_str (const char *type)
+{
+	if (type == NULL)
+		return WACOM_ERASER_NONE;
+	if (streq(type, "None"))
+		return WACOM_ERASER_NONE;
+	if (streq(type, "Invert"))
+		return WACOM_ERASER_INVERT;
+	if (streq(type, "Button"))
+		return WACOM_ERASER_BUTTON;
+	return WACOM_ERASER_UNKNOWN;
 }
 
 WacomBusType
@@ -234,8 +252,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		int id;
 		char **string_list;
 
-		id = strtol (groups[i], NULL, 16);
-		if (id == 0) {
+		if (!safe_atoi_base (groups[i], &id, 16)) {
 			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
 			continue;
 		}
@@ -246,29 +263,39 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
 
-		stylus->is_eraser = g_key_file_get_boolean(keyfile, groups[i], "IsEraser", &error);
+		type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
+		stylus->eraser_type = eraser_type_from_str (type);
+		g_free (type);
+
+		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+		if (string_list) {
+			GArray *array;
+			guint j;
+
+			array = g_array_new (FALSE, FALSE, sizeof(int));
+			for (j = 0; string_list[j]; j++) {
+				int val;
+
+				if (safe_atoi_base (string_list[j], &val, 16)) {
+					g_array_append_val (array, val);
+					stylus->num_ids++;
+				} else {
+					g_warning ("Stylus %s (%s) Ignoring invalid PairedId value\n", stylus->name, groups[i]);
+				}
+			}
+
+			g_strfreev (string_list);
+			stylus->paired_ids = (int *) g_array_free (array, FALSE);
+		}
+
+		stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
 		g_clear_error (&error);
-
-		if (stylus->is_eraser == FALSE) {
-			stylus->has_eraser = g_key_file_get_boolean(keyfile, groups[i], "HasEraser", &error);
-			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-			g_clear_error (&error);
-			stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
-			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-			g_clear_error (&error);
-			stylus->has_wheel = g_key_file_get_boolean(keyfile, groups[i], "HasWheel", &error);
-			if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-				g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-			g_clear_error (&error);
-		} else {
-			stylus->has_eraser = FALSE;
-			stylus->has_lens = FALSE;
-			stylus->has_wheel = FALSE;
-		}
+		stylus->has_wheel = g_key_file_get_boolean(keyfile, groups[i], "HasWheel", &error);
+		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
+		g_clear_error (&error);
 
 		stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
 		if (stylus->num_buttons == 0 && error != NULL) {
@@ -312,13 +339,42 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		g_free (type);
 
 		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (id)) != NULL)
-			g_warning ("Duplicate definition for stylus ID '0x%x'", id);
+			g_warning ("Duplicate definition for stylus ID '%#x'", id);
 
 		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
 	}
 	g_strfreev (groups);
 	if (keyfile)
 		g_key_file_free (keyfile);
+}
+
+static void
+libwacom_setup_paired_attributes(WacomDeviceDatabase *db)
+{
+	GHashTableIter iter;
+	gpointer key, value;
+
+	g_hash_table_iter_init(&iter, db->stylus_ht);
+	while (g_hash_table_iter_next (&iter, &key, &value)) {
+		WacomStylus *stylus = value;
+		const int* ids;
+		int count;
+		int i;
+
+		ids = libwacom_stylus_get_paired_ids(stylus, &count);
+		for (i = 0; i < count; i++) {
+			const WacomStylus *pair;
+
+			pair = libwacom_stylus_get_for_id(db, ids[i]);
+			if (pair == NULL) {
+				g_warning("Paired stylus '0x%x' not found, ignoring.", ids[i]);
+				continue;
+			}
+			if (libwacom_stylus_is_eraser(pair)) {
+				stylus->has_eraser = true;
+			}
+		}
+	}
 }
 
 struct {
@@ -391,7 +447,7 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 	assert(strvals);
 
 	for (i = 0; i < device->num_buttons; i++) {
-		glong val;
+		gint val;
 
 		if (!strvals[i]) {
 			g_error ("%s: Missing EvdevCode for button %d, ignoring all codes\n",
@@ -399,13 +455,12 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 			return false;
 		}
 
-		val = strtol (strvals[i], NULL, 0);
-		if (val < BTN_MISC || val >= BTN_DIGI) {
-			g_warning ("%s: Invalid EvdevCode %ld for button %d, ignoring all codes\n",
-				   device->name, val, i);
+		if (!safe_atoi_base (strvals[i], &val, 16) || val < BTN_MISC || val >= BTN_DIGI) {
+			g_warning ("%s: Invalid EvdevCode %s for button %d, ignoring all codes\n",
+				   device->name, strvals[i], i);
 			return false;
 		}
-		device->button_codes[i] = (int)val;
+		device->button_codes[i] = val;
 	}
 
 	return true;
@@ -528,10 +583,11 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 		const char *id = ids[i];
 
 		if (strneq(id, "0x", 2)) {
-			glong long_value = strtol (ids[i], NULL, 0);
-			int int_value = long_value;
-			g_array_append_val (array, int_value);
-			device->num_styli++;
+			int int_value;
+			if (safe_atoi_base (ids[i], &int_value, 16)) {
+				g_array_append_val (array, int_value);
+				device->num_styli++;
+			}
 		} else if (strneq(id, "@", 1)) {
 			const char *group = &id[1];
 			GHashTableIter iter;
@@ -904,6 +960,8 @@ libwacom_database_new_for_path (const char *datadir)
 	    libwacom_database_destroy(db);
 	    db = NULL;
     }
+
+    libwacom_setup_paired_attributes(db);
 
     return db;
 }

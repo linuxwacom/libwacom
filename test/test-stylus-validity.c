@@ -53,6 +53,7 @@ test_type(gconstpointer data)
 	case WSTYLUS_STROKE:
 	case WSTYLUS_PUCK:
 	case WSTYLUS_3D:
+	case WSTYLUS_MOBILE:
 		break;
 	case WSTYLUS_UNKNOWN:
 	default:
@@ -61,33 +62,125 @@ test_type(gconstpointer data)
 }
 
 static void
-test_eraser(gconstpointer data)
+test_mobile(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	WacomStylusType type;
+
+	g_assert_cmpint(libwacom_stylus_get_type(stylus), ==, WSTYLUS_MOBILE);
+}
+
+static void
+test_eraser_type(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	switch (libwacom_stylus_get_eraser_type(stylus)) {
+	case WACOM_ERASER_NONE:
+	case WACOM_ERASER_INVERT:
+	case WACOM_ERASER_BUTTON:
+		break;
+	case WACOM_ERASER_UNKNOWN:
+	default:
+		g_test_fail();
+	}
+}
+
+static void
+test_has_eraser(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
 	gboolean matching_eraser_found = FALSE;
+	const int *ids;
+	int count;
+	int i;
 
 	/* A stylus cannot be an eraser and have an eraser at the same time */
 	g_assert_true(libwacom_stylus_has_eraser(stylus));
 	g_assert_false(libwacom_stylus_is_eraser(stylus));
 
-	/* Search for another stylus with the same type as ours that is an
-	   eraser.
-	   FIXME: This is imprecise. Multiple pens share the same type but
-	   we are happy with the first eraser of that type we find. So once
-	   we have an eraser for each type, this will always be true, even if
-	   we forget to add the right eraser for a new pen.
-	 */
-	type = libwacom_stylus_get_type (stylus);
-	for (const WacomStylus **s = all_styli; *s; s++) {
-		if (libwacom_stylus_is_eraser(*s) &&
-		    libwacom_stylus_get_type(*s) == type) {
-			matching_eraser_found = TRUE;
-			break;
+	/* Search for the linked eraser */
+	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	g_assert_cmpint(count, >, 0);
+
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			if (libwacom_stylus_get_id(*s) == ids[i] &&
+			    libwacom_stylus_is_eraser(*s)) {
+				matching_eraser_found = TRUE;
+				break;
+			}
 		}
 	}
 
 	g_assert_true(matching_eraser_found);
+}
+
+static void
+test_eraser_link(const WacomStylus *stylus, gboolean linked)
+{
+	gboolean matching_stylus_found = FALSE;
+	const int *ids;
+	int count;
+	int i;
+
+	/* A stylus cannot be an eraser and have an eraser at the same time */
+	g_assert_false(libwacom_stylus_has_eraser(stylus));
+	g_assert_true(libwacom_stylus_is_eraser(stylus));
+
+	/* Verify the link count */
+	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	if (!linked) {
+		g_assert_cmpint(count, ==, 0);
+		return;
+	}
+
+	/* If we're supposed to be linked, ensure its to a non-eraser */
+	g_assert_cmpint(count, >, 0);
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			if (libwacom_stylus_get_id(*s) == ids[i] &&
+			    libwacom_stylus_has_eraser(*s)) {
+				matching_stylus_found = TRUE;
+				break;
+			}
+		}
+	}
+
+	g_assert_true(matching_stylus_found);
+}
+
+static void
+test_is_eraser_unlinked(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	test_eraser_link(stylus, FALSE);
+}
+
+static void
+test_is_eraser_linked(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	test_eraser_link(stylus, TRUE);
+}
+
+static void
+test_eraser_inverted(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+
+	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_INVERT);
+}
+
+static void
+test_eraser_button(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+
+	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_BUTTON);
 }
 
 static void
@@ -179,6 +272,41 @@ test_no_buttons(gconstpointer data)
 	g_assert_cmpint(libwacom_stylus_get_num_buttons(stylus), ==, 0);
 }
 
+static void
+test_mutually_paired(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+	int stylus_id;
+	const int *stylus_pairings;
+	int count;
+	int i;
+
+	stylus_id = libwacom_stylus_get_id(stylus);
+	stylus_pairings = libwacom_stylus_get_paired_ids(stylus, &count);
+
+	for (i = 0; i < count; i++) {
+		for (const WacomStylus **s = all_styli; *s; s++) {
+			gboolean match_found = FALSE;
+			const int *pair_ids;
+			int pair_count;
+			int j;
+
+			if (libwacom_stylus_get_id(*s) != stylus_pairings[i])
+				continue;
+
+			pair_ids = libwacom_stylus_get_paired_ids(*s, &pair_count);
+			for (j = 0; j < pair_count; j++) {
+				if (pair_ids[j] == stylus_id) {
+					match_found = TRUE;
+					break;
+				}
+			}
+
+			g_assert_true(match_found);
+		}
+	}
+}
+
 /* Wrapper function to make adding tests simpler. g_test requires
  * a unique test case name so we assemble that from the test function and
  * the stylus data.
@@ -203,32 +331,28 @@ _add_test(const WacomStylus *stylus, GTestDataFunc func, const char *funcname)
 	_add_test(stylus, func_, #func_)
 
 static void
-setup_tests(const WacomStylus *stylus)
+setup_aes_tests(const WacomStylus *stylus)
 {
-	add_test(stylus, test_name);
-	add_test(stylus, test_type);
+	add_test(stylus, test_mobile);
 
-	/* Button checks */
-	switch (libwacom_stylus_get_type(stylus)) {
-		case WSTYLUS_PUCK:
-			add_test(stylus, test_puck);
-			add_test(stylus, test_buttons);
-			break;
-		case WSTYLUS_INKING:
-		case WSTYLUS_STROKE:
-			add_test(stylus, test_no_buttons);
-			break;
-		default:
-			switch (libwacom_stylus_get_id(stylus)) {
-				case 0x885:
-					add_test(stylus, test_no_buttons);
-					break;
-				default:
-					add_test(stylus, test_buttons);
-			}
+	add_test(stylus, test_pressure);
+	add_test(stylus, test_no_distance);
+
+	if (libwacom_stylus_get_id(stylus) < 0x8000) {
+		add_test(stylus, test_no_tilt);
+	} else {
+		add_test(stylus, test_tilt);
 	}
 
-	/* Axes checks */
+	if (libwacom_stylus_is_eraser(stylus)) {
+		add_test(stylus, test_is_eraser_unlinked);
+		add_test(stylus, test_eraser_button);
+	}
+}
+
+static void
+setup_emr_tests(const WacomStylus *stylus)
+{
 	switch (libwacom_stylus_get_id(stylus)) {
 		case 0xffffd:
 			add_test(stylus, test_pressure);
@@ -264,8 +388,53 @@ setup_tests(const WacomStylus *stylus)
 			break;
 	}
 
+	if (libwacom_stylus_is_eraser(stylus)) {
+		add_test(stylus, test_is_eraser_linked);
+		add_test(stylus, test_eraser_inverted);
+	}
+}
+
+static void
+setup_tests(const WacomStylus *stylus)
+{
+	add_test(stylus, test_name);
+	add_test(stylus, test_type);
+
+	/* Button checks */
+	switch (libwacom_stylus_get_type(stylus)) {
+		case WSTYLUS_PUCK:
+			add_test(stylus, test_puck);
+			add_test(stylus, test_buttons);
+			break;
+		case WSTYLUS_INKING:
+		case WSTYLUS_STROKE:
+			add_test(stylus, test_no_buttons);
+			break;
+		default:
+			switch (libwacom_stylus_get_id(stylus)) {
+				case 0x885:
+				case 0x8051:
+					add_test(stylus, test_no_buttons);
+					break;
+				default:
+					add_test(stylus, test_buttons);
+			}
+	}
+
+	/* Technology-specific tests */
+	if (libwacom_stylus_get_type(stylus) == WSTYLUS_MOBILE) {
+		setup_aes_tests(stylus);
+	} else {
+		setup_emr_tests(stylus);
+	}
+
 	if (libwacom_stylus_has_eraser(stylus))
-		add_test(stylus, test_eraser);
+		add_test(stylus, test_has_eraser);
+
+	if (libwacom_stylus_is_eraser(stylus))
+		add_test(stylus, test_eraser_type);
+
+	add_test(stylus, test_mutually_paired);
 }
 
 /**

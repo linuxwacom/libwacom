@@ -1,24 +1,222 @@
 # Some generic fallback styli
 [0xfffff]
 Name=General Pen
+PairedStylusIds=0xffffe;
 Buttons=2
-HasEraser=true
 Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0xffffe]
 Name=General Pen Eraser
-IsEraser=true
+PairedStylusIds=0xfffff;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0xffffd]
 Name=General Pen with no Eraser
-HasEraser=false
 Buttons=2
 Axes=Pressure;
 Type=General
+
+[0x1]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x11]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_CHRG
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x19]
+# Lenovo ; VID_LENOVO   | 0x60A8 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x21]
+# HP     ; VID_NONE     | 0x0000 | BAT_SWAP
+# Huawei ; VID_NONE     | 0x0000 | BAT_SWAP
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x31]
+# Dell   ; VID_BROADCOM | 0x81B9 | BAT_SWAP
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x39]
+# Huawei ; VID_HUAWEI   | 0x1091 | BAT_SWAP ("Huawei MatePen" / AF61)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x49]
+# Wacom  ; VID_WACOM    | 0x035F | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink" / CS321A)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x71]
+# Wacom  ; VID_WACOM    | 0x035F | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink" / CS321A1)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x221]
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x231]
+# Dell   ; VID_BROADCOM | 0x81C6 | BAT_SWAP | LONGPRESS (Dell PN557W)
+# HP     ; VID_CHICONY  | 0xB4A3 | BAT_SWAP | BAT_HID
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x271]
+# Wacom  ; VID_NONE     | 0x0000 | BAT_SWAP ("Wacom Bamboo Ink" / CS323A)
+Name=Bamboo Ink
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x421]
+# HP     ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x431]
+# Dell   ; VID_BROADCOM | 0x81B9 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x621]
+# Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x631]
+# Dell   ; VID_NONE     | 0x0000 | BAT_SWAP | LONGPRESS (Dell PN557W)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
+[0x8051]
+# Google ; VID_NONE     | 0x0000 | BAT_SWAP ("Google Pixelbook Pen" / C0B)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=0
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x805B]
+# Dell   ; VID_BROADCOM | 0x81D5 | BAT_SWAP | BAT_GATT | BAT_SHARED | LONGPRESS (Dell PN579X)
+# Lenovo ; VID_LENOVO   | 0x60C5 | BAT_SWAP | BAT_GATT | BAT_SHARED
+# Toshiba; VID_NONE     | 0x0000 | BAT_SWAP
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x806B]
+# HP     ; VID_CHICONY  | 0x1728 | BAT_CHRG | BAT_PROX | BAT_SHARED | LONGPRESS | PROX ("HP Rechargeable Active Pen" / HP Active Pen G2 / 4KL69AA)
+# Huawei ; VID_NONE     | 0x0000 | BAT_SWAP
+# Lenovo ; VID_LENOVO   | 0x60C2 | BAT_CHRG | BAT_GATT | BAT_SHARED
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x807B]
+# Wacom  ; VID_WACOM    | 0x0397 | BAT_CHRG | BAT_GATT | BAT_SHARED | LONGPRESS ("Wacom Bamboo Ink Plus" / CS322A)
+Name=Bamboo Ink Plus
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x826B]
+# HP     ; VID_CHICONY  | 0x1728 | BAT_CHRG | BAT_PROX | BAT_SHARED | LONGPRESS | PROX
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
+
+[0x846B]
+# HP     ; VID_CHICONY  | 0x1850 | BAT_CHRG | BAT_GATT | BAT_SHARED | LONGPRESS | PROX ("HP Rechargeable Active Pen G3" / HP Active Pen G3 / GSG43AA)
+Name=AES Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile
 
 # Inking pen have no eraser
 [0x812]
@@ -26,7 +224,6 @@ Type=General
 Name=Inking Pen
 Group=intuos
 Buttons=0
-HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Inking
 
@@ -35,7 +232,6 @@ Type=Inking
 Name=Inking Pen
 Group=intuos3
 Buttons=0
-HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Inking
 
@@ -43,7 +239,6 @@ Type=Inking
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Inking Pen
 Buttons=0
-HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Inking
 
@@ -52,7 +247,6 @@ Type=Inking
 Name=Inking Pen
 Group=intuos5
 Buttons=0
-HasEraser=false
 Axes=Tilt;Pressure;Distance;
 Type=Inking
 
@@ -61,7 +255,7 @@ Type=Inking
 # Intuos and Intuos2
 Name=Classic Pen
 Group=intuos
-HasEraser=true
+PairedStylusIds=0x82a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -70,7 +264,6 @@ Type=Classic
 # Intuos P/PT 2
 Name=Intuos Pen
 Group=intuospt
-HasEraser=false
 Buttons=2
 Axes=Pressure;Distance;
 Type=General
@@ -79,7 +272,6 @@ Type=General
 # Intuos P/PT 2
 Name=Intuos Pen
 Group=intuospt3
-HasEraser=false
 Buttons=2
 Axes=Pressure;Distance;
 Type=General
@@ -88,13 +280,13 @@ Type=General
 # [0x842]
 # Intuos2
 # Name=Designer Pen
-# HasEraser=false
+# PairedStylusIds=0x84a;
 
 [0x842]
 # MobileStudio Pro
 Name=Pro Pen
 Group=mobilestudio
-HasEraser=true
+PairedStylusIds=0x84a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -103,7 +295,6 @@ Type=General
 # MobileStudio Pro
 Name=Pro Pen 3D
 Group=mobilestudio
-HasEraser=false
 Buttons=3
 Axes=Tilt;Pressure;Distance;
 Type=3D
@@ -112,7 +303,7 @@ Type=3D
 # Intuos2
 Name=Grip Pen
 Group=intuos2
-HasEraser=true
+PairedStylusIds=0x85a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -121,7 +312,7 @@ Type=General
 # Intuos3 and Cintiq 21UX
 Name=Grip Pen
 Group=intuos3
-HasEraser=true
+PairedStylusIds=0x82b;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -130,7 +321,7 @@ Type=General
 # Intuos3 and Cintiq 21UX
 Name=Classic Pen
 Group=intuos3
-HasEraser=true
+PairedStylusIds=0x81b;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -139,7 +330,6 @@ Type=Classic
 # Intuos3 and Cintiq 21UX
 Name=6D Art Pen
 Group=intuos3
-HasEraser=false
 Buttons=0
 Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
@@ -148,7 +338,7 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen
 Group=intuos4
-HasEraser=true
+PairedStylusIds=0x80a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -157,7 +347,7 @@ Type=General
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Art Pen
 Group=intuos4
-HasEraser=true
+PairedStylusIds=0x80c;
 Buttons=2
 Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
@@ -166,7 +356,7 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Art Pen
 Group=intuos5
-HasEraser=true
+PairedStylusIds=0x10080c;
 Buttons=2
 Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
@@ -175,7 +365,7 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen
 Group=intuos5
-HasEraser=true
+PairedStylusIds=0x10080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -184,7 +374,7 @@ Type=General
 # MobileStudio Pro, Cintiq Pro, Intuos Pro
 Name=Pro Pen Slim
 Group=mobilestudio
-HasEraser=true
+PairedStylusIds=0x10084a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -192,7 +382,7 @@ Type=General
 [0x40802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
-HasEraser=true
+PairedStylusIds=0x4080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -201,7 +391,7 @@ Type=Classic
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
 Group=intuos5
-HasEraser=true
+PairedStylusIds=0x14080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -210,7 +400,7 @@ Type=Classic
 # Cintiq 13HD Pro Pen
 Name=Pro Pen
 Group=intuos5
-HasEraser=true
+PairedStylusIds=0x16080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -219,7 +409,7 @@ Type=Classic
 # DTH2242 Pen
 Name=Pen
 Group=dth2242
-HasEraser=true
+PairedStylusIds=0x18080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -229,7 +419,6 @@ Type=General
 #Intuos and Intuos2
 Name=Stroke Pen
 Group=intuos
-HasEraser=false
 Buttons=0
 Axes=Tilt;Pressure;Distance;
 Type=Stroke
@@ -239,7 +428,8 @@ Type=Stroke
 # Intuos and Intuos2
 Name=Classic Pen Eraser
 Group=intuos
-IsEraser=true
+PairedStylusIds=0x822;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -248,7 +438,8 @@ Type=Classic
 # MobileStudio Pro
 Name=Pro Pen Eraser
 Group=mobilestudio
-IsEraser=true
+PairedStylusIds=0x842;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -257,7 +448,8 @@ Type=General
 # Intuos2
 Name=Grip Pen Eraser
 Group=intuos2
-IsEraser=true
+PairedStylusIds=0x852;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -266,7 +458,8 @@ Type=General
 # Intuos2
 Name=Airbrush Pen Eraser
 Group=intuos2
-IsEraser=true
+PairedStylusIds=0x912;
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -275,7 +468,8 @@ Type=Airbrush
 # Intuos
 Name=Airbrush Pen Eraser
 Group=intuos-airbrush
-IsEraser=true
+PairedStylusIds=0xd12;
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -284,7 +478,8 @@ Type=Airbrush
 # Intuos3 and Cintiq 21UX
 Name=Grip Pen Eraser
 Group=intuos3
-IsEraser=true
+PairedStylusIds=0x823;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -293,7 +488,8 @@ Type=General
 # Intuos3 and Cintiq 21UX
 Name=Classic Pen Eraser
 Group=intuos3
-IsEraser=true
+PairedStylusIds=0x813;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -302,7 +498,8 @@ Type=Classic
 # Intuos3 and Cintiq 21UX
 Name=Airbrush Pen Eraser
 Group=intuos3
-IsEraser=true
+PairedStylusIds=0x913;
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -311,7 +508,8 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Art Pen Eraser
 Group=intuos4
-IsEraser=true
+PairedStylusIds=0x804;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Marker
@@ -320,7 +518,8 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
 Group=intuos4
-IsEraser=true
+PairedStylusIds=0x802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -328,7 +527,8 @@ Type=General
 [0x4080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
-IsEraser=true
+PairedStylusIds=0x40802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -337,7 +537,8 @@ Type=Classic
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
 Group=intuos5
-IsEraser=true
+PairedStylusIds=0x140802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -346,7 +547,8 @@ Type=Classic
 # Intuos4, 5 and 13HD, 24HD Art Pen
 Name=Art Pen Eraser
 Group=intuos5
-IsEraser=true
+PairedStylusIds=0x100804;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Marker
@@ -355,7 +557,8 @@ Type=Marker
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
 Group=intuos5
-IsEraser=true
+PairedStylusIds=0x100802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -364,7 +567,8 @@ Type=General
 # MobileStudio Pro, Cintiq Pro, Intuos Pro
 Name=Pro Pen Slim
 Group=mobilestudio
-IsEraser=true
+PairedStylusIds=0x100842;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -373,7 +577,8 @@ Type=General
 # Cintiq 13HD
 Name=Pro Pen Eraser
 Group=intuos5
-IsEraser=true
+PairedStylusIds=0x160802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
@@ -382,7 +587,8 @@ Type=Classic
 # DTH2242 Eraser
 Name=Pen Eraser
 Group=dth2242
-IsEraser=true
+PairedStylusIds=0x180802;
+EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -391,7 +597,8 @@ Type=General
 # Intuos4, 5 and Cintiq 13HD, 22HD, 24HD Airbrush Eraser
 Name=Airbrush Pen Eraser
 Group=intuos5
-IsEraser=true
+PairedStylusIds=0x100902;
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -400,7 +607,8 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Airbrush Pen Eraser
 Group=intuos4
-IsEraser=true
+PairedStylusIds=0x902;
+EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
@@ -410,7 +618,7 @@ Type=Airbrush
 # Intuos
 Name=Airbrush Pen
 Group=intuos-airbrush
-HasEraser=true
+PairedStylusIds=0xd1a;
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
@@ -419,7 +627,7 @@ Type=Airbrush
 # Intuos2
 Name=Airbrush Pen
 Group=intuos2
-HasEraser=true
+PairedStylusIds=0x91a;
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
@@ -428,8 +636,8 @@ Type=Airbrush
 # Intuos3 and Cintiq 21UX
 Name=Airbrush Pen
 Group=intuos3
+PairedStylusIds=0x91b;
 Buttons=1
-HasEraser=true
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
 
@@ -437,8 +645,8 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Airbrush Pen
 Group=intuos4
+PairedStylusIds=0x90a;
 Buttons=1
-HasEraser=true
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
@@ -446,8 +654,8 @@ Type=Airbrush
 # Intuos4, 5 and Cintiq 13HD, 21UX2, 22HD, 24HD
 Name=Airbrush Pen
 Group=intuos5
+PairedStylusIds=0x10090a;
 Buttons=1
-HasEraser=true
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
@@ -521,10 +729,3 @@ Type=Puck
 HasLens=false
 HasWheel=true
 Buttons=5
-
-[0x21]
-Name=Thinkpad Pro Pen
-Buttons=2
-HasEraser=false
-Axes=Pressure;Distance;
-Type=General

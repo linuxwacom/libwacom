@@ -159,7 +159,18 @@ typedef enum {
 	WSTYLUS_STROKE,
 	WSTYLUS_PUCK,
 	WSTYLUS_3D,
+	WSTYLUS_MOBILE,
 } WacomStylusType;
+
+/**
+ * Type of eraser on a stylus
+ */
+typedef enum {
+	WACOM_ERASER_UNKNOWN,
+	WACOM_ERASER_NONE,      /**< No eraser is present on the stylus */
+	WACOM_ERASER_INVERT,	/**< Eraser is a seperate tool on the opposite end of the stylus */
+	WACOM_ERASER_BUTTON,	/**< Eraser is a button alongside any other stylus buttons */
+} WacomEraserType;
 
 /**
  * Capabilities of the various tablet buttons
@@ -597,19 +608,43 @@ const char *libwacom_stylus_get_name (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
+ * @param num_paired_ids The length of the returned list
+ * @return The list of other IDs paired to this stylus
+ */
+const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids);
+
+/**
+ * @param stylus The stylus to query
  * @return The number of buttons on the stylus
  */
 int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
 
 /**
+ * Check if the given stylus is paired with a seperate eraser.
+ *
+ * If this function returns \c true then the tool described by the given
+ * WacomStylus is paired with a seperate eraser tool. The actual eraser
+ * tool may be located by iterating over the list of paired styli.
+ *
  * @param stylus The stylus to query
- * @return Whether the stylus has an eraser
+ * @return Whether the stylus is paired with an eraser
+ * @see libwacom_stylus_get_paired_ids
+ * @see libwacom_stylus_is_eraser
  */
 int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
 
 /**
+ * Check if the given stylus may act like an eraser.
+ *
+ * If this function returns \c true then the tool described by the given
+ * WacomStylus may act like an eraser. Such a tool may be dedicated to
+ * sending just eraser events (and paired with a seperate tool for "tip"
+ * events) or capable of sending both both tip and eraser events.
+ *
  * @param stylus The stylus to query
- * @return Whether the stylus is actually an eraser
+ * @return Whether the stylus can act as an eraser
+ * @see libwacom_stylus_get_eraser_type
+ * @see libwacom_stylus_has_eraser
  */
 int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
 
@@ -636,6 +671,12 @@ WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus);
  * @return The type of stylus
  */
 WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return The type of eraser on the stylus
+ */
+WacomEraserType libwacom_stylus_get_eraser_type (const WacomStylus *stylus);
 
 /**
  * Print the description of this stylus to the given file.

@@ -1206,6 +1206,14 @@ libwacom_stylus_get_name (const WacomStylus *stylus)
 	return stylus->name;
 }
 
+LIBWACOM_EXPORT const int *
+libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids)
+{
+	if (num_paired_ids)
+		*num_paired_ids = stylus->num_ids;
+	return stylus->paired_ids;
+}
+
 LIBWACOM_EXPORT int
 libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 {
@@ -1225,7 +1233,7 @@ libwacom_stylus_has_eraser (const WacomStylus *stylus)
 LIBWACOM_EXPORT int
 libwacom_stylus_is_eraser (const WacomStylus *stylus)
 {
-	return stylus->is_eraser;
+	return libwacom_stylus_get_eraser_type(stylus) != WACOM_ERASER_NONE;
 }
 
 LIBWACOM_EXPORT int
@@ -1256,17 +1264,38 @@ libwacom_stylus_get_type (const WacomStylus *stylus)
 	return stylus->type;
 }
 
+LIBWACOM_EXPORT WacomEraserType
+libwacom_stylus_get_eraser_type (const WacomStylus *stylus)
+{
+	return stylus->eraser_type;
+}
+
 LIBWACOM_EXPORT void
 libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 {
 	const char *type;
 	WacomAxisTypeFlags axes;
+	const int *paired_ids;
+	int count;
+	int i;
 
 	dprintf(fd, "[%#x]\n",		libwacom_stylus_get_id(stylus));
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
 	dprintf(fd, "Buttons=%d\n",	libwacom_stylus_get_num_buttons(stylus));
-	dprintf(fd, "HasEraser=%s\n",	libwacom_stylus_has_eraser(stylus) ? "true" : "false");
-	dprintf(fd, "IsEraser=%s\n",	libwacom_stylus_is_eraser(stylus) ? "true" : "false");
+	dprintf(fd, "PairedIds=");
+	paired_ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	for (i = 0; i < count; i++) {
+		dprintf(fd, "%#x;", paired_ids[i]);
+	}
+	dprintf(fd, "\n");
+	switch (libwacom_stylus_get_eraser_type(stylus)) {
+		case WACOM_ERASER_UNKNOWN: type = "Unknown";       break;
+		case WACOM_ERASER_NONE:    type = "None";          break;
+		case WACOM_ERASER_INVERT:  type = "Invert";        break;
+		case WACOM_ERASER_BUTTON:  type = "Button";        break;
+		default:                   g_assert_not_reached(); break;
+	}
+	dprintf(fd, "EraserType=%s\n", type);
 	dprintf(fd, "HasLens=%s\n",	libwacom_stylus_has_lens(stylus) ? "true" : "false");
 	dprintf(fd, "HasWheel=%s\n",	libwacom_stylus_has_wheel(stylus) ? "true" : "false");
 	axes = libwacom_stylus_get_axes(stylus);
@@ -1293,6 +1322,7 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 		case WSTYLUS_STROKE:	type = "Stroke";	 break;
 		case WSTYLUS_PUCK:	type = "Puck";		break;
 		case WSTYLUS_3D:	type = "3D";		break;
+		case WSTYLUS_MOBILE:	type = "Mobile";	break;
 		default:		g_assert_not_reached();	break;
 	}
 
@@ -1315,6 +1345,7 @@ libwacom_stylus_unref(WacomStylus *stylus)
 
 	g_free (stylus->name);
 	g_free (stylus->group);
+	g_free (stylus->paired_ids);
 	g_free (stylus);
 
 	return NULL;

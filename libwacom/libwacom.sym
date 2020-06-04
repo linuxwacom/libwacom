@@ -72,7 +72,7 @@ local:
         *;
 };
 
-LIBWACOM_1.2 {
+LIBWACOM_1.4 {
 global:
     libwacom_stylus_get_eraser_type;
     libwacom_stylus_get_paired_ids;

@@ -1,0 +1,24 @@
+# HUION
+# New 1060 Plus
+#
+
+[Device]
+Name=Huion New 1060 Plus
+ModelName=
+DeviceMatch=usb:256c:006e:HID 256c:006e Pen;usb:256c:006e:HID 256c:006e Pad
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=huion-new-1060-plus.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=12
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K;L
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109;0x130;0x131

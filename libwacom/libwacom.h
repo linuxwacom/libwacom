@@ -622,7 +622,7 @@ int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
 /**
  * Check if the given stylus is paired with a seperate eraser.
  *
- * If this function returns \c true then the tool described by the given
+ * If this function returns @c true then the tool described by the given
  * WacomStylus is paired with a seperate eraser tool. The actual eraser
  * tool may be located by iterating over the list of paired styli.
  *
@@ -636,7 +636,7 @@ int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
 /**
  * Check if the given stylus may act like an eraser.
  *
- * If this function returns \c true then the tool described by the given
+ * If this function returns @c true then the tool described by the given
  * WacomStylus may act like an eraser. Such a tool may be dedicated to
  * sending just eraser events (and paired with a seperate tool for "tip"
  * events) or capable of sending both both tip and eraser events.

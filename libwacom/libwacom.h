@@ -168,7 +168,7 @@ typedef enum {
 typedef enum {
 	WACOM_ERASER_UNKNOWN,
 	WACOM_ERASER_NONE,      /**< No eraser is present on the stylus */
-	WACOM_ERASER_INVERT,	/**< Eraser is a seperate tool on the opposite end of the stylus */
+	WACOM_ERASER_INVERT,	/**< Eraser is a separate tool on the opposite end of the stylus */
 	WACOM_ERASER_BUTTON,	/**< Eraser is a button alongside any other stylus buttons */
 } WacomEraserType;
 
@@ -620,10 +620,10 @@ const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_pa
 int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
 
 /**
- * Check if the given stylus is paired with a seperate eraser.
+ * Check if the given stylus is paired with a separate eraser.
  *
  * If this function returns @c true then the tool described by the given
- * WacomStylus is paired with a seperate eraser tool. The actual eraser
+ * WacomStylus is paired with a separate eraser tool. The actual eraser
  * tool may be located by iterating over the list of paired styli.
  *
  * @param stylus The stylus to query
@@ -638,7 +638,7 @@ int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
  *
  * If this function returns @c true then the tool described by the given
  * WacomStylus may act like an eraser. Such a tool may be dedicated to
- * sending just eraser events (and paired with a seperate tool for "tip"
+ * sending just eraser events (and paired with a separate tool for "tip"
  * events) or capable of sending both both tip and eraser events.
  *
  * @param stylus The stylus to query

@@ -21,7 +21,7 @@
 Name=Wacom Intuos BT M
 ModelName=CTL-6100WL
 DeviceMatch=usb:056a:0378;bluetooth:056a:0379
-Class=Bamboo
+Class=Intuos3
 Width=9
 Height=5
 Layout=intuos-m-p3.svg

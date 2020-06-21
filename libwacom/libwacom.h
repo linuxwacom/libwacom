@@ -130,6 +130,9 @@ typedef enum {
 
 /**
  * Classes of devices.
+ *
+ * @deprecated This enum should no longer be used. The classes are not
+ * fine-grained or reliable enough to be useful.
  */
 typedef enum {
 	WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
@@ -363,7 +366,11 @@ int libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFla
 /**
  * @param device The tablet to query
  * @return The class of the device
+ *
+ * @deprecated This function should no longer be used. The classes are not
+ * fine-grained or reliable enough to be useful.
  */
+LIBWACOM_DEPRECATED
 WacomClass libwacom_get_class(const WacomDevice *device);
 
 /**

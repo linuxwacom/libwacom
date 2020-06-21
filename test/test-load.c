@@ -109,7 +109,10 @@ test_intuos4(struct fixture *f, gconstpointer user_data)
 	g_assert_nonnull(device);
 
 	g_assert_cmpstr(libwacom_get_name(device), ==, "Wacom Intuos4 WL");
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	g_assert_cmpint(libwacom_get_class(device), ==, WCLASS_INTUOS4);
+#pragma GCC diagnostic pop
 	g_assert_cmpint(libwacom_get_vendor_id(device), ==, 0x56a);
 	g_assert_cmpint(libwacom_get_product_id(device), ==, 0xbc);
 	g_assert_cmpint(libwacom_get_bustype(device), ==, WBUSTYPE_USB);

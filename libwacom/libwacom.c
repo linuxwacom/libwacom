@@ -781,7 +781,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	WacomClass class;
 	const char *class_name;
 
-	class  = libwacom_get_class(device);
+	class  = device->cls;
 	switch(class) {
 		case WCLASS_UNKNOWN:	class_name = "Unknown";	break;
 		case WCLASS_INTUOS3:	class_name = "Intuos3";	break;

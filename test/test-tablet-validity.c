@@ -129,8 +129,13 @@ static void
 test_class(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
+	WacomClass cls;
 
-	switch (libwacom_get_class(device)) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	cls = libwacom_get_class(device);
+#pragma GCC diagnostic pop
+	switch (cls) {
 		case WCLASS_BAMBOO:
 		case WCLASS_ISDV4:
 		case WCLASS_PEN_DISPLAYS:
@@ -319,6 +324,7 @@ _add_test(WacomDevice *device, GTestDataFunc func, const char *funcname)
 static void setup_tests(WacomDevice *device)
 {
 	const char *name;
+	WacomClass cls;
 
 	name = libwacom_get_name(device);
 	if (strcmp(name, "Generic") == 0)
@@ -334,16 +340,20 @@ static void setup_tests(WacomDevice *device)
 	add_test(device, test_rings);
 	add_test(device, test_strips);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	cls = libwacom_get_class(device);
+#pragma GCC diagnostic pop
+
 	/* ISDv4 are built-in, they may be of varying size */
-	if (libwacom_get_class(device) != WCLASS_ISDV4 &&
-	    libwacom_get_class(device) != WCLASS_REMOTE)
+	if (cls != WCLASS_ISDV4 && cls != WCLASS_REMOTE)
 		add_test(device, test_dimensions);
 
 	/* FIXME: we force the generic pen for these, should add a test */
 	if (libwacom_has_stylus(device))
 		add_test(device, test_styli);
 
-	switch (libwacom_get_class(device)) {
+	switch (cls) {
 		case WCLASS_INTUOS:
 		case WCLASS_INTUOS2:
 		case WCLASS_INTUOS3:

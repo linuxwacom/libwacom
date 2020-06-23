@@ -15,7 +15,7 @@ libwacom 1.2:
   - Elan 2628
   - Lenovo X1 Yoga 4th, X1 Yoga 3d, Yoga 720, Yoga C930, Yoga C940, X390
     Yoga, IdeaPad FLEX-14API
-  - ASUS ZenBook Pro Duo 
+  - ASUS ZenBook Pro Duo
 
 libwacom 1.1:
 - New devices: Wacom HID 5115
@@ -216,8 +216,8 @@ libwacom 0.7.1:
 - Better checks to prevent bad databases
 
 libwacom 0.7:
-- New devices: 
-  - Cintiq 22HD, 24HD touch, 
+- New devices:
+  - Cintiq 22HD, 24HD touch,
   - ISDv4 E5, 100, 101
 - Support for SVG layouts of the tablets
 - New APIs for:

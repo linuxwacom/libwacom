@@ -1,4 +1,4 @@
-.TH libwacom-list-local-devices 1 
+.TH libwacom-list-local-devices 1
 
 .SH NAME
 libwacom-list-local-devices - utility to list tablet devices

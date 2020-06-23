@@ -19,7 +19,7 @@
 #    *-----------------------*
 #
 # This definition is for the special "Android Mode" which changes the
-# tablet's vendor ID and active area. For more information, see: 
+# tablet's vendor ID and active area. For more information, see:
 # https://github.com/linuxwacom/xf86-input-wacom/wiki/Known-Issues#android-misdetect
 
 [Device]

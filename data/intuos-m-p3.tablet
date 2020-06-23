@@ -21,7 +21,6 @@
 Name=Wacom Intuos M
 ModelName=CTL-6100
 DeviceMatch=usb:056a:0375
-Class=Bamboo
 Width=9
 Height=5
 Layout=intuos-m-p3.svg
@@ -35,3 +34,4 @@ Buttons=4
 
 [Buttons]
 Top=A;B;C;D
+EvdevCodes=0x100;0x101;0x102;0x103

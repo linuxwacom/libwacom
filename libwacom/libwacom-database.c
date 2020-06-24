@@ -959,9 +959,9 @@ libwacom_database_new_for_path (const char *datadir)
     if (!load_stylus_files(db, datadir) || !load_tablet_files(db, datadir)) {
 	    libwacom_database_destroy(db);
 	    db = NULL;
+    } else {
+	    libwacom_setup_paired_attributes(db);
     }
-
-    libwacom_setup_paired_attributes(db);
 
     return db;
 }

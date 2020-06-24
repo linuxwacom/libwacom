@@ -94,10 +94,12 @@ install_subdir('data',
 	       install_dir: dir_data,
 	       strip_directory: true,
 	       exclude_files: ['wacom.example',
-		       	       'check-files-in-git.sh',
+			       'check-files-in-git.sh',
 			       'check-svg-exists.sh',
 			       'Makefile.am',
+			       'Makefile.in',
 			       'layouts/Makefile.am',
+			       'layouts/Makefile.in',
 			       'layouts/README'])
 
 test('files-in-git',

@@ -20,6 +20,6 @@ KERNELS=="input*", \
 
 # We can't unset properties through the hwdb but we can set them to zero.
 # So let's have a rule that converts the 0 properties to unset ones.
-ENV{ID_INPUT_JOYSTICK}="0", ENV{ID_INPUT_JOYSTICK}=""
+ENV{ID_INPUT_JOYSTICK}=="0", ENV{ID_INPUT_JOYSTICK}=""
 
 LABEL="libwacom_end"

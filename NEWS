@@ -1,3 +1,9 @@
+libwacom 1.4.1:
+- fix a typo in the udev rule that caused joysticks to be mislabeled
+- New devices:
+  - HP ZBook Studio x360 G5
+  - Dell Latitude 7285
+
 libwacom 1.4:
 - New devices:
   - Dell Latitude 7200 2-in-1, Dell Latitude 7400 2-in-1

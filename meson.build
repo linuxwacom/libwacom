@@ -264,7 +264,10 @@ if get_option('tests').enabled()
 					     include_directories: [includes_src],
 					     c_args: tests_cflags,
 					     install: false)
-		test('test-deprecated', test_deprecated, suite: ['all'])
+		test('test-deprecated',
+		     test_deprecated,
+		     env:['LD_LIBRARY_PATH=@0@'.format(meson.build_root())],
+		     suite: ['all'])
 	endif
 endif
 

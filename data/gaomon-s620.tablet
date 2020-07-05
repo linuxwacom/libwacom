@@ -15,6 +15,7 @@ DeviceMatch=usb:256C:006D:GAOMON Gaomon Tablet Pen;usb:256C:006D:GAOMON Gaomon T
 Class=Bamboo
 Width=6.5
 Height=4
+Layout=gaomon-s620.svg
 IntegratedIn=
 Styli=0xffffd;
 

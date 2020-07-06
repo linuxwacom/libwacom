@@ -1,0 +1,29 @@
+# GAOMON
+# S620
+#
+# This tablet masquerades as a Huion (vendor 256c) tablet despite not being the
+# same manufacturer.
+#
+# The pen is visually identical to that from the Huion 420, so the Styli
+# parameter has been copied from it.
+#
+
+[Device]
+Name=GAOMON S620
+ModelName=
+DeviceMatch=usb:256C:006D:GAOMON Gaomon Tablet Pen;usb:256C:006D:GAOMON Gaomon Tablet Pad;
+Class=Bamboo
+Width=6
+Height=4
+Layout=gaomon-s620.svg
+IntegratedIn=
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=4
+
+[Buttons]
+Left=A;B;C;D
+EvdevCodes=0x100;0x101;0x102;0x103

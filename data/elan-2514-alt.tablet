@@ -8,6 +8,9 @@ Width=12
 Height=7
 IntegratedIn=Display;System
 
+# sysinfo.fpvLP66qoQ
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/85
+
 [Features]
 Stylus=true
 Touch=true

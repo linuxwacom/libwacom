@@ -1,4 +1,8 @@
 # ELAN touchscreen/pen sensor present in the HP Pavilion x360 Convertible 14-dh0xxx
+
+# sysinfo.fpvLP66qoQ
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/85
+
 [Device]
 Name=ELAN 2514
 ModelName=
@@ -7,9 +11,6 @@ Class=ISDV4
 Width=12
 Height=7
 IntegratedIn=Display;System
-
-# sysinfo.fpvLP66qoQ
-# https://github.com/linuxwacom/wacom-hid-descriptors/issues/85
 
 [Features]
 Stylus=true

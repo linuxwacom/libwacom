@@ -1,0 +1,14 @@
+# ELAN touchscreen/pen sensor present in the HP Pavilion x360 Convertible 14-dh0xxx
+[Device]
+Name=ELAN 2514
+ModelName=
+DeviceMatch=i2c:004F3:23DB
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

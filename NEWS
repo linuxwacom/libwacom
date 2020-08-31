@@ -1,3 +1,13 @@
+libwacom 1.5:
+- New devices:
+  - Acer Spin 5 / Acer Spin SP513-54N
+  - Dell Latitude 7410,
+  - GAOMON S620
+  - HP Pavilion x360 Convertible 14-dh0xxx
+  - Huawei MateBook HZ-W19
+  - Lenovo ThinkPad X1 Yoga 3rd
+  - Wacom Cintiq 16, DTK-1660E
+
 libwacom 1.4.1:
 - fix a typo in the udev rule that caused joysticks to be mislabeled
 - New devices:

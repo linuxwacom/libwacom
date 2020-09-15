@@ -182,8 +182,7 @@ endif
 
 if get_option('tests').enabled()
 	dep_libxml  = dependency('libxml-2.0', required : false)
-	dep_dl      = meson.get_compiler('c').find_library('dl')
-
+	dep_dl      = cc.find_library('dl')
 
 	tests_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
 

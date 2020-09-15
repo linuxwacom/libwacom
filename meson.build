@@ -26,9 +26,9 @@ libwacom_so_version = '@0@.@1@.@2@'.format((libwacom_lt_c - libwacom_lt_a),
 # Compiler setup
 cc = meson.get_compiler('c')
 cflags= ['-Wno-unused-parameter',
-	 '-fvisibility=hidden',
 	 '-Wmissing-prototypes',
-	 '-Wstrict-prototypes']
+	 '-Wstrict-prototypes',
+	 '-fvisibility=hidden']
 add_project_arguments(cflags, language: 'c')
 
 # Dependencies

@@ -12,9 +12,9 @@ int main(void) {
         /* we don't change the soname anymore, we use symbol maps instead.
            So these can stay fixed until we properly break the ABI and bump
            the soname.  */
-	assert(C == 8);
-	assert(R == 1);
-	assert(A == 6);
+	assert(C == 9);
+	assert(R == 0);
+	assert(A == 0);
 
 	return 0;
 }

@@ -4,7 +4,6 @@ noinst_PROGRAMS= \
 		 test-tablet-validity \
 		 test-stylus-validity \
 		 test-ltversion \
-		 test-deprecated \
 		 $(NULL)
 
 TESTS=$(noinst_PROGRAMS)

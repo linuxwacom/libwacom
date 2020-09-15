@@ -16,9 +16,9 @@ if dir_udev == ''
 endif
 
 # Do not modify this, use symbol versioning instead.
-libwacom_lt_c=8
-libwacom_lt_r=1
-libwacom_lt_a=6
+libwacom_lt_c=9
+libwacom_lt_r=0
+libwacom_lt_a=0
 # convert ltversion to soname
 libwacom_so_version = '@0@.@1@.@2@'.format((libwacom_lt_c - libwacom_lt_a),
                                             libwacom_lt_a, libwacom_lt_r)
@@ -49,7 +49,6 @@ src_libwacom = [
 	'libwacom/libwacom.c',
 	'libwacom/libwacom-error.c',
 	'libwacom/libwacom-database.c',
-	'libwacom/libwacom-deprecated.c',
 ]
 
 deps_libwacom = [
@@ -252,22 +251,6 @@ if get_option('tests').enabled()
 			       timeout_multiplier : 100)
 	else
 		message('valgrind not found, disabling valgrind test suite')
-	endif
-
-	# because of the tricks we use in calling the function and exposing
-	# it to begin with, LTO gets confused and this fails to link.
-	# Let's just disable it here.
-	if not get_option('b_lto')
-		test_deprecated = executable('test-deprecated',
-					     'test/test-deprecated.c',
-					     dependencies: [dep_libwacom, dep_dl],
-					     include_directories: [includes_src],
-					     c_args: tests_cflags,
-					     install: false)
-		test('test-deprecated',
-		     test_deprecated,
-		     env:['LD_LIBRARY_PATH=@0@'.format(meson.build_root())],
-		     suite: ['all'])
 	endif
 endif
 

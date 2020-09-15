@@ -11,7 +11,7 @@ AM_MAINTAINER_MODE([enable])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 # Do not modify this, use symbol versioning instead.
-LIBWACOM_LT_VERSION=8:1:6
+LIBWACOM_LT_VERSION=9:0:0
 AC_SUBST(LIBWACOM_LT_VERSION)
 
 # Initialize libtool

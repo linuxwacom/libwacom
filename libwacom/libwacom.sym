@@ -1,6 +1,6 @@
 /* in alphabetical order! */
 
-LIBWACOM_0.33 {
+LIBWACOM_2.0 {
 global:
     libwacom_compare;
     libwacom_database_destroy;
@@ -11,7 +11,6 @@ global:
     libwacom_error_get_code;
     libwacom_error_get_message;
     libwacom_error_new;
-    libwacom_error_set;
     libwacom_get_bustype;
     libwacom_get_button_evdev_code;
     libwacom_get_button_flag;
@@ -43,37 +42,29 @@ global:
     libwacom_is_builtin;
     libwacom_is_reversible;
     libwacom_list_devices_from_database;
-    libwacom_match_destroy;
     libwacom_match_get_bustype;
     libwacom_match_get_match_string;
     libwacom_match_get_name;
     libwacom_match_get_product_id;
     libwacom_match_get_vendor_id;
-    libwacom_match_new;
     libwacom_new_from_name;
     libwacom_new_from_path;
     libwacom_new_from_usbid;
     libwacom_print_device_description;
     libwacom_print_stylus_description;
-    libwacom_stylus_destroy;
     libwacom_stylus_get_axes;
+    libwacom_stylus_get_eraser_type;
     libwacom_stylus_get_for_id;
     libwacom_stylus_get_id;
     libwacom_stylus_get_name;
     libwacom_stylus_get_num_buttons;
+    libwacom_stylus_get_paired_ids;
     libwacom_stylus_get_type;
     libwacom_stylus_has_eraser;
     libwacom_stylus_has_lens;
     libwacom_stylus_has_wheel;
     libwacom_stylus_is_eraser;
-    libwacom_update_match;
 
 local:
         *;
 };
-
-LIBWACOM_1.4 {
-global:
-    libwacom_stylus_get_eraser_type;
-    libwacom_stylus_get_paired_ids;
-} LIBWACOM_0.33;

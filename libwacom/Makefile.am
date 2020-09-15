@@ -15,7 +15,7 @@ libwacom_la_SOURCES = \
                       libwacom.c \
                       libwacom-error.c \
                       libwacom-database.c \
-                      libwacom-deprecated.c
+                      $(NULL)
 
 libwacom_la_LIBADD = $(GLIB_LIBS)
 libwacom_la_CFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS)

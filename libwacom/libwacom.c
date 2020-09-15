@@ -209,10 +209,6 @@ get_device_info (const char            *path,
 	char *bus_str;
 	const char *devname;
 
-#if NEED_G_TYPE_INIT
-	g_type_init();
-#endif
-
 	retval = FALSE;
 	/* The integration flags from device info are unset by default */
 	*integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;

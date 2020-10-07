@@ -174,7 +174,9 @@ assert_vidpid(WacomBusType bus, int vid, int pid)
 		case WBUSTYPE_USB:
 			if (vid == 0x056A)
 				g_assert_cmpint(pid, !=, 0x84); /* wireless dongle */
-			/* fall through */
+			g_assert_cmpint(vid, >, 0);
+			g_assert_cmpint(pid, >, 0);
+			break;
 		case WBUSTYPE_BLUETOOTH:
 		case WBUSTYPE_I2C:
 			g_assert_cmpint(vid, >, 0);

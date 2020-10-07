@@ -1,10 +1,54 @@
 # Example model file description for a tablet
 #
-# Make sure to give it a recognisable name, with the ".tablet" suffix
+# The .tablet file must have a name matching the device, usually
+# the lowercase version of <vendor>-<model>.tablet. See existing data files
+# for guidance, Wacom devices can skip the vendor name.
+#
+# In 90% of the cases we already ship a file for a device that is similar to
+# the new one to be added. The best approach is to copy that file and change
+# it. This example file here describes all possible keys.
+#
+# To test a new file, copy it into /usr/share/libwacom/ and run
+# libwacom-list-local-devices. This should show your device with all
+# information from this file.
+#
+# The file should start with a pseudo-drawing of the device that illustrates
+# where the buttons are. See the data/intuos5-m.tablet file for a full
+# example:
+#
+# Wacom
+# Intuos5 M
+# PTK-650
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  B |                       |
+#  C |                       |
+#  D |                       |
+#  E |                       |
+#  A |        TABLET         |
+#  F |                       |
+#  G |                       |
+#  H |                       |
+#  I |                       |
+#    |                       |
+#    *-----------------------*
+#
 [Device]
 
-# The name is the vendor and product name announced by the kernel
+# The name is the vendor and product name announced by the kernel. This
+# filename is shown as device name by tools like libinput record,
+# evemu-record or evtest.
 Name=Wacom Intuos4 6x9
+
+# The unique model name for this device where it differs significantly from
+# the Name. For example, Wacom has several devices named Wacom Intuos Pro
+# but they all have a unique model name (e.g. PTH-660).
+# Leave blank where the device name is sufficient to identify.
+ModelName=
 
 # DeviceMatch includes the bus (usb, bluetooth, serial), the vendor ID and
 # product ID. This is the connector used, not whatever name the kernel
@@ -20,7 +64,7 @@ Name=Wacom Intuos4 6x9
 # https://github.com/linuxwacom/input-wacom/wiki/Device-IDs
 #
 # Do not add 0x in front of the hex numbers, make sure to pad each ID
-# so it has exactly 4 digits.
+# so it has exactly 4 digits. hex letters must be lowercase.
 DeviceMatch=usb:056a:00bc
 
 # Paired PID includes the match line of any device that share the same
@@ -31,9 +75,11 @@ DeviceMatch=usb:056a:00bc
 PairedIDs=usb:056a:0335
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
-# If unsure, or not applicable (the tablet isn't stand-alone for
-# example), just leave it out.
-Class=Intuos4
+# If unsure, or not applicable (the tablet isn't stand-alone for example).
+#
+# The class is deprecated as of v1.4. For non-Wacom devices, set to Bamboo
+# for external tablets and ISDV4 for built-in ones.
+Class=Bamboo
 
 # (Optional) Width in inches, as advertised by the manufacturer
 Width=9
@@ -41,29 +87,27 @@ Width=9
 # (Optional) Height in inches, as advertised by the manufacturer
 Height=6
 
-# Integration flags, is the tablet is part of the system, such as a
-# TabletPC or integrated in the screen, ie a screen tablet (most serial
-# tablets, Cintiqs)
+# Integration flags. Set to Display where the device is an external monitor
+# (e.g. Cintiq) or Display;System where the device is built into the display
+# of the system itself (i.e. part of a laptop). Leave empty for external
+# tablets.
 # Note, if unspecified, the integration flags will be taken from the kernel.
-# Using an empty value or "None" forces the intergration flags to remain unset
-# even if the relevant kernel flags would state otherwise.
 IntegratedIn=Display;System
 
+# Filename of the SVG representing this tablet. Only needed for tablets with
+# pad buttons.
+Layout=bamboo-16fg-m-pt.svg
 # Styli
 #
-# This is a list of stylus IDs supported by the tablet. This is the
-# hardest thing to gather, but note that this is only needed for the
-# professional range of tablets, as the consumer range of devices all
-# have a single stylus (stylus + 2 buttons + eraser), just like our
-# generic stylus.
+# This is a list of stylus IDs supported by the tablet. Non-Wacom devices
+# usually do not support specific stylus IDs and default to the generic
+# pens. If the stylus has an eraser:
+# Styli=0xffffe;0xffffff;
+# If the stylus does not have an eraser:
+# Styli=0xffffd
 #
-# Consumer range:
-# - Graphire
-# - Bamboo
-#
-# Professional range:
-# - Cintiq
-# - Intuos
+# For Wacom devices this is needed only for the professional series devices,
+# i.e. Intuos Pro and Cintiq.
 #
 # In general, differently sized models of the same range support the same
 # styli, so you can copy/paste the list from another definition.
@@ -74,7 +118,7 @@ IntegratedIn=Display;System
 #
 # Finally, if you cannot find any information about the styli supported
 # by your device, you will need to gather the "Wacom Serial IDs",
-# and getting each stylus closer to the tablet.
+# and getting each stylus in proximity of the tablet.
 Styli=0x802;0x804;0x40802;0x80c;0x80a;0x4080a;0x90a;0x20802;0x902;
 
 # Optional features that this tablet supports
@@ -88,8 +132,8 @@ Styli=0x802;0x804;0x40802;0x80c;0x80a;0x4080a;0x90a;0x20802;0x902;
 # This tablet supports styli (and erasers, if present on the actual stylus)
 Stylus=true
 
-# Whether the tablet can be used left-handed
-# This is only for stand-alone tablets. The tablet
+# Whether the tablet can be used left-handed.
+# This is only for asymmetrical stand-alone tablets. The tablet
 # is deemed reversible if the tablet can be turned 180 degrees
 # so buttons are placed on the other side. The Intuos4 tablet
 # is a great example of that.
@@ -135,7 +179,7 @@ EvdevCodes=0x110;0x112;0x111;0x113
 # for which the values have already been filled in.
 
 # Which buttons have OLEDs associated to them
-# Only the Intuos4 devices have that right now
+# Only the Intuos4 devices had this.
 # http://101.wacom.com/i4settings/images/expresskeys-feature.jpg
 OLEDs=B;C;D;E;F;G;H;I
 

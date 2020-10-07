@@ -42,7 +42,7 @@ static char *database_path;
 
 static GOptionEntry opts[] = {
         {"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
-	{NULL}
+	{ .long_name = NULL}
 };
 
 static int event_devices_only(const struct dirent *dir) {

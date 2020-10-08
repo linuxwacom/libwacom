@@ -301,6 +301,9 @@ WacomDevice* libwacom_new_from_path(const WacomDeviceDatabase *db, const char *p
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
  *
+ * @note The term "usbid" is misleading, this function will return
+ * devices with matching ids on the USB, Bluetooth or i2c bus.
+ *
  * @param db A device database
  * @param vendor_id The vendor ID of the device
  * @param product_id The product ID of the device

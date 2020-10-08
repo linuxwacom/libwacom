@@ -241,6 +241,22 @@ test_bamboopen(struct fixture *f, gconstpointer user_data)
 	libwacom_destroy(device);
 }
 
+static void
+test_isdv4_4800(struct fixture *f, gconstpointer user_data)
+{
+	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x4800, NULL);
+	g_assert_nonnull(device);
+
+	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
+	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	g_assert_null(libwacom_get_model_name(device));
+	g_assert_cmpint(libwacom_get_vendor_id(device), ==, 0x56a);
+	g_assert_cmpint(libwacom_get_product_id(device), ==, 0x4800);
+	g_assert_cmpint(libwacom_get_num_buttons(device), ==, 0);
+
+	libwacom_destroy(device);
+}
+
 int main(int argc, char **argv)
 {
 	g_test_init(&argc, &argv, NULL);
@@ -272,6 +288,9 @@ int main(int argc, char **argv)
 		   fixture_teardown);
 	g_test_add("/load/056a:WACf004", struct fixture, NULL,
 		   fixture_setup, test_wacf004,
+		   fixture_teardown);
+	g_test_add("/load/056a:4800", struct fixture, NULL,
+		   fixture_setup, test_isdv4_4800,
 		   fixture_teardown);
 
 	return g_test_run();

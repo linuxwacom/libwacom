@@ -570,6 +570,10 @@ libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int produc
 	}
 
 	device = libwacom_new(db, NULL, vendor_id, product_id, WBUSTYPE_USB, error);
+	if (!device)
+		device = libwacom_new(db, NULL, vendor_id, product_id, WBUSTYPE_I2C, error);
+	if (!device)
+		device = libwacom_new(db, NULL, vendor_id, product_id, WBUSTYPE_BLUETOOTH, error);
 
 	if (device)
 		return libwacom_copy(device);

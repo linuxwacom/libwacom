@@ -1,7 +1,4 @@
 # ELAN touchscreen/pen sensor present in the HP Envy x360 Converti0ble 15-dr1xxx
-# Width and Height are rounded up to the nearest inch.  Real measurements are:
-# Width: 13 5/8"
-# Height: 7 5/8"
 #
 # Sysinfo:
 # sysinfo.uFNKtCProZ
@@ -10,7 +7,7 @@
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:04f3:29CF
+DeviceMatch=i2c:04f3:29cf
 Class=ISDV4
 Width=14
 Height=8

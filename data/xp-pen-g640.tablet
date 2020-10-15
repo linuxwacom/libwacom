@@ -1,0 +1,19 @@
+# XP-Pen
+# Start G640
+#
+
+[Device]
+Name=XP-Pen Star G640
+ModelName=
+DeviceMatch=usb:28bd:0914
+Class=Bamboo
+Width=6
+Height=4
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0
+

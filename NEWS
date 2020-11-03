@@ -1,3 +1,9 @@
+libwacom 1.6:
+- New devices:
+  - XP Pen G640
+- libwacom_new_from_usbid() now also returns matching Bluetooth and i2c
+  devices
+
 libwacom 1.5:
 - New devices:
   - Acer Spin 5 / Acer Spin SP513-54N

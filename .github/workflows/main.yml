@@ -1,0 +1,156 @@
+on: [ push, pull_request ]
+
+env:
+  CFLAGS: "-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
+  UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree
+
+jobs:
+  ###
+  #
+  # autotools build job
+  #
+  autotools:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        compiler:
+          - gcc
+          - clang
+        make_args:
+          - distcheck
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install libwacom dependencies
+        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+      - name: autotools make ${{matrix.make_args}}
+        run: |
+          mkdir _build && pushd _build > /dev/null
+          ../autogen.sh --disable-silent-rules
+          make
+          make ${{matrix.make_args}}
+          popd > /dev/null
+        env:
+          CC: ${{matrix.compiler}}
+      - name: capture build logs
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}  # even if we fail
+        with:
+          name: autotools test logs
+          path: |
+            _build/config.log
+            _build/test-suite.log
+      # And for the distcheck job, let's save the tarball for later use
+      - name: move tarballs to top level
+        if: matrix.make_args == 'distcheck'
+        run: mv _build/libwacom-*tar.* .
+      - name: capture tarball from distcheck
+        uses: actions/upload-artifact@v2
+        if: matrix.make_args == 'distcheck'
+        with:
+          name: tarball
+          path: libwacom-*.tar.bz2
+
+  ###
+  #
+  # meson build job
+  #
+  meson:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        compiler:
+          - gcc
+          - clang
+        meson_options:
+          - ''
+          # clang requires b_lundef=false for b_santize, see
+          # https://github.com/mesonbuild/meson/issues/764
+          - '-Db_sanitize=address,undefined -Db_lundef=false'
+          - 'valgrind'  # special handling
+    steps:
+      - uses: actions/checkout@v2
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      - name: install meson
+        run: python -m pip install --upgrade pip meson ninja
+      - name: Install libwacom dependencies
+        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+      # for the non-valgrind case, we pass the meson options through and run
+      # meson test
+      - name: meson test ${{matrix.meson_options}}
+        if: ${{matrix.meson_options != 'valgrind'}}
+        run: |
+          meson setup builddir ${{matrix.meson_options}}
+          meson test -C builddir --print-errorlogs
+        env:
+          CC: ${{matrix.compiler}}
+      # for the valgrind case, we need custom setup, the matrix isn't
+      # flexible enough for this
+      - name: valgrind - meson test ${{matrix.meson_options}}
+        if: ${{matrix.meson_options == 'valgrind'}}
+        run: |
+          meson setup builddir
+          meson test -C builddir --print-errorlogs --setup=valgrind --suite=valgrind
+        env:
+          CC: ${{matrix.compiler}}
+      # Capture all the meson logs, even if we failed
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}  # even if we fail
+        with:
+          name: meson test logs
+          path: |
+            builddir/meson-logs/testlog*.txt
+            builddir/meson-logs/meson-log.txt
+
+  ###
+  #
+  # tarball verification
+  #
+  build-from-tarball:
+    needs: autotools
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        buildtool:
+          - meson
+          - autogen
+    env:
+      TARBALLDIR: '_tarball_dir'
+      INSTALLDIR: '/tmp/libwacom/_inst'
+    steps:
+      # libwacom dependencies
+      - name: Install dependencies
+        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+      - name: install python (if needed)
+        uses: actions/setup-python@v1
+        if: matrix.buildtool == 'meson'
+        with:
+          python-version: '3.8'
+      - name: install meson from pip (if needed)
+        run: python -m pip install --upgrade pip meson ninja
+        if: matrix.buildtool == 'meson'
+      - name: fetch tarball from previous job(s)
+        uses: actions/download-artifact@v2
+        with:
+          name: tarball
+      - name: extract tarball
+        run: |
+          mkdir -p "$TARBALLDIR"
+          tar xf libwacom-*.tar.bz2 -C "$TARBALLDIR"
+      - run: mkdir -p "$INSTALLDIR"
+      # The next three jobs are conditional on the buildtool,
+      # it's the easiest way to save on duplication
+      - name: build from tarball with meson
+        if: matrix.buildtool == 'meson'
+        run: |
+          pushd "$TARBALLDIR"/libwacom-*/
+          meson setup builddir --prefix="$INSTALLDIR"
+          ninja -C builddir test && ninja -C builddir install
+      - name: build from tarball with autogen
+        if: matrix.buildtool == 'autogen'
+        run: |
+          pushd "$TARBALLDIR"/libwacom-*/
+          ./autogen.sh --disable-silent-rules --prefix="$INSTALLDIR"
+          make && make install

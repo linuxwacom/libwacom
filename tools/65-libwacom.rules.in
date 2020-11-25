@@ -1,6 +1,6 @@
 # udev rules for libwacom supported devices
 
-ACTION!="add|change", GOTO="libwacom_end"
+ACTION=="remove", GOTO="libwacom_end"
 KERNEL!="event[0-9]*", GOTO="libwacom_end"
 
 # HUION and GAOMON consumer and system control devices are not tablets.

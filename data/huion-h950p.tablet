@@ -1,14 +1,14 @@
 # HUION
 # H950P
-# place in /usr/share/libwacom/
+# 
 
 [Device]
 Name=Huion H950P
 ModelName=
 DeviceMatch=usb:256c:006d
 Class=Bamboo
-#Width=10
-#Height=6
+Width=9
+Height=5
 IntegratedIn=
 Layout=huion-h610-pro.svg
 Styli=0xffffd;

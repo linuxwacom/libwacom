@@ -270,6 +270,17 @@ if get_option('tests').enabled()
 		     env:['LD_LIBRARY_PATH=@0@'.format(meson.build_root())],
 		     suite: ['all'])
 	endif
+
+	if meson.version().version_compare('>= 0.51.0')
+		python = import('python')
+		python.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
+	endif
+	pytest = find_program('pytest-3', 'pytest')
+	test('pytest',
+	     pytest,
+	     args: [meson.source_root()],
+	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.source_root())],
+	     suite: ['all'])
 endif
 
 # This is a non-optional test

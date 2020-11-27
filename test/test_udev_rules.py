@@ -10,6 +10,7 @@
 
 import configparser
 import libevdev
+import os
 from pathlib import Path
 import pyudev
 import pytest
@@ -32,7 +33,7 @@ def pytest_generate_tests(metafunc):
     # in the data dir. Where the tablet also has touch/buttons generate an
     # extra Finger or Pad device
     if 'tablet' in metafunc.fixturenames:
-        datadir = Path('data')
+        datadir = Path(os.getenv('MESON_SOURCE_ROOT') or '.') / 'data'
         tablets = []
         for f in datadir.glob('*.tablet'):
             config = configparser.ConfigParser()

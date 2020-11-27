@@ -15,7 +15,8 @@ jobs:
       uses: vmactions/freebsd-vm@v0.0.7
       with:
         prepare: |
-          pkg install -y meson pkgconf evdev-proto libgudev libxml++ bash
+          pkg install -y meson pkgconf evdev-proto libgudev libxml++ bash libevdev py37-pip
+          pip install libevdev pytest pyudev
         run: |
           meson setup builddir
           meson test -C builddir --print-errorlogs

@@ -6,7 +6,7 @@
 [Device]
 Name=ELAN 29B6
 ModelName=
-DeviceMatch=i2c:04F3:29B6
+DeviceMatch=i2c:04f3:29b6
 Class=ISDV4
 Width=14
 Height=8

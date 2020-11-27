@@ -6,7 +6,7 @@
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:004F3:23DB
+DeviceMatch=i2c:004f3:23db
 Class=ISDV4
 Width=12
 Height=7

@@ -11,7 +11,7 @@
 [Device]
 Name=GAOMON S620
 ModelName=
-DeviceMatch=usb:256C:006D:GAOMON Gaomon Tablet Pen;usb:256C:006D:GAOMON Gaomon Tablet Pad;
+DeviceMatch=usb:256c:006d:GAOMON Gaomon Tablet Pen;usb:256c:006d:GAOMON Gaomon Tablet Pad;
 Class=Bamboo
 Width=6
 Height=4

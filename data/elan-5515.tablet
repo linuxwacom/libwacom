@@ -3,7 +3,7 @@
 [Device]
 Name=ELAN 5515
 ModelName=
-DeviceMatch=i2c:04F3:2339
+DeviceMatch=i2c:04f3:2339
 Class=ISDV4
 IntegratedIn=Display
 

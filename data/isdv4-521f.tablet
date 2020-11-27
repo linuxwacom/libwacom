@@ -10,7 +10,7 @@
 [Device]
 Name=ISDv4 521F
 ModelName=
-DeviceMatch=usb:056A:521F
+DeviceMatch=usb:056a:521f
 Class=ISDV4
 Width=12
 Height=7

@@ -30,7 +30,7 @@
 Name=Wacom Cintiq Pro 13
 ModelName=DTH-1320
 Class=Cintiq
-DeviceMatch=usb:056a:034F
+DeviceMatch=usb:056a:034f
 PairedID=usb:056a:0353
 Width=12
 Height=7

@@ -10,7 +10,7 @@ jobs:
   # autotools build job
   #
   autotools:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         compiler:
@@ -55,7 +55,7 @@ jobs:
   # meson build job
   #
   meson:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         compiler:
@@ -110,7 +110,7 @@ jobs:
   #
   build-from-tarball:
     needs: autotools
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         buildtool:

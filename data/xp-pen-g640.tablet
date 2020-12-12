@@ -5,7 +5,7 @@
 [Device]
 Name=XP-Pen Star G640
 ModelName=
-DeviceMatch=usb:28bd:0094
+DeviceMatch=usb:28bd:0914;usb:28bd:0094
 Class=Bamboo
 Width=6
 Height=4

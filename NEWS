@@ -1,3 +1,11 @@
+libwacom 1.7:
+- New devices:
+  - Dell XPS 13 2-in-1 9310
+  - Lenovo IdeaPad Flex 14API, Flex 5
+  - HP Envy x360, EliteBook x360
+  - Huawei MateBook HZ-W19
+  - XP Pen Star G640
+
 libwacom 1.6:
 - New devices:
   - XP Pen G640

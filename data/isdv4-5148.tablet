@@ -1,4 +1,7 @@
 # this is for the Wacom pen + touchscreen as found in the Lenovo ThinkPad X1 Yoga (3rd-gen)
+#
+# sysinfo.4xQ82uOLCD
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/117
 
 [Device]
 Name=Wacom ISDv4 5148

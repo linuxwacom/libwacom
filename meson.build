@@ -5,6 +5,7 @@ project('libwacom', 'c',
 	meson_version: '>= 0.50.0')
 
 dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
+dir_etc     = join_paths(get_option('prefix'), get_option('sysconfdir'), 'libwacom')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
 dir_src     = join_paths(meson.source_root(), 'libwacom')
 dir_test    = join_paths(meson.source_root(), 'test')
@@ -85,6 +86,7 @@ lib_libwacom = shared_library('wacom',
 			      c_args: [
 				'-DG_LOG_DOMAIN="@0@"'.format(meson.project_name()),
 				'-DDATADIR="@0@"'.format(dir_data),
+				'-DETCDIR="@0@"'.format(dir_etc),
 			      ],
 			      install: true)
 dep_libwacom = declare_dependency(link_with: lib_libwacom)

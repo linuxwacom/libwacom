@@ -43,32 +43,31 @@
 static WacomDeviceDatabase *db_old;
 static WacomDeviceDatabase *db_new;
 
-static int
-scandir_filter(const struct dirent *entry)
-{
-	return strncmp(entry->d_name, ".", 1);
-}
-
 static void
-rmtmpdir(const char *dir)
+rmtmpdir(const char *tmpdir)
 {
-	int nfiles;
-	struct dirent **files;
-	char *path = NULL;
+	DIR *dir;
+	struct dirent *file;
 
-	nfiles = scandir(dir, &files, scandir_filter, alphasort);
-	while(nfiles--)
-	{
-		g_assert(asprintf(&path, "%s/%s", dir, files[nfiles]->d_name) != -1);
+	dir = opendir(tmpdir);
+	if (!dir)
+		return;
+
+	while ((file = readdir(dir))) {
+		char *path = NULL;
+
+		if (file->d_name[0] == '.')
+			continue;
+
+		g_assert(asprintf(&path, "%s/%s", tmpdir, file->d_name) != -1);
 		g_assert(path);
 		g_assert(remove(path) != -1);
-		free(files[nfiles]);
 		free(path);
-		path = NULL;
 	}
 
-	free(files);
-	g_assert(remove(dir) != -1);
+	closedir(dir);
+
+	g_assert(remove(tmpdir) != -1);
 }
 
 static void

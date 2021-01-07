@@ -823,13 +823,13 @@ has_suffix(const char *name, const char *suffix)
 }
 
 static int
-scandir_tablet_filter(const struct dirent *entry)
+is_tablet_file(const struct dirent *entry)
 {
 	return has_suffix(entry->d_name, TABLET_SUFFIX);
 }
 
 static int
-scandir_stylus_filter(const struct dirent *entry)
+is_stylus_file(const struct dirent *entry)
 {
 	return has_suffix(entry->d_name, STYLUS_SUFFIX);
 }
@@ -837,54 +837,52 @@ scandir_stylus_filter(const struct dirent *entry)
 static bool
 load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 {
-    int n, nfiles;
-    struct dirent **files;
-    bool success = false;
+	DIR *dir;
+	struct dirent *file;
+	bool success = false;
 
-    n = scandir(datadir, &files, scandir_tablet_filter, alphasort);
-    if (n < 0)
-	    return false;
+	dir = opendir(datadir);
+	if (!dir)
+		return false;
 
-    nfiles = n;
-    while(n--) {
-	    WacomDevice *d;
-	    const WacomMatch **matches, **match;
+	while ((file = readdir(dir))) {
+		WacomDevice *d;
+		const WacomMatch **matches, **match;
 
-	    d = libwacom_parse_tablet_keyfile(db, datadir, files[n]->d_name);
+		if (!is_tablet_file(file))
+			continue;
 
-	    if (!d)
-		    continue;
+		d = libwacom_parse_tablet_keyfile(db, datadir, file->d_name);
+		if (!d)
+			continue;
 
-	    matches = libwacom_get_matches(d);
-	    if (!matches || !*matches) {
-		    g_critical("Device '%s' has no matches defined\n",
-			       libwacom_get_name(d));
-		    goto out;
-	    }
+		matches = libwacom_get_matches(d);
+		if (!matches || !*matches) {
+			g_critical("Device '%s' has no matches defined\n",
+				   libwacom_get_name(d));
+			goto out;
+		}
 
-	    for (match = matches; *match; match++) {
-		    const char *matchstr;
-		    matchstr = libwacom_match_get_match_string(*match);
-		    /* no duplicate matches allowed */
-		    if (g_hash_table_lookup(db->device_ht, matchstr) != NULL) {
-			    g_critical("Duplicate match of '%s' on device '%s'.",
-					matchstr, libwacom_get_name(d));
-			    goto out;
-		    }
-		    g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
-		    libwacom_ref(d);
-	    }
-	    libwacom_unref(d);
-    }
+		for (match = matches; *match; match++) {
+			const char *matchstr;
+			matchstr = libwacom_match_get_match_string(*match);
+			/* no duplicate matches allowed */
+			if (g_hash_table_lookup(db->device_ht, matchstr) != NULL) {
+				g_critical("Duplicate match of '%s' on device '%s'.",
+					   matchstr, libwacom_get_name(d));
+				goto out;
+			}
+			g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
+			libwacom_ref(d);
+		}
+		libwacom_unref(d);
+	}
 
-    success = true;
+	success = true;
 
 out:
-    while(nfiles--)
-	    free(files[nfiles]);
-    free(files);
-
-    return success;
+	closedir(dir);
+	return success;
 }
 
 static void
@@ -896,31 +894,27 @@ stylus_destroy(void *data)
 static bool
 load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 {
-    int n, nfiles;
-    struct dirent **files;
-    bool success = false;
+	DIR *dir;
+	struct dirent *file;
 
-    n = scandir(datadir, &files, scandir_stylus_filter, alphasort);
-    if (n < 0)
-	    return false;
+	dir = opendir(datadir);
+	if (!dir)
+		return false;
 
-    nfiles = n;
-    while(n--) {
-	    char *path;
+	while ((file = readdir(dir))) {
+		char *path;
 
-	    path = g_build_filename (datadir, files[n]->d_name, NULL);
-	    libwacom_parse_stylus_keyfile(db, path);
-	    g_free(path);
-    }
+		if (!is_stylus_file(file))
+			continue;
 
-    success = true;
+		path = g_build_filename (datadir, file->d_name, NULL);
+		libwacom_parse_stylus_keyfile(db, path);
+		g_free(path);
+	}
 
-    while(nfiles--)
-	    free(files[nfiles]);
-    free(files);
+	closedir(dir);
 
-
-    return success;
+	return true;
 }
 
 static bool

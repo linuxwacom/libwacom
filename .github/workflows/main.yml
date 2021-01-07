@@ -106,6 +106,49 @@ jobs:
             builddir/meson-logs/testlog*.txt
             builddir/meson-logs/meson-log.txt
 
+  ####
+  # /etc/ loading check
+  etcdir:
+    needs: meson
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        command:
+          # A variety of ways to split the database across the two locations
+          # we load from.
+          - sudo mv /usr/share/libwacom/intuos*.tablet /etc/libwacom
+          - sudo mv /usr/share/libwacom/*.tablet /etc/libwacom
+          - sudo mv /usr/share/libwacom/*.stylus /etc/libwacom
+          # split the libwacom.stylus file into to two files to check for
+          # accumlated loading
+          - sudo csplit data/libwacom.stylus '/^\[0x822\]/' && sudo mv xx00 /etc/libwacom/first.stylus && sudo mv xx01 /usr/share/libwacom/libwacom.stylus
+
+    steps:
+      - uses: actions/checkout@v2
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      # keep this in sync with the meson job above. We just do it as
+      # one step here, it's not supposed to fail if the above succeeded.
+      # Exception: everything is run as sudo because we install to /etc
+      # and thus need the pip bits available as root
+      - name: Prep install
+        run: |
+          sudo python -m pip install --upgrade pip meson ninja
+          sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+          sudo python -m pip install --upgrade libevdev pyudev pytest
+      - run: meson builddir --prefix=/usr && sudo ninja -C builddir install
+      - name: list devices with database in /usr
+        run: ./builddir/list-devices > devicelist.default.txt
+      - run: sudo mkdir /etc/libwacom
+      - name: split the databases between /usr/share and /etc
+        run: ${{matrix.command}}
+      - name: list devices with database in /etc and /usr
+        run: ./builddir/list-devices > devicelist.modified.txt
+      - name: compare device database
+        run: diff -u8 devicelist.default.txt devicelist.modified.txt
+
   ###
   #
   # tarball verification

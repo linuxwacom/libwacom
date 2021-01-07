@@ -2,6 +2,7 @@ lib_LTLIBRARIES=libwacom.la
 
 AM_CPPFLAGS = \
 	      -DDATADIR="\"$(datadir)/libwacom\"" \
+	      -DETCDIR="\"$(sysconfdir)/libwacom\"" \
 	      -DG_LOG_DOMAIN="\"$(PACKAGE)\"" \
 	      -I$(top_srcdir)/include \
 	      -fvisibility=hidden

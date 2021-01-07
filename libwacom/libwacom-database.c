@@ -843,7 +843,7 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 
 	dir = opendir(datadir);
 	if (!dir)
-		return false;
+		return errno == ENOENT; /* non-existing directory is ok */
 
 	while ((file = readdir(dir))) {
 		WacomDevice *d;
@@ -899,7 +899,7 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 
 	dir = opendir(datadir);
 	if (!dir)
-		return false;
+		return errno == ENOENT; /* non-existing directory is ok */
 
 	while ((file = readdir(dir))) {
 		char *path;
@@ -966,9 +966,12 @@ libwacom_database_new_for_path (const char *datadir)
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
-	const char *datadir = DATADIR;
+	const char *datadir[] = {
+		DATADIR,
+		ETCDIR,
+	};
 
-	return database_new_for_paths (1, &datadir);
+	return database_new_for_paths (2, datadir);
 }
 
 LIBWACOM_EXPORT void

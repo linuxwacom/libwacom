@@ -923,8 +923,8 @@ load_from_datadir(WacomDeviceDatabase *db, const char *datadir)
 	return load_stylus_files(db, datadir) && load_tablet_files(db, datadir);
 }
 
-LIBWACOM_EXPORT WacomDeviceDatabase *
-libwacom_database_new_for_path (const char *datadir)
+static WacomDeviceDatabase *
+database_new_for_paths (size_t npaths, const char **datadirs)
 {
 	WacomDeviceDatabase *db;
 
@@ -938,8 +938,10 @@ libwacom_database_new_for_path (const char *datadir)
 					       NULL,
 					       (GDestroyNotify) stylus_destroy);
 
-	if (!load_from_datadir(db, datadir))
-		goto error;
+	for (const char **datadir = datadirs; npaths--; datadir++) {
+		if (!load_from_datadir(db, *datadir))
+			goto error;
+	}
 
 	/* If we couldn't load _anything_ then something's wrong */
 	if (g_hash_table_size (db->stylus_ht) == 0 ||
@@ -956,9 +958,17 @@ error:
 }
 
 LIBWACOM_EXPORT WacomDeviceDatabase *
+libwacom_database_new_for_path (const char *datadir)
+{
+	return database_new_for_paths(1, &datadir);
+}
+
+LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
-	return libwacom_database_new_for_path (DATADIR);
+	const char *datadir = DATADIR;
+
+	return database_new_for_paths (1, &datadir);
 }
 
 LIBWACOM_EXPORT void

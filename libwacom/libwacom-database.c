@@ -849,7 +849,7 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
     bool success = false;
 
     n = scandir(datadir, &files, scandir_tablet_filter, alphasort);
-    if (n <= 0)
+    if (n < 0)
 	    return false;
 
     nfiles = n;
@@ -908,7 +908,7 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
     bool success = false;
 
     n = scandir(datadir, &files, scandir_stylus_filter, alphasort);
-    if (n <= 0)
+    if (n < 0)
 	    return false;
 
     nfiles = n;

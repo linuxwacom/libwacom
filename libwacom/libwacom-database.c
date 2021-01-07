@@ -926,33 +926,33 @@ load_from_datadir(WacomDeviceDatabase *db, const char *datadir)
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
 {
-    WacomDeviceDatabase *db;
+	WacomDeviceDatabase *db;
 
-    db = g_new0 (WacomDeviceDatabase, 1);
-    db->device_ht = g_hash_table_new_full (g_str_hash,
-					   g_str_equal,
-					   g_free,
-					   (GDestroyNotify) libwacom_destroy);
-    db->stylus_ht = g_hash_table_new_full (g_direct_hash,
-					   g_direct_equal,
-					   NULL,
-					   (GDestroyNotify) stylus_destroy);
+	db = g_new0 (WacomDeviceDatabase, 1);
+	db->device_ht = g_hash_table_new_full (g_str_hash,
+					       g_str_equal,
+					       g_free,
+					       (GDestroyNotify) libwacom_destroy);
+	db->stylus_ht = g_hash_table_new_full (g_direct_hash,
+					       g_direct_equal,
+					       NULL,
+					       (GDestroyNotify) stylus_destroy);
 
-    if (!load_from_datadir(db, datadir))
-	    goto error;
+	if (!load_from_datadir(db, datadir))
+		goto error;
 
-    /* If we couldn't load _anything_ then something's wrong */
-    if (g_hash_table_size (db->stylus_ht) == 0 ||
-	g_hash_table_size (db->device_ht) == 0)
-	    goto error;
+	/* If we couldn't load _anything_ then something's wrong */
+	if (g_hash_table_size (db->stylus_ht) == 0 ||
+	    g_hash_table_size (db->device_ht) == 0)
+		goto error;
 
-    libwacom_setup_paired_attributes(db);
+	libwacom_setup_paired_attributes(db);
 
-    return db;
+	return db;
 
 error:
-    libwacom_database_destroy(db);
-    return NULL;
+	libwacom_database_destroy(db);
+	return NULL;
 }
 
 LIBWACOM_EXPORT WacomDeviceDatabase *

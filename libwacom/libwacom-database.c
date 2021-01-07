@@ -930,6 +930,11 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
     return success;
 }
 
+static bool
+load_from_datadir(WacomDeviceDatabase *db, const char *datadir)
+{
+	return load_stylus_files(db, datadir) && load_tablet_files(db, datadir);
+}
 
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
@@ -946,8 +951,8 @@ libwacom_database_new_for_path (const char *datadir)
 					   NULL,
 					   (GDestroyNotify) stylus_destroy);
 
-    if (!load_stylus_files(db, datadir) || !load_tablet_files(db, datadir))
-	goto error;
+    if (!load_from_datadir(db, datadir))
+	    goto error;
 
     /* If we couldn't load _anything_ then something's wrong */
     if (g_hash_table_size (db->stylus_ht) == 0 ||

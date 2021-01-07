@@ -848,11 +848,6 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
     struct dirent **files;
     bool success = false;
 
-    db->device_ht = g_hash_table_new_full (g_str_hash,
-					   g_str_equal,
-					   g_free,
-					   (GDestroyNotify) libwacom_destroy);
-
     n = scandir(datadir, &files, scandir_tablet_filter, alphasort);
     if (n <= 0)
 	    return false;
@@ -871,7 +866,6 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 	    if (!matches || !*matches) {
 		    g_critical("Device '%s' has no matches defined\n",
 			       libwacom_get_name(d));
-		    libwacom_destroy(d);
 		    goto out;
 	    }
 
@@ -889,9 +883,6 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 	    }
 	    libwacom_unref(d);
     }
-
-    if (g_hash_table_size (db->device_ht) == 0)
-	    goto out;
 
     success = true;
 
@@ -920,10 +911,6 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
     if (n <= 0)
 	    return false;
 
-    db->stylus_ht = g_hash_table_new_full (g_direct_hash,
-					   g_direct_equal,
-					   NULL,
-					   (GDestroyNotify) stylus_destroy);
     nfiles = n;
     while(n--) {
 	    char *path;
@@ -933,13 +920,8 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 	    g_free(path);
     }
 
-    /* If we couldn't load _anything_ then something's wrong */
-    if (g_hash_table_size (db->stylus_ht) == 0)
-	    goto end;
-
     success = true;
 
-end:
     while(nfiles--)
 	    free(files[nfiles]);
     free(files);
@@ -955,15 +937,30 @@ libwacom_database_new_for_path (const char *datadir)
     WacomDeviceDatabase *db;
 
     db = g_new0 (WacomDeviceDatabase, 1);
+    db->device_ht = g_hash_table_new_full (g_str_hash,
+					   g_str_equal,
+					   g_free,
+					   (GDestroyNotify) libwacom_destroy);
+    db->stylus_ht = g_hash_table_new_full (g_direct_hash,
+					   g_direct_equal,
+					   NULL,
+					   (GDestroyNotify) stylus_destroy);
 
-    if (!load_stylus_files(db, datadir) || !load_tablet_files(db, datadir)) {
-	    libwacom_database_destroy(db);
-	    db = NULL;
-    } else {
-	    libwacom_setup_paired_attributes(db);
-    }
+    if (!load_stylus_files(db, datadir) || !load_tablet_files(db, datadir))
+	goto error;
+
+    /* If we couldn't load _anything_ then something's wrong */
+    if (g_hash_table_size (db->stylus_ht) == 0 ||
+	g_hash_table_size (db->device_ht) == 0)
+	    goto error;
+
+    libwacom_setup_paired_attributes(db);
 
     return db;
+
+error:
+    libwacom_database_destroy(db);
+    return NULL;
 }
 
 LIBWACOM_EXPORT WacomDeviceDatabase *

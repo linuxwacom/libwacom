@@ -807,38 +807,31 @@ out:
 	return device;
 }
 
-static int
-scandir_tablet_filter(const struct dirent *entry)
+static bool
+has_suffix(const char *name, const char *suffix)
 {
-	const char *name = entry->d_name;
-	int len, suffix_len;
+	size_t len = strlen(name);
+	size_t suffix_len = strlen(suffix);
 
 	if (!name || name[0] == '.')
 		return 0;
 
-	len = strlen(name);
-	suffix_len = strlen(TABLET_SUFFIX);
 	if (len <= suffix_len)
-		return 0;
+		return false;
 
-	return streq(&name[len - suffix_len], TABLET_SUFFIX);
+	return streq(&name[len - suffix_len], suffix);
+}
+
+static int
+scandir_tablet_filter(const struct dirent *entry)
+{
+	return has_suffix(entry->d_name, TABLET_SUFFIX);
 }
 
 static int
 scandir_stylus_filter(const struct dirent *entry)
 {
-	const char *name = entry->d_name;
-	int len, suffix_len;
-
-	if (!name || name[0] == '.')
-		return 0;
-
-	len = strlen(name);
-	suffix_len = strlen(STYLUS_SUFFIX);
-	if (len <= suffix_len)
-		return 0;
-
-	return streq(&name[len - suffix_len], STYLUS_SUFFIX);
+	return has_suffix(entry->d_name, STYLUS_SUFFIX);
 }
 
 static bool

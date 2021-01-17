@@ -11,10 +11,16 @@
 # sysinfo.L1vXaj9Wcz
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/110
 
+# i2c:04f3:2813
+#
+# HP Spectre x360 Convertible 13-ap0xxx
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/127
+
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;
+DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;
 Class=ISDV4
 Width=12
 Height=7

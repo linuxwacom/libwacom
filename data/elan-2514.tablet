@@ -17,10 +17,16 @@
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/127
 
+# i2c:04f3:2817
+#
+# HP Spectre x360 Convertible 15-df0xxx
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/70
+
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;
+DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;i2c:04f3:2817
 Class=ISDV4
 Width=12
 Height=7

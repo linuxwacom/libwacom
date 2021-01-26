@@ -1,0 +1,50 @@
+# HUION
+# HS610
+#
+# Button Map:
+#      *-----------------------------------*
+#      |                                   |
+#  A|B |                                   |
+#  C|D |                                   |
+#  E|F |                                   |
+#      |                                   |
+#   M  |              TABLET               |
+#      |                                   |
+#  G|H |                                   |
+#  I|J |                                   |
+#  K|L |                                   |
+#      |                                   |
+#      *-----------------------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  M |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=HUION Huion Tablet
+ModelName=HS610
+DeviceMatch=usb:256c:006d
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=huion-hs610.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=13
+Ring=true
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K;L;M
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109;0x130;0x131;0x132
+Ring=M

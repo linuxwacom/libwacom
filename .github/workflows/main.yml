@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install libwacom dependencies
-        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
       - name: autotools make ${{matrix.make_args}}
         run: |
           mkdir _build && pushd _build > /dev/null
@@ -76,7 +76,7 @@ jobs:
       - name: install meson
         run: python -m pip install --upgrade pip meson ninja
       - name: Install libwacom dependencies
-        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
       - name: install pip dependencies
         run: python -m pip install --upgrade libevdev pyudev pytest
       # for the non-valgrind case, we pass the meson options through and run
@@ -124,7 +124,7 @@ jobs:
     steps:
       # libwacom dependencies
       - name: Install dependencies
-        run: sudo apt-get install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
       - name: install python
         uses: actions/setup-python@v1
         with:

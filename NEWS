@@ -1,3 +1,9 @@
+libwacom 1.8:
+- New devices:
+  - Dell XPS 15 7590
+  - HP EliteBook x360 (830 and 1030), Spectre x360
+  - Lenovo Thinkpad P15 Gen1, Yoga, Yoga 3, Yoga 11e, X13 Yoga
+
 libwacom 1.7:
 - New devices:
   - Dell XPS 13 2-in-1 9310

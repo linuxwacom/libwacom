@@ -34,6 +34,11 @@
 #include <linux/input-event-codes.h>
 
 #include <assert.h>
+#ifdef __FreeBSD__
+#include <sys/endian.h>
+#else
+#include <endian.h>
+#endif
 #include <glib.h>
 #include <dirent.h>
 #include <string.h>
@@ -46,6 +51,7 @@
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 #define BUTTONS_GROUP "Buttons"
+#define EDID_GROUP "EDID"
 
 static WacomClass
 libwacom_class_string_to_enum(const char *class)
@@ -199,7 +205,7 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 		vendor_id = 0;
 		product_id = 0;
 	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
-		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", matchstr);
+		DBG("failed to parse '%s' for product/vendor IDs. Skipping.\n", matchstr);
 		return FALSE;
 	}
 
@@ -228,6 +234,64 @@ libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
 	device->paired = libwacom_match_new(name, bus, vendor_id, product_id);
 
 	free(name);
+	return TRUE;
+}
+
+static gboolean
+edid_match_from_string(const char *str, WacomEDID *edid)
+{
+	unsigned int product_code = 0, serial = 0;
+	const gchar *manufacturer, *product;
+	uint32_t flags = 0;
+	g_auto(GStrv) strlist;
+
+	strlist = g_strsplit (str, ":", 0);
+	g_return_val_if_fail(strlist[0] && strlist[1] && strlist[2] && strlist[3], FALSE);
+	g_return_val_if_fail(strlist[4] == NULL, FALSE);
+
+	/* First entry is 3-char manufacturer, e.g. DEL */
+	manufacturer = strlist[0];
+	g_return_val_if_fail(strlen(manufacturer) <= 3, FALSE);
+	if (g_strcmp0(manufacturer, "*") == 0)
+		flags |= WACOM_EDID_FLAG_GLOB_MANUFACTURER;
+
+	/* Second entry is 16-bit product code */
+	if (g_strcmp0(strlist[1], "*") == 0) {
+		flags |= WACOM_EDID_FLAG_GLOB_PRODUCT_CODE;
+	} else {
+		gchar *endptr;
+
+		guint64 v = g_ascii_strtoull(strlist[1], &endptr, 16);
+		if (v > 0xffff || (endptr != NULL && *endptr != '\0'))
+			g_return_val_if_reached(FALSE);
+		/* EDID is little-endian */
+		product_code = le16toh(v);
+	}
+
+	/* Third entry is 32-bit serial */
+	if (g_strcmp0(strlist[2], "*") == 0) {
+		flags |= WACOM_EDID_FLAG_GLOB_SERIAL_NUMBER;
+	} else {
+		gchar *endptr;
+		guint64 v = g_ascii_strtoull(strlist[2], &endptr, 16);
+		if (v > 0xffffffff || (endptr != NULL && *endptr != '\0'))
+			g_return_val_if_reached(FALSE);
+		/* EDID is little-endian */
+		serial = le32toh(v);
+	}
+
+	/* Fourth entry is 13-char name */
+	product = strlist[3];
+	g_return_val_if_fail(strlen(product) <= 13, FALSE);
+	if (g_strcmp0(product, "*") == 0)
+		flags |= WACOM_EDID_FLAG_GLOB_NAME;
+
+	strncpy(edid->manufacturer_id, manufacturer, sizeof(edid->manufacturer_id));
+	edid->product_code = product_code;
+	edid->serial_number = serial;
+	strcpy(edid->product_name, product);
+	edid->flags = flags;
+
 	return TRUE;
 }
 
@@ -703,6 +767,29 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 				g_warning ("Unrecognized integration flag '%s'", string_list[i]);
 		}
 		g_strfreev (string_list);
+	}
+
+	string_list = g_key_file_get_string_list (keyfile, DEVICE_GROUP, "EDIDMatch", NULL, NULL);
+	if (string_list) {
+		GArray *array;
+		guint i;
+
+		array = g_array_new (FALSE, FALSE, sizeof(WacomEDID));
+		device->num_edid = 0;
+
+		for (i = 0; string_list[i]; i++) {
+			WacomEDID match = {0};
+
+			if (!edid_match_from_string(string_list[i], &match)) {
+				DBG("failed to match '%s' for EDID. Skipping.\n", string_list[i]);
+				continue;
+			}
+
+			g_array_append_val (array, match);
+			device->num_edid++;
+		}
+		g_strfreev (string_list);
+		device->edid = (WacomEDID *) g_array_free (array, FALSE);
 	}
 
 	layout = g_key_file_get_string(keyfile, DEVICE_GROUP, "Layout", NULL);

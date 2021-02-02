@@ -32,6 +32,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #if defined(__GNUC__) && ((__GNUC__ * 100 + __GNUC_MINOR__) >= 301)
 #define LIBWACOM_DEPRECATED  __attribute__((deprecated))
@@ -91,6 +92,8 @@ typedef struct _WacomStylus WacomStylus;
 typedef struct _WacomError WacomError;
 
 typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
+
+typedef struct _WacomEDID WacomEDID;
 
 #define WACOM_STYLUS_FALLBACK_ID 0xfffff
 #define WACOM_ERASER_FALLBACK_ID 0xffffe
@@ -701,6 +704,74 @@ WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
 uint32_t libwacom_match_get_product_id(const WacomMatch *match);
 uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);
 const char* libwacom_match_get_match_string(const WacomMatch *match);
+
+/**
+ * Return true if the given EDID matches the device, false otherwise.
+ *
+ * Use libwacom_edid_set_manufacturer_id(), libwacom_edid_set_product_code()
+ * libwacom_edid_set_serial_number() and/or libwacom_edid_set_product_name()
+ * to fill in the information before matching. These can be omitted where
+ * the information is not available, e.g. it's possible to try to match on
+ * an EDID with only the manufacturer ID set.
+ *
+ * A WacomEDID with no information always returns false.
+ */
+bool libwacom_match_edid(WacomDevice *device,
+			 const WacomEDID *edid);
+
+/**
+ * Create a new WacomEDID struct to be used with libwacom_match_edid()
+ * When done with this struct, use libwacom_edid_destroy() to free associated
+ * memory.
+ */
+WacomEDID *libwacom_edid_new(void);
+
+/**
+ * Release the EDID struct and all associated memory.
+ */
+void libwacom_edid_destroy(WacomEDID *edid);
+
+/**
+ * Fill in the 3-character manufacturer id for this EDID.
+ *
+ * Where not set, a default "unset" value will be used during
+ * libwacom_match_edid(). This makes it possible to match on EDID with only
+ * partial information available.
+ *
+ * manufacturer_id must not be NULL and at least three bytes long. The
+ * string must be null-terminated.
+ */
+void libwacom_edid_set_manufacturer_id(WacomEDID *edid,
+				       const char *manufacturer_id);
+/**
+ * Fill in the 16-bit little endian product code for this EDID.
+ *
+ * Where not set, a default "unset" value will be used during
+ * libwacom_match_edid(). This makes it possible to match on EDID with only
+ * partial information available.
+ */
+void libwacom_edid_set_product_code(WacomEDID *edid,
+				    uint16_t product_code);
+/**
+ * Fill in the 32-bit little endian serial number for this EDID.
+ *
+ * Where not set, a default "unset" value will be used during
+ * libwacom_match_edid(). This makes it possible to match on EDID with only
+ * partial information available.
+ */
+void libwacom_edid_set_serial_number(WacomEDID *edid,
+				     uint32_t serial_number);
+/**
+ * Fill in the product name for this EDID.
+ *
+ * Where not set, a default "unset" value will be used during
+ * libwacom_match_edid(). This makes it possible to match on EDID with only
+ * partial information available.
+ *
+ * product_name must not be NULL
+ */
+void libwacom_edid_set_product_name(WacomEDID *edid,
+				    const char *product_name);
 
 /** @cond hide_from_doxygen */
 #endif /* _LIBWACOM_H_ */

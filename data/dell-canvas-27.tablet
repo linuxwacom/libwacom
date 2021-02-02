@@ -29,6 +29,7 @@ Height=13
 # No pad buttons, so no layout
 Styli=0xffffd;
 IntegratedIn=Display
+EDIDMatch=DEL:*:*:Dell KV2718D;*:*:*:Dell KV2718D
 
 [Features]
 Stylus=true

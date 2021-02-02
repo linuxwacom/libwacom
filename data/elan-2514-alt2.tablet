@@ -1,0 +1,19 @@
+# ELAN touchscreen/pen sensor present in the HP Envy x360 Converti0ble 15-dr1xxx
+#
+# Sysinfo:
+# sysinfo.uFNKtCProZ
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/102
+
+[Device]
+Name=ELAN 2514
+ModelName=
+DeviceMatch=i2c:04f3:29cf
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

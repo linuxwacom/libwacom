@@ -4,13 +4,13 @@ project('libwacom', 'c',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.50.0')
 
-dir_bin     = join_paths(get_option('prefix'), get_option('bindir'))
-dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
-dir_etc     = join_paths(get_option('prefix'), get_option('sysconfdir'), 'libwacom')
-dir_src     = join_paths(meson.source_root(), 'libwacom')
-dir_src_data= join_paths(meson.source_root(), 'data')
-dir_test    = join_paths(meson.source_root(), 'test')
-dir_sys_udev= join_paths(get_option('prefix'), 'lib', 'udev')
+dir_bin     = get_option('prefix') / get_option('bindir')
+dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
+dir_etc     = get_option('prefix') / get_option('sysconfdir') / 'libwacom'
+dir_src     = meson.source_root()  / 'libwacom'
+dir_src_data= meson.source_root()  / 'data'
+dir_test    = meson.source_root()  / 'test'
+dir_sys_udev= get_option('prefix') / 'lib' / 'udev'
 
 dir_udev = get_option('udev-dir')
 if dir_udev == ''
@@ -75,7 +75,7 @@ inc_libwacom = [
 	     includes_src,
 ]
 
-mapfile = join_paths(dir_src, 'libwacom.sym')
+mapfile = dir_src / 'libwacom.sym'
 version_flag = '-Wl,--version-script,@0@'.format(mapfile)
 lib_libwacom = shared_library('wacom',
 			      src_libwacom,
@@ -144,13 +144,13 @@ custom_target('hwdb',
 	      capture: true,
 	      output: '65-libwacom.hwdb',
 	      install: true,
-	      install_dir: join_paths(dir_udev, 'hwdb.d'))
+	      install_dir: dir_udev / 'hwdb.d')
 
 configure_file(input: 'tools/65-libwacom.rules.in',
 	       output: '65-libwacom.rules',
 	       copy: true,
 	       install: true,
-	       install_dir: join_paths(dir_udev, 'rules.d'))
+	       install_dir: dir_udev / 'rules.d')
 
 # The non-installed version of list-devices uses the git tree's data files
 executable('list-devices',
@@ -196,7 +196,7 @@ docs_feature = get_option('documentation')
 doxygen = find_program('doxygen', required: docs_feature)
 if doxygen.found()
 	src_doxygen = [
-		join_paths(dir_src, 'libwacom.h'),
+		dir_src / 'libwacom.h',
 	]
 	doc_config = configuration_data()
 	doc_config.set('PACKAGE_NAME', meson.project_name())
@@ -265,7 +265,7 @@ if get_option('tests').enabled()
 
 	valgrind = find_program('valgrind', required : false)
 	if valgrind.found()
-		valgrind_suppressions_file = join_paths(dir_test, 'valgrind.suppressions')
+		valgrind_suppressions_file = dir_test / 'valgrind.suppressions'
 		add_test_setup('valgrind',
 			       exe_wrapper: [valgrind,
 					     '--leak-check=full',

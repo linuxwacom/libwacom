@@ -27,10 +27,16 @@
 #
 # HP Envy x360 Convertible 15z-ee000
 
+# i2c:04f3:23f3
+#
+# HP Envy x360 Convertible 15-dr1xxx0
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/140
+
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;i2c:04f3:2817;i2c:04f3:2b0a
+DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;i2c:04f3:2817;i2c:04f3:2b0a;i2c:04f3:23f3
 Class=ISDV4
 Width=12
 Height=7

@@ -219,17 +219,17 @@
 	d="M 31 135 l 3 -1.5 l 0 1 a 7.5 7.5 0 0 0 5 -1 a 6.5 6.5 0 0 1 -5 2 l 0 1 z" />
   <circle
 	id="ButtonM"
-	class="M Button"
+	class="M ModeSwitch Button"
 	cx="34"
 	cy="121"
 	r="9.5" />
   <path
 	id="LeaderM"
-	class="M Leader"
+	class="M ModeSwitch Leader"
 	d="M 56 121 L 60 121" />
   <text
 	id="LabelM"
-	class="M Label"
+	class="M ModeSwitch Label"
 	x="62"
 	y="121"
 	style="text-anchor:start;">M</text>

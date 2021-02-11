@@ -1,0 +1,18 @@
+# This is for the Microsoft Surface Go
+#
+# Elan I2C sensor
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/51
+
+[Device]
+Name=Microsoft Surface Go
+Class=ISDV4
+DeviceMatch=i2c:04f3:261a
+Width=8
+Height=5
+IntegratedIn=Display;System;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

@@ -1,6 +1,7 @@
 # This is for the HP Pro Tablet 408
 #
 # Synaptics I2C sensor
+# Makes use of a HP branded stylus
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/137
 

@@ -30,5 +30,10 @@ dist_udev_hwdb_DATA = $(hwdb)
 $(hwdb): generate-hwdb
 	$(builddir)/$< > $@
 
-CLEANFILES = $(hwdb)
-EXTRA_DIST = $(rules) $(hwdb)
+bin_SCRIPTS = libwacom-show-stylus
+libwacom-show-stylus: show-stylus.py
+	sed -e 's|@DATADIR@|$(datadir)/libwacom|' -e 's|@ETCDIR@|$(sysconfdir)/libwacom|' $< > $@
+
+
+CLEANFILES = $(hwdb) $(bin_SCRIPTS)
+EXTRA_DIST = $(rules) $(hwdb) show-stylus.py

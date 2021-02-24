@@ -4,6 +4,7 @@ project('libwacom', 'c',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.50.0')
 
+dir_bin     = join_paths(get_option('prefix'), get_option('bindir'))
 dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
 dir_etc     = join_paths(get_option('prefix'), get_option('sysconfdir'), 'libwacom')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
@@ -171,6 +172,15 @@ executable('list-compatible-styli',
 install_man(configure_file(input: 'tools/libwacom-list-local-devices.man',
 			   output: '@BASENAME@.1',
 			   copy: true))
+
+showstylus_config = configuration_data()
+showstylus_config.set('DATADIR', dir_data)
+showstylus_config.set('ETCDIR', dir_etc)
+configure_file(output: 'libwacom-show-stylus',
+	       input: 'tools/show-stylus.py',
+	       configuration: showstylus_config,
+	       install_dir: dir_bin,
+	       install: true)
 
 ############### docs ###########################
 docs_feature = get_option('documentation')

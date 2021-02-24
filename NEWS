@@ -1,3 +1,12 @@
+libwacom 1.9:
+- libwacom can now read tablet and stylus files from /etc/libwacom
+- New tool: libwacom-show-stylus to interactively show stylus IDs and serial
+  numbers
+- New devices:
+  - HP Envy x360, Pro Tablet 508
+  - Lenovo X1 Yoga Gen5, Yoga6, Ideapad Flex 5, Yoga 7, Yoga C650, L13 Yoga
+  - Microsoft Surface Go
+
 libwacom 1.8:
 - New devices:
   - Dell XPS 15 7590

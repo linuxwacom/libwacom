@@ -1,6 +1,16 @@
 # HUION
 # H640P
 # 
+#      *-----------------------------------*
+#    A |                                   |
+#    B |                                   |
+#    C |                                   |
+#      |              DISPLAY              |
+#    D |                                   |
+#    E |                                   |
+#    F |                                   |
+#      *-----------------------------------*
+#
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/145
 
 [Device]

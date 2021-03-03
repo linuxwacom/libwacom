@@ -1,0 +1,25 @@
+# HUION
+# H640P
+# 
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/145
+
+[Device]
+Name=Huion H640P
+ModelName=
+DeviceMatch=usb:256c:006d
+Class=Bamboo
+Width=6.3
+Height=3.9
+IntegratedIn=
+Layout=huion-h640p.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=6
+
+[Buttons]
+Left=A;B;C;D;E;F
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105

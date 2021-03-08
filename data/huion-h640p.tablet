@@ -17,6 +17,7 @@
 Name=Huion H640P
 ModelName=
 DeviceMatch=usb:256c:006d
+PairedIDs=usb:256c:006d
 Class=Bamboo
 Width=6.3
 Height=3.9

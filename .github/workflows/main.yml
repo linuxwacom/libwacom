@@ -3,6 +3,7 @@ on: [ push, pull_request ]
 env:
   CFLAGS: "-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
   UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev2
+  PIP_PACKAGES: meson ninja libevdev pyudev pytest
 
 jobs:
   ###
@@ -20,8 +21,9 @@ jobs:
           - distcheck
     steps:
       - uses: actions/checkout@v2
-      - name: Install libwacom dependencies
-        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
       - name: autotools make ${{matrix.make_args}}
         run: |
           mkdir _build && pushd _build > /dev/null
@@ -73,28 +75,26 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: '3.8'
-      - name: install meson
-        run: python -m pip install --upgrade pip meson ninja
-      - name: Install libwacom dependencies
-        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
-      - name: install pip dependencies
-        run: python -m pip install --upgrade libevdev pyudev pytest
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
       # for the non-valgrind case, we pass the meson options through and run
       # meson test
       - name: meson test ${{matrix.meson_options}}
         if: ${{matrix.meson_options != 'valgrind'}}
-        run: |
-          meson setup builddir ${{matrix.meson_options}}
-          meson test -C builddir --print-errorlogs
+        uses: ./.github/actions/meson
+        with:
+          meson_args: ${{matrix.meson_options}}
         env:
           CC: ${{matrix.compiler}}
       # for the valgrind case, we need custom setup, the matrix isn't
       # flexible enough for this
       - name: valgrind - meson test ${{matrix.meson_options}}
         if: ${{matrix.meson_options == 'valgrind'}}
-        run: |
-          meson setup builddir
-          meson test -C builddir --print-errorlogs --setup=valgrind --suite=valgrind
+        uses: ./.github/actions/meson
+        with:
+          meson_test_args: --setup=valgrind --suite=valgrind
         env:
           CC: ${{matrix.compiler}}
       # Capture all the meson logs, even if we failed
@@ -105,7 +105,6 @@ jobs:
           path: |
             builddir/meson-logs/testlog*.txt
             builddir/meson-logs/meson-log.txt
-
   ####
   # /etc/ loading check
   etcdir:
@@ -129,16 +128,19 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: '3.8'
-      # keep this in sync with the meson job above. We just do it as
-      # one step here, it's not supposed to fail if the above succeeded.
-      # Exception: everything is run as sudo because we install to /etc
-      # and thus need the pip bits available as root
-      - name: Prep install
-        run: |
-          sudo python -m pip install --upgrade pip meson ninja
-          sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
-          sudo python -m pip install --upgrade libevdev pyudev pytest
-      - run: meson builddir --prefix=/usr && sudo ninja -C builddir install
+      # Run as sudo because we install to /etc and thus need the pip
+      # packages available to root
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
+          pip_precmd: sudo
+      - uses: ./.github/actions/meson
+        with:
+          meson_args: --prefix=/usr
+          meson_skip_test: yes
+          ninja_args: install
+          ninja_precmd: sudo
       - name: list devices with database in /usr
         run: ./builddir/list-devices > devicelist.default.txt
       - run: sudo mkdir /etc/libwacom
@@ -165,18 +167,15 @@ jobs:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
     steps:
-      # libwacom dependencies
-      - name: Install dependencies
-        run: sudo apt update && sudo apt install -yq --no-install-suggests --no-install-recommends $UBUNTU_PACKAGES
+      - uses: actions/checkout@v2
       - name: install python
         uses: actions/setup-python@v1
         with:
           python-version: '3.8'
-      - name: install pip dependencies
-        run: python -m pip install --upgrade libevdev pyudev pytest
-      - name: install meson from pip (if needed)
-        run: python -m pip install --upgrade pip meson ninja
-        if: matrix.buildtool == 'meson'
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
       - name: fetch tarball from previous job(s)
         uses: actions/download-artifact@v2
         with:
@@ -186,14 +185,15 @@ jobs:
           mkdir -p "$TARBALLDIR"
           tar xf libwacom-*.tar.bz2 -C "$TARBALLDIR"
       - run: mkdir -p "$INSTALLDIR"
-      # The next three jobs are conditional on the buildtool,
+      # The next jobs are conditional on the buildtool,
       # it's the easiest way to save on duplication
       - name: build from tarball with meson
         if: matrix.buildtool == 'meson'
-        run: |
-          pushd "$TARBALLDIR"/libwacom-*/
-          meson setup builddir --prefix="$INSTALLDIR"
-          ninja -C builddir test && ninja -C builddir install
+        uses: ./.github/actions/meson
+        with:
+          srcdir: $TARBALLDIR/libwacom-*/
+          meson_args: --prefix="$INSTALLDIR"
+          ninja_args: test install
       - name: build from tarball with autogen
         if: matrix.buildtool == 'autogen'
         run: |

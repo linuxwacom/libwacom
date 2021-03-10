@@ -1,0 +1,35 @@
+# HUION
+# H640P
+#
+#      *-------------------------------*
+#    A |                               |
+#    B |                               |
+#    C |                               |
+#      |            DISPLAY            |
+#    D |                               |
+#    E |                               |
+#    F |                               |
+#      *-------------------------------*
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/145
+
+[Device]
+Name=Huion H640P
+ModelName=
+DeviceMatch=usb:256c:006d:HUION Huion Tablet_H640P Pad;usb:256c:006d:HUION Huion Tablet_H640P Pen
+Class=Bamboo
+Width=6
+Height=4
+IntegratedIn=
+Layout=huion-h640p.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=6
+
+[Buttons]
+Left=A;B;C;D;E;F
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105

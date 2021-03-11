@@ -23,49 +23,53 @@ from argparse import ArgumentParser
 from xml.etree import ElementTree as ET
 
 NAMESPACE = "http://www.w3.org/2000/svg"
-BRACKETS_NAMESPACE = '{' + NAMESPACE + '}'
+BRACKETS_NAMESPACE = "{" + NAMESPACE + "}"
+
 
 def human_round(number):
-    '''
+    """
     Round to closest .5
-    '''
+    """
     return round(number * 2) / 2.0
 
+
 def traverse_and_clean(node):
-    '''
+    """
     Clean the tree recursively
-    '''
+    """
     # Remove any non-SVG namespace attributes
     for key in node.attrib.keys():
-        if key.startswith('{'):
+        if key.startswith("{"):
             del node.attrib[key]
-    if node.tag == 'g' and node.attrib.has_key('id'):
+    if node.tag == "g" and node.attrib.has_key("id"):
         apply_id_and_class_from_group(node)
-        del node.attrib['id']
-    if node.attrib.has_key('style'):
-        if node.tag == 'text':
-            node.attrib['style'] = 'text-anchor:start;'
-        elif node.tag != 'svg':
-            del node.attrib['style']
+        del node.attrib["id"]
+    if node.attrib.has_key("style"):
+        if node.tag == "text":
+            node.attrib["style"] = "text-anchor:start;"
+        elif node.tag != "svg":
+            del node.attrib["style"]
 
     remove_transform_if_exists(node)
 
-    round_attrib(node, 'd', 'x', 'y', 'rx', 'ry', 'width', 'height', 'cx', 'cy', 'r')
+    round_attrib(node, "d", "x", "y", "rx", "ry", "width", "height", "cx", "cy", "r")
 
     for child in node.getchildren():
         traverse_and_clean(child)
+
 
 def round_attrib(node, *attrs):
     for attr_name in attrs:
         attr_value = node.attrib.get(attr_name)
         if attr_value is None:
             continue
-        if attr_name == 'd':
-            d = attr_value.replace(',', ' ')
+        if attr_name == "d":
+            d = attr_value.replace(",", " ")
             values = [round_if_number(value) for value in d.split()]
-            node.attrib[attr_name] = ' '.join(values)
+            node.attrib[attr_name] = " ".join(values)
         else:
             node.attrib[attr_name] = round_if_number(attr_value)
+
 
 def round_if_number(value):
     try:
@@ -74,27 +78,31 @@ def round_if_number(value):
         pass
     return str(value)
 
+
 def remove_non_svg_nodes_and_strip_namespace(root):
     if root.tag.startswith(BRACKETS_NAMESPACE):
-        root.tag = root.tag[len(BRACKETS_NAMESPACE):]
+        root.tag = root.tag[len(BRACKETS_NAMESPACE) :]
     for elem in root.getchildren():
-        if not elem.tag.startswith(BRACKETS_NAMESPACE) or \
-           elem.tag == BRACKETS_NAMESPACE + 'metadata':
+        if (
+            not elem.tag.startswith(BRACKETS_NAMESPACE)
+            or elem.tag == BRACKETS_NAMESPACE + "metadata"
+        ):
             root.remove(elem)
         else:
             remove_non_svg_nodes_and_strip_namespace(elem)
 
-def remove_transform_if_exists(node):
-    TRANSLATE = 'translate'
-    MATRIX = 'matrix'
 
-    transform = node.attrib.get('transform')
+def remove_transform_if_exists(node):
+    TRANSLATE = "translate"
+    MATRIX = "matrix"
+
+    transform = node.attrib.get("transform")
     if transform is None:
         return
     transform = transform.strip()
 
     if transform.startswith(TRANSLATE):
-        values = transform[len(TRANSLATE) + 1:-1].split(',')
+        values = transform[len(TRANSLATE) + 1 : -1].split(",")
         try:
             x, y = float(values[0]), float(values[1])
         except:
@@ -102,20 +110,21 @@ def remove_transform_if_exists(node):
 
         apply_translation(node, 1, 0, 0, 1, x, y)
     elif transform.startswith(MATRIX):
-        values = transform[len(MATRIX) + 1:-1].split(',')
+        values = transform[len(MATRIX) + 1 : -1].split(",")
         try:
             a, b, c, d, e, f = [float(value.strip()) for value in values]
         except:
             return
         apply_translation(node, a, b, c, d, e, f)
         apply_scaling(node, a, d)
-    del node.attrib['transform']
+    del node.attrib["transform"]
+
 
 def apply_translation(node, a, b, c, d, e, f):
-    x_attr, y_attr = 'x', 'y'
-    if node.tag == 'circle':
-        x_attr, y_attr = 'cx', 'cy'
-    elif node.tag == 'path':
+    x_attr, y_attr = "x", "y"
+    if node.tag == "circle":
+        x_attr, y_attr = "cx", "cy"
+    elif node.tag == "path":
         apply_translation_to_path(node, e, f)
         return
     try:
@@ -127,19 +136,20 @@ def apply_translation(node, a, b, c, d, e, f):
     except:
         pass
 
+
 def apply_translation_to_path(node, x, y):
-    d = node.attrib.get('d')
+    d = node.attrib.get("d")
     if d is None:
         return
-    d = d.replace(',', ' ').split()
+    d = d.replace(",", " ").split()
     m_init_index = 0
     length = len(d)
     m_end_index = length
-    operation = 'M'
+    operation = "M"
     i = 0
     while i < length:
         value = d[i]
-        if value.lower() == 'm':
+        if value.lower() == "m":
             operation = value
             m_init_index = i + 1
         elif len(value) == 1 and value.isalpha():
@@ -149,16 +159,21 @@ def apply_translation_to_path(node, x, y):
     for i in range(m_init_index, m_end_index, 2):
         d[i] = str(float(d[i]) + x)
         d[i + 1] = str(float(d[i + 1]) + y)
-        if operation == 'm':
+        if operation == "m":
             break
-    node.attrib['d'] = ' '.join(d[:m_init_index]) + ' ' + ' '.join(d[m_init_index:m_end_index]) + ' '.join(d[m_end_index:])
+    node.attrib["d"] = (
+        " ".join(d[:m_init_index])
+        + " "
+        + " ".join(d[m_init_index:m_end_index])
+        + " ".join(d[m_end_index:])
+    )
 
 
 def apply_scaling(node, x, y):
-    w_attr, h_attr = 'width', 'height'
-    if node.tag == 'circle':
-        r = float(node.attrib.get('r', 1.0))
-        node.attrib['r'] = str(r * x)
+    w_attr, h_attr = "width", "height"
+    if node.tag == "circle":
+        r = float(node.attrib.get("r", 1.0))
+        node.attrib["r"] = str(r * x)
     try:
         w = float(node.attrib[w_attr])
         h = float(node.attrib[h_attr])
@@ -167,15 +182,16 @@ def apply_scaling(node, x, y):
     except:
         pass
 
+
 def to_string_rec(node, level=0):
-    indent = '\n' + level * '  '
+    indent = "\n" + level * "  "
 
     tag_name = node.tag
 
     # Remove 'defs' element. This cannot be done in the traverse_and_clean
     # because somehow it is never found
-    if tag_name == 'defs':
-        return ''
+    if tag_name == "defs":
+        return ""
 
     # use a list to put id and class as the first arguments
     attribs = []
@@ -184,107 +200,125 @@ def to_string_rec(node, level=0):
         if attr_value is not None:
             attribs.append(indent + '   %s="%s"' % (attr, attr_value))
 
-    string = indent + '<' + tag_name + ''.join(attribs)
+    string = indent + "<" + tag_name + "".join(attribs)
     if len(node) or node.text:
-        string += '>'
+        string += ">"
         if not node.text or not node.text.strip():
-            node.text = indent + '  '
+            node.text = indent + "  "
         else:
             string += node.text
         if list(node):
             for child in get_node_children_sorted(node):
-                string += to_string_rec(child, level+1)
+                string += to_string_rec(child, level + 1)
             string += indent
-        string += '</%s>' % tag_name
+        string += "</%s>" % tag_name
     else:
-        string += ' />'
+        string += " />"
     return string
 
+
 def custom_tag_sort(arg):
-    '''
+    """
     Use as key functon in sorted().
 
     Pre-fix arg tag name by a number in the sort order we want. Anything
     unspecified defaults to 9. i.e. circle -> 1circle, thus sorts lower
     than
     other tags.
-    '''
-    tag_order = {'title': 0,
-                 'rect': 1,
-                 'circle': 2,
-                 'path': 3 }
+    """
+    tag_order = {"title": 0, "rect": 1, "circle": 2, "path": 3}
     return str(tag_order.get(arg.tag, 9)) + arg.tag
+
 
 def get_node_children_sorted(node):
     children = node.getchildren()
     return sorted(children, key=custom_tag_sort)
 
+
 def custom_attr_sort(arg):
-    '''
+    """
     Same as custom_tag_sort but for a node's attributes
-    '''
-    attr_order = {'id': 0, 'class': 1,
-                  'x': 2, 'y': 3, 'cx': 4, 'cy': 5,
-                  'width': 6, 'height': 7}
+    """
+    attr_order = {
+        "id": 0,
+        "class": 1,
+        "x": 2,
+        "y": 3,
+        "cx": 4,
+        "cy": 5,
+        "width": 6,
+        "height": 7,
+    }
     return str(attr_order.get(arg, 9)) + arg
+
 
 def get_node_attrs_sorted(node):
     attrs = node.attrib.keys()
     return sorted(attrs, key=custom_attr_sort)
 
+
 def apply_id_and_class_from_group(group_node):
     button_assigned = label_assigned = path_assigned = False
-    _id = group_node.attrib.get('id')
+    _id = group_node.attrib.get("id")
     if _id is None:
         return
     for child in group_node.getchildren():
-        if child.tag == 'rect' or child.tag == 'circle':
+        if child.tag == "rect" or child.tag == "circle":
             if button_assigned:
                 continue
-            child.attrib['id'] = 'Button%s' % _id
-            child.attrib['class'] = '%s Button' % _id
+            child.attrib["id"] = "Button%s" % _id
+            child.attrib["class"] = "%s Button" % _id
             button_assigned = True
-        elif child.tag == 'path':
+        elif child.tag == "path":
             if path_assigned:
                 continue
-            child.attrib['id'] = 'Leader%s' % _id
-            child.attrib['class'] = '%s Leader' % _id
+            child.attrib["id"] = "Leader%s" % _id
+            child.attrib["class"] = "%s Leader" % _id
             path_assigned = True
-        elif child.tag == 'text':
+        elif child.tag == "text":
             if label_assigned:
                 continue
-            child.attrib['id'] = 'Label%s' % _id
-            child.attrib['class'] = '%s Label' % _id
+            child.attrib["id"] = "Label%s" % _id
+            child.attrib["class"] = "%s Label" % _id
             child.text = _id
             label_assigned = True
 
+
 def to_string(root):
-    header = '''<?xml version="1.0" standalone="no"?>
+    header = """<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'''
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">"""
     return header + to_string_rec(root)
+
 
 def clean_svg(root, tabletname):
     remove_non_svg_nodes_and_strip_namespace(root)
-    title = root.find('title')
+    title = root.find("title")
     if title is not None:
         title.text = tabletname
-    root.attrib['xmlns'] = 'http://www.w3.org/2000/svg'
+    root.attrib["xmlns"] = "http://www.w3.org/2000/svg"
     traverse_and_clean(root)
 
-if __name__ == '__main__':
-    parser = ArgumentParser(description='Clean SVG files for libwacom')
-    parser.add_argument('filename', nargs=1, type=str,
-                        help='SVG file to clean', metavar='FILE')
-    parser.add_argument('tabletname', nargs=1, type=str,
-                        help='The name of the tablet', metavar='TABLET_NAME')
+
+if __name__ == "__main__":
+    parser = ArgumentParser(description="Clean SVG files for libwacom")
+    parser.add_argument(
+        "filename", nargs=1, type=str, help="SVG file to clean", metavar="FILE"
+    )
+    parser.add_argument(
+        "tabletname",
+        nargs=1,
+        type=str,
+        help="The name of the tablet",
+        metavar="TABLET_NAME",
+    )
     args = parser.parse_args()
 
-    ET.register_namespace('', NAMESPACE)
+    ET.register_namespace("", NAMESPACE)
     try:
         tree = ET.parse(args.filename[0])
     except Exception, e:
-        sys.stderr.write(str(e) + '\n')
+        sys.stderr.write(str(e) + "\n")
         exit(1)
     root = tree.getroot()
     clean_svg(root, args.tabletname[0])

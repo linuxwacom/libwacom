@@ -54,7 +54,7 @@ def traverse_and_clean(node):
 
     round_attrib(node, "d", "x", "y", "rx", "ry", "width", "height", "cx", "cy", "r")
 
-    for child in node.getchildren():
+    for child in node:
         traverse_and_clean(child)
 
 
@@ -82,7 +82,7 @@ def round_if_number(value):
 def remove_non_svg_nodes_and_strip_namespace(root):
     if root.tag.startswith(BRACKETS_NAMESPACE):
         root.tag = root.tag[len(BRACKETS_NAMESPACE):]
-    for elem in root.getchildren():
+    for elem in root:
         if (
             not elem.tag.startswith(BRACKETS_NAMESPACE)
             or elem.tag == BRACKETS_NAMESPACE + "metadata"
@@ -231,8 +231,7 @@ def custom_tag_sort(arg):
 
 
 def get_node_children_sorted(node):
-    children = node.getchildren()
-    return sorted(children, key=custom_tag_sort)
+    return sorted(node, key=custom_tag_sort)
 
 
 def custom_attr_sort(arg):
@@ -319,7 +318,7 @@ if __name__ == "__main__":
         tree = ET.parse(args.filename[0])
     except Exception as e:
         sys.stderr.write(str(e) + "\n")
-        exit(1)
+        sys.exit(1)
     root = tree.getroot()
     clean_svg(root, args.tabletname[0])
-    print to_string(root)
+    print(to_string(root))

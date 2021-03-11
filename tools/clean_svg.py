@@ -41,10 +41,10 @@ def traverse_and_clean(node):
     for key in node.attrib.keys():
         if key.startswith("{"):
             del node.attrib[key]
-    if node.tag == "g" and node.attrib.has_key("id"):
+    if node.tag == "g" and "id" in node.attrib:
         apply_id_and_class_from_group(node)
         del node.attrib["id"]
-    if node.attrib.has_key("style"):
+    if "style" in node.attrib:
         if node.tag == "text":
             node.attrib["style"] = "text-anchor:start;"
         elif node.tag != "svg":
@@ -81,7 +81,7 @@ def round_if_number(value):
 
 def remove_non_svg_nodes_and_strip_namespace(root):
     if root.tag.startswith(BRACKETS_NAMESPACE):
-        root.tag = root.tag[len(BRACKETS_NAMESPACE) :]
+        root.tag = root.tag[len(BRACKETS_NAMESPACE):]
     for elem in root.getchildren():
         if (
             not elem.tag.startswith(BRACKETS_NAMESPACE)
@@ -102,18 +102,18 @@ def remove_transform_if_exists(node):
     transform = transform.strip()
 
     if transform.startswith(TRANSLATE):
-        values = transform[len(TRANSLATE) + 1 : -1].split(",")
+        values = transform[len(TRANSLATE) + 1:-1].split(",")
         try:
             x, y = float(values[0]), float(values[1])
-        except:
+        except Exception:
             return
 
         apply_translation(node, 1, 0, 0, 1, x, y)
     elif transform.startswith(MATRIX):
-        values = transform[len(MATRIX) + 1 : -1].split(",")
+        values = transform[len(MATRIX) + 1:-1].split(",")
         try:
             a, b, c, d, e, f = [float(value.strip()) for value in values]
-        except:
+        except Exception:
             return
         apply_translation(node, a, b, c, d, e, f)
         apply_scaling(node, a, d)
@@ -133,7 +133,7 @@ def apply_translation(node, a, b, c, d, e, f):
         new_y = x * b + y * d + 1 * f
         node.attrib[x_attr] = str(new_x)
         node.attrib[y_attr] = str(new_y)
-    except:
+    except Exception:
         pass
 
 
@@ -179,7 +179,7 @@ def apply_scaling(node, x, y):
         h = float(node.attrib[h_attr])
         node.attrib[w_attr] = str(w * x)
         node.attrib[h_attr] = str(h * y)
-    except:
+    except Exception:
         pass
 
 
@@ -317,7 +317,7 @@ if __name__ == "__main__":
     ET.register_namespace("", NAMESPACE)
     try:
         tree = ET.parse(args.filename[0])
-    except Exception, e:
+    except Exception as e:
         sys.stderr.write(str(e) + "\n")
         exit(1)
     root = tree.getroot()

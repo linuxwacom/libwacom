@@ -142,12 +142,12 @@ jobs:
           ninja_args: install
           ninja_precmd: sudo
       - name: list devices with database in /usr
-        run: ./builddir/list-devices --format=datafile > devicelist.default.txt
+        run: libwacom-list-devices --format=datafile > devicelist.default.txt
       - run: sudo mkdir /etc/libwacom
       - name: split the databases between /usr/share and /etc
         run: ${{matrix.command}}
       - name: list devices with database in /etc and /usr
-        run: ./builddir/list-devices --format=datafile > devicelist.modified.txt
+        run: libwacom-list-devices --format=datafile > devicelist.modified.txt
       - name: compare device database
         run: diff -u8 devicelist.default.txt devicelist.modified.txt
 

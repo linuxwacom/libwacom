@@ -156,12 +156,20 @@ configure_file(input: 'tools/65-libwacom.rules.in',
 	       install: true,
 	       install_dir: join_paths(dir_udev, 'rules.d'))
 
+# The non-installed version of list-devices uses the git tree's data files
 executable('list-devices',
 	   'tools/list-devices.c',
 	   dependencies: [dep_libwacom, dep_glib],
 	   include_directories: [includes_src],
 	   c_args: tools_cflags,
 	   install: false)
+
+# The installed version of list-devices uses the installed data files
+executable('libwacom-list-devices',
+	   'tools/list-devices.c',
+	   dependencies: [dep_libwacom, dep_glib],
+	   include_directories: [includes_src],
+	   install: true)
 
 executable('list-compatible-styli',
 	   'tools/list-compatible-styli.c',
@@ -171,6 +179,10 @@ executable('list-compatible-styli',
 	   install: false)
 
 install_man(configure_file(input: 'tools/libwacom-list-local-devices.man',
+			   output: '@BASENAME@.1',
+			   copy: true))
+
+install_man(configure_file(input: 'tools/libwacom-list-devices.man',
 			   output: '@BASENAME@.1',
 			   copy: true))
 

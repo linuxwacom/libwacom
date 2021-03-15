@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 	       return !!(strcmp(argv[1], "--help"));
 	}
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	db = libwacom_database_new_for_path(DATABASEPATH);
 
 	list = libwacom_list_devices_from_database(db, NULL);
 	if (!list) {

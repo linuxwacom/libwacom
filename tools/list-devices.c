@@ -42,10 +42,11 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 
 	for (match = libwacom_get_matches(device); *match; match++) {
 		WacomBusType type = libwacom_match_get_bustype(*match);
-		if (type == bus_type_filter) {
-			libwacom_print_device_description(STDOUT_FILENO, device);
-			dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
-		}
+		if (type != bus_type_filter)
+			continue;
+
+		libwacom_print_device_description(STDOUT_FILENO, device);
+		dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
 	}
 }
 

@@ -13,6 +13,34 @@ Use the libwacom-list-local-devices tool to list all local devices recognized by
 2. A new tablet description is enabled by adding and installing a new file with a .tablet suffix. Once installed the tablet is part of libwacom's database, no rebuild is neccessary
 3. The tablet is then available through libwacom-list-local-devices
 
-**The new device should also be added to the udev rule to ensure all required properties are set**
-* ***When building from source*** generate an update ruleset with tools/generate-udev-rules after adding the tablet descripton to
-* ***When updating an installed version of libwacom***, add it manually to the existing ruleset (/lib/udev/rules.d/65-libwacom.rules)
+## Updating udev
+
+The new device must be added to the hwdb entry to ensure all required udev properties are set. Without this entry, the device may not be detected as tablet and may not work correctly.
+
+### When building from source
+
+Generate an update ruleset with `tools/generate-hwdb` after adding the tablet
+description to the `data/` directory. This is done automatically during the build, look for the `65-libwacom.hwdb` file in the build tree.
+
+### When updating an installed version of libwacom
+
+Create a `/etc/lib/udev/hwdb.d/99-libwacom-new-tablet.hwdb` file with the following content:
+
+```
+libwacom:name:*:input:b0003v056Ap0084*
+ ID_INPUT=1
+ ID_INPUT_TABLET=1
+ ID_INPUT_JOYSTICK=0
+
+libwacom:name:* Finger:input:b0003v056Ap0084*:
+ ID_INPUT_TOUCHPAD=1
+
+libwacom:name:* Pad:input:b0003v056Ap0084*:
+ ID_INPUT_TABLET_PAD=1
+```
+
+- Replace `0084` with your **uppercase** Product ID, see the device's entry in `/proc/bus/input/devices`
+- Replace `056A` with your **uppercase** Vendor ID if the device is not from Wacom
+- Replace the `b0003` with `b0005` if the device is connected via Bluetooth
+
+Once the file is in place, run `sudo systemd-hwdb update` and disconnect + reconnect the device.

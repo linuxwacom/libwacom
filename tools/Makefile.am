@@ -1,4 +1,4 @@
-AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DTOPSRCDIR="\"$(abs_top_srcdir)\""
+AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DDATABASEPATH="\"$(abs_top_srcdir)/data\""
 
 noinst_PROGRAMS = generate-hwdb list-devices list-compatible-styli
 

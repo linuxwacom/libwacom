@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 	WacomDeviceDatabase *db;
 	WacomDevice **list, **p;
 
-	db = libwacom_database_new_for_path(TOPSRCDIR"/data");
+	db = libwacom_database_new_for_path(DATABASEPATH);
 
 	list = libwacom_list_devices_from_database(db, NULL);
 	if (!list) {

@@ -9,6 +9,7 @@ dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom'
 dir_etc     = join_paths(get_option('prefix'), get_option('sysconfdir'), 'libwacom')
 dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
 dir_src     = join_paths(meson.source_root(), 'libwacom')
+dir_src_data= join_paths(meson.source_root(), 'data')
 dir_test    = join_paths(meson.source_root(), 'test')
 dir_sys_udev= join_paths(get_option('prefix'), 'lib', 'udev')
 
@@ -134,7 +135,7 @@ executable('libwacom-list-local-devices',
 	   include_directories: [includes_src],
 	   install: true)
 
-tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
+tools_cflags = ['-DDATABASEPATH="@0@"'.format(dir_src_data)]
 
 gen_hwdb = executable('generate-hwdb',
 		      'tools/generate-hwdb.c',

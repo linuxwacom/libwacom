@@ -1,0 +1,19 @@
+.TH libwacom-list-devices 1
+
+.SH NAME
+libwacom-list-devices - utility to list supported tablet devices
+
+.SH SYNOPSIS
+.B libwacom-list-devices [--format=oneline|datafile]
+
+.SH DESCRIPTION
+libwacom-list-devices is a debug utility to list all supported tablet
+devices identified by libwacom. It is usually used to check whether a
+libwacom installation is correct after adding custom data files.
+.SH OPTIONS
+.TP 8
+.B --format=oneline|datafile
+Sets the output format to be used. If \fIoneline\fR, the output format is a
+one-line format comprising the bus type, vendor and product ID and the
+device name. If \fIdatafile\fR, the output format matches
+the tablet data files. The default is \fIoneline\fR.

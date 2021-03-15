@@ -114,7 +114,11 @@ int main(int argc, char **argv)
 	}
 	g_option_context_free (context);
 
+#ifdef DATABASEPATH
 	db = libwacom_database_new_for_path(DATABASEPATH);
+#else
+	db = libwacom_database_new();
+#endif
 
 	list = libwacom_list_devices_from_database(db, NULL);
 	if (!list) {

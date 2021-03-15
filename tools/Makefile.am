@@ -1,24 +1,32 @@
-AM_CPPFLAGS=-I$(top_srcdir)/libwacom -DDATABASEPATH="\"$(abs_top_srcdir)/data\""
+AM_CPPFLAGS=-I$(top_srcdir)/libwacom
+
+DBPATH_CFLAGS=-DDATABASEPATH="\"$(abs_top_srcdir)/data\""
 
 noinst_PROGRAMS = generate-hwdb list-devices list-compatible-styli
 
 generate_hwdb_SOURCES = generate-hwdb.c
 generate_hwdb_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
-generate_hwdb_CFLAGS=$(GLIB_CFLAGS)
+generate_hwdb_CFLAGS=$(GLIB_CFLAGS) $(DBPATH_CFLAGS)
 
 list_devices_SOURCES = list-devices.c
 list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
-list_devices_CFLAGS=$(GLIB_CFLAGS)
+list_devices_CFLAGS=$(GLIB_CFLAGS) $(DBPATH_CFLAGS)
 
 list_compatible_styli_SOURCES = list-compatible-styli.c
 list_compatible_styli_LDADD=$(top_builddir)/libwacom/libwacom.la
+list_compatible_styli_CFLAGS=$(DBPATH_CFLAGS)
 
-bin_PROGRAMS = libwacom-list-local-devices
+bin_PROGRAMS = libwacom-list-local-devices libwacom-list-devices
+
+libwacom_list_devices_SOURCES = list-devices.c
+libwacom_list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
+libwacom_list_devices_CFLAGS=$(GLIB_CFLAGS)
+
 libwacom_list_local_devices_SOURCES = list-local-devices.c
 libwacom_list_local_devices_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 libwacom_list_local_devices_CFLAGS=$(GLIB_CFLAGS)
 
-dist_man1_MANS = libwacom-list-local-devices.man
+dist_man1_MANS = libwacom-list-local-devices.man libwacom-list-devices.man
 
 rules = 65-libwacom.rules
 udev_rulesdir=$(UDEV_DIR)/rules.d

@@ -75,6 +75,9 @@ int main(int argc, char **argv)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
 
 	for (p = list; *p; p++)
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_I2C);
+
+	for (p = list; *p; p++)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_SERIAL);
 
 	for (p = list; *p; p++)

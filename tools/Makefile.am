@@ -7,7 +7,8 @@ generate_hwdb_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 generate_hwdb_CFLAGS=$(GLIB_CFLAGS)
 
 list_devices_SOURCES = list-devices.c
-list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la
+list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
+list_devices_CFLAGS=$(GLIB_CFLAGS)
 
 list_compatible_styli_SOURCES = list-compatible-styli.c
 list_compatible_styli_LDADD=$(top_builddir)/libwacom/libwacom.la

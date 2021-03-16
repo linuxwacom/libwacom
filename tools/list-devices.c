@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 Red Hat, Inc.
+ * Copyright © 2012-2021 Red Hat, Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software
  * and its documentation for any purpose is hereby granted without
@@ -34,32 +34,85 @@
 #include <assert.h>
 #include <libgen.h>
 #include <unistd.h>
+#include <glib/gi18n.h>
+#include <glib.h>
 #include "libwacom.h"
 
-static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter)
+static enum output_format {
+	ONELINE,
+	DATAFILE,
+} output_format = ONELINE;
+
+static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter,
+			       enum output_format format)
 {
 	const WacomMatch **match;
 
 	for (match = libwacom_get_matches(device); *match; match++) {
 		WacomBusType type = libwacom_match_get_bustype(*match);
+
 		if (type != bus_type_filter)
 			continue;
 
-		libwacom_print_device_description(STDOUT_FILENO, device);
-		dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
+		if (format == DATAFILE) {
+			libwacom_print_device_description(STDOUT_FILENO, device);
+			dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
+		} else {
+			const char *name = libwacom_get_name(device);
+			const char *bus = NULL;
+			int vid = libwacom_match_get_vendor_id(*match);
+			int pid = libwacom_match_get_product_id(*match);
+
+			switch (type) {
+				case WBUSTYPE_USB:	bus = "usb"; break;
+				case WBUSTYPE_SERIAL:	bus = "serial"; break;
+				case WBUSTYPE_BLUETOOTH:bus = "bluetooth"; break;
+				case WBUSTYPE_I2C:	bus = "i2c"; break;
+				default:
+				   break;
+			}
+
+			/* We don't need to print the generic device */
+			if (vid != 0 || pid != 0 || bus != 0)
+				printf("%s:%04x:%04x:%s\n", bus ? bus : "unknown", vid, pid, name);
+		}
 	}
 }
+
+static gboolean
+check_format(const gchar *option_name, const gchar *value, gpointer data, GError **error)
+{
+	if (g_str_equal(value, "datafile"))
+		output_format = DATAFILE;
+	else if (g_str_equal(value, "oneline"))
+		output_format = ONELINE;
+	else
+		return FALSE;
+	return TRUE;
+}
+
+static GOptionEntry opts[] = {
+	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'oneline', 'datafile'"), NULL },
+	{ .long_name = NULL}
+};
 
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **list, **p;
+	GOptionContext *context;
+	GError *error = NULL;
 
-	if (argc > 1) {
-		printf("Usage: %s [--help] - list all supported devices\n",
-		       basename(argv[0]));
-	       return !!(strcmp(argv[1], "--help"));
+	context = g_option_context_new (NULL);
+	g_option_context_add_main_entries (context, opts, NULL);
+	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+		if (error != NULL) {
+			fprintf (stderr, "%s\n", error->message);
+			g_error_free (error);
+		}
+		return EXIT_FAILURE;
 	}
+	g_option_context_free (context);
 
 	db = libwacom_database_new_for_path(DATABASEPATH);
 
@@ -70,19 +123,19 @@ int main(int argc, char **argv)
 	}
 
 	for (p = list; *p; p++)
-		print_device_info ((WacomDevice *) *p, WBUSTYPE_USB);
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_USB, output_format);
 
 	for (p = list; *p; p++)
-		print_device_info ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH);
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_BLUETOOTH, output_format);
 
 	for (p = list; *p; p++)
-		print_device_info ((WacomDevice *) *p, WBUSTYPE_I2C);
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_I2C, output_format);
 
 	for (p = list; *p; p++)
-		print_device_info ((WacomDevice *) *p, WBUSTYPE_SERIAL);
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_SERIAL, output_format);
 
 	for (p = list; *p; p++)
-		print_device_info ((WacomDevice *) *p, WBUSTYPE_UNKNOWN);
+		print_device_info ((WacomDevice *) *p, WBUSTYPE_UNKNOWN, output_format);
 
 	libwacom_database_destroy (db);
 

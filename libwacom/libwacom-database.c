@@ -999,32 +999,51 @@ device_compare(gconstpointer pa, gconstpointer pb)
 	return cmp;
 }
 
+static void
+ht_copy_key(gpointer key, gpointer value, gpointer user_data)
+{
+	g_hash_table_add((GHashTable*)user_data, value);
+}
+
 LIBWACOM_EXPORT WacomDevice**
 libwacom_list_devices_from_database(const WacomDeviceDatabase *db, WacomError *error)
 {
-	GList *cur, *devices;
+	GList *cur, *devices = NULL;
 	WacomDevice **list, **p;
+	GHashTable *ht = NULL;
 
 	if (!db) {
 		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
 		return NULL;
 	}
 
-	devices = g_hash_table_get_values (db->device_ht);
+	/* Devices may be present more than one in the device_ht, so let's
+	 * use a temporary hashtable like a set to filter duplicates */
+	ht = g_hash_table_new (g_direct_hash, g_direct_equal);
+	if (!ht)
+		goto error;
+	g_hash_table_foreach (db->device_ht, ht_copy_key, ht);
+
+	devices = g_hash_table_get_keys (ht);
 	list = calloc (g_list_length (devices) + 1, sizeof (WacomDevice *));
-	if (!list) {
-		libwacom_error_set(error, WERROR_BAD_ALLOC, "Memory allocation failed");
-		g_list_free (devices);
-		return NULL;
-	}
+	if (!list)
+		goto error;
 
 	devices = g_list_sort (devices, device_compare);
-
 	for (p = list, cur = devices; cur; cur = g_list_next (cur))
 		*p++ = (WacomDevice *) cur->data;
 	g_list_free (devices);
+	g_hash_table_destroy (ht);
 
 	return list;
+
+error:
+	libwacom_error_set(error, WERROR_BAD_ALLOC, "Memory allocation failed");
+	if (ht)
+		g_hash_table_destroy (ht);
+	if (devices)
+		g_list_free (devices);
+	return NULL;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

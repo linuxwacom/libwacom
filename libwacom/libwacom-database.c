@@ -994,6 +994,8 @@ device_compare(gconstpointer pa, gconstpointer pb)
 	cmp = libwacom_get_vendor_id(a) - libwacom_get_vendor_id(b);
 	if (cmp == 0)
 		cmp = libwacom_get_product_id(a) - libwacom_get_product_id(b);
+	if (cmp == 0)
+		cmp = g_strcmp0(libwacom_get_name(a), libwacom_get_name(b));
 	return cmp;
 }
 

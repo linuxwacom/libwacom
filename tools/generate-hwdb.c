@@ -62,10 +62,10 @@ static void print_wireless_kit_quirk (void)
 	       " ID_INPUT_TABLET=1\n"
 	       " ID_INPUT_JOYSTICK=0\n"
 	       "\n"
-	       "libwacom:name:* Finger:input:%s*:\n"
+	       "libwacom:name:* Finger:input:%s*\n"
 	       " ID_INPUT_TOUCHPAD=1\n"
 	       "\n"
-	       "libwacom:name:* Pad:input:%s*:\n"
+	       "libwacom:name:* Pad:input:%s*\n"
 	       " ID_INPUT_TABLET_PAD=1\n"
 	       "\n", matchstr, matchstr, matchstr);
 }

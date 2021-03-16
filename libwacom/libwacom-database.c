@@ -917,16 +917,12 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 	return true;
 }
 
-static bool
-load_from_datadir(WacomDeviceDatabase *db, const char *datadir)
-{
-	return load_stylus_files(db, datadir) && load_tablet_files(db, datadir);
-}
-
 static WacomDeviceDatabase *
 database_new_for_paths (size_t npaths, const char **datadirs)
 {
 	WacomDeviceDatabase *db;
+	size_t n;
+	const char **datadir;
 
 	db = g_new0 (WacomDeviceDatabase, 1);
 	db->device_ht = g_hash_table_new_full (g_str_hash,
@@ -938,8 +934,13 @@ database_new_for_paths (size_t npaths, const char **datadirs)
 					       NULL,
 					       (GDestroyNotify) stylus_destroy);
 
-	for (const char **datadir = datadirs; npaths--; datadir++) {
-		if (!load_from_datadir(db, *datadir))
+	for (datadir = datadirs, n = npaths; n--; datadir++) {
+		if (!load_stylus_files(db, *datadir))
+			goto error;
+	}
+
+	for (datadir = datadirs, n = npaths; n--; datadir++) {
+		if (!load_tablet_files(db, *datadir))
 			goto error;
 	}
 

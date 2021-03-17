@@ -2,12 +2,7 @@ AM_CPPFLAGS=-I$(top_srcdir)/libwacom
 
 DBPATH_CFLAGS=-DDATABASEPATH="\"$(abs_top_srcdir)/data\""
 
-noinst_PROGRAMS = generate-hwdb list-devices list-compatible-styli
-
-generate_hwdb_SOURCES = generate-hwdb.c
-generate_hwdb_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
-generate_hwdb_CFLAGS=$(GLIB_CFLAGS) $(DBPATH_CFLAGS)
-
+noinst_PROGRAMS = list-devices list-compatible-styli
 list_devices_SOURCES = list-devices.c
 list_devices_LDADD=$(top_builddir)/libwacom/libwacom.la $(GLIB_LIBS)
 list_devices_CFLAGS=$(GLIB_CFLAGS) $(DBPATH_CFLAGS)
@@ -36,8 +31,8 @@ hwdb = 65-libwacom.hwdb
 udev_hwdbdir=$(UDEV_DIR)/hwdb.d
 dist_udev_hwdb_DATA = $(hwdb)
 
-$(hwdb): generate-hwdb
-	$(builddir)/$< > $@
+$(hwdb): $(srcdir)/generate-hwdb.py
+	$(srcdir)/generate-hwdb.py --include-wireless-accessory-kit $(abs_top_srcdir)/data > $@
 
 bin_SCRIPTS = libwacom-show-stylus
 libwacom-show-stylus: show-stylus.py
@@ -45,4 +40,4 @@ libwacom-show-stylus: show-stylus.py
 
 
 CLEANFILES = $(hwdb) $(bin_SCRIPTS)
-EXTRA_DIST = $(rules) $(hwdb) show-stylus.py
+EXTRA_DIST = $(rules) $(hwdb) show-stylus.py generate-hwdb.py

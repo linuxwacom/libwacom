@@ -29,6 +29,20 @@ device in the kernel (see `/proc/bus/input/devices`) and in the X session (see
    database, no rebuild is neccessary
 3. The tablet is then available through `libwacom-list-local-devices`
 
+You must update udev after installing the file, see below.
+
+## To add support for a tablet to an older libwacom
+
+If the system-provided libwacom does not include a `.tablet` file, it is
+possible to "backport" that `.tablet` file to the system-provided libwacom.
+Simply copy the `.tablet` file from the upstream git tree into the local
+directory `/etc/libwacom/`. Create that directory if necessary.
+
+For versions of libwacom older than 1.9, the file should be copied to
+`/usr/share/libwacom`. It may be overwritten on updates.
+
+You must update udev after installing the file, see below.
+
 ## Updating udev's hwdb
 
 The new device must be added to the udev hwdb to ensure all required udev
@@ -40,28 +54,23 @@ tablet and may not work correctly.
 Generate an updated hwdb with `tools/generate-hwdb.py` after adding the
 tablet description to the `data/` directory. This is done automatically during
 the build, look for the `65-libwacom.hwdb` file in the build tree.
+This file is installed as part of `ninja install` or `make install`. Run the following
+command to activate the new hwdb set:
+```
+$ sudo systemd-hwdb update
+```
+Now disconnect and reconnect the device and it should be detected by libwacom.
 
-### When updating an installed version of libwacom
+### When adding files to an installed version of libwacom
 
-Create a `/etc/udev/hwdb.d/99-libwacom-new-tablet.hwdb` file with the
-following content:
+After installing the `.tablet` file in `/etc/libwacom/`, run
+the [`generate-hwdb.py`](https://github.com/linuxwacom/libwacom/blob/master/tools/generate-hwdb.py) tool:
+This tool can be run from the source tree.
 
 ```
-libwacom:name:*:input:b0003v056Ap0084*
- ID_INPUT=1
- ID_INPUT_TABLET=1
- ID_INPUT_JOYSTICK=0
-
-libwacom:name:* Finger:input:b0003v056Ap0084*:
- ID_INPUT_TOUCHPAD=1
-
-libwacom:name:* Pad:input:b0003v056Ap0084*:
- ID_INPUT_TABLET_PAD=1
+$ generate-hwdb.py /etc/libwacom > 66-libwacom-local.hwdb
+$ sudo cp 66-libwacom-local.hwdb /etc/udev/hwdb.d/
+$ sudo systemd-hwdb update
 ```
 
-- Replace `0084` with your **uppercase** Product ID, see the device's entry in `/proc/bus/input/devices`
-- Replace `056A` with your **uppercase** Vendor ID if the device is not from Wacom
-- Replace the `b0003` with `b0005` if the device is connected via Bluetooth
-
-Once the file is in place, run `sudo systemd-hwdb update` and disconnect +
-reconnect the device.
+Now disconnect and reconnect the device and it should be detected by libwacom.

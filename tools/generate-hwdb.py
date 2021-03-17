@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+#
+# Copyright © 2012 Red Hat, Inc.
+#
+# Permission to use, copy, modify, distribute, and sell this software
+# and its documentation for any purpose is hereby granted without
+# fee, provided that the above copyright notice appear in all copies
+# and that both that copyright notice and this permission notice
+# appear in supporting documentation, and that the name of Red Hat
+# not be used in advertising or publicity pertaining to distribution
+# of the software without specific, written prior permission.  Red
+# Hat makes no representations about the suitability of this software
+# for any purpose.  It is provided "as is" without express or implied
+# warranty.
+#
+# THE AUTHORS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS, IN
+# NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+# CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+# OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+# NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+# CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+import argparse
+import configparser
+from pathlib import Path
+
+
+class Tablet(object):
+    def __init__(self, name, bus, vid, pid):
+        self.name = name
+        self.bus = bus
+        self.vid = vid  # Note: this is a string
+        self.pid = pid  # Note: this is a string
+        self.has_touch = False
+        self.has_pad = False
+        self.is_touchscreen = False
+
+        # We have everything in strings so let's use that for sorting later
+        # This will sort bluetooth before usb but meh
+        self.cmpstr = ":".join((bus, vid, pid, name))
+
+    def __lt__(self, other):
+        return self.cmpstr < other.cmpstr
+
+    def __str__(self):
+        return f"{self.bus}:{self.vid}:{self.pid}:{self.name}"
+
+
+def load_from_directory(path):
+    for file in Path(path).glob("*.tablet"):
+        config = configparser.ConfigParser()
+        config.read(file)
+        for match in config["Device"]["DeviceMatch"].split(";"):
+            # ignore trailing semicolons
+            if not match or match == "generic":
+                continue
+
+            # For hwdb entries we don't care about name matches,
+            # it'll just result in duplicate ID_INPUT_TABLET assignments
+            # for tablets with re-used usbids and that doesn't matter
+            try:
+                bus, vid, pid, *_ = match.split(":")
+            except ValueError as e:
+                print(f"Failed to process match {match}")
+                raise e
+
+            name = config["Device"]["Name"]
+            t = Tablet(name, bus, vid, pid)
+
+            try:
+                t.has_touch = config["Features"]["Touch"].lower() == "true"
+                if t.has_touch:
+                    integration = config["Device"]["IntegratedIn"]
+                    t.is_touchscreen = (
+                        "Display" in integration or "System" in integration
+                    )
+            except KeyError:
+                pass
+            try:
+                t.has_pad = int(config["Features"]["Buttons"]) > 0
+            except KeyError:
+                pass
+            yield t
+
+
+def write_hwdb_entry(tablet):
+    bustypes = {
+        "usb": "0003",
+        "bluetooth": "0005",
+    }
+    # serial devices have their own rules, so we skip anything that
+    # doesn't have straight conversion
+    try:
+        bus = bustypes[tablet.bus]
+    except KeyError:
+        return
+
+    # modaliases require uppercase hex
+    vid = tablet.vid.upper()
+    pid = tablet.pid.upper()
+
+    match = f"b{bus}v{vid}p{pid}"
+    print(f"# {tablet.name}")
+    print(f"libwacom:name:*:input:{match}*")
+    print(" ID_INPUT=1")
+    print(" ID_INPUT_TABLET=1")
+    print(" ID_INPUT_JOYSTICK=0")
+    print("")
+
+    if tablet.has_touch:
+        print(f"libwacom:name:* Finger:input:{match}*")
+        if tablet.is_touchscreen:
+            print(" ID_INPUT_TOUCHSCREEN=1")
+        else:
+            print(" ID_INPUT_TOUCHPAD=1")
+        print("")
+
+    if tablet.has_pad:
+        print(f"libwacom:name:* Pad:input:{match}*")
+        print(" ID_INPUT_TABLET_PAD=1")
+        print("")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="hwdb generation tool")
+    parser.add_argument(
+        "paths", nargs="+", type=str, help="Directories to load .tablet files from"
+    )
+    parser.add_argument(
+        "--include-wireless-accessory-kit",
+        action="store_true",
+        default=False,
+        help="Include an extra entry for the Wacom Wireless Accessory Kit",
+    )
+    ns = parser.parse_args()
+
+    tablets = []
+
+    for path in ns.paths:
+        # for tablet in load_from_directory(path):
+        tablets.extend(load_from_directory(path))
+
+    tablets.sort()
+
+    print("# hwdb entries for libwacom supported devices")
+    print("# This file is generated by libwacom, do not edit")
+    print("#")
+    print("# The lookup key is a contract between the udev rules and the hwdb entries.")
+    print("# It is not considered public API and may change.")
+    print("")
+
+    # Bamboo and Intuos devices connected to the system via Wacom's
+    # Wireless Accessory Kit appear to udev as having the PID of the
+    # dongle rather than the actual tablet. Make sure we properly tag
+    # such devices.
+    if ns.include_wireless_accessory_kit:
+        wwak = Tablet("Wacom Wireless Accessory Kit", "usb", "056A", "0084")
+        wwak.has_pad = True
+        wwak.has_touch = True
+        write_hwdb_entry(wwak)
+
+    for tablet in tablets:
+        write_hwdb_entry(tablet)

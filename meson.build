@@ -136,14 +136,11 @@ executable('libwacom-list-local-devices',
 
 tools_cflags = ['-DDATABASEPATH="@0@"'.format(dir_src_data)]
 
-gen_hwdb = executable('generate-hwdb',
-		      'tools/generate-hwdb.c',
-		      dependencies: [dep_libwacom, dep_glib],
-		      include_directories: [includes_src],
-		      c_args: tools_cflags,
-		      install: false)
+hwdb_generator = find_program('tools/generate-hwdb.py')
 custom_target('hwdb',
-	      command: gen_hwdb,
+	      command: [hwdb_generator,
+		        '--include-wireless-accessory-kit',
+			dir_src_data],
 	      capture: true,
 	      output: '65-libwacom.hwdb',
 	      install: true,

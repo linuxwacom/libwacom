@@ -1,3 +1,5 @@
+name: linux
+
 on: [ push, pull_request ]
 
 env:

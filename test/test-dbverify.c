@@ -86,6 +86,8 @@ find_matching(gconstpointer data)
 	devices = devs_old;
 	other = devs_new[index];
 	for (d = devices; *d; d++) {
+		/* Two different contexts, they cannot be the same pointer */
+		g_assert(other != *d);
 		if (libwacom_compare(other, *d, WCOMPARE_MATCHES) == 0) {
 			found = TRUE;
 			break;

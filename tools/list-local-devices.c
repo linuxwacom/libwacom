@@ -195,7 +195,7 @@ int main(int argc, char **argv)
 	}
 
 	if (!tabletlist)
-		fprintf(stderr, "Failed to find any devices.\n");
+		fprintf(stderr, "Failed to find any devices known to libwacom.\n");
 
 	switch (output_format) {
 	case DATAFILE:

@@ -130,7 +130,7 @@ test('svg-layout-exists',
 
 executable('libwacom-list-local-devices',
 	   'tools/list-local-devices.c',
-	   dependencies: [dep_libwacom, dep_glib],
+	   dependencies: [dep_libwacom, dep_glib, dep_gudev],
 	   include_directories: [includes_src],
 	   install: true)
 

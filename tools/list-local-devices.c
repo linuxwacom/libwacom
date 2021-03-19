@@ -36,6 +36,7 @@
 #include <dirent.h>
 #include <glib/gi18n.h>
 #include <glib.h>
+#include <gudev/gudev.h>
 #include "libwacom.h"
 
 static enum output_format {
@@ -104,6 +105,25 @@ tablet_print_oneline(gpointer data, gpointer user_data)
 	printf("%s: ", libwacom_get_name(d->dev));
 	g_list_foreach(d->nodes, print_str, NULL);
 	printf("\n");
+}
+
+static void
+check_if_udev_tablet(const char *path)
+{
+	GUdevClient *client;
+	GUdevDevice *device;
+	const char * const subsystems[] = { "input", NULL };
+
+	client = g_udev_client_new (subsystems);
+	device = g_udev_client_query_by_device_file (client, path);
+	if (device &&
+	    g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET")) {
+		fprintf(stderr,
+			"%s is a tablet but not supported by libwacom\n",
+			path);
+	}
+	g_object_unref (device);
+	g_object_unref (client);
 }
 
 static gboolean
@@ -178,8 +198,10 @@ int main(int argc, char **argv)
 		snprintf(fname, sizeof(fname), "/dev/input/%s", filename);
 
 		dev = libwacom_new_from_path(db, fname, WFALLBACK_NONE, NULL);
-		if (!dev)
+		if (!dev) {
+			check_if_udev_tablet(fname);
 			continue;
+		}
 
 		found = g_list_find_custom(tabletlist, dev, tablet_compare);
 		if (found) {

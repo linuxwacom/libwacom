@@ -4,13 +4,19 @@
 libwacom-list-local-devices - utility to list tablet devices
 
 .SH SYNOPSIS
-.B libwacom-list-local-devices [--database /path/to/datadir]
+.B libwacom-list-local-devices [--format=oneline|datafile] [--database /path/to/datadir]
 
 .SH DESCRIPTION
 libwacom-list-local-devices is a debug utility to list connected tablet
 devices identified by libwacom. It is usually used to check whether a
 libwacom data file is correct, present and/or applies to a specific device.
 .SH OPTIONS
+.TP 8
+.B --format=oneline|datafile
+Sets the output format to be used. If \fIoneline\fR, the output format is a
+one-line format comprising the device name and the event nodes.
+If \fIdatafile\fR, the output format matches
+the tablet data files. The default is \fIoneline\fR.
 .TP 8
 .B --database /path/do/datadir
 Sets the data directory path to be used. This is only useful when testing

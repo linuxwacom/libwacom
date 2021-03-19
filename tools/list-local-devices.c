@@ -90,18 +90,14 @@ static GOptionEntry opts[] = {
 	{ .long_name = NULL}
 };
 
-static int event_devices_only(const struct dirent *dir) {
-	return strncmp("event", dir->d_name, 5) == 0;
-}
-
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
-	int i;
-	struct dirent **namelist = NULL;
 	GOptionContext *context;
 	GError *error;
 	GList *tabletlist = NULL;
+	GDir *dir = NULL;
+	const char *filename;
 
 	context = g_option_context_new (NULL);
 
@@ -130,20 +126,22 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	i = scandir("/dev/input", &namelist, event_devices_only, alphasort);
-
-	if (i < 0 || i == 0) {
-		fprintf(stderr, "Failed to find any devices.\n");
-		goto out;
+	dir = g_dir_open("/dev/input", 0, &error);
+	if (!dir) {
+		fprintf(stderr, "%s\n", error->message);
+		g_error_free(error);
+		return EXIT_FAILURE;
 	}
 
-	while (i--) {
+	while ((filename = g_dir_read_name(dir))) {
 		WacomDevice *dev;
 		char fname[PATH_MAX];
 		GList *found;
 
-		snprintf(fname, sizeof(fname), "/dev/input/%s", namelist[i]->d_name);
-		free(namelist[i]);
+		if (!g_str_has_prefix(filename, "event"))
+			continue;
+
+		snprintf(fname, sizeof(fname), "/dev/input/%s", filename);
 
 		dev = libwacom_new_from_path(db, fname, WFALLBACK_NONE, NULL);
 		if (!dev)
@@ -162,13 +160,13 @@ int main(int argc, char **argv)
 		}
 	}
 
+	if (!tabletlist)
+		fprintf(stderr, "Failed to find any devices.\n");
+
 	g_list_foreach(tabletlist, tablet_print, NULL);
 
-out:
-	if (namelist)
-		free(namelist);
 	g_list_free_full(tabletlist, tablet_destroy);
-
+	g_dir_close(dir);
 	libwacom_database_destroy (db);
 	return 0;
 }

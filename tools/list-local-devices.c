@@ -38,6 +38,11 @@
 #include <glib.h>
 #include "libwacom.h"
 
+static enum output_format {
+	ONELINE,
+	DATAFILE,
+} output_format = ONELINE;
+
 static char *database_path;
 
 /* Most devices have 2-3 event nodes, let's have a wrapper struct to group
@@ -85,8 +90,37 @@ tablet_print(gpointer data, gpointer user_data)
 	printf("---------------------------------------------------------------\n");
 }
 
+static void
+print_str(gpointer data, gpointer user_data)
+{
+	printf("%s ", (char *)data);
+}
+
+static void
+tablet_print_oneline(gpointer data, gpointer user_data)
+{
+	struct tablet *d = data;
+
+	printf("%s: ", libwacom_get_name(d->dev));
+	g_list_foreach(d->nodes, print_str, NULL);
+	printf("\n");
+}
+
+static gboolean
+check_format(const gchar *option_name, const gchar *value, gpointer data, GError **error)
+{
+	if (g_str_equal(value, "datafile"))
+		output_format = DATAFILE;
+	else if (g_str_equal(value, "oneline"))
+		output_format = ONELINE;
+	else
+		return FALSE;
+	return TRUE;
+}
+
 static GOptionEntry opts[] = {
         {"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
+	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'oneline', 'datafile'"), NULL },
 	{ .long_name = NULL}
 };
 
@@ -163,7 +197,16 @@ int main(int argc, char **argv)
 	if (!tabletlist)
 		fprintf(stderr, "Failed to find any devices.\n");
 
-	g_list_foreach(tabletlist, tablet_print, NULL);
+	switch (output_format) {
+	case DATAFILE:
+		g_list_foreach(tabletlist, tablet_print, NULL);
+		break;
+	case ONELINE:
+		g_list_foreach(tabletlist, tablet_print_oneline, NULL);
+		break;
+	default:
+		abort();
+	}
 
 	g_list_free_full(tabletlist, tablet_destroy);
 	g_dir_close(dir);

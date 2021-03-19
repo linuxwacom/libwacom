@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 
 	if (!db) {
 		fprintf(stderr, "Failed to initialize device database\n");
-		return 1;
+		return EXIT_FAILURE;
 	}
 
 	i = scandir("/dev/input", &namelist, event_devices_only, alphasort);

@@ -7,7 +7,6 @@ project('libwacom', 'c',
 dir_bin     = join_paths(get_option('prefix'), get_option('bindir'))
 dir_data    = join_paths(get_option('prefix'), get_option('datadir'), 'libwacom')
 dir_etc     = join_paths(get_option('prefix'), get_option('sysconfdir'), 'libwacom')
-dir_man1    = join_paths(get_option('prefix'), get_option('mandir'), 'man1')
 dir_src     = join_paths(meson.source_root(), 'libwacom')
 dir_src_data= join_paths(meson.source_root(), 'data')
 dir_test    = join_paths(meson.source_root(), 'test')

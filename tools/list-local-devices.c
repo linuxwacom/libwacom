@@ -52,7 +52,6 @@ static int event_devices_only(const struct dirent *dir) {
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
-	WacomDevice *dev;
 	int i;
 	struct dirent **namelist = NULL;
 	GOptionContext *context;
@@ -93,6 +92,7 @@ int main(int argc, char **argv)
 	}
 
 	while (i--) {
+		WacomDevice *dev;
 		char fname[PATH_MAX];
 
 		snprintf(fname, sizeof(fname), "/dev/input/%s", namelist[i]->d_name);

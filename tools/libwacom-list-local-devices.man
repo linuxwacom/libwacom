@@ -17,6 +17,9 @@ Sets the data directory path to be used. This is only useful when testing
 against a modified data path. Only libwacom developers need this option.
 .SH NOTES
 The Linux kernel provides separate \fI/dev/input/event*\fR nodes for the
-stylus, the pad and the touch part of the tablet. This usually results in a
-connected tablet being listed multiple times with this tool. This behavior
-is expected and should not be seen as a bug.
+stylus, the pad and the touch part of the tablet. These devices nodes are
+listed as part of this tool's output.
+.PP
+This tool is unable to distinguish between multiple identical devices. Only
+one such device will be listed, with all event nodes from all devices that
+are of the same type.

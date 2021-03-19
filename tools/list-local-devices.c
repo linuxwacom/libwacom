@@ -40,6 +40,51 @@
 
 static char *database_path;
 
+/* Most devices have 2-3 event nodes, let's have a wrapper struct to group
+ * those together */
+struct tablet {
+	WacomDevice *dev;
+	GList *nodes; /* list of "/dev/input/eventX" paths */
+};
+
+static void
+tablet_destroy(gpointer data)
+{
+	struct tablet *d = data;
+
+	libwacom_destroy(d->dev);
+	g_list_free_full(d->nodes, free);
+};
+
+/* Note: users with two identical devices plugged in will see
+ * as one device with twice the event nodes.
+ * Too niche to worry about.
+ */
+static gint
+tablet_compare(gconstpointer list_elem, gconstpointer dev)
+{
+	const struct tablet *t = list_elem;
+
+	return libwacom_compare(t->dev, dev, WCOMPARE_MATCHES);
+}
+
+static void
+print_node(gpointer data, gpointer user_data)
+{
+	printf("#  - %s\n", (char *)data);
+}
+
+static void
+tablet_print(gpointer data, gpointer user_data)
+{
+	struct tablet *d = data;
+
+	printf("# %s\n", libwacom_get_name(d->dev));
+	g_list_foreach(d->nodes, print_node, NULL);
+	libwacom_print_device_description(STDOUT_FILENO, d->dev);
+	printf("---------------------------------------------------------------\n");
+}
+
 static GOptionEntry opts[] = {
         {"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
 	{ .long_name = NULL}
@@ -56,6 +101,7 @@ int main(int argc, char **argv)
 	struct dirent **namelist = NULL;
 	GOptionContext *context;
 	GError *error;
+	GList *tabletlist = NULL;
 
 	context = g_option_context_new (NULL);
 
@@ -94,6 +140,7 @@ int main(int argc, char **argv)
 	while (i--) {
 		WacomDevice *dev;
 		char fname[PATH_MAX];
+		GList *found;
 
 		snprintf(fname, sizeof(fname), "/dev/input/%s", namelist[i]->d_name);
 		free(namelist[i]);
@@ -102,16 +149,25 @@ int main(int argc, char **argv)
 		if (!dev)
 			continue;
 
-		dprintf(STDOUT_FILENO, "# Device node: %s\n", fname);
-		libwacom_print_device_description(STDOUT_FILENO, dev);
-		libwacom_destroy(dev);
-
-		dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
+		found = g_list_find_custom(tabletlist, dev, tablet_compare);
+		if (found) {
+			struct tablet *t = found->data;
+			t->nodes = g_list_append(t->nodes, g_strdup(fname));
+			libwacom_destroy(dev);
+		} else {
+			struct tablet *t = g_new0(struct tablet, 1);
+			t->dev = dev;
+			t->nodes = g_list_append(t->nodes, g_strdup(fname));
+			tabletlist = g_list_append(tabletlist, t);
+		}
 	}
+
+	g_list_foreach(tabletlist, tablet_print, NULL);
 
 out:
 	if (namelist)
 		free(namelist);
+	g_list_free_full(tabletlist, tablet_destroy);
 
 	libwacom_database_destroy (db);
 	return 0;

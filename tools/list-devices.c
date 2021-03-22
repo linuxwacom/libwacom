@@ -142,6 +142,7 @@ int main(int argc, char **argv)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_UNKNOWN, output_format);
 
 	libwacom_database_destroy (db);
+	free(list);
 
 	return 0;
 }

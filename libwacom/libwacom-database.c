@@ -841,14 +841,23 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 	DIR *dir;
 	struct dirent *file;
 	bool success = false;
+	GHashTable *keyset = NULL;
 
 	dir = opendir(datadir);
 	if (!dir)
 		return errno == ENOENT; /* non-existing directory is ok */
 
+	/* A set of all matches for duplicate detection. We allow duplicates
+	 * across data directories, but we don't allow for duplicates
+	 * within the same data directory.
+	 */
+	keyset = g_hash_table_new_full (g_str_hash, g_str_equal, free, NULL);
+	if (!keyset)
+		goto out;
+
 	while ((file = readdir(dir))) {
 		WacomDevice *d;
-		const WacomMatch **matches, **match;
+		guint idx = 0;
 
 		if (!is_tablet_file(file))
 			continue;
@@ -857,24 +866,42 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 		if (!d)
 			continue;
 
-		matches = libwacom_get_matches(d);
-		if (!matches || !*matches) {
+		if (d->matches->len == 0) {
 			g_critical("Device '%s' has no matches defined\n",
 				   libwacom_get_name(d));
 			goto out;
 		}
 
-		for (match = matches; *match; match++) {
+		/* Note: we may change the array while iterating over it */
+		while (idx < d->matches->len) {
+			WacomMatch *match = g_array_index(d->matches, WacomMatch*, idx);
 			const char *matchstr;
-			matchstr = libwacom_match_get_match_string(*match);
-			/* no duplicate matches allowed */
-			if (g_hash_table_lookup(db->device_ht, matchstr) != NULL) {
+
+			matchstr = libwacom_match_get_match_string(match);
+			/* no duplicate matches allowed within the same
+			 * directory */
+			if (g_hash_table_contains(keyset, matchstr)) {
 				g_critical("Duplicate match of '%s' on device '%s'.",
 					   matchstr, libwacom_get_name(d));
 				goto out;
 			}
-			g_hash_table_insert (db->device_ht, g_strdup (matchstr), d);
+			g_hash_table_add(keyset, g_strdup(matchstr));
+
+			/* We already have an entry for this match in the database,
+			 * that takes precedence. Remove the current match
+			 * from the new tablet - that's fine because we
+			 * haven't exposed the tablet yet.
+			 */
+			if (g_hash_table_lookup(db->device_ht, matchstr)) {
+				libwacom_remove_match(d, match);
+				continue;
+			}
+
+			g_hash_table_insert(db->device_ht,
+					    g_strdup (matchstr),
+					    d);
 			libwacom_ref(d);
+			idx++;
 		}
 		libwacom_unref(d);
 	}
@@ -882,6 +909,8 @@ load_tablet_files(WacomDeviceDatabase *db, const char *datadir)
 	success = true;
 
 out:
+	if (keyset)
+		g_hash_table_destroy(keyset);
 	closedir(dir);
 	return success;
 }
@@ -969,8 +998,8 @@ LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
 	const char *datadir[] = {
-		DATADIR,
 		ETCDIR,
+		DATADIR,
 	};
 
 	return database_new_for_paths (2, datadir);

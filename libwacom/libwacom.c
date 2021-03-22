@@ -941,6 +941,19 @@ libwacom_add_match(WacomDevice *device, WacomMatch *newmatch)
 	g_array_append_val(device->matches, newmatch);
 }
 
+void
+libwacom_remove_match(WacomDevice *device, WacomMatch *to_remove)
+{
+	for (guint i= 0; i < device->matches->len; i++) {
+		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
+		if (streq(m->match, to_remove->match)) {
+			g_array_remove_index(device->matches, i);
+			libwacom_match_unref(to_remove);
+			break;
+		}
+	}
+}
+
 LIBWACOM_EXPORT int
 libwacom_get_vendor_id(const WacomDevice *device)
 {

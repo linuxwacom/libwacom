@@ -655,7 +655,9 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 				first_valid_match = i;
 		}
 		if (nmatches == 0) {
-			DBG("failed to match '%s' for product/vendor IDs in '%s'\n", string_list[i], path);
+			DBG("failed to match '%s' for product/vendor IDs in '%s'\n",
+			    g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL),
+			    path);
 			g_strfreev (string_list);
 			goto out;
 		}

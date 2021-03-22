@@ -649,15 +649,16 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		guint nmatches = 0;
 		guint first_valid_match = 0;
 		for (i = 0; string_list[i]; i++) {
-			if (libwacom_matchstr_to_match (device, string_list[i]))
+			if (libwacom_matchstr_to_match (device, string_list[i])) {
 				nmatches++;
-			if (nmatches == 1)
-				first_valid_match = i;
+				if (nmatches == 1)
+					first_valid_match = i;
+			} else {
+				DBG("'%s' is an invalid DeviceMatch in '%s'\n",
+				    string_list[i], path);
+			}
 		}
 		if (nmatches == 0) {
-			DBG("failed to match '%s' for product/vendor IDs in '%s'\n",
-			    g_key_file_get_string(keyfile, DEVICE_GROUP, "DeviceMatch", NULL),
-			    path);
 			g_strfreev (string_list);
 			goto out;
 		}

@@ -639,6 +639,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 
 	device = g_new0 (WacomDevice, 1);
 	device->refcnt = 1;
+	device->matches = g_array_new(TRUE, TRUE, sizeof(WacomMatch*));
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "DeviceMatch", NULL, NULL);
 	if (!string_list) {

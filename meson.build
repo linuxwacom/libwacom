@@ -17,6 +17,9 @@ if dir_udev == ''
 	dir_udev = dir_sys_udev
 endif
 
+pymod = import('python')
+python = pymod.find_installation('python3', required: true)
+
 # Do not modify this, use symbol versioning instead.
 libwacom_lt_c=8
 libwacom_lt_r=1
@@ -294,8 +297,7 @@ if get_option('tests').enabled()
 	endif
 
 	if meson.version().version_compare('>= 0.51.0')
-		python = import('python')
-		python.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
+		pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
 	endif
 	pytest = find_program('pytest-3', 'pytest')
 	test('pytest',

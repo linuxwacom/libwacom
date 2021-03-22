@@ -32,7 +32,7 @@ udev_hwdbdir=$(UDEV_DIR)/hwdb.d
 dist_udev_hwdb_DATA = $(hwdb)
 
 $(hwdb): $(srcdir)/generate-hwdb.py
-	$(srcdir)/generate-hwdb.py --include-wireless-accessory-kit $(abs_top_srcdir)/data > $@
+	$(PYTHON) $(srcdir)/generate-hwdb.py --include-wireless-accessory-kit $(abs_top_srcdir)/data > $@
 
 bin_SCRIPTS = libwacom-show-stylus
 libwacom-show-stylus: show-stylus.py

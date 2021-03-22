@@ -141,7 +141,7 @@ tools_cflags = ['-DDATABASEPATH="@0@"'.format(dir_src_data)]
 
 hwdb_generator = find_program('tools/generate-hwdb.py')
 custom_target('hwdb',
-	      command: [hwdb_generator,
+	      command: [python, hwdb_generator,
 		        '--include-wireless-accessory-kit',
 			dir_src_data],
 	      capture: true,

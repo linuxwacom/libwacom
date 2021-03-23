@@ -183,7 +183,7 @@ jobs:
       matrix:
         buildtool:
           - meson
-          - autogen
+          - autotools
     env:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
@@ -215,8 +215,8 @@ jobs:
           srcdir: $TARBALLDIR/libwacom-*/
           meson_args: --prefix="$INSTALLDIR"
           ninja_args: test install
-      - name: build from tarball with autogen
-        if: matrix.buildtool == 'autogen'
+      - name: build from tarball with autotools
+        if: matrix.buildtool == 'autotools'
         run: |
           pushd "$TARBALLDIR"/libwacom-*/
           ./autogen.sh --disable-silent-rules --prefix="$INSTALLDIR"

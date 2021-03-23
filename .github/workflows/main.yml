@@ -70,7 +70,6 @@ jobs:
           # clang requires b_lundef=false for b_santize, see
           # https://github.com/mesonbuild/meson/issues/764
           - '-Db_sanitize=address,undefined -Db_lundef=false'
-          - 'valgrind'  # special handling
     steps:
       - uses: actions/checkout@v2
       # install python so we get pip for meson
@@ -81,19 +80,39 @@ jobs:
         with:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
-      # for the non-valgrind case, we pass the meson options through and run
-      # meson test
       - name: meson test ${{matrix.meson_options}}
-        if: ${{matrix.meson_options != 'valgrind'}}
         uses: ./.github/actions/meson
         with:
           meson_args: ${{matrix.meson_options}}
         env:
           CC: ${{matrix.compiler}}
+      # Capture all the meson logs, even if we failed
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}  # even if we fail
+        with:
+          name: meson test logs
+          path: |
+            builddir/meson-logs/testlog*.txt
+            builddir/meson-logs/meson-log.txt
+  ###
+  #
+  # valgrind run
+  #
+  valgrind:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
       # for the valgrind case, we need custom setup, the matrix isn't
       # flexible enough for this
-      - name: valgrind - meson test ${{matrix.meson_options}}
-        if: ${{matrix.meson_options == 'valgrind'}}
+      - name: valgrind - meson test
         uses: ./.github/actions/meson
         with:
           meson_test_args: --setup=valgrind --suite=valgrind

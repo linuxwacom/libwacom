@@ -57,6 +57,9 @@ dep_glib    = dependency('glib-2.0')
 includes_include = include_directories('include')
 includes_src = include_directories('libwacom')
 
+# config.h
+config_h = configuration_data()
+
 #################### libwacom.so ########################
 src_libwacom = [
 	'include/linux/input-event-codes.h',
@@ -314,5 +317,10 @@ test_ltversion = executable('test-ltversion',
 			    c_args: ['-DLIBWACOM_LT_VERSION="@0@"'.format(lt_version)],
 			    install: false)
 test('test-ltversion', test_ltversion, suite: ['all'])
+
+
+
+############ output files ############
+configure_file(output: 'config.h', configuration: config_h)
 
 # vim: set noexpandtab tabstop=8 shiftwidth=8:

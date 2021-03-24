@@ -100,41 +100,46 @@ class HWDBFile:
                 print(entry)
 
 
-def load_from_directory(path):
-    for file in Path(path).glob("*.tablet"):
-        config = configparser.ConfigParser()
-        config.read(file)
-        for match in config["Device"]["DeviceMatch"].split(";"):
-            # ignore trailing semicolons
-            if not match or match == "generic":
-                continue
+class TabletDatabase:
+    def __init__(self, path):
+        self.path = path
+        self.tablets = sorted(self._load(path))
 
-            # For hwdb entries we don't care about name matches,
-            # it'll just result in duplicate ID_INPUT_TABLET assignments
-            # for tablets with re-used usbids and that doesn't matter
-            try:
-                bus, vid, pid, *_ = match.split(":")
-            except ValueError as e:
-                print(f"Failed to process match {match}")
-                raise e
+    def _load(self, path):
+        for file in Path(path).glob("*.tablet"):
+            config = configparser.ConfigParser()
+            config.read(file)
+            for match in config["Device"]["DeviceMatch"].split(";"):
+                # ignore trailing semicolons
+                if not match or match == "generic":
+                    continue
 
-            name = config["Device"]["Name"]
-            t = Tablet(name, bus, vid, pid)
+                # For hwdb entries we don't care about name matches,
+                # it'll just result in duplicate ID_INPUT_TABLET assignments
+                # for tablets with re-used usbids and that doesn't matter
+                try:
+                    bus, vid, pid, *_ = match.split(":")
+                except ValueError as e:
+                    print(f"Failed to process match {match}")
+                    raise e
 
-            try:
-                t.has_touch = config["Features"]["Touch"].lower() == "true"
-                if t.has_touch:
-                    integration = config["Device"]["IntegratedIn"]
-                    t.is_touchscreen = (
-                        "Display" in integration or "System" in integration
-                    )
-            except KeyError:
-                pass
-            try:
-                t.has_pad = int(config["Features"]["Buttons"]) > 0
-            except KeyError:
-                pass
-            yield t
+                name = config["Device"]["Name"]
+                t = Tablet(name, bus, vid, pid)
+
+                try:
+                    t.has_touch = config["Features"]["Touch"].lower() == "true"
+                    if t.has_touch:
+                        integration = config["Device"]["IntegratedIn"]
+                        t.is_touchscreen = (
+                            "Display" in integration or "System" in integration
+                        )
+                except KeyError:
+                    pass
+                try:
+                    t.has_pad = int(config["Features"]["Buttons"]) > 0
+                except KeyError:
+                    pass
+                yield t
 
 
 if __name__ == "__main__":
@@ -153,7 +158,7 @@ if __name__ == "__main__":
     tablets = []
 
     for path in ns.paths:
-        tablets = sorted(load_from_directory(path))
+        tablets.extend(TabletDatabase(path).tablets)
 
     hwdb = HWDBFile()
     # Bamboo and Intuos devices connected to the system via Wacom's

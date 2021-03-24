@@ -336,8 +336,12 @@ libwacom_copy(const WacomDevice *device)
 	d->strips_num_modes = device->strips_num_modes;
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
-	d->num_styli = device->num_styli;
-	d->supported_styli = g_memdup2 (device->supported_styli, sizeof(int) * device->num_styli);
+	d->styli = g_array_sized_new(FALSE, FALSE, sizeof(int),
+				     device->styli->len);
+	for (guint i = 0; i < device->styli->len; i++) {
+		int id = g_array_index(device->styli, int, i);
+		g_array_append_val(d->styli, id);
+	}
 	d->num_leds = device->num_leds;
 	d->status_leds = g_memdup2 (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
 	d->num_buttons = device->num_buttons;
@@ -438,10 +442,10 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (a->num_buttons != b->num_buttons)
 		return 1;
 
-	if (a->num_styli != b->num_styli)
+	if (a->styli->len != b->styli->len)
 		return 1;
 
-	if (memcmp(a->supported_styli, b->supported_styli, sizeof(int) * a->num_styli) != 0)
+	if (memcmp(a->styli->data, b->styli->data, sizeof(int) * a->styli->len) != 0)
 		return 1;
 
 	if (a->num_leds != b->num_leds)
@@ -874,7 +878,7 @@ libwacom_unref(WacomDevice *device)
 	for (guint i = 0; i < device->matches->len; i++)
 		libwacom_match_unref(g_array_index(device->matches, WacomMatch*, i));
 	g_array_free (device->matches, TRUE);
-	g_free (device->supported_styli);
+	g_array_free (device->styli, TRUE);
 	g_free (device->status_leds);
 	g_free (device->buttons);
 	g_free (device->button_codes);
@@ -1050,8 +1054,8 @@ libwacom_get_num_buttons(const WacomDevice *device)
 LIBWACOM_EXPORT const int *
 libwacom_get_supported_styli(const WacomDevice *device, int *num_styli)
 {
-	*num_styli = device->num_styli;
-	return device->supported_styli;
+	*num_styli = device->styli->len;
+	return (const int *)device->styli->data;
 }
 
 LIBWACOM_EXPORT int

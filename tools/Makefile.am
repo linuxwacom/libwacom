@@ -31,13 +31,15 @@ hwdb = 65-libwacom.hwdb
 udev_hwdbdir=$(UDEV_DIR)/hwdb.d
 dist_udev_hwdb_DATA = $(hwdb)
 
-$(hwdb): $(srcdir)/generate-hwdb.py
-	$(PYTHON) $(srcdir)/generate-hwdb.py --include-wireless-accessory-kit $(abs_top_srcdir)/data > $@
+$(hwdb): libwacom-update-db
+	$(PYTHON) $(builddir)/libwacom-update-db --buildsystem-mode $(abs_top_srcdir)/data > $@
 
-bin_SCRIPTS = libwacom-show-stylus
+bin_SCRIPTS = libwacom-show-stylus libwacom-update-db
 libwacom-show-stylus: show-stylus.py
 	sed -e 's|@DATADIR@|$(datadir)/libwacom|' -e 's|@ETCDIR@|$(sysconfdir)/libwacom|' $< > $@
 
+libwacom-update-db: libwacom-update-db.py
+	cp $< $@
 
 CLEANFILES = $(hwdb) $(bin_SCRIPTS)
-EXTRA_DIST = $(rules) $(hwdb) show-stylus.py generate-hwdb.py
+EXTRA_DIST = $(rules) $(hwdb) show-stylus.py libwacom-update-db.py

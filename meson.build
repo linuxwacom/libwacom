@@ -59,6 +59,9 @@ includes_src = include_directories('libwacom')
 
 # config.h
 config_h = configuration_data()
+config_h.set10('HAVE_G_MEMDUP2',
+	       cc.has_function('g_memdup2',
+			       dependencies: dep_glib))
 
 #################### libwacom.so ########################
 src_libwacom = [

@@ -36,6 +36,10 @@
 
 #include <linux/input-event-codes.h>
 
+#if !HAVE_G_MEMDUP2
+#define g_memdup2 g_memdup
+#endif
+
 static const WacomDevice *
 libwacom_get_device(const WacomDeviceDatabase *db, const char *match)
 {
@@ -333,12 +337,12 @@ libwacom_copy(const WacomDevice *device)
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
 	d->num_styli = device->num_styli;
-	d->supported_styli = g_memdup (device->supported_styli, sizeof(int) * device->num_styli);
+	d->supported_styli = g_memdup2 (device->supported_styli, sizeof(int) * device->num_styli);
 	d->num_leds = device->num_leds;
-	d->status_leds = g_memdup (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
+	d->status_leds = g_memdup2 (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
 	d->num_buttons = device->num_buttons;
-	d->buttons = g_memdup (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
-	d->button_codes = g_memdup (device->button_codes, sizeof(int) * device->num_buttons);
+	d->buttons = g_memdup2 (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
+	d->button_codes = g_memdup2 (device->button_codes, sizeof(int) * device->num_buttons);
 	return d;
 }
 

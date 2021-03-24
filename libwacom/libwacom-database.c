@@ -576,7 +576,6 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	guint i;
 
 	array = g_array_new (FALSE, FALSE, sizeof(int));
-	device->num_styli = 0;
 	for (i = 0; ids[i]; i++) {
 		const char *id = ids[i];
 
@@ -584,7 +583,6 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 			int int_value;
 			if (safe_atoi_base (ids[i], &int_value, 16)) {
 				g_array_append_val (array, int_value);
-				device->num_styli++;
 			}
 		} else if (g_str_has_prefix(id, "@")) {
 			const char *group = &id[1];
@@ -596,7 +594,6 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 				WacomStylus *stylus = value;
 				if (stylus->group && g_str_equal(group, stylus->group)) {
 					g_array_append_val (array, stylus->id);
-					device->num_styli++;
 				}
 			}
 		} else {
@@ -606,7 +603,7 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	/* Using groups means we don't get the styli in ascending order.
 	   Sort it so the output is predictable */
 	g_array_sort(array, styli_id_sort);
-	device->supported_styli = (int *) g_array_free (array, FALSE);
+	device->styli = array;
 }
 
 static WacomDevice*
@@ -723,10 +720,11 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		libwacom_parse_styli_list(db, device, string_list);
 		g_strfreev (string_list);
 	} else {
-		device->supported_styli = g_new (int, 2);
-		device->supported_styli[0] = WACOM_ERASER_FALLBACK_ID;
-		device->supported_styli[1] = WACOM_STYLUS_FALLBACK_ID;
-		device->num_styli = 2;
+		int fallback_eraser = WACOM_ERASER_FALLBACK_ID;
+		int fallback_stylus = WACOM_STYLUS_FALLBACK_ID;
+		device->styli = g_array_new(FALSE, FALSE, sizeof(int));
+		g_array_append_val(device->styli, fallback_eraser);
+		g_array_append_val(device->styli, fallback_stylus);
 	}
 
 	/* Features */

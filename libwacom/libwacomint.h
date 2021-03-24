@@ -84,8 +84,7 @@ struct _WacomDevice {
 	int ring_num_modes;
 	int ring2_num_modes;
 
-	gsize num_styli;
-	int *supported_styli;
+	GArray *styli;
 
 	int num_buttons;
 	WacomButtonFlags *buttons;

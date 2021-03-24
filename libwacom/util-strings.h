@@ -45,9 +45,6 @@
 #include <xlocale.h>
 #endif
 
-#define streq(s1, s2) (strcmp((s1), (s2)) == 0)
-#define strneq(s1, s2, n) (strncmp((s1), (s2), (n)) == 0)
-
 static inline void *
 zalloc(size_t size)
 {

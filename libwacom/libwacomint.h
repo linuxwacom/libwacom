@@ -144,9 +144,6 @@ WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
 char *make_match_string(const char *name, WacomBusType bus, int vendor_id, int product_id);
 
-#define streq(s1, s2) (strcmp((s1), (s2)) == 0)
-#define strneq(s1, s2, n) (strncmp((s1), (s2), (n)) == 0)
-
 #endif /* _LIBWACOMINT_H_ */
 
 /* vim: set noexpandtab shiftwidth=8: */

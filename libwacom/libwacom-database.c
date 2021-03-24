@@ -53,27 +53,27 @@ libwacom_class_string_to_enum(const char *class)
 	if (class == NULL || *class == '\0')
 		return WCLASS_UNKNOWN;
 
-	if (streq(class, "Intuos3"))
+	if (g_str_equal(class, "Intuos3"))
 		return WCLASS_INTUOS3;
-	if (streq(class, "Intuos4"))
+	if (g_str_equal(class, "Intuos4"))
 		return WCLASS_INTUOS4;
-	if (streq(class, "Intuos5"))
+	if (g_str_equal(class, "Intuos5"))
 		return WCLASS_INTUOS5;
-	if (streq(class, "Cintiq"))
+	if (g_str_equal(class, "Cintiq"))
 		return WCLASS_CINTIQ;
-	if (streq(class, "Bamboo"))
+	if (g_str_equal(class, "Bamboo"))
 		return WCLASS_BAMBOO;
-	if (streq(class, "Graphire"))
+	if (g_str_equal(class, "Graphire"))
 		return WCLASS_GRAPHIRE;
-	if (streq(class, "Intuos"))
+	if (g_str_equal(class, "Intuos"))
 		return WCLASS_INTUOS;
-	if (streq(class, "Intuos2"))
+	if (g_str_equal(class, "Intuos2"))
 		return WCLASS_INTUOS2;
-	if (streq(class, "ISDV4"))
+	if (g_str_equal(class, "ISDV4"))
 		return WCLASS_ISDV4;
-	if (streq(class, "PenDisplay"))
+	if (g_str_equal(class, "PenDisplay"))
 		return WCLASS_PEN_DISPLAYS;
-	if (streq(class, "Remote"))
+	if (g_str_equal(class, "Remote"))
 		return WCLASS_REMOTE;
 
 	return WCLASS_UNKNOWN;
@@ -84,23 +84,23 @@ type_from_str (const char *type)
 {
 	if (type == NULL)
 		return WSTYLUS_UNKNOWN;
-	if (streq(type, "General"))
+	if (g_str_equal(type, "General"))
 		return WSTYLUS_GENERAL;
-	if (streq(type, "Inking"))
+	if (g_str_equal(type, "Inking"))
 		return WSTYLUS_INKING;
-	if (streq(type, "Airbrush"))
+	if (g_str_equal(type, "Airbrush"))
 		return WSTYLUS_AIRBRUSH;
-	if (streq(type, "Classic"))
+	if (g_str_equal(type, "Classic"))
 		return WSTYLUS_CLASSIC;
-	if (streq(type, "Marker"))
+	if (g_str_equal(type, "Marker"))
 		return WSTYLUS_MARKER;
-	if (streq(type, "Stroke"))
+	if (g_str_equal(type, "Stroke"))
 		return WSTYLUS_STROKE;
-	if (streq(type, "Puck"))
+	if (g_str_equal(type, "Puck"))
 		return WSTYLUS_PUCK;
-	if (streq(type, "3D"))
+	if (g_str_equal(type, "3D"))
 		return WSTYLUS_3D;
-	if (streq(type, "Mobile"))
+	if (g_str_equal(type, "Mobile"))
 		return WSTYLUS_MOBILE;
 	return WSTYLUS_UNKNOWN;
 }
@@ -110,11 +110,11 @@ eraser_type_from_str (const char *type)
 {
 	if (type == NULL)
 		return WACOM_ERASER_NONE;
-	if (streq(type, "None"))
+	if (g_str_equal(type, "None"))
 		return WACOM_ERASER_NONE;
-	if (streq(type, "Invert"))
+	if (g_str_equal(type, "Invert"))
 		return WACOM_ERASER_INVERT;
-	if (streq(type, "Button"))
+	if (g_str_equal(type, "Button"))
 		return WACOM_ERASER_BUTTON;
 	return WACOM_ERASER_UNKNOWN;
 }
@@ -122,13 +122,13 @@ eraser_type_from_str (const char *type)
 WacomBusType
 bus_from_str (const char *str)
 {
-	if (streq(str, "usb"))
+	if (g_str_equal(str, "usb"))
 		return WBUSTYPE_USB;
-	if (streq(str, "serial"))
+	if (g_str_equal(str, "serial"))
 		return WBUSTYPE_SERIAL;
-	if (streq(str, "bluetooth"))
+	if (g_str_equal(str, "bluetooth"))
 		return WBUSTYPE_BLUETOOTH;
-	if (streq(str, "i2c"))
+	if (g_str_equal(str, "i2c"))
 		return WBUSTYPE_I2C;
 	return WBUSTYPE_UNKNOWN;
 }
@@ -193,7 +193,7 @@ libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
 	if (matchstr == NULL)
 		return FALSE;
 
-	if (streq(matchstr, GENERIC_DEVICE_MATCH)) {
+	if (g_str_equal(matchstr, GENERIC_DEVICE_MATCH)) {
 		name = NULL;
 		bus = WBUSTYPE_UNKNOWN;
 		vendor_id = 0;
@@ -310,15 +310,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 			for (j = 0; string_list[j]; j++) {
 				WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
-				if (streq(string_list[j], "Tilt")) {
+				if (g_str_equal(string_list[j], "Tilt")) {
 					flag = WACOM_AXIS_TYPE_TILT;
-				} else if (streq(string_list[j], "RotationZ")) {
+				} else if (g_str_equal(string_list[j], "RotationZ")) {
 					flag = WACOM_AXIS_TYPE_ROTATION_Z;
-				} else if (streq(string_list[j], "Distance")) {
+				} else if (g_str_equal(string_list[j], "Distance")) {
 					flag = WACOM_AXIS_TYPE_DISTANCE;
-				} else if (streq(string_list[j], "Pressure")) {
+				} else if (g_str_equal(string_list[j], "Pressure")) {
 					flag = WACOM_AXIS_TYPE_PRESSURE;
-				} else if (streq(string_list[j], "Slider")) {
+				} else if (g_str_equal(string_list[j], "Slider")) {
 					flag = WACOM_AXIS_TYPE_SLIDER;
 				} else {
 					g_warning ("Invalid axis %s for stylus ID %s\n",
@@ -582,13 +582,13 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	for (i = 0; ids[i]; i++) {
 		const char *id = ids[i];
 
-		if (strneq(id, "0x", 2)) {
+		if (g_str_has_prefix(id, "0x")) {
 			int int_value;
 			if (safe_atoi_base (ids[i], &int_value, 16)) {
 				g_array_append_val (array, int_value);
 				device->num_styli++;
 			}
-		} else if (strneq(id, "@", 1)) {
+		} else if (g_str_has_prefix(id, "@")) {
 			const char *group = &id[1];
 			GHashTableIter iter;
 			gpointer key, value;
@@ -596,7 +596,7 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 			g_hash_table_iter_init(&iter, db->stylus_ht);
 			while (g_hash_table_iter_next (&iter, &key, &value)) {
 				WacomStylus *stylus = value;
-				if (stylus->group && streq(group, stylus->group)) {
+				if (stylus->group && g_str_equal(group, stylus->group)) {
 					g_array_append_val (array, stylus->id);
 					device->num_styli++;
 				}
@@ -697,7 +697,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		for (i = 0; string_list[i]; i++) {
 			found = FALSE;
 			for (n = 0; n < G_N_ELEMENTS (integration_flags); n++) {
-				if (streq(string_list[i], integration_flags[n].key)) {
+				if (g_str_equal(string_list[i], integration_flags[n].key)) {
 					device->integration_flags |= integration_flags[n].value;
 					found = TRUE;
 					break;
@@ -785,7 +785,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		device->num_leds = 0;
 		for (i = 0; string_list[i]; i++) {
 			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
-				if (streq(string_list[i], supported_leds[n].key)) {
+				if (g_str_equal(string_list[i], supported_leds[n].key)) {
 					g_array_append_val (array, supported_leds[n].value);
 					device->num_leds++;
 					break;
@@ -823,7 +823,7 @@ has_suffix(const char *name, const char *suffix)
 	if (len <= suffix_len)
 		return false;
 
-	return streq(&name[len - suffix_len], suffix);
+	return g_str_equal(&name[len - suffix_len], suffix);
 }
 
 static int

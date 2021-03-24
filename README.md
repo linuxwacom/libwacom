@@ -33,46 +33,52 @@ the tablet is not in that list.
 
 You must update udev after installing the file, see below.
 
-## To add support for a tablet to an older libwacom
+## To add support for a tablet to an installed libwacom
 
 If the system-provided libwacom does not include a `.tablet` file, it is
 possible to "backport" that `.tablet` file to the system-provided libwacom.
-Simply copy the `.tablet` file from the upstream git tree into the local
-directory `/etc/libwacom/`. Create that directory if necessary.
 
-For versions of libwacom older than 1.9, the file should be copied to
+### libwacom 1.10 and newer
+
+Copy the `.tablet` file into `/etc/libwacom` and run the
+`libwacom-update-db` tool:
+
+```
+$ cp my-tablet-file-from-upstream.tablet /etc/libwacom/
+$ libwacom-update-db /etc/libwacom
+```
+
+The tool will take care of updating udev, the hwdb, etc.
+
+### libwacom 1.9 and earlier
+
+For versions of libwacom <= 1.9, the file must be copied to
 `/usr/share/libwacom`. It may be overwritten on updates.
 
-You must update udev after installing the file, see below.
-
-## Updating udev's hwdb
-
-The new device must be added to the udev hwdb to ensure all required udev
-properties are set. Without a hwdb entry, the device may not be detected as
-tablet and may not work correctly.
-
-### When building from source
-
-Generate an updated hwdb with `tools/generate-hwdb.py` after adding the
-tablet description to the `data/` directory. This is done automatically during
-the build, look for the `65-libwacom.hwdb` file in the build tree.
-This file is installed as part of `ninja install` or `make install`. Run the following
-command to activate the new hwdb set:
-```
-$ sudo systemd-hwdb update
-```
-Now disconnect and reconnect the device and it should be detected by libwacom.
-
-### When adding files to an installed version of libwacom
-
-After installing the `.tablet` file in `/etc/libwacom/`, run
-the [`generate-hwdb.py`](https://github.com/linuxwacom/libwacom/blob/master/tools/generate-hwdb.py) tool:
-This tool can be run from the source tree.
+You must update udev after installing the file. The simplest (and broadest)
+way to do this is outlined below:
 
 ```
-$ generate-hwdb.py /etc/libwacom > 66-libwacom-local.hwdb
-$ sudo cp 66-libwacom-local.hwdb /etc/udev/hwdb.d/
-$ sudo systemd-hwdb update
-```
+# create the hwdb file
+$ cat <EOF > /etc/udev/hwdb.d/66-libwacom.hwdb
+# WARNING: change "Your Device Name" to the actual name of your device
+libwacom:name:Your Device Name*:input:*
+ ID_INPUT=1
+ ID_INPUT_TABLET=1
+ ID_INPUT_JOYSTICK=0
 
+libwacom:name:Your Device Name Pad:input:*
+ ID_INPUT_TABLET_PAD=1
+
+# Use this if the device is an external tablet
+libwacom:name:Your Device Name Finger:input:*
+ ID_INPUT_TOUCHPAD=1
+
+# Use this if the device is a screen tablet
+libwacom:name:Your Device Name Finger:input:*
+ ID_INPUT_TOUCHSCREEN=1
+
+EOF
+$ systemd-hwdb --update
+```
 Now disconnect and reconnect the device and it should be detected by libwacom.

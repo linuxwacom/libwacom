@@ -172,7 +172,7 @@ get_bus (GUdevDevice *device)
 	parent = g_object_ref (device);
 
 	while (parent && subsystem &&
-	       (streq(subsystem, "input") || streq (subsystem, "hid"))) {
+	       (g_str_equal(subsystem, "input") || g_str_equal (subsystem, "hid"))) {
 		GUdevDevice *old_parent = parent;
 		parent = g_udev_device_get_parent (old_parent);
 		if (parent)
@@ -181,7 +181,7 @@ get_bus (GUdevDevice *device)
 	}
 
 	if (parent) {
-		if (subsystem && (streq(subsystem, "tty") || streq(subsystem, "serio")))
+		if (subsystem && (g_str_equal(subsystem, "tty") || g_str_equal(subsystem, "serio")))
 			bus_str = g_strdup ("serial");
 		else
 			bus_str = g_strdup (subsystem);
@@ -352,7 +352,7 @@ compare_matches(const WacomDevice *a, const WacomDevice *b)
 	for (match_a = ma; *match_a; match_a++) {
 		int found = 0;
 		for (match_b = mb; !found && *match_b; match_b++) {
-			if (streq((*match_a)->match, (*match_b)->match))
+			if (g_str_equal((*match_a)->match, (*match_b)->match))
 				found = 1;
 		}
 		if (!found)
@@ -399,7 +399,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (a == b)
 		return 0;
 
-	if (!streq(a->name, b->name))
+	if (!g_str_equal(a->name, b->name))
 		return 1;
 
 	if (a->width != b->width || a->height != b->height)
@@ -452,7 +452,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 
 	if ((a->paired == NULL && b->paired != NULL) ||
 	    (a->paired != NULL && b->paired == NULL) ||
-	    (a->paired && b->paired && !streq(a->paired->match, b->paired->match)))
+	    (a->paired && b->paired && !g_str_equal(a->paired->match, b->paired->match)))
 		return 1;
 
 	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
@@ -460,7 +460,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	else {
 		WacomMatch *ma = g_array_index(a->matches, WacomMatch*, a->match),
 			   *mb = g_array_index(b->matches, WacomMatch*, b->match);
-		if (!streq(ma->match, mb->match))
+		if (!g_str_equal(ma->match, mb->match))
 			return 1;
 	}
 
@@ -604,7 +604,7 @@ libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomErr
 	for (l = keys; l; l = l->next) {
 		WacomDevice *d = l->data;
 
-		if (streq(d->name, name)) {
+		if (g_str_equal(d->name, name)) {
 			device = d;
 			break;
 		}
@@ -932,7 +932,7 @@ libwacom_add_match(WacomDevice *device, WacomMatch *newmatch)
 		WacomMatch *m = g_array_index(device->matches, WacomMatch *, i);
 		const char *matchstr = libwacom_match_get_match_string(m);
 
-		if (streq(matchstr, newmatch->match)) {
+		if (g_str_equal(matchstr, newmatch->match)) {
 			device->match = i;
 			return;
 		}
@@ -946,7 +946,7 @@ libwacom_remove_match(WacomDevice *device, WacomMatch *to_remove)
 {
 	for (guint i= 0; i < device->matches->len; i++) {
 		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
-		if (streq(m->match, to_remove->match)) {
+		if (g_str_equal(m->match, to_remove->match)) {
 			g_array_remove_index(device->matches, i);
 			libwacom_match_unref(to_remove);
 			break;

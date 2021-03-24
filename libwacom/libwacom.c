@@ -318,9 +318,13 @@ libwacom_copy(const WacomDevice *device)
 	d->height = device->height;
 	d->integration_flags = device->integration_flags;
 	d->layout = g_strdup(device->layout);
-	d->matches = g_array_copy(device->matches);
-	for (guint i = 0; i < d->matches->len; i++)
-		libwacom_match_ref(g_array_index(device->matches, WacomMatch*, i));
+	d->matches = g_array_sized_new(TRUE, TRUE, sizeof(WacomDevice*),
+				       device->matches->len);
+	for (guint i = 0; i < device->matches->len; i++) {
+		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
+		libwacom_match_ref(m);
+		g_array_append_val(d->matches, m);
+	}
 	d->match = device->match;
 	if (device->paired)
 		d->paired = libwacom_match_ref(device->paired);

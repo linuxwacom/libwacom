@@ -24,9 +24,7 @@
  *	Peter Hutterer (peter.hutterer@redhat.com)
  */
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #ifndef _LIBWACOMINT_H_
 #define _LIBWACOMINT_H_

@@ -24,9 +24,7 @@
  *	Peter Hutterer (peter.hutterer@redhat.com)
  */
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include <linux/input-event-codes.h>
 #include <glib.h>

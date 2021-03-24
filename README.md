@@ -17,6 +17,8 @@ Use the `libwacom-list-local-devices` tool to list all local devices recognized
 by libwacom. If your device is not listed, but it is available as an event
 device in the kernel (see `/proc/bus/input/devices`) and in the X session (see
 `xinput list`), the device is missing from libwacom's database.
+Use the `libwacom-list-devices` tool to list all known devices and verify
+the tablet is not in that list.
 
 ## To add support for a new tablet to libwacom git:
 

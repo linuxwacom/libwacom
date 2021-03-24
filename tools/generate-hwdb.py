@@ -138,7 +138,6 @@ if __name__ == "__main__":
     tablets = []
 
     for path in ns.paths:
-        # for tablet in load_from_directory(path):
         tablets.extend(load_from_directory(path))
 
     tablets.sort()

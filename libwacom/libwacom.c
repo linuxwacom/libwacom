@@ -1115,7 +1115,7 @@ libwacom_get_status_leds(const WacomDevice *device, int *num_leds)
 	return device->status_leds;
 }
 
-struct {
+static const struct {
 	WacomButtonFlags button_flags;
 	WacomStatusLEDs  status_leds;
 } button_status_leds[] = {

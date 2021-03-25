@@ -266,24 +266,21 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		g_free (type);
 
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+		stylus->paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
 		if (string_list) {
-			GArray *array;
 			guint j;
 
-			array = g_array_new (FALSE, FALSE, sizeof(int));
 			for (j = 0; string_list[j]; j++) {
 				int val;
 
 				if (safe_atoi_base (string_list[j], &val, 16)) {
-					g_array_append_val (array, val);
-					stylus->num_ids++;
+					g_array_append_val (stylus->paired_ids, val);
 				} else {
 					g_warning ("Stylus %s (%s) Ignoring invalid PairedId value\n", stylus->name, groups[i]);
 				}
 			}
 
 			g_strfreev (string_list);
-			stylus->paired_ids = (int *) g_array_free (array, FALSE);
 		}
 
 		stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);

@@ -1233,8 +1233,8 @@ LIBWACOM_EXPORT const int *
 libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids)
 {
 	if (num_paired_ids)
-		*num_paired_ids = stylus->num_ids;
-	return stylus->paired_ids;
+		*num_paired_ids = stylus->paired_ids->len;
+	return (const int*)stylus->paired_ids->data;
 }
 
 LIBWACOM_EXPORT int
@@ -1368,7 +1368,8 @@ libwacom_stylus_unref(WacomStylus *stylus)
 
 	g_free (stylus->name);
 	g_free (stylus->group);
-	g_free (stylus->paired_ids);
+	if (stylus->paired_ids)
+		g_array_free (stylus->paired_ids, TRUE);
 	g_free (stylus);
 
 	return NULL;

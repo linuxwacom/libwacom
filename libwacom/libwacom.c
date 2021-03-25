@@ -311,6 +311,8 @@ static WacomDevice *
 libwacom_copy(const WacomDevice *device)
 {
 	WacomDevice *d;
+	GHashTableIter iter;
+	gpointer k, v;
 
 	d = g_new0 (WacomDevice, 1);
 	g_atomic_int_inc(&d->refcnt);
@@ -343,10 +345,16 @@ libwacom_copy(const WacomDevice *device)
 		g_array_append_val(d->styli, id);
 	}
 	d->num_leds = device->num_leds;
-	d->status_leds = g_memdup2 (device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
-	d->num_buttons = device->num_buttons;
-	d->buttons = g_memdup2 (device->buttons, sizeof(WacomButtonFlags) * device->num_buttons);
-	d->button_codes = g_memdup2 (device->button_codes, sizeof(int) * device->num_buttons);
+	d->status_leds = g_memdup2(device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
+
+	d->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
+					   NULL, g_free);
+	g_hash_table_iter_init(&iter, device->buttons);
+	while (g_hash_table_iter_next(&iter, &k, &v)) {
+		WacomButton *a = v;
+		WacomButton *b = g_memdup2(a, sizeof(WacomButton));
+		g_hash_table_insert(d->buttons, k, b);
+	}
 	return d;
 }
 
@@ -401,6 +409,9 @@ libwacom_same_layouts (const WacomDevice *a, const WacomDevice *b)
 LIBWACOM_EXPORT int
 libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags flags)
 {
+	GHashTableIter iter;
+	gpointer k, v;
+
 	g_return_val_if_fail(a || b, 0);
 
 	if (!a || !b)
@@ -439,7 +450,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (a->ring2_num_modes != b->ring2_num_modes)
 		return 1;
 
-	if (a->num_buttons != b->num_buttons)
+	if (g_hash_table_size(a->buttons) != g_hash_table_size(b->buttons))
 		return 1;
 
 	if (a->styli->len != b->styli->len)
@@ -454,11 +465,14 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (memcmp(a->status_leds, b->status_leds, sizeof(WacomStatusLEDs) * a->num_leds) != 0)
 		return 1;
 
-	if (memcmp(a->buttons, b->buttons, sizeof(WacomButtonFlags) * a->num_buttons) != 0)
-		return 1;
+	g_hash_table_iter_init(&iter, a->buttons);
+	while (g_hash_table_iter_next(&iter, &k, &v)) {
+		WacomButton *ba = v;
+		WacomButton *bb = g_hash_table_lookup(b->buttons, k);
 
-	if (memcmp(a->button_codes, b->button_codes, sizeof(int) * a->num_buttons) != 0)
-		return 1;
+		if (!bb || ba->flags != bb->flags || ba->code != bb->code)
+			return 1;
+	}
 
 	if ((a->paired == NULL && b->paired != NULL) ||
 	    (a->paired != NULL && b->paired == NULL) ||
@@ -880,8 +894,8 @@ libwacom_unref(WacomDevice *device)
 	g_array_free (device->matches, TRUE);
 	g_array_free (device->styli, TRUE);
 	g_free (device->status_leds);
-	g_free (device->buttons);
-	g_free (device->button_codes);
+	if (device->buttons)
+		g_hash_table_destroy (device->buttons);
 	g_free (device);
 
 	return NULL;
@@ -1048,7 +1062,7 @@ libwacom_has_touch(const WacomDevice *device)
 LIBWACOM_EXPORT int
 libwacom_get_num_buttons(const WacomDevice *device)
 {
-	return device->num_buttons;
+	return g_hash_table_size(device->buttons);
 }
 
 LIBWACOM_EXPORT const int *
@@ -1114,24 +1128,18 @@ struct {
 LIBWACOM_EXPORT int
 libwacom_get_button_led_group (const WacomDevice *device, char button)
 {
-	int button_index, led_index;
-	WacomButtonFlags button_flags;
+	int led_index;
+	WacomButton *b = g_hash_table_lookup(device->buttons,
+					     GINT_TO_POINTER(button));
 
-	g_return_val_if_fail (device->num_buttons > 0, -1);
-	g_return_val_if_fail (button >= 'A', -1);
-	g_return_val_if_fail (button < 'A' + device->num_buttons, -1);
-
-	button_index = button - 'A';
-	button_flags = device->buttons[button_index];
-
-	if (!(button_flags & WACOM_BUTTON_MODESWITCH))
+	if (!(b->flags & WACOM_BUTTON_MODESWITCH))
 		return -1;
 
 	for (led_index = 0; led_index < device->num_leds; led_index++) {
 		guint n;
 
 		for (n = 0; n < G_N_ELEMENTS (button_status_leds); n++) {
-			if ((button_flags & button_status_leds[n].button_flags) &&
+			if ((b->flags & button_status_leds[n].button_flags) &&
 			    (device->status_leds[led_index] == button_status_leds[n].status_leds)) {
 				return led_index;
 			}
@@ -1179,29 +1187,20 @@ libwacom_get_bustype(const WacomDevice *device)
 LIBWACOM_EXPORT WacomButtonFlags
 libwacom_get_button_flag(const WacomDevice *device, char button)
 {
-	int index;
+	WacomButton *b = g_hash_table_lookup(device->buttons,
+					     GINT_TO_POINTER(button));
 
-	g_return_val_if_fail (device->num_buttons > 0, WACOM_BUTTON_NONE);
-	g_return_val_if_fail (button >= 'A', WACOM_BUTTON_NONE);
-	g_return_val_if_fail (button < 'A' + device->num_buttons, WACOM_BUTTON_NONE);
 
-	index = button - 'A';
-
-	return device->buttons[index];
+	return b ? b->flags : WACOM_BUTTON_NONE;
 }
 
 LIBWACOM_EXPORT int
 libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 {
-	int index;
+	WacomButton *b = g_hash_table_lookup(device->buttons,
+					     GINT_TO_POINTER(button));
 
-	g_return_val_if_fail (device->num_buttons > 0, 0);
-	g_return_val_if_fail (button >= 'A', 0);
-	g_return_val_if_fail (button < 'A' + device->num_buttons, 0);
-
-	index = button - 'A';
-
-	return device->button_codes[index];
+	return b ? b->code : 0;
 }
 
 LIBWACOM_EXPORT const

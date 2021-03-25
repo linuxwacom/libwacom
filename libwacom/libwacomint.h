@@ -61,6 +61,12 @@ struct _WacomMatch {
 	uint32_t product_id;
 };
 
+/* Used in the device->buttons hashtable */
+typedef struct _WacomButton {
+	WacomButtonFlags flags;
+	int code;
+} WacomButton;
+
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy() and
  * libwacom_print_device_description() ! */
@@ -85,10 +91,7 @@ struct _WacomDevice {
 	int ring2_num_modes;
 
 	GArray *styli;
-
-	int num_buttons;
-	WacomButtonFlags *buttons;
-	int *button_codes;
+	GHashTable *buttons; /* 'A' : WacomButton */
 
 	int num_leds;
 	WacomStatusLEDs *status_leds;

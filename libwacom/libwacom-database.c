@@ -375,7 +375,7 @@ libwacom_setup_paired_attributes(WacomDeviceDatabase *db)
 	}
 }
 
-struct {
+static const struct {
 	const char       *key;
 	WacomButtonFlags  flag;
 } options[] = {
@@ -390,7 +390,7 @@ struct {
 	{ "OLEDs", WACOM_BUTTON_OLED }
 };
 
-struct {
+static const struct {
 	const char       *key;
 	WacomStatusLEDs   value;
 } supported_leds[] = {
@@ -400,7 +400,7 @@ struct {
 	{ "Touchstrip2",	WACOM_STATUS_LED_TOUCHSTRIP2 }
 };
 
-struct {
+static const struct {
 	const char             *key;
 	WacomIntegrationFlags   value;
 } integration_flags[] = {

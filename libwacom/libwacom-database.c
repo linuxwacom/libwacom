@@ -422,6 +422,7 @@ libwacom_parse_buttons_key(WacomDevice      *device,
 		return;
 	for (i = 0; vals[i] != NULL; i++) {
 		char val;
+		WacomButton *button;
 
 		val = *vals[i];
 		if (strlen (vals[i]) > 1 ||
@@ -430,85 +431,118 @@ libwacom_parse_buttons_key(WacomDevice      *device,
 			g_warning ("Ignoring value '%s' in key '%s'", vals[i], key);
 			continue;
 		}
-		val -= 'A';
-		device->buttons[(int) val] |= flag;
+
+		button = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(val));
+		if (!button) {
+			button = g_new0(WacomButton, 1);
+			g_hash_table_insert(device->buttons, GINT_TO_POINTER(val), button);
+		}
+
+		button->flags |= flag;
 	}
 
 	g_strfreev (vals);
 }
 
+static void
+reset_code(gpointer key, gpointer value, gpointer user_data)
+{
+	WacomButton *button = value;
+	button->code = 0;
+}
+
 static inline bool
 set_button_codes_from_string(WacomDevice *device, char **strvals)
 {
-	gint i;
+	bool success = false;
 
 	assert(strvals);
 
-	for (i = 0; i < device->num_buttons; i++) {
-		gint val;
+	for (guint i = 0; i < g_hash_table_size(device->buttons); i++) {
+		char key = 'A' + i;
+		int code;
+		WacomButton *button = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(key));
+
+		if (!button) {
+			g_error("%s: Button %c is not defined, ignoring all codes\n",
+				device->name, key);
+			goto out;
+		}
 
 		if (!strvals[i]) {
 			g_error ("%s: Missing EvdevCode for button %d, ignoring all codes\n",
 				 device->name, i);
-			return false;
+			goto out;
 		}
 
-		if (!safe_atoi_base (strvals[i], &val, 16) || val < BTN_MISC || val >= BTN_DIGI) {
-			g_warning ("%s: Invalid EvdevCode %s for button %d, ignoring all codes\n",
-				   device->name, strvals[i], i);
-			return false;
+		if (!safe_atoi_base (strvals[i], &code, 16) || code < BTN_MISC || code >= BTN_DIGI) {
+			g_warning ("%s: Invalid EvdevCode %s for button %c, ignoring all codes\n",
+				   device->name, strvals[i], key);
+			goto out;
 		}
-		device->button_codes[i] = val;
+		button->code = code;
 	}
+	success = true;
 
-	return true;
+out:
+	if (!success)
+		g_hash_table_foreach(device->buttons, reset_code, NULL);
+
+	return success;
 }
 
 static inline void
 set_button_codes_from_heuristics(WacomDevice *device)
 {
-	gint i;
-	for (i = 0; i < device->num_buttons; i++) {
+	for (char key = 'A'; key <= 'Z'; key++) {
+		int code = 0;
+		WacomButton *button;
+
+		button = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(key));
+		if (!button)
+			continue;
+
 		if (device->cls == WCLASS_BAMBOO ||
 		    device->cls == WCLASS_GRAPHIRE) {
-			switch (i) {
-			case 0:
-				device->button_codes[i] = BTN_LEFT;
-				break;
-			case 1:
-				device->button_codes[i] = BTN_RIGHT;
-				break;
-			case 2:
-				device->button_codes[i] = BTN_FORWARD;
-				break;
-			case 3:
-				device->button_codes[i] = BTN_BACK;
-				break;
+			switch (key) {
+			case 'A': code = BTN_LEFT; break;
+			case 'B': code = BTN_RIGHT; break;
+			case 'C': code = BTN_FORWARD; break;
+			case 'D': code = BTN_BACK; break;
 			default:
-				device->button_codes[i] = 0;
 				break;
 			}
 		} else {
 			/* Assume traditional ExpressKey ordering */
-			switch (i) {
-			case 0 ... 9:
-				device->button_codes[i] = BTN_0 + i;
-				break;
-			case 10 ... 15:
-				device->button_codes[i] = BTN_A + (i-10);
-				break;
-			case 16:
-			case 17:
-				device->button_codes[i] = BTN_BASE + (i-16);
-				break;
+			switch (key) {
+			case 'A': code = BTN_0; break;
+			case 'B': code = BTN_1; break;
+			case 'C': code = BTN_2; break;
+			case 'D': code = BTN_3; break;
+			case 'E': code = BTN_4; break;
+			case 'F': code = BTN_5; break;
+			case 'G': code = BTN_6; break;
+			case 'H': code = BTN_7; break;
+			case 'I': code = BTN_8; break;
+			case 'J': code = BTN_9; break;
+			case 'K': code = BTN_A; break;
+			case 'L': code = BTN_B; break;
+			case 'M': code = BTN_C; break;
+			case 'N': code = BTN_X; break;
+			case 'O': code = BTN_Y; break;
+			case 'P': code = BTN_Z; break;
+			case 'Q': code = BTN_BASE; break;
+			case 'R': code = BTN_BASE2; break;
 			default:
-				device->button_codes[i] = 0;
 				break;
 			}
 		}
 
-		if (device->button_codes[i] == 0)
-			g_warning ("Unable to determine evdev code for button %d (%s)", i, device->name);
+		if (code == 0)
+			g_warning ("Unable to determine evdev code for button %c (%s)",
+				   key, device->name);
+
+		button->code = code;
 	}
 }
 
@@ -519,8 +553,7 @@ libwacom_parse_button_codes(WacomDevice *device,
 	char **vals;
 
 	vals = g_key_file_get_string_list(keyfile, BUTTONS_GROUP, "EvdevCodes", NULL, NULL);
-	if (!vals ||
-	    !set_button_codes_from_string(device, vals))
+	if (!vals || !set_button_codes_from_string(device, vals))
 		set_button_codes_from_heuristics(device);
 
 	g_strfreev (vals);
@@ -532,16 +565,21 @@ libwacom_parse_num_modes (WacomDevice      *device,
 			  const char       *key,
 			  WacomButtonFlags  flag)
 {
+	GHashTableIter iter;
 	int num;
-	int i;
+	gpointer k, v;
 
 	num = g_key_file_get_integer (keyfile, BUTTONS_GROUP, key, NULL);
 	if (num > 0)
 		return num;
-	for (i = 0; i < device->num_buttons; i++) {
-		if (device->buttons[i] & flag)
+
+	g_hash_table_iter_init(&iter, device->buttons);
+	while (g_hash_table_iter_next(&iter, &k, &v)) {
+		WacomButton *button = v;
+		if (button->flags & flag)
 			num++;
 	}
+
 	return num;
 }
 
@@ -621,6 +659,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	char *paired;
 	char **string_list;
 	bool success = FALSE;
+	int num_buttons;
 
 	keyfile = g_key_file_new();
 
@@ -760,17 +799,18 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		g_warning ("Tablet '%s' has touch switch but no touch tool. This is impossible", libwacom_get_match(device));
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
-	device->num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);
-	if (device->num_buttons == 0 &&
+
+	num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);
+	if (num_buttons == 0 &&
 	    g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
 		g_warning ("Tablet '%s' has no buttons defined, do something!", libwacom_get_match(device));
 		g_clear_error (&error);
 	}
-	if (device->num_buttons > 0) {
-		device->buttons = g_new0 (WacomButtonFlags, device->num_buttons);
-		device->button_codes = g_new0 (gint, device->num_buttons);
+
+	device->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
+						NULL, g_free);
+	if (num_buttons > 0)
 		libwacom_parse_buttons(device, keyfile);
-	}
 
 	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
 	if (string_list) {

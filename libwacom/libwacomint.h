@@ -93,8 +93,7 @@ struct _WacomDevice {
 	GArray *styli;
 	GHashTable *buttons; /* 'A' : WacomButton */
 
-	int num_leds;
-	WacomStatusLEDs *status_leds;
+	GArray *status_leds;
 
 	char *layout;
 

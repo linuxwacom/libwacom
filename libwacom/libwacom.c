@@ -344,8 +344,13 @@ libwacom_copy(const WacomDevice *device)
 		int id = g_array_index(device->styli, int, i);
 		g_array_append_val(d->styli, id);
 	}
-	d->num_leds = device->num_leds;
-	d->status_leds = g_memdup2(device->status_leds, sizeof(WacomStatusLEDs) * device->num_leds);
+	d->status_leds = g_array_sized_new(FALSE, FALSE,
+					   sizeof(WacomStatusLEDs),
+					   device->status_leds->len);
+	for (guint i = 0; i < device->status_leds->len; i++) {
+		g_array_append_val(d->status_leds,
+				   g_array_index(device->status_leds, WacomStatusLEDs, i));
+	}
 
 	d->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 					   NULL, g_free);
@@ -459,10 +464,11 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (memcmp(a->styli->data, b->styli->data, sizeof(int) * a->styli->len) != 0)
 		return 1;
 
-	if (a->num_leds != b->num_leds)
+	if (a->status_leds->len != b->status_leds->len)
 		return 1;
 
-	if (memcmp(a->status_leds, b->status_leds, sizeof(WacomStatusLEDs) * a->num_leds) != 0)
+	if (memcmp(a->status_leds->data, b->status_leds->data,
+		   sizeof(WacomStatusLEDs) * a->status_leds->len) != 0)
 		return 1;
 
 	g_hash_table_iter_init(&iter, a->buttons);
@@ -893,7 +899,7 @@ libwacom_unref(WacomDevice *device)
 		libwacom_match_unref(g_array_index(device->matches, WacomMatch*, i));
 	g_array_free (device->matches, TRUE);
 	g_array_free (device->styli, TRUE);
-	g_free (device->status_leds);
+	g_array_free (device->status_leds, TRUE);
 	if (device->buttons)
 		g_hash_table_destroy (device->buttons);
 	g_free (device);
@@ -1111,8 +1117,8 @@ libwacom_get_strips_num_modes(const WacomDevice *device)
 LIBWACOM_EXPORT const WacomStatusLEDs *
 libwacom_get_status_leds(const WacomDevice *device, int *num_leds)
 {
-	*num_leds = device->num_leds;
-	return device->status_leds;
+	*num_leds = device->status_leds->len;
+	return (const WacomStatusLEDs*)device->status_leds->data;
 }
 
 static const struct {
@@ -1128,19 +1134,21 @@ static const struct {
 LIBWACOM_EXPORT int
 libwacom_get_button_led_group (const WacomDevice *device, char button)
 {
-	int led_index;
 	WacomButton *b = g_hash_table_lookup(device->buttons,
 					     GINT_TO_POINTER(button));
 
 	if (!(b->flags & WACOM_BUTTON_MODESWITCH))
 		return -1;
 
-	for (led_index = 0; led_index < device->num_leds; led_index++) {
+	for (guint led_index = 0; led_index < device->status_leds->len; led_index++) {
 		guint n;
 
 		for (n = 0; n < G_N_ELEMENTS (button_status_leds); n++) {
+			WacomStatusLEDs led = g_array_index(device->status_leds,
+							    WacomStatusLEDs,
+							    led_index);
 			if ((b->flags & button_status_leds[n].button_flags) &&
-			    (device->status_leds[led_index] == button_status_leds[n].status_leds)) {
+			    (led == button_status_leds[n].status_leds)) {
 				return led_index;
 			}
 		}

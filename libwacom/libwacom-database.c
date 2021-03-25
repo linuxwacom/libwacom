@@ -812,24 +812,20 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	if (num_buttons > 0)
 		libwacom_parse_buttons(device, keyfile);
 
+	device->status_leds = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
 	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
 	if (string_list) {
-		GArray *array;
 		guint i, n;
 
-		array = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
-		device->num_leds = 0;
 		for (i = 0; string_list[i]; i++) {
 			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
 				if (g_str_equal(string_list[i], supported_leds[n].key)) {
-					g_array_append_val (array, supported_leds[n].value);
-					device->num_leds++;
+					g_array_append_val (device->status_leds, supported_leds[n].value);
 					break;
 				}
 			}
 		}
 		g_strfreev (string_list);
-		device->status_leds = (WacomStatusLEDs *) g_array_free (array, FALSE);
 	}
 
 	success = TRUE;

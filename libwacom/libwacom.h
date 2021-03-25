@@ -276,16 +276,55 @@ WacomDeviceDatabase* libwacom_database_new(void);
 WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
 
 /**
- * Free all memory used by the database.
+ * Increase the refcount of the database by one.
+ * Use libwacom_database_unref() to decrease the refcount, libwacom will
+ * free all resources associated with this database when the refcount
+ * reaches zero.
+ *
+ * @param db A Tablet and Stylus database.
+ * @return The passed-in pointer
+ *
+ * @since 1.10
+ */
+WacomDeviceDatabase *
+libwacom_database_ref(WacomDeviceDatabase *db);
+
+/**
+ * Decrease the refcount of the database by one.
+ * libwacom will free all resources associated with this database when the
+ * refcount reaches zero.
+ *
+ * Use libwacom_database_ref() to increase the refcount.
+ *
+ * @param db A Tablet and Stylus database.
+ * @return always NULL
+ *
+ * @since 1.10
+ */
+WacomDeviceDatabase *
+libwacom_database_unref(WacomDeviceDatabase *db);
+
+/**
+ * Destroy the database context. This function is deprecated, use
+ * libwacom_database_unref() instead for any new code.
+ *
+ * Code using libwacom_database_ref() must not use
+ * libwacom_database_destroy().
+ *
+ * @deprecated Use libwacom_database_unref() instead
  *
  * @param db A Tablet and Stylus database.
  */
+LIBWACOM_DEPRECATED
 void libwacom_database_destroy(WacomDeviceDatabase *db);
 
 /**
  * Create a new device reference from the given device path.
  * In case of error, NULL is returned and the error is set to the
  * appropriate value.
+ *
+ * The returned context has a refcount of at least 1, use
+ * libwacom_database_unref() to drop the context.
  *
  * @param db A device database
  * @param path A device path in the form of e.g. /dev/input/event0

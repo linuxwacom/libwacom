@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 	for (p = list; *p; p++)
 		print_device_info(db, (WacomDevice *)*p);
 
-	libwacom_database_destroy(db);
+	libwacom_database_unref(db);
 
         return 0;
 }

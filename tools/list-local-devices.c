@@ -230,7 +230,7 @@ int main(int argc, char **argv)
 
 	g_list_free_full(tabletlist, tablet_destroy);
 	g_dir_close(dir);
-	libwacom_database_destroy (db);
+	libwacom_database_unref (db);
 	return 0;
 }
 

@@ -63,7 +63,7 @@ fixture_setup(struct fixture *f, gconstpointer user_data)
 static void
 fixture_teardown(struct fixture *f, gconstpointer user_data)
 {
-	libwacom_database_destroy(f->db);
+	libwacom_database_unref(f->db);
 }
 
 

@@ -139,7 +139,7 @@ int main(int argc, char **argv)
 	for (p = list; *p; p++)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_UNKNOWN, output_format);
 
-	libwacom_database_destroy (db);
+	libwacom_database_unref (db);
 	free(list);
 
 	return 0;

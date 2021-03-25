@@ -527,7 +527,7 @@ int main(int argc, char **argv)
 	rc = g_test_run();
 
 	free(all_styli);
-	libwacom_database_destroy (db);
+	libwacom_database_unref (db);
 
 	return rc;
 }

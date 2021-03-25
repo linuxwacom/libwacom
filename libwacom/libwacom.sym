@@ -77,3 +77,9 @@ global:
     libwacom_stylus_get_eraser_type;
     libwacom_stylus_get_paired_ids;
 } LIBWACOM_0.33;
+
+LIBWACOM_1.10 {
+global:
+    libwacom_database_ref;
+    libwacom_database_unref;
+} LIBWACOM_1.4;

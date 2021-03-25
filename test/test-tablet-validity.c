@@ -405,7 +405,7 @@ int main(int argc, char **argv)
 
 	rc = g_test_run();
 
-	libwacom_database_destroy(db);
+	libwacom_database_unref(db);
 	free(devices);
 
 	return rc;

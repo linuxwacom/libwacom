@@ -251,8 +251,8 @@ int main(int argc, char **argv)
 
 	db_old = db;
 	rc = compare_databases(db_old, db_new);
-	libwacom_database_destroy(db_new);
-	libwacom_database_destroy(db_old);
+	libwacom_database_unref(db_new);
+	libwacom_database_unref(db_old);
 
 	rmtmpdir(dirname);
 	free(dirname);

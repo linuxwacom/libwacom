@@ -181,7 +181,7 @@ match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *produ
 }
 
 static gboolean
-libwacom_matchstr_to_match(WacomDevice *device, const char *matchstr)
+libwacom_add_match_from_string(WacomDevice *device, const char *matchstr)
 {
 	char *name = NULL;
 	int vendor_id, product_id;
@@ -681,7 +681,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		guint nmatches = 0;
 		guint first_valid_match = 0;
 		for (i = 0; string_list[i]; i++) {
-			if (libwacom_matchstr_to_match (device, string_list[i])) {
+			if (libwacom_add_match_from_string(device, string_list[i])) {
 				nmatches++;
 				if (nmatches == 1)
 					first_valid_match = i;
@@ -696,7 +696,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		}
 		if (nmatches > 1) {
 			/* set default to first entry */
-			libwacom_matchstr_to_match(device, string_list[first_valid_match]);
+			libwacom_add_match_from_string(device, string_list[first_valid_match]);
 		}
 		g_strfreev (string_list);
 	}

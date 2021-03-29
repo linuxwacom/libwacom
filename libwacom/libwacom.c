@@ -363,9 +363,8 @@ libwacom_copy(const WacomDevice *device)
 	return d;
 }
 
-
-static int
-compare_matches(const WacomDevice *a, const WacomDevice *b)
+static bool
+matches_are_equal(const WacomDevice *a, const WacomDevice *b)
 {
 	const WacomMatch **ma, **mb, **match_a, **match_b;
 
@@ -379,10 +378,10 @@ compare_matches(const WacomDevice *a, const WacomDevice *b)
 				found = 1;
 		}
 		if (!found)
-			return 1;
+			return false;
 	}
 
-	return 0;
+	return true;
 }
 
 /* Compare layouts based on file name, stripping the full path */
@@ -485,7 +484,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	    (a->paired && b->paired && !g_str_equal(a->paired->match, b->paired->match)))
 		return 1;
 
-	if ((flags & WCOMPARE_MATCHES) && compare_matches(a, b) != 0)
+	if ((flags & WCOMPARE_MATCHES) && !matches_are_equal(a, b))
 		return 1;
 	else {
 		WacomMatch *ma = a->match,

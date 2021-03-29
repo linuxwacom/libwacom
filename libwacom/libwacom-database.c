@@ -689,7 +689,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 			nmatches++;
 			/* set default to first entry */
 			if (nmatches == 1)
-				libwacom_add_match(device, m);
+				libwacom_set_default_match(device, m);
 			libwacom_match_unref(m);
 		}
 		g_strfreev (string_list);

@@ -574,7 +574,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 
 	/* for multiple-match devices, set to the one we requested */
 	match = libwacom_match_new(match_name, bus, vendor_id, product_id);
-	libwacom_add_match(ret, match);
+	libwacom_set_default_match(ret, match);
 	libwacom_match_unref(match);
 
 	if (device) {
@@ -963,12 +963,26 @@ libwacom_add_match(WacomDevice *device, WacomMatch *newmatch)
 		const char *matchstr = libwacom_match_get_match_string(m);
 
 		if (g_str_equal(matchstr, newmatch->match)) {
-			device->match = i;
 			return;
 		}
 	}
 	libwacom_match_ref(newmatch);
 	g_array_append_val(device->matches, newmatch);
+}
+
+void
+libwacom_set_default_match(WacomDevice *device, WacomMatch *newmatch)
+{
+	for (guint i = 0; i < device->matches->len; i++) {
+		WacomMatch *m = g_array_index(device->matches, WacomMatch *, i);
+		const char *matchstr = libwacom_match_get_match_string(m);
+
+		if (g_str_equal(matchstr, newmatch->match)) {
+			device->match = i;
+			return;
+		}
+	}
+	g_return_if_reached();
 }
 
 void

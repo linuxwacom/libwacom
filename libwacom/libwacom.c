@@ -555,15 +555,15 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 		match_name = NULL;
 		device = libwacom_new (db, match_name, vendor_id, product_id, bus, error);
 	}
-	if (device != NULL)
-		ret = libwacom_copy(device);
-	else if (fallback == WFALLBACK_NONE)
-		goto bail;
 
-	if (device == NULL && fallback == WFALLBACK_GENERIC) {
+	if (device == NULL) {
+		if (fallback == WFALLBACK_NONE)
+			goto out;
+
+		/* WFALLBACK_GENERIC */
 		device = libwacom_get_device(db, "generic");
 		if (device == NULL)
-			goto bail;
+			goto out;
 
 		ret = libwacom_copy(device);
 
@@ -571,6 +571,8 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 			g_free (ret->name);
 			ret->name = g_strdup(name);
 		}
+	} else {
+		ret = libwacom_copy(device);
 	}
 
 	/* for multiple-match devices, set to the one we requested */
@@ -578,20 +580,15 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	libwacom_set_default_match(ret, match);
 	libwacom_match_unref(match);
 
-	if (device) {
-		/* if unset, use the kernel flags. Could be unset as well. */
-		if (ret->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
-			ret->integration_flags = integration_flags;
+	/* if unset, use the kernel flags. Could be unset as well. */
+	if (device && ret->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
+		ret->integration_flags = integration_flags;
 
-		g_free (name);
-
-		return ret;
-	}
-
-bail:
+out:
 	g_free (name);
-	libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
-	return NULL;
+	if (ret == NULL)
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
+	return ret;
 }
 
 LIBWACOM_EXPORT WacomDevice*

@@ -991,7 +991,21 @@ libwacom_remove_match(WacomDevice *device, WacomMatch *to_remove)
 	for (guint i= 0; i < device->matches->len; i++) {
 		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
 		if (g_str_equal(m->match, to_remove->match)) {
+			WacomMatch *dflt = g_array_index(device->matches,
+							 WacomMatch*,
+							 device->match);
+
+			/* remove from list */
 			g_array_remove_index(device->matches, i);
+
+			/* now reset the default match if needed */
+			if (g_str_equal(dflt->match, to_remove->match)) {
+				WacomMatch *first = g_array_index(device->matches,
+							      WacomMatch*,
+							      0);
+				libwacom_set_default_match(device, first);
+			}
+
 			libwacom_match_unref(to_remove);
 			break;
 		}

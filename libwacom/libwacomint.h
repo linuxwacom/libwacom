@@ -76,7 +76,7 @@ struct _WacomDevice {
 	int width;
 	int height;
 
-	guint match;	/* used match or first match by default */
+	WacomMatch *match;	/* used match or first match by default */
 	GArray *matches;
 
 	WacomMatch *paired;

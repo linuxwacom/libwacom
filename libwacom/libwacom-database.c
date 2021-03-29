@@ -180,8 +180,8 @@ match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *produ
 	return TRUE;
 }
 
-static gboolean
-libwacom_add_match_from_string(WacomDevice *device, const char *matchstr)
+static WacomMatch *
+libwacom_match_from_string(WacomDevice *device, const char *matchstr)
 {
 	char *name = NULL;
 	int vendor_id, product_id;
@@ -189,7 +189,7 @@ libwacom_add_match_from_string(WacomDevice *device, const char *matchstr)
 	WacomMatch *match;
 
 	if (matchstr == NULL)
-		return FALSE;
+		return NULL;
 
 	if (g_str_equal(matchstr, GENERIC_DEVICE_MATCH)) {
 		name = NULL;
@@ -198,15 +198,13 @@ libwacom_add_match_from_string(WacomDevice *device, const char *matchstr)
 		product_id = 0;
 	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
 		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", matchstr);
-		return FALSE;
+		return NULL;
 	}
 
 	match = libwacom_match_new(name, bus, vendor_id, product_id);
-	libwacom_add_match(device, match);
-	libwacom_match_unref(match);
-
 	free(name);
-	return TRUE;
+
+	return match;
 }
 
 static gboolean
@@ -679,26 +677,24 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	} else {
 		guint i;
 		guint nmatches = 0;
-		guint first_valid_match = 0;
 		for (i = 0; string_list[i]; i++) {
-			if (libwacom_add_match_from_string(device, string_list[i])) {
-				nmatches++;
-				if (nmatches == 1)
-					first_valid_match = i;
-			} else {
+			WacomMatch *m = libwacom_match_from_string(device,
+								   string_list[i]);
+			if (!m) {
 				DBG("'%s' is an invalid DeviceMatch in '%s'\n",
 				    string_list[i], path);
+				continue;
 			}
-		}
-		if (nmatches == 0) {
-			g_strfreev (string_list);
-			goto out;
-		}
-		if (nmatches > 1) {
+			libwacom_add_match(device, m);
+			nmatches++;
 			/* set default to first entry */
-			libwacom_add_match_from_string(device, string_list[first_valid_match]);
+			if (nmatches == 1)
+				libwacom_add_match(device, m);
+			libwacom_match_unref(m);
 		}
 		g_strfreev (string_list);
+		if (nmatches == 0)
+			goto out;
 	}
 
 	paired = g_key_file_get_string(keyfile, DEVICE_GROUP, "PairedID", NULL);

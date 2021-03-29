@@ -364,6 +364,12 @@ libwacom_copy(const WacomDevice *device)
 }
 
 static bool
+match_is_equal(const WacomMatch *a, const WacomMatch *b)
+{
+	return g_str_equal(a->match, b->match);
+}
+
+static bool
 matches_are_equal(const WacomDevice *a, const WacomDevice *b)
 {
 	const WacomMatch **ma, **mb, **match_a, **match_b;
@@ -374,7 +380,7 @@ matches_are_equal(const WacomDevice *a, const WacomDevice *b)
 	for (match_a = ma; *match_a; match_a++) {
 		int found = 0;
 		for (match_b = mb; !found && *match_b; match_b++) {
-			if (g_str_equal((*match_a)->match, (*match_b)->match))
+			if (match_is_equal(*match_a, *match_b))
 				found = 1;
 		}
 		if (!found)
@@ -481,17 +487,13 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 
 	if ((a->paired == NULL && b->paired != NULL) ||
 	    (a->paired != NULL && b->paired == NULL) ||
-	    (a->paired && b->paired && !g_str_equal(a->paired->match, b->paired->match)))
+	    (a->paired && b->paired && !match_is_equal(a->paired, b->paired)))
 		return 1;
 
 	if ((flags & WCOMPARE_MATCHES) && !matches_are_equal(a, b))
 		return 1;
-	else {
-		WacomMatch *ma = a->match,
-			   *mb = b->match;
-		if (!g_str_equal(ma->match, mb->match))
+	else if (!match_is_equal(a->match, b->match))
 			return 1;
-	}
 
 	return 0;
 }
@@ -976,9 +978,8 @@ libwacom_set_default_match(WacomDevice *device, WacomMatch *newmatch)
 {
 	for (guint i = 0; i < device->matches->len; i++) {
 		WacomMatch *m = g_array_index(device->matches, WacomMatch *, i);
-		const char *matchstr = libwacom_match_get_match_string(m);
 
-		if (g_str_equal(matchstr, newmatch->match)) {
+		if (match_is_equal(m, newmatch)) {
 			libwacom_match_unref(device->match);
 			device->match = libwacom_match_ref(m);
 			return;
@@ -992,14 +993,14 @@ libwacom_remove_match(WacomDevice *device, WacomMatch *to_remove)
 {
 	for (guint i= 0; i < device->matches->len; i++) {
 		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
-		if (g_str_equal(m->match, to_remove->match)) {
+		if (match_is_equal(m, to_remove)) {
 			WacomMatch *dflt = device->match;
 
 			/* remove from list */
 			g_array_remove_index(device->matches, i);
 
 			/* now reset the default match if needed */
-			if (g_str_equal(dflt->match, to_remove->match)) {
+			if (match_is_equal(dflt, to_remove)) {
 				WacomMatch *first = g_array_index(device->matches,
 							      WacomMatch*,
 							      0);

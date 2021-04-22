@@ -40,24 +40,26 @@ print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
     const int *styli;
     int nstyli;
 
-    printf("%s", libwacom_get_name(device));
+    printf("- name: '%s'\n", libwacom_get_name(device));
     if (libwacom_get_model_name(device)) {
-	    printf(" (%s)", libwacom_get_model_name(device));
+	    printf("  model: '%s'\n", libwacom_get_model_name(device));
     }
-    printf(":\n");
-
     if (!libwacom_has_stylus(device)) {
-        printf("\tno styli defined\n");
+        printf("  styli: []  # no styli defined\n");
         return;
     }
+
+    printf("  styli:\n");
 
     styli = libwacom_get_supported_styli(device, &nstyli);
     for (int i = 0; i < nstyli; i++) {
         const WacomStylus *s;
+        char id[64];
 
         s = libwacom_stylus_get_for_id(db, styli[i]);
-        printf("\t%#8x:\t%s\n",
-               libwacom_stylus_get_id(s),
+        snprintf(id, sizeof(id), "0x%x", libwacom_stylus_get_id(s));
+        printf("    - { id: %*s'%s', name: '%s' }\n",
+               (int)(7 - strlen(id)), " ", id,
                libwacom_stylus_get_name(s));
     }
 }
@@ -68,7 +70,7 @@ int main(int argc, char **argv)
 	WacomDevice **list, **p;
 
 	if (argc > 1) {
-		printf("Usage: %s [--help] - list all supported devices\n",
+		printf("Usage: %s [--help] - list compatible styli\n",
 		       basename(argv[0]));
 	       return !!(strcmp(argv[1], "--help"));
 	}

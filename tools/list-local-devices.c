@@ -38,9 +38,9 @@
 #include "libwacom.h"
 
 static enum output_format {
-	ONELINE,
+	YAML,
 	DATAFILE,
-} output_format = ONELINE;
+} output_format = YAML;
 
 static char *database_path;
 
@@ -92,17 +92,34 @@ tablet_print(gpointer data, gpointer user_data)
 static void
 print_str(gpointer data, gpointer user_data)
 {
-	printf("%s ", (char *)data);
+	printf("  - %s\n", (char *)data);
 }
 
 static void
-tablet_print_oneline(gpointer data, gpointer user_data)
+tablet_print_yaml(gpointer data, gpointer user_data)
 {
 	struct tablet *d = data;
+	const char *name = libwacom_get_name(d->dev);
+	const char *bus = "unknown";
+	int vid = libwacom_get_vendor_id(d->dev);
+	int pid = libwacom_get_product_id(d->dev);
+	WacomBusType bustype = libwacom_get_bustype(d->dev);
 
-	printf("%s: ", libwacom_get_name(d->dev));
+	switch (bustype) {
+		case WBUSTYPE_USB:	bus = "usb"; break;
+		case WBUSTYPE_SERIAL:	bus = "serial"; break;
+		case WBUSTYPE_BLUETOOTH:bus = "bluetooth"; break;
+		case WBUSTYPE_I2C:	bus = "i2c"; break;
+		default:
+			break;
+	}
+
+	printf("- name: '%s'\n", name);
+	printf("  bus: '%s'\n", bus);
+	printf("  vid: '0x%04x'\n", vid);
+	printf("  pid: '0x%04x'\n", pid);
+	printf("  nodes: \n");
 	g_list_foreach(d->nodes, print_str, NULL);
-	printf("\n");
 }
 
 static void
@@ -129,8 +146,8 @@ check_format(const gchar *option_name, const gchar *value, gpointer data, GError
 {
 	if (g_str_equal(value, "datafile"))
 		output_format = DATAFILE;
-	else if (g_str_equal(value, "oneline"))
-		output_format = ONELINE;
+	else if (g_str_equal(value, "yaml"))
+		output_format = YAML;
 	else
 		return FALSE;
 	return TRUE;
@@ -138,7 +155,7 @@ check_format(const gchar *option_name, const gchar *value, gpointer data, GError
 
 static GOptionEntry opts[] = {
         {"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
-	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'oneline', 'datafile'"), NULL },
+	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'yaml', 'datafile'"), NULL },
 	{ .long_name = NULL}
 };
 
@@ -214,18 +231,20 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (!tabletlist)
+	if (!tabletlist) {
 		fprintf(stderr, "Failed to find any devices known to libwacom.\n");
-
-	switch (output_format) {
-	case DATAFILE:
-		g_list_foreach(tabletlist, tablet_print, NULL);
-		break;
-	case ONELINE:
-		g_list_foreach(tabletlist, tablet_print_oneline, NULL);
-		break;
-	default:
-		abort();
+	} else {
+		switch (output_format) {
+		case DATAFILE:
+			g_list_foreach(tabletlist, tablet_print, NULL);
+			break;
+		case YAML:
+			printf("devices:\n");
+			g_list_foreach(tabletlist, tablet_print_yaml, NULL);
+			break;
+		default:
+			abort();
+		}
 	}
 
 	g_list_free_full(tabletlist, tablet_destroy);

@@ -37,9 +37,9 @@
 #include "libwacom.h"
 
 static enum output_format {
-	ONELINE,
+	YAML,
 	DATAFILE,
-} output_format = ONELINE;
+} output_format = YAML;
 
 static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter,
 			       enum output_format format)
@@ -57,7 +57,7 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 			dprintf(STDOUT_FILENO, "---------------------------------------------------------------\n");
 		} else {
 			const char *name = libwacom_get_name(device);
-			const char *bus = NULL;
+			const char *bus = "unknown";
 			int vid = libwacom_match_get_vendor_id(*match);
 			int pid = libwacom_match_get_product_id(*match);
 
@@ -72,7 +72,9 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 
 			/* We don't need to print the generic device */
 			if (vid != 0 || pid != 0 || bus != 0)
-				printf("%s:%04x:%04x:%s\n", bus ? bus : "unknown", vid, pid, name);
+				printf("- { bus: '%s',%*svid: '0x%04x', pid: '0x%04x', name: '%s' }\n",
+				       bus, (int)(10 - strlen(bus)), " ",
+				       vid, pid, name);
 		}
 	}
 }
@@ -82,15 +84,15 @@ check_format(const gchar *option_name, const gchar *value, gpointer data, GError
 {
 	if (g_str_equal(value, "datafile"))
 		output_format = DATAFILE;
-	else if (g_str_equal(value, "oneline"))
-		output_format = ONELINE;
+	else if (g_str_equal(value, "yaml"))
+		output_format = YAML;
 	else
 		return FALSE;
 	return TRUE;
 }
 
 static GOptionEntry opts[] = {
-	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'oneline', 'datafile'"), NULL },
+	{ "format", 0, 0, G_OPTION_ARG_CALLBACK, check_format, N_("Output format, one of 'yaml', 'datafile'"), NULL },
 	{ .long_name = NULL}
 };
 
@@ -123,6 +125,9 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Failed to load device database.\n");
 		return 1;
 	}
+
+	if (output_format == YAML)
+		printf("devices:\n");
 
 	for (p = list; *p; p++)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_USB, output_format);

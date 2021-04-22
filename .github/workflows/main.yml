@@ -5,7 +5,7 @@ on: [ push, pull_request ]
 env:
   CFLAGS: "-Werror -Wall -Wextra -Wno-error=sign-compare -Wno-error=unused-parameter -Wno-error=missing-field-initializers"
   UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev2
-  PIP_PACKAGES: meson ninja libevdev pyudev pytest
+  PIP_PACKAGES: meson ninja libevdev pyudev pytest yq
 
 jobs:
   ###
@@ -197,7 +197,7 @@ jobs:
           ninja_args: install
           ninja_precmd: sudo
       - name: list devices with database in /usr
-        run: libwacom-list-devices --format=oneline > devicelist.default.txt
+        run: libwacom-list-devices --format=yaml > devicelist.default.txt
       - run: sudo mkdir /etc/libwacom
         # We override a Cintiq 27QHD with a single device match, and one of
         # the multiple matches of the Intuos Pro L.
@@ -206,17 +206,17 @@ jobs:
           sed -e 's/27QHD/27QHD MODIFIED/' data/cintiq-27hd.tablet | sudo tee /etc/libwacom/modified-cintiq.tablet
           sed -e 's/Pro L/Pro L MODIFIED/' -e 's/usb:056a:0358;//' data/intuos-pro-2-l.tablet | sudo tee /etc/libwacom/modified-intuos.tablet
       - name: list all devices for debugging
-        run: libwacom-list-devices --format=oneline
+        run: libwacom-list-devices --format=yaml
 
       # We expect the modified tablets to be listed
       # We expect the remaining match for a modified tablet to be listed
       # We expect the overridden match *not* to be listed
       - name: check for the expected devices to be present (or not present)
         run: |
-          libwacom-list-devices --format=oneline | grep "usb:056a:032a:Wacom Cintiq 27QHD MODIFIED"
-          libwacom-list-devices --format=oneline | grep "bluetooth:056a:0361:Wacom Intuos Pro L MODIFIED"
-          test $(libwacom-list-devices --format=oneline | grep "usb:056a:0358" | wc -l) -eq 1
-          test $(libwacom-list-devices --format=oneline | grep "usb:056a:032a:Wacom Cintiq 27QHD M" | wc -l) -eq 1
+          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name')" == "Wacom Cintiq 27QHD MODIFIED"
+          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "bluetooth") | select(.vid == "0x056a") | select(.pid == "0x0361") | .name')" == "Wacom Intuos Pro L MODIFIED"
+          test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x0358") | .name' | wc -l) -eq 1
+          test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name' | wc -l) -eq 1
 
   ###
   #

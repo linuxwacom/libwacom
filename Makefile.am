@@ -14,7 +14,6 @@ dist_libwacomlayouts_DATA =  $(layouts)
 
 EXTRA_DIST = \
 	     data/wacom.example \
-	     data/layouts/README.md \
 	     $(NULL)
 
 

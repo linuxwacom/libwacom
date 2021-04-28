@@ -37,31 +37,31 @@
 static void
 print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
 {
-    const int *styli;
-    int nstyli;
+	const int *styli;
+	int nstyli;
 
-    printf("- name: '%s'\n", libwacom_get_name(device));
-    if (libwacom_get_model_name(device)) {
-	    printf("  model: '%s'\n", libwacom_get_model_name(device));
-    }
-    if (!libwacom_has_stylus(device)) {
-        printf("  styli: []  # no styli defined\n");
-        return;
-    }
+	printf("- name: '%s'\n", libwacom_get_name(device));
+	if (libwacom_get_model_name(device)) {
+		printf("  model: '%s'\n", libwacom_get_model_name(device));
+	}
+	if (!libwacom_has_stylus(device)) {
+		printf("  styli: []  # no styli defined\n");
+		return;
+	}
 
-    printf("  styli:\n");
+	printf("  styli:\n");
 
-    styli = libwacom_get_supported_styli(device, &nstyli);
-    for (int i = 0; i < nstyli; i++) {
-        const WacomStylus *s;
-        char id[64];
+	styli = libwacom_get_supported_styli(device, &nstyli);
+	for (int i = 0; i < nstyli; i++) {
+		const WacomStylus *s;
+		char id[64];
 
-        s = libwacom_stylus_get_for_id(db, styli[i]);
-        snprintf(id, sizeof(id), "0x%x", libwacom_stylus_get_id(s));
-        printf("    - { id: %*s'%s', name: '%s' }\n",
-               (int)(7 - strlen(id)), " ", id,
-               libwacom_stylus_get_name(s));
-    }
+		s = libwacom_stylus_get_for_id(db, styli[i]);
+		snprintf(id, sizeof(id), "0x%x", libwacom_stylus_get_id(s));
+		printf("    - { id: %*s'%s', name: '%s' }\n",
+		       (int)(7 - strlen(id)), " ", id,
+		       libwacom_stylus_get_name(s));
+	}
 }
 
 int main(int argc, char **argv)

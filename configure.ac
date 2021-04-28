@@ -15,7 +15,7 @@ LIBWACOM_LT_VERSION=8:1:6
 AC_SUBST(LIBWACOM_LT_VERSION)
 
 # Initialize libtool
-AC_PROG_LIBTOOL
+LT_INIT([disable-static])
 
 # Checks for programs.
 AC_PROG_CC

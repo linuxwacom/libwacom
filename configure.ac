@@ -49,8 +49,6 @@ UDEV_DIR=${udevdir}
 AC_SUBST(UDEV_DIR)
 
 AC_CONFIG_FILES([Makefile
-                 data/Makefile
-                 data/layouts/Makefile
                  doc/Makefile
                  test/Makefile
                  tools/Makefile

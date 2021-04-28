@@ -124,7 +124,8 @@ install_subdir('data',
 			       'Makefile.in',
 			       'layouts/Makefile.am',
 			       'layouts/Makefile.in',
-			       'layouts/README'])
+			       'layouts/README.md'],
+	       exclude_directories: ['__pycache__'])
 
 test('files-in-git',
      find_program('data/check-files-in-git.sh'),

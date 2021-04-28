@@ -1,3 +1,16 @@
+libwacom 1.10:
+- Duplicate matches in /etc no longer cause conflicts with the
+  system-provided .tablet files
+- libwacom-list-local-devices now prints YAML by default
+- New tools:
+  - libwacom-list-devices lists all supported devices
+  - libwacom-update-db to update the db after adding tablet files
+- New devices:
+  - Elan 2514 variant 25BF
+  - Huion H640P
+  - Lenovo X1 Yoga Gen 6
+  - Samsung CHromebook Pro
+
 libwacom 1.9:
 - libwacom can now read tablet and stylus files from /etc/libwacom
 - New tool: libwacom-show-stylus to interactively show stylus IDs and serial

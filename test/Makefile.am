@@ -43,3 +43,9 @@ test_tablet_svg_validity_LDADD = $(top_builddir)/libwacom/libwacom.la $(LIBXML_L
 test_tablet_svg_validity_LDFLAGS = -no-install
 test_tablet_svg_validity_CFLAGS = $(LIBXML_CFLAGS)
 endif
+
+noinst_SCRIPTS = check-files-in-git.sh test_data_files.py
+EXTRA_DIST = $(noinst_SCRIPTS)
+
+AM_TESTS_ENVIRONMENT=top_srcdir="$(abs_top_srcdir)"; export top_srcdir;
+TESTS = $(noinst_SCRIPTS)

@@ -118,7 +118,6 @@ install_subdir('data',
 	       strip_directory: true,
 	       exclude_files: ['wacom.example',
 			       'check-files-in-git.sh',
-			       'check-svg-exists.sh',
 			       'test_data_files.py',
 			       'Makefile.am',
 			       'Makefile.in',
@@ -129,10 +128,6 @@ install_subdir('data',
 
 test('files-in-git',
      find_program('data/check-files-in-git.sh'),
-     args: [meson.source_root()],
-     suite: ['all'])
-test('svg-layout-exists',
-     find_program('data/check-svg-exists.sh'),
      args: [meson.source_root()],
      suite: ['all'])
 

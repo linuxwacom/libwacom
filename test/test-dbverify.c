@@ -241,9 +241,8 @@ int main(int argc, char **argv)
 
 	db = load_database();
 
-	dirname = strdup("tmp.dbverify.XXXXXX");
-	g_assert(mkdtemp(dirname)); /* just check for non-null to avoid
-				       Coverity complaints */
+	dirname = g_dir_make_tmp("tmp.dbverify.XXXXXX", NULL);
+	g_assert(dirname);
 
 	duplicate_database(db, dirname);
 	db_new = libwacom_database_new_for_path(dirname);
@@ -255,7 +254,7 @@ int main(int argc, char **argv)
 	libwacom_database_destroy(db_old);
 
 	rmtmpdir(dirname);
-	free(dirname);
+	g_free(dirname);
 
 	return rc;
 }

@@ -43,9 +43,3 @@ test_tablet_svg_validity_LDADD = $(top_builddir)/libwacom/libwacom.la $(LIBXML_L
 test_tablet_svg_validity_LDFLAGS = -no-install
 test_tablet_svg_validity_CFLAGS = $(LIBXML_CFLAGS)
 endif
-
-clean-local: clean-local-check
-.PHONY: clean-local-check
-
-clean-local-check:
-	rm -rf tmp.dbverify.*

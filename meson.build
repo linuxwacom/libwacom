@@ -117,10 +117,6 @@ install_subdir('data',
 	       install_dir: dir_data,
 	       strip_directory: true,
 	       exclude_files: ['wacom.example',
-			       'Makefile.am',
-			       'Makefile.in',
-			       'layouts/Makefile.am',
-			       'layouts/Makefile.in',
 			       'layouts/README.md'])
 
 test('files-in-git',

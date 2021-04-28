@@ -117,17 +117,14 @@ install_subdir('data',
 	       install_dir: dir_data,
 	       strip_directory: true,
 	       exclude_files: ['wacom.example',
-			       'check-files-in-git.sh',
-			       'test_data_files.py',
 			       'Makefile.am',
 			       'Makefile.in',
 			       'layouts/Makefile.am',
 			       'layouts/Makefile.in',
-			       'layouts/README.md'],
-	       exclude_directories: ['__pycache__'])
+			       'layouts/README.md'])
 
 test('files-in-git',
-     find_program('data/check-files-in-git.sh'),
+     find_program('test/check-files-in-git.sh'),
      args: [meson.source_root()],
      suite: ['all'])
 

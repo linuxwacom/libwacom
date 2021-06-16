@@ -1,0 +1,51 @@
+# Huion
+# Kamvas Pro 13
+# GT-133
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#          |                       |
+#    A     |                       |
+#    B     |                       |
+#          |                       |
+#          |        DISPLAY        |
+#          |                       |
+#    C     |                       |
+#    D     |                       |
+#    E     |                       |
+#          *-----------------------*
+#
+# Touch Strip Map:
+# NOTE: not enabled because i couldnt get it to work
+# evtest reports 0x108 (BTN_8), 0x109 (BTN_9), 0x130 (BTN_SOUTH)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  a |        DISPLAY        | 
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Huion Kamvas Pro 13
+ModelName=GT-133
+Class=Cintiq
+DeviceMatch=usb:256c:006e:Tablet Monitor Pen;usb:256c:006e:Tablet Monitor Pad;
+Width=12
+Height=7
+Layout=kamvas-pro-13.svg
+Styli=@0xffffd;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Buttons=5
+
+[Buttons]
+Left=A;B;C;D;E
+EvdevCodes=0x100;0x101;0x102;0x103;0x104

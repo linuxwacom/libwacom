@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="cintiq-13hd"
+   width="380"
+   height="250"
+   style="color:#000000;fill:none;font-size:8;stroke:#7f7f7f;stroke-width:.25"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="title">Huion Kamvas Pro 13</title>
+  <circle
+     id="ButtonA"
+     class="A Button"
+     cx="34"
+     cy="67"
+     r="6.75" />
+  <circle
+     id="DotA"
+     class="A Dot"
+     cx="34"
+     cy="67"
+     r="1" />
+  <path
+     id="LeaderA"
+     class="A Leader"
+     d="m46 68h4" />
+  <text
+     id="LabelA"
+     class="A Label"
+     x="52"
+     y="68">A</text>
+  <circle
+     id="ButtonB"
+     class="B Button"
+     cx="34"
+     cy="86"
+     r="6.75" />
+  <path
+     id="LeaderB"
+     class="B Leader"
+     d="m46 86.5h4" />
+  <text
+     id="LabelB"
+     class="B Label"
+     x="52"
+     y="86.5">B</text>
+  <circle
+     id="ButtonC"
+     class="C Button"
+     cx="34"
+     cy="164.2"
+     r="6.75" />
+  <path
+     id="LeaderC"
+     class="C Leader"
+     d="m46 165h4" />
+  <text
+     id="LabelC"
+     class="C Label"
+     x="52"
+     y="165">C</text>
+  <circle
+     id="ButtonD"
+     class="D Button"
+     cx="34"
+     cy="182.2"
+     r="6.75" />
+  <circle
+     id="DotD"
+     class="D Dot"
+     cx="34"
+     cy="182"
+     r="1" />
+  <path
+     id="LeaderD"
+     class="D Leader"
+     d="m46 183.5h4" />
+  <text
+     id="LabelD"
+     class="D Label"
+     x="52"
+     y="183.5">D</text>
+  <circle
+     id="ButtonE"
+     class="E Button"
+     cx="34.25"
+     cy="204.5"
+     r="8.25" />
+  <path
+     id="DotE"
+     class="E Dot"
+     d="m 32.25,201.5 h 4.25 c 0.4155,0 0.75,0.3345 0.75,0.75 v 4.25 c 0,0.4155 -0.3345,0.75 -0.75,0.75 h -4.25 c -0.4155,0 -0.75,-0.3345 -0.75,-0.75 v -4.25 c 0,-0.4155 0.3345,-0.75 0.75,-0.75 z" />
+  <path
+     id="LeaderE"
+     class="E Leader"
+     d="m46 205h4" />
+  <text
+     id="LabelE"
+     class="E Label"
+     x="52"
+     y="205">E</text>
+</svg>

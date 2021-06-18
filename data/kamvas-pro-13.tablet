@@ -42,7 +42,7 @@ DeviceMatch=usb:256c:006e:Tablet Monitor Pen;usb:256c:006e:Tablet Monitor Pad;
 Width=12
 Height=7
 Layout=kamvas-pro-13.svg
-Styli=@0xffffd;
+Styli=0xffffd;
 IntegratedIn=Display
 
 [Features]

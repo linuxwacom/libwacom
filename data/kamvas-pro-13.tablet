@@ -26,9 +26,13 @@
 #    *-----------------------*
 #    |                       |
 #  A |                       |
-#  a |        DISPLAY        | 
+#  a |        DISPLAY        |
 #    |                       |
 #    *-----------------------*
+#
+# Also matches:
+# GAOMON S56K which doesn't have buttons but since HUION re-uses usb IDs
+# there is nothing we can do about this.
 
 [Device]
 Name=Huion Kamvas Pro 13

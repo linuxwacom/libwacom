@@ -1,0 +1,24 @@
+# GAOMON
+# PD1560
+#
+# This file is a slighlty modified gaomon-s620.tablet
+
+[Device]
+Name=GAOMON PD1560
+ModelName=
+DeviceMatch=usb:256c:006e
+Class=Bamboo
+Width=13
+Height=8
+Layout=gaomon-pd1560.svg
+IntegratedIn=Display
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=false
+Buttons=10
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109

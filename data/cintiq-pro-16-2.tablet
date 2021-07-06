@@ -1,0 +1,47 @@
+# Wacom
+# Cintiq Pro 16
+# DTH167
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#        A |                       | E
+#        B |                       | F
+#        C |                       | G
+#        D |                       | H
+#          |                       |
+#          |        DISPLAY        |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          *-----------------------*
+#
+# NOTE: Buttons are on the back side of the device rather
+# than on the top bezel.
+#
+
+[Device]
+Name=Wacom Cintiq Pro 16
+ModelName=DTH167
+Class=Cintiq
+DeviceMatch=usb:056a:03b2
+PairedID=usb:056a:03b3
+Width=14
+Height=8
+Layout=cintiq-pro-16-2.svg
+Styli=@intuos5;@mobilestudio;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D
+Right=E;F;G;H

@@ -1,0 +1,22 @@
+# Lenovo ThinkVision M14t
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+# HW Resolution: 30931 x 17399 (2540 x 2540 lpi)
+#
+# Manually generated from sysinfo.4trjkKChOo
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/157#issuecomment-855588271
+
+[Device]
+Name=Lenovo ThinkVision M14t
+ModelName=
+DeviceMatch=usb:2d1f:524c
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

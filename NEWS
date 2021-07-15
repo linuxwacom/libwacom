@@ -1,3 +1,14 @@
+libwacom 1.11:
+- New devices:
+  - Lenovo ThinkPad L390 Yoga, Yoga C940, Yoga 460, Yoga 720,
+    ThinkVision M14t, IdeaPad Flex5
+  - HP EliteBook x360 1030 G3
+  - Dell XPS 13 9310 2-in-1
+  - HUION Kamvas Pro 13
+    - Note the Gaomon S56K entry was removed in favour of the Kamvas. Gaomon
+      users will see their device show up as Kamvas Pro now.
+  - ELAN 2514 variant 2718
+
 libwacom 1.10:
 - Duplicate matches in /etc no longer cause conflicts with the
   system-provided .tablet files

@@ -7,6 +7,9 @@ KERNEL!="event[0-9]*", GOTO="libwacom_end"
 ATTRS{name}=="* Consumer Control", GOTO="libwacom_end"
 ATTRS{name}=="* System Control", GOTO="libwacom_end"
 
+# HUION keyboard is not a tablet
+ATTRS{name}=="HUION * Keyboard", GOTO="libwacom_end"
+
 # Match all serial wacom tablets with a serial ID starting with WACf
 ENV{ID_BUS}=="tty|pnp", ATTRS{id}=="WACf*", ENV{ID_INPUT}="1", ENV{ID_INPUT_TABLET}="1", GOTO="libwacom_end"
 ENV{ID_BUS}=="tty|pnp", ATTRS{id}=="FUJ*", ENV{ID_INPUT}="1", ENV{ID_INPUT_TABLET}="1", GOTO="libwacom_end"

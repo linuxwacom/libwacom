@@ -9,3 +9,5 @@ HTML_TIMESTAMP         = YES
 MATHJAX_RELPATH        = https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/
 GENERATE_LATEX         = NO
 INPUT                  = @TOPSRCDIR@/libwacom/libwacom.h
+HTML_EXTRA_STYLESHEET  = @TOPSRCDIR@/doc/doxygen-awesome.css
+GENERATE_TREEVIEW      = YES

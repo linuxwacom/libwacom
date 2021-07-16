@@ -1,0 +1,38 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev2 doxygen
+  PIP_PACKAGES: meson ninja libevdev pyudev pytest yq
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
+      - name: meson test ${{matrix.meson_options}}
+        uses: ./.github/actions/meson
+        with:
+          meson_args: -Ddocumentation=enabled
+          meson_skip_test: yes
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./builddir/html/
+          allow_empty_commit: true

@@ -78,6 +78,15 @@ class HWDBFile:
         if tablet.has_pad:
             entries["* Pad"] = ["ID_INPUT_TABLET_PAD=1"]
 
+        # Non-Wacom devices often have a Keyboard node instead of a Pad
+        # device. If they share the USB ID with the tablet, we likely just
+        # assigned ID_INPUT_TABLET to a keyboard device - and libinput refuses
+        # to accept those.
+        # Let's add a generic exclusion rule for anything we know of with a
+        # Keyboard device name.
+        if int(vid, 16) != 0x56a:
+            entries["* Keyboard"] = ["ID_INPUT_TABLET=0"]
+
         lines = [f"# {tablet.name}"]
         for name, props in entries.items():
             lines.append(f"libwacom:name:{name}:input:{match}*")

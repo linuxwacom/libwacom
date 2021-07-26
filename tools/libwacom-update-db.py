@@ -172,16 +172,15 @@ def find_udev_base_dir(path):
 
 
 # udev's behaviour is that where a file X exists in two locations,
-# only the highest-precedence one is read. Our files in /etc are
-# supposed to be complimentary to the system ones so we have to
-# change the filename accordingly. We do so based on the prefix.
+# only the highest-precedence one is read. Our files are supposed to be
+# complimentary to the system-installed ones (which default to
+# 65-libwacom.hwdb) so we bump the filename number.
 def guess_hwdb_filename(basedir):
     hwdbdir = Path(basedir) / "hwdb.d"
     if not hwdbdir.exists():
         raise FileNotFoundError(hwdbdir)
 
-    number = 66 if str(hwdbdir).startswith("/etc/") else 66
-    fname = hwdbdir / f"{number}-libwacom.hwdb"
+    fname = hwdbdir / f"66-libwacom.hwdb"
     return fname
 
 

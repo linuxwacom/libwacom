@@ -1,4 +1,7 @@
 # ELAN touchscreen/pen sensor in the HP Probook x360 435 G7 
+#
+# sysinfo.9FNnwQKhog
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/165
 
 [Device]
 Name=ELAN 2AD9

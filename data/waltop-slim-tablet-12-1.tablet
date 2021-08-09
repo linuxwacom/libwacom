@@ -13,7 +13,7 @@ ModelName=
 DeviceMatch=usb:172f:0031
 Class=Bamboo
 Width=10
-Height=6.25
+Height=6
 Styli=0xffffd;
 
 [Features]

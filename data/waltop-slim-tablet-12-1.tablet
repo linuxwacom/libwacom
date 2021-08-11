@@ -1,0 +1,23 @@
+# Waltop 
+# Slim Tablet 12.1"
+#
+# Also known/rebranded as: Genius G-Pen F610, Trust Slimline Widescreen Tablet, Medion Graphics Pad MD 85637
+#                   guess: VisTablet Original 12", Adesso CyberTablet Z12, Adesso CT-Z12A, PenPower Tooya Pro, Aiptek Slim 12.1 Inch, Aiptek SlimTablet 600u Premium II, NGS Slim Pro, iVistaTablet Slim 12.1, PENTAGRAM ThinType P 2006
+# According to https://digimend.github.io/tablets/Waltop_Slim_Tablet_12.1_inch/
+#
+#
+
+[Device]
+Name=Waltop Slim Tablet 12.1"
+ModelName=
+DeviceMatch=usb:172f:0031
+Class=Bamboo
+Width=10
+Height=6
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=0

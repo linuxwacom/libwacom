@@ -1,0 +1,22 @@
+# ELAN touchscreen/pen sensor present in the HP ProBook 435 G7
+
+[Device]
+Name=ELAN 24D8
+ModelName=
+DeviceMatch=i2c:04f3:2ad8;
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System;
+Styli=0xffffe;0xfffff;
+
+[Features]
+Reversible=false
+Stylus=true
+Ring=false
+Ring2=false
+Touch=true
+TouchSwitch=false
+# StatusLEDs=
+NumStrips=0
+Buttons=0

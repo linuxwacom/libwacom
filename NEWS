@@ -1,3 +1,12 @@
+libwacom 1.12:
+- New devices:
+  - ELAN 2513
+  - HP Probook x360, 435 G7
+  - Waltop Slim Tablet 12.1
+  - XP-PEN Star 3
+- libwacom's hwdb no longer tags devices with "Keyboard" in their name as
+  ID_INPUT_TABLET
+
 libwacom 1.11:
 - New devices:
   - Lenovo ThinkPad L390 Yoga, Yoga C940, Yoga 460, Yoga 720,

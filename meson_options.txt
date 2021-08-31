@@ -1,6 +1,6 @@
 option('documentation',
        type: 'feature',
-       value: 'auto',
+       value: 'disabled',
        description: 'Build doxygen documentation [default=auto]')
 option('udev-dir',
        type: 'string',

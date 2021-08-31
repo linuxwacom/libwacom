@@ -82,3 +82,7 @@ EOF
 $ systemd-hwdb --update
 ```
 Now disconnect and reconnect the device and it should be detected by libwacom.
+
+# API Documentation
+
+The API documentation is available at https://linuxwacom.github.io/libwacom/

@@ -1,0 +1,20 @@
+# LetSketch
+# WP9620
+#
+# HID Descriptor:
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/171
+
+[Device]
+Name=LetSketch LetSketch
+ModelName=WP9620
+DeviceMatch=usb:6161:4d15
+PairedIDs=
+Class=Bamboo
+Width=8
+Height=6
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Buttons=0

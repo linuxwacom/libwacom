@@ -25,7 +25,7 @@
 [Device]
 Name=Wacom Intuos BT M (Android Mode)
 ModelName=CTL-6100WL
-DeviceMatch=usb:2d1f:0378
+DeviceMatch=usb:2d1f:0378;usb:2d1f:03c7
 Class=Bamboo
 Width=3
 Height=5

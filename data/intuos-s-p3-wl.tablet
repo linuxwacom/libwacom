@@ -20,7 +20,7 @@
 [Device]
 Name=Wacom Intuos BT S
 ModelName=CTL-4100WL
-DeviceMatch=usb:056a:0376;bluetooth:056a:0377
+DeviceMatch=usb:056a:0376;bluetooth:056a:0377;usb:056a:03c5;bluetooth:056a:03c6
 Class=Bamboo
 Width=6
 Height=4

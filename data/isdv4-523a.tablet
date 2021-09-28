@@ -7,10 +7,9 @@
 # https://github.com/linuxwacom/libwacom/issues/355#issuecomment-780039943
 
 [Device]
-Name=ISDv4 523a/523e
+Name=ISDv4 523a
 ModelName=
 DeviceMatch=i2c:056a:523a
-DeviceMatch=i2c:056a:523e
 Class=ISDV4
 Width=12
 Height=7

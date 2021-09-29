@@ -1,0 +1,21 @@
+# Lenovo Yoga 9 14ITL5
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+# HW Resolution: 30931 x 17399 (2540 x 2540 lpi)
+#
+# Copied and altered from the ISDV4 523a file. Same laptop, just slightly different PID.
+
+[Device]
+Name=ISDv4 523e
+ModelName=
+DeviceMatch=i2c:056a:523e
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

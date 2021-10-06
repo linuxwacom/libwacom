@@ -2,7 +2,7 @@ project('libwacom', 'c',
 	version: '1.12', # change configure.ac as well
 	license: 'MIT/Expat',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
-	meson_version: '>= 0.50.0')
+	meson_version: '>= 0.51.0')
 
 dir_bin     = get_option('prefix') / get_option('bindir')
 dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
@@ -302,9 +302,7 @@ if get_option('tests').enabled()
 		     suite: ['all'])
 	endif
 
-	if meson.version().version_compare('>= 0.51.0')
-		pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
-	endif
+	pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
 	pytest = find_program('pytest-3', 'pytest')
 	test('pytest',
 	     pytest,

@@ -1,4 +1,5 @@
 # this is for the Wacom pen + touchscreen as found in the Samsung Ativ Smart PC Pro 700t.
+# Also used in the Thinkpad Yoga 260, the PairedID entry is for that device.
 
 [Device]
 Name=Wacom ISDv4 EC
@@ -6,6 +7,7 @@ ModelName=
 DeviceMatch=usb:056a:00ec
 Class=ISDV4
 IntegratedIn=Display;System
+PairedID=usb:04f3:0254
 
 [Features]
 Stylus=true

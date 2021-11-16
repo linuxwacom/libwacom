@@ -587,7 +587,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 out:
 	g_free (name);
 	if (ret == NULL)
-		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "unknown model");
 	return ret;
 }
 

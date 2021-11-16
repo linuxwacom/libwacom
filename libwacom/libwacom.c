@@ -195,6 +195,24 @@ get_bus (GUdevDevice *device)
 	return bus_str;
 }
 
+static GUdevDevice *
+client_query_by_subsystem_and_device_file (GUdevClient *client,
+					   const char  *subsystem,
+					   const char  *path)
+{
+	GList *l, *devices;
+	GUdevDevice *ret = NULL;
+
+	devices = g_udev_client_query_by_subsystem (client, subsystem);
+	for (l = devices; l != NULL; l = l->next) {
+		if (!ret && g_strcmp0 (g_udev_device_get_device_file (l->data), path) == 0)
+			ret = g_object_ref (l->data);
+		g_object_unref (l->data);
+	}
+	g_list_free (devices);
+	return ret;
+}
+
 static gboolean
 get_device_info (const char            *path,
 		 int                   *vendor_id,
@@ -217,7 +235,9 @@ get_device_info (const char            *path,
 	*name = NULL;
 	bus_str = NULL;
 	client = g_udev_client_new (subsystems);
-	device = g_udev_client_query_by_device_file (client, path);
+	device = client_query_by_subsystem_and_device_file (client, subsystems[0], path);
+	if (device == NULL)
+		device = g_udev_client_query_by_device_file (client, path);
 	if (device == NULL) {
 		libwacom_error_set(error, WERROR_INVALID_PATH, "Could not find device '%s' in udev", path);
 		goto out;

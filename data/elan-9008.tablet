@@ -1,4 +1,7 @@
 # ELAN touchscreen/pen sensor present in the ASUS ZenBook Flip S13 OLED UX371
+#
+# sysinfo.rrI71nO76F
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/179
 
 [Device]
 Name=ELAN 9008

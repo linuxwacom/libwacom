@@ -4,9 +4,9 @@
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/179
 
 [Device]
-Name=ELAN 9008
+Name=ELAN 2BB3
 ModelName=
-DeviceMatch=i2c:04F3:2BB3
+DeviceMatch=i2c:04f3:2bb3
 Class=ISDV4
 IntegratedIn=Display;System
 

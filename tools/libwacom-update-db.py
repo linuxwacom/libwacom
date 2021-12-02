@@ -193,7 +193,7 @@ if __name__ == "__main__":
         help="Directory to load .tablet files from"
     )
     # buildsystem-mode is what we use from meson/autotools, it changes the
-    # the behavior to just generate the file
+    # the behavior to just generate the file and print it
     parser.add_argument(
         "--buildsystem-mode",
         action="store_true",

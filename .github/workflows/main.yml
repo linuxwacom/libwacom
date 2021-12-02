@@ -8,57 +8,7 @@ env:
   PIP_PACKAGES: meson ninja libevdev pyudev pytest yq
 
 jobs:
-  ###
-  #
-  # autotools build job
-  #
-  autotools:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        compiler:
-          - gcc
-          - clang
-        make_args:
-          - distcheck
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/pkginstall
-        with:
-          apt: $UBUNTU_PACKAGES
-      - name: autotools make ${{matrix.make_args}}
-        run: |
-          mkdir _build && pushd _build > /dev/null
-          ../autogen.sh --disable-silent-rules
-          make
-          make ${{matrix.make_args}}
-          popd > /dev/null
-        env:
-          CC: ${{matrix.compiler}}
-      - name: capture build logs
-        uses: actions/upload-artifact@v2
-        if: ${{ always() }}  # even if we fail
-        with:
-          name: autotools test logs
-          path: |
-            _build/config.log
-            _build/test-suite.log
-      # And for the distcheck job, let's save the tarball for later use
-      - name: move tarballs to top level
-        if: matrix.make_args == 'distcheck'
-        run: mv _build/libwacom-*tar.* .
-      - name: capture tarball from distcheck
-        uses: actions/upload-artifact@v2
-        if: matrix.make_args == 'distcheck'
-        with:
-          name: tarball
-          path: libwacom-*.tar.bz2
-
-  ###
-  #
-  # meson build job
-  #
-  meson:
+  build-and-dist:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -86,6 +36,11 @@ jobs:
           meson_args: ${{matrix.meson_options}}
         env:
           CC: ${{matrix.compiler}}
+      # create the tarball
+      - name: meson dist
+        uses: ./.github/actions/meson
+        with:
+          ninja_args: dist
       # Capture all the meson logs, even if we failed
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}  # even if we fail
@@ -94,6 +49,13 @@ jobs:
           path: |
             builddir/meson-logs/testlog*.txt
             builddir/meson-logs/meson-log.txt
+      # move the tarball to the top level
+      - name: move tarballs to top level
+        run: mv builddir/meson-dist/libwacom-*tar.xz .
+      - uses: actions/upload-artifact@v2
+        with:
+          name: tarball
+          path: libwacom-*tar.xz
   ###
   #
   # valgrind run
@@ -129,7 +91,7 @@ jobs:
   ####
   # /etc/ loading check
   etcdir:
-    needs: meson
+    needs: build-and-dist
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -175,7 +137,7 @@ jobs:
   ####
   # duplicate device check
   duplicate-devices:
-    needs: meson
+    needs: build-and-dist
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -223,13 +185,8 @@ jobs:
   # tarball verification
   #
   build-from-tarball:
-    needs: autotools
+    needs: build-and-dist
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        buildtool:
-          - meson
-          - autotools
     env:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
@@ -250,20 +207,11 @@ jobs:
       - name: extract tarball
         run: |
           mkdir -p "$TARBALLDIR"
-          tar xf libwacom-*.tar.bz2 -C "$TARBALLDIR"
+          tar xf libwacom-*.tar.xz -C "$TARBALLDIR"
       - run: mkdir -p "$INSTALLDIR"
-      # The next jobs are conditional on the buildtool,
-      # it's the easiest way to save on duplication
       - name: build from tarball with meson
-        if: matrix.buildtool == 'meson'
         uses: ./.github/actions/meson
         with:
           srcdir: $TARBALLDIR/libwacom-*/
           meson_args: --prefix="$INSTALLDIR"
           ninja_args: test install
-      - name: build from tarball with autotools
-        if: matrix.buildtool == 'autotools'
-        run: |
-          pushd "$TARBALLDIR"/libwacom-*/
-          ./autogen.sh --disable-silent-rules --prefix="$INSTALLDIR"
-          make && make install

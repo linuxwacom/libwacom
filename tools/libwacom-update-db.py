@@ -192,7 +192,7 @@ if __name__ == "__main__":
         "path", nargs="?", type=Path, default='/etc/libwacom',
         help="Directory to load .tablet files from"
     )
-    # buildsystem-mode is what we use from meson/autotools, it changes the
+    # buildsystem-mode is what we use from meson, it changes the
     # the behavior to just generate the file and print it
     parser.add_argument(
         "--buildsystem-mode",

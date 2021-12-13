@@ -1,3 +1,14 @@
+libwacom 2.0:
+- New major version with a soname bump. Some symbols have been
+  dropped but no user should've ever used those anyway. See commit
+  b9961dbe912fa096230460b194eebdc8a590d256 for details.
+- New Devices:
+  - LetSketch WP9620
+  - Wacom Intuos BT, Cintiq Pro 16
+  - ISDv4 523a
+  - Dell Latitude 5290, 7275
+  - Asus Zenbook Flip S13
+
 libwacom 1.12:
 - New devices:
   - ELAN 2513

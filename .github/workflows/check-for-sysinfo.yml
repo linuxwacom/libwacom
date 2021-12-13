@@ -1,0 +1,20 @@
+name: "Check for sysinfo in data files"
+
+on: [ pull_request ]
+
+jobs:
+  checksysinfo:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tj-actions/changed-files@v11.9
+        id: added-files
+        with:
+          path: data
+      - name: Check for sysinfo in all added files
+        run: |
+          for file in ${{ steps.added-files.outputs.added_files }}; do
+            if [[ "$file" == *.tablet ]]; then
+                grep -q "sysinfo" $file || (echo "Missing reference to sysinfo.DEADBEEF.gz in $file" && exit 1)
+            fi
+          done

@@ -101,7 +101,7 @@ Usage</h1>
      error = <a class="el" href="group__context.html#ga2b2eedf5db08f000ca4bf245d9b62dfb" title="Allocate a new structure for error reporting.">libwacom_error_new()</a>;
      device = libwacom_new_from_path(db, "/dev/input/event0", WFALLBACK_NONE, error);
      if (!device)
-          return; // should check for error here</pre><pre>     if (libwacom_device_is_builtin(device))
+          return; // should check for error here</pre><pre>     if (libwacom_get_integration_flags(device) &amp; WACOM_DEVICE_INTEGRATED_SYSTEM)
           printf("This is a built-in device\n");</pre><pre>     libwacom_destroy(device);
      libwacom_database_destroy(db);
 </pre><p>For a full API reference to see <a class="el" href="libwacom_8h.html">libwacom.h</a>.</p>
@@ -114,7 +114,7 @@ Database</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 4 2022 23:46:26 for libwacom by
+    <li class="footer">Generated on Wed Jan 5 2022 06:25:15 for libwacom by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

@@ -62,7 +62,7 @@
       if (!device)
            return; // should check for error here
 
-      if (libwacom_device_is_builtin(device))
+      if (libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM)
            printf("This is a built-in device\n");
 
       libwacom_destroy(device);

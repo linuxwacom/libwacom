@@ -3,6 +3,7 @@
 # Elan I2C sensor
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/192
+# sysinfo.43RvL0wF2a
 
 [Device]
 Name=Microsoft Surface Go 2

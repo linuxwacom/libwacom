@@ -48,4 +48,4 @@ noinst_SCRIPTS = check-files-in-git.sh test_data_files.py
 EXTRA_DIST = $(noinst_SCRIPTS)
 
 AM_TESTS_ENVIRONMENT=top_srcdir="$(abs_top_srcdir)"; export top_srcdir;
-TESTS = $(noinst_SCRIPTS)
+TESTS += $(noinst_SCRIPTS)

@@ -4,7 +4,7 @@ AC_INIT([libwacom], [1.12]) # change meson.build as well
 AC_CONFIG_HEADERS([config.h])
 
 # Initialize Automake
-AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip check-news])
+AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip])
 AM_MAINTAINER_MODE([enable])
 
 # Enable silent build when available (Automake 1.11)

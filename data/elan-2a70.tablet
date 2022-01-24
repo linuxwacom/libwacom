@@ -11,7 +11,6 @@ Height=6
 IntegratedIn=Display;System
 
 [Features]
-Reversible=true
 Stylus=true
 Touch=true
 Buttons=0

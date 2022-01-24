@@ -14,7 +14,6 @@ IntegratedIn=Display;System
 Reversible=true
 Stylus=true
 Touch=true
-Ring=false
 Buttons=0
 BuiltIn=false
 

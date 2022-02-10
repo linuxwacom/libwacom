@@ -69,3 +69,18 @@ def test_svg_exists(tabletfile):
 
     except KeyError:
         pass
+
+
+def test_button_evcodes(tabletfile):
+    config = configparser.ConfigParser(strict=True)
+    # Don't convert to lowercase
+    config.optionxform = lambda option: option
+    config.read(tabletfile)
+
+    try:
+        nbuttons = int(config['Features']['Buttons'])
+        str = config['Buttons']['EvdevCodes']
+        codes = [c for c in str.split(";") if c]  # drop empty strings from trailing semicolons
+        assert len(codes) == nbuttons, "Number of buttons mismatches the EvdevCodes"
+    except KeyError:
+        pass

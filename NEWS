@@ -1,3 +1,10 @@
+libwacom 2.1:
+- New Devices:
+  - Dell Latitude 5290
+  - Lenovo ThinkPad X1 Tablet Gen3, Yoga 7
+  - Pine64 PineNote
+  - HP ProBook x360
+
 libwacom 2.0:
 - New major version with a soname bump. Some symbols have been
   dropped but no user should've ever used those anyway. See commit

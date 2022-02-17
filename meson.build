@@ -44,6 +44,7 @@ cflags = cc.get_supported_arguments(
 	'-Wredundant-decls',
 	'-Wincompatible-pointer-types',
 	'-Wformat=2',
+	'-Wsign-compare',
 	'-Wmissing-declarations',
 )
 add_project_arguments(cflags, language: 'c')

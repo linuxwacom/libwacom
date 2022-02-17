@@ -7,9 +7,9 @@ project('libwacom', 'c',
 dir_bin     = get_option('prefix') / get_option('bindir')
 dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
 dir_etc     = get_option('prefix') / get_option('sysconfdir') / 'libwacom'
-dir_src     = meson.source_root()  / 'libwacom'
-dir_src_data= meson.source_root()  / 'data'
-dir_test    = meson.source_root()  / 'test'
+dir_src     = meson.current_source_dir()  / 'libwacom'
+dir_src_data= meson.current_source_dir()  / 'data'
+dir_test    = meson.current_source_dir()  / 'test'
 dir_sys_udev= get_option('prefix') / 'lib' / 'udev'
 
 dir_udev = get_option('udev-dir')
@@ -120,7 +120,7 @@ install_subdir('data',
 
 test('files-in-git',
      find_program('test/check-files-in-git.sh'),
-     args: [meson.source_root()],
+     args: [meson.current_source_dir()],
      suite: ['all'])
 
 # This is a generic pytest invocation. If we end up with more than one
@@ -128,7 +128,7 @@ test('files-in-git',
 pytest = find_program('pytest-3', required: false)
 if pytest.found()
 	test('pytests', pytest,
-	     workdir: meson.source_root(),
+	     workdir: meson.current_source_dir(),
 	     env: ['LIBWACOM_DATA_DIR=@0@'.format(dir_src_data)])
 endif
 
@@ -209,7 +209,7 @@ if doxygen.found()
 	doc_config = configuration_data()
 	doc_config.set('PACKAGE_NAME', meson.project_name())
 	doc_config.set('PACKAGE_VERSION', meson.project_version())
-	doc_config.set('TOPSRCDIR', meson.source_root())
+	doc_config.set('TOPSRCDIR', meson.current_source_dir())
 
 	doxyfile = configure_file(input: 'doc/doxygen.conf.in',
 				  output: 'doxygen.conf',
@@ -227,7 +227,7 @@ if get_option('tests').enabled()
 	dep_libxml  = dependency('libxml-2.0', required : false)
 	dep_dl      = cc.find_library('dl')
 
-	tests_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
+	tests_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.current_source_dir())]
 
 	test_load = executable('test-load',
 			       'test/test-load.c',
@@ -289,8 +289,8 @@ if get_option('tests').enabled()
 	pytest = find_program('pytest-3', 'pytest')
 	test('pytest',
 	     pytest,
-	     args: [meson.source_root()],
-	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.source_root())],
+	     args: [meson.current_source_dir()],
+	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.current_source_dir())],
 	     suite: ['all'])
 endif
 

@@ -181,7 +181,7 @@ match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *produ
 }
 
 static WacomMatch *
-libwacom_match_from_string(WacomDevice *device, const char *matchstr)
+libwacom_match_from_string(const char *matchstr)
 {
 	char *name = NULL;
 	int vendor_id, product_id;
@@ -678,8 +678,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		guint i;
 		guint nmatches = 0;
 		for (i = 0; string_list[i]; i++) {
-			WacomMatch *m = libwacom_match_from_string(device,
-								   string_list[i]);
+			WacomMatch *m = libwacom_match_from_string(string_list[i]);
 			if (!m) {
 				DBG("'%s' is an invalid DeviceMatch in '%s'\n",
 				    string_list[i], path);

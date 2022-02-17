@@ -135,7 +135,7 @@ test_database_size(void)
 }
 
 static int
-compare_databases(WacomDeviceDatabase *orig, WacomDeviceDatabase *new)
+compare_databases(WacomDeviceDatabase *new)
 {
 	int i, rc;
 	WacomDevice **devs_new, **n;
@@ -249,7 +249,7 @@ int main(int argc, char **argv)
 	g_assert(db_new);
 
 	db_old = db;
-	rc = compare_databases(db_old, db_new);
+	rc = compare_databases(db_new);
 	libwacom_database_destroy(db_new);
 	libwacom_database_destroy(db_old);
 

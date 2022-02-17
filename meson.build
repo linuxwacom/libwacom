@@ -45,7 +45,6 @@ cflags = cc.get_supported_arguments(
 	'-Wincompatible-pointer-types',
 	'-Wformat=2',
 	'-Wmissing-declarations',
-	'-fvisibility=hidden',
 )
 add_project_arguments(cflags, language: 'c')
 
@@ -97,6 +96,7 @@ lib_libwacom = shared_library('wacom',
 				'-DDATADIR="@0@"'.format(dir_data),
 				'-DETCDIR="@0@"'.format(dir_etc),
 			      ],
+			      gnu_symbol_visibility: 'hidden',
 			      install: true)
 dep_libwacom = declare_dependency(link_with: lib_libwacom)
 

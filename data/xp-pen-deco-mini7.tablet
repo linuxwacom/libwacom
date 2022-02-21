@@ -1,0 +1,25 @@
+# XP-Pen
+# Deco mini7
+#
+# sysinfo.KmirkLjsqr.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/268
+
+[Device]
+Name=XP-Pen Deco mini7
+ModelName=
+DeviceMatch=usb:28bd:0928:UGTABLET 6 inch PenTablet
+Class=Bamboo
+Width=7
+Height=4
+Layout=xp-pen-deco-mw.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

@@ -1,0 +1,15 @@
+# this is for the Wacom pen + touchscreen as found in the Fujitsu T935
+
+[Device]
+Name=Wacom ISDv4 101
+ModelName=
+DeviceMatch=usb:056a:5019
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=1

@@ -1,3 +1,9 @@
+libwacom 2.2:
+- New Devices:
+  - Lenovo X1 Yoga Gen6, X1 Titanium Gen1
+  - Fujitsu Lifebook T935
+  - Wacom One Pen Display 13
+
 libwacom 2.1:
 - New Devices:
   - Dell Latitude 5290

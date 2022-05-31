@@ -1,0 +1,26 @@
+# HUION
+# H1060P
+# sysinfo.H1060P.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/230
+
+[Device]
+Name=HUION H1060P Tablet
+ModelName=
+DeviceMatch=usb:256c:006d:HUION Huion Tablet Pad;usb:256c:006d:HUION Huion Tablet Pen
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=huion-h1060p.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+NumStrips=0
+Buttons=12
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J;K;L
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109;0x130;0x131

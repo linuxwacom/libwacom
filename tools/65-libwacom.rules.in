@@ -3,9 +3,10 @@
 ACTION=="remove", GOTO="libwacom_end"
 KERNEL!="event[0-9]*", GOTO="libwacom_end"
 
-# HUION and GAOMON consumer and system control devices are not tablets.
+# HUION and GAOMON keyboard, consumer and system control devices are not tablets.
 ATTRS{name}=="* Consumer Control", GOTO="libwacom_end"
 ATTRS{name}=="* System Control", GOTO="libwacom_end"
+ATTRS{name}=="* Keyboard", GOTO="libwacom_end"
 
 # Match all serial wacom tablets with a serial ID starting with WACf
 ENV{ID_BUS}=="tty|pnp", ATTRS{id}=="WACf*", ENV{ID_INPUT}="1", ENV{ID_INPUT_TABLET}="1", GOTO="libwacom_end"

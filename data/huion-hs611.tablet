@@ -31,6 +31,8 @@
 #    |                        |
 #    *------------------------*
 #
+# sysinfo.RmLwlkDGnI
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/132
 
 [Device]
 Name=Huion HS611

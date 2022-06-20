@@ -1,3 +1,11 @@
+libwacom 2.3:
+- New Devices:
+  - Acer Chromebook Spin 13
+  - Huion HS611
+  - Lenovo 14s Yoga, X13 Yoga, X1 Yoga, X380
+  - Samsung Galaxy Book Pro 360, Flex2
+- Devices matching a "* Keyboard" glob are no longer treated as tablets
+
 libwacom 2.2:
 - New Devices:
   - Lenovo X1 Yoga Gen6, X1 Titanium Gen1

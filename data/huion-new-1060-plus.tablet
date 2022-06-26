@@ -1,6 +1,6 @@
 # HUION
 # New 1060 Plus
-#
+# https://github.com/linuxwacom/wacom-hid-descriptors/files/8801571/sysinfo.H1060P.tar.gz
 
 [Device]
 Name=Huion New 1060 Plus

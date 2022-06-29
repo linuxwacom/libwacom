@@ -1,0 +1,14 @@
+[Device]
+Name=XP-Pen Artist 12
+ModelName=
+DeviceMatch=usb:28bd:080a
+Class=Bamboo
+Width=10.09
+Height=5.676
+Styli=0xffffe;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=6

@@ -1,0 +1,56 @@
+# Huion
+# HS611
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------*
+#    |                 |
+#  A |                 |
+#  B |                 |
+#  C |                 |
+#  D |                 |
+#  E |                 |
+#    |      TABLET     |
+#  F |                 |
+#  G |                 |
+#  H |                 |
+#  I |                 |
+#  J |                 |
+#    |                 |
+#    *-----------------*
+#
+#
+# Touch Strip Map:
+# (a=strip min, A=strip max)
+#
+#       a A
+#    *------------------------*
+#    |                        |
+#    |        TABLET          |
+#    |                        |
+#    *------------------------*
+#
+# sysinfo.RmLwlkDGnI
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/132
+
+[Device]
+Name=Huion HS611
+DeviceMatch=usb:256c:006d:HUION Huion Tablet_HS611 Pad;usb:256c:006d:HUION Huion Tablet_HS611 Touch Strip;usb:256c:006d:HUION Huion Tablet_HS611 Pen
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Layout=huion-hs611.svg
+Styli=0xffffd
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+NumStrips=1
+Buttons=10
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107;0x108;0x109

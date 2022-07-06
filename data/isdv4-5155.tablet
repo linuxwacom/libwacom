@@ -1,0 +1,19 @@
+# this is for the Wacom pen + touchscreen as found in some versions of the Lenovo ThinkPad X380 Yoga
+# 
+# sysinfo.k4zWHNsL8F.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/235
+
+[Device]
+Name=Wacom ISDv4 5155
+ModelName=
+DeviceMatch=usb:056a:5155
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

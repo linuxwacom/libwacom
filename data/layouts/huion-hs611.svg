@@ -1,0 +1,272 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   id="hs611"
+   height="218"
+   width="333">
+   <title id="title">Huion HS611</title>
+   <g
+       id="E">
+      <rect
+         id="ButtonE"
+         width="14.940429"
+         height="10.02261"
+         x="19.938246"
+         y="89.998764"
+         ry="5.0113049"
+         class="E Button" />
+      <path
+         d="m 35.975139,95.015501 h 16"
+         id="LeaderE"
+         class="E Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="95.742607"
+         id="LabelE"
+         class="E Label">E</text>
+    </g>
+    <g
+       id="F">
+      <rect
+         ry="5.0113049"
+         y="119.9372"
+         x="19.938246"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonF"
+         class="F Button" />
+      <path
+         id="LeaderF"
+         d="m 35.975139,124.9581 h 16"
+         class="F Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="125.83328"
+         id="LabelF"
+         class="F Label">F</text>
+    </g>
+    <g
+       id="J">
+      <rect
+         ry="5.0113049"
+         y="179.93921"
+         x="19.938244"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonJ"
+         class="J Button" />
+      <path
+         id="LeaderJ"
+         d="m 35.975139,185.00042 h 16"
+         class="J Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="185.62686"
+         id="LabelJ"
+         class="J Label">J</text>
+    </g>
+    <g
+       id="C">
+      <rect
+         id="ButtonC"
+         width="14.940429"
+         height="10.02261"
+         x="19.938246"
+         y="59.961643"
+         ry="5.0113049"
+         class="C Button" />
+      <path
+         id="DotC"
+         d="m 28.185834,64.955528 a 0.70261902,0.66588998 0 0 1 -0.701193,0.665889 0.70261902,0.66588998 0 0 1 -0.704039,-0.663187 0.70261902,0.66588998 0 0 1 0.698337,-0.668579 0.70261902,0.66588998 0 0 1 0.706872,0.660473" />
+      <path
+         d="m 35.975139,64.965242 h 16"
+         id="LeaderC"
+         class="C Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="65.990486"
+         id="LabelC"
+         class="C Label">C</text>
+    </g>
+    <g
+       id="H">
+      <rect
+         ry="5.0113049"
+         y="149.9382"
+         x="19.938244"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonH"
+         class="H Button" />
+      <path
+         d="m 28.185857,155.00258 a 0.70261902,0.66588998 0 0 1 -0.701193,0.66589 0.70261902,0.66588998 0 0 1 -0.704039,-0.66319 0.70261902,0.66588998 0 0 1 0.698337,-0.66858 0.70261902,0.66588998 0 0 1 0.706872,0.66047"
+         id="DotH"/>
+      <path
+         id="LeaderH"
+         d="m 35.975139,154.99717 h 16"
+         class="H Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="155.91202"
+         id="LabelH"
+         class="H Label">H</text>
+    </g>
+    <g
+       id="B">
+      <rect
+         ry="5.0113049"
+         y="45.034912"
+         x="19.938244"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonB"
+         class="B Button" />
+      <path
+         d="m 26.780595,50.012591 h 1.40524"
+         id="LineB" />
+      <path
+         id="LeaderB"
+         d="m 35.975139,50.012592 h 16"
+         class="B Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="50.746315"
+         id="LabelB"
+         class="B Label">B</text>
+    </g>
+    <g
+       id="D">
+      <rect
+         ry="5.0113049"
+         y="74.969101"
+         x="19.938246"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonD"
+         class="D Button" />
+      <path
+         id="LineD"
+         d="m 26.780597,79.990482 h 1.40524" />
+      <path
+         id="LeaderD"
+         d="m 35.975139,79.990482 h 16"
+         class="D Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="80.779503"
+         id="LabelD"
+         class="D Label">D</text>
+    </g>
+    <g
+       id="G">
+      <rect
+         id="ButtonG"
+         width="14.940429"
+         height="10.02261"
+         x="19.938244"
+         y="134.9711"
+         ry="5.0113049"
+         class="G Button" />
+      <path
+         d="m 26.780597,139.98334 h 1.40524"
+         id="LineG" />
+      <path
+         d="m 35.975139,139.98334 h 16"
+         id="LeaderG"
+         class="G Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="141.06967"
+         id="LabelG"
+         class="G Label">G</text>
+    </g>
+    <g
+       id="I">
+      <rect
+         id="ButtonI"
+         width="14.940429"
+         height="10.02261"
+         x="19.938244"
+         y="164.97211"
+         ry="5.0113049"
+         class="I Button" />
+      <path
+         id="LineI"
+         d="m 26.780597,170.00536 h 1.40524" />
+      <path
+         d="m 35.975139,170.00536 h 16"
+         id="LeaderI"
+         class="I Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="170.53181"
+         id="LabelI"
+         class="I Label">I</text>
+    </g>
+    <g
+       id="A">
+      <rect
+         ry="5.0113049"
+         y="29.934193"
+         x="19.938246"
+         height="10.02261"
+         width="14.940429"
+         id="ButtonA"
+         class="A Button" />
+      <path
+         id="LeaderA"
+         d="m 35.975139,34.923341 h 16"
+         class="A Leader" />
+      <text
+         style="text-anchor:start;"
+         x="53.963047"
+         y="35.745594"
+         id="LabelA"
+         class="A Label">A</text>
+    </g>
+    <g
+       id="TouchStrip">
+      <rect
+         id="Strip"
+         width="86.044434"
+         height="1.8669244"
+         x="43.963196"
+         y="14.995788"
+         rx="0.56326956"
+         ry="0.64894742"
+         class="Strip TouchStrip" />
+      <path
+         id="LeaderStripUp"
+         d="M 46.282313,13.892746 V 9.7896363 H 137.9779"
+         class="StripUp Strip Leader" />
+      <text
+         style="text-anchor:start;"
+         x="141"
+         y="12"
+         id="LabelStripUp"
+         class="StripUp Strip Label">Up</text>
+      <path
+         d="m 131.00124,16 h 7.01948"
+         id="LeaderStripDown"
+         class="StripDown Strip Leader" />
+      <text
+         style="text-anchor:start;"
+         x="141"
+         y="19"
+         id="LabelStripDown"
+         class="StripDown Strip Label">Down</text>
+    </g>
+</svg>

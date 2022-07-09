@@ -2,8 +2,8 @@
 Name=ELAN 2CF7
 Class=ISDV4
 DeviceMatch=i2c:04F3:2CF7
-Width=12.1
-Height=6.8
+Width=12
+Height=7
 IntegratedIn=Display;System
 
 

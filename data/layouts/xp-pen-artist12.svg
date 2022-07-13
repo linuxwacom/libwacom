@@ -1,0 +1,168 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="xp-pen-artist12"
+   width="650.0"
+   height="400.0"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="24.0"
+       y="139.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="m 46.0 145.0 h 5.0 V 96.0 h 20.0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="73.0"
+       y="96.0"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="24.0"
+       y="152.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 46.0 158.0 H 56.0 V 122.0 H 71.0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="73.0"
+       y="122.0"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="24.0"
+       y="165.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 46.0 171.0 l 15.0 0.0 l 0.0 -23.0 l 10.0 0.0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="73.0"
+       y="148.0"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="24.0"
+       y="223.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 46.0 230.0 l 15.0 0.0 l 0.0 23.0 l 10.0 0.0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="73.0"
+       y="252.0"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="24.0"
+       y="236.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="m 46.0 242.0 h 10.0 v 36.0 h 15.0" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="73.0"
+       y="278.0"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="24.0"
+       y="249.0"
+       width="20.0"
+       height="12.0"
+       rx="0.5"
+       ry="0.5" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="m 46.0 255.0 h 5.0 v 49.0 h 20.0" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="73.0"
+       y="304.0"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g>
+    <rect
+       id="Strip"
+       class="Strip TouchStrip"
+       x="24.0"
+       y="177.0"
+       width="20.0"
+       height="46.0"
+       rx="1.5"
+       ry="1.0" />
+    <path
+       id="LeaderStripUp"
+       class="StripUp Strip Leader"
+       d="M 11.0 177.0 V 79.0 h 60.0" />
+    <path
+       id="LeaderStripDown"
+       class="StripDown Strip Leader"
+       d="m 11.0 223.0 v 98.0 h 60.0" />
+    <text
+       id="LabelStripUp"
+       class="StripUp Strip Label"
+       x="73.0"
+       y="79.0"
+       style="text-anchor:start;">Up</text>
+    <text
+       id="LabelStripDown"
+       class="StripDown Strip Label"
+       x="73.0"
+       y="321.0"
+       style="text-anchor:start;">Down</text>
+  </g>
+</svg>

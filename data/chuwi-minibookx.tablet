@@ -5,7 +5,7 @@
 
 [Device]
 Name=Chuwi Minibook X
-Class=ISDV4-aes
+Class=ISDV4
 DeviceMatch=i2c:27C6:011A
 Width=23
 Height=14

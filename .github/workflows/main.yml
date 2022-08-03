@@ -45,14 +45,16 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}  # even if we fail
         with:
-          name: meson test logs
+          name: meson test logs-${{matrix.compiler}} ${{matrix.meson_options}}
           path: |
             builddir/meson-logs/testlog*.txt
             builddir/meson-logs/meson-log.txt
       # move the tarball to the top level
       - name: move tarballs to top level
         run: mv builddir/meson-dist/libwacom-*tar.xz .
+      # We only need one tarball for the build-from-tarball job
       - uses: actions/upload-artifact@v2
+        if: ${{ matrix.compiler == 'gcc' && matrix.meson_options == '' }}
         with:
           name: tarball
           path: libwacom-*tar.xz
@@ -84,7 +86,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}  # even if we fail
         with:
-          name: meson test logs
+          name: meson test logs-valgrind
           path: |
             builddir/meson-logs/testlog*.txt
             builddir/meson-logs/meson-log.txt

@@ -129,6 +129,7 @@ test('files-in-git',
 pytest = find_program('pytest-3', required: false)
 if pytest.found()
 	test('pytests', pytest,
+	     args: ['-vv', '--log-level=DEBUG'],
 	     workdir: meson.current_source_dir(),
 	     env: ['LIBWACOM_DATA_DIR=@0@'.format(dir_src_data)])
 endif

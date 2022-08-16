@@ -1,4 +1,6 @@
 # this is for the Wacom pen + touchscreen as found in the Fujitsu Lifebook U729X
+# sysinfo.Huuazdf011
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/245
 
 [Device]
 Name=Wacom Pen and multitouch sensor Pen

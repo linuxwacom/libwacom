@@ -1,7 +1,9 @@
 # Dell Inspiron 7425 14 2-in-1
-# Sensor Type: AES (
+# Sensor Type: AES
 # Features: Touch (Intergrated), Tilt
 #
+# sysinfo.c1SCfcbgC2
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/251
 
 [Device]
 Name=Wacom HID 49C8

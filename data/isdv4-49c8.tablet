@@ -1,0 +1,19 @@
+# Dell Inspiron 7425 14 2-in-1
+# Sensor Type: AES (
+# Features: Touch (Intergrated), Tilt
+#
+
+[Device]
+Name=Wacom HID 49C8
+ModelName=
+DeviceMatch=i2c:056a:49c8
+Class=ISDV4
+Width=11
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

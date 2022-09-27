@@ -44,7 +44,7 @@ PairedID=usb:056a:039b
 Width=14
 Height=8
 Layout=mobilestudio-pro-16.svg
-Styli=@intuos5;@mobilestudio;
+Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display;System
 
 [Features]

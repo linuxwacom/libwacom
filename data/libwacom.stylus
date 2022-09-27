@@ -291,6 +291,22 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
+[0x200]
+# Cintiq Pro 2022
+Name=Pro Pen 3
+Group=cintiqpro2022
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x04200]
+# Cintiq Pro 2022
+Name=Pro Pen 3
+Group=cintiqpro2022
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+
 [0x80842]
 # MobileStudio Pro
 Name=Pro Pen 3D
@@ -355,7 +371,7 @@ Type=Marker
 [0x100804]
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Art Pen
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x10080c;
 Buttons=2
 Axes=Tilt;Pressure;Distance;RotationZ;
@@ -364,7 +380,7 @@ Type=Marker
 [0x100802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x10080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -390,7 +406,7 @@ Type=Classic
 [0x140802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x14080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -399,7 +415,7 @@ Type=Classic
 [0x160802]
 # Cintiq 13HD Pro Pen
 Name=Pro Pen
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x16080a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
@@ -536,7 +552,7 @@ Type=Classic
 [0x14080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x140802;
 EraserType=Invert
 Buttons=2
@@ -546,7 +562,7 @@ Type=Classic
 [0x10080c]
 # Intuos4, 5 and 13HD, 24HD Art Pen
 Name=Art Pen Eraser
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x100804;
 EraserType=Invert
 Buttons=2
@@ -556,7 +572,7 @@ Type=Marker
 [0x10080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x100802;
 EraserType=Invert
 Buttons=2
@@ -576,7 +592,7 @@ Type=General
 [0x16080a]
 # Cintiq 13HD
 Name=Pro Pen Eraser
-Group=intuos5
+Group=propengen2
 PairedStylusIds=0x160802;
 EraserType=Invert
 Buttons=2

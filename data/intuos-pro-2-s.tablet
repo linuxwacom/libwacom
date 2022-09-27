@@ -32,13 +32,13 @@
 [Device]
 Name=Wacom Intuos Pro S
 ModelName=PTH-460
-DeviceMatch=usb:056a:0392;bluetooth:056a:0393;usb:056a:03dc;bluetooth:056a:03dd;
+DeviceMatch=usb:056a:0392;bluetooth:056a:0393;
 Class=Intuos5
 Width=6
 Height=4
 Layout=intuos-pro-2-s.svg
 IntegratedIn=
-Styli=@intuos5;@mobilestudio;
+Styli=@intuos5;@mobilestudio;@propengen2;
 
 [Features]
 Stylus=true

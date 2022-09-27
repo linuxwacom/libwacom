@@ -29,7 +29,7 @@ DeviceMatch=usb:056a:0304
 Width=12
 Height=7
 Layout=cintiq-13hd.svg
-Styli=@intuos5;@intuos4;
+Styli=@intuos5;@intuos4;@propengen2;
 IntegratedIn=Display
 
 [Features]

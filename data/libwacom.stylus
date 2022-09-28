@@ -299,7 +299,7 @@ Buttons=3
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x04200]
+[0x40200]
 # Cintiq Pro 2022
 Name=Pro Pen 3
 Group=cintiqpro2022

@@ -22,6 +22,8 @@
 # NOTE: Buttons are on the back side of the device rather
 # than on the top bezel.
 #
+# sysinfo.rLRz2hqrEy
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/260#issue-1391416660
 
 [Device]
 Name=Wacom Cintiq Pro 27

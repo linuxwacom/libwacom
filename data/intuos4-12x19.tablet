@@ -41,7 +41,7 @@ Width=19
 Height=12
 Layout=intuos4-12x19.svg
 IntegratedIn=
-Styli=@intuos4-lens;@intuos4-puck;@intuos5;@intuos4;
+Styli=@intuos4-lens;@intuos4-puck;@intuos5;@intuos4;@propengen2;
 
 [Features]
 Reversible=true

@@ -49,7 +49,7 @@ Width=6
 Height=4
 Layout=intuos-pro-s.svg
 IntegratedIn=
-Styli=@intuos4-puck;@intuos5;@intuos4;
+Styli=@intuos4-puck;@intuos5;@intuos4;@propengen2;
 
 [Features]
 Stylus=true

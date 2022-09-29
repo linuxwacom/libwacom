@@ -35,7 +35,7 @@ PairedID=usb:056a:0356
 Width=27
 Height=15
 # No pad buttons, so no layout
-Styli=@intuos5;@mobilestudio;
+Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display
 
 [Features]

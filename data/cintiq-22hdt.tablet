@@ -40,7 +40,7 @@ Class=Cintiq
 Width=19
 Height=11
 Layout=cintiq-22hd.svg
-Styli=@intuos5;@intuos4;
+Styli=@intuos5;@intuos4;@propengen2;
 IntegratedIn=Display
 
 [Features]

@@ -34,7 +34,7 @@ DeviceMatch=usb:056a:037c
 Width=20
 Height=12
 # No pad buttons, so no layout
-Styli=@intuos5;@mobilestudio;
+Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display
 
 [Features]

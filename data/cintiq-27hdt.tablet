@@ -12,7 +12,7 @@ PairedID=usb:056a:032c
 Class=Cintiq
 Width=24
 Height=12
-Styli=@intuos5;
+Styli=@intuos5;@propengen2;
 IntegratedIn=Display
 
 [Features]

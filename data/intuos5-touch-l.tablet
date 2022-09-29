@@ -51,7 +51,7 @@ Width=13
 Height=8
 Layout=intuos5-l.svg
 IntegratedIn=
-Styli=@intuos4-lens;@intuos4-puck;@intuos5;@intuos4;
+Styli=@intuos4-lens;@intuos4-puck;@intuos5;@intuos4;@propengen2;
 
 [Features]
 Stylus=true

@@ -1,0 +1,23 @@
+# XP-Pen
+# Deco Fun L
+
+[Device]
+Name=XP-Pen 10 inch PenTablet
+ModelName=
+DeviceMatch=usb:28bd:0932
+PairedIDs=
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Styli=0xffffd
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=0

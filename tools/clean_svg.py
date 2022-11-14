@@ -38,7 +38,7 @@ def traverse_and_clean(node):
     Clean the tree recursively
     """
     # Remove any non-SVG namespace attributes
-    for key in node.attrib.keys():
+    for key in list(node.attrib.keys()):
         if key.startswith("{"):
             del node.attrib[key]
     if node.tag == "g" and "id" in node.attrib:

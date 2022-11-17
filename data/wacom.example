@@ -24,6 +24,11 @@
 # Intuos5 M
 # PTK-650
 #
+# The comment MUST name the sysinfo and link to the respective issue in the
+# wacom-hid-descriptors repository. See that repository for details.
+# sysinfo.1234abcd
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/1234
+#
 # Button Map:
 # (A=1, B=2, C=3, ...)
 #

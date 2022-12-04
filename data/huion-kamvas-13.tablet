@@ -1,0 +1,46 @@
+# Huion
+# Kamvas 13
+# GS1331
+#
+# sysinfo.Xzxg7g1kCc
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/247#issuecomment-1336314324
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |                       |
+#  C |                       |
+#  D |                       |
+#  E |        TABLET         |
+#  F |                       |
+#  G |                       |
+#  H |                       |
+#    |                       |
+#    *-----------------------*
+#
+[Device]
+Name=Huion Kamvas 13
+ModelName=GS1331
+DeviceMatch=usb:256c:006d:HUION Huion Tablet_GS1331 Pad;usb:256c:006d:HUION Huion Tablet_GS1331 Pen
+Class=Cintiq
+Width=12
+Height=7
+IntegratedIn=Display
+Layout=huion-kamvas-13.svg
+Styli=0xffffd
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+Ring=false
+NumStrips=0
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

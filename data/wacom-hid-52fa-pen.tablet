@@ -1,0 +1,23 @@
+# Wacom
+# Wacom HID 52FA Pen
+# WACF2200
+#
+# sysinfo.VBqR9LHvjY
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/275
+
+[Device]
+Name=Wacom HID 52FA Pen
+ModelName=WACF2200
+Class=ISDV4
+DeviceMatch=i2c:056a:52fa;
+# Width=11
+# Height=6
+# No pad buttons, so no layout
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=0

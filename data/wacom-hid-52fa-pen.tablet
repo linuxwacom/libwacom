@@ -1,6 +1,9 @@
 # Wacom
 # Wacom HID 52FA Pen
 # WACF2200
+#
+# sysinfo.VBqR9LHvjY
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/275
 
 [Device]
 Name=Wacom HID 52FA Pen

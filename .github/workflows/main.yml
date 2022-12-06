@@ -21,9 +21,9 @@ jobs:
           # https://github.com/mesonbuild/meson/issues/764
           - '-Db_sanitize=address,undefined -Db_lundef=false'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # install python so we get pip for meson
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -42,7 +42,7 @@ jobs:
         with:
           ninja_args: dist
       # Capture all the meson logs, even if we failed
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: ${{ always() }}  # even if we fail
         with:
           name: meson test logs-${{matrix.compiler}} ${{matrix.meson_options}}
@@ -53,7 +53,7 @@ jobs:
       - name: move tarballs to top level
         run: mv builddir/meson-dist/libwacom-*tar.xz .
       # We only need one tarball for the build-from-tarball job
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: ${{ matrix.compiler == 'gcc' && matrix.meson_options == '' }}
         with:
           name: tarball
@@ -65,9 +65,9 @@ jobs:
   valgrind:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # install python so we get pip for meson
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -83,7 +83,7 @@ jobs:
         env:
           CC: ${{matrix.compiler}}
       # Capture all the meson logs, even if we failed
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: ${{ always() }}  # even if we fail
         with:
           name: meson test logs-valgrind
@@ -108,9 +108,9 @@ jobs:
           - sudo csplit data/libwacom.stylus '/^\[0x822\]/' && sudo mv xx00 /etc/libwacom/first.stylus && sudo mv xx01 /usr/share/libwacom/libwacom.stylus
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # install python so we get pip for meson
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       # Run as sudo because we install to /etc and thus need the pip
@@ -142,9 +142,9 @@ jobs:
     needs: build-and-dist
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # install python so we get pip for meson
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       # Run as sudo because we install to /etc and thus need the pip
@@ -193,9 +193,9 @@ jobs:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -203,7 +203,7 @@ jobs:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
       - name: fetch tarball from previous job(s)
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: tarball
       - name: extract tarball

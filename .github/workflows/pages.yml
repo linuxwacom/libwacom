@@ -13,12 +13,12 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES
       # install python so we get pip for meson
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall

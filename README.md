@@ -1,8 +1,11 @@
 # Overview
 
-libwacom is a library to identify Wacom tablets and their model-specific
+libwacom is a library to identify graphics tablets and their model-specific
 features. It provides easy access to information such as "is this a built-in
 on-screen tablet", "what is the size of this model", etc.
+
+The name libwacom is historical - it was originally developed for Wacom devices
+only but now supports any graphics tablet from any vendor.
 
 **libwacom does not make a tablet work.** libwacom is merely a database with a
 C library wrapper for *information* about a tablet. It has no effect on whether

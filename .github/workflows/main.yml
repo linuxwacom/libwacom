@@ -9,7 +9,7 @@ env:
 
 jobs:
   build-and-dist:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         compiler:
@@ -63,7 +63,7 @@ jobs:
   # valgrind run
   #
   valgrind:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       # install python so we get pip for meson
@@ -94,7 +94,7 @@ jobs:
   # /etc/ loading check
   etcdir:
     needs: build-and-dist
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         command:
@@ -140,7 +140,7 @@ jobs:
   # duplicate device check
   duplicate-devices:
     needs: build-and-dist
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       # install python so we get pip for meson
@@ -188,7 +188,7 @@ jobs:
   #
   build-from-tarball:
     needs: build-and-dist
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'

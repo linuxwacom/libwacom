@@ -23,8 +23,13 @@ import sys
 def systemd_reload():
     '''Make sure our hwdb and udev rules are up-to-date'''
     import subprocess
-    subprocess.run(['systemd-hwdb', 'update'])
-    subprocess.run(['systemctl', 'daemon-reload'])
+    try:
+        subprocess.run(['systemd-hwdb', 'update'])
+        subprocess.run(['systemctl', 'daemon-reload'])
+    except FileNotFoundError:
+        # If any of the commands above are not found (most likely the system
+        # simply does not use systemd), just skip.
+        raise pytest.skip()
 
 
 def pytest_generate_tests(metafunc):

@@ -1,0 +1,31 @@
+# Wacom
+# Wacom One Pen tablet small
+# CTC4110WL
+#
+# sysinfo.2l5xhSogc9.tar.gz
+# sysinfo.jIO6fyyckl.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/317
+#
+# Stylus with two buttons and no physical eraser. Upper button switches the
+# pen to become an eraser, similar to AES devices.
+#
+# Pen active area: 5.98 x 3.74in
+#
+# Has an "Android mode" with a slightly different HID descriptor which
+# uses the alternate VID:PID of 0531:0104.
+
+[Device]
+Name=Wacom One Pen tablet small
+ModelName=CTC4110WL
+DeviceMatch=usb:0531:0100;bluetooth:0531:0101;usb:0531:0104
+Class=Bamboo
+Width=6
+Height=4
+# No pad buttons, so no layout
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Buttons=0

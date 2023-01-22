@@ -1,4 +1,6 @@
-# ELAN touchscreen/pen sensor present in the ASUS ROG Flow X16 [GV601RE]
+# ELAN touchscreen/pen sensor present in the ASUS ROG Flow X16 [GV601R]
+# Auto generated sysinfo file
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/287
 [Device]
 Name=ELAN 2FC2
 ModelName=

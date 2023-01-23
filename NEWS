@@ -1,3 +1,11 @@
+libwacom 2.6:
+- New Devices
+  - ASUS ROG Flow X16
+  - XP-Pen Deco01 v2
+  - Huion Kamvas 13
+  - Wacom HID 52FA Pen
+  - Ugee M708 v1
+
 libwacom 2.5:
 - New Devices
   - Cintiq Pro 27

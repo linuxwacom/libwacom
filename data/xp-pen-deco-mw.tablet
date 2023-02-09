@@ -1,0 +1,30 @@
+# XP-Pen
+# Deco MW
+#
+# sysinfo.VOAFvy7j7z.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/291
+
+[Device]
+Name=XP-Pen Deco MW
+ModelName=Deco_MW
+DeviceMatch=usb:28bd:0936
+Class=Bamboo
+Width=8
+Height=5
+Layout=xp-pen-deco-mw.svg
+Styli=0xffffd;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+Ring=false
+Ring2=false
+NumStrips=0
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107
+

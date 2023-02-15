@@ -9,9 +9,8 @@ ModelName=WACF2200
 DeviceMatch=i2c:056a:52d5
 Class=ISDV4
 IntegratedIn=Display;System
-#302x188mm
-#Height=
-#Width=
+Width=12
+Height=7
 
 [Features]
 Reversible=false

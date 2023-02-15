@@ -1,0 +1,22 @@
+# Lenovo Yoga 7 14ARB7
+
+# sysinfo.vZi1KLwSip.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/279
+
+[Device]
+Name=Wacom HID 52D5
+ModelName=WACF2200
+DeviceMatch=i2c:056a:52d5
+Class=ISDV4
+IntegratedIn=Display;System
+#302x188mm
+#Height=
+#Width=
+
+[Features]
+Reversible=false
+Stylus=true
+Touch=true
+Ring=false
+Buttons=0
+BuiltIn=true

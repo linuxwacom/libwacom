@@ -1,0 +1,43 @@
+# XP-Pen
+# Deco Pro MW
+#
+# sysinfo.H746LBd8lp
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/295
+
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#      |                       |
+#  A B |                       |
+#  C D |                       |
+#      |        TABLET         |
+#  E F |                       |
+#  G H |                       |
+#      |                       |
+#      *-----------------------*
+
+[Device]
+Name=Hanvon Ugee Technology Co.,Ltd Deco Pro MW
+ModelName=
+DeviceMatch=usb:28bd:0934
+PairedIDs=
+Class=Bamboo
+Width=11
+Height=6
+IntegratedIn=
+Layout=xp-pen-deco-pro-mw.svg
+Styli=0xffffd
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Ring=true
+Ring2=false
+NumStrips=0
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

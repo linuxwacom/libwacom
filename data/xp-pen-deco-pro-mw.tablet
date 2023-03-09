@@ -33,7 +33,6 @@ Styli=0xffffd
 Stylus=true
 Reversible=true
 Touch=false
-TouchSwitch=true
 Ring=true
 Ring2=false
 NumStrips=0

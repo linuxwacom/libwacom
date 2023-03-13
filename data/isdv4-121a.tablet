@@ -1,0 +1,22 @@
+# IdeaPad Duet 5 12IAU7
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt, Pressure
+#
+# Manually generated
+# Sysinfo: sysinfo.vcgNVDx9C0
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/278#issue-1509517203
+
+[Device]
+Name=ISDv4 121a
+ModelName=
+DeviceMatch=i2c:4858:121a
+Class=ISDV4
+Width=10
+Height=6
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

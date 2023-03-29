@@ -8,14 +8,12 @@ Name=Wacom HID 52D3
 ModelName=WACF2200
 DeviceMatch=i2c:056a:52d3
 Class=ISDV4
-IntegratedIn=Display;System
 Width=12
 Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
 
 [Features]
-Reversible=false
 Stylus=true
 Touch=true
-Ring=false
 Buttons=0
-BuiltIn=true

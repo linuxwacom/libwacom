@@ -9,23 +9,23 @@ from pathlib import Path
 
 
 WACOM_RECEIVER_USBIDS = [
-    (0x56a, 0x84),
+    (0x56A, 0x84),
 ]
 
 
 def datadir():
-    return Path(os.getenv('MESON_SOURCE_ROOT') or '.') / 'data'
+    return Path(os.getenv("MESON_SOURCE_ROOT") or ".") / "data"
 
 
 def layoutsdir():
-    return datadir() / 'layouts'
+    return datadir() / "layouts"
 
 
 def pytest_generate_tests(metafunc):
     # for any function that takes a "tabletfile" argument return the path to
     # a tablet file
-    if 'tabletfile' in metafunc.fixturenames:
-        metafunc.parametrize('tabletfile', [f for f in datadir().glob('*.tablet')])
+    if "tabletfile" in metafunc.fixturenames:
+        metafunc.parametrize("tabletfile", [f for f in datadir().glob("*.tablet")])
 
 
 def test_device_match(tabletfile):
@@ -36,14 +36,23 @@ def test_device_match(tabletfile):
     # where bus is 'usb' or 'bluetooth'
     # where vid/pid is a lowercase hex
     # where name is optional
-    for match in config['Device']['DeviceMatch'].split(';'):
-        if not match or match == 'generic':
+    for match in config["Device"]["DeviceMatch"].split(";"):
+        if not match or match == "generic":
             continue
 
-        bus, vid, pid = match.split(':')[:3]  # skip the name part of the match
-        assert bus in ['usb', 'bluetooth', 'i2c', 'serial'], f'{tabletfile}: unknown bus type'
-        assert re.match('[0-9a-f]{4}', vid), f'{tabletfile}: {vid} must be lowercase hex'
-        assert re.match('[0-9a-f]{4}', pid), f'{tabletfile}: {pid} must be lowercase hex'
+        bus, vid, pid = match.split(":")[:3]  # skip the name part of the match
+        assert bus in [
+            "usb",
+            "bluetooth",
+            "i2c",
+            "serial",
+        ], f"{tabletfile}: unknown bus type"
+        assert re.match(
+            "[0-9a-f]{4}", vid
+        ), f"{tabletfile}: {vid} must be lowercase hex"
+        assert re.match(
+            "[0-9a-f]{4}", pid
+        ), f"{tabletfile}: {pid} must be lowercase hex"
 
 
 def test_no_receiver_id(tabletfile):
@@ -52,8 +61,8 @@ def test_no_receiver_id(tabletfile):
     config.optionxform = lambda option: option
     config.read(tabletfile)
 
-    receivers = ['usb:{:04x}:{:04x}'.format(*r) for r in WACOM_RECEIVER_USBIDS]
-    for match in config['Device']['DeviceMatch'].split(';'):
+    receivers = ["usb:{:04x}:{:04x}".format(*r) for r in WACOM_RECEIVER_USBIDS]
+    for match in config["Device"]["DeviceMatch"].split(";"):
         assert match not in receivers
 
 
@@ -64,7 +73,7 @@ def test_svg_exists(tabletfile):
     config.read(tabletfile)
 
     try:
-        svg = config['Device']['Layout']
+        svg = config["Device"]["Layout"]
         assert (layoutsdir() / svg).exists()
 
     except KeyError:
@@ -78,9 +87,11 @@ def test_button_evcodes(tabletfile):
     config.read(tabletfile)
 
     try:
-        nbuttons = int(config['Features']['Buttons'])
-        str = config['Buttons']['EvdevCodes']
-        codes = [c for c in str.split(";") if c]  # drop empty strings from trailing semicolons
+        nbuttons = int(config["Features"]["Buttons"])
+        str = config["Buttons"]["EvdevCodes"]
+        codes = [
+            c for c in str.split(";") if c
+        ]  # drop empty strings from trailing semicolons
         assert len(codes) == nbuttons, "Number of buttons mismatches the EvdevCodes"
     except KeyError:
         pass

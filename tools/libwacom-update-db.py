@@ -84,7 +84,7 @@ class HWDBFile:
         # to accept those.
         # Let's add a generic exclusion rule for anything we know of with a
         # Keyboard device name.
-        if int(vid, 16) != 0x56a:
+        if int(vid, 16) != 0x56A:
             entries["* Keyboard"] = ["ID_INPUT_TABLET=0"]
 
         lines = [f"# {tablet.name}"]
@@ -189,8 +189,11 @@ if __name__ == "__main__":
         description="Update the system according to the current set of tablet data files"
     )
     parser.add_argument(
-        "path", nargs="?", type=Path, default='/etc/libwacom',
-        help="Directory to load .tablet files from"
+        "path",
+        nargs="?",
+        type=Path,
+        default="/etc/libwacom",
+        help="Directory to load .tablet files from",
     )
     # buildsystem-mode is what we use from meson, it changes the
     # the behavior to just generate the file and print it
@@ -241,8 +244,12 @@ if __name__ == "__main__":
             print(f"New hwdb file: {hwdbfile}")
 
             if not ns.skip_systemd_hwdb_update:
-                subprocess.run(["systemd-hwdb", "update"],
-                        capture_output=True, check=True, text=True)
+                subprocess.run(
+                    ["systemd-hwdb", "update"],
+                    capture_output=True,
+                    check=True,
+                    text=True,
+                )
             print("Finished, please unplug and replug your device")
         except PermissionError as e:
             print(f"{e}, please run me as root")

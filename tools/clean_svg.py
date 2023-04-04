@@ -81,7 +81,7 @@ def round_if_number(value):
 
 def remove_non_svg_nodes_and_strip_namespace(root):
     if root.tag.startswith(BRACKETS_NAMESPACE):
-        root.tag = root.tag[len(BRACKETS_NAMESPACE):]
+        root.tag = root.tag[len(BRACKETS_NAMESPACE) :]
     for elem in root:
         if (
             not elem.tag.startswith(BRACKETS_NAMESPACE)
@@ -102,7 +102,7 @@ def remove_transform_if_exists(node):
     transform = transform.strip()
 
     if transform.startswith(TRANSLATE):
-        values = transform[len(TRANSLATE) + 1:-1].split(",")
+        values = transform[len(TRANSLATE) + 1 : -1].split(",")
         try:
             x, y = float(values[0]), float(values[1])
         except Exception:
@@ -110,7 +110,7 @@ def remove_transform_if_exists(node):
 
         apply_translation(node, 1, 0, 0, 1, x, y)
     elif transform.startswith(MATRIX):
-        values = transform[len(MATRIX) + 1:-1].split(",")
+        values = transform[len(MATRIX) + 1 : -1].split(",")
         try:
             a, b, c, d, e, f = [float(value.strip()) for value in values]
         except Exception:

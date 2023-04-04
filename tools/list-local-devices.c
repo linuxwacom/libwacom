@@ -90,9 +90,26 @@ tablet_print(gpointer data, gpointer user_data)
 }
 
 static void
-print_str(gpointer data, gpointer user_data)
+print_devnode(gpointer data, gpointer user_data)
 {
-	printf("  - %s\n", (char *)data);
+	const gchar *devnode = data;
+	gchar *name = NULL;
+	gsize size;
+	GError *error = NULL;
+
+	gchar *basename = g_path_get_basename(devnode);
+	char *path = g_strdup_printf("/sys/class/input/%s/device/name", basename);
+
+	g_free(basename);
+	if (g_file_get_contents(path, &name, &size, &error)) {
+		printf("  - %s: '%.*s'\n", devnode, (int)(size - 1), name);
+	} else {
+		fprintf(stderr, "%s\n", error->message);
+	}
+	if (error)
+		g_error_free(error);
+	g_free(name);
+	g_free(path);
 }
 
 static void
@@ -119,7 +136,7 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 	printf("  vid: '0x%04x'\n", vid);
 	printf("  pid: '0x%04x'\n", pid);
 	printf("  nodes: \n");
-	g_list_foreach(d->nodes, print_str, NULL);
+	g_list_foreach(d->nodes, print_devnode, NULL);
 }
 
 static void

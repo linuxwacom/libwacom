@@ -1,3 +1,10 @@
+libwacom 2.7:
+- New Devices:
+  - HP Spectre x360, Envy x360, 
+  - XP-Pen Deco MW, Deco Pro MW, Deco Pro SW
+  - Lenovo Yoga 7, Ideapad Duet 5i
+- Fixed the match for the Huion H950p
+
 libwacom 2.6:
 - New Devices
   - ASUS ROG Flow X16

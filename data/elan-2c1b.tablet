@@ -1,0 +1,20 @@
+# ELAN touchscreen/pen sensor present in the ASUS ZenBook Duo 14 UX482EG-HY067R
+# this is the secondary / bottom touchscreen
+# 309mm x 82mm
+# 12.2in x 3.23in
+#
+# Note: sysinfo missing, see #566 if ever needed
+
+[Device]
+Name=ELAN 2C1B
+ModelName=
+DeviceMatch=i2c:04f3:2c1b
+Class=ISDV4
+Width=14
+Height=4
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

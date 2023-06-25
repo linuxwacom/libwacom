@@ -111,7 +111,7 @@ Layout=bamboo-16fg-m-pt.svg
 # This is a list of stylus IDs supported by the tablet. Non-Wacom devices
 # usually do not support specific stylus IDs and default to the generic
 # pens. If the stylus has an eraser:
-# Styli=0xffffe;0xfffff;
+# Styli=@generic-with-eraser
 # If the stylus does not have an eraser:
 # Styli=@generic-no-eraser
 #

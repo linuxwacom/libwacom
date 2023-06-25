@@ -14,7 +14,7 @@ Width=9
 Height=5
 IntegratedIn=
 Layout=xp-pen-deco-pro-s-m-sw-mw.svg
-Styli=0xffffd
+Styli=@generic-no-eraser
 
 [Features]
 Stylus=true

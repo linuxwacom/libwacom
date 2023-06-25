@@ -12,7 +12,7 @@ Class=Bamboo
 Width=8
 Height=5
 Layout=xp-pen-deco-mw.svg
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

@@ -30,7 +30,7 @@ Width=12
 Height=7
 IntegratedIn=Display
 Layout=huion-kamvas-13.svg
-Styli=0xffffd
+Styli=@generic-no-eraser
 
 [Features]
 Stylus=true

@@ -113,7 +113,7 @@ Layout=bamboo-16fg-m-pt.svg
 # pens. If the stylus has an eraser:
 # Styli=0xffffe;0xfffff;
 # If the stylus does not have an eraser:
-# Styli=0xffffd
+# Styli=@generic-no-eraser
 #
 # For Wacom devices this is needed only for the professional series devices,
 # i.e. Intuos Pro and Cintiq.

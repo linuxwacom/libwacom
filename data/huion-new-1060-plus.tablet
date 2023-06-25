@@ -11,7 +11,7 @@ Width=10
 Height=6
 IntegratedIn=
 Layout=huion-new-1060-plus.svg
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

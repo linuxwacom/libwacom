@@ -14,7 +14,7 @@ Width=10
 Height=6
 IntegratedIn=
 Layout=xp-pen-deco-l.svg
-Styli=0xffffd
+Styli=@generic-no-eraser
 
 [Features]
 Stylus=true

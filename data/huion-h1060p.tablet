@@ -12,7 +12,7 @@ Width=10
 Height=6
 IntegratedIn=
 Layout=huion-h1060p.svg
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

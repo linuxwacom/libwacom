@@ -17,7 +17,7 @@ Width=6
 Height=4
 Layout=gaomon-s620.svg
 IntegratedIn=
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

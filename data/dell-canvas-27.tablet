@@ -27,7 +27,7 @@ PairedID=usb:2575:0204
 Width=23
 Height=13
 # No pad buttons, so no layout
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 IntegratedIn=Display
 
 [Features]

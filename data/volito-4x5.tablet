@@ -9,7 +9,7 @@ DeviceMatch=usb:056a:0060
 Class=Graphire
 Width=5
 Height=4
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

@@ -21,7 +21,7 @@ Width=4
 Height=2
 IntegratedIn=
 Layout=huion-h420.svg
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

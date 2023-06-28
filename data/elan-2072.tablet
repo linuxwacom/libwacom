@@ -8,7 +8,7 @@ Width=12
 Height=7
 Class=PenDisplay
 IntegratedIn=Display;System
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

@@ -14,7 +14,7 @@ Class=ISDV4
 Width=12
 Height=7
 IntegratedIn=Display;System
-Styli=0xfffff;0xffffe;
+Styli=@generic-with-eraser;
 
 [Features]
 Stylus=true

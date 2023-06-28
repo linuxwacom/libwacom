@@ -9,7 +9,7 @@ Width=14
 Height=8
 IntegratedIn=Display;System
 # This device supports both pens with eraser and without eraser
-Styli=0xffffd;0xffffe;0xfffff;
+Styli=@generic-no-eraser;@generic-with-eraser;
 
 [Features]
 Stylus=true

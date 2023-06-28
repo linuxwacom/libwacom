@@ -14,7 +14,7 @@ Width=10
 Height=6
 IntegratedIn=
 Layout=xp-pen-artist12.svg
-Styli=0xffffe;0xfffff;
+Styli=@generic-with-eraser;
 
 [Features]
 Stylus=true

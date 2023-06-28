@@ -9,7 +9,7 @@ DeviceMatch=usb:28bd:0075
 Class=Bamboo
 Width=4
 Height=3
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

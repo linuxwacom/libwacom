@@ -6,7 +6,7 @@
 [Device]
 Name=Huion H950P
 ModelName=
-DeviceMatch=usb:256c:006d:HID 256c:006d Pen;usb:256c:006d:HID 256c:006d Pad
+DeviceMatch=usb:256c:006d:HID 256c:006d Pen;usb:256c:006d:HID 256c:006d Pad;usb:256c:006d:HUION Huion Tablet_H950P;usb:256c:006d:HUION Huion Tablet_H950P Pad;
 Class=Bamboo
 Width=9
 Height=5

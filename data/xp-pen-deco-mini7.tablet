@@ -11,7 +11,7 @@ DeviceMatch=usb:28bd:0928:UGTABLET 6 inch PenTablet
 Class=Bamboo
 Width=7
 Height=4
-Styli=0xffffd;
+Styli=@generic-no-eraser;
 
 [Features]
 Stylus=true

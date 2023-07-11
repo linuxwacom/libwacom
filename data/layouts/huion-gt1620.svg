@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  version="1.1"
+  style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+  id="huion-kamvas-13"
+  width="380"
+  height="250"
+  xmlns="http://www.w3.org/2000/svg">
+  <title
+    id="title">Huion Kamvas 13</title>
+  <g id="A">
+    <circle
+      id="ButtonA"
+      class="A Button"
+      cx="29"
+      cy="56"
+      r="7.5" />
+    <path
+      id="LeaderA"
+      class="A Leader"
+      d="m 51,56 4,0" />
+    <text
+      id="LabelA"
+      class="A Label"
+      x="57"
+      y="56">A</text>
+  </g>
+  <g id="B">
+    <circle
+      id="ButtonB"
+      class="B Button"
+      r="7.5"
+      cy="75"
+      cx="29" />
+    <circle
+      id="DotB"
+      class="B Dot"
+      r="1"
+      cy="75"
+      cx="29" />
+    <path
+      id="LeaderB"
+      class="B Leader"
+      d="m 51,75 4,0" />
+    <text
+      id="LabelB"
+      class="B Label"
+      y="75"
+      x="57">B</text>
+  </g>
+  <g id="C">
+    <circle
+      id="ButtonC"
+      class="C Button"
+      cx="29"
+      cy="94"
+      r="7.5" />
+    <path
+      id="LeaderC"
+      class="C Leader"
+      d="m 51,94 4,0" />
+    <text
+      id="LabelC"
+      class="C Label"
+      x="57"
+      y="94">C</text>
+  </g>
+  <g id="D">
+    <path
+      id="ButtonD"
+      class="D Button"
+      d="m 29,110.125 c 4.155,0 7.5,3.345 7.5,7.5 v 5 h -15 v -5 c 0,-4.155 3.345,-7.5 7.5,-7.5 z" />
+    <circle
+      id="DotD"
+      class="D Dot"
+      r="1"
+      cy="117.5"
+      cx="29" />
+    <path
+      id="LeaderD"
+      class="D Leader"
+      d="m 51,118 4,0" />
+    <text
+      id="LabelD"
+      class="D Label"
+      x="57"
+      y="118">D</text>
+  </g>
+  <g id="E">
+    <path
+      id="ButtonE"
+      class="E Button"
+      d="m 29,139.875 c 4.155,0 7.5,-3.345 7.5,-7.5 v -5 h -15 v 5 c 0,4.155 3.345,7.5 7.5,7.5 z" />
+    <circle
+      id="DotE"
+      class="E Dot"
+      r="1"
+      cy="132.5"
+      cx="29" />
+    <path
+      id="LeaderE"
+      class="E Leader"
+      d="m 51,132 4,0" />
+    <text
+      id="LabelE"
+      class="E Label"
+      x="57"
+      y="132">E</text>
+  </g>
+  <g id="F">
+    <circle
+      id="ButtonF"
+      class="F Button"
+      cx="29"
+      cy="156"
+      r="7.5" />
+    <path
+      id="LeaderF"
+      class="F Leader"
+      d="m 51,156 4,0" />
+    <text
+      id="LabelF"
+      class="F Label"
+      x="57"
+      y="156">F</text>
+  </g>
+  <g id="G">
+    <circle
+      id="ButtonG"
+      class="G Button"
+      cx="29"
+      cy="175"
+      r="7.5" />
+    <circle
+      id="DotG"
+      class="G Dot"
+      r="1"
+      cy="175"
+      cx="29" />
+    <path
+      id="LeaderG"
+      class="G Leader"
+      d="m 51,175 4,0" />
+    <text
+      id="LabelG"
+      class="G Label"
+      x="57"
+      y="175">G</text>
+  </g>
+  <g id="H">
+    <circle
+      id="ButtonH"
+      class="H Button"
+      cx="29"
+      cy="194"
+      r="7.5" />
+    <path
+      id="LeaderH"
+      class="H Leader"
+      d="m 51,194 4,0" />
+    <text
+      id="LabelH"
+      class="H Label"
+      x="57"
+      y="194">H</text>
+  </g>
+</svg>

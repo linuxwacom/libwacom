@@ -1,0 +1,45 @@
+# Huion
+# Kamvas Pro 16 (2.5K)
+# GT1602
+#
+#
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |                       |
+#  C |                       |
+#  D |                       |
+#  E |        TABLET         |
+#  F |                       |
+#  G |                       |
+#  H |                       |
+#    |                       |
+#    *-----------------------*
+#
+[Device]
+Name=Huion Kamvas 16 Pro (2.5K)
+ModelName=GT1602
+DeviceMatch=usb:256c:006d:HUION Huion Tablet_GT1602 Pad;usb:256c:006d:HUION Huion Tablet_GT1602 Pen
+Class=Cintiq
+Width=13
+Height=7
+IntegratedIn=Display
+Layout=huion-GT1602.svg
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+Ring=false
+NumStrips=0
+Buttons=8
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=0x100;0x101;0x102;0x103;0x104;0x105;0x106;0x107

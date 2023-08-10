@@ -1,0 +1,23 @@
+# Wacom
+# Wacom One Pen Display 12
+# DTC121
+#
+# sysinfo.2gKHOkzsUw
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/315
+
+[Device]
+Name=Wacom One Pen Display 12
+ModelName=DTC121
+Class=PenDisplay
+DeviceMatch=usb:056a:03ce
+Width=11
+Height=6
+# No pad buttons, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+Ring=false
+Buttons=0

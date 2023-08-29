@@ -1,0 +1,22 @@
+# Samsung Chromebook Plus v2 (XE520QAB)
+# Sensor Type: EMR
+# Features: Touch (External), Tilt
+# HW Resolution: 26277 x 16423
+#
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/318
+
+[Device]
+Name=Samsung Chromebook Plus v2
+ModelName=
+DeviceMatch=i2c:2D1F:0040:ACPI0C50:00 2D1F:0040 Stylus
+PairedIDs=i2c:06CB:7813
+Class=ISDV4
+Width=12
+Height=8
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

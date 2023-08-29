@@ -7,7 +7,7 @@
 [Device]
 Name=Nuvision Solo 10 Draw
 ModelName=
-DeviceMatch=i2c:04F3:22F7
+DeviceMatch=i2c:04f3:22f7
 Class=ISDV4
 Width=10
 Height=6

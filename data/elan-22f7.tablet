@@ -1,8 +1,9 @@
 # Used in the Nuvision Solo 10 Draw
 #
 # Makes use of the same stylus as the Microsoft Surface line of devices
-#
-#  https://github.com/linuxwacom/wacom-hid-descriptors/issues/48
+# 
+# sysinfo.RGjMc1uFhu.tar.gz 
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/48
 
 [Device]
 Name=Nuvision Solo 10 Draw

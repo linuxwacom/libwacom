@@ -1,3 +1,11 @@
+libwacom 2.8:
+- New Devices:
+  - Wacom One, One 12, One 13
+  - XP Pen Deco mini7
+  - HUION H950P (another match for that one)
+  - Samsung Chromebook Plus v2
+  - Nuvision Solo 10 Draw
+
 libwacom 2.7:
 - New Devices:
   - HP Spectre x360, Envy x360, 

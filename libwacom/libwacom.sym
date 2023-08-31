@@ -68,3 +68,7 @@ global:
 local:
         *;
 };
+
+LIBWACOM_2.9 {
+    libwacom_get_num_keys;
+} LIBWACOM_2.0;

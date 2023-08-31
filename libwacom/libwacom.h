@@ -595,6 +595,16 @@ int libwacom_has_touch(const WacomDevice *device);
 int libwacom_get_num_buttons(const WacomDevice *device);
 
 /**
+ * Tablet keys indices are numbered from zero
+ *
+ * @param device The tablet to query
+ * @return The number of keys on the tablet
+ *
+ * @ingroup devices
+ */
+int libwacom_get_num_keys(const WacomDevice *device);
+
+/**
  * @param device The tablet to query
  * @param num_styli Return location for the number of listed styli
  * @return an array of Styli IDs supported by the device

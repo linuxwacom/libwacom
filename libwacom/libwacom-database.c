@@ -45,6 +45,7 @@
 #define FEATURES_GROUP "Features"
 #define DEVICE_GROUP "Device"
 #define BUTTONS_GROUP "Buttons"
+#define KEYS_GROUP "Keys"
 
 static WacomClass
 libwacom_class_string_to_enum(const char *class)
@@ -493,6 +494,50 @@ out:
 	return success;
 }
 
+static inline bool
+set_key_codes_from_string(WacomDevice *device, char **strvals)
+{
+	bool success = false;
+	assert(strvals);
+
+	for (unsigned int idx = 0; strvals[idx]; idx++) {
+		const char *str = strvals[idx];
+		int code = -1;
+		int type = -1;
+
+		if (!str) {
+			g_error("%s: Missing KeyCode for key %d, ignoring all codes\n",
+				device->name, idx);
+			goto out;
+		} else if (g_str_has_prefix(str, "KEY")) {
+			type = EV_KEY;
+			code = libevdev_event_code_from_code_name(str);
+		} else if (g_str_has_prefix(str, "SW")) {
+			type = EV_SW;
+			code = libevdev_event_code_from_code_name(str);
+		} else {
+			if (safe_atoi_base (strvals[idx], &code, 16))
+				type = EV_KEY;
+		}
+
+		if (code == -1 || type == -1) {
+			g_warning ("%s: Invalid KeyCode %s, ignoring all codes\n", device->name, str);
+			goto out;
+		}
+
+		device->keycodes[idx].type = type;
+		device->keycodes[idx].code = code;
+		device->num_keycodes = idx + 1;
+	}
+
+	success = true;
+out:
+	if (!success) {
+		memset(device->keycodes, 0, sizeof(device->keycodes));
+	}
+	return success;
+}
+
 static inline void
 set_button_codes_from_heuristics(WacomDevice *device)
 {
@@ -603,6 +648,30 @@ libwacom_parse_buttons(WacomDevice *device,
 	device->ring2_num_modes = libwacom_parse_num_modes(device, keyfile, "Ring2NumModes", WACOM_BUTTON_RING2_MODESWITCH);
 	device->strips_num_modes = libwacom_parse_num_modes(device, keyfile, "StripsNumModes", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
 }
+
+static void
+libwacom_parse_key_codes(WacomDevice *device,
+			 GKeyFile    *keyfile)
+{
+	char **vals;
+
+	vals = g_key_file_get_string_list(keyfile, KEYS_GROUP, "KeyCodes", NULL, NULL);
+	if (vals)
+		set_key_codes_from_string(device, vals);
+
+	g_strfreev (vals);
+}
+
+static void
+libwacom_parse_keys(WacomDevice *device,
+		    GKeyFile    *keyfile)
+{
+	if (!g_key_file_has_group(keyfile, KEYS_GROUP))
+		return;
+
+	libwacom_parse_key_codes(device, keyfile);
+}
+
 
 static int
 styli_id_sort(gconstpointer pa, gconstpointer pb)
@@ -829,6 +898,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 
 	libwacom_parse_features(device, keyfile);
 	libwacom_parse_buttons(device, keyfile);
+	libwacom_parse_keys(device, keyfile);
 
 	success = TRUE;
 

@@ -379,6 +379,10 @@ libwacom_copy(const WacomDevice *device)
 		WacomButton *b = g_memdup2(a, sizeof(WacomButton));
 		g_hash_table_insert(d->buttons, k, b);
 	}
+
+	d->num_keycodes = device->num_keycodes;
+	memcpy(d->keycodes, device->keycodes, sizeof(device->keycodes));
+
 	return d;
 }
 
@@ -1118,6 +1122,12 @@ LIBWACOM_EXPORT int
 libwacom_get_num_buttons(const WacomDevice *device)
 {
 	return g_hash_table_size(device->buttons);
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_num_keys(const WacomDevice *device)
+{
+	return device->num_keycodes;
 }
 
 LIBWACOM_EXPORT const int *

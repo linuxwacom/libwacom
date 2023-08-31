@@ -67,6 +67,11 @@ typedef struct _WacomButton {
 	int code;
 } WacomButton;
 
+typedef struct _WacomKeycode {
+	unsigned int type;
+	unsigned int code;
+} WacomKeycode;
+
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy() and
  * libwacom_print_device_description() ! */
@@ -92,6 +97,8 @@ struct _WacomDevice {
 
 	GArray *styli;
 	GHashTable *buttons; /* 'A' : WacomButton */
+	WacomKeycode keycodes[32];
+	size_t num_keycodes;
 
 	GArray *status_leds;
 

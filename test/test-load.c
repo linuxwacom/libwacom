@@ -227,6 +227,16 @@ test_cintiq13hd(struct fixture *f, gconstpointer user_data)
 }
 
 static void
+test_cintiqpro13(struct fixture *f, gconstpointer user_data)
+{
+	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Cintiq Pro 13", NULL);
+	g_assert_nonnull(device);
+	g_assert_cmpint(libwacom_get_num_keys(device), ==, 5);
+
+	libwacom_destroy(device);
+}
+
+static void
 test_bamboopen(struct fixture *f, gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Bamboo Pen", NULL);
@@ -293,6 +303,9 @@ int main(int argc, char **argv)
 		   fixture_teardown);
 	g_test_add("/load/056a:0304", struct fixture, NULL,
 		   fixture_setup, test_cintiq13hd,
+		   fixture_teardown);
+	g_test_add("/load/056a:034f", struct fixture, NULL,
+		   fixture_setup, test_cintiqpro13,
 		   fixture_teardown);
 	g_test_add("/load/056a:0065", struct fixture, NULL,
 		   fixture_setup, test_bamboopen,

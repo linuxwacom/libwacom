@@ -43,3 +43,7 @@ Stylus=true
 Reversible=false
 Touch=true
 Ring=false
+
+[Keys]
+# first key is in-kernel display toggle
+KeyCodes=0;KEY_CONTROLPANEL;KEY_ONSCREEN_KEYBOARD;KEY_BUTTONCONFIG;SW_MUTE_DEVICE

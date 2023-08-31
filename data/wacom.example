@@ -210,3 +210,10 @@ Touchstrip2=J
 # We assume the same number of modes for each of the touchstrips
 # if there is more than one
 StripsNumModes=4
+
+
+# Metadata about the keys on the tablet
+[Keys]
+# The evdev codes for the keys (if any) in order from left to right.
+# Keys that have a code of zero do not produce any events.
+KeyCodes=0;KEY_CONTROLPANEL;KEY_ONSCREEN_KEYBOARD;KEY_BUTTONCONFIG;SW_MUTE_DEVICE

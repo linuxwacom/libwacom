@@ -21,7 +21,6 @@ IntegratedIn=
 Stylus=false
 Reversible=true
 Touch=true
-Buttons=4
 
 [Buttons]
 Left=A;B;C;D

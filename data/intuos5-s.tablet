@@ -55,7 +55,6 @@ Styli=@intuos4-puck;@intuos5;@intuos4;@propengen2;
 Stylus=true
 Reversible=true
 Touch=false
-Buttons=7
 Ring=true
 StatusLEDs=Ring
 

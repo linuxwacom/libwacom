@@ -22,7 +22,6 @@ Class=Remote
 Stylus=false
 Ring=true
 NumStrips=0
-Buttons=18
 StatusLEDs=Ring
 
 [Buttons]

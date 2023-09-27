@@ -41,7 +41,6 @@ IntegratedIn=Display
 Reversible=false
 Stylus=true
 NumStrips=2
-Buttons=8
 
 [Buttons]
 Left=A;B;C;D

@@ -886,7 +886,6 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	print_supported_leds(fd, device);
 
 	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
-	dprintf(fd, "Buttons=%d\n",		libwacom_get_num_buttons(device));
 	dprintf(fd, "\n");
 
 	print_buttons_for_device(fd, device);
@@ -1354,7 +1353,6 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 
 	dprintf(fd, "[%#x]\n",		libwacom_stylus_get_id(stylus));
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
-	dprintf(fd, "Buttons=%d\n",	libwacom_stylus_get_num_buttons(stylus));
 	dprintf(fd, "PairedIds=");
 	paired_ids = libwacom_stylus_get_paired_ids(stylus, &count);
 	for (i = 0; i < count; i++) {

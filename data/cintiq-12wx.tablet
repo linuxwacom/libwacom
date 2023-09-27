@@ -44,7 +44,6 @@ IntegratedIn=Display
 [Features]
 Stylus=true
 NumStrips=2
-Buttons=10
 
 [Buttons]
 Left=A;B;C;D;I

@@ -40,7 +40,6 @@ Stylus=true
 Reversible=false
 Touch=true
 Ring=false
-Buttons=8
 
 [Buttons]
 Left=A;B;C;D

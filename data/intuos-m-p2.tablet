@@ -35,7 +35,6 @@ Styli=@intuospt;
 [Features]
 Stylus=true
 Reversible=false
-Buttons=4
 
 [Buttons]
 Top=A;B;C;D

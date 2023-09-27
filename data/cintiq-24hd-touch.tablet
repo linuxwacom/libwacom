@@ -55,7 +55,6 @@ IntegratedIn=Display
 Stylus=true
 Reversible=false
 Touch=true
-Buttons=16
 Ring=true
 Ring2=true
 StatusLEDs=Ring2;Ring

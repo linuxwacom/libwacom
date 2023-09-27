@@ -31,7 +31,6 @@ Ring=false
 Ring2=false
 NumStrips=0
 # Actually 5 buttons but one is reserved for onscreen menus
-Buttons=4
 
 [Buttons]
 Right=A;B;C;D

@@ -39,7 +39,6 @@ Touch=false
 TouchSwitch=false
 Ring=false
 NumStrips=0
-Buttons=8
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H

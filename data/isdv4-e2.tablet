@@ -12,4 +12,3 @@ IntegratedIn=Display;System
 [Features]
 Stylus=true
 Touch=false
-Buttons=0

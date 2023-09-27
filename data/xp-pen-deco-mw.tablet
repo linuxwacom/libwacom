@@ -22,7 +22,6 @@ TouchSwitch=false
 Ring=false
 Ring2=false
 NumStrips=0
-Buttons=8
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H

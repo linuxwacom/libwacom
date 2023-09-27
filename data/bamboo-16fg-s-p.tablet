@@ -21,5 +21,4 @@ IntegratedIn=
 Stylus=true
 Reversible=true
 Touch=false
-Buttons=0
 EvdevCodes=BTN_LEFT;BTN_FORWARD;BTN_BACK;BTN_RIGHT

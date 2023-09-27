@@ -31,4 +31,4 @@ Buttons=3
 
 [Buttons]
 Left=A;B;C
-EvdevCodes=0x100;0x101;0x102;
+EvdevCodes=BTN_0;BTN_1;BTN_2;

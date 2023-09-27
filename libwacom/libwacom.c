@@ -33,8 +33,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <gudev/gudev.h>
-
-#include <linux/input-event-codes.h>
+#include <libevdev/libevdev.h>
 
 #if !HAVE_G_MEMDUP2
 #define g_memdup2 g_memdup
@@ -754,9 +753,14 @@ static void print_button_evdev_codes(int fd, const WacomDevice *device)
 	unsigned idx = 0;
 
 	for (b = 'A'; b < 'A' + nbuttons; b++) {
+		unsigned int code = libwacom_get_button_evdev_code(device, b);
+		const char *str = libevdev_event_code_get_name(EV_KEY, code);
+
 		assert(idx < sizeof(buf) - 30);
-		idx += snprintf(buf + idx, 30, "0x%x;",
-				libwacom_get_button_evdev_code(device, b));
+		if (str)
+			idx += snprintf(buf + idx, 30, "%s;", str);
+		else
+			idx += snprintf(buf + idx, 30, "0x%x;", code);
 	}
 	dprintf(fd, "EvdevCodes=%s\n", buf);
 }

@@ -50,9 +50,10 @@ cflags = cc.get_supported_arguments(
 add_project_arguments(cflags, language: 'c')
 
 # Dependencies
-pkgconfig   = import('pkgconfig')
-dep_gudev   = dependency('gudev-1.0')
-dep_glib    = dependency('glib-2.0')
+pkgconfig    = import('pkgconfig')
+dep_gudev    = dependency('gudev-1.0')
+dep_glib     = dependency('glib-2.0')
+dep_libevdev = dependency('libevdev')
 
 includes_include = include_directories('include')
 includes_src = include_directories('libwacom')
@@ -75,7 +76,8 @@ src_libwacom = [
 
 deps_libwacom = [
 	    dep_gudev,
-	    dep_glib
+	    dep_glib,
+	    dep_libevdev,
 ]
 
 inc_libwacom = [

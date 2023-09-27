@@ -21,4 +21,4 @@ Buttons=2
 
 [Buttons]
 Bottom=A;B
-EvdevCodes=0x110;0x111
+EvdevCodes=BTN_LEFT;BTN_RIGHT

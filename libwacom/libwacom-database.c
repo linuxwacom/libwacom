@@ -30,6 +30,7 @@
 #include "libwacomint.h"
 #include "util-strings.h"
 #include <linux/input-event-codes.h>
+#include <libevdev/libevdev.h>
 
 #include <assert.h>
 #include <glib.h>
@@ -455,8 +456,9 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 
 	for (guint i = 0; i < g_hash_table_size(device->buttons); i++) {
 		char key = 'A' + i;
-		int code;
+		int code = -1;
 		WacomButton *button = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(key));
+		const char *str = strvals[i];
 
 		if (!button) {
 			g_error("%s: Button %c is not defined, ignoring all codes\n",
@@ -464,17 +466,22 @@ set_button_codes_from_string(WacomDevice *device, char **strvals)
 			goto out;
 		}
 
-		if (!strvals[i]) {
+		if (!str) {
 			g_error ("%s: Missing EvdevCode for button %d, ignoring all codes\n",
 				 device->name, i);
 			goto out;
+		} else if (g_str_has_prefix(str, "BTN")) {
+			code = libevdev_event_code_from_code_name(str);
+		} else if (!safe_atoi_base(str, &code, 16)) {
+			code = -1;
 		}
 
-		if (!safe_atoi_base (strvals[i], &code, 16) || code < BTN_MISC || code >= BTN_DIGI) {
+		if (code < BTN_MISC || code >= BTN_DIGI) {
 			g_warning ("%s: Invalid EvdevCode %s for button %c, ignoring all codes\n",
-				   device->name, strvals[i], key);
+				   device->name, str, key);
 			goto out;
 		}
+
 		button->code = code;
 	}
 	success = true;

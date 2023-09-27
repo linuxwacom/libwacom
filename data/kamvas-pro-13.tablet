@@ -21,7 +21,7 @@
 #
 # Touch Strip Map:
 # NOTE: not enabled because i couldnt get it to work
-# evtest reports 0x108 (BTN_8), 0x109 (BTN_9), 0x130 (BTN_SOUTH)
+# evtest reports BTN_8, BTN_9, BTN_SOUTH
 #
 #    *-----------------------*
 #    |                       |
@@ -54,4 +54,4 @@ Buttons=5
 
 [Buttons]
 Left=A;B;C;D;E
-EvdevCodes=0x100;0x101;0x102;0x103;0x104
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4

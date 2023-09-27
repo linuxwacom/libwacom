@@ -649,6 +649,61 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	device->styli = array;
 }
 
+static void
+libwacom_parse_features(WacomDevice *device, GKeyFile *keyfile)
+{
+	char **string_list;
+
+	/* Features */
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Stylus", NULL))
+		device->features |= FEATURE_STYLUS;
+
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Touch", NULL))
+		device->features |= FEATURE_TOUCH;
+
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring", NULL))
+		device->features |= FEATURE_RING;
+
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring2", NULL))
+		device->features |= FEATURE_RING2;
+
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
+		device->features |= FEATURE_REVERSIBLE;
+
+	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "TouchSwitch", NULL))
+		device->features |= FEATURE_TOUCHSWITCH;
+
+	if (device->integration_flags != WACOM_DEVICE_INTEGRATED_UNSET &&
+	    device->integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY &&
+	    device->features & FEATURE_REVERSIBLE)
+		g_warning ("Tablet '%s' is both reversible and integrated in screen. This is impossible", libwacom_get_match(device));
+
+	if (!(device->features & FEATURE_RING) &&
+	    (device->features & FEATURE_RING2))
+		g_warning ("Tablet '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
+
+	if (!(device->features & FEATURE_TOUCH) &&
+	    (device->features & FEATURE_TOUCHSWITCH))
+		g_warning ("Tablet '%s' has touch switch but no touch tool. This is impossible", libwacom_get_match(device));
+
+	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
+
+	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
+	if (string_list) {
+		guint i, n;
+
+		for (i = 0; string_list[i]; i++) {
+			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
+				if (g_str_equal(string_list[i], supported_leds[n].key)) {
+					g_array_append_val (device->status_leds, supported_leds[n].value);
+					break;
+				}
+			}
+		}
+		g_strfreev (string_list);
+	}
+}
+
 static WacomDevice*
 libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 			      const char *datadir,
@@ -767,59 +822,13 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		g_array_append_val(device->styli, fallback_stylus);
 	}
 
-	/* Features */
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Stylus", NULL))
-		device->features |= FEATURE_STYLUS;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Touch", NULL))
-		device->features |= FEATURE_TOUCH;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring", NULL))
-		device->features |= FEATURE_RING;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring2", NULL))
-		device->features |= FEATURE_RING2;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
-		device->features |= FEATURE_REVERSIBLE;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "TouchSwitch", NULL))
-		device->features |= FEATURE_TOUCHSWITCH;
-
-	if (device->integration_flags != WACOM_DEVICE_INTEGRATED_UNSET &&
-	    device->integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY &&
-	    device->features & FEATURE_REVERSIBLE)
-		g_warning ("Tablet '%s' is both reversible and integrated in screen. This is impossible", libwacom_get_match(device));
-
-	if (!(device->features & FEATURE_RING) &&
-	    (device->features & FEATURE_RING2))
-		g_warning ("Tablet '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
-
-	if (!(device->features & FEATURE_TOUCH) &&
-	    (device->features & FEATURE_TOUCHSWITCH))
-		g_warning ("Tablet '%s' has touch switch but no touch tool. This is impossible", libwacom_get_match(device));
-
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
-
 	device->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 						NULL, g_free);
-	libwacom_parse_buttons(device, keyfile);
-
 	device->status_leds = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
-	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
-	if (string_list) {
-		guint i, n;
 
-		for (i = 0; string_list[i]; i++) {
-			for (n = 0; n < G_N_ELEMENTS (supported_leds); n++) {
-				if (g_str_equal(string_list[i], supported_leds[n].key)) {
-					g_array_append_val (device->status_leds, supported_leds[n].value);
-					break;
-				}
-			}
-		}
-		g_strfreev (string_list);
-	}
+	libwacom_parse_features(device, keyfile);
+	libwacom_parse_buttons(device, keyfile);
 
 	success = TRUE;
 

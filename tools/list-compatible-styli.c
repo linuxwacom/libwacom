@@ -32,6 +32,7 @@
 #include <assert.h>
 #include <libgen.h>
 #include <unistd.h>
+#include <glib.h>
 #include "libwacom.h"
 
 static void
@@ -72,7 +73,7 @@ int main(int argc, char **argv)
 	if (argc > 1) {
 		printf("Usage: %s [--help] - list compatible styli\n",
 		       basename(argv[0]));
-	       return !!(strcmp(argv[1], "--help"));
+	       return g_str_equal(argv[1], "--help");
 	}
 
 	db = libwacom_database_new_for_path(DATABASEPATH);

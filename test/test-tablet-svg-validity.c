@@ -69,7 +69,7 @@ class_found (gchar **classes, gchar *value)
 {
 	gchar **ptr = classes;
 	while (*ptr) {
-		if (strcmp (*ptr++, value) == 0)
+		if (g_str_equal (*ptr++, value))
 			return TRUE;
 	}
 
@@ -365,7 +365,7 @@ static void setup_tests(WacomDevice *device)
 	const char *name;
 
 	name = libwacom_get_name(device);
-	if (strcmp(name, "Generic") == 0)
+	if (g_str_equal(name, "Generic"))
 		return;
 
 	add_test(device, test_filename);

@@ -166,7 +166,6 @@ Ring2=false
 NumStrips=1
 
 # Number of buttons on the tablet
-Buttons=9
 
 # Metadata about the buttons on the tablet
 # Buttons are "numbered" using upper-case letters

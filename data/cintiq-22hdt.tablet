@@ -49,7 +49,6 @@ Reversible=false
 Touch=true
 Ring=false
 NumStrips=2
-Buttons=18
 
 [Buttons]
 Left=B;C;D;E;A;F;G;H;I

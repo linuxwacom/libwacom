@@ -147,10 +147,7 @@ class TabletDatabase:
                         )
                 except KeyError:
                     pass
-                try:
-                    t.has_pad = int(config["Features"]["Buttons"]) > 0
-                except KeyError:
-                    pass
+                t.has_pad = config.has_section("Buttons")
                 yield t
 
 

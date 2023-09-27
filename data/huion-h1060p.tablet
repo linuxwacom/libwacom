@@ -19,7 +19,6 @@ Stylus=true
 Reversible=true
 Touch=false
 NumStrips=0
-Buttons=12
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H;I;J;K;L

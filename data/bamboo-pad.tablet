@@ -17,7 +17,6 @@ Layout=bamboo-pad.svg
 Stylus=true
 Reversible=false
 Touch=true
-Buttons=2
 
 [Buttons]
 Bottom=A;B

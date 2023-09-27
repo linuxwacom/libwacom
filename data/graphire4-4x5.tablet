@@ -27,7 +27,6 @@ Layout=graphire4-4x5.svg
 
 [Features]
 Stylus=true
-Buttons=2
 
 [Buttons]
 Top=A;B

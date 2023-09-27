@@ -42,7 +42,6 @@ IntegratedIn=Display;System
 Stylus=true
 Touch=true
 Ring=false
-Buttons=11
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H;I;J;K

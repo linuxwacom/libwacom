@@ -42,7 +42,6 @@ Styli=@intuos3-pucks;@intuos3;
 [Features]
 Stylus=true
 NumStrips=2
-Buttons=8
 
 [Buttons]
 Left=A;B;C;D

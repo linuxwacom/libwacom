@@ -28,7 +28,6 @@ IntegratedIn=
 Reversible=false
 Stylus=true
 Ring=false
-Buttons=2
 
 [Buttons]
 Top=A;B

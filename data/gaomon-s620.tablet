@@ -22,7 +22,6 @@ Styli=@generic-no-eraser;
 [Features]
 Stylus=true
 Reversible=true
-Buttons=4
 
 [Buttons]
 Left=A;B;C;D

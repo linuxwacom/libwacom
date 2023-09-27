@@ -28,7 +28,6 @@ Styli=@generic-no-eraser;
 Stylus=true
 Reversible=true
 Touch=false
-Buttons=6
 
 [Buttons]
 Left=A;B;C;D;E;F

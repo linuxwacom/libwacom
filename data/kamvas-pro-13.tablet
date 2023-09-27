@@ -50,7 +50,6 @@ Stylus=true
 Reversible=false
 Touch=false
 Ring=false
-Buttons=5
 
 [Buttons]
 Left=A;B;C;D;E

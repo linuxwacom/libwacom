@@ -30,7 +30,6 @@ Touch=false
 Ring=false
 Ring2=false
 NumStrips=0
-Buttons=4
 
 [Buttons]
 Top=A;B;C;D

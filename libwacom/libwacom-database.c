@@ -591,6 +591,9 @@ libwacom_parse_buttons(WacomDevice *device,
 {
 	guint i;
 
+	if (!g_key_file_has_group(keyfile, BUTTONS_GROUP))
+		return;
+
 	for (i = 0; i < G_N_ELEMENTS (options); i++)
 		libwacom_parse_buttons_key(device, keyfile, options[i].key, options[i].flag);
 
@@ -661,7 +664,6 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	char *paired;
 	char **string_list;
 	bool success = FALSE;
-	int num_buttons;
 
 	keyfile = g_key_file_new();
 
@@ -799,17 +801,9 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 
-	num_buttons = g_key_file_get_integer(keyfile, FEATURES_GROUP, "Buttons", &error);
-	if (num_buttons == 0 &&
-	    g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
-		g_warning ("Tablet '%s' has no buttons defined, do something!", libwacom_get_match(device));
-		g_clear_error (&error);
-	}
-
 	device->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 						NULL, g_free);
-	if (num_buttons > 0)
-		libwacom_parse_buttons(device, keyfile);
+	libwacom_parse_buttons(device, keyfile);
 
 	device->status_leds = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));
 	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);

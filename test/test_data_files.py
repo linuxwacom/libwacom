@@ -87,7 +87,13 @@ def test_button_evcodes(tabletfile):
     config.read(tabletfile)
 
     try:
-        nbuttons = int(config["Features"]["Buttons"])
+        nbuttons = 0
+        for where in ["Top", "Bottom", "Left", "Right"]:
+            try:
+                buttons = config["Buttons"][where]
+                nbuttons += len([s for s in buttons.split(";") if s])
+            except KeyError:
+                pass
         str = config["Buttons"]["EvdevCodes"]
         codes = [
             c for c in str.split(";") if c

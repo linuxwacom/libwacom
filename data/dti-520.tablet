@@ -35,7 +35,6 @@ Ring=false
 Ring2=false
 NumStrips=0
 # Actually 11 buttons but the two Ctrl ones send the same scancode
-Buttons=10
 
 [Buttons]
 Top=F;G;H;I;J

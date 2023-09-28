@@ -124,16 +124,6 @@ test('files-in-git',
      args: [meson.current_source_dir()],
      suite: ['all'])
 
-# This is a generic pytest invocation. If we end up with more than one
-# pytest-compatible test somewhere, we'll conveniently run that one too.
-pytest = find_program('pytest-3', required: false)
-if pytest.found()
-	test('pytests', pytest,
-	     args: ['-vv', '--log-level=DEBUG'],
-	     workdir: meson.current_source_dir(),
-	     env: ['LIBWACOM_DATA_DIR=@0@'.format(dir_src_data)])
-endif
-
 ############### tools ###########################
 
 tools_cflags = ['-DDATABASEPATH="@0@"'.format(dir_src_data)]

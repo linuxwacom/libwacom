@@ -1,0 +1,23 @@
+# Wacom
+# DTH134
+# DTH134
+#
+# sysinfo.R3oOipLEux
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/328
+
+[Device]
+Name=Wacom DTH134
+ModelName=DTH-134
+Class=PenDisplay
+DeviceMatch=usb:056a:03ec
+Width=13
+Height=7
+# No pad buttons, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=0

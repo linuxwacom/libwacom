@@ -74,6 +74,7 @@ var group__devices =
     [ "libwacom_get_model_name", "group__devices.html#gac9f62a5f72fdce38323ee6fdb53e2b19", null ],
     [ "libwacom_get_name", "group__devices.html#ga7e37d3343b9b63a4a86db8a1e5806221", null ],
     [ "libwacom_get_num_buttons", "group__devices.html#gac6e0aa5a3662ec1b2d098c6a7ecd5428", null ],
+    [ "libwacom_get_num_keys", "group__devices.html#gacca1b4f6db8a43be8f0afbd9dcc99efb", null ],
     [ "libwacom_get_num_strips", "group__devices.html#ga105c271d2b22303d856514292109dc29", null ],
     [ "libwacom_get_paired_device", "group__devices.html#ga6d488e20510dac2d1bc56f69f8ec8097", null ],
     [ "libwacom_get_product_id", "group__devices.html#ga4cc98b52f83e83569e6e6a65afd36f42", null ],

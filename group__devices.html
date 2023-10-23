@@ -236,6 +236,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gac6e0aa5a3662ec1b2d098c6a7ecd5428"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gac6e0aa5a3662ec1b2d098c6a7ecd5428">libwacom_get_num_buttons</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
 <tr class="memdesc:gac6e0aa5a3662ec1b2d098c6a7ecd5428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablet buttons are numbered 'A' through to 'A' + number of buttons.  <a href="group__devices.html#gac6e0aa5a3662ec1b2d098c6a7ecd5428">More...</a><br /></td></tr>
 <tr class="separator:gac6e0aa5a3662ec1b2d098c6a7ecd5428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacca1b4f6db8a43be8f0afbd9dcc99efb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gacca1b4f6db8a43be8f0afbd9dcc99efb">libwacom_get_num_keys</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="memdesc:gacca1b4f6db8a43be8f0afbd9dcc99efb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablet keys indices are numbered from zero.  <a href="group__devices.html#gacca1b4f6db8a43be8f0afbd9dcc99efb">More...</a><br /></td></tr>
+<tr class="separator:gacca1b4f6db8a43be8f0afbd9dcc99efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf69a5a5b89d1b18c11f7153dfb43c227"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gaf69a5a5b89d1b18c11f7153dfb43c227">libwacom_has_ring</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
 <tr class="separator:gaf69a5a5b89d1b18c11f7153dfb43c227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8d51e232cf392f7c46ed735b47379f8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga8d51e232cf392f7c46ed735b47379f8d">libwacom_has_ring2</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
@@ -925,6 +928,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of buttons on the tablet </dd></dl>
+
+</div>
+</div>
+<a id="gacca1b4f6db8a43be8f0afbd9dcc99efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacca1b4f6db8a43be8f0afbd9dcc99efb">&#9670;&nbsp;</a></span>libwacom_get_num_keys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_num_keys </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tablet keys indices are numbered from zero. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of keys on the tablet </dd></dl>
 
 </div>
 </div>
@@ -1673,7 +1703,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Oct 19 2023 23:42:53 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Oct 23 2023 02:23:17 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

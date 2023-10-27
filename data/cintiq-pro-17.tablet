@@ -1,6 +1,6 @@
 # Wacom
 # Cintiq Pro 17
-# DTH-172
+# DTH172
 #
 # Button Map:
 # (A=1, B=2, C=3, ...)
@@ -27,7 +27,7 @@
 
 [Device]
 Name=Wacom Cintiq Pro 17
-ModelName=DTH-172
+ModelName=DTH172
 Class=Cintiq
 DeviceMatch=usb:056a:03c4
 Width=15

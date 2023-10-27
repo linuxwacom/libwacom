@@ -1,6 +1,6 @@
 # Wacom
 # Cintiq Pro 22
-# DTH-227
+# DTH227
 #
 # Button Map:
 # (A=1, B=2, C=3, ...)
@@ -27,7 +27,7 @@
 
 [Device]
 Name=Wacom Cintiq Pro 22
-ModelName=DTH-227
+ModelName=DTH227
 Class=Cintiq
 DeviceMatch=usb:056a:03d0
 Width=18

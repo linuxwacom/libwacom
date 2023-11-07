@@ -13,38 +13,38 @@
     <rect
        id="ButtonA"
        class="A Button"
-       x="26.0"
-       y="93.5"
+       x="25.0"
+       y="88.5"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderA"
        class="A Leader"
-       d="M 61.0 109.413276H 90.0 Z" />
+       d="M 61.0 104.413276H 90.0 Z" />
     <text
        id="LabelA"
        class="A Label"
        x="90.5"
-       y="109.0"
+       y="104.0"
        style="text-anchor:start;">A</text>
   </g>
   <g>
     <rect
        id="ButtonB"
        class="B Button"
-       x="26.5"
-       y="119.0"
+       x="25.0"
+       y="112.0"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderB"
        class="B Leader"
-       d="M 61.5 135.0217421H 90.0 Z" />
+       d="M 61.5 127.0217421H 90.0 Z" />
     <text
        id="LabelB"
        class="B Label"
        x="91.0"
-       y="134.5"
+       y="127.5"
        style="text-anchor:start;">B</text>
   </g>
   <g>
@@ -52,37 +52,37 @@
        id="ButtonC"
        class="C Button"
        x="25.0"
-       y="142.5"
+       y="135.5"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderC"
        class="C Leader"
-       d="M 60.0 158.573682H 90.0 Z" />
+       d="M 60.0 151.573682H 90.0 Z" />
     <text
        id="LabelC"
        class="C Label"
-       x="89.5"
-       y="158.0"
+       x="90.5"
+       y="151.0"
        style="text-anchor:start;">C</text>
   </g>
   <g>
     <rect
        id="ButtonD"
        class="D Button"
-       x="26.0"
-       y="166.5"
+       x="25.0"
+       y="159.5"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderD"
        class="D Leader"
-       d="M 61.0 182.377185H 90.0 Z" />
+       d="M 61.0 175.377185H 90.0 Z" />
     <text
        id="LabelD"
        class="D Label"
        x="90.5"
-       y="182.0"
+       y="175.0"
        style="text-anchor:start;">D</text>
   </g>
   <g>
@@ -99,7 +99,7 @@
     <path
        id="RingCCW"
        class="RingCCW Button"
-       d="m 35.5 206.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 1.0 6.5 2.0 8.5 8.5 0.0 0.0 0.0 -6.5 -0.5 v 1.5 z" />
+       d="m 35.553343,206.65045 3.821656,-1.91083 v 1.27389 a 9.5541398,9.5541399 0 0 1 6.369426,1.91083 8.2802545,8.2802546 0 0 0 -6.369426,-0.63694 v 1.27388 z" />
     <path
        id="LeaderRingCW"
        class="RingCW Ring Leader"
@@ -107,13 +107,13 @@
     <path
        id="RingCW"
        class="RingCW Button"
-       d="m 35.5 242.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 0.0 6.5 -1.5 8.5 8.5 0.0 0.0 1.0 -6.5 2.5 v 1.5 z" />
+       d="m 35.553343,242.31924 3.821656,-1.91082 v 1.27387 a 9.5541398,9.5541399 0 0 0 6.369426,-1.27387 8.2802545,8.2802546 0 0 1 -6.369426,2.54777 v 1.27388 z" />
     <text
        id="LabelRingCCW"
        class="RingCCW Ring Label"
        x="94.5"
        y="196.0"
-       style="text-anchor:start;">Ring</text>
+       style="text-anchor:start;">CCW</text>
     <text
        id="LabelRingCW"
        class="RingCW Ring Label"
@@ -164,37 +164,37 @@
        id="ButtonG"
        class="G Button"
        x="25.0"
-       y="142.5"
+       y="318"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderG"
        class="G Leader"
-       d="M 60.0 158.573682H 90.0 Z" />
+       d="M 60.0 333.9004H 90.0 Z" />
     <text
        id="LabelG"
        class="G Label"
        x="89.5"
-       y="158.0"
+       y="333.0"
        style="text-anchor:start;">G</text>
   </g>
   <g>
     <rect
        id="ButtonH"
        class="H Button"
-       x="26.0"
-       y="166.5"
+       x="25.0"
+       y="342.5"
        width="30.5"
        height="19.5" />
     <path
        id="LeaderH"
        class="H Leader"
-       d="M 61.0 182.377185H 90.0 Z" />
+       d="M 61.0 358.2804H 90.0 Z" />
     <text
        id="LabelH"
        class="H Label"
        x="90.5"
-       y="182.0"
+       y="357.0"
        style="text-anchor:start;">H</text>
   </g>
 </svg>

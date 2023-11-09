@@ -1,0 +1,30 @@
+# XP-Pen
+# Artist 13.3 Pro
+#
+# sysinfo.WaL7UDEPSP
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/334
+
+[Device]
+Name=UGTABLET 13.3 inch PenDisplay
+ModelName=
+DeviceMatch=usb:28bd:092b
+PairedIDs=
+Class=Bamboo
+Width=11
+Height=6
+IntegratedIn=Display
+Layout=xp-pen-artist13-3-pro.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+Ring=true
+Ring2=false
+NumStrips=0
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7

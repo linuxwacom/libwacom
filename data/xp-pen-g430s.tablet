@@ -7,8 +7,8 @@ Name=XP-Pen G430S
 ModelName=
 DeviceMatch=usb:28bd:0913
 Class=Bamboo
-Width=5
-Height=4
+Width=4
+Height=3
 Styli=@generic-with-eraser
 
 [Features]

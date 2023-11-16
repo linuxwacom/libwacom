@@ -1,6 +1,8 @@
 # XP-Pen
 # G430S
 #
+# sysinfo.slpdTWkTPl
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/337
 
 [Device]
 Name=XP-Pen G430S

@@ -1,0 +1,20 @@
+# XP-Pen
+# G430S
+#
+# sysinfo.slpdTWkTPl
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/337
+
+[Device]
+Name=XP-Pen G430S
+ModelName=
+DeviceMatch=usb:28bd:0913
+Class=Bamboo
+Width=4
+Height=3
+Styli=@generic-with-eraser
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+Buttons=0

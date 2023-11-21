@@ -495,7 +495,8 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (a->status_leds->len != b->status_leds->len)
 		return 1;
 
-	if (memcmp(a->status_leds->data, b->status_leds->data,
+	if (a->status_leds->len > 0 &&
+	    memcmp(a->status_leds->data, b->status_leds->data,
 		   sizeof(WacomStatusLEDs) * a->status_leds->len) != 0)
 		return 1;
 

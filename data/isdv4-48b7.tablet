@@ -1,0 +1,18 @@
+# Active electrostatic (AES) sensor used by the HP EliteBook x360 1040 G5
+#
+# sysinfo.XkevsUVUax.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/338
+
+[Device]
+Name=Wacom ISDv4 48b7
+ModelName=
+DeviceMatch=i2c:056a:48b7
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

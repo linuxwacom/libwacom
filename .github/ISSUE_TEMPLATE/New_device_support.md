@@ -5,35 +5,21 @@ about: Request to add a new device to libwacom's database
 ---
 
 <!--
-**NOTE:** libwacom is a descriptive library and has no effect on the
-tablet events. Only file a bug for libwacom if the tablet works but does not
-show up in GNOME's configuration panel.
+Please read https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device
 
-If your tablet does not work, please follow the instructions here:
-https://github.com/linuxwacom/libwacom/wiki/Troubleshooting
+In most cases you should file a pull request instead of this issue.
+Pull requests are usually quickly reviewed and merged.
+
+Filing this issue means support for your tablet is likely to get delayed for a
+long time.
 -->
 
-**Device name**
-<!-- e.g. Wacom Intuos Pro Small -->
-> ...
 
-**Device model identifier**
-<!-- e.g. CTH-680 -->
-> ...
+- **Device name**: <!-- e.g. Wacom Intuos Pro Small -->
+- **Device model identifier**: <!-- e.g. CTH-680 -->
+- **libwacom version**:
 
+- [ ] I understand that libwacom does affect whether the device works (see [Troubleshooting](https://github.com/linuxwacom/libwacom/wiki/Troubleshooting#my-tablet-doesnt-work))
 
-<!--
-**NOTE:** please look at the data/ directory for existing tablet device
-files. These are text files. For most tablets, adding a new device is a
-simple as copying+renaming an existing file and modifying the entries.
-
-If you do so, please submit a Pull Request instead of this issue.
-
-You will also need a new (alphabetically sorted) entry in the meson.build
-file.
--->
-
-**udevadm info output**
-<!-- udevadm info /sys/class/input/eventXXX where XXX is the event node for
-your device -->
-
+- [ ] **udevadm info output**: <!-- as attachment! -->
+- [ ] sysinfo issue in [wacom-hid-descriptors](https://github.com/linuxwacom/wacom-hid-descriptors):

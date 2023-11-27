@@ -1,14 +1,14 @@
 ---
 name: Bug report
-about: A report of an error in libwacom
+about: A report of a bug in libwacom
 
 ---
 
-<!--
-**NOTE:** libwacom is a descriptive library and has no effect on the
-tablet events. Only file a bug for libwacom if the tablet works but does not
-show up in GNOME's configuration panel.
+- **Device name**: <!-- e.g. Wacom Intuos Pro Small -->
+- **Device model identifier**: <!-- e.g. CTH-680 -->
+- **libwacom version**:
 
-If your tablet does not work, please follow the instructions here:
-  https://github.com/linuxwacom/libwacom/wiki/Troubleshooting
--->
+- [ ] I understand that libwacom does affect whether the device works (see [Troubleshooting](https://github.com/linuxwacom/libwacom/wiki/Troubleshooting#my-tablet-doesnt-work))
+
+
+# Bug description

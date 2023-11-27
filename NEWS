@@ -1,3 +1,16 @@
+libwacom 2.9
+- New Devices:
+  - Wacom Cintiq Pro 22, Cintiq Pro 17, DTC121, DTH134, ISDv4 58B7
+  - XP Pen Artist 13.3, XP Pen G430s
+- Tablet data file changes:
+  - A new KeyCodes=<evdev codes> entry is now supported
+  - EvdevCodes=<evdev codes> now supports evdev code names (e.g. BTN_0)
+  - The Buttons=<int> entry is no longer supported (it is
+    inferred from the Buttons section)
+- New APIs:
+  - libwacom_get_num_keys() for number of supported key codes
+- License correction: text used was HPND, not MIT/Expat
+
 libwacom 2.8:
 - New Devices:
   - Wacom One, One 12, One 13

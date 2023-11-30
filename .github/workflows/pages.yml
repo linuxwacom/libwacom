@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+
 env:
   UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev-dev doxygen
   PIP_PACKAGES: meson ninja libevdev pyudev pytest yq
@@ -12,6 +15,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/pkginstall

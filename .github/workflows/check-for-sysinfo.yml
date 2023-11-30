@@ -2,6 +2,9 @@ name: "Check for sysinfo in data files"
 
 on: [ pull_request ]
 
+permissions:
+  contents: read
+
 jobs:
   checksysinfo:
     runs-on: ubuntu-22.04

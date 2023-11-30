@@ -2,6 +2,9 @@ name: "Build and test"
 
 on: [ push, pull_request ]
 
+permissions:
+  contents: read
+
 env:
   CFLAGS: "-Werror -Wno-error=missing-field-initializers"
   UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev-dev

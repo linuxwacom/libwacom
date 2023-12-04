@@ -1,0 +1,42 @@
+comment:
+  header: Hi, there. I'm a bot and have been asked to have a look at this.
+  footer: |
+    ---
+    This is an automated comment created by a bot. Responding to the bot or mentioning it won't have any effect.
+
+labels:
+  - name: not libwacom
+    labeled:
+      issue: 
+        body: |
+          libwacom is a bunch of text files with a C API, and the information in those text files
+          is static fixed information that we cannot get from the device (e.g. the model name or which
+          button will produce which event code). It does not affect functionality directly, if the
+          tablet does not work this is either an issue with the kernel drivers, xf86-input-wacom 
+          (if using X) or libinput/the desktop environment (if using Wayland). Please file the
+          issue with the component that most likely applies.
+
+          See also https://github.com/linuxwacom/libwacom/wiki/Troubleshooting
+          See also https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device
+        action: close
+
+  - name: sysinfo needed
+    labeled:
+      pr:
+        body: |
+          Please run the sysinfo script from https://github.com/linuxwacom/wacom-hid-descriptors and
+          file a new issue in that repo with the resulting sysinfo tarball. The README in that repo
+          has more information and instructions.
+
+          The `.tablet` files in this PR should then link to the sysinfo in this form:
+          ```
+          # sysinfo.abCdE1234.tar.gz
+          # https://github.com/linuxwacom/wacom-hid-descriptors/issues/1234
+          ```
+          A `git grep sysinfo` will show how this is currently used in existing data files.
+
+          See also https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device
+    unlabeled:
+      pr:
+        body: |
+          Thanks for providing the sysinfo. Someone will be along shortly to review the PR.

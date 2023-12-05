@@ -7,7 +7,7 @@
 
 [Device]
 Name=Wacom DTC121
-ModelName=DTC-121
+ModelName=DTC121
 Class=PenDisplay
 DeviceMatch=usb:056a:03ed
 Width=11

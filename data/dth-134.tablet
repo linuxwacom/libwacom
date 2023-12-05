@@ -7,7 +7,7 @@
 
 [Device]
 Name=Wacom DTH134
-ModelName=DTH-134
+ModelName=DTH134
 Class=PenDisplay
 DeviceMatch=usb:056a:03ec
 Width=13

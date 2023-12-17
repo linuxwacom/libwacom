@@ -1,0 +1,20 @@
+# Wacom
+# Wacom HID 5362
+#
+# sysinfo.oMdWcZJ918
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/325
+
+[Device]
+Name=Wacom HID 5362 Pen,Wacom HID 5362 Finger
+ModelName=
+Class=ISDV4
+DeviceMatch=i2c:056a:5362
+Width=14
+Height=9
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+

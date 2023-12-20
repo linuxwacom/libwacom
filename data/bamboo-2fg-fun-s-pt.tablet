@@ -23,7 +23,7 @@
 [Device]
 Name=Wacom Bamboo Fun small (2FG)
 ModelName=CTH-461
-DeviceMatch=usb:056a:00d2
+DeviceMatch=usb|056a|00d2
 Class=Bamboo
 Width=6
 Height=4

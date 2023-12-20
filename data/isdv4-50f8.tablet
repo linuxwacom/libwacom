@@ -3,7 +3,7 @@
 [Device]
 Name=Wacom ISDv4 50f8
 ModelName=
-DeviceMatch=i2c:056a:50f8
+DeviceMatch=i2c|056a|50f8
 Class=ISDV4
 Width=14
 Height=8

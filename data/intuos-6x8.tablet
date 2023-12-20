@@ -5,7 +5,7 @@
 [Device]
 Name=Wacom Intuos 6x8
 ModelName=GD-0608
-DeviceMatch=usb:056a:0021
+DeviceMatch=usb|056a|0021
 Class=Intuos
 Width=8
 Height=6

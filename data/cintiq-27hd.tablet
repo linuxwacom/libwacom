@@ -6,7 +6,7 @@
 [Device]
 Name=Wacom Cintiq 27QHD
 ModelName=DTK-2700
-DeviceMatch=usb:056a:032a
+DeviceMatch=usb|056a|032a
 Class=Cintiq
 Width=24
 Height=12

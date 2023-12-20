@@ -76,11 +76,11 @@ ModelName=
 # so it has exactly 4 digits. hex letters must be lowercase.
 #
 # Multiple matches are joined by a semicolon
-DeviceMatch=usb:056a:00bc;bluetooth:056a:00bc;
+DeviceMatch=usb|056a|00bc;bluetooth|056a|00bc;
 # If the vendor/product ID is not sufficient to distinguish the name
 # (common for HUION, GAOMON, UCLogic, XP-Pen), use the device name
 # as fourth element in the match string.
-# DeviceMatch=usb:1234:abcd:SomeDevice Name;
+# DeviceMatch=usb|1234|abcd:SomeDevice Name;
 
 
 # Paired PID includes the match line of any device that share the same
@@ -88,7 +88,7 @@ DeviceMatch=usb:056a:00bc;bluetooth:056a:00bc;
 # device on the 24HDT). The format of the match line is identical to
 # DeviceMatch but only one value is permitted.
 # Note: the PIDs listed may not be libwacom devices themselves.
-PairedIDs=usb:056a:0335
+PairedIDs=usb|056a|0335
 
 # Class of the tablet. Valid classes include Intuos3, Intuos4, Graphire, Bamboo, Cintiq
 # If unsure, or not applicable (the tablet isn't stand-alone for example).

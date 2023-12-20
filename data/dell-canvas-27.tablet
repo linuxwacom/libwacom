@@ -22,8 +22,8 @@
 Name=Dell Canvas 27
 ModelName=
 Class=Cintiq
-DeviceMatch=usb:056a:4200
-PairedID=usb:2575:0204
+DeviceMatch=usb|056a|4200
+PairedID=usb|2575|0204
 Width=23
 Height=13
 # No pad buttons, so no layout

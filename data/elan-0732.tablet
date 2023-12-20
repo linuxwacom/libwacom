@@ -2,7 +2,7 @@
 [Device]
 Name=ELAN 0732
 ModelName=
-DeviceMatch=i2c:04f3:271c
+DeviceMatch=i2c|04f3|271c
 Class=ISDV4
 Width=12
 Height=7

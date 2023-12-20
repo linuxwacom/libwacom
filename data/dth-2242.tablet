@@ -11,13 +11,13 @@
 #      |                 |
 #      *-----------------*
 #
-# Note: touch data comes through the usb:056a:005d interface
+# Note: touch data comes through the usb|056a|005d interface
 
 [Device]
 Name=Wacom DTH2242
 ModelName=DTH-2242
-DeviceMatch=usb:056a:0059
-PairedID=usb:056a:005d
+DeviceMatch=usb|056a|0059
+PairedID=usb|056a|005d
 Class=PenDisplay
 Width=19
 Height=11

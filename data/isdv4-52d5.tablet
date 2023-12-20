@@ -6,7 +6,7 @@
 [Device]
 Name=Wacom HID 52D5
 ModelName=WACF2200
-DeviceMatch=i2c:056a:52d5
+DeviceMatch=i2c|056a|52d5
 Class=ISDV4
 IntegratedIn=Display;System
 Width=12

@@ -130,7 +130,7 @@ class TabletDatabase:
                 # it'll just result in duplicate ID_INPUT_TABLET assignments
                 # for tablets with re-used usbids and that doesn't matter
                 try:
-                    bus, vid, pid, *_ = match.split(":")
+                    bus, vid, pid, *_ = match.split("|")
                 except ValueError as e:
                     print(f"Failed to process match {match} in {file}", file=sys.stderr)
                     raise e

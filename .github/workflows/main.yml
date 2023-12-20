@@ -171,7 +171,7 @@ jobs:
       - name: copy and modify tablet files to override another one
         run: |
           sed -e 's/27QHD/27QHD MODIFIED/' data/cintiq-27hd.tablet | sudo tee /etc/libwacom/modified-cintiq.tablet
-          sed -e 's/Pro L/Pro L MODIFIED/' -e 's/usb:056a:0358;//' data/intuos-pro-2-l.tablet | sudo tee /etc/libwacom/modified-intuos.tablet
+          sed -e 's/Pro L/Pro L MODIFIED/' -e 's/usb|056a|0358;//' data/intuos-pro-2-l.tablet | sudo tee /etc/libwacom/modified-intuos.tablet
       - name: list all devices for debugging
         run: libwacom-list-devices --format=yaml
 

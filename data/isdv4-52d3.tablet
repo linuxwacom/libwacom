@@ -6,7 +6,7 @@
 [Device]
 Name=Wacom HID 52D3
 ModelName=WACF2200
-DeviceMatch=i2c:056a:52d3
+DeviceMatch=i2c|056a|52d3
 Class=ISDV4
 Width=12
 Height=7

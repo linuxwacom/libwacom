@@ -15,7 +15,7 @@
 [Device]
 Name=Wacom DTK1651
 ModelName=DTK-1651
-DeviceMatch=usb:056a:0343
+DeviceMatch=usb|056a|0343
 Class=PenDisplay
 Width=14
 Height=8

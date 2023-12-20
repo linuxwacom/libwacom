@@ -3,7 +3,7 @@
 [Device]
 Name=ELAN 24DB
 ModelName=
-DeviceMatch=i2c:04f3:24db
+DeviceMatch=i2c|04f3|24db
 Class=ISDV4
 Width=12
 Height=7

@@ -36,7 +36,7 @@
 [Device]
 Name=Wacom Cintiq 20WSX
 ModelName=DTZ-2000W
-DeviceMatch=usb:056a:00c5
+DeviceMatch=usb|056a|00c5
 Class=Cintiq
 Width=17
 Height=11

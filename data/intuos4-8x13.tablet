@@ -35,7 +35,7 @@
 [Device]
 Name=Wacom Intuos4 8x13
 ModelName=PTK-840
-DeviceMatch=usb:056a:00ba
+DeviceMatch=usb|056a|00ba
 Class=Intuos4
 Width=13
 Height=8

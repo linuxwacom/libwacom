@@ -155,10 +155,10 @@ bus_to_str (WacomBusType bus)
 char *
 make_match_string (const char *name, WacomBusType bus, int vendor_id, int product_id)
 {
-	return g_strdup_printf("%s:%04x:%04x%s%s",
+	return g_strdup_printf("%s|%04x|%04x%s%s",
 				bus_to_str (bus),
 				vendor_id, product_id,
-				name ? ":" : "",
+				name ? "|" : "",
 				name ? name : "");
 }
 
@@ -168,7 +168,7 @@ match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *produ
 	int rc = 1, len = 0;
 	char busstr[64];
 
-	rc = sscanf(str, "%63[^:]:%x:%x:%n", busstr, vendor_id, product_id, &len);
+	rc = sscanf(str, "%63[^|]|%x|%x|%n", busstr, vendor_id, product_id, &len);
 	if (len > 0) {
 		/* Grumble grumble scanf handling of %n */
 		*name = g_strdup(str+len);

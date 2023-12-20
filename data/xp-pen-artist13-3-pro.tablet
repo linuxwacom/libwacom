@@ -7,7 +7,7 @@
 [Device]
 Name=UGTABLET 13.3 inch PenDisplay
 ModelName=
-DeviceMatch=usb:28bd:092b
+DeviceMatch=usb|28bd|092b
 PairedIDs=
 Class=Bamboo
 Width=11

@@ -7,7 +7,7 @@
 [Device]
 Name=Microsoft Surface Go
 Class=ISDV4
-DeviceMatch=i2c:04f3:261a
+DeviceMatch=i2c|04f3|261a
 Width=8
 Height=5
 IntegratedIn=Display;System;

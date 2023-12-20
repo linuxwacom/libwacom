@@ -23,7 +23,7 @@
 [Device]
 Name=Intuos Pen Medium
 ModelName=CTL-680
-DeviceMatch=usb:056a:0323
+DeviceMatch=usb|056a|0323
 Class=Bamboo
 Width=9
 Height=5

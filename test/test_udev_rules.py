@@ -53,7 +53,7 @@ def pytest_generate_tests(metafunc):
                 if not match or match == 'generic':
                     continue
 
-                bus, vid, pid = match.split(':')[:3]  # skip the name part of the match
+                bus, vid, pid = match.split('|')[:3]  # skip the name part of the match
                 if bus not in ['usb', 'bluetooth']:
                     continue
 

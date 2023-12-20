@@ -9,7 +9,7 @@
 [Device]
 Name=Lenovo ThinkVision M14t
 ModelName=
-DeviceMatch=usb:2d1f:524c
+DeviceMatch=usb|2d1f|524c
 Class=ISDV4
 Width=12
 Height=7

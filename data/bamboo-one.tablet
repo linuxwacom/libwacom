@@ -5,7 +5,7 @@
 [Device]
 Name=Bamboo One
 ModelName=CTF-430
-DeviceMatch=usb:056a:0069
+DeviceMatch=usb|056a|0069
 Class=Bamboo
 Width=5
 Height=4

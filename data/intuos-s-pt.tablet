@@ -36,7 +36,7 @@
 [Device]
 Name=Intuos Pen & Touch Small
 ModelName=CTH-480
-DeviceMatch=usb:056a:0302
+DeviceMatch=usb|056a|0302
 Class=Bamboo
 Width=6
 Height=4

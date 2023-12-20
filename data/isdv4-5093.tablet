@@ -9,7 +9,7 @@
 [Device]
 Name=ISDv4 5093
 ModelName=
-DeviceMatch=usb:056a:5093
+DeviceMatch=usb|056a|5093
 Class=ISDV4
 Width=12
 Height=7

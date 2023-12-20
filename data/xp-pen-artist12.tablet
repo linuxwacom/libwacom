@@ -7,7 +7,7 @@
 [Device]
 Name=XP-Pen Artist 12
 ModelName=
-DeviceMatch=usb:28bd:080a:UGTABLET 11.6 inch PenDisplay Mouse;usb:28bd:080a:UGTABLET 11.6 inch PenDisplay;usb:28bd:080a:UGTABLET 11.6 inch PenDisplay;usb:28bd:080a:UGTABLET 11.6 inch PenDisplay Keyboard
+DeviceMatch=usb|28bd|080a|UGTABLET 11.6 inch PenDisplay Mouse;usb|28bd|080a|UGTABLET 11.6 inch PenDisplay;usb|28bd|080a|UGTABLET 11.6 inch PenDisplay;usb|28bd|080a|UGTABLET 11.6 inch PenDisplay Keyboard
 PairedIDs=
 Class=Bamboo
 Width=10

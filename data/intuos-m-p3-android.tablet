@@ -25,7 +25,7 @@
 [Device]
 Name=Wacom Intuos M (Android Mode)
 ModelName=CTL-6100
-DeviceMatch=usb:2d1f:0375
+DeviceMatch=usb|2d1f|0375
 Class=Bamboo
 Width=3
 Height=5

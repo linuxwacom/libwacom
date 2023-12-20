@@ -29,7 +29,7 @@
 Name=Wacom Cintiq Pro 27
 ModelName=DTH271
 Class=Cintiq
-DeviceMatch=usb:056a:03c0
+DeviceMatch=usb|056a|03c0
 Width=24
 Height=13
 Layout=cintiq-pro-27.svg

@@ -5,7 +5,7 @@
 [Device]
 Name=Wacom DTU-1931
 ModelName=DTU-1931
-DeviceMatch=usb:056a:00c7
+DeviceMatch=usb|056a|00c7
 Width=15
 Height=12
 Class=PenDisplay

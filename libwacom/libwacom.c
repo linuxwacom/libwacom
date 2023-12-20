@@ -829,9 +829,9 @@ static void print_match(int fd, const WacomMatch *match)
 		case WBUSTYPE_UNKNOWN:		bus_name = "unknown";	break;
 		default:			g_assert_not_reached(); break;
 	}
-	dprintf(fd, "%s:%04x:%04x", bus_name, vendor, product);
+	dprintf(fd, "%s|%04x|%04x", bus_name, vendor, product);
 	if (name)
-		dprintf(fd, ":%s", name);
+		dprintf(fd, "|%s", name);
 	dprintf(fd, ";");
 }
 

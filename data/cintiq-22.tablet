@@ -6,7 +6,7 @@
 Name=Wacom Cintiq 22
 ModelName=DTK-2260
 Class=Cintiq
-DeviceMatch=usb:056a:0391
+DeviceMatch=usb|056a|0391
 Width=19
 Height=10
 # No pad buttons, so no layout

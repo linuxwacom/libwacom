@@ -40,7 +40,7 @@ def test_device_match(tabletfile):
         if not match or match == "generic":
             continue
 
-        bus, vid, pid = match.split(":")[:3]  # skip the name part of the match
+        bus, vid, pid = match.split("|")[:3]  # skip the name part of the match
         assert bus in [
             "usb",
             "bluetooth",
@@ -61,7 +61,7 @@ def test_no_receiver_id(tabletfile):
     config.optionxform = lambda option: option
     config.read(tabletfile)
 
-    receivers = ["usb:{:04x}:{:04x}".format(*r) for r in WACOM_RECEIVER_USBIDS]
+    receivers = ["usb|{:04x}|{:04x}".format(*r) for r in WACOM_RECEIVER_USBIDS]
     for match in config["Device"]["DeviceMatch"].split(";"):
         assert match not in receivers
 

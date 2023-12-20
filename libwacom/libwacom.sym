@@ -72,3 +72,7 @@ local:
 LIBWACOM_2.9 {
     libwacom_get_num_keys;
 } LIBWACOM_2.0;
+
+LIBWACOM_2.11 {
+    libwacom_match_get_firmware_string;
+} LIBWACOM_2.9;

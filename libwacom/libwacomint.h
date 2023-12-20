@@ -56,6 +56,7 @@ struct _WacomMatch {
 	gint refcnt;
 	char *match;
 	char *name;
+	char *fw;
 	WacomBusType bus;
 	uint32_t vendor_id;
 	uint32_t product_id;
@@ -143,12 +144,13 @@ void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char 
 void libwacom_add_match(WacomDevice *device, WacomMatch *newmatch);
 void libwacom_set_default_match(WacomDevice *device, WacomMatch *newmatch);
 void libwacom_remove_match(WacomDevice *device, WacomMatch *newmatch);
-WacomMatch* libwacom_match_new(const char *name, WacomBusType bus,
+WacomMatch* libwacom_match_new(const char *name, const char *fw,
+			       WacomBusType bus,
 			       int vendor_id, int product_id);
 
 WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
-char *make_match_string(const char *name, WacomBusType bus, int vendor_id, int product_id);
+char *make_match_string(const char *name, const char *fw, WacomBusType bus, int vendor_id, int product_id);
 
 #endif /* _LIBWACOMINT_H_ */
 

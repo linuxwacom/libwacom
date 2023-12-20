@@ -276,7 +276,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 				if (safe_atoi_base (string_list[j], &val, 16)) {
 					g_array_append_val (stylus->paired_ids, val);
 				} else {
-					g_warning ("Stylus %s (%s) Ignoring invalid PairedId value\n", stylus->name, groups[i]);
+					g_warning ("Stylus %s (%s) Ignoring invalid PairedStylusIds value\n", stylus->name, groups[i]);
 				}
 			}
 

@@ -81,7 +81,11 @@ DeviceMatch=usb|056a|00bc;bluetooth|056a|00bc;
 # (common for HUION, GAOMON, UCLogic, XP-Pen), use the device name
 # as fourth element in the match string.
 # DeviceMatch=usb|1234|abcd:SomeDevice Name;
-
+#
+# Optionally after the device name (which may be empty) the
+# the remainer of that substring is the firmware version to match against.
+# DeviceMatch=usb|1234|abcd||ABC_1234;
+# DeviceMatch=usb|1234|abcd|SomeDevice Name|ABC_1234;
 
 # Paired PID includes the match line of any device that share the same
 # physical device but has different product or vendor ids (e.g. the touch

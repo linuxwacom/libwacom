@@ -163,23 +163,37 @@ make_match_string (const char *name, WacomBusType bus, int vendor_id, int produc
 }
 
 static gboolean
-match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *product_id, char **name)
+match_from_string(const char *str_in, WacomBusType *bus, int *vendor_id, int *product_id, char **name)
 {
-	int rc = 1, len = 0;
-	char busstr[64];
+	gboolean rc = FALSE;
+	guint64 num;
+	char *str = g_strdup(str_in);
+	char **components = NULL;
 
-	rc = sscanf(str, "%63[^|]|%x|%x|%n", busstr, vendor_id, product_id, &len);
-	if (len > 0) {
-		/* Grumble grumble scanf handling of %n */
-		*name = g_strdup(str+len);
-	} else if (rc == 3) {
-		*name = NULL;
-	} else {
-		return FALSE;
-	}
-	*bus = bus_from_str (busstr);
+	if (g_str_has_suffix(str_in, ";"))
+		str[strlen(str) - 1] = '\0';
 
-	return TRUE;
+	components = g_strsplit(str, "|", 16);
+	if (!components[0] || !components[1] || !components[2])
+		goto out;
+
+	*bus = bus_from_str (components[0]);
+	if (!g_ascii_string_to_unsigned(components[1], 16, 0, 0xffff, &num, NULL))
+		goto out;
+	*vendor_id = (int)num;
+
+	if (!g_ascii_string_to_unsigned(components[2], 16, 0, 0xffff, &num, NULL))
+		goto out;
+	*product_id = (int)num;
+
+	if (components[3])
+		*name = g_strdup(components[3]);
+
+	rc = TRUE;
+out:
+	free(str);
+	g_strfreev(components);
+	return rc;
 }
 
 static WacomMatch *

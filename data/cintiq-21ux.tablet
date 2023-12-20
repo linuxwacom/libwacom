@@ -29,7 +29,7 @@
 [Device]
 Name=Wacom Cintiq 21UX
 ModelName=DTZ-2100
-DeviceMatch=usb:056a:003f
+DeviceMatch=usb|056a|003f
 Class=Cintiq
 Width=17
 Height=13

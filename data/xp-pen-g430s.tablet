@@ -7,7 +7,7 @@
 [Device]
 Name=XP-Pen G430S
 ModelName=
-DeviceMatch=usb:28bd:0913
+DeviceMatch=usb|28bd|0913
 Class=Bamboo
 Width=4
 Height=3

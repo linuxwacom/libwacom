@@ -17,7 +17,7 @@
 [Device]
 Name=Wacom One Pen tablet medium
 ModelName=CTC6110WL
-DeviceMatch=usb:0531:0102;bluetooth:0531:0103;usb:0531:0105
+DeviceMatch=usb|0531|0102;bluetooth|0531|0103;usb|0531|0105
 Class=Bamboo
 Width=9
 Height=5

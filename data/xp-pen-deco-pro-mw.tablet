@@ -20,7 +20,7 @@
 [Device]
 Name=Hanvon Ugee Technology Co.,Ltd Deco Pro MW
 ModelName=
-DeviceMatch=usb:28bd:0934
+DeviceMatch=usb|28bd|0934
 PairedIDs=
 Class=Bamboo
 Width=11

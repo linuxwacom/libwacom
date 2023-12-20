@@ -2,7 +2,7 @@
 [Device]
 Name=ELAN 2628
 ModelName=
-DeviceMatch=i2c:04f3:2628
+DeviceMatch=i2c|04f3|2628
 Class=ISDV4
 Width=12
 Height=7

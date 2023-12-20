@@ -22,7 +22,7 @@
 [Device]
 Name=Intuos Pen Small
 ModelName=CTL-490
-DeviceMatch=usb:056a:033b
+DeviceMatch=usb|056a|033b
 Class=Bamboo
 Width=6
 Height=4

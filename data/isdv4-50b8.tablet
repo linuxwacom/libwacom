@@ -3,7 +3,7 @@
 [Device]
 Name=Wacom ISDv4 50b8
 ModelName=
-DeviceMatch=usb:056a:50b8
+DeviceMatch=usb|056a|50b8
 Class=ISDV4
 Width=12
 Height=7

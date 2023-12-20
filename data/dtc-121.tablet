@@ -9,7 +9,7 @@
 Name=Wacom DTC121
 ModelName=DTC121
 Class=PenDisplay
-DeviceMatch=usb:056a:03ed
+DeviceMatch=usb|056a|03ed
 Width=11
 Height=6
 # No pad buttons, so no layout

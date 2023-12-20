@@ -9,7 +9,7 @@
 [Device]
 Name=ISDv4 5278
 ModelName=
-DeviceMatch=i2c:056a:5278
+DeviceMatch=i2c|056a|5278
 Class=ISDV4
 Width=12
 Height=7

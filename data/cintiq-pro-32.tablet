@@ -30,8 +30,8 @@
 Name=Wacom Cintiq Pro 32
 ModelName=DTH-3220
 Class=Cintiq
-DeviceMatch=usb:056a:0352
-PairedID=usb:056a:0356
+DeviceMatch=usb|056a|0352
+PairedID=usb|056a|0356
 Width=27
 Height=15
 # No pad buttons, so no layout

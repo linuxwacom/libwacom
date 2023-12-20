@@ -9,8 +9,8 @@
 [Device]
 Name=ISDv4 0114
 ModelName=
-DeviceMatch=i2c:2d1f:0114
-PairedID=i2c:04f3:2c86
+DeviceMatch=i2c|2d1f|0114
+PairedID=i2c|04f3|2c86
 Class=ISDV4
 Width=12
 Height=7

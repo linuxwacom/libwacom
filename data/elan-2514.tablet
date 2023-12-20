@@ -1,45 +1,45 @@
 # ELAN touchscreen/pen sensor
 
-# i2c:04f3:29f5
+# i2c|04f3|29f5
 #
 # HP Spectre x360 Convertible 13-aw0xxx
 
-# i2c:04f3:2af4
+# i2c|04f3|2af4
 #
 # HP Envy x360 Convertible 13-ay0xxx
 #
 # sysinfo.L1vXaj9Wcz
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/110
 
-# i2c:04f3:2813
+# i2c|04f3|2813
 #
 # HP Spectre x360 Convertible 13-ap0xxx
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/127
 
-# i2c:04f3:2817
+# i2c|04f3|2817
 #
 # HP Spectre x360 Convertible 15-df0xxx
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/70
 
-# i2c:04f3:2b0a
+# i2c|04f3|2b0a
 #
 # HP Envy x360 Convertible 15z-ee000
 
-# i2c:04f3:23f3
+# i2c|04f3|23f3
 #
 # HP Envy x360 Convertible 15-dr1xxx
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/140
 
-# i2c:04f3:2718
+# i2c|04f3|2718
 #
 # HP Envy x360 Convertible 14-cd0xxx
 #
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/155
 
-# i2c:04f3:29d4
+# i2c|04f3|29d4
 #
 # HP Envy x360 Convertible 15-ds1xxx
 #
@@ -47,7 +47,7 @@
 [Device]
 Name=ELAN 2514
 ModelName=
-DeviceMatch=i2c:04f3:29f5;i2c:04f3:2af4;i2c:04f3:2813;i2c:04f3:2817;i2c:04f3:2b0a;i2c:04f3:23f3;i2c:04f3:2718;i2c:04f3:2beb;i2c:04f3:23b9;i2c:04f3:29d4
+DeviceMatch=i2c|04f3|29f5;i2c|04f3|2af4;i2c|04f3|2813;i2c|04f3|2817;i2c|04f3|2b0a;i2c|04f3|23f3;i2c|04f3|2718;i2c|04f3|2beb;i2c|04f3|23b9;i2c|04f3|29d4
 Class=ISDV4
 Width=12
 Height=7

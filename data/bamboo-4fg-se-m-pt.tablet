@@ -11,7 +11,7 @@
 [Device]
 Name=Wacom Bamboo Special Edition Pen & Touch medium
 ModelName=CTH-661SE
-DeviceMatch=usb:056a:00db
+DeviceMatch=usb|056a|00db
 Class=Bamboo
 Width=9
 Height=5

@@ -11,7 +11,7 @@
 [Device]
 Name=Wacom Bamboo Pen & Touch (2+FG)
 ModelName=CTH-460(A)
-DeviceMatch=usb:056a:00d6
+DeviceMatch=usb|056a|00d6
 Class=Bamboo
 Width=6
 Height=4

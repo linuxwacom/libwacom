@@ -16,7 +16,7 @@
 [Device]
 Name=Wacom DTU1141
 ModelName=DTU-1141
-DeviceMatch=usb:056a:0336
+DeviceMatch=usb|056a|0336
 Class=PenDisplay
 Width=9
 Height=5

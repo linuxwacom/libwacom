@@ -43,7 +43,7 @@
 [Device]
 Name=Wacom Intuos Pro S
 ModelName=PTH-451
-DeviceMatch=usb:056a:0314
+DeviceMatch=usb|056a|0314
 Class=Intuos5
 Width=6
 Height=4

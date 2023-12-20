@@ -7,7 +7,7 @@
 [Device]
 Name=XP-Pen Deco MW
 ModelName=Deco_MW
-DeviceMatch=usb:28bd:0936
+DeviceMatch=usb|28bd|0936
 Class=Bamboo
 Width=8
 Height=5

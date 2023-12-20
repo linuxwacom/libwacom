@@ -32,7 +32,7 @@
 [Device]
 Name=Wacom Intuos Pro S
 ModelName=PTH-460
-DeviceMatch=usb:056a:0392;bluetooth:056a:0393;usb:056a:03dc;bluetooth:056a:03dd;
+DeviceMatch=usb|056a|0392;bluetooth|056a|0393;usb|056a|03dc;bluetooth|056a|03dd;
 Class=Intuos5
 Width=6
 Height=4

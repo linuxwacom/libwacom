@@ -29,13 +29,13 @@
 #    |                       |
 #    @-----------------------@
 #
-# Note: touch data comes through the usb:056a:005e interface
+# Note: touch data comes through the usb|056a|005e interface
 
 [Device]
 Name=Wacom Cintiq 22HD touch
 ModelName=DTH-2200
-DeviceMatch=usb:056a:005b
-PairedID=usb:056a:005e
+DeviceMatch=usb|056a|005b
+PairedID=usb|056a|005e
 Class=Cintiq
 Width=19
 Height=11

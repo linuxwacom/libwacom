@@ -60,9 +60,9 @@ Name=Wacom Intuos4 6x9
 ModelName=
 
 # DeviceMatch includes the bus (usb, bluetooth, serial), the vendor ID and
-# product ID. This is the connector used, not whatever name the kernel
-# might give it, so some "Wacom Serial" builtin devices will be USB
-# as that's how they're connected.
+# product ID and optionally the device name. This is the connector used,
+# not whatever name the kernel might give it, so some "Wacom Serial" builtin
+# devices will be USB as that's how they're connected.
 #
 # For example:
 # $ lsusb | grep Wacom
@@ -74,7 +74,14 @@ ModelName=
 #
 # Do not add 0x in front of the hex numbers, make sure to pad each ID
 # so it has exactly 4 digits. hex letters must be lowercase.
-DeviceMatch=usb:056a:00bc
+#
+# Multiple matches are joined by a semicolon
+DeviceMatch=usb:056a:00bc;bluetooth:056a:00bc;
+# If the vendor/product ID is not sufficient to distinguish the name
+# (common for HUION, GAOMON, UCLogic, XP-Pen), use the device name
+# as fourth element in the match string.
+# DeviceMatch=usb:1234:abcd:SomeDevice Name;
+
 
 # Paired PID includes the match line of any device that share the same
 # physical device but has different product or vendor ids (e.g. the touch

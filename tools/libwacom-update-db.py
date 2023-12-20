@@ -132,7 +132,7 @@ class TabletDatabase:
                 try:
                     bus, vid, pid, *_ = match.split(":")
                 except ValueError as e:
-                    print(f"Failed to process match {match}")
+                    print(f"Failed to process match {match} in {file}", file=sys.stderr)
                     raise e
 
                 name = config["Device"]["Name"]

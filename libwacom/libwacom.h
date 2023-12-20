@@ -876,6 +876,7 @@ void libwacom_print_stylus_description (int fd, const WacomStylus *stylus);
 /** @addtogroup devices
  * @{ */
 const char *libwacom_match_get_name(const WacomMatch *match);
+const char *libwacom_match_get_uniq(const WacomMatch *match);
 WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
 uint32_t libwacom_match_get_product_id(const WacomMatch *match);
 uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);

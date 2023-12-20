@@ -60,6 +60,7 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 			const char *bus = "unknown";
 			int vid = libwacom_match_get_vendor_id(*match);
 			int pid = libwacom_match_get_product_id(*match);
+			const char *uniq = libwacom_match_get_uniq(*match);
 
 			switch (type) {
 				case WBUSTYPE_USB:	bus = "usb"; break;
@@ -72,9 +73,9 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 
 			/* We don't need to print the generic device */
 			if (vid != 0 || pid != 0 || bus != 0)
-				printf("- { bus: '%s',%*svid: '0x%04x', pid: '0x%04x', name: '%s' }\n",
+				printf("- { bus: '%s',%*svid: '0x%04x', pid: '0x%04x', name: '%s', uniq: '%s' }\n",
 				       bus, (int)(10 - strlen(bus)), " ",
-				       vid, pid, name);
+				       vid, pid, name, uniq);
 		}
 	}
 }

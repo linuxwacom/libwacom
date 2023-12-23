@@ -1,0 +1,18 @@
+# Ingenic Touch/Pen Display
+
+[Device]
+Name=Ingenic Touch/Pen display
+ModelName=Gadget_Serial_and_keyboard
+Class=Cintiq
+DeviceMatch=usb:17ef:6161
+Width=11
+Height=6
+# No pad buttons, so no layout
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false
+Buttons=0

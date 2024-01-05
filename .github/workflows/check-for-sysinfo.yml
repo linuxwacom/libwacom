@@ -20,6 +20,6 @@ jobs:
         run: |
           for file in ${{ steps.added-files.outputs.added_files }}; do
             if [[ "$file" == *.tablet ]]; then
-                grep -q "sysinfo" $file || (echo "Missing reference to sysinfo.DEADBEEF.gz in $file" && exit 1)
+                grep -q "sysinfo" data/$file || (echo "Missing reference to sysinfo.DEADBEEF.gz in $file" && exit 1)
             fi
           done

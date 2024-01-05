@@ -2,7 +2,7 @@
 
 [Device]
 Name=Ingenic Touch/Pen display
-ModelName=Gadget_Serial_and_keyboard
+ModelName=
 Class=Cintiq
 DeviceMatch=usb:17ef:6161
 Width=11
@@ -15,4 +15,3 @@ Stylus=true
 Reversible=false
 Touch=true
 Ring=false
-Buttons=0

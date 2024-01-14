@@ -1,0 +1,21 @@
+# Lenovo ThinkPad X1 Yoga Gen 7
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+# HW Resolution: 30159 x 18850 (2540 x 2540 lpi)
+#
+# Manually generated from sysinfo.up1aDlcShX
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/353
+
+[Device]
+Name=ISDv4 5309
+ModelName=
+DeviceMatch=i2c:056a:5309
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

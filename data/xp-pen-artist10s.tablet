@@ -1,6 +1,8 @@
 # XP-Pen
 # Artist 10S (1st generation)
 #
+# sysinfo.2kd91mftwQ
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/354
 
 [Device]
 Name=UGEE 10.1 Tablet Monitor

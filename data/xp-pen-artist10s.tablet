@@ -23,7 +23,6 @@ Touch=false
 TouchSwitch=false
 Ring=false
 Ring2=false
-NumStrips=1
 
 [Buttons]
 Left=A;B;C;D;E;F

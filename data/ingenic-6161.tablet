@@ -7,7 +7,7 @@
 [Device]
 Name=Ingenic Touch/Pen display
 ModelName=
-Class=Cintiq
+Class=PenDisplay
 DeviceMatch=usb:17ef:6161
 Width=11
 Height=6

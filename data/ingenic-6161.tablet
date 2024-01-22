@@ -1,0 +1,21 @@
+# Ingenic Touch/Pen Display
+# Integrated into the Lenovo Yoga Book 9i (13IRU8)
+# 
+# sysinfo.zpUboT0IUG.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/346
+
+[Device]
+Name=Ingenic Touch/Pen display
+ModelName=
+Class=PenDisplay
+DeviceMatch=usb:17ef:6161
+Width=11
+Height=6
+# No pad buttons, so no layout
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Ring=false

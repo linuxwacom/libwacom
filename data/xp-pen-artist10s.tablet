@@ -1,0 +1,29 @@
+# XP-Pen
+# Artist 10S (1st generation)
+#
+# sysinfo.2kd91mftwQ
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/354
+
+[Device]
+Name=UGEE 10.1 Tablet Monitor
+ModelName=
+DeviceMatch=usb:5543:004a:UGEE 10.1 Tablet Monitor;usb:5543:004a:UGEE 10.1 Tablet Monitor Pad;usb:5543:004a:UGEE 10.1 Tablet Monitor Mouse
+PairedIDs=
+Class=Bamboo
+Width=9
+Height=5
+IntegratedIn=
+Layout=xp-pen-artist10s.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+Ring=false
+Ring2=false
+
+[Buttons]
+Left=A;B;C;D;E;F
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5

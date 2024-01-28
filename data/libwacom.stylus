@@ -159,7 +159,7 @@ Type=Mobile
 # Dell   ; VID_NONE     | 0xf142541e | BAT_SWAP (Dell PN5122W)
 Name=Dell Active Pen
 Group=isdv4-aes
-Buttons=2
+Buttons=1
 EraserType=Button
 Axes=Pressure
 Type=Mobile

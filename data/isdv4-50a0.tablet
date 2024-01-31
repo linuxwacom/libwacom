@@ -1,0 +1,19 @@
+# this is for the Wacom pen + touchscreen as found in some versions of the Lenovo ThinkPad Yoga 370
+#
+# sysinfo.i8xtfznvRF.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/359
+
+[Device]
+Name=Wacom ISDv4 50A0
+ModelName=
+DeviceMatch=usb:056a:50a0
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

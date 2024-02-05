@@ -58,6 +58,7 @@ tablet_destroy(gpointer data)
 
 	libwacom_destroy(d->dev);
 	g_list_free_full(d->nodes, free);
+	free(data);
 };
 
 /* Note: users with two identical devices plugged in will see

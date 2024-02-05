@@ -1271,8 +1271,8 @@ libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 	return b ? b->code : 0;
 }
 
-LIBWACOM_EXPORT const
-WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
+LIBWACOM_EXPORT const WacomStylus *
+libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
 {
 	return g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER(id));
 }

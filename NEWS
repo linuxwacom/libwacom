@@ -1,3 +1,9 @@
+libwacom 2.10.0
+- New Devices:
+  - Lenovo X1 Yoga Gen 5, X1 Yoga Gen 7, ThinkPad Yoga 370,  Lenovo Yoga Book 9i
+  - XP-Pen Artist 10s
+  - Wacom HID 5362
+
 libwacom 2.9
 - New Devices:
   - Wacom Cintiq Pro 22, Cintiq Pro 17, DTC121, DTH134, ISDv4 58B7

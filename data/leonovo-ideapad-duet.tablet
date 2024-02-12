@@ -1,0 +1,15 @@
+#This is for the Google Kukui Lenovo Ideapad Duet
+
+[Device]
+Name=Lenovo Ideapad Duet
+Class=ISDV4
+DeviceMatch=i2c:27C6:0E30
+Width=8.5
+Height=5.25
+IntegratedIn=Display;System
+#Styli=@generic-no-eraser
+Styli=0x812
+
+[Features]
+Stylus=true
+Touch=true

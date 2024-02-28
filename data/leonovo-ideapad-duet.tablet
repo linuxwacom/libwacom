@@ -8,7 +8,7 @@ Width=9
 Height=5
 IntegratedIn=Display;System
 #FIXME: see https://github.com/linuxwacom/libwacom/issues/639 and https://github.com/linuxwacom/libwacom/pull/636
-Styli=0x1
+# Styli=0x1
 
 [Features]
 Stylus=true

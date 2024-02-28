@@ -7,7 +7,7 @@ DeviceMatch=i2c:27C6:0E30
 Width=9
 Height=5
 IntegratedIn=Display;System
-#FIXME: see https://github.com/linuxwacom/libwacom/issues/639 and https://github.com/linuxwacom/libwacom/pull/636
+# FIXME: see https://github.com/linuxwacom/libwacom/issues/639 and https://github.com/linuxwacom/libwacom/pull/636
 # Styli=0x1
 
 [Features]

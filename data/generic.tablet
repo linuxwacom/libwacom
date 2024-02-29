@@ -2,9 +2,9 @@
 Name=Generic
 ModelName=generic
 DeviceMatch=generic
+IntegratedIn=Display;System;
 
 [Features]
-Reversible=true
+Reversible=false
 Stylus=true
-Ring=true
-NumStrips=2
+Ring=false

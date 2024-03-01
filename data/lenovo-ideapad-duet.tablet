@@ -1,4 +1,7 @@
 # This is for the Google Kukui Lenovo Ideapad Duet
+# sysinfo.c1r5C3bMCr.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/364
+
 
 [Device]
 Name=Lenovo Ideapad Duet

@@ -1,0 +1,18 @@
+# This is for the Google Kukui Lenovo Ideapad Duet
+# sysinfo.c1r5C3bMCr.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/364
+
+
+[Device]
+Name=Lenovo Ideapad Duet
+Class=ISDV4
+DeviceMatch=i2c:27c6:0e30
+Width=9
+Height=5
+IntegratedIn=Display;System
+# FIXME: see https://github.com/linuxwacom/libwacom/issues/639 and https://github.com/linuxwacom/libwacom/pull/636
+# Styli=0x1
+
+[Features]
+Stylus=true
+Touch=true

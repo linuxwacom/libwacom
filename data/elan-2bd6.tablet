@@ -1,0 +1,16 @@
+# ELAN touchscreen/pen sensor present in the IdeaPad Duet 3 10IGL5
+#
+# sysinfo.Al8cFbaepN
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/212
+
+[Device]
+Name=Elan 2BD6
+ModelName=
+DeviceMatch=i2c:04f3:2bd6
+Class=ISDV4
+IntegratedIn=Display;System
+Styli=@generic-with-eraser
+
+[Features]
+Stylus=true
+Touch=true

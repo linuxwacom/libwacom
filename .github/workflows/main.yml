@@ -24,7 +24,7 @@ jobs:
           # https://github.com/mesonbuild/meson/issues/764
           - '-Db_sanitize=address,undefined -Db_lundef=false'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v4
         with:
@@ -68,7 +68,7 @@ jobs:
   valgrind:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v4
         with:
@@ -111,7 +111,7 @@ jobs:
           - sudo csplit data/libwacom.stylus '/^\[0x822\]/' && sudo mv xx00 /etc/libwacom/first.stylus && sudo mv xx01 /usr/share/libwacom/libwacom.stylus
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v4
         with:
@@ -145,7 +145,7 @@ jobs:
     needs: build-and-dist
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v4
         with:
@@ -196,7 +196,7 @@ jobs:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: install python
         uses: actions/setup-python@v4
         with:

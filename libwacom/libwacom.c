@@ -249,7 +249,8 @@ get_device_info (const char            *path,
 		parent = g_udev_device_get_parent(device);
 		if (!parent || !is_tablet_or_touchpad(parent)) {
 			libwacom_error_set(error, WERROR_INVALID_PATH, "Device '%s' is not a tablet", path);
-			g_object_unref (parent);
+			if (parent)
+				g_object_unref (parent);
 			goto out;
 		}
 		g_object_unref (parent);

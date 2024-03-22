@@ -9,7 +9,7 @@
 Name=Wacom DTH134
 ModelName=DTH134
 Class=PenDisplay
-DeviceMatch=usb:056a:03ec
+DeviceMatch=usb|056a|03ec
 Width=13
 Height=7
 # No pad buttons, so no layout

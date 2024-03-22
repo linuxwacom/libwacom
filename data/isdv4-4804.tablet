@@ -9,7 +9,7 @@
 [Device]
 Name=Dell Latitude 7275
 ModelName=
-DeviceMatch=i2c:056a:4804
+DeviceMatch=i2c|056a|4804
 Class=ISDV4
 Width=11
 Height=6

@@ -11,7 +11,7 @@
 [Device]
 Name=Wacom Bamboo Create
 ModelName=CTH-670
-DeviceMatch=usb:056a:00df
+DeviceMatch=usb|056a|00df
 Class=Bamboo
 Width=6
 Height=4

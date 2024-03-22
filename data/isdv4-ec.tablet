@@ -4,10 +4,10 @@
 [Device]
 Name=Wacom ISDv4 EC
 ModelName=
-DeviceMatch=usb:056a:00ec
+DeviceMatch=usb|056a|00ec
 Class=ISDV4
 IntegratedIn=Display;System
-PairedID=usb:04f3:0254
+PairedID=usb|04f3|0254
 
 [Features]
 Stylus=true

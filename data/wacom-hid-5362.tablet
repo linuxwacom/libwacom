@@ -8,7 +8,7 @@
 Name=Wacom HID 5362 Pen,Wacom HID 5362 Finger
 ModelName=
 Class=ISDV4
-DeviceMatch=i2c:056a:5362
+DeviceMatch=i2c|056a|5362
 Width=14
 Height=9
 IntegratedIn=Display;System

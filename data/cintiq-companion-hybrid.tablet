@@ -21,15 +21,15 @@
 #
 # Note: Buttons F, G, H, I are on a circle
 #
-# Note: touch data comes through the usb:056a:0309 interface
+# Note: touch data comes through the usb|056a|0309 interface
 #
 
 [Device]
 Name=Wacom Cintiq Companion Hybrid
 ModelName=DTH-A1300
 Class=Cintiq
-DeviceMatch=usb:056a:0307
-PairedID=usb:056a:0309
+DeviceMatch=usb|056a|0307
+PairedID=usb|056a|0309
 Width=12
 Height=7
 Layout=cintiq-companion-hybrid.svg

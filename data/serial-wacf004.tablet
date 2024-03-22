@@ -1,7 +1,7 @@
 [Device]
 Name=Wacom Serial Tablet WACf004
 ModelName=
-DeviceMatch=serial:0000:0000
+DeviceMatch=serial|0000|0000
 Class=ISDV4
 IntegratedIn=Display;System
 

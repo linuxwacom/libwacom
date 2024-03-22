@@ -41,7 +41,7 @@
 [Device]
 Name=Wacom Cintiq 24HD
 ModelName=DTK-2400
-DeviceMatch=usb:056a:00f4
+DeviceMatch=usb|056a|00f4
 Class=Cintiq
 Width=21
 Height=13

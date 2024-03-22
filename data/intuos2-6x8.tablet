@@ -5,8 +5,8 @@
 [Device]
 Name=Wacom Intuos2 6x8
 ModelName=XD-0608
-# FIXME add missing usb:0056a:0047 match
-DeviceMatch=usb:056a:0042
+# FIXME add missing usb|0056a|0047 match
+DeviceMatch=usb|056a|0042
 Class=Intuos2
 Width=8
 Height=6

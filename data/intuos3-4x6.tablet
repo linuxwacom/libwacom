@@ -31,7 +31,7 @@
 [Device]
 Name=Wacom Intuos3 4x6
 ModelName=PTZ-431W
-DeviceMatch=usb:056a:00b7
+DeviceMatch=usb|056a|00b7
 Class=Intuos3
 Width=6
 Height=4

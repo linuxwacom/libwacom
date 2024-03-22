@@ -5,7 +5,7 @@
 Name=Wacom DTK-1660E
 ModelName=DTK-1660E
 Class=Cintiq
-DeviceMatch=usb:056a:03b0
+DeviceMatch=usb|056a|03b0
 Width=14
 Height=8
 # No pad buttons, so no layout

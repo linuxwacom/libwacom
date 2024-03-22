@@ -19,7 +19,7 @@
 [Device]
 Name=Wacom Graphire4 6x8
 ModelName=CTE-640
-DeviceMatch=usb:056a:0016
+DeviceMatch=usb|056a|0016
 Class=Graphire
 Width=8
 Height=6

@@ -29,7 +29,7 @@
 Name=Wacom Cintiq Pro 22
 ModelName=DTH227
 Class=Cintiq
-DeviceMatch=usb:056a:03d0
+DeviceMatch=usb|056a|03d0
 Width=18
 Height=10
 Layout=cintiq-pro-22.svg

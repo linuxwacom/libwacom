@@ -45,7 +45,7 @@
 [Device]
 Name=Wacom Intuos Pro L
 ModelName=PTH-851
-DeviceMatch=usb:056a:0317
+DeviceMatch=usb|056a|0317
 Class=Intuos5
 Width=13
 Height=8

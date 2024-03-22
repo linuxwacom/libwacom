@@ -53,12 +53,17 @@ def pytest_generate_tests(metafunc):
                 if not match or match == 'generic':
                     continue
 
-                bus, vid, pid = match.split(':')[:3]  # skip the name part of the match
+                bus, vid, pid = match.split('|')[:3]  # skip the name part of the match
                 if bus not in ['usb', 'bluetooth']:
                     continue
 
-                vid = int(vid, 16)
-                pid = int(pid, 16)
+                try:
+                    vid = int(vid, 16)
+                    pid = int(pid, 16)
+                except ValueError as e:
+                    print(f"Invalid vid/pid in {match} in {f}", file=sys.stderr)
+                    raise e
+
                 if bus == 'usb':
                     bus = 0x3
                 elif bus == 'bluetooth':

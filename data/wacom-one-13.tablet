@@ -9,7 +9,7 @@
 Name=Wacom One Pen Display 13
 ModelName=DTH134
 Class=PenDisplay
-DeviceMatch=usb:056a:03cb
+DeviceMatch=usb|056a|03cb
 Width=13
 Height=7
 # No pad buttons, so no layout

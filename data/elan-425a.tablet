@@ -9,7 +9,7 @@
 [Device]
 Name=ELAN9009:00
 ModelName=
-DeviceMatch=i2c:04f3:425a
+DeviceMatch=i2c|04f3|425a
 Class=ISDV4
 Width=14
 Height=4

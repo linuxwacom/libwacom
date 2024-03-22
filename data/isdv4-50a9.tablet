@@ -5,7 +5,7 @@
 [Device]
 Name=Wacom Pen and multitouch sensor Pen
 ModelName=
-DeviceMatch=usb:056a:50a9
+DeviceMatch=usb|056a|50a9
 Class=ISDV4
 Width=11
 Height=6

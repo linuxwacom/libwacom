@@ -4,7 +4,7 @@
 
 [Device]
 Name=ELAN1001
-DeviceMatch=i2c:04f3:2a70
+DeviceMatch=i2c|04f3|2a70
 Class=ISDV4
 Width=10
 Height=6

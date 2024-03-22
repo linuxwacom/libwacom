@@ -5,7 +5,7 @@
 [Device]
 Name=Wacom Intuos2 12x18
 ModelName=XD-1218
-DeviceMatch=usb:056a:0045
+DeviceMatch=usb|056a|0045
 Class=Intuos2
 Width=18
 Height=12

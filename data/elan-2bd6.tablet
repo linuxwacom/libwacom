@@ -6,7 +6,7 @@
 [Device]
 Name=Elan 2BD6
 ModelName=
-DeviceMatch=i2c:04f3:2bd6
+DeviceMatch=i2c|04f3|2bd6
 Class=ISDV4
 IntegratedIn=Display;System
 Styli=@generic-with-eraser

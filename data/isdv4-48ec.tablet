@@ -3,7 +3,7 @@
 [Device]
 Name=Wacom HID 48EC
 ModelName=
-DeviceMatch=i2c:056a:48ec
+DeviceMatch=i2c|056a|48ec
 Class=ISDV4
 Width=11
 Height=7

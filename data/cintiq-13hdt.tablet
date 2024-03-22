@@ -20,14 +20,14 @@
 #          *-----------------------*
 #
 # Note: Buttons F, G, H, I are on a circle
-#       touch data comes through the usb:056a:0335 interface
+#       touch data comes through the usb|056a|0335 interface
 
 [Device]
 Name=Wacom Cintiq 13HD touch
 ModelName=DTH-1300
 Class=Cintiq
-DeviceMatch=usb:056a:0333
-PairedID=usb:056a:0335
+DeviceMatch=usb|056a|0333
+PairedID=usb|056a|0335
 Width=12
 Height=7
 Layout=cintiq-13hd.svg

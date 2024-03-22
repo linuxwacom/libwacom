@@ -20,7 +20,7 @@
 [Device]
 Name=Wacom Intuos M
 ModelName=CTL-6100
-DeviceMatch=usb:056a:0375
+DeviceMatch=usb|056a|0375
 Class=Bamboo
 Width=9
 Height=5

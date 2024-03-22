@@ -3,7 +3,7 @@
 [Device]
 Name=ELAN touchscreen/pen sensor
 ModelName=ELAN-264C
-DeviceMatch=i2c:04f3:264c
+DeviceMatch=i2c|04f3|264c
 Class=ISDV4
 Width=14
 Height=8

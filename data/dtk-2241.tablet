@@ -15,7 +15,7 @@
 [Device]
 Name=Wacom DTK2241
 ModelName=DTK-2241
-DeviceMatch=usb:056a:0057
+DeviceMatch=usb|056a|0057
 Class=PenDisplay
 Width=19
 Height=11

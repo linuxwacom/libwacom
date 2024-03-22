@@ -37,8 +37,8 @@
 Name=Wacom MobileStudio Pro 13
 ModelName=DTH-W1320
 Class=Cintiq
-DeviceMatch=usb:056a:034d
-PairedID=usb:056a:034a
+DeviceMatch=usb|056a|034d
+PairedID=usb|056a|034a
 Width=12
 Height=7
 Layout=mobilestudio-pro-13.svg

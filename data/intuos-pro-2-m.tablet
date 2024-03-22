@@ -45,7 +45,7 @@
 [Device]
 Name=Wacom Intuos Pro M
 ModelName=PTH-660
-DeviceMatch=usb:056a:0357;bluetooth:056a:0360;
+DeviceMatch=usb|056a|0357;bluetooth|056a|0360;
 Class=Intuos5
 Width=9
 Height=6

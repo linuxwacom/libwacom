@@ -153,39 +153,59 @@ bus_to_str (WacomBusType bus)
 }
 
 char *
-make_match_string (const char *name, WacomBusType bus, int vendor_id, int product_id)
+make_match_string (const char *name, const char *fw, WacomBusType bus, int vendor_id, int product_id)
 {
-	return g_strdup_printf("%s:%04x:%04x%s%s",
+	return g_strdup_printf("%s|%04x|%04x%s%s%s%s",
 				bus_to_str (bus),
 				vendor_id, product_id,
-				name ? ":" : "",
-				name ? name : "");
+				name ? "|" : "",
+				name ? name : "",
+			        fw ? "|" : "",
+			        fw ? fw : "");
 }
 
 static gboolean
-match_from_string(const char *str, WacomBusType *bus, int *vendor_id, int *product_id, char **name)
+match_from_string(const char *str_in, WacomBusType *bus, int *vendor_id, int *product_id, char **name, char **fw)
 {
-	int rc = 1, len = 0;
-	char busstr[64];
+	gboolean rc = FALSE;
+	guint64 num;
+	char *str = g_strdup(str_in);
+	char **components = NULL;
 
-	rc = sscanf(str, "%63[^:]:%x:%x:%n", busstr, vendor_id, product_id, &len);
-	if (len > 0) {
-		/* Grumble grumble scanf handling of %n */
-		*name = g_strdup(str+len);
-	} else if (rc == 3) {
-		*name = NULL;
-	} else {
-		return FALSE;
+	if (g_str_has_suffix(str_in, ";"))
+		str[strlen(str) - 1] = '\0';
+
+	components = g_strsplit(str, "|", 16);
+	if (!components[0] || !components[1] || !components[2])
+		goto out;
+
+	*bus = bus_from_str (components[0]);
+	if (!g_ascii_string_to_unsigned(components[1], 16, 0, 0xffff, &num, NULL))
+		goto out;
+	*vendor_id = (int)num;
+
+	if (!g_ascii_string_to_unsigned(components[2], 16, 0, 0xffff, &num, NULL))
+		goto out;
+	*product_id = (int)num;
+
+	if (components[3]) {
+		*name = g_strdup(components[3]);
+		if (components[4])
+			*fw = g_strdup(components[4]);
 	}
-	*bus = bus_from_str (busstr);
 
-	return TRUE;
+	rc = TRUE;
+out:
+	free(str);
+	g_strfreev(components);
+	return rc;
 }
 
 static WacomMatch *
 libwacom_match_from_string(const char *matchstr)
 {
 	char *name = NULL;
+	char *fw = NULL;
 	int vendor_id, product_id;
 	WacomBusType bus;
 	WacomMatch *match;
@@ -195,16 +215,18 @@ libwacom_match_from_string(const char *matchstr)
 
 	if (g_str_equal(matchstr, GENERIC_DEVICE_MATCH)) {
 		name = NULL;
+		fw = NULL;
 		bus = WBUSTYPE_UNKNOWN;
 		vendor_id = 0;
 		product_id = 0;
-	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+	} else if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name, &fw)) {
 		DBG("failed to match '%s' for product/vendor IDs. Skipping.\n", matchstr);
 		return NULL;
 	}
 
-	match = libwacom_match_new(name, bus, vendor_id, product_id);
+	match = libwacom_match_new(name, fw, bus, vendor_id, product_id);
 	free(name);
+	free(fw);
 
 	return match;
 }
@@ -213,19 +235,21 @@ static gboolean
 libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
 {
 	char *name = NULL;
+	char *fw = NULL;
 	int vendor_id, product_id;
 	WacomBusType bus;
 
 	g_return_val_if_fail(device->paired == NULL, FALSE);
 
-	if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name)) {
+	if (!match_from_string(matchstr, &bus, &vendor_id, &product_id, &name, &fw)) {
 		DBG("failed to match '%s' for product/vendor IDs. Ignoring.\n", matchstr);
 		return FALSE;
 	}
 
-	device->paired = libwacom_match_new(name, bus, vendor_id, product_id);
+	device->paired = libwacom_match_new(name, fw, bus, vendor_id, product_id);
 
 	free(name);
+	free(fw);
 	return TRUE;
 }
 
@@ -276,7 +300,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 				if (safe_atoi_base (string_list[j], &val, 16)) {
 					g_array_append_val (stylus->paired_ids, val);
 				} else {
-					g_warning ("Stylus %s (%s) Ignoring invalid PairedId value\n", stylus->name, groups[i]);
+					g_warning ("Stylus %s (%s) Ignoring invalid PairedStylusIds value\n", stylus->name, groups[i]);
 				}
 			}
 

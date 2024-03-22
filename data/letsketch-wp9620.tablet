@@ -7,7 +7,7 @@
 [Device]
 Name=LetSketch LetSketch
 ModelName=WP9620
-DeviceMatch=usb:6161:4d15
+DeviceMatch=usb|6161|4d15
 PairedIDs=
 Class=Bamboo
 Width=8

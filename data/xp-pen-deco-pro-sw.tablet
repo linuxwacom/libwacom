@@ -7,7 +7,7 @@
 [Device]
 Name=UGTABLET Deco Pro SW
 ModelName=
-DeviceMatch=usb:28bd:0933
+DeviceMatch=usb|28bd|0933
 PairedIDs=
 Class=Bamboo
 Width=9

@@ -3,7 +3,7 @@
 [Device]
 Name=ELAN 24D8
 ModelName=
-DeviceMatch=i2c:04f3:2ad8;
+DeviceMatch=i2c|04f3|2ad8;
 Class=ISDV4
 Width=12
 Height=7

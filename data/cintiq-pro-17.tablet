@@ -29,7 +29,7 @@
 Name=Wacom Cintiq Pro 17
 ModelName=DTH172
 Class=Cintiq
-DeviceMatch=usb:056a:03c4
+DeviceMatch=usb|056a|03c4
 Width=15
 Height=8
 Layout=cintiq-pro-17.svg

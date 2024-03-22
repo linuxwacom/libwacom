@@ -4,7 +4,7 @@
 Name=Wacom Graphire3 4x5
 ModelName=CTE-430
 
-DeviceMatch=usb:056a:0013
+DeviceMatch=usb|056a|0013
 
 Class=Graphire
 

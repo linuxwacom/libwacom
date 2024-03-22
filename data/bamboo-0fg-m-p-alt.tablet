@@ -41,7 +41,7 @@
 [Device]
 Name=Wacom Bamboo Fun medium
 ModelName=CTE-650
-DeviceMatch=usb:056a:0018
+DeviceMatch=usb|056a|0018
 Class=Bamboo
 Width=9
 Height=5

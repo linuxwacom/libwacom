@@ -2,13 +2,13 @@
 # Cintiq 27QHD touch
 # DTH-2700
 #
-# Note: touch data comes through the usb:056a:032c interface
+# Note: touch data comes through the usb|056a|032c interface
 
 [Device]
 Name=Wacom Cintiq 27QHD touch
 ModelName=DTH-2700
-DeviceMatch=usb:056a:032b
-PairedID=usb:056a:032c
+DeviceMatch=usb|056a|032b
+PairedID=usb|056a|032c
 Class=Cintiq
 Width=24
 Height=12

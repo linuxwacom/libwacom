@@ -36,7 +36,7 @@
 [Device]
 Name=Intuos Pen & Touch Medium
 ModelName=CTH-680
-DeviceMatch=usb:056a:0303
+DeviceMatch=usb|056a|0303
 Class=Bamboo
 Width=9
 Height=5

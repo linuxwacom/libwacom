@@ -40,3 +40,16 @@ labels:
       pr:
         body: |
           Thanks for providing the sysinfo. Someone will be along shortly to review the PR.
+  - name: please file pull request
+    labeled:
+      issue:
+        body: |
+          This issue looks like it should be fixed in libwacom. Unfortunately the maintainers have
+          limited time and access to hardware for testing so the best approach to get this fixed
+          is for you to file a pull request.
+
+          If you're trying to add a new device to libwacom, this wiki page should get you started:
+          https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device
+
+          Meanwhile, I'm closing this bug in eager anticipation of a PR.
+        action: close

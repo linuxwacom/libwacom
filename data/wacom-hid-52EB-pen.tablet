@@ -10,8 +10,8 @@ Name=Wacom HID 52EB Pen
 ModelName=WACF2200
 Class=ISDV4
 DeviceMatch=i2c:056a:52eb;
-# Width=11
-# Height=6
+Width=11
+Height=7
 # No pad buttons, so no layout
 IntegratedIn=Display;System
 

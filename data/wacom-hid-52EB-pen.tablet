@@ -6,7 +6,7 @@
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/369
 
 [Device]
-Name=Wacom HID 52EB Pen, Wacom HID 52EB Finger
+Name=Wacom HID 52EB Pen
 ModelName=WACF2200
 Class=ISDV4
 DeviceMatch=i2c:056a:52eb;

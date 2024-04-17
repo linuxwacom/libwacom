@@ -7,54 +7,52 @@
 # Button Map:
 # (A=1, B=2, C=3, ...)
 #
-#          *-----------------------*
-#    A     |                       |     K
-#    B     |                       |     L
-#    C     |                       |     M
-#    D     |                       |     N
-#    E     |                       |     O
-#          |        DISPLAY        |
-#    F     |                       |     P
-#    G     |                       |     Q
-#    H     |                       |     R
-#    I     |                       |     S
-#    J     |                       |     T
-#          *-----------------------*
+#    *-----------------------*
+#  A |                       | K
+#  B |                       | L
+#  C |                       | M
+#  D |                       | N
+#  E |                       | O
+#    |        DISPLAY        |
+#  F |                       | P
+#  G |                       | Q
+#  H |                       | R
+#  I |                       | S
+#  J |                       | T
+#    *-----------------------*
 #
 # Touch Strip Map:
-# (A=1st strip, B=2nd strip, ...)
-#
+# (a=strip min, A=strip max)
+# Touch Strips are mirrored and do not map seperately
 #
 #    *-----------------------*
 #    |                       |
-#  A |                       | B
-#  a |        DISPLAY        | b
+#  A |                       | A
+#  a |        DISPLAY        | a
 #    |                       |
 #    *-----------------------*
 #
-# Also matches:
-# GAOMON S56K which doesn't have buttons but since HUION re-uses usb IDs
-# there is nothing we can do about this.
 
 [Device]
 Name=Huion Kamvas Pro 24
 ModelName=GT-240
 Class=Cintiq
-DeviceMatch=usb:256c:006e:Tablet Monitor Pen;usb:256c:006e:Tablet Monitor Pad;usb:256c:006e:Tablet Monitor Touch Strip;
-Width=26
-Height=15
+DeviceMatch=usb|256c|006e|Tablet Monitor Pen;usb|256c|006e|Tablet Monitor Pad;usb|256c|006e|Tablet Monitor Touch Strip;
+Width=21
+Height=12
 Layout=kamvas-pro-24.svg
 Styli=@generic-no-eraser;
 IntegratedIn=Display
 
 [Features]
-Buttons=20
+NumStrips=1
 Reversible=false
 Ring=false
 Stylus=true
 Touch=false
+TouchSwitch=false
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H;I;J
-Right=K;L;M
-EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7;BTN_8;BTN_9;BTN_SOUTH;BTN_EAST;BTN_C
+Right=K;L;M;N;O;P;Q;R;S;T
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7;BTN_8;BTN_9;BTN_SOUTH;BTN_EAST;BTN_C;BTN_NORTH;BTN_WEST;BTN_Z;BTN_TL;BTN_TR;BTN_TL2;BTN_TR2

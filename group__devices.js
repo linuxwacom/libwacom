@@ -96,6 +96,7 @@ var group__devices =
     [ "libwacom_match_get_match_string", "group__devices.html#gaf46230253f8009987a620705cccf7634", null ],
     [ "libwacom_match_get_name", "group__devices.html#ga37bbe762737a4dc1901325d3206fc443", null ],
     [ "libwacom_match_get_product_id", "group__devices.html#gaa447133161dd5529d4c45a6b2addd150", null ],
+    [ "libwacom_match_get_uniq", "group__devices.html#gacb8d6143fb1a972d06f13ccfe4639160", null ],
     [ "libwacom_match_get_vendor_id", "group__devices.html#gaa11e234a0e3bb7f4d939d1abc66c9c19", null ],
     [ "libwacom_new_from_name", "group__devices.html#gae58659a01922c67e9fd9129f68a60b0b", null ],
     [ "libwacom_new_from_path", "group__devices.html#ga903b1bee3d0746431c475cf91fec2b88", null ],

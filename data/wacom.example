@@ -173,7 +173,7 @@ Ring=true
 # This tablet has a second touch ring (Cintiq 24HD)
 Ring2=false
 
-# This tablet's number of strips, default is zero
+# This tablet's number of touch strips (e.g. Cintiq 22HD), default is zero
 NumStrips=1
 
 # Number of buttons on the tablet

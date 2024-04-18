@@ -37,7 +37,7 @@
 Name=Huion Kamvas Pro 24
 ModelName=GT-240
 Class=Cintiq
-DeviceMatch=usb|256c|006e|Tablet Monitor Pen;usb|256c|006e|Tablet Monitor Pad;usb|256c|006e|Tablet Monitor Touch Strip;
+DeviceMatch=usb|256c|006e|Tablet Monitor Pen|HUION_M184;usb|256c|006e|Tablet Monitor Pad|HUION_M184;usb|256c|006e|Tablet Monitor Touch Strip|HUION_M184;
 Width=21
 Height=12
 Layout=kamvas-pro-24.svg

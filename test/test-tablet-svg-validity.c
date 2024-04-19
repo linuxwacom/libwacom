@@ -36,6 +36,9 @@
 #include <glib.h>
 #include "libwacom.h"
 
+#define trace(fmt, ...) \
+	fprintf(stderr, "%s: checking " fmt "\n", __func__,  __VA_ARGS__)
+
 static xmlNodePtr
 verify_has_sub (xmlNodePtr cur, char *sub)
 {
@@ -79,11 +82,12 @@ class_found (gchar **classes, gchar *value)
 static void
 verify_has_class (xmlNodePtr cur, const gchar *expected)
 {
-
 	xmlChar *prop;
 	gchar  **classes_present;
 	gchar  **classes_expected;
 	gchar  **ptr;
+
+	trace("%s", expected);
 
 	prop = xmlGetProp (cur, (xmlChar *) "class");
 	g_assert (prop != NULL);
@@ -109,6 +113,8 @@ check_button (xmlNodePtr cur, const WacomDevice *device, char button, gchar *typ
 	xmlNodePtr        node;
 	WacomButtonFlags  flags;
 
+	trace("%c %s", button, type);
+
 	/* Check ID */
 	sub = g_strdup_printf ("%s%c", type, button);
 	node = verify_has_sub (cur, sub);
@@ -131,6 +137,8 @@ check_touchstrip (xmlNodePtr cur, gchar *id)
 	char             *sub;
 	char             *class;
 	xmlNodePtr        node;
+
+	trace("%s", id);
 
 	node = verify_has_sub (cur, id);
 	g_assert (node != NULL);
@@ -233,6 +241,8 @@ check_touchring (xmlNodePtr cur, gchar *id)
 	char             *sub;
 	char             *class;
 	xmlNodePtr        node;
+
+	trace("%s", id);
 
 	node = verify_has_sub (cur, id);
 	g_assert (node != NULL);

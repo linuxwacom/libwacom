@@ -320,7 +320,7 @@
        d="M 486 100 l -25 0" />
     <text
        id="LabelO"
-       class="J Label"
+       class="O Label"
        x="458"
        y="100"
        style="text-anchor:end;">O</text>
@@ -362,7 +362,7 @@
        d="M 486 206 l -24 0" />
     <text
        id="LabelQ"
-       class="P Label"
+       class="Q Label"
        x="458"
        y="206"
        style="text-anchor:end;">Q</text>

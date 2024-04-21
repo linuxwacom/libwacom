@@ -752,6 +752,10 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 				if (device == NULL) {
 					match_name = NULL;
 					device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
+					if (device == NULL) {
+						match_uniq = uniq;
+						device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
+					}
 				}
 			}
 			if (device)

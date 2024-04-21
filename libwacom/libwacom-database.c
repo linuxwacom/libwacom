@@ -158,7 +158,7 @@ make_match_string (const char *name, const char *uniq, WacomBusType bus, int ven
 	return g_strdup_printf("%s|%04x|%04x%s%s%s%s",
 				bus_to_str (bus),
 				vendor_id, product_id,
-				name ? "|" : "",
+				(name || uniq) ? "|" : "",
 				name ? name : "",
 			        uniq ? "|" : "",
 			        uniq ? uniq : "");

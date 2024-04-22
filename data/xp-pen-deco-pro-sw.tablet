@@ -20,7 +20,7 @@ Styli=@generic-no-eraser
 Stylus=true
 Reversible=true
 Touch=false
-Ring=true
+Ring=false
 Ring2=false
 NumStrips=0
 

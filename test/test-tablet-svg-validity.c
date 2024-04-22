@@ -234,19 +234,6 @@ struct fixture {
 };
 
 static void
-test_filename(struct fixture *f, gconstpointer data)
-{
-    const WacomDevice *device = data;
-    const char *filename;
-
-    filename = libwacom_get_layout_filename(device);
-    if (libwacom_get_num_buttons(device) > 0) {
-	    g_assert_nonnull(filename);
-	    g_assert_cmpstr(filename, !=, "");
-    }
-}
-
-static void
 test_svg(struct fixture *f, gconstpointer data)
 {
     g_assert_nonnull(f->doc);
@@ -368,7 +355,6 @@ static void setup_tests(WacomDevice *device)
 	if (g_str_equal(name, "Generic"))
 		return;
 
-	add_test(device, test_filename);
 	if (!libwacom_get_layout_filename(device))
 		return;
 

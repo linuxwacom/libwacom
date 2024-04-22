@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -45,7 +45,7 @@ jobs:
         with:
           ninja_args: dist
       # Capture all the meson logs, even if we failed
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ always() }}  # even if we fail
         with:
           name: meson test logs-${{matrix.compiler}} ${{matrix.meson_options}}
@@ -56,7 +56,7 @@ jobs:
       - name: move tarballs to top level
         run: mv builddir/meson-dist/libwacom-*tar.xz .
       # We only need one tarball for the build-from-tarball job
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ matrix.compiler == 'gcc' && matrix.meson_options == '' }}
         with:
           name: tarball
@@ -70,7 +70,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -86,7 +86,7 @@ jobs:
         env:
           CC: ${{matrix.compiler}}
       # Capture all the meson logs, even if we failed
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ always() }}  # even if we fail
         with:
           name: meson test logs-valgrind
@@ -113,7 +113,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       # Run as sudo because we install to /etc and thus need the pip
@@ -147,7 +147,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       # Run as sudo because we install to /etc and thus need the pip
@@ -198,7 +198,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       - uses: ./.github/actions/pkginstall
@@ -206,7 +206,7 @@ jobs:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
       - name: fetch tarball from previous job(s)
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: tarball
       - name: extract tarball

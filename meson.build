@@ -163,6 +163,14 @@ configure_file(input: 'tools/65-libwacom.rules.in',
 	       install_dir: dir_udev / 'rules.d')
 
 # The non-installed version of list-devices uses the git tree's data files
+executable('debug-device',
+	   'tools/debug-device.c',
+	   dependencies: [dep_libwacom, dep_glib],
+	   include_directories: [includes_src],
+	   c_args: tools_cflags,
+	   install: false)
+
+# The non-installed version of list-devices uses the git tree's data files
 executable('list-devices',
 	   'tools/list-devices.c',
 	   dependencies: [dep_libwacom, dep_glib],

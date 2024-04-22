@@ -11,11 +11,11 @@ jobs:
   # FreeBSD build job
   #
   freebsd:
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: meson test
-      uses: vmactions/freebsd-vm@v0
+      uses: vmactions/freebsd-vm@v1
       with:
         prepare: |
           pkg install -y meson pkgconf evdev-proto libgudev libxml++ bash libevdev

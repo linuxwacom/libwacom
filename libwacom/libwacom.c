@@ -404,8 +404,11 @@ libwacom_copy(const WacomDevice *device)
 	d->cls = device->cls;
 	d->num_strips = device->num_strips;
 	d->num_rings = device->num_rings;
+	d->num_dials = device->num_dials;
 	d->features = device->features;
 	d->strips_num_modes = device->strips_num_modes;
+	d->dial_num_modes = device->dial_num_modes;
+	d->dial2_num_modes = device->dial2_num_modes;
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
 	d->styli = g_array_sized_new(FALSE, FALSE, sizeof(int),
@@ -522,10 +525,19 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (a->num_strips != b->num_strips)
 		return 1;
 
+	if (a->num_dials != b->num_dials)
+		return 1;
+
 	if (a->features != b->features)
 		return 1;
 
 	if (a->strips_num_modes != b->strips_num_modes)
+		return 1;
+
+	if (a->dial_num_modes != b->dial_num_modes)
+		return 1;
+
+	if (a->dial2_num_modes != b->dial2_num_modes)
 		return 1;
 
 	if (a->ring_num_modes != b->ring_num_modes)
@@ -843,13 +855,18 @@ static void print_buttons_for_device (int fd, const WacomDevice *device)
 	print_button_flag_if(fd, device, "Bottom", WACOM_BUTTON_POSITION_BOTTOM);
 	print_button_flag_if(fd, device, "Touchstrip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
 	print_button_flag_if(fd, device, "Touchstrip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH);
+	print_button_flag_if(fd, device, "Dial", WACOM_BUTTON_DIAL_MODESWITCH);
 	print_button_flag_if(fd, device, "OLEDs", WACOM_BUTTON_OLED);
 	print_button_flag_if(fd, device, "Ring", WACOM_BUTTON_RING_MODESWITCH);
 	print_button_flag_if(fd, device, "Ring2", WACOM_BUTTON_RING2_MODESWITCH);
+	print_button_flag_if(fd, device, "Dial", WACOM_BUTTON_DIAL_MODESWITCH);
+	print_button_flag_if(fd, device, "Dial2", WACOM_BUTTON_DIAL2_MODESWITCH);
 	print_button_evdev_codes(fd, device);
 	dprintf(fd, "RingNumModes=%d\n", libwacom_get_ring_num_modes(device));
 	dprintf(fd, "Ring2NumModes=%d\n", libwacom_get_ring2_num_modes(device));
 	dprintf(fd, "StripsNumModes=%d\n", libwacom_get_strips_num_modes(device));
+	dprintf(fd, "DialNumModes=%d\n", libwacom_get_dial_num_modes(device));
+	dprintf(fd, "Dial2NumModes=%d\n", libwacom_get_dial2_num_modes(device));
 
 	dprintf(fd, "\n");
 }
@@ -951,6 +968,9 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	print_supported_leds(fd, device);
 
 	dprintf(fd, "NumStrips=%d\n",	libwacom_get_num_strips(device));
+	dprintf(fd, "\n");
+
+	dprintf(fd, "NumDials=%d\n",	libwacom_get_num_dials(device));
 	dprintf(fd, "\n");
 
 	print_buttons_for_device(fd, device);
@@ -1242,6 +1262,24 @@ LIBWACOM_EXPORT int
 libwacom_get_strips_num_modes(const WacomDevice *device)
 {
 	return device->strips_num_modes;
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_num_dials(const WacomDevice *device)
+{
+	return device->num_dials;
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_dial_num_modes(const WacomDevice *device)
+{
+	return device->dial_num_modes;
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_dial2_num_modes(const WacomDevice *device)
+{
+	return device->dial2_num_modes;
 }
 
 LIBWACOM_EXPORT const WacomStatusLEDs *

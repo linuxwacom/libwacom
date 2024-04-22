@@ -126,6 +126,7 @@ test_intuos4(struct fixture *f, gconstpointer user_data)
 	g_assert_cmpint(libwacom_get_num_rings(device), ==, 1);
 	g_assert_false(libwacom_has_touchswitch(device));
 	g_assert_cmpint(libwacom_get_num_strips(device), ==, 0);
+	g_assert_cmpint(libwacom_get_num_dials(device), ==, 0);
 	g_assert_cmpint(libwacom_get_integration_flags (device), ==, WACOM_DEVICE_INTEGRATED_NONE);
 	g_assert_cmpint(libwacom_get_width(device), ==, 8);
 	g_assert_cmpint(libwacom_get_height(device), ==, 5);
@@ -177,6 +178,7 @@ test_cintiq21ux(struct fixture *f, gconstpointer user_data)
 	g_assert_nonnull(device);
 
 	g_assert_cmpint(libwacom_get_num_strips(device), ==, 2);
+	g_assert_cmpint(libwacom_get_num_dials(device), ==, 0);
 	libwacom_destroy(device);
 }
 

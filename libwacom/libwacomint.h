@@ -88,10 +88,13 @@ struct _WacomDevice {
 	WacomClass cls;
 	int num_strips;
 	int num_rings;
+	int num_dials;
 	uint32_t features;
 	uint32_t integration_flags;
 
 	int strips_num_modes;
+	int dial_num_modes;
+	int dial2_num_modes;
 	int ring_num_modes;
 	int ring2_num_modes;
 

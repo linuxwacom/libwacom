@@ -231,10 +231,13 @@ typedef enum {
 	WACOM_BUTTON_TOUCHSTRIP_MODESWITCH  = (1 << 7),
 	WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH = (1 << 8),
 	WACOM_BUTTON_OLED                   = (1 << 9),
-	WACOM_BUTTON_MODESWITCH             = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
+	WACOM_BUTTON_DIAL_MODESWITCH        = (1 << 10),
+	WACOM_BUTTON_DIAL2_MODESWITCH       = (1 << 11),
+	WACOM_BUTTON_MODESWITCH             = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH | WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH),
 	WACOM_BUTTON_DIRECTION              = (WACOM_BUTTON_POSITION_LEFT | WACOM_BUTTON_POSITION_RIGHT | WACOM_BUTTON_POSITION_TOP | WACOM_BUTTON_POSITION_BOTTOM),
 	WACOM_BUTTON_RINGS_MODESWITCH       = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH),
 	WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
+	WACOM_BUTTON_DIALS_MODESWITCH       = (WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH),
 } WacomButtonFlags;
 
 /**
@@ -681,6 +684,31 @@ int libwacom_get_num_strips(const WacomDevice *device);
  * @ingroup devices
  */
 int libwacom_get_strips_num_modes(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return the number of rotary dials on the tablet
+ * otherwise
+ *
+ * @ingroup devices
+ */
+int libwacom_get_num_dials(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return the number of modes for the dial, if any
+ *
+ * @ingroup devices
+ */
+int libwacom_get_dial_num_modes(const WacomDevice *device);
+
+/**
+ * @param device The tablet to query
+ * @return the number of modes for the second dial, if any
+ *
+ * @ingroup devices
+ */
+int libwacom_get_dial2_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query

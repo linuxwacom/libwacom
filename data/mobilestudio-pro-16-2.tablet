@@ -50,7 +50,7 @@ IntegratedIn=Display;System
 [Features]
 Stylus=true
 Touch=true
-Ring=true
+NumRings=1
 
 [Buttons]
 Left=A;B;C;D;E;F;G;H;I;J;K;L;M

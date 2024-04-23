@@ -44,8 +44,6 @@
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),
-	FEATURE_RING		= (1 << 2),
-	FEATURE_RING2		= (1 << 3),
 	FEATURE_REVERSIBLE	= (1 << 4),
 	FEATURE_TOUCHSWITCH	= (1 << 5)
 };
@@ -89,6 +87,7 @@ struct _WacomDevice {
 
 	WacomClass cls;
 	int num_strips;
+	int num_rings;
 	uint32_t features;
 	uint32_t integration_flags;
 

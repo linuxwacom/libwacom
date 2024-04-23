@@ -7,4 +7,4 @@ IntegratedIn=Display;System
 
 [Features]
 Stylus=true
-Ring=false
+NumRings=0

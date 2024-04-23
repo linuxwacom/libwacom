@@ -271,11 +271,11 @@ test_rings(gconstpointer data)
 	g_assert_cmpint(libwacom_get_ring_num_modes(device), >=, 0);
 	g_assert_cmpint(libwacom_get_ring2_num_modes(device), >=, 0);
 
-	if (libwacom_has_ring(device))
+	if (libwacom_get_num_rings(device) >= 1)
 		g_assert_true(match_mode_switch(device,
 						libwacom_get_ring_num_modes,
 						WACOM_BUTTON_RING_MODESWITCH));
-	if (libwacom_has_ring2(device))
+	if (libwacom_get_num_rings(device) >= 2)
 		g_assert_true(match_mode_switch(device,
 						libwacom_get_ring2_num_modes,
 						WACOM_BUTTON_RING2_MODESWITCH));

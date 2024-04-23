@@ -754,12 +754,6 @@ libwacom_parse_features(WacomDevice *device, GKeyFile *keyfile)
 	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Touch", NULL))
 		device->features |= FEATURE_TOUCH;
 
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring", NULL))
-		device->features |= FEATURE_RING;
-
-	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Ring2", NULL))
-		device->features |= FEATURE_RING2;
-
 	if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Reversible", NULL))
 		device->features |= FEATURE_REVERSIBLE;
 
@@ -771,14 +765,11 @@ libwacom_parse_features(WacomDevice *device, GKeyFile *keyfile)
 	    device->features & FEATURE_REVERSIBLE)
 		g_warning ("Tablet '%s' is both reversible and integrated in screen. This is impossible", libwacom_get_match(device));
 
-	if (!(device->features & FEATURE_RING) &&
-	    (device->features & FEATURE_RING2))
-		g_warning ("Tablet '%s' has Ring2 but no Ring. This is impossible", libwacom_get_match(device));
-
 	if (!(device->features & FEATURE_TOUCH) &&
 	    (device->features & FEATURE_TOUCHSWITCH))
 		g_warning ("Tablet '%s' has touch switch but no touch tool. This is impossible", libwacom_get_match(device));
 
+	device->num_rings = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumRings", NULL);
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 
 	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);

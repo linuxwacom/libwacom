@@ -27,7 +27,7 @@ IntegratedIn=
 [Features]
 Reversible=false
 Stylus=true
-Ring=false
+NumRings=0
 
 [Buttons]
 Top=A;B

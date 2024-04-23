@@ -52,7 +52,7 @@ Layout=bamboo-0fg-s-p-alt.svg
 Stylus=true
 Reversible=false
 Touch=false
-Ring=true
+NumRings=1
 
 [Buttons]
 Top=A;B;C;D

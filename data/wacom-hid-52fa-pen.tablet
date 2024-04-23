@@ -19,4 +19,4 @@ IntegratedIn=Display;System
 Stylus=true
 Reversible=false
 Touch=true
-Ring=false
+NumRings=0

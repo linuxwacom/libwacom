@@ -49,7 +49,7 @@ IntegratedIn=Display
 Stylus=true
 Reversible=false
 Touch=false
-Ring=false
+NumRings=0
 
 [Buttons]
 Left=A;B;C;D;E

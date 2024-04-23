@@ -15,5 +15,5 @@ IntegratedIn=
 Reversible=true
 Stylus=true
 Touch=false
-Ring=false
+NumRings=0
 NumStrips=0

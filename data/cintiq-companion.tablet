@@ -39,7 +39,7 @@ IntegratedIn=Display;System
 [Features]
 Stylus=true
 Touch=true
-Ring=false
+NumRings=0
 
 [Buttons]
 Left=B;C;G;H;A;F;I;D;E

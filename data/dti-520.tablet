@@ -31,8 +31,7 @@ IntegratedIn=Display
 Stylus=true
 Reversible=false
 Touch=false
-Ring=false
-Ring2=false
+NumRings=0
 NumStrips=0
 # Actually 11 buttons but the two Ctrl ones send the same scancode
 

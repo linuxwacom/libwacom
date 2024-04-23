@@ -20,7 +20,7 @@ Class=Remote
 
 [Features]
 Stylus=false
-Ring=true
+NumRings=1
 NumStrips=0
 StatusLEDs=Ring
 

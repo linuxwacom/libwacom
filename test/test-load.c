@@ -118,8 +118,12 @@ test_intuos4(struct fixture *f, gconstpointer user_data)
 	g_assert_true(libwacom_has_stylus(device));
 	g_assert_true(libwacom_is_reversible(device));
 	g_assert_false(libwacom_has_touch(device));
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	g_assert_true(libwacom_has_ring(device));
 	g_assert_false(libwacom_has_ring2(device));
+#pragma GCC diagnostic pop
+	g_assert_cmpint(libwacom_get_num_rings(device), ==, 1);
 	g_assert_false(libwacom_has_touchswitch(device));
 	g_assert_cmpint(libwacom_get_num_strips(device), ==, 0);
 	g_assert_cmpint(libwacom_get_integration_flags (device), ==, WACOM_DEVICE_INTEGRATED_NONE);

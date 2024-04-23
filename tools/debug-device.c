@@ -152,8 +152,11 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 	intfunc(libwacom_has_touch, device);
 	intfunc(libwacom_get_num_buttons, device);
 	intfunc(libwacom_get_num_keys, device);
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	intfunc(libwacom_has_ring, device);
 	intfunc(libwacom_has_ring2, device);
+	#pragma GCC diagnostic pop
 	intfunc(libwacom_has_touchswitch, device);
 	intfunc(libwacom_get_ring_num_modes, device);
 	intfunc(libwacom_get_ring2_num_modes, device);

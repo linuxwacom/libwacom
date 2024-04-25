@@ -23,7 +23,7 @@
 [Device]
 Name=Wacom Movink
 ModelName=DTH-135
-DeviceMatch=usb:056a:03f0
+DeviceMatch=usb|056a|03f0
 Class=Movink
 Width=11
 Height=8

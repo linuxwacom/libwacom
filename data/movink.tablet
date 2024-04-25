@@ -1,0 +1,42 @@
+# Wacom
+# Movink 13HD touch
+# DTH-135
+#
+# Note: touch data comes through the usb:056a:03f0 interface
+#
+# Button Map:
+# (A=1, B=2, C=3)
+#
+#    *------------------------------------------*
+#    |                    C                     |
+#  A |                                          | B
+#    |                                          |
+#    |                                          |
+#    |                                          |
+#    |                  TABLET                  |
+#    |                                          |
+#    |                                          |
+#    |                                          |
+#    |                                          |
+#    |                                          |
+#    *------------------------------------------*
+[Device]
+Name=Wacom Movink
+ModelName=DTH-135
+DeviceMatch=usb:056a:03f0
+Class=Movink
+Width=11
+Height=8
+Styli=@udpen;
+IntegratedIn=Display
+Layout=movink.svg
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+Buttons=3
+
+[Buttons]
+Left=A;C
+Right=B;C

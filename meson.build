@@ -294,7 +294,8 @@ if get_option('tests').enabled()
 	     pytest,
 	     args: ['--verbose', '--log-level=DEBUG', meson.current_source_dir()],
 	     env: env,
-	     suite: ['all'])
+	     suite: ['all'],
+	     timeout: 300)
 endif
 
 # This is a non-optional test

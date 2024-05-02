@@ -153,11 +153,15 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da41c77218ff1a41cd32bd2bd5e179799b">WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH</a> = (1 &lt;&lt; 8)
 , <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dac0c92f8d7d64d4a98fab32726a71a3ba">WACOM_BUTTON_OLED</a> = (1 &lt;&lt; 9)
-, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dab8d69722b1e8e6eb1a2ea32ca5635829">WACOM_BUTTON_MODESWITCH</a> = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH)
-, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da2e822ddd1d44b7095391931d27042b27">WACOM_BUTTON_DIRECTION</a> = (WACOM_BUTTON_POSITION_LEFT | WACOM_BUTTON_POSITION_RIGHT | WACOM_BUTTON_POSITION_TOP | WACOM_BUTTON_POSITION_BOTTOM)
+, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021daf8d9cf362897f649f6075ab342123a3f">WACOM_BUTTON_DIAL_MODESWITCH</a> = (1 &lt;&lt; 10)
+, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dabda11b20436176cee4869bb44a14c429">WACOM_BUTTON_DIAL2_MODESWITCH</a> = (1 &lt;&lt; 11)
 , <br />
-&#160;&#160;<a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da239d75d58b0ea0614ac4afcc1f527f5d">WACOM_BUTTON_RINGS_MODESWITCH</a> = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH)
+&#160;&#160;<a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dab8d69722b1e8e6eb1a2ea32ca5635829">WACOM_BUTTON_MODESWITCH</a> = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH | WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH)
+, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da2e822ddd1d44b7095391931d27042b27">WACOM_BUTTON_DIRECTION</a> = (WACOM_BUTTON_POSITION_LEFT | WACOM_BUTTON_POSITION_RIGHT | WACOM_BUTTON_POSITION_TOP | WACOM_BUTTON_POSITION_BOTTOM)
+, <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da239d75d58b0ea0614ac4afcc1f527f5d">WACOM_BUTTON_RINGS_MODESWITCH</a> = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH)
 , <a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da168d068d5d6de79ae30485bf9185bee9">WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH</a> = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH)
+, <br />
+&#160;&#160;<a class="el" href="group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da7573ac170c255e92014f4844cb173a03">WACOM_BUTTON_DIALS_MODESWITCH</a> = (WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH)
 <br />
  }</td></tr>
 <tr class="memdesc:ga7349dfd03aece0522b2133c7fbe9021d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capabilities of the various tablet buttons.  <a href="group__devices.html#ga7349dfd03aece0522b2133c7fbe9021d">More...</a><br /></td></tr>
@@ -255,6 +259,12 @@ Functions</h2></td></tr>
 <tr class="separator:ga105c271d2b22303d856514292109dc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga19234b61d298ee588d66021c98e24ca7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga19234b61d298ee588d66021c98e24ca7">libwacom_get_strips_num_modes</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
 <tr class="separator:ga19234b61d298ee588d66021c98e24ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2024cbdf9cba83f6a7195965abb77348"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga2024cbdf9cba83f6a7195965abb77348">libwacom_get_num_dials</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="separator:ga2024cbdf9cba83f6a7195965abb77348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7822f49667d9090410cb31a2d4bc209f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga7822f49667d9090410cb31a2d4bc209f">libwacom_get_dial_num_modes</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="separator:ga7822f49667d9090410cb31a2d4bc209f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga01d68c9440d5aea4f607282ac5fed834"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga01d68c9440d5aea4f607282ac5fed834">libwacom_get_dial2_num_modes</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="separator:ga01d68c9440d5aea4f607282ac5fed834"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4b023b830ddfcbbff8279ac9956afe38"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="group__devices.html#ga18a534584fbfeb1254107b30246bcfd6">WacomStatusLEDs</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga4b023b830ddfcbbff8279ac9956afe38">libwacom_get_status_leds</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device, int *num_leds)</td></tr>
 <tr class="separator:ga4b023b830ddfcbbff8279ac9956afe38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga505f528225b6ffe639d3b44faecd4449"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga505f528225b6ffe639d3b44faecd4449">libwacom_get_button_led_group</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device, char button)</td></tr>
@@ -368,10 +378,13 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021dac1c9baa6fe67ceaab2db3aea48a52b5c"></a>WACOM_BUTTON_TOUCHSTRIP_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021da41c77218ff1a41cd32bd2bd5e179799b"></a>WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021dac0c92f8d7d64d4a98fab32726a71a3ba"></a>WACOM_BUTTON_OLED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021daf8d9cf362897f649f6075ab342123a3f"></a>WACOM_BUTTON_DIAL_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021dabda11b20436176cee4869bb44a14c429"></a>WACOM_BUTTON_DIAL2_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021dab8d69722b1e8e6eb1a2ea32ca5635829"></a>WACOM_BUTTON_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021da2e822ddd1d44b7095391931d27042b27"></a>WACOM_BUTTON_DIRECTION&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021da239d75d58b0ea0614ac4afcc1f527f5d"></a>WACOM_BUTTON_RINGS_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021da168d068d5d6de79ae30485bf9185bee9"></a>WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga7349dfd03aece0522b2133c7fbe9021da7573ac170c255e92014f4844cb173a03"></a>WACOM_BUTTON_DIALS_MODESWITCH&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -730,6 +743,56 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga01d68c9440d5aea4f607282ac5fed834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga01d68c9440d5aea4f607282ac5fed834">&#9670;&nbsp;</a></span>libwacom_get_dial2_num_modes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_dial2_num_modes </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of modes for the second dial, if any </dd></dl>
+
+</div>
+</div>
+<a id="ga7822f49667d9090410cb31a2d4bc209f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7822f49667d9090410cb31a2d4bc209f">&#9670;&nbsp;</a></span>libwacom_get_dial_num_modes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_dial_num_modes </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of modes for the dial, if any </dd></dl>
+
+</div>
+</div>
 <a id="gac925a601e2f6b894d11b285aaf811d21"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac925a601e2f6b894d11b285aaf811d21">&#9670;&nbsp;</a></span>libwacom_get_height()</h2>
 
@@ -932,6 +995,31 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of buttons on the tablet </dd></dl>
+
+</div>
+</div>
+<a id="ga2024cbdf9cba83f6a7195965abb77348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2024cbdf9cba83f6a7195965abb77348">&#9670;&nbsp;</a></span>libwacom_get_num_dials()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_num_dials </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of rotary dials on the tablet otherwise </dd></dl>
 
 </div>
 </div>
@@ -1753,7 +1841,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu May 2 2024 05:20:54 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu May 2 2024 05:35:42 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -34,10 +34,13 @@ var libwacom_8h =
       [ "WACOM_BUTTON_TOUCHSTRIP_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dac1c9baa6fe67ceaab2db3aea48a52b5c", null ],
       [ "WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da41c77218ff1a41cd32bd2bd5e179799b", null ],
       [ "WACOM_BUTTON_OLED", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dac0c92f8d7d64d4a98fab32726a71a3ba", null ],
+      [ "WACOM_BUTTON_DIAL_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021daf8d9cf362897f649f6075ab342123a3f", null ],
+      [ "WACOM_BUTTON_DIAL2_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dabda11b20436176cee4869bb44a14c429", null ],
       [ "WACOM_BUTTON_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dab8d69722b1e8e6eb1a2ea32ca5635829", null ],
       [ "WACOM_BUTTON_DIRECTION", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da2e822ddd1d44b7095391931d27042b27", null ],
       [ "WACOM_BUTTON_RINGS_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da239d75d58b0ea0614ac4afcc1f527f5d", null ],
-      [ "WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da168d068d5d6de79ae30485bf9185bee9", null ]
+      [ "WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da168d068d5d6de79ae30485bf9185bee9", null ],
+      [ "WACOM_BUTTON_DIALS_MODESWITCH", "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021da7573ac170c255e92014f4844cb173a03", null ]
     ] ],
     [ "WacomClass", "group__devices.html#gabe5d90234cce1b8ad62be2676a1d56e5", [
       [ "WCLASS_UNKNOWN", "group__devices.html#ggabe5d90234cce1b8ad62be2676a1d56e5a2aa39060933230cc40f430926a491905", null ],
@@ -114,6 +117,8 @@ var libwacom_8h =
     [ "libwacom_get_button_flag", "group__devices.html#gab62583042419e89507662048fc7593ac", null ],
     [ "libwacom_get_button_led_group", "group__devices.html#ga505f528225b6ffe639d3b44faecd4449", null ],
     [ "libwacom_get_class", "group__devices.html#gaca2749ecdda450e836843ed320b0991f", null ],
+    [ "libwacom_get_dial2_num_modes", "group__devices.html#ga01d68c9440d5aea4f607282ac5fed834", null ],
+    [ "libwacom_get_dial_num_modes", "group__devices.html#ga7822f49667d9090410cb31a2d4bc209f", null ],
     [ "libwacom_get_height", "group__devices.html#gac925a601e2f6b894d11b285aaf811d21", null ],
     [ "libwacom_get_integration_flags", "group__devices.html#ga88efa2a2a569569563e81f578c7730fc", null ],
     [ "libwacom_get_layout_filename", "group__devices.html#ga3bfbfbd2b85bda1f131ea68cf2e0d187", null ],
@@ -122,6 +127,7 @@ var libwacom_8h =
     [ "libwacom_get_model_name", "group__devices.html#gac9f62a5f72fdce38323ee6fdb53e2b19", null ],
     [ "libwacom_get_name", "group__devices.html#ga7e37d3343b9b63a4a86db8a1e5806221", null ],
     [ "libwacom_get_num_buttons", "group__devices.html#gac6e0aa5a3662ec1b2d098c6a7ecd5428", null ],
+    [ "libwacom_get_num_dials", "group__devices.html#ga2024cbdf9cba83f6a7195965abb77348", null ],
     [ "libwacom_get_num_keys", "group__devices.html#gacca1b4f6db8a43be8f0afbd9dcc99efb", null ],
     [ "libwacom_get_num_rings", "group__devices.html#gafd308796a4696c86cca0843d0ebf2223", null ],
     [ "libwacom_get_num_strips", "group__devices.html#ga105c271d2b22303d856514292109dc29", null ],

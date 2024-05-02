@@ -766,6 +766,6 @@ Name=UD Pen Eraser
 Group=udpen
 PairedStylusIds=0x10002;
 Buttons=1
-EraserType=Invert;
+EraserType=Invert
 Axes=Tilt;Pressure;Distance;
 Type=General

@@ -749,3 +749,22 @@ Type=Puck
 HasLens=false
 HasWheel=true
 Buttons=5
+
+[0x10002]
+# Movink
+Name=UD Pen
+Group=udpen
+PairedStylusIds=0x1000a;
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x1000a]
+# Movink
+Name=UD Pen Eraser
+Group=udpen
+PairedStylusIds=0x10002;
+Buttons=1
+EraserType=Invert
+Axes=Tilt;Pressure;Distance;
+Type=General

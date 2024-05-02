@@ -27,7 +27,7 @@
 Name=Wacom Movink
 ModelName=DTH-135K0C
 DeviceMatch=usb|056a|03f0
-Class=Movink
+Class=Cintiq
 Width=11
 Height=8
 Styli=@udpen;

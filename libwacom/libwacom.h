@@ -617,17 +617,29 @@ const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styl
  * @param device The tablet to query
  * @return non-zero if the device has a touch ring or zero otherwise
  *
+ * @deprecated 2.12 Use libwacom_get_num_rings() instead.
  * @ingroup devices
  */
-int libwacom_has_ring(const WacomDevice *device);
+int libwacom_has_ring(const WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
  * @return non-zero if the device has a second touch ring or zero otherwise
  *
+ * @deprecated 2.12 Use libwacom_get_num_rings() instead.
  * @ingroup devices
  */
-int libwacom_has_ring2(const WacomDevice *device);
+int libwacom_has_ring2(const WacomDevice *device) LIBWACOM_DEPRECATED;
+
+/**
+ * @param device The tablet to query
+ * @return the number of touch rings on the tablet
+ * otherwise
+ *
+ * @since 2.12
+ * @ingroup devices
+ */
+int libwacom_get_num_rings(const WacomDevice *device);
 
 /**
  * @param device The tablet to query

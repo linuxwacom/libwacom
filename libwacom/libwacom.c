@@ -403,6 +403,7 @@ libwacom_copy(const WacomDevice *device)
 		d->paired = libwacom_match_ref(device->paired);
 	d->cls = device->cls;
 	d->num_strips = device->num_strips;
+	d->num_rings = device->num_rings;
 	d->features = device->features;
 	d->strips_num_modes = device->strips_num_modes;
 	d->ring_num_modes = device->ring_num_modes;
@@ -944,8 +945,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "[Features]\n");
 	dprintf(fd, "Reversible=%s\n", libwacom_is_reversible(device)	? "true" : "false");
 	dprintf(fd, "Stylus=%s\n",	 libwacom_has_stylus(device)	? "true" : "false");
-	dprintf(fd, "Ring=%s\n",	 libwacom_has_ring(device)	? "true" : "false");
-	dprintf(fd, "Ring2=%s\n",	 libwacom_has_ring2(device)	? "true" : "false");
+	dprintf(fd, "NumRings=%s\n",	 libwacom_get_num_rings(device)	? "true" : "false");
 	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
 	dprintf(fd, "TouchSwitch=%s\n",	libwacom_has_touchswitch(device)? "true" : "false");
 	print_supported_leds(fd, device);
@@ -1205,13 +1205,19 @@ libwacom_get_supported_styli(const WacomDevice *device, int *num_styli)
 LIBWACOM_EXPORT int
 libwacom_has_ring(const WacomDevice *device)
 {
-	return !!(device->features & FEATURE_RING);
+	return device->num_rings >= 1;
 }
 
 LIBWACOM_EXPORT int
 libwacom_has_ring2(const WacomDevice *device)
 {
-	return !!(device->features & FEATURE_RING2);
+	return device->num_rings >= 2;
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_num_rings(const WacomDevice *device)
+{
+	return device->num_rings;
 }
 
 LIBWACOM_EXPORT int

@@ -18,6 +18,5 @@ IntegratedIn=Display
 Stylus=true
 Reversible=false
 Touch=true
-Ring=false
-Ring2=false
+NumRings=0
 NumStrips=0

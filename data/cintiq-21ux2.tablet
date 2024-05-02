@@ -55,7 +55,7 @@ IntegratedIn=Display
 
 [Features]
 Stylus=true
-Ring=false
+NumRings=0
 NumStrips=2
 StatusLEDs=Touchstrip2;Touchstrip
 

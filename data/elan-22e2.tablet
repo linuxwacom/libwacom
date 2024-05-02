@@ -13,6 +13,5 @@ Stylus=true
 Reversible=false
 Touch=false
 TouchSwitch=false
-Ring=false
-Ring2=false
+NumRings=0
 NumStrips=0

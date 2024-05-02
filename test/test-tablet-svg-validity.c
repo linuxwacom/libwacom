@@ -262,9 +262,9 @@ test_rings(struct fixture *f, gconstpointer data)
 {
 	const WacomDevice *device = data;
 
-	if (libwacom_has_ring(device))
+	if (libwacom_get_num_rings(device) >= 1)
 		check_touchring(f->root, "Ring");
-	if (libwacom_has_ring2(device))
+	if (libwacom_get_num_rings(device) >= 2)
 		check_touchring(f->root, "Ring2");
 }
 
@@ -362,7 +362,7 @@ static void setup_tests(WacomDevice *device)
 	add_test(device, test_dimensions);
 	if (libwacom_get_num_buttons(device) > 0)
 		add_test(device, test_buttons);
-	if (libwacom_has_ring(device) || libwacom_has_ring2(device))
+	if (libwacom_get_num_rings(device) > 0)
 		add_test(device, test_rings);
 	if (libwacom_get_num_strips(device) > 0)
 		add_test(device, test_strips);

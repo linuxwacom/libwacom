@@ -13,8 +13,7 @@ Styli=@generic-with-eraser;
 [Features]
 Reversible=false
 Stylus=true
-Ring=false
-Ring2=false
+NumRings=0
 Touch=true
 TouchSwitch=false
 # StatusLEDs=

@@ -16,5 +16,5 @@ Height=7
 Reversible=false
 Stylus=true
 Touch=true
-Ring=false
+NumRings=0
 BuiltIn=true

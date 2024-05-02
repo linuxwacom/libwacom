@@ -75,4 +75,5 @@ LIBWACOM_2.9 {
 
 LIBWACOM_2.12 {
     libwacom_match_get_uniq;
+    libwacom_get_num_rings;
 } LIBWACOM_2.9;

@@ -19,6 +19,11 @@
 #    |                                          |
 #    *------------------------------------------*
 #
+# Note: This tablet has 2 physical buttons (one left, one right)
+# configured via a firmware OSD but only one button can send 
+# events at any time. This is button C, shown centered here.
+# We cannot tell which physical button triggered the event.
+#
 # Note: touch data comes through the usb:056a:03f0 interface
 #
 # sysinfo.4XIn8KkXzp
@@ -41,5 +46,7 @@ Touch=true
 Buttons=3
 
 [Buttons]
+# Button C can be physically left or right depending on the firmware
+# but let's assign it to Left here, that's good enough.
 Left=A;C
 Right=B

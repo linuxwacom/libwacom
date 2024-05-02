@@ -176,6 +176,56 @@ check_touchstrip (xmlNodePtr cur, gchar *id)
 	g_free (class);
 }
 
+static void
+check_dial (xmlNodePtr cur, gchar *id)
+{
+	char             *sub;
+	char             *class;
+	xmlNodePtr        node;
+
+	node = verify_has_sub (cur, id);
+	g_assert (node != NULL);
+
+	class = g_strdup_printf ("%s %s", id, "Dial");
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Label%sUp", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sUp %s Label", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Label%sDown", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sDown %s Label", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sUp", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sUp %s Leader", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+
+	sub = g_strdup_printf ("Leader%sDown", id);
+	node = verify_has_sub (cur, sub);
+	g_assert (node != NULL);
+	g_free (sub);
+
+	class = g_strdup_printf ("%sDown %s Leader", id, id);
+	verify_has_class (node, class);
+	g_free (class);
+}
 
 static void
 check_touchring (xmlNodePtr cur, gchar *id)
@@ -280,6 +330,17 @@ test_strips(struct fixture *f, gconstpointer data)
 }
 
 static void
+test_dials(struct fixture *f, gconstpointer data)
+{
+	const WacomDevice *device = data;
+
+	if (libwacom_get_num_dials(device) > 0)
+		check_dial(f->root, "Dial");
+	if (libwacom_get_num_dials(device) > 1)
+		check_dial(f->root, "Dial");
+}
+
+static void
 test_buttons(struct fixture *f, gconstpointer data)
 {
 	const WacomDevice *device = data;
@@ -366,6 +427,8 @@ static void setup_tests(WacomDevice *device)
 		add_test(device, test_rings);
 	if (libwacom_get_num_strips(device) > 0)
 		add_test(device, test_strips);
+	if (libwacom_get_num_dials(device) > 0)
+		add_test(device, test_dials);
 }
 
 static WacomDeviceDatabase *

@@ -74,6 +74,9 @@ LIBWACOM_2.9 {
 } LIBWACOM_2.0;
 
 LIBWACOM_2.12 {
-    libwacom_match_get_uniq;
+    libwacom_get_dial_num_modes;
+    libwacom_get_dial2_num_modes;
+    libwacom_get_num_dials;
     libwacom_get_num_rings;
+    libwacom_match_get_uniq;
 } LIBWACOM_2.9;

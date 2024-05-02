@@ -162,6 +162,9 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 	intfunc(libwacom_get_ring2_num_modes, device);
 	intfunc(libwacom_get_num_strips, device);
 	intfunc(libwacom_get_strips_num_modes, device);
+	intfunc(libwacom_get_num_dials, device);
+	intfunc(libwacom_get_dial_num_modes, device);
+	intfunc(libwacom_get_dial2_num_modes, device);
 
 	{
 		WacomIntegrationFlags flags = libwacom_get_integration_flags(device);
@@ -190,7 +193,7 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 			WacomButtonFlags flags;
 
 			flags = libwacom_get_button_flag(device, b);
-			func_arg(libwacom_get_button_flag, "%c", b, "%s%s%s%s%s%s%s%s%s%s",
+			func_arg(libwacom_get_button_flag, "%c", b, "%s%s%s%s%s%s%s%s%s%s%s%s",
 				 flags == WACOM_BUTTON_NONE ? "NONE" : "",
 				 flags & WACOM_BUTTON_POSITION_LEFT ? "POSITION_LEFT|" : "",
 				 flags & WACOM_BUTTON_POSITION_RIGHT ? "POSITION_RIGHT|" : "",
@@ -200,8 +203,9 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				 flags & WACOM_BUTTON_RING2_MODESWITCH ? "RING2_MODESWITCH|" : "",
 				 flags & WACOM_BUTTON_TOUCHSTRIP_MODESWITCH ? "TOUCHSTRIP_MODESWITCH|" : "",
 				 flags & WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH ? "TOUCHSTRIP2_MODESWITCH|" : "",
+				 flags & WACOM_BUTTON_DIAL_MODESWITCH ? "DIAL_MODESWITCH|" : "",
+				 flags & WACOM_BUTTON_DIAL2_MODESWITCH ? "DIAL2_MODESWITCH|" : "",
 				 flags & WACOM_BUTTON_OLED ? "OLED " : "");
-
 		}
 	}
 

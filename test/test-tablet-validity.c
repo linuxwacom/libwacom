@@ -295,6 +295,25 @@ test_strips(gconstpointer data)
 						WACOM_BUTTON_TOUCHSTRIP_MODESWITCH));
 }
 
+static void
+test_dials(gconstpointer data)
+{
+	WacomDevice *device = (WacomDevice*)data;
+
+	g_assert_cmpint(libwacom_get_num_dials(device), >=, 0);
+	g_assert_cmpint(libwacom_get_dial_num_modes(device), >=, 0);
+
+	if (libwacom_get_num_dials(device) > 0)
+		g_assert_true(match_mode_switch(device,
+						libwacom_get_dial_num_modes,
+						WACOM_BUTTON_DIAL_MODESWITCH));
+
+	if (libwacom_get_num_dials(device) > 1)
+		g_assert_true(match_mode_switch(device,
+						libwacom_get_dial2_num_modes,
+						WACOM_BUTTON_DIAL2_MODESWITCH));
+}
+
 /* Wrapper function to make adding tests simpler. g_test requires
  * a unique test case name so we assemble that from the test function and
  * the tablet data.
@@ -339,6 +358,7 @@ static void setup_tests(WacomDevice *device)
 	add_test(device, test_styli);
 	add_test(device, test_rings);
 	add_test(device, test_strips);
+	add_test(device, test_dials);
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"

@@ -408,7 +408,9 @@ static const struct {
 	{ "Ring2", WACOM_BUTTON_RING2_MODESWITCH },
 	{ "Touchstrip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH },
 	{ "Touchstrip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH },
-	{ "OLEDs", WACOM_BUTTON_OLED }
+	{ "OLEDs", WACOM_BUTTON_OLED },
+	{ "Dial", WACOM_BUTTON_DIAL_MODESWITCH },
+	{ "Dial2", WACOM_BUTTON_DIAL2_MODESWITCH },
 };
 
 static const struct {
@@ -671,6 +673,8 @@ libwacom_parse_buttons(WacomDevice *device,
 	device->ring_num_modes = libwacom_parse_num_modes(device, keyfile, "RingNumModes", WACOM_BUTTON_RING_MODESWITCH);
 	device->ring2_num_modes = libwacom_parse_num_modes(device, keyfile, "Ring2NumModes", WACOM_BUTTON_RING2_MODESWITCH);
 	device->strips_num_modes = libwacom_parse_num_modes(device, keyfile, "StripsNumModes", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
+	device->dial_num_modes = libwacom_parse_num_modes(device, keyfile, "DialNumModes", WACOM_BUTTON_DIAL_MODESWITCH);
+	device->dial2_num_modes = libwacom_parse_num_modes(device, keyfile, "Dial2NumModes", WACOM_BUTTON_DIAL2_MODESWITCH);
 }
 
 static void
@@ -771,6 +775,7 @@ libwacom_parse_features(WacomDevice *device, GKeyFile *keyfile)
 
 	device->num_rings = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumRings", NULL);
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
+	device->num_dials = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumDials", NULL);
 
 	string_list = g_key_file_get_string_list(keyfile, FEATURES_GROUP, "StatusLEDs", NULL, NULL);
 	if (string_list) {
@@ -907,6 +912,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	}
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
+	device->num_dials = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumDials", NULL);
 	device->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 						NULL, g_free);
 	device->status_leds = g_array_new (FALSE, FALSE, sizeof(WacomStatusLEDs));

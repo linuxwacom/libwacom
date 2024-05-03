@@ -16,6 +16,64 @@ if any(os.environ.get(v) for v in ["ASAN_OPTIONS", "UBSAN_OPTIONS"]):
 logger = logging.getLogger(__name__)
 
 
+def write_stylus_file(dir):
+    from configparser import ConfigParser
+
+    config = ConfigParser()
+    config.optionxform = lambda option: option
+    config["0xfffff"] = {
+        "Name": "General Pen",
+        "Group": "generic-with-eraser",
+        "PairedStylusIds": "0xffffe;",
+        "Buttons": "2",
+        "Axes": "Tilt;Pressure;Distance;",
+        "Type": "General",
+    }
+
+    config["0xffffe"] = {
+        "Name": "General Pen Eraser",
+        "Group": "generic-with-eraser",
+        "PairedStylusIds": "0xfffff;",
+        "EraserType": "Invert",
+        "Buttons": "2",
+        "Axes": "Tilt;Pressure;Distance;",
+        "Type": "General",
+    }
+
+    with open(dir / "libwacom.stylus", "w") as fd:
+        config.write(fd, space_around_delimiters=False)
+
+
+def write_tablet_file(filename, devicename, matches):
+    from configparser import ConfigParser
+
+    config = ConfigParser()
+    config.optionxform = lambda option: option
+    config["Device"] = {
+        "Name": devicename,
+        "DeviceMatch": ";".join(matches),
+        "Width": 9,
+        "Height": 6,
+        "IntegratedIn": "",
+        "Class": "Bamboo",
+        "Layout": "",
+    }
+    config["Features"] = {
+        "Stylus": True,
+        "Reversible": False,
+    }
+
+    with open(filename, "w") as fd:
+        config.write(fd, space_around_delimiters=False)
+
+
+@pytest.fixture()
+def custom_datadir(tmp_path):
+    write_stylus_file(tmp_path)
+    write_tablet_file(tmp_path / "generic.tablet", "Generic", ["generic"])
+    return tmp_path
+
+
 def test_database_init(db):
     """Just a test to make sure it doesn't crash"""
     assert db is not None
@@ -224,5 +282,104 @@ def test_new_from_builder_uniq(db):
     # since vid/pid isn't set this does not find a match
     builder = WacomBuilder.create(uniq="OEM02_T18e")
     builder.device_name = "GAOMON S620"
+    device = db.new_from_builder(builder)
+    assert device is None
+
+
+def test_exact_matches(custom_datadir):
+    USBID = (0x1234, 0x5678)
+    UNIQ = "uniqval"
+    NAME = "nameval"
+
+    # A device match with uniq but no name
+    matches = ["usb|1234|5678||uniqval"]
+    write_tablet_file(custom_datadir / "uniq.tablet", "UniqOnly", matches)
+
+    # A device match with a name but no uniq
+    matches = ["usb|1234|5678|nameval"]
+    write_tablet_file(custom_datadir / "name.tablet", "NameOnly", matches)
+
+    # A device match with both
+    matches = ["usb|1234|5678|nameval|uniqval"]
+    write_tablet_file(custom_datadir / "both.tablet", "Both", matches)
+
+    db = WacomDatabase(path=custom_datadir)
+
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "UniqOnly"
+
+    builder = WacomBuilder.create(usbid=USBID, match_name=NAME)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "NameOnly"
+
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ, match_name=NAME)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "Both"
+
+
+def test_prefer_uniq_over_name(custom_datadir):
+    USBID = (0x1234, 0x5678)
+    UNIQ = "uniqval"
+    NAME = "nameval"
+
+    # A device match with uniq but no name
+    matches = ["usb|1234|5678||uniqval"]
+    write_tablet_file(custom_datadir / "uniq.tablet", "UniqOnly", matches)
+
+    # A device match with a name but no uniq
+    matches = ["usb|1234|5678|nameval"]
+    write_tablet_file(custom_datadir / "name.tablet", "NameOnly", matches)
+
+    db = WacomDatabase(path=custom_datadir)
+
+    # name and uniq set in our match but we don't have a device with both.
+    # Prefer the uniq match over the name match
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ, match_name=NAME)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "UniqOnly"
+
+    # If we have a uniq in our match but none of the DeviceMatches
+    # have that, fall back to name only
+    builder = WacomBuilder.create(usbid=USBID, uniq="whatever", match_name=NAME)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "NameOnly"
+
+    # If we have a name in our match but none of the DeviceMatches
+    # have that, fall back to uniq only
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ, match_name="whatever")
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "UniqOnly"
+
+
+def test_dont_ignore_exact_matches(custom_datadir):
+    USBID = (0x1234, 0x5678)
+    UNIQ = "uniqval"
+    NAME = "nameval"
+
+    # A device match with both
+    matches = ["usb|1234|5678|nameval|uniqval"]
+    write_tablet_file(custom_datadir / "both.tablet", "Both", matches)
+
+    db = WacomDatabase(path=custom_datadir)
+
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ, match_name=NAME)
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "Both"
+
+    # Our DeviceMatch has both uniq and name set, so only match
+    # when *both* match
+    builder = WacomBuilder.create(usbid=USBID, uniq=UNIQ, match_name="whatever")
+    device = db.new_from_builder(builder)
+    assert device is None
+
+    builder = WacomBuilder.create(usbid=USBID, uniq="whatever", match_name=NAME)
     device = db.new_from_builder(builder)
     assert device is None

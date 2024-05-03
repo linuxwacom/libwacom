@@ -2,7 +2,7 @@ project('libwacom', 'c',
 	version: '2.11.0',
 	license: 'HPND',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
-	meson_version: '>= 0.51.0')
+	meson_version: '>= 0.53.0')
 
 dir_bin     = get_option('prefix') / get_option('bindir')
 dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
@@ -17,6 +17,7 @@ if dir_udev == ''
 	dir_udev = dir_sys_udev
 endif
 
+fs = import('fs')
 pymod = import('python')
 python = pymod.find_installation('python3', required: true)
 
@@ -295,12 +296,15 @@ if get_option('tests').enabled()
 		message('valgrind not found, disabling valgrind test suite')
 	endif
 
+	env = environment()
+	env.set('MESON_SOURCE_ROOT', meson.current_source_dir())
+	env.set('LD_LIBRARY_PATH', fs.parent(lib_libwacom.full_path()))
 	pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
 	pytest = find_program('pytest-3', 'pytest')
 	test('pytest',
 	     pytest,
 	     args: [meson.current_source_dir()],
-	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.current_source_dir())],
+	     env: env,
 	     suite: ['all'])
 endif
 

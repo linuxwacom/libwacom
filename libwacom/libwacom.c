@@ -730,7 +730,8 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 
 		int vendor_id, product_id;
 		char *name, *uniq;
-		const char *match_name, *match_uniq;
+		const char *used_match_name = NULL;
+		const char *used_match_uniq = NULL;
 		WacomMatch *used_match;
 
 		vendor_id = builder->vendor_id;
@@ -743,20 +744,34 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 			bus = all_busses;
 
 		while (*bus != WBUSTYPE_UNKNOWN) {
-			match_name = name;
-			match_uniq = uniq;
-			device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
-			if (device == NULL) {
-				match_uniq = NULL;
+			/* Uniq (where it exists) is more reliable than the name which may be re-used
+			 * across tablets. So try to find a uniq+name match first, then uniq-only, then
+			 * name-only.
+			 */
+			struct match_approach {
+				const char *name;
+				const char *uniq;
+			} approaches[] = {
+				{ name, uniq },
+				{ NULL, uniq },
+				{ name, NULL },
+				{ NULL, NULL },
+			};
+			struct match_approach *approach = approaches;
+			while (true) {
+				const char *match_name = approach->name;
+				const char *match_uniq = approach->uniq;
 				device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
-				if (device == NULL) {
-					match_name = NULL;
-					device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
-					if (device == NULL) {
-						match_uniq = uniq;
-						device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
-					}
+				if (device) {
+					used_match_name = match_name;
+					used_match_uniq = match_uniq;
+					break;
 				}
+
+				if (approach->name == NULL && approach->uniq == NULL)
+					break;
+
+				approach++;
 			}
 			if (device)
 				break;
@@ -765,7 +780,7 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 		ret = fallback_or_device(db, device, builder->device_name, fallback);
 		if (ret) {
 			/* for multiple-match devices, set to the one we requested */
-			used_match = libwacom_match_new(match_name, match_uniq, *bus, vendor_id, product_id);
+			used_match = libwacom_match_new(used_match_name, used_match_uniq, *bus, vendor_id, product_id);
 			libwacom_set_default_match(ret, used_match);
 			libwacom_match_unref(used_match);
 		}

@@ -48,6 +48,15 @@ enum WacomFeature {
 	FEATURE_TOUCHSWITCH	= (1 << 5)
 };
 
+struct _WacomBuilder {
+	char *device_name;
+	char *match_name;
+	char *uniq;
+	WacomBusType bus;
+	uint32_t vendor_id;
+	uint32_t product_id;
+};
+
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy_match() ! */
 struct _WacomMatch {

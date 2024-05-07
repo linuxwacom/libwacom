@@ -1,0 +1,90 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        id="huion-inspiroy-g10t"
+        width="750"
+        height="355">
+    <title id="title">INSPIROY  G10T</title>
+    <rect x="216" y="21" width="510" height="314" />
+
+            <g>
+                <rect id="ButtonA"
+                      class="A Button"
+                      x="28"
+                      y="94"
+                      width="47"
+                      height="20" />
+                <text id="LabelA"
+                      class="A Label"
+                      x="49.5"
+                      y="106"
+                      style="text-anchor:start;">A</text>
+            </g>,
+            <g>
+                <rect id="ButtonB"
+                      class="B Button"
+                      x="92"
+                      y="94"
+                      width="32"
+                      height="20" />
+                <text id="LabelB"
+                      class="B Label"
+                      x="106"
+                      y="106"
+                      style="text-anchor:start;">B</text>
+            </g>,
+            <g>
+                <rect id="ButtonC"
+                      class="C Button"
+                      x="140"
+                      y="94"
+                      width="47"
+                      height="20" />
+                <text id="LabelC"
+                      class="C Label"
+                      x="161.5"
+                      y="106"
+                      style="text-anchor:start;">C</text>
+            </g>,
+            <g>
+                <rect id="ButtonD"
+                      class="D Button"
+                      x="28"
+                      y="238"
+                      width="47"
+                      height="20" />
+                <text id="LabelD"
+                      class="D Label"
+                      x="49.5"
+                      y="250"
+                      style="text-anchor:start;">D</text>
+            </g>,
+            <g>
+                <rect id="ButtonE"
+                      class="E Button"
+                      x="92"
+                      y="238"
+                      width="32"
+                      height="20" />
+                <text id="LabelE"
+                      class="E Label"
+                      x="106"
+                      y="250"
+                      style="text-anchor:start;">E</text>
+            </g>,
+            <g>
+                <rect id="ButtonF"
+                      class="F Button"
+                      x="141"
+                      y="239"
+                      width="47"
+                      height="20" />
+                <text id="LabelF"
+                      class="F Label"
+                      x="162.5"
+                      y="251"
+                      style="text-anchor:start;">F</text>
+            </g>
+</svg>

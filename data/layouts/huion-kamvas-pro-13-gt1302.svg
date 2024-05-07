@@ -1,0 +1,103 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        id="huion-kamvas-pro-13-gt1302"
+        width="698"
+        height="430">
+    <title id="title">KAMVAS Pro 13 GT1302</title>
+    <rect x="112" y="46" width="540" height="340" />
+
+            <g>
+                <rect id="ButtonA"
+                      class="A Button"
+                      x="28"
+                      y="75"
+                      width="28"
+                      height="38" />
+                <text id="LabelA"
+                      class="A Label"
+                      x="40"
+                      y="96"
+                      style="text-anchor:start;">A</text>
+            </g>,
+            <g>
+                <rect id="ButtonB"
+                      class="B Button"
+                      x="28"
+                      y="116"
+                      width="28"
+                      height="38" />
+                <text id="LabelB"
+                      class="B Label"
+                      x="40"
+                      y="137"
+                      style="text-anchor:start;">B</text>
+            </g>,
+            <g>
+                <rect id="ButtonC"
+                      class="C Button"
+                      x="28"
+                      y="156"
+                      width="28"
+                      height="38" />
+                <text id="LabelC"
+                      class="C Label"
+                      x="40"
+                      y="177"
+                      style="text-anchor:start;">C</text>
+            </g>,
+            <g>
+                <rect id="ButtonD"
+                      class="D Button"
+                      x="28"
+                      y="196"
+                      width="28"
+                      height="38" />
+                <text id="LabelD"
+                      class="D Label"
+                      x="40"
+                      y="217"
+                      style="text-anchor:start;">D</text>
+            </g>,
+            <g>
+                <rect id="ButtonE"
+                      class="E Button"
+                      x="28"
+                      y="237"
+                      width="28"
+                      height="38" />
+                <text id="LabelE"
+                      class="E Label"
+                      x="40"
+                      y="258"
+                      style="text-anchor:start;">E</text>
+            </g>,
+            <g>
+                <rect id="ButtonF"
+                      class="F Button"
+                      x="28"
+                      y="277"
+                      width="28"
+                      height="38" />
+                <text id="LabelF"
+                      class="F Label"
+                      x="40"
+                      y="298"
+                      style="text-anchor:start;">F</text>
+            </g>,
+            <g>
+                <rect id="ButtonG"
+                      class="G Button"
+                      x="28"
+                      y="316"
+                      width="28"
+                      height="38" />
+                <text id="LabelG"
+                      class="G Label"
+                      x="40"
+                      y="337"
+                      style="text-anchor:start;">G</text>
+            </g>
+</svg>

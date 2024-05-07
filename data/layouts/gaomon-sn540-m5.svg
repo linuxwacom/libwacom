@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        id="gaomon-sn540-m5"
+        width="715"
+        height="500">
+    <title id="title">SN540/M5</title>
+    <rect x="73" y="38" width="572" height="380" />
+
+            <g>
+                <rect id="ButtonA"
+                      class="A Button"
+                      x="664"
+                      y="50"
+                      width="35"
+                      height="35" />
+                <text id="LabelA"
+                      class="A Label"
+                      x="679.5"
+                      y="69.5"
+                      style="text-anchor:start;">A</text>
+            </g>
+</svg>

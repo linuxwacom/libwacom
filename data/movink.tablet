@@ -20,7 +20,7 @@
 #    *------------------------------------------*
 #
 # Note: This tablet has 2 physical buttons (one left, one right)
-# configured via a firmware OSD but only one button can send 
+# configured via a firmware OSD but only one button can send
 # events at any time. This is button C, shown centered here.
 # We cannot tell which physical button triggered the event.
 #

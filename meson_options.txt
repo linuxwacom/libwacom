@@ -10,4 +10,3 @@ option('tests',
        type: 'feature',
        value: 'enabled',
        description: 'Build the tests [default=enabled]')
-

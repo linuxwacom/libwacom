@@ -1,5 +1,5 @@
 name: Label Commenter
-  
+
 on:
   issues:
     types: [labeled, unlabeled]

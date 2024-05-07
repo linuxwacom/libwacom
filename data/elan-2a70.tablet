@@ -1,4 +1,4 @@
-# ELAN touchscreen/pen sensor present in the HP ProBook X360 11 G5 EE 
+# ELAN touchscreen/pen sensor present in the HP ProBook X360 11 G5 EE
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/185
 # sysinfo.B2HOmo20Hc
 
@@ -13,4 +13,3 @@ IntegratedIn=Display;System
 [Features]
 Stylus=true
 Touch=true
-

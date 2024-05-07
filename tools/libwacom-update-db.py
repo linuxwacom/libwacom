@@ -177,7 +177,7 @@ def guess_hwdb_filename(basedir):
     if not hwdbdir.exists():
         raise FileNotFoundError(hwdbdir)
 
-    fname = hwdbdir / f"66-libwacom.hwdb"
+    fname = hwdbdir / "66-libwacom.hwdb"
     return fname
 
 

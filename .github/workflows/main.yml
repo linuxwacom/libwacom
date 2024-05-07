@@ -28,7 +28,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES
@@ -72,7 +72,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES
@@ -115,7 +115,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       # Run as sudo because we install to /etc and thus need the pip
       # packages available to root
       - uses: ./.github/actions/pkginstall
@@ -149,7 +149,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       # Run as sudo because we install to /etc and thus need the pip
       # packages available to root
       - uses: ./.github/actions/pkginstall
@@ -200,7 +200,7 @@ jobs:
       - name: install python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES

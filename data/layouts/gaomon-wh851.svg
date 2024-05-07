@@ -1,0 +1,129 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        id="gaomon-wh851"
+        width="727"
+        height="430">
+    <title id="title">WH851</title>
+    <rect x="160" y="56" width="511" height="318" />
+
+            <g>
+                <rect id="ButtonA"
+                      class="A Button"
+                      x="36"
+                      y="41"
+                      width="43"
+                      height="29" />
+                <text id="LabelA"
+                      class="A Label"
+                      x="55.5"
+                      y="57.5"
+                      style="text-anchor:start;">A</text>
+            </g>,
+            <g>
+                <rect id="ButtonB"
+                      class="B Button"
+                      x="36"
+                      y="75"
+                      width="43"
+                      height="29" />
+                <text id="LabelB"
+                      class="B Label"
+                      x="55.5"
+                      y="91.5"
+                      style="text-anchor:start;">B</text>
+            </g>,
+            <g>
+                <rect id="ButtonC"
+                      class="C Button"
+                      x="36"
+                      y="109"
+                      width="43"
+                      height="29" />
+                <text id="LabelC"
+                      class="C Label"
+                      x="55.5"
+                      y="125.5"
+                      style="text-anchor:start;">C</text>
+            </g>,
+            <g>
+                <rect id="ButtonD"
+                      class="D Button"
+                      x="36"
+                      y="143"
+                      width="43"
+                      height="29" />
+                <text id="LabelD"
+                      class="D Label"
+                      x="55.5"
+                      y="159.5"
+                      style="text-anchor:start;">D</text>
+            </g>,
+            <g>
+                <rect id="ButtonE"
+                      class="E Button"
+                      x="36"
+                      y="258"
+                      width="43"
+                      height="29" />
+                <text id="LabelE"
+                      class="E Label"
+                      x="55.5"
+                      y="274.5"
+                      style="text-anchor:start;">E</text>
+            </g>,
+            <g>
+                <rect id="ButtonF"
+                      class="F Button"
+                      x="36"
+                      y="292"
+                      width="43"
+                      height="29" />
+                <text id="LabelF"
+                      class="F Label"
+                      x="55.5"
+                      y="308.5"
+                      style="text-anchor:start;">F</text>
+            </g>,
+            <g>
+                <rect id="ButtonG"
+                      class="G Button"
+                      x="36"
+                      y="326"
+                      width="43"
+                      height="29" />
+                <text id="LabelG"
+                      class="G Label"
+                      x="55.5"
+                      y="342.5"
+                      style="text-anchor:start;">G</text>
+            </g>,
+            <g>
+                <rect id="ButtonH"
+                      class="H Button"
+                      x="36"
+                      y="360"
+                      width="43"
+                      height="29" />
+                <text id="LabelH"
+                      class="H Label"
+                      x="55.5"
+                      y="376.5"
+                      style="text-anchor:start;">H</text>
+            </g>,
+            <g>
+                <rect id="ButtonI"
+                      class="I Button"
+                      x="20"
+                      y="178"
+                      width="74"
+                      height="74" />
+                <text id="LabelI"
+                      class="I Label"
+                      x="55"
+                      y="217"
+                      style="text-anchor:start;">I</text>
+            </g>
+</svg>

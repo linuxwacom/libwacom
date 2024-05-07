@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        id="gaomon-gt-1106"
+        width="750"
+        height="414">
+    <title id="title">GT-1106</title>
+    <rect x="158" y="58" width="533" height="301" />
+
+            <g>
+                <rect id="ButtonA"
+                      class="A Button"
+                      x="34"
+                      y="60"
+                      width="55"
+                      height="25" />
+                <text id="LabelA"
+                      class="A Label"
+                      x="59.5"
+                      y="74.5"
+                      style="text-anchor:start;">A</text>
+            </g>,
+            <g>
+                <rect id="ButtonB"
+                      class="B Button"
+                      x="34"
+                      y="93"
+                      width="55"
+                      height="25" />
+                <text id="LabelB"
+                      class="B Label"
+                      x="59.5"
+                      y="107.5"
+                      style="text-anchor:start;">B</text>
+            </g>,
+            <g>
+                <rect id="ButtonC"
+                      class="C Button"
+                      x="34"
+                      y="126"
+                      width="55"
+                      height="25" />
+                <text id="LabelC"
+                      class="C Label"
+                      x="59.5"
+                      y="140.5"
+                      style="text-anchor:start;">C</text>
+            </g>,
+            <g>
+                <rect id="ButtonD"
+                      class="D Button"
+                      x="34"
+                      y="160"
+                      width="55"
+                      height="25" />
+                <text id="LabelD"
+                      class="D Label"
+                      x="59.5"
+                      y="174.5"
+                      style="text-anchor:start;">D</text>
+            </g>,
+            <g>
+                <rect id="ButtonE"
+                      class="E Button"
+                      x="34"
+                      y="231"
+                      width="55"
+                      height="25" />
+                <text id="LabelE"
+                      class="E Label"
+                      x="59.5"
+                      y="245.5"
+                      style="text-anchor:start;">E</text>
+            </g>,
+            <g>
+                <rect id="ButtonF"
+                      class="F Button"
+                      x="34"
+                      y="265"
+                      width="55"
+                      height="25" />
+                <text id="LabelF"
+                      class="F Label"
+                      x="59.5"
+                      y="279.5"
+                      style="text-anchor:start;">F</text>
+            </g>,
+            <g>
+                <rect id="ButtonG"
+                      class="G Button"
+                      x="34"
+                      y="298"
+                      width="55"
+                      height="25" />
+                <text id="LabelG"
+                      class="G Label"
+                      x="59.5"
+                      y="312.5"
+                      style="text-anchor:start;">G</text>
+            </g>,
+            <g>
+                <rect id="ButtonH"
+                      class="H Button"
+                      x="34"
+                      y="331"
+                      width="55"
+                      height="25" />
+                <text id="LabelH"
+                      class="H Label"
+                      x="59.5"
+                      y="345.5"
+                      style="text-anchor:start;">H</text>
+            </g>
+</svg>

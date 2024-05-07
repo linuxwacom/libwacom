@@ -19,13 +19,14 @@ import logging
 import sys
 
 
-@pytest.fixture(scope='session', autouse=True)
+@pytest.fixture(scope="session", autouse=True)
 def systemd_reload():
-    '''Make sure our hwdb and udev rules are up-to-date'''
+    """Make sure our hwdb and udev rules are up-to-date"""
     import subprocess
+
     try:
-        subprocess.run(['systemd-hwdb', 'update'], check=True)
-        subprocess.run(['systemctl', 'daemon-reload'], check=True)
+        subprocess.run(["systemd-hwdb", "update"], check=True)
+        subprocess.run(["systemctl", "daemon-reload"], check=True)
     except (FileNotFoundError, subprocess.CalledProcessError):
         # If any of the commands above are not found (most likely the system
         # simply does not use systemd), just skip.
@@ -37,24 +38,24 @@ def pytest_generate_tests(metafunc):
     # filled with exactly one DeviceMatch from the list of all .tablet files
     # in the data dir. Where the tablet also has touch/buttons generate an
     # extra Finger or Pad device
-    if 'tablet' in metafunc.fixturenames:
-        datadir = Path(os.getenv('MESON_SOURCE_ROOT') or '.') / 'data'
+    if "tablet" in metafunc.fixturenames:
+        datadir = Path(os.getenv("MESON_SOURCE_ROOT") or ".") / "data"
         tablets = []
-        for f in datadir.glob('*.tablet'):
+        for f in datadir.glob("*.tablet"):
             config = configparser.ConfigParser()
             config.read(f)
-            name = config['Device']['Name']
-            want_pad = config['Device'].get('Buttons', 0)
-            want_finger = config['Features'].get('Touch') == 'true'
-            integrated_in = config['Device'].get('IntegratedIn', '').split(';')
-            is_touchscreen = set(integrated_in) & set(['Display', 'System'])
+            name = config["Device"]["Name"]
+            want_pad = config["Device"].get("Buttons", 0)
+            want_finger = config["Features"].get("Touch") == "true"
+            integrated_in = config["Device"].get("IntegratedIn", "").split(";")
+            is_touchscreen = set(integrated_in) & set(["Display", "System"])
 
-            for match in config['Device']['DeviceMatch'].split(';'):
-                if not match or match == 'generic':
+            for match in config["Device"]["DeviceMatch"].split(";"):
+                if not match or match == "generic":
                     continue
 
-                bus, vid, pid = match.split('|')[:3]  # skip the name part of the match
-                if bus not in ['usb', 'bluetooth']:
+                bus, vid, pid = match.split("|")[:3]  # skip the name part of the match
+                if bus not in ["usb", "bluetooth"]:
                     continue
 
                 try:
@@ -64,9 +65,9 @@ def pytest_generate_tests(metafunc):
                     print(f"Invalid vid/pid in {match} in {f}", file=sys.stderr)
                     raise e
 
-                if bus == 'usb':
+                if bus == "usb":
                     bus = 0x3
-                elif bus == 'bluetooth':
+                elif bus == "bluetooth":
                     bus = 0x5
 
                 class Tablet(object):
@@ -80,27 +81,25 @@ def pytest_generate_tests(metafunc):
                 tablets.append(Tablet(name, bus, vid, pid))
 
                 if want_pad:
-                    tablets.append(Tablet(name + ' Pad', bus, vid, pid))
+                    tablets.append(Tablet(name + " Pad", bus, vid, pid))
 
                 if want_finger:
-                    tablets.append(Tablet(name + ' Finger', bus, vid, pid, is_touchscreen))
+                    tablets.append(
+                        Tablet(name + " Finger", bus, vid, pid, is_touchscreen)
+                    )
 
         # our tablets list now becomes the list of arguments passed to the
         # test functions taking a 'tablet' argument - one-by-one. So where
         # tablets contains 10 entries, our test function will be called 10
         # times.
-        metafunc.parametrize('tablet', tablets)
+        metafunc.parametrize("tablet", tablets)
 
 
 @pytest.fixture
 def uinput(tablet):
     dev = libevdev.Device()
     dev.name = tablet.name
-    dev.id = {
-        'vendor': tablet.vid,
-        'product': tablet.pid,
-        'bustype': tablet.bus
-    }
+    dev.id = {"vendor": tablet.vid, "product": tablet.pid, "bustype": tablet.bus}
     # Our rules match on pid/vid, so purposely make this look like a
     # non-tablet to verify that our rules apply anyway and not others
     dev.enable(libevdev.EV_REL.REL_X)
@@ -122,28 +121,32 @@ def uinput(tablet):
         raise pytest.skip()
 
 
-@pytest.mark.skipif(sys.platform != 'linux', reason='This test requires udev')
+@pytest.mark.skipif(sys.platform != "linux", reason="This test requires udev")
 def test_hwdb_files(uinput):
-    logging.debug('{:04x}:{:04x} {}'.format(uinput.id['vendor'], uinput.id['product'], uinput.name))
+    logging.debug(
+        "{:04x}:{:04x} {}".format(
+            uinput.id["vendor"], uinput.id["product"], uinput.name
+        )
+    )
     udev = pyudev.Context()
     dev = pyudev.Devices.from_device_file(udev, uinput.devnode)
     props = list(dev.properties)  # convert to list for better error messages
 
-    assert 'ID_INPUT' in props
-    assert dev.properties['ID_INPUT'] == '1'
+    assert "ID_INPUT" in props
+    assert dev.properties["ID_INPUT"] == "1"
 
-    assert 'ID_INPUT_TABLET' in props
-    assert dev.properties['ID_INPUT_TABLET'] == '1'
+    assert "ID_INPUT_TABLET" in props
+    assert dev.properties["ID_INPUT_TABLET"] == "1"
 
-    assert 'ID_INPUT_JOYSTICK' not in props
+    assert "ID_INPUT_JOYSTICK" not in props
 
-    if 'Finger' in uinput.name:
+    if "Finger" in uinput.name:
         if uinput.is_touchscreen:
-            assert 'ID_INPUT_TOUCHSCREEN' in props
+            assert "ID_INPUT_TOUCHSCREEN" in props
         else:
-            assert 'ID_INPUT_TOUCHPAD' in props
+            assert "ID_INPUT_TOUCHPAD" in props
 
     # For the Wacom Bamboo Pad we check for "Pad Pad" in the device name
-    if 'Pad' in uinput.name:
-        if 'Wacom Bamboo Pad' not in uinput.name or 'Pad Pad' in uinput.name:
-            assert 'ID_INPUT_TABLET_PAD' in props
+    if "Pad" in uinput.name:
+        if "Wacom Bamboo Pad" not in uinput.name or "Pad Pad" in uinput.name:
+            assert "ID_INPUT_TABLET_PAD" in props

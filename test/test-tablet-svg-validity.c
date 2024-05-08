@@ -347,7 +347,7 @@ test_dials(struct fixture *f, gconstpointer data)
 	if (libwacom_get_num_dials(device) > 0)
 		check_dial(f->root, "Dial");
 	if (libwacom_get_num_dials(device) > 1)
-		check_dial(f->root, "Dial");
+		check_dial(f->root, "Dial2");
 }
 
 static void

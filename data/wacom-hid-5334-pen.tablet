@@ -8,7 +8,7 @@
 Name=Wacom HID 5334 Pen
 ModelName=WACF2200
 Class=ISDV4
-DeviceMatch=i2c:056a:5334;
+DeviceMatch=i2c|056a|5334
 # No pad buttons, so no layout
 IntegratedIn=Display;System
 

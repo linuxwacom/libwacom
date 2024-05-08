@@ -1,0 +1,19 @@
+# Wacom
+# Wacom HID 5334 Pen
+# WACF2200
+#
+# sysinfo.QQFfpSHRzL
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/313
+[Device]
+Name=Wacom HID 5334 Pen
+ModelName=WACF2200
+Class=ISDV4
+DeviceMatch=i2c|056a|5334
+# No pad buttons, so no layout
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+NumRings=0

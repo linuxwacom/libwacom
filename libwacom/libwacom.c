@@ -26,6 +26,7 @@
 
 #include "config.h"
 
+#include "libwacom.h"
 #include "libwacomint.h"
 #include <assert.h>
 #include <stdlib.h>
@@ -603,18 +604,87 @@ libwacom_new (const WacomDeviceDatabase *db, const char *name, const char *uniq,
 	return device;
 }
 
-LIBWACOM_EXPORT WacomDevice*
-libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error)
+static bool
+builder_is_name_only(const WacomBuilder *builder)
 {
-	int vendor_id, product_id;
-	WacomBusType bus;
-	const WacomDevice *device;
-	WacomDevice *ret = NULL;
-	WacomIntegrationFlags integration_flags;
-	char *name, *match_name;
-	char *uniq, *match_uniq;
-	WacomMatch *match;
+	return builder->device_name != NULL && builder->match_name == NULL &&
+		builder->uniq == NULL &&
+		builder->vendor_id == 0 && builder->product_id == 0 &&
+		builder->bus == WBUSTYPE_UNKNOWN;
+}
 
+static bool
+builder_is_uniq_only(const WacomBuilder *builder)
+{
+	return builder->device_name == NULL && builder->match_name == NULL &&
+		builder->uniq != NULL &&
+		builder->vendor_id == 0 && builder->product_id == 0 &&
+		builder->bus == WBUSTYPE_UNKNOWN;
+}
+
+/**
+ * Return a copy of the given device or, if NULL, the fallback device with
+ * the name changed to the override name.
+ */
+static WacomDevice *
+fallback_or_device(const WacomDeviceDatabase *db, const WacomDevice *device,
+		   const char *name_override, WacomFallbackFlags fallback_flags)
+{
+	WacomDevice *copy = NULL;
+	const WacomDevice *fallback;
+	const char *fallback_name = NULL;
+
+	if (device != NULL) {
+		return libwacom_copy(device);
+	}
+
+	switch (fallback_flags) {
+	case WFALLBACK_NONE:
+		return NULL;
+	case WFALLBACK_GENERIC:
+		fallback_name = "generic";
+		break;
+	default:
+		g_assert_not_reached();
+		break;
+	}
+
+	fallback = libwacom_get_device(db, fallback_name);
+	if (fallback == NULL)
+		return NULL;
+
+	copy = libwacom_copy(fallback);
+	if (name_override != NULL) {
+		g_free(copy->name);
+		copy->name = g_strdup(name_override);
+	}
+	return copy;
+}
+
+static gint
+find_named_device(const WacomDevice *device, const char *name)
+{
+	return g_strcmp0(device->name, name);
+}
+
+static gint
+find_uniq_device(const WacomDevice *device, const char *uniq)
+{
+	const WacomMatch **matches = libwacom_get_matches(device);
+
+	for (const WacomMatch **match = matches; *match; match++) {
+		if (uniq && (*match)->uniq && g_str_equal((*match)->uniq, uniq))
+			return 0;
+	}
+	return -1;
+}
+
+LIBWACOM_EXPORT WacomDevice*
+libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *builder,
+			  WacomFallbackFlags fallback, WacomError *error)
+{
+	const WacomDevice *device = NULL;
+	WacomDevice *ret = NULL;
 	switch (fallback) {
 		case WFALLBACK_NONE:
 		case WFALLBACK_GENERIC:
@@ -629,6 +699,89 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 		return NULL;
 	}
 
+	/* Name-only matches behave like new_from_name */
+	if (builder_is_name_only(builder)) {
+		GList *keys = g_hash_table_get_values(db->device_ht);
+		GList *entry = g_list_find_custom(keys, builder->device_name, (GCompareFunc)find_named_device);
+		if (entry)
+			device = entry->data;
+		ret = fallback_or_device(db, device, builder->device_name, fallback);
+		g_list_free (keys);
+	/* Uniq-only behaves like new_from_name but matches on uniq in the match strings */
+	} else if (builder_is_uniq_only(builder)) {
+		GList *keys = g_hash_table_get_values(db->device_ht);
+		GList *entry = g_list_find_custom(keys, builder->uniq, (GCompareFunc)find_uniq_device);
+		if (entry)
+			device = entry->data;
+		ret = fallback_or_device(db, device, builder->device_name, fallback);
+		g_list_free (keys);
+	} else {
+		WacomBusType all_busses[] = {
+			WBUSTYPE_USB,
+			WBUSTYPE_I2C,
+			WBUSTYPE_BLUETOOTH,
+			WBUSTYPE_UNKNOWN,
+		};
+		WacomBusType fixed_bus[] = {
+			builder->bus,
+			WBUSTYPE_UNKNOWN,
+		};
+		WacomBusType *bus;
+
+		int vendor_id, product_id;
+		char *name, *uniq;
+		const char *match_name, *match_uniq;
+		WacomMatch *used_match;
+
+		vendor_id = builder->vendor_id;
+		product_id = builder->product_id;
+		name = builder->match_name;
+		uniq = builder->uniq;
+		if (builder->bus)
+			bus = fixed_bus;
+		else
+			bus = all_busses;
+
+		while (*bus != WBUSTYPE_UNKNOWN) {
+			match_name = name;
+			match_uniq = uniq;
+			device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
+			if (device == NULL) {
+				match_uniq = NULL;
+				device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
+				if (device == NULL) {
+					match_name = NULL;
+					device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, *bus, error);
+				}
+			}
+			if (device)
+				break;
+			bus++;
+		}
+		ret = fallback_or_device(db, device, builder->device_name, fallback);
+		if (ret) {
+			/* for multiple-match devices, set to the one we requested */
+			used_match = libwacom_match_new(match_name, match_uniq, *bus, vendor_id, product_id);
+			libwacom_set_default_match(ret, used_match);
+			libwacom_match_unref(used_match);
+		}
+	}
+
+	if (ret == NULL)
+		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "unknown model");
+	return ret;
+}
+
+LIBWACOM_EXPORT WacomDevice*
+libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error)
+{
+	int vendor_id, product_id;
+	WacomBusType bus;
+	WacomDevice *device;
+	WacomIntegrationFlags integration_flags;
+	char *name, *uniq;
+	WacomBuilder *builder;
+
 	if (!path) {
 		libwacom_error_set(error, WERROR_INVALID_PATH, "path is NULL");
 		return NULL;
@@ -637,107 +790,46 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 	if (!get_device_info (path, &vendor_id, &product_id, &name, &uniq, &bus, &integration_flags, error))
 		return NULL;
 
-	match_name = name;
-	match_uniq = uniq;
-	device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, bus, error);
-	if (device == NULL) {
-		match_uniq = NULL;
-		device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, bus, error);
-		if (device == NULL) {
-			match_name = NULL;
-			device = libwacom_new (db, match_name, match_uniq, vendor_id, product_id, bus, error);
-		}
-	}
-
-	if (device == NULL) {
-		if (fallback == WFALLBACK_NONE)
-			goto out;
-
-		/* WFALLBACK_GENERIC */
-		device = libwacom_get_device(db, "generic");
-		if (device == NULL)
-			goto out;
-
-		ret = libwacom_copy(device);
-
-		if (name != NULL) {
-			g_free (ret->name);
-			ret->name = g_strdup(name);
-		}
-	} else {
-		ret = libwacom_copy(device);
-	}
-
-	/* for multiple-match devices, set to the one we requested */
-	match = libwacom_match_new(match_name, match_uniq, bus, vendor_id, product_id);
-	libwacom_set_default_match(ret, match);
-	libwacom_match_unref(match);
-
+	builder = libwacom_builder_new();
+	libwacom_builder_set_match_name(builder, name);
+	libwacom_builder_set_uniq(builder, uniq);
+	libwacom_builder_set_usbid(builder, vendor_id, product_id);
+	device = libwacom_new_from_builder(db, builder, fallback, error);
 	/* if unset, use the kernel flags. Could be unset as well. */
-	if (device && ret->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
-		ret->integration_flags = integration_flags;
+	if (device && device->integration_flags == WACOM_DEVICE_INTEGRATED_UNSET)
+		device->integration_flags = integration_flags;
 
-out:
+	libwacom_builder_destroy(builder);
 	g_free (name);
 	g_free (uniq);
-	if (ret == NULL)
-		libwacom_error_set(error, WERROR_UNKNOWN_MODEL, "unknown model");
-	return ret;
+
+	return device;
 }
 
 LIBWACOM_EXPORT WacomDevice*
 libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error)
 {
-	const WacomDevice *device;
+	WacomDevice *device;
+	WacomBuilder *builder = libwacom_builder_new();
 
-	if (!db) {
-		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
-		return NULL;
-	}
+	libwacom_builder_set_usbid(builder, vendor_id, product_id);
+	device = libwacom_new_from_builder(db, builder, WFALLBACK_NONE, error);
+	libwacom_builder_destroy(builder);
 
-	device = libwacom_new(db, NULL, NULL, vendor_id, product_id, WBUSTYPE_USB, error);
-	if (!device)
-		device = libwacom_new(db, NULL, NULL, vendor_id, product_id, WBUSTYPE_I2C, error);
-	if (!device)
-		device = libwacom_new(db, NULL, NULL, vendor_id, product_id, WBUSTYPE_BLUETOOTH, error);
-
-	if (device)
-		return libwacom_copy(device);
-
-	libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
-	return NULL;
+	return device;
 }
 
 LIBWACOM_EXPORT WacomDevice*
 libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomError *error)
 {
-	const WacomDevice *device;
-	GList *keys, *l;
+	WacomBuilder *builder = libwacom_builder_new();
+	WacomDevice *device;
+	libwacom_builder_set_device_name(builder, name);
 
-	if (!db) {
-		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
-		return NULL;
-	}
+	device = libwacom_new_from_builder(db, builder, WFALLBACK_NONE, error);
+	libwacom_builder_destroy(builder);
 
-	g_return_val_if_fail(name != NULL, NULL);
-
-	device = NULL;
-	keys = g_hash_table_get_values (db->device_ht);
-	for (l = keys; l; l = l->next) {
-		WacomDevice *d = l->data;
-
-		if (g_str_equal(d->name, name)) {
-			device = d;
-			break;
-		}
-	}
-	g_list_free (keys);
-
-	if (device)
-		return libwacom_copy(device);
-
-	libwacom_error_set(error, WERROR_UNKNOWN_MODEL, NULL);
-	return NULL;
+	return device;
 }
 
 static void print_styli_for_device (int fd, const WacomDevice *device)
@@ -1065,6 +1157,56 @@ libwacom_match_new(const char *name, const char *uniq,
 	match->product_id = product_id;
 
 	return match;
+}
+
+LIBWACOM_EXPORT WacomBuilder*
+libwacom_builder_new(void)
+{
+	WacomBuilder *builder = g_malloc0(sizeof(*builder));
+	return builder;
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_destroy(WacomBuilder *builder)
+{
+	g_free (builder->device_name);
+	g_free (builder->match_name);
+	g_free (builder->uniq);
+	g_free (builder);
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_set_bustype(WacomBuilder *builder, WacomBusType bustype)
+{
+	builder->bus = bustype;
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_set_usbid(WacomBuilder *builder, int vendor_id, int product_id)
+{
+	builder->vendor_id = vendor_id;
+	builder->product_id = product_id;
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_set_device_name(WacomBuilder *builder, const char *name)
+{
+	g_free(builder->device_name);
+	builder->device_name = g_strdup(name);
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_set_match_name(WacomBuilder *builder, const char *name)
+{
+	g_free(builder->match_name);
+	builder->match_name = g_strdup(name);
+}
+
+LIBWACOM_EXPORT void
+libwacom_builder_set_uniq(WacomBuilder *builder, const char *uniq)
+{
+	g_free(builder->uniq);
+	builder->uniq = g_strdup(uniq);
 }
 
 void

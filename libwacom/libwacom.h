@@ -97,6 +97,11 @@ typedef struct _WacomDevice WacomDevice;
 /**
  * @ingroup devices
  */
+typedef struct _WacomBuilder WacomBuilder;
+
+/**
+ * @ingroup devices
+ */
 typedef struct _WacomMatch WacomMatch;
 
 /**
@@ -351,6 +356,36 @@ WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
  * @ingroup context
  */
 void libwacom_database_destroy(WacomDeviceDatabase *db);
+
+/**
+ * Create a new device reference for the given builder.
+ * In case of error, NULL is returned and the error is set to the
+ * appropriate value.
+ *
+ * The behavior for unset values in the builder is as follows:
+ * - if the bus is WBUSTYPE_UNKNOWN but product and vendor ID are set
+ *   (and optionally device name, match name, and/or uniq), all known bus types
+ *   are tested until a match is found (if any)
+ * - if the device name is set but all other values are empty the behavior
+ *   matches libwacom_new_from_name(), i.e. the name alone will be
+ *   used as lookup
+ * - if the uniq is set but all other values are empty the only the uniq
+ *   string will be used for lookup
+ *   device is the first with a corresponding uniq match.
+ * - if one of vendor or product id is zero and the other one is nonzero,
+ *   no match will be found and the fallback device (if requested) is
+ *   returned
+ *
+ * @param db A device database
+ * @param builder A builder specifying the known fields for this device.
+ * @param fallback Whether we should create a generic if model is unknown
+ * @param error If not NULL, set to the error if any occurs
+ *
+ * @return A new reference to this device or NULL on error.
+ *
+ * @ingroup devices
+ */
+WacomDevice* libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *builder, WacomFallbackFlags fallback, WacomError *error);
 
 /**
  * Create a new device reference from the given device path.
@@ -922,6 +957,47 @@ uint32_t libwacom_match_get_product_id(const WacomMatch *match);
 uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);
 const char* libwacom_match_get_match_string(const WacomMatch *match);
 /** @} */
+
+
+/**
+ * Create a new builder to be used into libwacom_new_from_builder().
+ * The returned builder must be freed with libwacom_builder_destroy().
+ */
+WacomBuilder *libwacom_builder_new(void);
+void libwacom_builder_destroy(WacomBuilder *builder);
+
+/**
+ * Change the bustype to the given bustype, overriding the currently set one (if any).
+ */
+void libwacom_builder_set_bustype(WacomBuilder *builder, WacomBusType bustype);
+
+/**
+ * Change the vendor and product id to the given ids, overriding the currently set ones (if any).
+ */
+void libwacom_builder_set_usbid(WacomBuilder *builder, int vendor_id, int product_id);
+
+/**
+ * Change the device name to the given name, overriding the currently set one (if any).
+ *
+ * The device name is the name set in the libwacom database and may not match the
+ * kernel name for this device. See libwacom_builder_set_match_name() to set the kernel
+ * name.
+ */
+void libwacom_builder_set_device_name(WacomBuilder *builder, const char *name);
+
+/**
+ * Change the match name to the given name, overriding the currently set one (if any).
+ *
+ * The match name is the device name advertised by the kernel and may be different
+ * to the device name, the human-readable name as set in the libwacom database.
+ */
+void libwacom_builder_set_match_name(WacomBuilder *builder, const char *name);
+
+/**
+ * Change the uniq to the given uniq, overriding the currently set one (if any).
+ */
+void libwacom_builder_set_uniq(WacomBuilder *builder, const char *uniq);
+
 
 /** @cond hide_from_doxygen */
 #endif /* _LIBWACOM_H_ */

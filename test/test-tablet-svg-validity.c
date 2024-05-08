@@ -198,39 +198,39 @@ check_dial (xmlNodePtr cur, gchar *id)
 	verify_has_class (node, class);
 	g_free (class);
 
-	sub = g_strdup_printf ("Label%sUp", id);
+	sub = g_strdup_printf ("Label%sCW", id);
 	node = verify_has_sub (cur, sub);
 	g_assert (node != NULL);
 	g_free (sub);
 
-	class = g_strdup_printf ("%sUp %s Label", id, id);
+	class = g_strdup_printf ("%sCW %s Label", id, id);
 	verify_has_class (node, class);
 	g_free (class);
 
-	sub = g_strdup_printf ("Label%sDown", id);
+	sub = g_strdup_printf ("Label%sCCW", id);
 	node = verify_has_sub (cur, sub);
 	g_assert (node != NULL);
 	g_free (sub);
 
-	class = g_strdup_printf ("%sDown %s Label", id, id);
+	class = g_strdup_printf ("%sCCW %s Label", id, id);
 	verify_has_class (node, class);
 	g_free (class);
 
-	sub = g_strdup_printf ("Leader%sUp", id);
+	sub = g_strdup_printf ("Leader%sCW", id);
 	node = verify_has_sub (cur, sub);
 	g_assert (node != NULL);
 	g_free (sub);
 
-	class = g_strdup_printf ("%sUp %s Leader", id, id);
+	class = g_strdup_printf ("%sCW %s Leader", id, id);
 	verify_has_class (node, class);
 	g_free (class);
 
-	sub = g_strdup_printf ("Leader%sDown", id);
+	sub = g_strdup_printf ("Leader%sCCW", id);
 	node = verify_has_sub (cur, sub);
 	g_assert (node != NULL);
 	g_free (sub);
 
-	class = g_strdup_printf ("%sDown %s Leader", id, id);
+	class = g_strdup_printf ("%sCCW %s Leader", id, id);
 	verify_has_class (node, class);
 	g_free (class);
 }

@@ -25,7 +25,8 @@ def pytest_generate_tests(metafunc):
     # for any function that takes a "tabletfile" argument return the path to
     # a tablet file
     if "tabletfile" in metafunc.fixturenames:
-        metafunc.parametrize("tabletfile", [f for f in datadir().glob("*.tablet")])
+        files = [f for f in datadir().glob("*.tablet")]
+        metafunc.parametrize("tabletfile", files, ids=[f.name for f in files])
 
 
 def test_device_match(tabletfile):

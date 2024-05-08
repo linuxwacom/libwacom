@@ -115,6 +115,8 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:gadbb6667e3d45b58fb0e269dd435c29cb"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomDevice&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a></td></tr>
 <tr class="separator:gadbb6667e3d45b58fb0e269dd435c29cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4369f272ceaefeb4fcab9069195bf41e"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomBuilder&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a></td></tr>
+<tr class="separator:ga4369f272ceaefeb4fcab9069195bf41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad9598829a59951a74f91c640a01f2fad"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomMatch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gad9598829a59951a74f91c640a01f2fad">WacomMatch</a></td></tr>
 <tr class="separator:gad9598829a59951a74f91c640a01f2fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gade7dd5ce503ef37813e5f08bf1544170"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomStylus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a></td></tr>
@@ -277,6 +279,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gafdc100499a3d0760a53ec19d28ce1b12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__context.html#gafdc100499a3d0760a53ec19d28ce1b12">libwacom_database_destroy</a> (<a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db)</td></tr>
 <tr class="memdesc:gafdc100499a3d0760a53ec19d28ce1b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all memory used by the database.  <a href="group__context.html#gafdc100499a3d0760a53ec19d28ce1b12">More...</a><br /></td></tr>
 <tr class="separator:gafdc100499a3d0760a53ec19d28ce1b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacaecadafc808fa31295a5a6c51caf232"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232">libwacom_new_from_builder</a> (const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db, const <a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, <a class="el" href="group__devices.html#gac345850b5a595ab24cf120e2a89005d7">WacomFallbackFlags</a> fallback, <a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *error)</td></tr>
+<tr class="memdesc:gacaecadafc808fa31295a5a6c51caf232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new device reference for the given builder.  <a href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232">More...</a><br /></td></tr>
+<tr class="separator:gacaecadafc808fa31295a5a6c51caf232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga903b1bee3d0746431c475cf91fec2b88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga903b1bee3d0746431c475cf91fec2b88">libwacom_new_from_path</a> (const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db, const char *path, <a class="el" href="group__devices.html#gac345850b5a595ab24cf120e2a89005d7">WacomFallbackFlags</a> fallback, <a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *error)</td></tr>
 <tr class="memdesc:ga903b1bee3d0746431c475cf91fec2b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new device reference from the given device path.  <a href="group__devices.html#ga903b1bee3d0746431c475cf91fec2b88">More...</a><br /></td></tr>
 <tr class="separator:ga903b1bee3d0746431c475cf91fec2b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -415,6 +420,26 @@ Functions</h2></td></tr>
 <tr class="separator:gaa11e234a0e3bb7f4d939d1abc66c9c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf46230253f8009987a620705cccf7634"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gaf46230253f8009987a620705cccf7634">libwacom_match_get_match_string</a> (const <a class="el" href="group__devices.html#gad9598829a59951a74f91c640a01f2fad">WacomMatch</a> *match)</td></tr>
 <tr class="separator:gaf46230253f8009987a620705cccf7634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c063006bf623f52cf37fc33e4d0c99b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a7c063006bf623f52cf37fc33e4d0c99b">libwacom_builder_new</a> (void)</td></tr>
+<tr class="memdesc:a7c063006bf623f52cf37fc33e4d0c99b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new builder to be used into <a class="el" href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232" title="Create a new device reference for the given builder.">libwacom_new_from_builder()</a>.  <a href="libwacom_8h.html#a7c063006bf623f52cf37fc33e4d0c99b">More...</a><br /></td></tr>
+<tr class="separator:a7c063006bf623f52cf37fc33e4d0c99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a1533f1b1a812062e87b552de49c5df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a8a1533f1b1a812062e87b552de49c5df">libwacom_builder_destroy</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder)</td></tr>
+<tr class="separator:a8a1533f1b1a812062e87b552de49c5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d66f4e197683aa1f4d994d5dc938304"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a2d66f4e197683aa1f4d994d5dc938304">libwacom_builder_set_bustype</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, <a class="el" href="group__devices.html#gac2fa165c0691b65d55f46eabdd02c96e">WacomBusType</a> bustype)</td></tr>
+<tr class="memdesc:a2d66f4e197683aa1f4d994d5dc938304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the bustype to the given bustype, overriding the currently set one (if any).  <a href="libwacom_8h.html#a2d66f4e197683aa1f4d994d5dc938304">More...</a><br /></td></tr>
+<tr class="separator:a2d66f4e197683aa1f4d994d5dc938304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c941f221ccf35eff502870195880333"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a1c941f221ccf35eff502870195880333">libwacom_builder_set_usbid</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, int vendor_id, int product_id)</td></tr>
+<tr class="memdesc:a1c941f221ccf35eff502870195880333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the vendor and product id to the given ids, overriding the currently set ones (if any).  <a href="libwacom_8h.html#a1c941f221ccf35eff502870195880333">More...</a><br /></td></tr>
+<tr class="separator:a1c941f221ccf35eff502870195880333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace240d05f00a222cfaf213afc6b1c3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#aace240d05f00a222cfaf213afc6b1c3e">libwacom_builder_set_device_name</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, const char *name)</td></tr>
+<tr class="memdesc:aace240d05f00a222cfaf213afc6b1c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the device name to the given name, overriding the currently set one (if any).  <a href="libwacom_8h.html#aace240d05f00a222cfaf213afc6b1c3e">More...</a><br /></td></tr>
+<tr class="separator:aace240d05f00a222cfaf213afc6b1c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e1e855b5b7f8cfd6d49db09836b4f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a44e1e855b5b7f8cfd6d49db09836b4f1">libwacom_builder_set_match_name</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, const char *name)</td></tr>
+<tr class="memdesc:a44e1e855b5b7f8cfd6d49db09836b4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the match name to the given name, overriding the currently set one (if any).  <a href="libwacom_8h.html#a44e1e855b5b7f8cfd6d49db09836b4f1">More...</a><br /></td></tr>
+<tr class="separator:a44e1e855b5b7f8cfd6d49db09836b4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac8cbc36791f1d8e1a5e69ccc4850ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="libwacom_8h.html#a0ac8cbc36791f1d8e1a5e69ccc4850ed">libwacom_builder_set_uniq</a> (<a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, const char *uniq)</td></tr>
+<tr class="memdesc:a0ac8cbc36791f1d8e1a5e69ccc4850ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the uniq to the given uniq, overriding the currently set one (if any).  <a href="libwacom_8h.html#a0ac8cbc36791f1d8e1a5e69ccc4850ed">More...</a><br /></td></tr>
+<tr class="separator:a0ac8cbc36791f1d8e1a5e69ccc4850ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ac36e8235910429091f20b3503c40d173"></a>
@@ -431,13 +456,211 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a8a1533f1b1a812062e87b552de49c5df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a1533f1b1a812062e87b552de49c5df">&#9670;&nbsp;</a></span>libwacom_builder_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c063006bf623f52cf37fc33e4d0c99b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c063006bf623f52cf37fc33e4d0c99b">&#9670;&nbsp;</a></span>libwacom_builder_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a>* libwacom_builder_new </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new builder to be used into <a class="el" href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232" title="Create a new device reference for the given builder.">libwacom_new_from_builder()</a>. </p>
+<p>The returned builder must be freed with <a class="el" href="libwacom_8h.html#a8a1533f1b1a812062e87b552de49c5df">libwacom_builder_destroy()</a>. </p>
+
+</div>
+</div>
+<a id="a2d66f4e197683aa1f4d994d5dc938304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d66f4e197683aa1f4d994d5dc938304">&#9670;&nbsp;</a></span>libwacom_builder_set_bustype()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_set_bustype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__devices.html#gac2fa165c0691b65d55f46eabdd02c96e">WacomBusType</a>&#160;</td>
+          <td class="paramname"><em>bustype</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the bustype to the given bustype, overriding the currently set one (if any). </p>
+
+</div>
+</div>
+<a id="aace240d05f00a222cfaf213afc6b1c3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace240d05f00a222cfaf213afc6b1c3e">&#9670;&nbsp;</a></span>libwacom_builder_set_device_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_set_device_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the device name to the given name, overriding the currently set one (if any). </p>
+<p>The device name is the name set in the libwacom database and may not match the kernel name for this device. See <a class="el" href="libwacom_8h.html#a44e1e855b5b7f8cfd6d49db09836b4f1" title="Change the match name to the given name, overriding the currently set one (if any).">libwacom_builder_set_match_name()</a> to set the kernel name. </p>
+
+</div>
+</div>
+<a id="a44e1e855b5b7f8cfd6d49db09836b4f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e1e855b5b7f8cfd6d49db09836b4f1">&#9670;&nbsp;</a></span>libwacom_builder_set_match_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_set_match_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the match name to the given name, overriding the currently set one (if any). </p>
+<p>The match name is the device name advertised by the kernel and may be different to the device name, the human-readable name as set in the libwacom database. </p>
+
+</div>
+</div>
+<a id="a0ac8cbc36791f1d8e1a5e69ccc4850ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac8cbc36791f1d8e1a5e69ccc4850ed">&#9670;&nbsp;</a></span>libwacom_builder_set_uniq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_set_uniq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>uniq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the uniq to the given uniq, overriding the currently set one (if any). </p>
+
+</div>
+</div>
+<a id="a1c941f221ccf35eff502870195880333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c941f221ccf35eff502870195880333">&#9670;&nbsp;</a></span>libwacom_builder_set_usbid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libwacom_builder_set_usbid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vendor_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>product_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the vendor and product id to the given ids, overriding the currently set ones (if any). </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_2bc10c097a08e7c15dc75588169cd55b.html">libwacom</a></li><li class="navelem"><a class="el" href="libwacom_8h.html">libwacom.h</a></li>
-    <li class="footer">Generated on Wed May 8 2024 06:52:11 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 8 2024 08:07:45 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

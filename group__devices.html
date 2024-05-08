@@ -99,6 +99,8 @@ $(document).ready(function(){initNavTree('group__devices.html',''); initResizabl
 Typedefs</h2></td></tr>
 <tr class="memitem:gadbb6667e3d45b58fb0e269dd435c29cb"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomDevice&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a></td></tr>
 <tr class="separator:gadbb6667e3d45b58fb0e269dd435c29cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4369f272ceaefeb4fcab9069195bf41e"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomBuilder&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a></td></tr>
+<tr class="separator:ga4369f272ceaefeb4fcab9069195bf41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad9598829a59951a74f91c640a01f2fad"><td class="memItemLeft" align="right" valign="top">typedef struct _WacomMatch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gad9598829a59951a74f91c640a01f2fad">WacomMatch</a></td></tr>
 <tr class="separator:gad9598829a59951a74f91c640a01f2fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -187,6 +189,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:gacaecadafc808fa31295a5a6c51caf232"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232">libwacom_new_from_builder</a> (const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db, const <a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *builder, <a class="el" href="group__devices.html#gac345850b5a595ab24cf120e2a89005d7">WacomFallbackFlags</a> fallback, <a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *error)</td></tr>
+<tr class="memdesc:gacaecadafc808fa31295a5a6c51caf232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new device reference for the given builder.  <a href="group__devices.html#gacaecadafc808fa31295a5a6c51caf232">More...</a><br /></td></tr>
+<tr class="separator:gacaecadafc808fa31295a5a6c51caf232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga903b1bee3d0746431c475cf91fec2b88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga903b1bee3d0746431c475cf91fec2b88">libwacom_new_from_path</a> (const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db, const char *path, <a class="el" href="group__devices.html#gac345850b5a595ab24cf120e2a89005d7">WacomFallbackFlags</a> fallback, <a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *error)</td></tr>
 <tr class="memdesc:ga903b1bee3d0746431c475cf91fec2b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new device reference from the given device path.  <a href="group__devices.html#ga903b1bee3d0746431c475cf91fec2b88">More...</a><br /></td></tr>
 <tr class="separator:ga903b1bee3d0746431c475cf91fec2b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,6 +302,20 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Functions to create and manage libwacom devices. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga4369f272ceaefeb4fcab9069195bf41e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4369f272ceaefeb4fcab9069195bf41e">&#9670;&nbsp;</a></span>WacomBuilder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct _WacomBuilder <a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="gadbb6667e3d45b58fb0e269dd435c29cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gadbb6667e3d45b58fb0e269dd435c29cb">&#9670;&nbsp;</a></span>WacomDevice</h2>
 
@@ -1646,6 +1665,65 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gacaecadafc808fa31295a5a6c51caf232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacaecadafc808fa31295a5a6c51caf232">&#9670;&nbsp;</a></span>libwacom_new_from_builder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a>* libwacom_new_from_builder </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#ga4369f272ceaefeb4fcab9069195bf41e">WacomBuilder</a> *&#160;</td>
+          <td class="paramname"><em>builder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__devices.html#gac345850b5a595ab24cf120e2a89005d7">WacomFallbackFlags</a>&#160;</td>
+          <td class="paramname"><em>fallback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new device reference for the given builder. </p>
+<p>In case of error, NULL is returned and the error is set to the appropriate value.</p>
+<p>The behavior for unset values in the builder is as follows:</p><ul>
+<li>if the bus is WBUSTYPE_UNKNOWN but product and vendor ID are set (and optionally device name, match name, and/or uniq), all known bus types are tested until a match is found (if any)</li>
+<li>if the device name is set but all other values are empty the behavior matches <a class="el" href="group__devices.html#gae58659a01922c67e9fd9129f68a60b0b" title="Create a new device reference from the given name.">libwacom_new_from_name()</a>, i.e. the name alone will be used as lookup</li>
+<li>if the uniq is set but all other values are empty the only the uniq string will be used for lookup device is the first with a corresponding uniq match.</li>
+<li>if one of vendor or product id is zero and the other one is nonzero, no match will be found and the fallback device (if requested) is returned</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>A device database </td></tr>
+    <tr><td class="paramname">builder</td><td>A builder specifying the known fields for this device. </td></tr>
+    <tr><td class="paramname">fallback</td><td>Whether we should create a generic if model is unknown </td></tr>
+    <tr><td class="paramname">error</td><td>If not NULL, set to the error if any occurs</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new reference to this device or NULL on error. </dd></dl>
+
+</div>
+</div>
 <a id="gae58659a01922c67e9fd9129f68a60b0b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae58659a01922c67e9fd9129f68a60b0b">&#9670;&nbsp;</a></span>libwacom_new_from_name()</h2>
 
@@ -1841,7 +1919,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed May 8 2024 06:52:11 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed May 8 2024 08:07:45 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -285,23 +285,25 @@ if get_option('tests').enabled()
 		message('valgrind not found, disabling valgrind test suite')
 	endif
 
-	env = environment()
-	env.set('MESON_SOURCE_ROOT', meson.current_source_dir())
-	env.set('LIBWACOM_HWDB_FILE', hwdb.full_path())
-	env.set('LD_LIBRARY_PATH', fs.parent(lib_libwacom.full_path()))
-	pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
-	pytest = find_program('pytest-3', 'pytest')
-	test('pytest',
-	     pytest,
-	     args: ['--verbose',
-		     '-rfES',
-		     '--log-level=DEBUG',
-		     '--log-file', meson.project_build_root() / 'meson-logs' / 'pytest.log',
-		     '--log-file-level=DEBUG',
-		     meson.current_source_dir()
-	     ],
-	     env: env,
-	     suite: ['all'])
+	if get_option('b_sanitize') == 'none'
+		env = environment()
+		env.set('MESON_SOURCE_ROOT', meson.current_source_dir())
+		env.set('LIBWACOM_HWDB_FILE', hwdb.full_path())
+		env.set('LD_LIBRARY_PATH', fs.parent(lib_libwacom.full_path()))
+		pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
+		pytest = find_program('pytest-3', 'pytest')
+		test('pytest',
+		     pytest,
+		     args: ['--verbose',
+			     '-rfES',
+			     '--log-level=DEBUG',
+			     '--log-file', meson.project_build_root() / 'meson-logs' / 'pytest.log',
+			     '--log-file-level=DEBUG',
+			     meson.current_source_dir()
+		     ],
+		     env: env,
+		     suite: ['all'])
+	endif
 endif
 
 # This is a non-optional test

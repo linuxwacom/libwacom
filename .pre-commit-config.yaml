@@ -6,8 +6,8 @@ repos:
   - id: trailing-whitespace
   - id: check-merge-conflict
   - id: check-symlinks
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.4.3
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.4.4
   hooks:
   - id: ruff
     args: ['--ignore=E741,E501']

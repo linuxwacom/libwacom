@@ -811,6 +811,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFal
 
 	builder = libwacom_builder_new();
 	libwacom_builder_set_match_name(builder, name);
+	libwacom_builder_set_bustype(builder, bus);
 	libwacom_builder_set_uniq(builder, uniq);
 	libwacom_builder_set_usbid(builder, vendor_id, product_id);
 	device = libwacom_new_from_builder(db, builder, fallback, error);

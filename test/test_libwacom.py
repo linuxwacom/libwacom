@@ -3,15 +3,9 @@
 # This file is formatted with ruff format
 
 import logging
-import os
 import pytest
 
 from . import WacomBuilder, WacomBustype, WacomDatabase, WacomDevice
-
-# If asan/ubsan is set, ctypes.CDLL blows up on us, so skip
-# this module if either is set
-if any(os.environ.get(v) for v in ["ASAN_OPTIONS", "UBSAN_OPTIONS"]):
-    pytest.skip("ASAN/UBSAN not supported in this module", allow_module_level=True)
 
 logger = logging.getLogger(__name__)
 

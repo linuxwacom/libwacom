@@ -14,9 +14,6 @@ logger = logging.getLogger(__name__)
 
 
 def load_test_db() -> WacomDatabase:
-    if any(os.environ.get(v) for v in ["ASAN_OPTIONS", "UBSAN_OPTIONS"]):
-        pytest.skip("ASAN/UBSAN not supported in this module")
-
     try:
         dbpath = os.environ.get("MESON_SOURCE_ROOT")
         if dbpath is None and (Path.cwd() / "meson.build").exists():

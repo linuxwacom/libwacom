@@ -21,7 +21,7 @@
                       x="61.5"
                       y="55"
                       style="text-anchor:start;">A</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonB"
                       class="B Button"
@@ -34,7 +34,7 @@
                       x="61.5"
                       y="106"
                       style="text-anchor:start;">B</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonC"
                       class="C Button"
@@ -47,7 +47,7 @@
                       x="509.5"
                       y="56"
                       style="text-anchor:start;">C</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonD"
                       class="D Button"

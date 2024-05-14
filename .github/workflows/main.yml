@@ -7,7 +7,7 @@ permissions:
 
 env:
   CFLAGS: "-Werror -Wno-error=missing-field-initializers"
-  UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev-dev
+  UBUNTU_PACKAGES: libgudev-1.0-dev libxml++2.6-dev valgrind tree python3-pip python3-setuptools libevdev-dev udev
   PIP_PACKAGES: meson ninja libevdev pyudev pytest yq
 
 jobs:

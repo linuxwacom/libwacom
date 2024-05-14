@@ -150,12 +150,12 @@ updatedb = configure_file(input: 'tools/libwacom-update-db.py',
 			  copy: true,
 			  install: true,
 			  install_dir: dir_bin)
-custom_target('hwdb',
-	      command: [python, updatedb, '--buildsystem-mode', dir_src_data],
-	      capture: true,
-	      output: '65-libwacom.hwdb',
-	      install: true,
-	      install_dir: dir_udev / 'hwdb.d')
+hwdb = custom_target('hwdb',
+	             command: [python, updatedb, '--buildsystem-mode', dir_src_data],
+	             capture: true,
+	             output: '65-libwacom.hwdb',
+	             install: true,
+	             install_dir: dir_udev / 'hwdb.d')
 
 configure_file(input: 'tools/65-libwacom.rules.in',
 	       output: '65-libwacom.rules',
@@ -287,6 +287,7 @@ if get_option('tests').enabled()
 
 	env = environment()
 	env.set('MESON_SOURCE_ROOT', meson.current_source_dir())
+	env.set('LIBWACOM_HWDB_FILE', hwdb.full_path())
 	env.set('LD_LIBRARY_PATH', fs.parent(lib_libwacom.full_path()))
 	pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
 	pytest = find_program('pytest-3', 'pytest')

@@ -17,17 +17,37 @@ import pytest
 import time
 import logging
 import sys
+import subprocess
+import shutil
 
 
 @pytest.fixture(scope="session", autouse=True)
 def systemd_reload():
     """Make sure our hwdb and udev rules are up-to-date"""
-    import subprocess
 
     try:
+        hwdb = os.environ.get("LIBWACOM_HWDB_FILE")
+        target = Path("/etc/udev/hwdb.d/99-libwacom-pytest.hwdb")
+        target.parent.mkdir(exist_ok=True, parents=True)
+        if hwdb:
+            shutil.copyfile(hwdb, target)
+        else:
+            import warnings
+
+            warnings.warn("LIBWACOM_HWDB_FILE is not set, using already installed hwdb")
+
         subprocess.run(["systemd-hwdb", "update"], check=True)
         subprocess.run(["systemctl", "daemon-reload"], check=True)
-    except (FileNotFoundError, subprocess.CalledProcessError):
+
+        yield
+
+        if hwdb:
+            os.unlink(target)
+
+        subprocess.run(["systemd-hwdb", "update"], check=True)
+        subprocess.run(["systemctl", "daemon-reload"], check=True)
+
+    except (IOError, FileNotFoundError, subprocess.CalledProcessError):
         # If any of the commands above are not found (most likely the system
         # simply does not use systemd), just skip.
         raise pytest.skip()

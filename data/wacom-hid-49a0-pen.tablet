@@ -1,0 +1,21 @@
+# Wacom
+# Wacom HID 5362
+#
+# AES Sensor used by the Dell Latitude 5320 2-in-1
+#
+# sysinfo.h5MttpxmAu.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/378
+
+[Device]
+Name=Wacom HID 49A0 Pen
+ModelName=
+DeviceMatch=i2c|056a|49a0
+Class=ISDV4
+Width=11
+Height=6
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

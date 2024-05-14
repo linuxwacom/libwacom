@@ -21,10 +21,13 @@
 # NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 # CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+from dataclasses import dataclass
 import argparse
 import configparser
 import sys
 import subprocess
+import functools
+from itertools import pairwise
 from pathlib import Path
 
 
@@ -49,11 +52,55 @@ class Tablet(object):
         return f"{self.bus}:{self.vid}:{self.pid}:{self.name}"
 
 
+@functools.total_ordering
+@dataclass  # (eq=True, order=True)
+class HWDBEntry:
+    match: str
+    name: str  # the device name for human purposes only
+    properties: list[str]
+    vid: int
+    pid: int
+    bus: int
+
+    def as_hwdb_match(self) -> str:
+        return f"{self.match:60} # {self.name}"
+
+    def as_hwdb_entry(self) -> str:
+        return "\n".join(
+            [
+                self.as_hwdb_match(),
+                "\n".join([f" {p}" for p in self.properties]),
+                "",
+            ]
+        )
+
+    def __eq__(self, other) -> bool:
+        return (self.match, self.name) == (other.match, other.name)
+
+    def __lt__(self, other: "HWDBEntry") -> bool:
+        # For sorting, we want to sort by individual components rather than the
+        # full string so that we get this sort order:
+        #   libwacom:name:*:input:b0003v256Cp0064*
+        #   libwacom:name:* Keyboard:input:b0003v256Cp0064*
+        # Direct string comparison would sort ":" after " "
+
+        # Sort order:
+        # - group all vids together
+        # - group all properties together
+        # - sort by PID inside those groups
+
+        if self.vid == other.vid:
+            if self.properties == other.properties:
+                return self.pid < other.pid
+            return self.properties < other.properties
+        return self.vid < other.vid
+
+
 class HWDBFile:
     def __init__(self):
         self.tablets = []
 
-    def _tablet_entry(self, tablet):
+    def _tablet_entry(self, tablet) -> list[HWDBEntry]:
         vid = tablet.vid.upper()
         pid = tablet.pid.upper()
         bustypes = {
@@ -65,7 +112,7 @@ class HWDBFile:
         try:
             bus = bustypes[tablet.bus]
         except KeyError:
-            return
+            return []
 
         match = f"b{bus}v{vid}p{pid}"
         entries = {"*": ["ID_INPUT=1", "ID_INPUT_TABLET=1", "ID_INPUT_JOYSTICK=0"]}
@@ -87,13 +134,19 @@ class HWDBFile:
         if int(vid, 16) != 0x56A:
             entries["* Keyboard"] = ["ID_INPUT_TABLET=0"]
 
-        lines = [f"# {tablet.name}"]
-        for name, props in entries.items():
-            lines.append(f"libwacom:name:{name}:input:{match}*")
-            lines.extend([f" {p}" for p in props])
-            lines.append("")
+        hwdb_entries = [
+            HWDBEntry(
+                name=tablet.name,
+                match=f"libwacom:name:{name}:input:{match}*",
+                properties=props,
+                vid=int(tablet.vid, 16),
+                pid=int(tablet.pid, 16),
+                bus=int(bus, 16),
+            )
+            for name, props in entries.items()
+        ]
 
-        return "\n".join(lines)
+        return hwdb_entries
 
     def print(self, file=sys.stdout):
         header = (
@@ -106,10 +159,32 @@ class HWDBFile:
         )
         print("\n".join(header), file=file)
 
-        for t in self.tablets:
-            entry = self._tablet_entry(t)
-            if entry:
-                print(entry, file=file)
+        # We sort all our entries by the match string but only
+        # print a new entry if it changes - we have a lot of tablets
+        # sharing the same few vid/pid so this compresses those a bit
+        entries = [e for t in self.tablets for e in self._tablet_entry(t)]
+        entries = sorted(entries)
+
+        # add a fake entry so we get our last real entry in pairwise's 'a'
+        entries.append(HWDBEntry("<ignore>", "<ignore>", [], 0, 0, 0))
+        last_vid = None
+        for a, b in pairwise(entries):
+            if a.vid != last_vid:
+                vid = f"0x{a.vid:04X}"
+                print("####################################################")
+                print(f"#{vid.center(50)}#")
+                print("####################################################")
+                print("")
+                last_vid = a.vid
+
+            if a.match == b.match:
+                if a != b:
+                    print(f"# {' ':60s}{a.name}", file=file)
+            else:
+                if a.properties == b.properties and a.vid == b.vid:
+                    print(a.as_hwdb_match(), file=file)
+                else:
+                    print(a.as_hwdb_entry(), file=file)
 
 
 class TabletDatabase:

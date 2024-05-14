@@ -9,12 +9,9 @@
 # - check if that device has the udev properties set we expect
 
 import configparser
-import libevdev
 import os
 from pathlib import Path
-import pyudev
 import pytest
-import time
 import logging
 import sys
 import subprocess
@@ -119,58 +116,41 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize("tablet", tablets, ids=[t.name for t in tablets])
 
 
-@pytest.fixture
-def uinput(tablet):
-    dev = libevdev.Device()
-    dev.name = tablet.name
-    dev.id = {"vendor": tablet.vid, "product": tablet.pid, "bustype": tablet.bus}
-    # Our rules match on pid/vid, so purposely make this look like a
-    # non-tablet to verify that our rules apply anyway and not others
-    dev.enable(libevdev.EV_REL.REL_X)
-    dev.enable(libevdev.EV_REL.REL_Y)
-    dev.enable(libevdev.EV_KEY.BTN_LEFT)
-    dev.enable(libevdev.EV_KEY.BTN_RIGHT)
-
-    try:
-        uinput = dev.create_uinput_device()
-        # We'll need the is_touchscreen later, so let's hide it in the
-        # uinput device to pass it to the actual test
-        try:
-            uinput.is_touchscreen = tablet.is_touchscreen
-        except AttributeError:
-            pass
-        time.sleep(0.3)
-        return uinput
-    except OSError:
-        raise pytest.skip()
-
-
 @pytest.mark.skipif(sys.platform != "linux", reason="This test requires udev")
-def test_hwdb_files(uinput):
-    logging.debug(
-        "{:04x}:{:04x} {}".format(
-            uinput.id["vendor"], uinput.id["product"], uinput.name
-        )
+def test_hwdb_files(tablet):
+    # Note: the actual name doesn't really matter, all our hwdb files use either "*"
+    # or "* Finger", etc. It does matter for that "Finger" suffix though.
+    query = f"libwacom:name:{tablet.name}:input:b{tablet.bus:04X}v{tablet.vid:04X}p{tablet.pid:04X}"
+    logging.debug(query)
+
+    r = subprocess.run(
+        ["systemd-hwdb", "query", query], check=True, capture_output=True
     )
-    udev = pyudev.Context()
-    dev = pyudev.Devices.from_device_file(udev, uinput.devnode)
-    props = list(dev.properties)  # convert to list for better error messages
+    stdout = r.stdout.decode("utf-8").strip()
+    assert stdout, f"No output recorded for query {query}"
+    logging.debug(stdout)
+    props = {}
+    for l in filter(lambda l: len(l) > 1, stdout.split("\n")):
+        print(l)
+        k, v = l.split("=")
+        props[k] = v
 
     assert "ID_INPUT" in props
-    assert dev.properties["ID_INPUT"] == "1"
+    assert props["ID_INPUT"] == "1"
 
     assert "ID_INPUT_TABLET" in props
-    assert dev.properties["ID_INPUT_TABLET"] == "1"
+    assert props["ID_INPUT_TABLET"] == "1"
 
-    assert "ID_INPUT_JOYSTICK" not in props
+    if "ID_INPUT_JOYSTICK" not in props:
+        assert props["ID_INPUT_JOYSTICK"] == "0"
 
-    if "Finger" in uinput.name:
-        if uinput.is_touchscreen:
+    if "Finger" in tablet.name:
+        if tablet.is_touchscreen:
             assert "ID_INPUT_TOUCHSCREEN" in props
         else:
             assert "ID_INPUT_TOUCHPAD" in props
 
     # For the Wacom Bamboo Pad we check for "Pad Pad" in the device name
-    if "Pad" in uinput.name:
-        if "Wacom Bamboo Pad" not in uinput.name or "Pad Pad" in uinput.name:
+    if "Pad" in tablet.name:
+        if "Wacom Bamboo Pad" not in tablet.name or "Pad Pad" in tablet.name:
             assert "ID_INPUT_TABLET_PAD" in props

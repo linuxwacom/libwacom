@@ -21,7 +21,7 @@
                       x="38"
                       y="189"
                       style="text-anchor:start;">A</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonB"
                       class="B Button"
@@ -34,7 +34,7 @@
                       x="38"
                       y="232"
                       style="text-anchor:start;">B</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonC"
                       class="C Button"

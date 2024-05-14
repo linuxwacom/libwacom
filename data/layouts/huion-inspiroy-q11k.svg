@@ -21,7 +21,7 @@
                       x="63.5"
                       y="59"
                       style="text-anchor:start;">A</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonB"
                       class="B Button"
@@ -34,7 +34,7 @@
                       x="63.5"
                       y="92"
                       style="text-anchor:start;">B</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonC"
                       class="C Button"
@@ -47,7 +47,7 @@
                       x="63.5"
                       y="126"
                       style="text-anchor:start;">C</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonD"
                       class="D Button"
@@ -60,7 +60,7 @@
                       x="63.5"
                       y="159"
                       style="text-anchor:start;">D</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonE"
                       class="E Button"
@@ -73,7 +73,7 @@
                       x="63.5"
                       y="264"
                       style="text-anchor:start;">E</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonF"
                       class="F Button"
@@ -86,7 +86,7 @@
                       x="63.5"
                       y="298"
                       style="text-anchor:start;">F</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonG"
                       class="G Button"
@@ -99,7 +99,7 @@
                       x="63.5"
                       y="331"
                       style="text-anchor:start;">G</text>
-            </g>,
+            </g>
             <g>
                 <rect id="ButtonH"
                       class="H Button"

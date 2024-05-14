@@ -1,116 +1,46 @@
-<?xml version="1.0" standalone="no"?>
+<?xml version='1.0' encoding='ASCII'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
-        id="gaomon-gt116h"
-        width="750"
-        height="414">
-    <title id="title">GT116H</title>
-    <rect x="157" y="57" width="536" height="301" />
-
-            <g>
-                <rect id="ButtonA"
-                      class="A Button"
-                      x="33"
-                      y="60"
-                      width="55"
-                      height="25" />
-                <text id="LabelA"
-                      class="A Label"
-                      x="58.5"
-                      y="74.5"
-                      style="text-anchor:start;">A</text>
-            </g>
-            <g>
-                <rect id="ButtonB"
-                      class="B Button"
-                      x="33"
-                      y="94"
-                      width="55"
-                      height="25" />
-                <text id="LabelB"
-                      class="B Label"
-                      x="58.5"
-                      y="108.5"
-                      style="text-anchor:start;">B</text>
-            </g>
-            <g>
-                <rect id="ButtonC"
-                      class="C Button"
-                      x="33"
-                      y="126"
-                      width="55"
-                      height="25" />
-                <text id="LabelC"
-                      class="C Label"
-                      x="58.5"
-                      y="140.5"
-                      style="text-anchor:start;">C</text>
-            </g>
-            <g>
-                <rect id="ButtonD"
-                      class="D Button"
-                      x="33"
-                      y="160"
-                      width="55"
-                      height="25" />
-                <text id="LabelD"
-                      class="D Label"
-                      x="58.5"
-                      y="174.5"
-                      style="text-anchor:start;">D</text>
-            </g>
-            <g>
-                <rect id="ButtonE"
-                      class="E Button"
-                      x="34"
-                      y="232"
-                      width="55"
-                      height="25" />
-                <text id="LabelE"
-                      class="E Label"
-                      x="59.5"
-                      y="246.5"
-                      style="text-anchor:start;">E</text>
-            </g>
-            <g>
-                <rect id="ButtonF"
-                      class="F Button"
-                      x="34"
-                      y="266"
-                      width="55"
-                      height="25" />
-                <text id="LabelF"
-                      class="F Label"
-                      x="59.5"
-                      y="280.5"
-                      style="text-anchor:start;">F</text>
-            </g>
-            <g>
-                <rect id="ButtonG"
-                      class="G Button"
-                      x="34"
-                      y="299"
-                      width="55"
-                      height="25" />
-                <text id="LabelG"
-                      class="G Label"
-                      x="59.5"
-                      y="313.5"
-                      style="text-anchor:start;">G</text>
-            </g>
-            <g>
-                <rect id="ButtonH"
-                      class="H Button"
-                      x="34"
-                      y="332"
-                      width="55"
-                      height="25" />
-                <text id="LabelH"
-                      class="H Label"
-                      x="59.5"
-                      y="346.5"
-                      style="text-anchor:start;">H</text>
-            </g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="gaomon-gt116h" width="750" height="414">
+  <title id="title">GT116H</title>
+  <rect x="157" y="57" width="536" height="301"/>
+  <g>
+    <rect id="ButtonA" class="A Button" x="33" y="60" width="55" height="25"/>
+    <text id="LabelA" class="A Label" x="108.5" y="74.5" style="text-anchor:start;">A</text>
+    <path style="fill:none" d="M 93.5,72.5 H 100.5" id="LeaderA" class="Leader A"/>
+  </g>
+  <g>
+    <rect id="ButtonB" class="B Button" x="33" y="94" width="55" height="25"/>
+    <text id="LabelB" class="B Label" x="108.5" y="108.5" style="text-anchor:start;">B</text>
+    <path style="fill:none" d="M 93.5,106.5 H 100.5" id="LeaderB" class="Leader B"/>
+  </g>
+  <g>
+    <rect id="ButtonC" class="C Button" x="33" y="126" width="55" height="25"/>
+    <text id="LabelC" class="C Label" x="108.5" y="140.5" style="text-anchor:start;">C</text>
+    <path style="fill:none" d="M 93.5,138.5 H 100.5" id="LeaderC" class="Leader C"/>
+  </g>
+  <g>
+    <rect id="ButtonD" class="D Button" x="33" y="160" width="55" height="25"/>
+    <text id="LabelD" class="D Label" x="108.5" y="174.5" style="text-anchor:start;">D</text>
+    <path style="fill:none" d="M 93.5,172.5 H 100.5" id="LeaderD" class="Leader D"/>
+  </g>
+  <g>
+    <rect id="ButtonE" class="E Button" x="34" y="232" width="55" height="25"/>
+    <text id="LabelE" class="E Label" x="109.5" y="246.5" style="text-anchor:start;">E</text>
+    <path style="fill:none" d="M 94.5,244.5 H 101.5" id="LeaderE" class="Leader E"/>
+  </g>
+  <g>
+    <rect id="ButtonF" class="F Button" x="34" y="266" width="55" height="25"/>
+    <text id="LabelF" class="F Label" x="109.5" y="280.5" style="text-anchor:start;">F</text>
+    <path style="fill:none" d="M 94.5,278.5 H 101.5" id="LeaderF" class="Leader F"/>
+  </g>
+  <g>
+    <rect id="ButtonG" class="G Button" x="34" y="299" width="55" height="25"/>
+    <text id="LabelG" class="G Label" x="109.5" y="313.5" style="text-anchor:start;">G</text>
+    <path style="fill:none" d="M 94.5,311.5 H 101.5" id="LeaderG" class="Leader G"/>
+  </g>
+  <g>
+    <rect id="ButtonH" class="H Button" x="34" y="332" width="55" height="25"/>
+    <text id="LabelH" class="H Label" x="109.5" y="346.5" style="text-anchor:start;">H</text>
+    <path style="fill:none" d="M 94.5,344.5 H 101.5" id="LeaderH" class="Leader H"/>
+  </g>
 </svg>

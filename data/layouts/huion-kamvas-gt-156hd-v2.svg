@@ -1,194 +1,76 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
-        id="huion-kamvas-gt-156hd-v2"
-        width="704"
-        height="430">
-    <title id="title">KAMVAS GT-156HD V2</title>
-    <rect x="86" y="60" width="558" height="311" />
-
-            <g>
-                <rect id="ButtonA"
-                      class="A Button"
-                      x="23"
-                      y="53"
-                      width="16"
-                      height="12" />
-                <text id="LabelA"
-                      class="A Label"
-                      x="29"
-                      y="61"
-                      style="text-anchor:start;">A</text>
-            </g>
-            <g>
-                <rect id="ButtonB"
-                      class="B Button"
-                      x="9"
-                      y="67"
-                      width="12"
-                      height="16" />
-                <text id="LabelB"
-                      class="B Label"
-                      x="13"
-                      y="77"
-                      style="text-anchor:start;">B</text>
-            </g>
-            <g>
-                <rect id="ButtonC"
-                      class="C Button"
-                      x="23"
-                      y="67"
-                      width="16"
-                      height="16" />
-                <text id="LabelC"
-                      class="C Label"
-                      x="29"
-                      y="77"
-                      style="text-anchor:start;">C</text>
-            </g>
-            <g>
-                <rect id="ButtonD"
-                      class="D Button"
-                      x="41"
-                      y="67"
-                      width="12"
-                      height="16" />
-                <text id="LabelD"
-                      class="D Label"
-                      x="45"
-                      y="77"
-                      style="text-anchor:start;">D</text>
-            </g>
-            <g>
-                <rect id="ButtonE"
-                      class="E Button"
-                      x="23"
-                      y="85"
-                      width="16"
-                      height="12" />
-                <text id="LabelE"
-                      class="E Label"
-                      x="29"
-                      y="93"
-                      style="text-anchor:start;">E</text>
-            </g>
-            <g>
-                <rect id="ButtonF"
-                      class="F Button"
-                      x="22"
-                      y="106"
-                      width="16"
-                      height="16" />
-                <text id="LabelF"
-                      class="F Label"
-                      x="28"
-                      y="116"
-                      style="text-anchor:start;">F</text>
-            </g>
-            <g>
-                <rect id="ButtonG"
-                      class="G Button"
-                      x="22"
-                      y="131"
-                      width="16"
-                      height="16" />
-                <text id="LabelG"
-                      class="G Label"
-                      x="28"
-                      y="141"
-                      style="text-anchor:start;">G</text>
-            </g>
-            <g>
-                <rect id="ButtonH"
-                      class="H Button"
-                      x="22"
-                      y="284"
-                      width="16"
-                      height="16" />
-                <text id="LabelH"
-                      class="H Label"
-                      x="28"
-                      y="294"
-                      style="text-anchor:start;">H</text>
-            </g>
-            <g>
-                <rect id="ButtonI"
-                      class="I Button"
-                      x="22"
-                      y="309"
-                      width="16"
-                      height="16" />
-                <text id="LabelI"
-                      class="I Label"
-                      x="28"
-                      y="319"
-                      style="text-anchor:start;">I</text>
-            </g>
-            <g>
-                <rect id="ButtonJ"
-                      class="J Button"
-                      x="22"
-                      y="333"
-                      width="16"
-                      height="12" />
-                <text id="LabelJ"
-                      class="J Label"
-                      x="28"
-                      y="341"
-                      style="text-anchor:start;">J</text>
-            </g>
-            <g>
-                <rect id="ButtonK"
-                      class="K Button"
-                      x="8"
-                      y="348"
-                      width="12"
-                      height="16" />
-                <text id="LabelK"
-                      class="K Label"
-                      x="12"
-                      y="358"
-                      style="text-anchor:start;">K</text>
-            </g>
-            <g>
-                <rect id="ButtonL"
-                      class="L Button"
-                      x="22"
-                      y="348"
-                      width="16"
-                      height="16" />
-                <text id="LabelL"
-                      class="L Label"
-                      x="28"
-                      y="358"
-                      style="text-anchor:start;">L</text>
-            </g>
-            <g>
-                <rect id="ButtonM"
-                      class="M Button"
-                      x="40"
-                      y="348"
-                      width="12"
-                      height="16" />
-                <text id="LabelM"
-                      class="M Label"
-                      x="44"
-                      y="358"
-                      style="text-anchor:start;">M</text>
-            </g>
-            <g>
-                <rect id="ButtonN"
-                      class="N Button"
-                      x="22"
-                      y="367"
-                      width="16"
-                      height="12" />
-                <text id="LabelN"
-                      class="N Label"
-                      x="28"
-                      y="375"
-                      style="text-anchor:start;">N</text>
-            </g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="huion-kamvas-gt-156hd-v2" width="704" height="430">
+  <title id="title">KAMVAS GT-156HD V2</title>
+  <rect x="86" y="60" width="558" height="311"/>
+  <g>
+    <rect id="ButtonA" class="A Button" x="23" y="53" width="16" height="12"/>
+    <text id="LabelA" class="A Label" x="29" y="31.0" style="text-anchor:start;">A</text>
+    <path style="fill:none" d="M 31.0,46.0 V 39.0" id="LeaderA" class="Leader A"/>
+  </g>
+  <g>
+    <rect id="ButtonB" class="B Button" x="9" y="67" width="12" height="16"/>
+    <text id="LabelB" class="B Label" x="13" y="47.0" style="text-anchor:start;">B</text>
+    <path style="fill:none" d="M 15.0,62.0 V 55.0" id="LeaderB" class="Leader B"/>
+  </g>
+  <g>
+    <rect id="ButtonC" class="C Button" x="23" y="67" width="16" height="16"/>
+    <text id="LabelC" class="C Label" x="69.0" y="77" style="text-anchor:start;">C</text>
+    <path style="fill:none" d="M 54.0,75.0 H 61.0" id="LeaderC" class="Leader C"/>
+  </g>
+  <g>
+    <rect id="ButtonD" class="D Button" x="41" y="67" width="12" height="16"/>
+    <text id="LabelD" class="D Label" x="45" y="47.0" style="text-anchor:start;">D</text>
+    <path style="fill:none" d="M 47.0,62.0 V 55.0" id="LeaderD" class="Leader D"/>
+  </g>
+  <g>
+    <rect id="ButtonE" class="E Button" x="23" y="85" width="16" height="12"/>
+    <text id="LabelE" class="E Label" x="69.0" y="93" style="text-anchor:start;">E</text>
+    <path style="fill:none" d="M 54.0,91.0 H 61.0" id="LeaderE" class="Leader E"/>
+  </g>
+  <g>
+    <rect id="ButtonF" class="F Button" x="22" y="106" width="16" height="16"/>
+    <text id="LabelF" class="F Label" x="68.0" y="116" style="text-anchor:start;">F</text>
+    <path style="fill:none" d="M 53.0,114.0 H 60.0" id="LeaderF" class="Leader F"/>
+  </g>
+  <g>
+    <rect id="ButtonG" class="G Button" x="22" y="131" width="16" height="16"/>
+    <text id="LabelG" class="G Label" x="68.0" y="141" style="text-anchor:start;">G</text>
+    <path style="fill:none" d="M 53.0,139.0 H 60.0" id="LeaderG" class="Leader G"/>
+  </g>
+  <g>
+    <rect id="ButtonH" class="H Button" x="22" y="284" width="16" height="16"/>
+    <text id="LabelH" class="H Label" x="68.0" y="294" style="text-anchor:start;">H</text>
+    <path style="fill:none" d="M 53.0,292.0 H 60.0" id="LeaderH" class="Leader H"/>
+  </g>
+  <g>
+    <rect id="ButtonI" class="I Button" x="22" y="309" width="16" height="16"/>
+    <text id="LabelI" class="I Label" x="68.0" y="319" style="text-anchor:start;">I</text>
+    <path style="fill:none" d="M 53.0,317.0 H 60.0" id="LeaderI" class="Leader I"/>
+  </g>
+  <g>
+    <rect id="ButtonJ" class="J Button" x="22" y="333" width="16" height="12"/>
+    <text id="LabelJ" class="J Label" x="68.0" y="341" style="text-anchor:start;">J</text>
+    <path style="fill:none" d="M 53.0,339.0 H 60.0" id="LeaderJ" class="Leader J"/>
+  </g>
+  <g>
+    <rect id="ButtonK" class="K Button" x="8" y="348" width="12" height="16"/>
+    <text id="LabelK" class="K Label" x="12" y="388.0" style="text-anchor:start;">K</text>
+    <path style="fill:none" d="M 14.0,373.0 V 380.0" id="LeaderK" class="Leader K"/>
+  </g>
+  <g>
+    <rect id="ButtonL" class="L Button" x="22" y="348" width="16" height="16"/>
+    <text id="LabelL" class="L Label" x="68.0" y="358" style="text-anchor:start;">L</text>
+    <path style="fill:none" d="M 53.0,356.0 H 60.0" id="LeaderL" class="Leader L"/>
+  </g>
+  <g>
+    <rect id="ButtonM" class="M Button" x="40" y="348" width="12" height="16"/>
+    <text id="LabelM" class="M Label" x="44" y="388.0" style="text-anchor:start;">M</text>
+    <path style="fill:none" d="M 46.0,373.0 V 380.0" id="LeaderM" class="Leader M"/>
+  </g>
+  <g>
+    <rect id="ButtonN" class="N Button" x="22" y="367" width="16" height="12"/>
+    <text id="LabelN" class="N Label" x="28" y="405.0" style="text-anchor:start;">N</text>
+    <path style="fill:none" d="M 30.0,390.0 V 397.0" id="LeaderN" class="Leader N"/>
+  </g>
 </svg>

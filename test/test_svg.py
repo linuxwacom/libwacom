@@ -69,35 +69,24 @@ def pytest_generate_tests(metafunc):
     def filenames(devices: List[SvgDevice]) -> List[str]:
         return [Path(d.device.layout_filename).name for d in devices]
 
-
     if "svgdevice" in metafunc.fixturenames:
-        metafunc.parametrize(
-            "svgdevice", devices, ids=filenames(devices)
-        )
+        metafunc.parametrize("svgdevice", devices, ids=filenames(devices))
 
     if "ringdevice" in metafunc.fixturenames:
         devices = list(filter(lambda d: d.device.num_rings > 0, devices))
-        metafunc.parametrize(
-            "ringdevice", devices, ids=filenames(devices)
-        )
+        metafunc.parametrize("ringdevice", devices, ids=filenames(devices))
 
     if "stripdevice" in metafunc.fixturenames:
         devices = list(filter(lambda d: d.device.num_strips > 0, devices))
-        metafunc.parametrize(
-            "stripdevice", devices, ids=filenames(devices)
-        )
+        metafunc.parametrize("stripdevice", devices, ids=filenames(devices))
 
     if "dialdevice" in metafunc.fixturenames:
         devices = list(filter(lambda d: d.device.num_dials > 0, devices))
-        metafunc.parametrize(
-            "dialdevice", devices, ids=filenames(devices)
-        )
+        metafunc.parametrize("dialdevice", devices, ids=filenames(devices))
 
     if "buttondevice" in metafunc.fixturenames:
         devices = list(filter(lambda d: d.device.num_buttons > 0, devices))
-        metafunc.parametrize(
-            "buttondevice", devices, ids=filenames(devices)
-        )
+        metafunc.parametrize("buttondevice", devices, ids=filenames(devices))
 
 
 def test_svg(svgdevice):
@@ -105,6 +94,19 @@ def test_svg(svgdevice):
     assert root.tag in ["svg", "{http://www.w3.org/2000/svg}svg"]
     assert root.get("width") is not None
     assert root.get("height") is not None
+
+
+def test_svg_maybe_not_needed(svgdevice):
+    device = svgdevice.device
+    features = [
+        device.num_buttons,
+        device.num_rings,
+        device.num_strips,
+        device.num_dials,
+    ]
+    assert any(
+        x > 0 for x in features
+    ), f"Device {device.name} has no buttons/rings/strips/dials and should not have an SVG"
 
 
 def has_item(root, id: str, classes: Optional[List[str]] = None):

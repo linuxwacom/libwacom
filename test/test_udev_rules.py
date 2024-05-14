@@ -92,7 +92,7 @@ def pytest_generate_tests(metafunc):
         # test functions taking a 'tablet' argument - one-by-one. So where
         # tablets contains 10 entries, our test function will be called 10
         # times.
-        metafunc.parametrize("tablet", tablets)
+        metafunc.parametrize("tablet", tablets, ids=[t.name for t in tablets])
 
 
 @pytest.fixture

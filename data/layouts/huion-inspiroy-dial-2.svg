@@ -1,116 +1,46 @@
-<?xml version="1.0" standalone="no"?>
+<?xml version='1.0' encoding='ASCII'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
-        id="huion-inspiroy-dial-2"
-        width="720"
-        height="419">
-    <title id="title">Inspiroy Dial 2</title>
-    <rect x="147" y="43" width="535" height="333" />
-
-            <g>
-                <rect id="ButtonA"
-                      class="A Button"
-                      x="34"
-                      y="99"
-                      width="31"
-                      height="31" />
-                <text id="LabelA"
-                      class="A Label"
-                      x="47.5"
-                      y="116.5"
-                      style="text-anchor:start;">A</text>
-            </g>
-            <g>
-                <rect id="ButtonB"
-                      class="B Button"
-                      x="33"
-                      y="134"
-                      width="34"
-                      height="34" />
-                <text id="LabelB"
-                      class="B Label"
-                      x="48"
-                      y="153"
-                      style="text-anchor:start;">B</text>
-            </g>
-            <g>
-                <rect id="ButtonC"
-                      class="C Button"
-                      x="33"
-                      y="173"
-                      width="34"
-                      height="34" />
-                <text id="LabelC"
-                      class="C Label"
-                      x="48"
-                      y="192"
-                      style="text-anchor:start;">C</text>
-            </g>
-            <g>
-                <rect id="ButtonD"
-                      class="D Button"
-                      x="33"
-                      y="212"
-                      width="34"
-                      height="34" />
-                <text id="LabelD"
-                      class="D Label"
-                      x="48"
-                      y="231"
-                      style="text-anchor:start;">D</text>
-            </g>
-            <g>
-                <rect id="ButtonE"
-                      class="E Button"
-                      x="33"
-                      y="251"
-                      width="34"
-                      height="34" />
-                <text id="LabelE"
-                      class="E Label"
-                      x="48"
-                      y="270"
-                      style="text-anchor:start;">E</text>
-            </g>
-            <g>
-                <rect id="ButtonF"
-                      class="F Button"
-                      x="34"
-                      y="289"
-                      width="31"
-                      height="31" />
-                <text id="LabelF"
-                      class="F Label"
-                      x="47.5"
-                      y="306.5"
-                      style="text-anchor:start;">F</text>
-            </g>
-            <g>
-                <rect id="ButtonG"
-                      class="G Button"
-                      x="25"
-                      y="25"
-                      width="50"
-                      height="50" />
-                <text id="LabelG"
-                      class="G Label"
-                      x="48"
-                      y="52"
-                      style="text-anchor:start;">G</text>
-            </g>
-            <g>
-                <rect id="ButtonH"
-                      class="H Button"
-                      x="25"
-                      y="344"
-                      width="50"
-                      height="50" />
-                <text id="LabelH"
-                      class="H Label"
-                      x="48"
-                      y="371"
-                      style="text-anchor:start;">H</text>
-            </g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="huion-inspiroy-dial-2" width="720" height="419">
+  <title id="title">Inspiroy Dial 2</title>
+  <rect x="147" y="43" width="535" height="333"/>
+  <g>
+    <rect id="ButtonA" class="A Button" x="34" y="99" width="31" height="31"/>
+    <text id="LabelA" class="A Label" x="97.5" y="116.5" style="text-anchor:start;">A</text>
+    <path style="fill:none" d="M 82.5,114.5 H 89.5" id="LeaderA" class="Leader A"/>
+  </g>
+  <g>
+    <rect id="ButtonB" class="B Button" x="33" y="134" width="34" height="34"/>
+    <text id="LabelB" class="B Label" x="98.0" y="153" style="text-anchor:start;">B</text>
+    <path style="fill:none" d="M 83.0,151.0 H 90.0" id="LeaderB" class="Leader B"/>
+  </g>
+  <g>
+    <rect id="ButtonC" class="C Button" x="33" y="173" width="34" height="34"/>
+    <text id="LabelC" class="C Label" x="98.0" y="192" style="text-anchor:start;">C</text>
+    <path style="fill:none" d="M 83.0,190.0 H 90.0" id="LeaderC" class="Leader C"/>
+  </g>
+  <g>
+    <rect id="ButtonD" class="D Button" x="33" y="212" width="34" height="34"/>
+    <text id="LabelD" class="D Label" x="98.0" y="231" style="text-anchor:start;">D</text>
+    <path style="fill:none" d="M 83.0,229.0 H 90.0" id="LeaderD" class="Leader D"/>
+  </g>
+  <g>
+    <rect id="ButtonE" class="E Button" x="33" y="251" width="34" height="34"/>
+    <text id="LabelE" class="E Label" x="98.0" y="270" style="text-anchor:start;">E</text>
+    <path style="fill:none" d="M 83.0,268.0 H 90.0" id="LeaderE" class="Leader E"/>
+  </g>
+  <g>
+    <rect id="ButtonF" class="F Button" x="34" y="289" width="31" height="31"/>
+    <text id="LabelF" class="F Label" x="97.5" y="306.5" style="text-anchor:start;">F</text>
+    <path style="fill:none" d="M 82.5,304.5 H 89.5" id="LeaderF" class="Leader F"/>
+  </g>
+  <g>
+    <rect id="ButtonG" class="G Button" x="25" y="25" width="50" height="50"/>
+    <text id="LabelG" class="G Label" x="98.0" y="52" style="text-anchor:start;">G</text>
+    <path style="fill:none" d="M 83.0,50.0 H 90.0" id="LeaderG" class="Leader G"/>
+  </g>
+  <g>
+    <rect id="ButtonH" class="H Button" x="25" y="344" width="50" height="50"/>
+    <text id="LabelH" class="H Label" x="98.0" y="371" style="text-anchor:start;">H</text>
+    <path style="fill:none" d="M 83.0,369.0 H 90.0" id="LeaderH" class="Leader H"/>
+  </g>
 </svg>

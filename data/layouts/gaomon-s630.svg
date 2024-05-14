@@ -1,64 +1,26 @@
-<?xml version="1.0" standalone="no"?>
+<?xml version='1.0' encoding='ASCII'?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
-        id="gaomon-s630"
-        width="537"
-        height="500">
-    <title id="title">S630</title>
-    <rect x="82" y="140" width="373" height="234" />
-
-            <g>
-                <rect id="ButtonA"
-                      class="A Button"
-                      x="37"
-                      y="41"
-                      width="40"
-                      height="40" />
-                <text id="LabelA"
-                      class="A Label"
-                      x="55"
-                      y="63"
-                      style="text-anchor:start;">A</text>
-            </g>
-            <g>
-                <rect id="ButtonB"
-                      class="B Button"
-                      x="98"
-                      y="39"
-                      width="45"
-                      height="45" />
-                <text id="LabelB"
-                      class="B Label"
-                      x="118.5"
-                      y="63.5"
-                      style="text-anchor:start;">B</text>
-            </g>
-            <g>
-                <rect id="ButtonC"
-                      class="C Button"
-                      x="394"
-                      y="39"
-                      width="45"
-                      height="45" />
-                <text id="LabelC"
-                      class="C Label"
-                      x="414.5"
-                      y="63.5"
-                      style="text-anchor:start;">C</text>
-            </g>
-            <g>
-                <rect id="ButtonD"
-                      class="D Button"
-                      x="459"
-                      y="40"
-                      width="40"
-                      height="40" />
-                <text id="LabelD"
-                      class="D Label"
-                      x="477"
-                      y="62"
-                      style="text-anchor:start;">D</text>
-            </g>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="gaomon-s630" width="537" height="500">
+  <title id="title">S630</title>
+  <rect x="82" y="140" width="373" height="234"/>
+  <g>
+    <rect id="ButtonA" class="A Button" x="37" y="41" width="40" height="40"/>
+    <text id="LabelA" class="A Label" x="55" y="113.0" style="text-anchor:start;">A</text>
+    <path style="fill:none" d="M 57.0,98.0 V 105.0" id="LeaderA" class="Leader A"/>
+  </g>
+  <g>
+    <rect id="ButtonB" class="B Button" x="98" y="39" width="45" height="45"/>
+    <text id="LabelB" class="B Label" x="118.5" y="113.5" style="text-anchor:start;">B</text>
+    <path style="fill:none" d="M 120.5,98.5 V 105.5" id="LeaderB" class="Leader B"/>
+  </g>
+  <g>
+    <rect id="ButtonC" class="C Button" x="394" y="39" width="45" height="45"/>
+    <text id="LabelC" class="C Label" x="414.5" y="113.5" style="text-anchor:start;">C</text>
+    <path style="fill:none" d="M 416.5,98.5 V 105.5" id="LeaderC" class="Leader C"/>
+  </g>
+  <g>
+    <rect id="ButtonD" class="D Button" x="459" y="40" width="40" height="40"/>
+    <text id="LabelD" class="D Label" x="477" y="112.0" style="text-anchor:start;">D</text>
+    <path style="fill:none" d="M 479.0,97.0 V 104.0" id="LeaderD" class="Leader D"/>
+  </g>
 </svg>

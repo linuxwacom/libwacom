@@ -25,7 +25,7 @@
    showguides="true"
    inkscape:zoom="6.8066038"
    inkscape:cx="174.02218"
-   inkscape:cy="314.62093"
+   inkscape:cy="244.10118"
    inkscape:window-width="3072"
    inkscape:window-height="1696"
    inkscape:window-x="0"
@@ -59,7 +59,6 @@
    x="115.5"
    y="51"
    style="text-anchor:start">A</text>
-,
             <rect
    id="ButtonB"
    class="B Button"
@@ -73,7 +72,6 @@
    x="115.5"
    y="98"
    style="text-anchor:start">B</text>
-,
             <rect
    id="ButtonC"
    class="C Button"
@@ -87,7 +85,6 @@
    x="115.5"
    y="145"
    style="text-anchor:start">C</text>
-,
             <rect
    id="ButtonD"
    class="D Button"
@@ -101,7 +98,6 @@
    x="115.5"
    y="282"
    style="text-anchor:start">D</text>
-,
             <rect
    id="ButtonE"
    class="E Button"
@@ -115,7 +111,6 @@
    x="115.5"
    y="329"
    style="text-anchor:start">E</text>
-,
             <rect
    id="ButtonF"
    class="F Button"
@@ -129,57 +124,60 @@
    x="115.5"
    y="376"
    style="text-anchor:start">F</text>
-<rect
-   style="fill:none"
-   id="rect6"
-   width="71.107414"
-   height="27.032572"
-   x="35.946293"
-   y="198.33681"
-   ry="3.4251668"
-   rx="3.1165621" />
-<path
-   id="LeaderDialCCW"
-   class="DialCCW Dial Leader"
-   d="M 87.116505,189.14918 V 187.1991 H 139.33177"
-   style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.349836" />
-<path
-   id="DialArrowUp"
-   class="DialCCW Button"
-   d="m 86.936266,207.95518 1.5,3 h -1 a 7.5,7.5 0 0 1 -1.5,5 6.5,6.5 0 0 0 0.5,-5 h -1 z"
-   style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
-<path
-   id="DialArrowDown"
-   class="DialCCW Button"
-   d="m 55.16357,215.75101 -1.5,-3 h 1 a 7.5,7.5 0 0 1 1.5,-5 6.5,6.5 0 0 0 -0.5,5 h 1 z"
-   style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
-<path
-   id="LeaderDialCW"
-   class="DialCW Dial Leader"
-   d="m 55.414901,233.17455 v 1.90472 h 84.779479"
-   style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.440553" />
-<text
-   id="LabelDialCCW"
-   class="DialCCW Dial Label"
-   x="152.79242"
-   y="189.8886"
-   style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">Up</text>
-<text
-   id="LabelDialCW"
-   class="DialCW Dial Label"
-   x="147.37643"
-   y="237.93018"
-   style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">Down</text>
-<rect
-   style="fill:none"
-   id="Dial"
-   class="Dial TouchDial"
-   width="71.107414"
-   height="27.032572"
-   x="35.946293"
-   y="198.33681"
-   ry="3.4251668"
-   rx="3.1165621" />
+<g
+   id="g1">
+  <rect
+     style="fill:none"
+     id="rect6"
+     width="71.107414"
+     height="27.032572"
+     x="35.946293"
+     y="198.33681"
+     ry="3.4251668"
+     rx="3.1165621" />
+  <path
+     id="LeaderDialCCW"
+     class="DialCCW Dial Leader"
+     d="M 87.116505,189.14918 V 187.1991 H 139.33177"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.349836" />
+  <path
+     id="DialArrowUp"
+     class="DialCCW Button"
+     d="m 86.936266,207.95518 1.5,3 h -1 a 7.5,7.5 0 0 1 -1.5,5 6.5,6.5 0 0 0 0.5,-5 h -1 z"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+  <path
+     id="DialArrowDown"
+     class="DialCCW Button"
+     d="m 55.16357,215.75101 -1.5,-3 h 1 a 7.5,7.5 0 0 1 1.5,-5 6.5,6.5 0 0 0 -0.5,5 h 1 z"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+  <path
+     id="LeaderDialCW"
+     class="DialCW Dial Leader"
+     d="m 55.414901,233.17455 v 1.90472 h 84.779479"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.440553" />
+  <text
+     id="LabelDialCCW"
+     class="DialCCW Dial Label"
+     x="152.79242"
+     y="189.8886"
+     style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">Up</text>
+  <text
+     id="LabelDialCW"
+     class="DialCW Dial Label"
+     x="147.37643"
+     y="237.93018"
+     style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">Down</text>
+  <rect
+     style="fill:none"
+     id="Dial"
+     class="Dial TouchDial"
+     width="71.107414"
+     height="27.032572"
+     x="35.946293"
+     y="198.33681"
+     ry="3.4251668"
+     rx="3.1165621" />
+</g>
 <path
    id="LeaderA"
    class="A Leader"

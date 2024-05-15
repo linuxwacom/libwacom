@@ -18,8 +18,9 @@ Styli=@generic-no-eraser;
 IntegratedIn=
 
 [Features]
-NumStrips=2
+NumStrips=0
 NumRings=0
+NumDials=2
 Reversible=true
 Stylus=true
 Touch=false

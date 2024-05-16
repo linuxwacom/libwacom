@@ -47,10 +47,14 @@ def systemd_reload():
         subprocess.run(["systemd-hwdb", "update"], check=True)
         subprocess.run(["systemctl", "daemon-reload"], check=True)
 
-    except (IOError, FileNotFoundError, subprocess.CalledProcessError):
+    except (IOError, FileNotFoundError, subprocess.CalledProcessError) as e:
         # If any of the commands above are not found (most likely the system
         # simply does not use systemd), just skip.
-        raise pytest.skip()
+        logging.critical(f"{e}")
+        pytest.skip(f"Skipping test: {e}")
+    except Exception as e:
+        logging.critical(f"{e}")
+        pytest.fail(f"Aborting test: {e}")
 
 
 def pytest_generate_tests(metafunc):

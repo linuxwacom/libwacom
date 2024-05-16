@@ -34,7 +34,6 @@ def systemd_reload():
             warnings.warn("LIBWACOM_HWDB_FILE is not set, using already installed hwdb")
 
         subprocess.run(["systemd-hwdb", "update"], check=True)
-        subprocess.run(["systemctl", "daemon-reload"], check=True)
 
         yield
 
@@ -42,7 +41,6 @@ def systemd_reload():
             os.unlink(target)
 
         subprocess.run(["systemd-hwdb", "update"], check=True)
-        subprocess.run(["systemctl", "daemon-reload"], check=True)
 
     except (IOError, FileNotFoundError, subprocess.CalledProcessError) as e:
         # If any of the commands above are not found (most likely the system

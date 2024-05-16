@@ -50,8 +50,7 @@ jobs:
         with:
           name: meson test logs-${{matrix.compiler}} ${{matrix.meson_options}}
           path: |
-            builddir/meson-logs/testlog*.txt
-            builddir/meson-logs/meson-log.txt
+            builddir/meson-logs/*
       # move the tarball to the top level
       - name: move tarballs to top level
         run: mv builddir/meson-dist/libwacom-*tar.xz .

@@ -24,7 +24,9 @@ def load_test_db() -> WacomDatabase:
             logger.info(f"Defaulting to MESON_SOURCE_ROOT={dbpath}")
         return WacomDatabase(path=Path(dbpath) / "data" if dbpath else None)
     except AttributeError as e:
-        pytest.exit(f"Failed to initialize and wrap libwacom.so: {e}. You may need to set LD_LIBRARY_PATH and optionally MESON_SOURCE_ROOT")
+        pytest.exit(
+            f"Failed to initialize and wrap libwacom.so: {e}. You may need to set LD_LIBRARY_PATH and optionally MESON_SOURCE_ROOT"
+        )
 
 
 @pytest.fixture()

@@ -293,7 +293,13 @@ if get_option('tests').enabled()
 	pytest = find_program('pytest-3', 'pytest')
 	test('pytest',
 	     pytest,
-	     args: ['--verbose', '--log-level=DEBUG', meson.current_source_dir()],
+	     args: ['--verbose',
+		     '-rfES',
+		     '--log-level=DEBUG',
+		     '--log-file', meson.project_build_root() / 'meson-logs' / 'pytest.log',
+		     '--log-file-level=DEBUG',
+		     meson.current_source_dir()
+	     ],
 	     env: env,
 	     suite: ['all'])
 endif

@@ -292,17 +292,25 @@ if get_option('tests').enabled()
 		env.set('LD_LIBRARY_PATH', fs.parent(lib_libwacom.full_path()))
 		pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
 		pytest = find_program('pytest-3', 'pytest')
-		test('pytest',
-		     pytest,
-		     args: ['--verbose',
-			     '-rfES',
-			     '--log-level=DEBUG',
-			     '--log-file', meson.project_build_root() / 'meson-logs' / 'pytest.log',
-			     '--log-file-level=DEBUG',
-			     meson.current_source_dir()
-		     ],
-		     env: env,
-		     suite: ['all'])
+		pytest_files = [
+			'test_data_files.py',
+			'test_libwacom.py',
+			'test_svg.py',
+			'test_udev_rules.py',
+		]
+		foreach f: pytest_files
+			test('pytest @0@'.format(f),
+			     pytest,
+			     args: ['--verbose',
+				     '-rfES',
+				     '--log-level=DEBUG',
+				     '--log-file', meson.project_build_root() / 'meson-logs' / 'pytest.log',
+				     '--log-file-level=DEBUG',
+				     meson.current_source_dir() / 'test' / f,
+			     ],
+			     env: env,
+			     suite: ['all'])
+		endforeach
 	endif
 endif
 

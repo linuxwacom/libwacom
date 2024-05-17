@@ -38,8 +38,8 @@
 #
 
 [Device]
-Name=Inspiroy 2 M - H951P
-ModelName=Inspiroy 2 M - H951P
+Name=Huion Inspiroy 2 M
+ModelName=H951P
 Class=Bamboo
 DeviceMatch=usb|256c|0067;
 Width=9

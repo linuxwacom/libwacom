@@ -39,7 +39,7 @@
 Name=Huion RTM-500
 ModelName=H952
 Class=Bamboo
-DeviceMatch=usb|256c|006d;
+DeviceMatch=usb|256c|006d||HUION_T19h;
 Width=9
 Height=5
 IntegratedIn=

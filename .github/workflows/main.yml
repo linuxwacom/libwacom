@@ -37,6 +37,8 @@ jobs:
         run: |
           sudo mkdir -p /etc/udev/hwdb.d
           sudo chmod o+rwx /etc/udev/hwdb.d
+      - name: make systemd-hwdb sticky
+        run: sudo chmod +s /usr/bin/systemd-hwdb
       - name: meson test ${{matrix.meson_options}}
         uses: ./.github/actions/meson
         with:

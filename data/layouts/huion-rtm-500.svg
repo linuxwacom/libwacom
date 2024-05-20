@@ -1,26 +1,129 @@
-<?xml version='1.0' encoding='ASCII'?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="huion-rtm-500" width="732" height="430">
-  <title id="title">Huion RTM-500</title>
-  <rect x="108" y="45" width="539" height="337"/>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="huion-rtm-500"
+   width="744.0"
+   height="459.0"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="title">Huion RTM-500</title>
+  <rect
+     x="5.0"
+     y="5.0"
+     width="734.0"
+     height="449.0" />
   <g>
-    <rect id="ButtonA" class="A Button" x="47" y="42" width="20" height="20"/>
-    <text id="LabelA" class="A Label" x="95.0" y="54" style="text-anchor:start;">A</text>
-    <path style="fill:none" d="M 80.0,52.0 H 87.0" id="LeaderA" class="Leader A"/>
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="50.0"
+       y="49.5"
+       width="20.0"
+       height="20.0"
+       rx="2.0" />
+    <path
+       id="LeaderA"
+       class="Leader A"
+       d="M 80.0 59.5 H 97.0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="105.0"
+       y="61.5"
+       style="text-anchor:start;">A</text>
   </g>
   <g>
-    <rect id="ButtonB" class="B Button" x="47" y="89" width="20" height="20"/>
-    <text id="LabelB" class="B Label" x="95.0" y="101" style="text-anchor:start;">B</text>
-    <path style="fill:none" d="M 80.0,99.0 H 87.0" id="LeaderB" class="Leader B"/>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="50.0"
+       y="97.0"
+       width="20.0"
+       height="20.0"
+       rx="2.0" />
+    <path
+       id="LeaderB"
+       class="Leader B"
+       d="M 80.0 107.0 H 97.0" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="105.0"
+       y="109.0"
+       style="text-anchor:start;">B</text>
   </g>
   <g>
-    <rect id="ButtonC" class="C Button" x="47" y="321" width="20" height="20"/>
-    <text id="LabelC" class="C Label" x="95.0" y="333" style="text-anchor:start;">C</text>
-    <path style="fill:none" d="M 80.0,331.0 H 87.0" id="LeaderC" class="Leader C"/>
+    <rect
+       id="Strip"
+       class="Strip TouchStrip"
+       x="50.0"
+       y="155.0"
+       width="20.0"
+       height="150.0"
+       rx="2.0" />
+    <path
+       id="LeaderStripUp"
+       class="StripUp Strip Leader"
+       d="M 80.0 165.0 H 97.0" />
+    <path
+       id="LeaderStripDown"
+       class="StripDown Strip Leader"
+       d="M 80.0 295.0 H 97.0" />
+    <text
+       id="LabelStripUp"
+       class="StripUp Strip Label"
+       x="105.0"
+       y="167.0"
+       style="text-anchor:start;">Up</text>
+    <text
+       id="LabelStripDown"
+       class="StripDown Strip Label"
+       x="105.0"
+       y="297.0"
+       style="text-anchor:start;">Down</text>
   </g>
   <g>
-    <rect id="ButtonD" class="D Button" x="47" y="368" width="20" height="20"/>
-    <text id="LabelD" class="D Label" x="95.0" y="380" style="text-anchor:start;">D</text>
-    <path style="fill:none" d="M 80.0,378.0 H 87.0" id="LeaderD" class="Leader D"/>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="50.0"
+       y="342.0"
+       width="20.0"
+       height="20.0"
+       rx="2.0" />
+    <path
+       id="LeaderC"
+       class="Leader C"
+       d="M 80.0 352.0 H 97.0" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="105.0"
+       y="354.0"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="50.0"
+       y="389.0"
+       width="20.0"
+       height="20.0"
+       rx="2.0" />
+    <path
+       id="LeaderD"
+       class="Leader D"
+       d="M 80.0 399.0 H 97.0" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="105.0"
+       y="401.0"
+       style="text-anchor:start;">D</text>
   </g>
 </svg>
+

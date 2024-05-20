@@ -33,6 +33,10 @@ jobs:
         with:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
+      - name: make /etc/udev/hwdb.d writable
+        run: |
+          sudo mkdir -p /etc/udev/hwdb.d
+          sudo chmod o+rwx /etc/udev/hwdb.d
       - name: meson test ${{matrix.meson_options}}
         uses: ./.github/actions/meson
         with:

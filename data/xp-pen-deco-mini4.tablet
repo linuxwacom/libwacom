@@ -1,0 +1,26 @@
+# XP-Pen
+# Deco Mini 4
+#
+# sysinfo.ixRe9fapJd.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/386
+
+[Device]
+Name=XP-Pen Deco Mini 4
+ModelName=
+DeviceMatch=usb|28bd|0929|UGTABLET 4 inch PenTablet
+Class=Bamboo
+Width=4
+Height=3
+Layout=xp-pen-deco-mini4.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+NumRings=0
+
+[Buttons]
+Left=A;B;C;D;E;F
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5

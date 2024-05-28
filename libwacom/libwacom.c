@@ -214,11 +214,38 @@ client_query_by_subsystem_and_device_file (GUdevClient *client,
 }
 
 static char *
-get_device_uniq(GUdevDevice *device)
+get_device_prop(GUdevDevice *device, const char *propname)
+{
+	char *value = NULL;
+	GUdevDevice *parent = g_object_ref(device);
+
+	do {
+		GUdevDevice *next;
+		const char *v = g_udev_device_get_property(parent, propname);
+		if (v) {
+			/* NAME and UNIQ properties are enclosed with quotes */
+			size_t offset = v[0] == '"' ? 1 : 0;
+			value = g_strdup(v + offset);
+			if (value[strlen(value)] == '"')
+				value[strlen(value)] = '\0';
+			break;
+		}
+		next = g_udev_device_get_parent (parent);
+		g_object_unref(parent);
+		parent = next;
+	} while (parent);
+
+	if (parent)
+		g_object_unref(parent);
+
+	return value;
+}
+
+static char *
+parse_uniq(char *uniq)
 {
 	GRegex *regex;
 	GMatchInfo *match_info;
-	gchar *uniq = g_strdup (g_udev_device_get_sysfs_attr (device, "uniq"));
 
 	if (!uniq)
 		return NULL;
@@ -319,29 +346,10 @@ get_device_info (const char            *path,
 		g_free (sysfs_path);
 	}
 
-	*name = g_strdup (g_udev_device_get_sysfs_attr (device, "name"));
-	*uniq = get_device_uniq (device);
-	/* Try getting the name/uniq from the parent if that fails */
-	if (*name == NULL || *uniq == NULL) {
-		GUdevDevice *parent = g_udev_device_get_parent (device);
-
-		while (parent && (*name == NULL || *uniq == NULL)) {
-			GUdevDevice *old_parent = parent;
-
-			if (*name == NULL)
-				*name = g_strdup (g_udev_device_get_sysfs_attr (parent, "name"));
-			if (*uniq == NULL)
-				*uniq = get_device_uniq (parent);
-			parent = g_udev_device_get_parent (parent);
-			g_object_unref (old_parent);
-		}
-
-		if (parent)
-			g_object_unref (parent);
-
-		if (*name == NULL)
-			goto out;
-	}
+	*name = get_device_prop (device, "NAME");
+	*uniq = parse_uniq(get_device_prop(device, "UNIQ"));
+	if (*name == NULL)
+		goto out;
 
 	/* Parse the PRODUCT attribute (for Bluetooth, USB, I2C) */
 	retval = get_bus_vid_pid (device, bus, vendor_id, product_id, error);

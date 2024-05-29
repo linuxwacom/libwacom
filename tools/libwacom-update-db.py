@@ -85,7 +85,7 @@ class HWDBFile:
         # Let's add a generic exclusion rule for anything we know of with a
         # Keyboard device name.
         if int(vid, 16) != 0x56A:
-            entries["* Keyboard"] = ["ID_INPUT_TABLET=0"]
+            entries["* Keyboard"] = ["ID_INPUT_TABLET=0", "ID_INPUT_TABLET_PAD=0"]
 
         lines = [f"# {tablet.name}"]
         for name, props in entries.items():

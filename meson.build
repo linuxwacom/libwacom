@@ -2,7 +2,7 @@ project('libwacom', 'c',
 	version: '2.11.0',
 	license: 'HPND',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
-	meson_version: '>= 0.53.0')
+	meson_version: '>= 0.56.0')
 
 dir_bin     = get_option('prefix') / get_option('bindir')
 dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'

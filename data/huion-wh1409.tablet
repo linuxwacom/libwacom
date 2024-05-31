@@ -21,7 +21,7 @@
 [Device]
 Name=TABLET Pen Tablet
 ModelName=
-DeviceMatch=usb|256c|006e|TABLET Pen Tablet Pad;usb|256c|006e|TABLET Pen Tablet Pen;usb|256c|006e|TABLET Pen Tablet Touch Strip;usb|256c|006e|TABLET Pen Tablet Dial
+DeviceMatch=usb|256c|006e||HUION_T153;usb|256c|006e|TABLET Pen Tablet Pad;usb|256c|006e|TABLET Pen Tablet Pen;usb|256c|006e|TABLET Pen Tablet Touch Strip;usb|256c|006e|TABLET Pen Tablet Dial
 Class=Bamboo
 Width=14
 Height=9

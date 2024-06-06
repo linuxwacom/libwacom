@@ -1,4 +1,4 @@
-var modules =
+var topics =
 [
     [ "libwacom context", "group__context.html", "group__context" ],
     [ "libwacom devices", "group__devices.html", "group__devices" ],

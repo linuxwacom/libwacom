@@ -12,10 +12,10 @@ var group__context =
       [ "WERROR_BUG_CALLER", "group__context.html#ggac3d9ee175999d6b22cee82aae8f829deab2d78e55f27a28d6de708e2ef7a56fc0", null ]
     ] ],
     [ "libwacom_database_destroy", "group__context.html#gafdc100499a3d0760a53ec19d28ce1b12", null ],
-    [ "libwacom_database_new", "group__context.html#gad9220728a9e077d86e652625eef17dca", null ],
-    [ "libwacom_database_new_for_path", "group__context.html#ga7283183d04c1dd28ef95936b84af5e88", null ],
+    [ "libwacom_database_new", "group__context.html#ga9dfbecd1a2e74eac8d85e446e8d16711", null ],
+    [ "libwacom_database_new_for_path", "group__context.html#ga608f10d525f4252963fee40a85136e16", null ],
     [ "libwacom_error_free", "group__context.html#ga6864ec1cbb3582b386ff13fa5e23d366", null ],
     [ "libwacom_error_get_code", "group__context.html#ga7835e4ff16a2f3360ffe61769d8f009e", null ],
-    [ "libwacom_error_get_message", "group__context.html#ga6f44878163668d0c67d5fa0d5cda8658", null ],
-    [ "libwacom_error_new", "group__context.html#ga2b2eedf5db08f000ca4bf245d9b62dfb", null ]
+    [ "libwacom_error_get_message", "group__context.html#ga34cdc365f6586c1c1a1057c4daa1b388", null ],
+    [ "libwacom_error_new", "group__context.html#ga0e0a730db1c1805d2751926e25d95901", null ]
 ];

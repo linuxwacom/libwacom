@@ -12,7 +12,7 @@ env:
 
 jobs:
   build-and-dist:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         compiler:
@@ -28,7 +28,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES
@@ -71,13 +71,13 @@ jobs:
   # valgrind run
   #
   valgrind:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES
@@ -102,7 +102,7 @@ jobs:
   # /etc/ loading check
   etcdir:
     needs: build-and-dist
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         command:
@@ -120,7 +120,7 @@ jobs:
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       # Run as sudo because we install to /etc and thus need the pip
       # packages available to root
       - uses: ./.github/actions/pkginstall
@@ -148,13 +148,13 @@ jobs:
   # duplicate device check
   duplicate-devices:
     needs: build-and-dist
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       # Run as sudo because we install to /etc and thus need the pip
       # packages available to root
       - uses: ./.github/actions/pkginstall
@@ -196,7 +196,7 @@ jobs:
   #
   build-from-tarball:
     needs: build-and-dist
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       TARBALLDIR: '_tarball_dir'
       INSTALLDIR: '/tmp/libwacom/_inst'
@@ -205,7 +205,7 @@ jobs:
       - name: install python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       - uses: ./.github/actions/pkginstall
         with:
           apt: $UBUNTU_PACKAGES

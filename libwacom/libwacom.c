@@ -1123,12 +1123,11 @@ libwacom_unref(WacomDevice *device)
 		libwacom_match_unref(device->paired);
 	for (guint i = 0; i < device->matches->len; i++)
 		libwacom_match_unref(g_array_index(device->matches, WacomMatch*, i));
-	g_array_free (device->matches, TRUE);
+	g_clear_pointer (&device->matches, g_array_unref);
 	libwacom_match_unref(device->match);
-	g_array_free (device->styli, TRUE);
-	g_array_free (device->status_leds, TRUE);
-	if (device->buttons)
-		g_hash_table_destroy (device->buttons);
+	g_clear_pointer (&device->styli, g_array_unref);
+	g_clear_pointer (&device->status_leds, g_array_unref);
+	g_clear_pointer (&device->buttons, g_hash_table_destroy);
 	g_free (device);
 
 	return NULL;
@@ -1705,8 +1704,7 @@ libwacom_stylus_unref(WacomStylus *stylus)
 
 	g_free (stylus->name);
 	g_free (stylus->group);
-	if (stylus->paired_ids)
-		g_array_free (stylus->paired_ids, TRUE);
+	g_clear_pointer (&stylus->paired_ids, g_array_unref);
 	g_free (stylus);
 
 	return NULL;

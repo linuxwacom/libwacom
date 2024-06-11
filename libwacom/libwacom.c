@@ -226,8 +226,8 @@ get_device_prop(GUdevDevice *device, const char *propname)
 			/* NAME and UNIQ properties are enclosed with quotes */
 			size_t offset = v[0] == '"' ? 1 : 0;
 			value = g_strdup(v + offset);
-			if (value[strlen(value)] == '"')
-				value[strlen(value)] = '\0';
+			if (value[strlen(value) - 1] == '"')
+				value[strlen(value) - 1] = '\0';
 			break;
 		}
 		next = g_udev_device_get_parent (parent);

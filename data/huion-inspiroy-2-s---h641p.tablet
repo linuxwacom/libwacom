@@ -34,7 +34,7 @@
 Name=Inspiroy 2 S
 ModelName=H641P
 Class=Bamboo
-DeviceMatch=usb|256c|0066||HUION_T21j;
+DeviceMatch=usb|256c|0066;
 Width=6
 Height=4
 Layout=huion-inspiroy-2-s---h641p.svg

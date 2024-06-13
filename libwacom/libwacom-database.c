@@ -892,8 +892,8 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	if (layout && layout[0] != '\0') {
 		/* For the layout, we store the full path to the SVG layout */
 		device->layout = g_build_filename (datadir, "layouts", layout, NULL);
-		g_free (layout);
 	}
+	g_free (layout);
 
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);
 	device->cls = libwacom_class_string_to_enum(class);

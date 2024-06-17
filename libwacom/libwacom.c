@@ -740,7 +740,6 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 		char *name, *uniq;
 		const char *used_match_name = NULL;
 		const char *used_match_uniq = NULL;
-		WacomMatch *used_match;
 
 		vendor_id = builder->vendor_id;
 		product_id = builder->product_id;
@@ -786,9 +785,9 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *bui
 			bus++;
 		}
 		ret = fallback_or_device(db, device, builder->device_name, fallback);
-		if (ret) {
-			/* for multiple-match devices, set to the one we requested */
-			used_match = libwacom_match_new(used_match_name, used_match_uniq, *bus, vendor_id, product_id);
+		if (ret && device != NULL) {
+			/* If this isn't the fallback device: for multiple-match devices, set to the one we requested */
+			WacomMatch *used_match = libwacom_match_new(used_match_name, used_match_uniq, *bus, vendor_id, product_id);
 			libwacom_set_default_match(ret, used_match);
 			libwacom_match_unref(used_match);
 		}

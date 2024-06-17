@@ -39,6 +39,13 @@
     <path style="fill:none" d="M 53.0,139.0 H 60.0" id="LeaderG" class="Leader G"/>
   </g>
   <g>
+    <rect id="Strip" class="Strip TouchStrip" x="22" y="156" width="16" height="119" rx="10" ry="8"/>
+    <text id="LabelStripUp" class="StripUp Strip Label" x="68" y="166" style="text-anchor:start;">Up</text>
+    <path style="fill:none" d="M 53.0,164.0 H 60.0" id="LeaderStripUp" class="StripUp Strip Leader"/>
+    <text id="LabelStripDown" class="StripDown Strip Label" x="62" y="265" style="text-anchor:start;">Down</text>
+    <path style="fill:none" d="M 53.0,263.0 H 60.0" id="LeaderStripDown" class="StripDown Strip Leader"/>
+  </g>
+  <g>
     <rect id="ButtonH" class="H Button" x="22" y="284" width="16" height="16"/>
     <text id="LabelH" class="H Label" x="68.0" y="294" style="text-anchor:start;">H</text>
     <path style="fill:none" d="M 53.0,292.0 H 60.0" id="LeaderH" class="Leader H"/>

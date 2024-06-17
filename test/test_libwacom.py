@@ -377,3 +377,25 @@ def test_dont_ignore_exact_matches(custom_datadir):
     builder = WacomBuilder.create(usbid=USBID, uniq="whatever", match_name=NAME)
     device = db.new_from_builder(builder)
     assert device is None
+
+
+# Emulates the behavior of new_from_path for an unknown device
+@pytest.mark.parametrize("fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC))
+@pytest.mark.parametrize("bustype", (WacomBustype.USB, WacomBustype.BLUETOOTH))
+def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
+    USBID = (0x1234, 0x5678)
+    NAME = "nameval"
+    db = WacomDatabase(path=custom_datadir)
+    builder = WacomBuilder.create(usbid=USBID, bus=bustype, match_name=NAME)
+
+    device = db.new_from_builder(builder, fallback=fallback)
+    if fallback:
+        assert device is not None
+        match = device.match
+        assert match.decode("utf-8") == "generic"
+        # Generic device always has 0, 0, 0 triple for bus/vid/pid
+        assert device.bustype == WacomBustype.UNKNOWN
+        assert device.vendor_id == 0
+        assert device.product_id == 0
+    else:
+        assert device is None

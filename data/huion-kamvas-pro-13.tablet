@@ -41,7 +41,7 @@ Class=Cintiq
 DeviceMatch=usb|256c|006e|Tablet Monitor Pen;usb|256c|006e|Tablet Monitor Pad;
 Width=12
 Height=7
-Layout=kamvas-pro-13.svg
+Layout=huion-kamvas-pro-13.svg
 Styli=@generic-no-eraser;
 IntegratedIn=Display
 

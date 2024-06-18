@@ -1,0 +1,47 @@
+# Wacom
+# Cintiq Pro 27
+# DTH271
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *-----------------------*
+#        A |                       | E
+#        B |                       | F
+#        C |                       | G
+#        D |                       | H
+#          |                       |
+#          |        DISPLAY        |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          |                       |
+#          *-----------------------*
+#
+# NOTE: Buttons are on the back side of the device rather
+# than on the top bezel.
+#
+# sysinfo.rLRz2hqrEy
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/260#issue-1391416660
+
+[Device]
+Name=Wacom Cintiq Pro 27
+ModelName=DTH271
+Class=Cintiq
+DeviceMatch=usb|056a|03c0
+Width=24
+Height=13
+Layout=wacom-cintiq-pro-27.svg
+Styli=@cintiqpro2022;@mobilestudio;@propengen2;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+NumRings=0
+
+[Buttons]
+Left=A;B;C;D
+Right=E;F;G;H

@@ -1,0 +1,48 @@
+# Wacom
+# Intuos3 12x12
+# PTZ-1230
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#   CA |                       | EG
+#   CA |                       | EG
+#   CB |                       | FG
+#   CB |                       | FG
+#   DD |        TABLET         | HH
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=Wacom Intuos3 12x12
+ModelName=PTZ-1230
+DeviceMatch=usb|056a|00b3
+Class=Intuos3
+Width=12
+Height=12
+Layout=wacom-intuos3-12x12.svg
+Styli=@intuos3-pucks;@intuos3;
+
+[Features]
+Stylus=true
+NumStrips=2
+
+[Buttons]
+Left=A;B;C;D
+Right=E;F;G;H

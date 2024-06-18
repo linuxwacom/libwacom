@@ -1,0 +1,47 @@
+# Wacom
+# Cintiq 21UX
+# DTZ-2100
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#      |                       |
+#   CA |                       | EG
+#   CA |                       | EG
+#   CB |        DISPLAY        | FG
+#   CB |                       | FG
+#   DD |                       | HH
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=Wacom Cintiq 21UX
+ModelName=DTZ-2100
+DeviceMatch=usb|056a|003f
+Class=Cintiq
+Width=17
+Height=13
+Layout=wacom-cintiq-21ux.svg
+Styli=@intuos3;
+IntegratedIn=Display
+
+[Features]
+Reversible=false
+Stylus=true
+NumStrips=2
+
+[Buttons]
+Left=A;B;C;D
+Right=E;F;G;H

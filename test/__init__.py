@@ -698,6 +698,12 @@ class WacomDatabase:
         device = self.libwacom_new_from_name(name.encode("utf-8"), 0)
         return WacomDevice(device) if device else None
 
+    def new_from_path(
+        self, path: str, fallback: Fallback = Fallback.NONE
+    ) -> Optional[WacomDevice]:
+        device = self.libwacom_new_from_path(path.encode("utf-8"), fallback, 0)
+        return WacomDevice(device) if device else None
+
     def new_from_usbid(self, vid: int, pid: int) -> Optional[WacomDevice]:
         device = self.libwacom_new_from_usbid(vid, pid, 0)
         return WacomDevice(device) if device else None

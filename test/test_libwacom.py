@@ -379,8 +379,11 @@ def test_dont_ignore_exact_matches(custom_datadir):
     assert device is None
 
 
-# Emulates the behavior of new_from_path for an unknown device
-@pytest.mark.parametrize("fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC))
+# Emulates the behavior of new_from_path for an unknown device but without
+# uinput devices
+@pytest.mark.parametrize(
+    "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
+)
 @pytest.mark.parametrize("bustype", (WacomBustype.USB, WacomBustype.BLUETOOTH))
 def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
     USBID = (0x1234, 0x5678)
@@ -402,3 +405,65 @@ def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
         assert device.name == NAME
     else:
         assert device is None
+
+
+def create_uinput(name, vid, pid):
+    libevdev = pytest.importorskip("libevdev")
+    dev = libevdev.Device()
+    dev.name = name
+    dev.id = {"bustype": 0x3, "vendor": vid, "product": pid}
+    dev.enable(
+        libevdev.EV_ABS.ABS_X,
+        libevdev.InputAbsInfo(minimum=0, maximum=10000, resolution=200),
+    )
+    dev.enable(
+        libevdev.EV_ABS.ABS_Y,
+        libevdev.InputAbsInfo(minimum=0, maximum=10000, resolution=200),
+    )
+    dev.enable(libevdev.EV_KEY.BTN_STYLUS)
+    dev.enable(libevdev.EV_KEY.BTN_TOOL_PEN)
+    try:
+        return dev.create_uinput_device()
+    except OSError as e:
+        pytest.skip(f"Failed to create uinput device: {e}")
+
+
+@pytest.mark.parametrize(
+    "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
+)
+def test_new_from_path_known_device(fallback):
+    name = "Wacom Intuos4 WL"
+    vid = 0x056A
+    pid = 0x00BC
+    uinput = create_uinput(name, vid, pid)
+
+    db = WacomDatabase()
+    dev = db.new_from_path(
+        uinput.devnode, fallback=fallback
+    )  # fallback has no effect here
+    assert dev is not None
+    assert dev.name == name
+    assert dev.vendor_id == vid
+    assert dev.product_id == pid
+
+
+@pytest.mark.parametrize(
+    "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
+)
+def test_new_from_path_unknown_device(fallback):
+    name = "Unknown device"
+    vid = 0x1234
+    pid = 0xABAC
+    uinput = create_uinput(name, vid, pid)
+
+    db = WacomDatabase()
+    dev = db.new_from_path(
+        uinput.devnode, fallback=fallback
+    )  # fallback has no effect here
+    if fallback == WacomDatabase.Fallback.NONE:
+        assert dev is None
+    else:
+        assert dev is not None
+        assert dev.name == name
+        assert dev.vendor_id == 0
+        assert dev.product_id == 0

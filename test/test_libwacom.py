@@ -386,7 +386,9 @@ def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
     USBID = (0x1234, 0x5678)
     NAME = "nameval"
     db = WacomDatabase(path=custom_datadir)
-    builder = WacomBuilder.create(usbid=USBID, bus=bustype, match_name=NAME)
+    builder = WacomBuilder.create(
+        usbid=USBID, bus=bustype, match_name=NAME, device_name=NAME
+    )
 
     device = db.new_from_builder(builder, fallback=fallback)
     if fallback:
@@ -397,5 +399,6 @@ def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
         assert device.bustype == WacomBustype.UNKNOWN
         assert device.vendor_id == 0
         assert device.product_id == 0
+        assert device.name == NAME
     else:
         assert device is None

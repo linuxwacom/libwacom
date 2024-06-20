@@ -1,0 +1,54 @@
+# Wacom
+# Intuos Pro S
+# PTK470
+# (Third Generation)
+#
+# sysinfo.vS9sFVLdTW
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/455#issue-2861784074
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#        A
+#      D E B
+#        C
+#    *-----------------------*
+#    |                       |
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    |                       |
+#    *-----------------------*
+#
+# Relative Dial Map:
+# (A=1st dial, B=2nd dial, ...)
+#
+#            A
+#    *-----------------------*
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=Wacom Intuos Pro S
+ModelName=PTK470
+DeviceMatch=usb|056a|03f5;bluetooth|056a|03f6;
+Class=Intuos5
+Width=7
+Height=4
+Layout=wacom-intuos-pro-3-s.svg
+IntegratedIn=
+Styli=@mobilestudio;@propengen2;@propen3;@udpen;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+NumDials=1
+
+[Buttons]
+Left=A;B;C;D;E
+Dial=E
+DialNumModes=3

@@ -1,0 +1,57 @@
+# Wacom
+# Intuos Pro M
+# PTK670
+# (Third Generation)
+#
+# sysinfo.BSaGepftZP
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/456#issue-2861784604
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#        A               E
+#      D I B           H J F
+#        C               G
+#    *-----------------------*
+#    |                       |
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    |                       |
+#    *-----------------------*
+#
+# Relative Dial Map:
+# (A=1st dial, B=2nd dial, ...)
+#
+#            A      B
+#    *-----------------------*
+#    |                       |
+#    |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=Wacom Intuos Pro M
+ModelName=PTK670
+DeviceMatch=usb|056a|03f7;bluetooth|056a|03f8;
+Class=Intuos5
+Width=10
+Height=6
+Layout=wacom-intuos-pro-3-m.svg
+IntegratedIn=
+Styli=@mobilestudio;@propengen2;@propen3;@udpen;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+NumDials=2
+
+[Buttons]
+Left=A;B;C;D;I
+Right=E;F;G;H;J
+Dial=I
+Dial2=J
+DialNumModes=3
+Dial2NumModes=3

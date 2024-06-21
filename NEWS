@@ -1,5 +1,8 @@
+libwacom 2.12.2
+- No new devices or APIs, bugfix release only
+
 libwacom 2.12.1
-- No new devices or APIS, bugfix release only
+- No new devices or APIs, bugfix release only
 
 libwacom 2.12.0
 - New API:

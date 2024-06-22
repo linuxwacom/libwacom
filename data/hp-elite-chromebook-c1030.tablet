@@ -1,0 +1,18 @@
+# This is for the Google Jinlon HP Elite Chromebook c1030
+# sysinfo.3drbykKy1k.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/384
+
+
+[Device]
+Name=HP Elite Chromebook c1030
+Class=ISDV4
+DeviceMatch=i2c:27c6:0e0c
+Width=11
+Height=7
+IntegratedIn=Display;System
+# FIXME: see https://github.com/linuxwacom/libwacom/issues/639
+# Styli=isdv4-aes
+
+[Features]
+Stylus=true
+Touch=true

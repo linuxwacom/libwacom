@@ -1,0 +1,50 @@
+# Wacom
+# Cintiq 12WX
+# DTZ-1200W
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#   II |                       | JJ
+#   CA |                       | EG
+#   CA |                       | EG
+#   CB |                       | FG
+#   CB |                       | FG
+#   DD |        DISPLAY        | HH
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    *-----------------------*
+#
+
+[Device]
+Name=Wacom Cintiq 12WX
+ModelName=DTZ-1200W
+Class=Cintiq
+DeviceMatch=usb|056a|00c6
+Width=10
+Height=7
+Layout=wacom-cintiq-12wx.svg
+Styli=@intuos3;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+NumStrips=2
+
+[Buttons]
+Left=A;B;C;D;I
+Right=E;F;G;H;J

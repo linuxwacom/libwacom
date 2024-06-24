@@ -1,0 +1,40 @@
+# Wacom
+# Bamboo
+# CTH-460
+#
+# first generation BambooPT
+#
+# stylus with two buttons and eraser (LP160E); 2FG touch
+# Pen active area: 5.8 x 3.62in
+# Touch active area: 4.92 x 3.35in
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |        TABLET         |
+#  C |                       |
+#  D |                       |
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Wacom Bamboo (2FG)
+ModelName=CTH-460
+DeviceMatch=usb|056a|00d1
+Class=Bamboo
+Width=6
+Height=4
+Layout=wacom-bamboo-2fg-s-pt.svg
+IntegratedIn=
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+
+[Buttons]
+Left=A;B;C;D
+EvdevCodes=BTN_RIGHT;BTN_BACK;BTN_FORWARD;BTN_LEFT

@@ -1,0 +1,54 @@
+# Wacom
+# Cintiq 20WSX
+# DTZ-2000W
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+# (NOTE: This map has *not* been verified.)
+#
+#      *-----------------------*
+#      |                       |
+#      |                       |
+#   KL |                       | MN
+#      |                       |
+#   II |                       | JJ
+#   CA |                       | EG
+#   CA |        DISPLAY        | EG
+#   CB |                       | FG
+#   CB |                       | FG
+#   DD |                       | HH
+#      |                       |
+#      |                       |
+#      *-----------------------*
+#
+# Touch Strip Map:
+# (a=1st strip min, A=1st strip max, b=2nd strip min, B=2nd strip max, ...)
+# (NOTE: This map has *not* been verified.)
+#
+#    @-----------------------@
+#    |                       |
+#  a |                       | b
+#  A |        DISPLAY        | B
+#    |                       |
+#    @-----------------------@
+#
+
+[Device]
+Name=Wacom Cintiq 20WSX
+ModelName=DTZ-2000W
+DeviceMatch=usb|056a|00c5
+Class=Cintiq
+Width=17
+Height=11
+Layout=wacom-cintiq-20wsx.svg
+Styli=@intuos3;
+IntegratedIn=Display
+
+[Features]
+Reversible=false
+Stylus=true
+NumStrips=2
+
+[Buttons]
+Left=A;B;C;D;I;K;L
+Right=E;F;G;H;J;M;N

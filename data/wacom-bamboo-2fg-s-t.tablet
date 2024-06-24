@@ -1,0 +1,39 @@
+# Wacom
+# Bamboo Touch
+# CTT-460
+#
+# first generation BambooPT
+#
+# no stylus; 2FG touch
+# Touch active area: 4.92 x 3.35in
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |        TABLET         |
+#  C |                       |
+#  D |                       |
+#    |                       |
+#    *-----------------------*
+
+[Device]
+Name=Wacom Bamboo Touch (2FG)
+ModelName=CTT-460
+DeviceMatch=usb|056a|00d0
+Class=Bamboo
+Width=5
+Height=3
+Layout=wacom-bamboo-2fg-s-t.svg
+IntegratedIn=
+
+[Features]
+Stylus=false
+Reversible=true
+Touch=true
+
+[Buttons]
+Left=A;B;C;D
+EvdevCodes=BTN_RIGHT;BTN_BACK;BTN_FORWARD;BTN_LEFT

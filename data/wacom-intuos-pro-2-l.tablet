@@ -1,0 +1,67 @@
+# Wacom
+# Intuos Pro 2 L
+# PTH-860
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |                       |
+#  B |                       |
+#  C |                       |
+#  D |                       |
+#  I |        TABLET         |
+#  E |                       |
+#  F |                       |
+#  G |                       |
+#  H |                       |
+#    |                       |
+#    *-----------------------*
+#
+# Touch Ring Map:
+# (A=1st ring, B=2nd ring, ...)
+#
+#    *-----------------------*
+#    |                       |
+#  A |        TABLET         |
+#    |                       |
+#    *-----------------------*
+#
+# LED Map:
+# (XY=Bank X, LED Y; *=Invisible)
+#
+#        *-----------------------*
+#        |                       |
+#        |                       |
+#  01 02 |                       |
+#        |        TABLET         |
+#  00 03 |                       |
+#        |                       |
+#        |                       |
+#        *-----------------------*
+#
+
+[Device]
+Name=Wacom Intuos Pro L
+ModelName=PTH-860
+DeviceMatch=usb|056a|0358;bluetooth|056a|0361;
+Class=Intuos5
+Width=12
+Height=8
+Layout=wacom-intuos-pro-2-l.svg
+IntegratedIn=
+Styli=@intuos4;@intuos5;@mobilestudio;@propengen2;
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=true
+NumRings=1
+StatusLEDs=Ring
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I
+
+Ring=I
+RingNumModes=4

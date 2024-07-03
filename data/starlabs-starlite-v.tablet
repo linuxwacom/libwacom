@@ -6,7 +6,7 @@
 [Device]
 Name=StarLabs Starlite V
 Class=ISDV4
-DeviceMatch=i2c:27C6:0111
+DeviceMatch=acpi:STAR:0002
 IntegratedIn=Display;System;
 
 [Features]

@@ -431,13 +431,12 @@ def create_uinput(name, vid, pid):
 @pytest.mark.parametrize(
     "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
 )
-def test_new_from_path_known_device(fallback):
+def test_new_from_path_known_device(db, fallback):
     name = "Wacom Intuos4 WL"
     vid = 0x056A
     pid = 0x00BC
     uinput = create_uinput(name, vid, pid)
 
-    db = WacomDatabase()
     dev = db.new_from_path(
         uinput.devnode, fallback=fallback
     )  # fallback has no effect here
@@ -450,13 +449,12 @@ def test_new_from_path_known_device(fallback):
 @pytest.mark.parametrize(
     "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
 )
-def test_new_from_path_unknown_device(fallback):
+def test_new_from_path_unknown_device(db, fallback):
     name = "Unknown device"
     vid = 0x1234
     pid = 0xABAC
     uinput = create_uinput(name, vid, pid)
 
-    db = WacomDatabase()
     dev = db.new_from_path(
         uinput.devnode, fallback=fallback
     )  # fallback has no effect here

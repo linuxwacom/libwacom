@@ -303,14 +303,6 @@ Buttons=3
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x40200]
-# Cintiq Pro 2022
-Name=Pro Pen 3
-Group=cintiqpro2022
-Buttons=3
-Axes=Tilt;Pressure;Distance;
-Type=General
-
 [0x80842]
 # MobileStudio Pro
 Name=Pro Pen 3D

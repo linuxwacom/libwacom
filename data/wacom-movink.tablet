@@ -35,7 +35,7 @@ DeviceMatch=usb|056a|03f0
 Class=Cintiq
 Width=11
 Height=8
-Styli=@udpen;
+Styli=@udpen;@mobilestudio;@propengen2;
 IntegratedIn=Display
 Layout=wacom-movink.svg
 

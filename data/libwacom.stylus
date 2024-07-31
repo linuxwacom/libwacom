@@ -743,7 +743,7 @@ HasWheel=true
 Buttons=5
 
 [0x10002]
-# Movink
+# Wacom Movink 13
 Name=UD Pen
 Group=udpen
 PairedStylusIds=0x1000a;
@@ -752,7 +752,7 @@ Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0x1000a]
-# Movink
+# Wacom Movink 13
 Name=UD Pen Eraser
 Group=udpen
 PairedStylusIds=0x10002;

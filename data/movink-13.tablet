@@ -1,4 +1,5 @@
-# Wacom Movink DTH135K0C
+# Wacom Movink 13
+# Model Name: DTH135K0C
 # Sensor Type: EMR
 # Features: Touch (Integrated), Tilt
 #
@@ -29,7 +30,7 @@
 # sysinfo.4XIn8KkXzp
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/376#issue-2270545906
 [Device]
-Name=Wacom Movink
+Name=Wacom Movink 13
 ModelName=DTH-135K0C
 DeviceMatch=usb:056a:03f0
 Class=Cintiq
@@ -37,7 +38,7 @@ Width=11
 Height=8
 Styli=@udpen;@mobilestudio;@propengen2;
 IntegratedIn=Display
-Layout=movink.svg
+Layout=movink-13.svg
 
 [Features]
 Stylus=true

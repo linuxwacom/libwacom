@@ -24,3 +24,11 @@ jobs:
         run: |
           meson setup builddir
           meson test -C builddir --print-errorlogs
+    # Capture all the meson logs, even if we failed
+    - uses: actions/upload-artifact@v4
+      if: ${{ always() }}  # even if we fail
+      with:
+        name: meson test logs
+        path: |
+          builddir/meson-logs/testlog*.txt
+          builddir/meson-logs/meson-log.txt

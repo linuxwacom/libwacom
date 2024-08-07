@@ -243,24 +243,62 @@ static void
 test_styli(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
-	int nstyli;
-	const int *styli = libwacom_get_supported_styli(device, &nstyli);
+	int nstylus_ids, nstyli;
+	const WacomStylus **styli;
+	const int *stylus_ids;
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	stylus_ids = libwacom_get_supported_styli(device, &nstylus_ids);
+#pragma GCC diagnostic pop
+	styli = libwacom_get_styli(device, &nstyli);
 
 	g_assert_cmpint(nstyli, >, 0);
+	g_assert_cmpint(nstyli, ==, nstylus_ids);
 	g_assert_nonnull(styli);
+	g_assert_nonnull(stylus_ids);
+	g_assert_null(styli[nstyli]); /* NULL-terminated list */
+
+	for (int i = 0; i < nstyli; i++) {
+		const WacomStylus *stylus = styli[i];
+		gboolean found = FALSE;
+		for (int j = 0; !found && j < nstylus_ids; j++) {
+			found = stylus_ids[j] == libwacom_stylus_get_id(stylus);
+		}
+		g_assert_true(found);
+	}
+
+	g_free(styli);
+
 }
 
 static void
 test_realstylus(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
-	int nstyli;
-	const int *styli = libwacom_get_supported_styli(device, &nstyli);
+	int nstylus_ids, nstyli;
+	const WacomStylus **styli;
+	const int *stylus_ids;
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	stylus_ids = libwacom_get_supported_styli(device, &nstylus_ids);
+#pragma GCC diagnostic pop
+	styli = libwacom_get_styli(device, &nstyli);
+
+	for (int i = 0; i < nstylus_ids; i++) {
+		g_assert_cmpint(stylus_ids[i], !=, WACOM_STYLUS_FALLBACK_ID);
+		g_assert_cmpint(stylus_ids[i], !=, WACOM_ERASER_FALLBACK_ID);
+	}
 
 	for (int i = 0; i < nstyli; i++) {
-		g_assert_cmpint(styli[i], !=, WACOM_STYLUS_FALLBACK_ID);
-		g_assert_cmpint(styli[i], !=, WACOM_ERASER_FALLBACK_ID);
+		const WacomStylus *stylus = styli[i];
+		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_STYLUS_FALLBACK_ID);
+		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_ERASER_FALLBACK_ID);
 	}
+
+
+	g_free(styli);
 }
 
 static void

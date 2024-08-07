@@ -648,8 +648,25 @@ int libwacom_get_num_keys(const WacomDevice *device);
  * @return an array of Styli IDs supported by the device
  *
  * @ingroup styli
+ * @deprecated 2.14 Use libwacom_get_styli() instead.
  */
+LIBWACOM_DEPRECATED
 const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styli);
+
+/**
+ * @param device The tablet to query
+ * @param[out] num_styli Optional return location for the number of listed styli,
+ *			 excluding the NULL terminator.
+ * @return A null-terminated array of WacomStylus that are supported by this
+ *	   device
+ *
+ * The content of the list is owned by the database and must not be
+ * modified or freed. Use free() to free the list.
+ *
+ * @since 2.14
+ * @ingroup styli
+ */
+const WacomStylus ** libwacom_get_styli(const WacomDevice *device, int *num_styli);
 
 /**
  * @param device The tablet to query
@@ -824,12 +841,17 @@ int libwacom_get_button_evdev_code(const WacomDevice *device,
 /**
  * Get the WacomStylus for the given tool ID.
  *
+ * The vendor ID is assumed to be the Wacom vendor id 0x56a.
+ *
  * @param db A Tablet and Stylus database.
  * @param id The Tool ID for this stylus
  * @return A WacomStylus representing the stylus. Do not free.
  *
  * @ingroup styli
+ * @deprecated 2.14 Use libwacom_get_styli() and
+ * libwacom_stylus_get_paired_styli() to obtain the WacomStylus directly
  */
+LIBWACOM_DEPRECATED
 const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id);
 
 /**
@@ -839,6 +861,15 @@ const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, in
  * @ingroup styli
  */
 int         libwacom_stylus_get_id (const WacomStylus *stylus);
+
+/**
+ * @param stylus The stylus to query
+ * @return the vendor ID of the tool
+ *
+ * @ingroup styli
+ * @since 2.14
+ */
+int         libwacom_stylus_get_vendor_id (const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -853,9 +884,29 @@ const char *libwacom_stylus_get_name (const WacomStylus *stylus);
  * @param num_paired_ids The length of the returned list
  * @return The list of other IDs paired to this stylus
  *
+ * For historical reasons this function will only return paired ids that
+ * match Wacom's vendor ID 0x56a. Callers should use
+ * libwacom_stylus_get_paired_styli() instead.
+ *
  * @ingroup styli
+ * @deprecated 2.14 Use libwacom_stylus_get_paired_styli() instead
  */
+LIBWACOM_DEPRECATED
 const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids);
+
+/**
+ * @param stylus The stylus to query
+ * @param[out] num_paired Optional return location for the length of the
+ * returned list, excluding the NULL terminator
+ * @return A NULL-terminated list contain the styli paired with this stylus
+ *
+ * The content of the list is owned by the database and must not be
+ * modified or freed. Use free() to free the list.
+ *
+ * @ingroup styli
+ * @since 2.14
+ */
+const WacomStylus **libwacom_stylus_get_paired_styli(const WacomStylus *stylus, int *num_paired);
 
 /**
  * @param stylus The stylus to query

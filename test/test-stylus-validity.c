@@ -88,7 +88,7 @@ test_has_eraser(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
 	gboolean matching_eraser_found = FALSE;
-	const int *ids;
+	const WacomStylus **paired;
 	int count;
 	int i;
 
@@ -97,18 +97,17 @@ test_has_eraser(gconstpointer data)
 	g_assert_false(libwacom_stylus_is_eraser(stylus));
 
 	/* Search for the linked eraser */
-	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	paired = libwacom_stylus_get_paired_styli(stylus, &count);
 	g_assert_cmpint(count, >, 0);
 
 	for (i = 0; i < count; i++) {
-		for (const WacomStylus **s = all_styli; *s; s++) {
-			if (libwacom_stylus_get_id(*s) == ids[i] &&
-			    libwacom_stylus_is_eraser(*s)) {
-				matching_eraser_found = TRUE;
-				break;
-			}
+		const WacomStylus *s = paired[i];
+		if (libwacom_stylus_is_eraser(s)) {
+			matching_eraser_found = TRUE;
+			break;
 		}
 	}
+	g_free(paired);
 
 	g_assert_true(matching_eraser_found);
 }
@@ -117,7 +116,7 @@ static void
 test_eraser_link(const WacomStylus *stylus, gboolean linked)
 {
 	gboolean matching_stylus_found = FALSE;
-	const int *ids;
+	const WacomStylus **paired;
 	int count;
 	int i;
 
@@ -126,23 +125,23 @@ test_eraser_link(const WacomStylus *stylus, gboolean linked)
 	g_assert_true(libwacom_stylus_is_eraser(stylus));
 
 	/* Verify the link count */
-	ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	paired = libwacom_stylus_get_paired_styli(stylus, &count);
 	if (!linked) {
 		g_assert_cmpint(count, ==, 0);
+		g_free(paired);
 		return;
 	}
 
 	/* If we're supposed to be linked, ensure its to a non-eraser */
 	g_assert_cmpint(count, >, 0);
 	for (i = 0; i < count; i++) {
-		for (const WacomStylus **s = all_styli; *s; s++) {
-			if (libwacom_stylus_get_id(*s) == ids[i] &&
-			    libwacom_stylus_has_eraser(*s)) {
-				matching_stylus_found = TRUE;
-				break;
-			}
+		const WacomStylus *s = paired[i];
+		if (libwacom_stylus_has_eraser(s)) {
+			matching_stylus_found = TRUE;
+			break;
 		}
 	}
+	g_free(paired);
 
 	g_assert_true(matching_stylus_found);
 }
@@ -274,35 +273,32 @@ static void
 test_mutually_paired(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	int stylus_id;
-	const int *stylus_pairings;
+	const WacomStylus **stylus_pairings;
 	int count;
-	int i;
 
-	stylus_id = libwacom_stylus_get_id(stylus);
-	stylus_pairings = libwacom_stylus_get_paired_ids(stylus, &count);
+	stylus_pairings = libwacom_stylus_get_paired_styli(stylus, &count);
 
-	for (i = 0; i < count; i++) {
-		for (const WacomStylus **s = all_styli; *s; s++) {
-			gboolean match_found = FALSE;
-			const int *pair_ids;
-			int pair_count;
-			int j;
+	for (int i = 0; i < count; i++) {
+		const WacomStylus *paired = stylus_pairings[i];
+		const WacomStylus **counter_paired;
+		gboolean match_found = FALSE;
+		int pair_count;
 
-			if (libwacom_stylus_get_id(*s) != stylus_pairings[i])
-				continue;
+		g_assert_true(paired != stylus); /* can't be paired with itself */
 
-			pair_ids = libwacom_stylus_get_paired_ids(*s, &pair_count);
-			for (j = 0; j < pair_count; j++) {
-				if (pair_ids[j] == stylus_id) {
-					match_found = TRUE;
-					break;
-				}
+		counter_paired = libwacom_stylus_get_paired_styli(paired, &pair_count);
+		for (int j = 0; j < pair_count; j++) {
+			const WacomStylus *back_paired = counter_paired[j];
+			if (back_paired == stylus) {
+				match_found = TRUE;
+				break;
 			}
-
-			g_assert_true(match_found);
 		}
+		g_free(counter_paired);
+
+		g_assert_true(match_found);
 	}
+	g_free(stylus_pairings);
 }
 
 /* Wrapper function to make adding tests simpler. g_test requires
@@ -451,14 +447,14 @@ assemble_styli(WacomDeviceDatabase *db)
 	g_assert(devices);
 
 	for (WacomDevice **d = devices; *d; d++) {
-		const int *styli;
+		const WacomStylus **styli;
 		int nstyli;
 
-		styli = libwacom_get_supported_styli(*d, &nstyli);
+		styli = libwacom_get_styli(*d, &nstyli);
 		for (int i = 0; i < nstyli; i++) {
-			const WacomStylus *stylus = libwacom_stylus_get_for_id (db, styli[i]);
-			g_hash_table_add(all, (gpointer)stylus);
+			g_hash_table_add(all, (gpointer)styli[i]);
 		}
+		g_free(styli);
 	}
 
 	all_styli = (const WacomStylus**)g_hash_table_get_keys_as_array(all, NULL);

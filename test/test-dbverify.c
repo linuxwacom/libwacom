@@ -179,7 +179,7 @@ duplicate_database(WacomDeviceDatabase *db, const char *dirname)
 		int fd;
 		char *path = NULL;
 		int nstyli;
-		const int *styli;
+		const WacomStylus **styli;
 
 		g_assert(asprintf(&path, "%s/%s.tablet", dirname,
 				libwacom_get_match(*device)) != -1);
@@ -193,20 +193,19 @@ duplicate_database(WacomDeviceDatabase *db, const char *dirname)
 		if (!libwacom_has_stylus(*device))
 			continue;
 
-		styli = libwacom_get_supported_styli(*device, &nstyli);
+		styli = libwacom_get_styli(*device, &nstyli);
 		for (i = 0; i < nstyli; i++) {
 			int fd_stylus;
-			const WacomStylus *stylus;
+			const WacomStylus *stylus = styli[i];
 
-			g_assert(asprintf(&path, "%s/%#x.stylus", dirname, styli[i]) != -1);
-			stylus = libwacom_stylus_get_for_id(db, styli[i]);
-			g_assert(stylus);
+			g_assert(asprintf(&path, "%s/%#x.stylus", dirname, libwacom_stylus_get_id(stylus)) != -1);
 			fd_stylus = open(path, O_WRONLY|O_CREAT, S_IRWXU);
 			g_assert(fd_stylus >= 0);
 			libwacom_print_stylus_description(fd_stylus, stylus);
 			close(fd_stylus);
 			free(path);
 		}
+		free(styli);
 	}
 
 	free(devices);

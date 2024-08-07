@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 import logging
 import pytest
 
-from . import WacomBuilder, WacomBustype, WacomDatabase, WacomDevice
+from . import WacomBuilder, WacomBustype, WacomDatabase, WacomDevice, WacomEraserType
 
 logger = logging.getLogger(__name__)
 
@@ -39,14 +39,14 @@ class StylusEntry:
 
     @classmethod
     def generic_pen(cls) -> "StylusEntry":
-        return cls(id="0xfffff", name="General Pen", paired_stylus_ids=["0xffffe"])
+        return cls(id="0x0:0xfffff", name="General Pen", paired_stylus_ids=["0x0:0xffffe"])
 
     @classmethod
     def generic_eraser(cls) -> "StylusEntry":
         return StylusEntry(
-            id="0xffffe",
+            id="0x0:0xffffe",
             name="General Pen Eraser",
-            paired_stylus_ids=["0xfffff"],
+            paired_stylus_ids=["0x0:0xfffff"],
             eraser_type="Invert",
         )
 
@@ -86,6 +86,7 @@ class TabletFile:
     layout: str = ""
     has_stylus: bool = True
     is_reversible: bool = False
+    styli: list[str] = field(default_factory=list)
 
     def write_to(self, filename):
         config = ConfigParser()
@@ -99,6 +100,9 @@ class TabletFile:
             "Class": self.klass,
             "Layout": self.layout,
         }
+        if self.styli:
+            config["Device"]["Styli"] = ";".join(self.styli)
+
         config["Features"] = {
             "Stylus": self.has_stylus,
             "Reversible": self.is_reversible,
@@ -521,3 +525,76 @@ def test_new_from_path_unknown_device(db, fallback):
         assert dev.name == name
         assert dev.vendor_id == 0
         assert dev.product_id == 0
+
+
+def test_nonwacom_stylus_ids(tmp_path):
+    styli = StylusFile.default()
+    s1 = StylusEntry(
+        id="0x1234:0xabcd",
+        name="ABC Pen",
+        group="notwacom",
+        paired_stylus_ids=["0x1234:0x9876"],
+    )
+    s2 = StylusEntry(
+        id="0x1234:0x9876",
+        name="9876 Pen",
+        group="notwacom",
+        paired_stylus_ids=["0x1234:0xabcd"],
+        eraser_type="Invert",
+    )
+    styli.entries.append(s1)
+    styli.entries.append(s2)
+    styli.write_to_dir(tmp_path)
+
+    # matches our nonwacom group
+    TabletFile(
+        name="ABC Group Tablet",
+        matches=["usb|9999|abcd"],
+        styli=["@notwacom"],
+    ).write_to(tmp_path / "group.tablet")
+
+    # matches one nonwacom styli and the default generic ones
+    TabletFile(
+        name="ABC Tablet",
+        matches=["usb|8888|abcd"],
+        styli=[s2.id, "@generic-with-eraser"],
+    ).write_to(tmp_path / "abc.tablet")
+
+    db = WacomDatabase(path=tmp_path)
+
+    builder = WacomBuilder.create(usbid=(0x9999, 0xABCD))
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "ABC Group Tablet"
+    styli = device.get_styli()
+    assert len(styli) == 2
+    assert styli[0].vendor_id == 0x1234
+    assert styli[1].vendor_id == 0x1234
+    # Order of styli is undefined
+    assert styli[0].tool_id == 0xABCD or styli[1].tool_id == 0xABCD
+    assert styli[0].tool_id == 0x9876 or styli[1].tool_id == 0x9876
+    assert sum(s.is_eraser for s in styli) == 1
+    for s in filter(lambda s: s.is_eraser, styli):
+        assert s.eraser_type == WacomEraserType.INVERT
+
+    assert sum(s.is_eraser is True for s in styli) == 1
+
+    paired0 = styli[0].get_paired_styli()
+    paired1 = styli[1].get_paired_styli()
+    assert len(paired0) == 1
+    assert len(paired1) == 1
+    assert paired0[0].vendor_id == styli[1].vendor_id
+    assert paired0[0].tool_id != styli[1].vendor_id
+    assert paired1[0].vendor_id == styli[0].vendor_id
+    assert paired1[0].tool_id != styli[0].vendor_id
+
+    builder = WacomBuilder.create(usbid=(0x8888, 0xABCD))
+    device = db.new_from_builder(builder)
+    assert device is not None
+    assert device.name == "ABC Tablet"
+    styli = device.get_styli()
+    assert len(styli) == 3  # 1 non-wacom, 2 generic ones
+    # Order of styli is undefined
+    assert sum(s.vendor_id == 0x1234 and s.tool_id == 0x9876 for s in styli) == 1
+    assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFE for s in styli) == 1
+    assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFF for s in styli) == 1

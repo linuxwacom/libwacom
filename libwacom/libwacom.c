@@ -419,7 +419,9 @@ libwacom_copy(const WacomDevice *device)
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
 	d->styli = g_array_copy(device->styli);
+	d->deprecated_styli_ids = g_array_copy(device->deprecated_styli_ids);
 	d->status_leds = g_array_copy(device->status_leds);
+
 	d->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 					   NULL, g_free);
 	g_hash_table_iter_init(&iter, device->buttons);
@@ -544,11 +546,23 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 	if (g_hash_table_size(a->buttons) != g_hash_table_size(b->buttons))
 		return 1;
 
+	/* We don't need to check deprecated_stylus_ids because if they differ
+	 * when the real id doesn't that's a bug */
+
 	if (a->styli->len != b->styli->len)
 		return 1;
 
-	if (memcmp(a->styli->data, b->styli->data, sizeof(int) * a->styli->len) != 0)
-		return 1;
+	/* This needs to be a deep comparison - our styli array contains
+	 * WacomStylus* pointers but we want libwacom_compare() to return
+	 * true if the stylus data matches (test-dbverify compares styli
+	 * from two different WacomDeviceDatabase).
+	 */
+	for (guint i = 0; i < a->styli->len; i++) {
+		WacomStylus *as = g_array_index(a->styli, WacomStylus*, i);
+		WacomStylus *bs = g_array_index(b->styli, WacomStylus*, i);
+		if (as->id.tool_id != bs->id.tool_id)
+			return 1;
+	}
 
 	if (a->status_leds->len != b->status_leds->len)
 		return 1;
@@ -849,7 +863,7 @@ libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomErr
 static void print_styli_for_device (int fd, const WacomDevice *device)
 {
 	int nstyli;
-	const int *styli;
+	const WacomStylus **styli;
 	int i;
 	unsigned idx = 0;
 	char buf[1024] = {0};
@@ -857,14 +871,18 @@ static void print_styli_for_device (int fd, const WacomDevice *device)
 	if (!libwacom_has_stylus(device))
 		return;
 
-	styli = libwacom_get_supported_styli(device, &nstyli);
-
+	styli = libwacom_get_styli(device, &nstyli);
 	for (i = 0; i < nstyli; i++) {
+		const WacomStylus *stylus = styli[i];
 		/* 20 digits for a stylus are enough, right */
 		assert(idx < sizeof(buf) - 20);
 
-		idx += snprintf(buf + idx, 20, "%#x;", styli[i]);
+		if (stylus->id.vid != WACOM_VENDOR_ID)
+			idx += snprintf(buf + idx, 20, "0x%04x:%#x;", stylus->id.vid, stylus->id.tool_id);
+		else
+			idx += snprintf(buf + idx, 20, "%#x;", stylus->id.tool_id);
 	}
+	g_free(styli);
 
 	dprintf(fd, "Styli=%s\n", buf);
 }
@@ -1112,6 +1130,7 @@ libwacom_unref(WacomDevice *device)
 	g_clear_pointer (&device->matches, g_array_unref);
 	libwacom_match_unref(device->match);
 	g_clear_pointer (&device->styli, g_array_unref);
+	g_clear_pointer (&device->deprecated_styli_ids, g_array_unref);
 	g_clear_pointer (&device->status_leds, g_array_unref);
 	g_clear_pointer (&device->buttons, g_hash_table_destroy);
 	g_free (device);
@@ -1373,8 +1392,23 @@ libwacom_get_num_keys(const WacomDevice *device)
 LIBWACOM_EXPORT const int *
 libwacom_get_supported_styli(const WacomDevice *device, int *num_styli)
 {
-	*num_styli = device->styli->len;
-	return (const int *)device->styli->data;
+	*num_styli = device->deprecated_styli_ids->len;
+	return (const int *)device->deprecated_styli_ids->data;
+}
+
+LIBWACOM_EXPORT const WacomStylus **
+libwacom_get_styli(const WacomDevice *device, int *num_styli)
+{
+	int count = device->styli->len;
+	const WacomStylus **styli = g_new0(const WacomStylus*, count + 1);
+
+	if (count > 0)
+		memcpy(styli, device->styli->data, count * sizeof(WacomStylus*));
+
+	if (num_styli)
+		*num_styli = count;
+
+	return styli;
 }
 
 LIBWACOM_EXPORT int
@@ -1534,16 +1568,34 @@ libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 	return b ? b->code : 0;
 }
 
-LIBWACOM_EXPORT const WacomStylus *
-libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
+static const WacomStylus *
+libwacom_stylus_get_for_stylus_id (const WacomDeviceDatabase *db,
+				   const WacomStylusId *id)
 {
-	return g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER(id));
+	return g_hash_table_lookup (db->stylus_ht, id);
+}
+
+LIBWACOM_EXPORT const WacomStylus *
+libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int tool_id)
+{
+	WacomStylusId id = {
+		.vid = WACOM_VENDOR_ID,
+		.tool_id = tool_id,
+	};
+
+	return libwacom_stylus_get_for_stylus_id (db, &id);
 }
 
 LIBWACOM_EXPORT int
 libwacom_stylus_get_id (const WacomStylus *stylus)
 {
-	return stylus->tool_id;
+	return stylus->id.tool_id;
+}
+
+LIBWACOM_EXPORT int
+libwacom_stylus_get_vendor_id (const WacomStylus *stylus)
+{
+	return stylus->id.vid;
 }
 
 LIBWACOM_EXPORT const char *
@@ -1556,15 +1608,29 @@ LIBWACOM_EXPORT const int *
 libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids)
 {
 	if (num_paired_ids)
-		*num_paired_ids = stylus->paired_ids->len;
-	return (const int*)stylus->paired_ids->data;
+		*num_paired_ids = stylus->deprecated_paired_ids->len;
+	return (const int*)stylus->deprecated_paired_ids->data;
+}
+
+LIBWACOM_EXPORT const WacomStylus **
+libwacom_stylus_get_paired_styli(const WacomStylus *stylus, int *num_paired)
+{
+	int count = stylus->paired_styli->len;
+	const WacomStylus **styli = g_new0(const WacomStylus*, count + 1);
+
+	if (num_paired)
+		*num_paired = count;
+
+	if (count > 0)
+		memcpy(styli, stylus->paired_styli->data, count * sizeof(WacomStylus*));
+	return styli;
 }
 
 LIBWACOM_EXPORT int
 libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 {
 	if (stylus->num_buttons == -1) {
-		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->tool_id);
+		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->id.tool_id);
 		return 2;
 	}
 	return stylus->num_buttons;
@@ -1604,7 +1670,7 @@ LIBWACOM_EXPORT WacomStylusType
 libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {
-		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->tool_id);
+		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->id.tool_id);
 		return WSTYLUS_GENERAL;
 	}
 	return stylus->type;
@@ -1621,17 +1687,25 @@ libwacom_print_stylus_description (int fd, const WacomStylus *stylus)
 {
 	const char *type;
 	WacomAxisTypeFlags axes;
-	const int *paired_ids;
+	const WacomStylus **paired;
 	int count;
 	int i;
 
-	dprintf(fd, "[%#x]\n",		libwacom_stylus_get_id(stylus));
+	if (libwacom_stylus_get_vendor_id(stylus) != WACOM_VENDOR_ID)
+		dprintf(fd, "[0x%x:%#x]\n", libwacom_stylus_get_vendor_id(stylus), libwacom_stylus_get_id(stylus));
+	else
+		dprintf(fd, "[%#x]\n", libwacom_stylus_get_id(stylus));
+
 	dprintf(fd, "Name=%s\n",	libwacom_stylus_get_name(stylus));
 	dprintf(fd, "PairedIds=");
-	paired_ids = libwacom_stylus_get_paired_ids(stylus, &count);
+	paired = libwacom_stylus_get_paired_styli(stylus, &count);
 	for (i = 0; i < count; i++) {
-		dprintf(fd, "%#x;", paired_ids[i]);
+		if (paired[i]->id.vid != 0x56a)
+			dprintf(fd, "%#04x:%#x;", paired[i]->id.vid, paired[i]->id.tool_id);
+		else
+			dprintf(fd, "%#x;", paired[i]->id.tool_id);
 	}
+	g_free(paired);
 	dprintf(fd, "\n");
 	switch (libwacom_stylus_get_eraser_type(stylus)) {
 		case WACOM_ERASER_UNKNOWN: type = "Unknown";       break;
@@ -1690,7 +1764,9 @@ libwacom_stylus_unref(WacomStylus *stylus)
 
 	g_free (stylus->name);
 	g_free (stylus->group);
-	g_clear_pointer (&stylus->paired_ids, g_array_unref);
+	g_clear_pointer (&stylus->deprecated_paired_ids, g_array_unref);
+	g_clear_pointer (&stylus->paired_stylus_ids, g_array_unref);
+	g_clear_pointer (&stylus->paired_styli, g_array_unref);
 	g_free (stylus);
 
 	return NULL;

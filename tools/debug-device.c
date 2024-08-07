@@ -230,7 +230,10 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 	{
 		int nstyli;
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		const int *styli = libwacom_get_supported_styli(device, &nstyli);
+		#pragma GCC diagnostic pop
 
 		{
 			char buf[1024] = {0};
@@ -239,14 +242,28 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 			func(libwacom_get_supported_styli, "[%s]", buf);
 		}
+	}
 
+	{
+		int nstyli;
+		const WacomStylus **styli = libwacom_get_styli(device, &nstyli);
+		{
+			char buf[1024] = {0};
+			for (int i = 0; i < nstyli; i++) {
+				const WacomStylus *s = styli[i];
+				snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s[0x%04x, 0x%06x]", i > 0 ? ", " : "",
+					 libwacom_stylus_get_vendor_id(s), libwacom_stylus_get_id(s));
+			}
+
+			func(libwacom_get_styli, "[%s]", buf);
+		}
 
 		if (with_styli) {
 			printf("\n---------- Listing styli for this device ----------\n");
 
 			for (int i = 0; i < nstyli; i++) {
-				int id = styli[i];
-				const WacomStylus *stylus = libwacom_stylus_get_for_id (db, id);
+				const WacomStylus *stylus = styli[i];
+				int id = libwacom_stylus_get_id(stylus);
 
 				ip("%s\n", "{");
 				push();
@@ -261,11 +278,29 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				{
 					char buf[1024] = {0};
 					int npaired;
+					#pragma GCC diagnostic push
+					#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 					const int *paired = libwacom_stylus_get_paired_ids(stylus, &npaired);
+					#pragma GCC diagnostic pop
 
 					for (int i = 0; i < npaired; i++)
 						snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s0x%06x", i > 0 ? ", " : "", paired[i]);
 					func_arg(libwacom_stylus_get_paired_ids, "0x%04x", id, "[%s]", buf);
+				}
+
+				{
+					char buf[1024] = {0};
+					int npaired;
+					const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
+
+					for (int i = 0; i < npaired; i++) {
+						const WacomStylus *p = paired[i];
+						snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s[0x%04x, 0x%06x]", i > 0 ? ", " : "",
+							 libwacom_stylus_get_vendor_id(p), libwacom_stylus_get_id(p));
+					}
+					func_arg(libwacom_stylus_get_paired_ids, "0x%04x", id, "[%s]", buf);
+
+					g_clear_pointer(&paired, g_free);
 				}
 
 				{
@@ -312,6 +347,8 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				ip("%s\n", "}");
 			}
 		}
+
+		g_clear_pointer(&styli, g_free);
 	}
 
 	libwacom_destroy(device);

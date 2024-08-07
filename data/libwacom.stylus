@@ -1,22 +1,22 @@
 # Some generic fallback styli
-[0xfffff]
+[0x0:0xfffff]
 Name=General Pen
 Group=generic-with-eraser
-PairedStylusIds=0xffffe;
+PairedStylusIds=0x0:0xffffe;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0xffffe]
+[0x0:0xffffe]
 Name=General Pen Eraser
 Group=generic-with-eraser
-PairedStylusIds=0xfffff;
+PairedStylusIds=0x0:0xfffff;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0xffffd]
+[0x0:0xffffd]
 Name=General Pen with no Eraser
 Group=generic-no-eraser
 Buttons=2

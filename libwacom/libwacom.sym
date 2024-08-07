@@ -88,3 +88,9 @@ LIBWACOM_2.12 {
     libwacom_builder_set_usbid;
     libwacom_new_from_builder;
 } LIBWACOM_2.9;
+
+LIBWACOM_2.14 {
+    libwacom_get_styli;
+    libwacom_stylus_get_paired_styli;
+    libwacom_stylus_get_vendor_id;
+} LIBWACOM_2.12;

@@ -40,6 +40,7 @@
 
 #define GENERIC_DEVICE_MATCH "generic"
 #define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1U)
+#define WACOM_VENDOR_ID 0x056a
 
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
@@ -107,7 +108,10 @@ struct _WacomDevice {
 	int ring_num_modes;
 	int ring2_num_modes;
 
-	GArray *styli;
+	/* for libwacom_get_supported_styli() */
+	GArray *deprecated_styli_ids; /* int */
+	/* for libwacom_get_styli() */
+	GArray *styli; /* WacomStylus* */
 	GHashTable *buttons; /* 'A' : WacomButton */
 	WacomKeycode keycodes[32];
 	size_t num_keycodes;
@@ -119,14 +123,21 @@ struct _WacomDevice {
 	gint refcnt; /* for the db hashtable */
 };
 
+typedef struct _WacomStylusId {
+	unsigned int vid;
+	unsigned int tool_id;
+} WacomStylusId;
+
 struct _WacomStylus {
 	gint refcnt;
-	int tool_id;
+	WacomStylusId id;
 	char *name;
 	char *group;
 	int num_buttons;
 	gboolean has_eraser;
-	GArray *paired_ids;
+	GArray *paired_styli; /* [WacomStylus*, ...] */
+	GArray *deprecated_paired_ids; /* [int, ...] */
+	GArray *paired_stylus_ids; /* [WacomStylusId, ...], NULL once parsing is complete */
 	WacomEraserType eraser_type;
 	gboolean has_lens;
 	gboolean has_wheel;
@@ -136,7 +147,7 @@ struct _WacomStylus {
 
 struct _WacomDeviceDatabase {
 	GHashTable *device_ht; /* key = DeviceMatch (str), value = WacomDeviceData * */
-	GHashTable *stylus_ht; /* key = ID (int), value = WacomStylus * */
+	GHashTable *stylus_ht; /* key = WacomStylusId, value = WacomStylus * */
 };
 
 struct _WacomError {

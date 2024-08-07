@@ -116,14 +116,13 @@ print_devnode(gpointer data, gpointer user_data)
 static void
 tablet_print_yaml(gpointer data, gpointer user_data)
 {
-	WacomDeviceDatabase *db = user_data;
 	struct tablet *d = data;
 	const char *name = libwacom_get_name(d->dev);
 	const char *bus = "unknown";
 	int vid = libwacom_get_vendor_id(d->dev);
 	int pid = libwacom_get_product_id(d->dev);
 	WacomBusType bustype = libwacom_get_bustype(d->dev);
-	const int *styli;
+	const WacomStylus **styli;
 	int nstyli;
 
 	switch (bustype) {
@@ -142,10 +141,10 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 	printf("  nodes: \n");
 	g_list_foreach(d->nodes, print_devnode, NULL);
 
-	styli = libwacom_get_supported_styli(d->dev, &nstyli);
+	styli = libwacom_get_styli(d->dev, &nstyli);
 	printf("  styli:%s\n", nstyli > 0 ? "" : "[]");
 	for (int i = 0; i < nstyli; i++) {
-		const WacomStylus *stylus = libwacom_stylus_get_for_id(db, styli[i]);
+		const WacomStylus *stylus = styli[i];
 		const char *type = "invalid";
 		WacomAxisTypeFlags axes = libwacom_stylus_get_axes(stylus);
 		WacomEraserType eraser_type = libwacom_stylus_get_eraser_type(stylus);
@@ -192,14 +191,18 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 			printf("     erasers: [");
 			if (libwacom_stylus_has_eraser(stylus)) {
 				int npaired;
-				const int *paired = libwacom_stylus_get_paired_ids(stylus, &npaired);
-				for (int j = 0; j < npaired; j++)
-					printf("%s0x%x", j == 0 ? "" : ", ", paired[j]);
+				const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
+				for (int j = 0; j < npaired; j++) {
+					const WacomStylus *p = paired[j];
+					printf("%s0x%x", j == 0 ? "" : ", ", libwacom_stylus_get_id(p));
+				}
+				g_free(paired);
 			}
 			printf("]\n");
 		}
 
 	}
+	g_free(styli);
 }
 
 static void

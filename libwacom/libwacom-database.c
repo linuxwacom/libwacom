@@ -253,6 +253,32 @@ libwacom_matchstr_to_paired(WacomDevice *device, const char *matchstr)
 	return TRUE;
 }
 
+static bool
+parse_stylus_id(const char *str, WacomStylusId *id)
+{
+	char **tokens = g_strsplit(str, ":", 2);
+	const char *vidstr, *tidstr;
+	int vid, tool_id;
+	bool ret = false;
+
+	if (tokens[1] == NULL) {
+		vidstr = G_STRINGIFY(WACOM_VENDOR_ID);
+		tidstr = tokens[0];
+	} else {
+		vidstr = tokens[0];
+		tidstr = tokens[1];
+	}
+
+	if (safe_atoi_base (vidstr, &vid, 16) && safe_atoi_base (tidstr, &tool_id, 16)) {
+		id->vid = vid;
+		id->tool_id = tool_id;
+		ret = true;
+	}
+	g_clear_pointer(&tokens, g_strfreev);
+
+	return ret;
+}
+
 static void
 libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 {
@@ -266,36 +292,41 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 	rc = g_key_file_load_from_file(keyfile, path, G_KEY_FILE_NONE, &error);
 	g_assert (rc);
+
 	groups = g_key_file_get_groups (keyfile, NULL);
 	for (i = 0; groups[i]; i++) {
 		WacomStylus *stylus;
+		WacomStylusId id;
 		GError *error = NULL;
 		char *eraser_type, *type;
-		int tool_id;
 		char **string_list;
 
-		if (!safe_atoi_base (groups[i], &tool_id, 16)) {
+		if (!parse_stylus_id(groups[i], &id)) {
 			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
 			continue;
 		}
-
 		stylus = g_new0 (WacomStylus, 1);
 		stylus->refcnt = 1;
-		stylus->tool_id = tool_id;
+		stylus->id = id;
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
+		stylus->paired_stylus_ids = g_array_new (FALSE, FALSE, sizeof(WacomStylusId));
 
 		eraser_type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
 		stylus->eraser_type = eraser_type_from_str (eraser_type);
 		g_clear_pointer(&eraser_type, g_free);
 
-		stylus->paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
+		/* We have to keep the integer array for libwacom_get_supported_styli() */
+		stylus->deprecated_paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
+		stylus->paired_styli = g_array_new (FALSE, FALSE, sizeof(WacomStylus*));
+
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
 		for (guint j = 0; string_list && string_list[j]; j++) {
-			int val;
-
-			if (safe_atoi_base (string_list[j], &val, 16)) {
-				g_array_append_val (stylus->paired_ids, val);
+			WacomStylusId paired_id;
+			if (parse_stylus_id(string_list[j], &paired_id)) {
+				g_array_append_val (stylus->paired_stylus_ids, paired_id);
+				if (paired_id.vid == WACOM_VENDOR_ID)
+					g_array_append_val (stylus->deprecated_paired_ids, paired_id.tool_id);
 			} else {
 				g_warning ("Stylus %s (%s) Ignoring invalid PairedStylusIds value\n", stylus->name, groups[i]);
 			}
@@ -346,10 +377,10 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->type = type_from_str (type);
 		g_clear_pointer(&type, g_free);
 
-		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (tool_id)) != NULL)
-			g_warning ("Duplicate definition for stylus ID '%#x'", tool_id);
+		if (g_hash_table_lookup (db->stylus_ht, &id) != NULL)
+			g_warning ("Duplicate definition for stylus ID '%s'", groups[i]);
 
-		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (tool_id), stylus);
+		g_hash_table_insert (db->stylus_ht, g_memdup2(&id, sizeof(id)), stylus);
 	}
 	g_clear_pointer(&groups, g_strfreev);
 	g_clear_pointer(&keyfile, g_key_file_free);
@@ -364,23 +395,24 @@ libwacom_setup_paired_attributes(WacomDeviceDatabase *db)
 	g_hash_table_iter_init(&iter, db->stylus_ht);
 	while (g_hash_table_iter_next (&iter, &key, &value)) {
 		WacomStylus *stylus = value;
-		const int* ids;
-		int count;
-		int i;
+		GArray *paired_ids = g_steal_pointer(&stylus->paired_stylus_ids);
 
-		ids = libwacom_stylus_get_paired_ids(stylus, &count);
-		for (i = 0; i < count; i++) {
-			const WacomStylus *pair;
+		for (guint i = 0; i < paired_ids->len; i++) {
+			WacomStylusId *id = &g_array_index(paired_ids, WacomStylusId, i);
+			WacomStylus *paired = g_hash_table_lookup(db->stylus_ht, id);
 
-			pair = libwacom_stylus_get_for_id(db, ids[i]);
-			if (pair == NULL) {
-				g_warning("Paired stylus '0x%x' not found, ignoring.", ids[i]);
+			if (paired == NULL) {
+				g_warning ("Invalid paired stylus %04x:%x", id->vid, id->tool_id);
 				continue;
 			}
-			if (libwacom_stylus_is_eraser(pair)) {
+
+			g_array_append_val(stylus->paired_styli, paired);
+
+			if (libwacom_stylus_is_eraser(paired)) {
 				stylus->has_eraser = true;
 			}
 		}
+		g_array_unref(paired_ids);
 	}
 }
 
@@ -688,12 +720,21 @@ libwacom_parse_keys(WacomDevice *device,
 	libwacom_parse_key_codes(device, keyfile);
 }
 
+static int
+wacom_stylus_id_sort(const WacomStylusId *a, const WacomStylusId *b)
+{
+	if (a->vid == b->vid)
+		return a->tool_id - b->tool_id;
+
+	return a->vid - b->vid;
+}
 
 static int
 styli_id_sort(gconstpointer pa, gconstpointer pb)
 {
-	const int *a = pa, *b = pb;
-	return *a > *b ? 1 : *a == *b ? 0 : -1;
+	const WacomStylus *a = *(WacomStylus**)pa, *b = *(WacomStylus**)pb;
+
+	return wacom_stylus_id_sort(&a->id, &b->id);
 }
 
 static void
@@ -703,17 +744,23 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	GArray *array;
 	guint i;
 
-	array = g_array_new (FALSE, FALSE, sizeof(int));
+	array = g_array_new (FALSE, FALSE, sizeof(WacomStylus*));
 	for (i = 0; ids[i]; i++) {
-		const char *id = ids[i];
+		const char *str = ids[i];
 
-		if (g_str_has_prefix(id, "0x")) {
-			int int_value;
-			if (safe_atoi_base (ids[i], &int_value, 16)) {
-				g_array_append_val (array, int_value);
+		if (g_str_has_prefix(str, "0x")) {
+			WacomStylusId id;
+			if (parse_stylus_id(str, &id)) {
+				WacomStylus *stylus = g_hash_table_lookup(db->stylus_ht, &id);
+				if (stylus)
+					g_array_append_val (array, stylus);
+				else
+					g_warning ("Invalid stylus id for '%s'!", str);
+			} else {
+				g_warning ("Invalid stylus id format for '%s'!", str);
 			}
-		} else if (g_str_has_prefix(id, "@")) {
-			const char *group = &id[1];
+		} else if (g_str_has_prefix(str, "@")) {
+			const char *group = &str[1];
 			GHashTableIter iter;
 			gpointer key, value;
 
@@ -721,17 +768,27 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 			while (g_hash_table_iter_next (&iter, &key, &value)) {
 				WacomStylus *stylus = value;
 				if (stylus->group && g_str_equal(group, stylus->group)) {
-					g_array_append_val (array, stylus->tool_id);
+					g_array_append_val (array, stylus);
 				}
 			}
 		} else {
-			g_warning ("Invalid prefix for '%s'!", id);
+			g_warning ("Invalid prefix for '%s'!", str);
 		}
 	}
 	/* Using groups means we don't get the styli in ascending order.
 	   Sort it so the output is predictable */
 	g_array_sort(array, styli_id_sort);
 	device->styli = array;
+
+	/* The legacy PID-only stylus id list */
+	device->deprecated_styli_ids = g_array_new(FALSE, FALSE, sizeof(int));
+	for (guint i = 0; i < device->styli->len; i++) {
+		WacomStylus *stylus = g_array_index(device->styli, WacomStylus*, i);
+		/* This only ever worked for Wacom styli, so let's keep that behavior */
+		if (stylus->id.vid == 0 || stylus->id.vid == WACOM_VENDOR_ID) {
+			g_array_append_val(device->deprecated_styli_ids, stylus->id.tool_id);
+		}
+	}
 }
 
 static void
@@ -890,8 +947,8 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (!string_list) {
 		string_list = g_new0(char*, 3);
-		string_list[0] = g_strdup_printf("0x%x", WACOM_ERASER_FALLBACK_ID);
-		string_list[1] = g_strdup_printf("0x%x", WACOM_STYLUS_FALLBACK_ID);
+		string_list[0] = g_strdup_printf("0x0:0x%x", WACOM_ERASER_FALLBACK_ID);
+		string_list[1] = g_strdup_printf("0x0:0x%x", WACOM_STYLUS_FALLBACK_ID);
 	}
 	libwacom_parse_styli_list(db, device, string_list);
 	g_strfreev (string_list);
@@ -1060,6 +1117,19 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 	return true;
 }
 
+static guint
+stylus_hash(WacomStylusId *id)
+{
+	guint64 full_id = (guint64)id->vid << 32 | id->tool_id;
+	return g_int64_hash(&full_id);
+}
+
+static gboolean
+stylus_compare(WacomStylusId *a, WacomStylusId *b)
+{
+	return wacom_stylus_id_sort(a, b) == 0;
+}
+
 static WacomDeviceDatabase *
 database_new_for_paths (size_t npaths, const char **datadirs)
 {
@@ -1072,9 +1142,9 @@ database_new_for_paths (size_t npaths, const char **datadirs)
 					       g_str_equal,
 					       g_free,
 					       (GDestroyNotify) libwacom_destroy);
-	db->stylus_ht = g_hash_table_new_full (g_direct_hash,
-					       g_direct_equal,
-					       NULL,
+	db->stylus_ht = g_hash_table_new_full ((GHashFunc)stylus_hash,
+					       (GEqualFunc)stylus_compare,
+					       (GDestroyNotify) g_free,
 					       (GDestroyNotify) stylus_destroy);
 
 	for (datadir = datadirs, n = npaths; n--; datadir++) {

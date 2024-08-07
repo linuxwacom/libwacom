@@ -199,6 +199,11 @@ class LibWacom:
             args=(c_void_p, c_void_p),
             return_type=c_void_p,
         ),
+        _Api(
+            name="libwacom_get_styli",
+            args=(c_void_p, c_void_p),
+            return_type=ctypes.POINTER(c_void_p),
+        ),
         _Api(name="libwacom_has_ring", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_has_ring2", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_get_num_rings", args=(c_void_p,), return_type=c_int),
@@ -240,6 +245,7 @@ class LibWacom:
             return_type=c_void_p,
         ),
         _Api(name="libwacom_stylus_get_id", args=(c_void_p,), return_type=c_int),
+        _Api(name="libwacom_stylus_get_vendor_id", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_stylus_get_name", args=(c_void_p,), return_type=c_char_p),
         _Api(
             name="libwacom_stylus_get_paired_ids",
@@ -257,6 +263,11 @@ class LibWacom:
         _Api(name="libwacom_stylus_get_type", args=(c_void_p,), return_type=c_int),
         _Api(
             name="libwacom_stylus_get_eraser_type", args=(c_void_p,), return_type=c_int
+        ),
+        _Api(
+            name="libwacom_stylus_get_paired_styli",
+            args=(c_void_p, c_void_p),
+            return_type=ctypes.POINTER(c_void_p),
         ),
         _Api(
             name="libwacom_print_stylus_description",
@@ -524,6 +535,87 @@ class WacomBuilder:
         lib.builder_destroy(self.builder)
 
 
+class WacomStylusType(enum.IntEnum):
+    UNKNOWN = 0
+    GENERAL = 1
+    INKING = 2
+    AIRBRUSH = 3
+    CLASSIC = 4
+    MARKER = 5
+    STROKE = 6
+    PUCK = 7
+    THREED = 8
+    MOBILE = 9
+
+
+class WacomEraserType(enum.IntEnum):
+    UNKNOWN = 0
+    NONE = 1
+    INVERT = 2
+    BUTTON = 3
+
+
+class WacomStylus:
+    def __init__(self, stylus):
+        self.stylus = stylus
+        lib = LibWacom.instance()
+
+        def wrapper(func):
+            return lambda *args, **kwargs: func(self.stylus, *args, **kwargs)
+
+        # Map all device-specifice accessors into respective functions
+        for api in lib._api_prototypes:
+            allowlist = ["stylus"]
+            if any(api.basename.startswith(n) for n in allowlist):
+                denylist = ["stylus_get_paired_styli", "stylus_is_eraser"]
+                if all(not api.basename.startswith(n) for n in denylist):
+                    func = getattr(lib, api.basename)
+                    setattr(self, api.basename.removeprefix("stylus_"), wrapper(func))
+
+    @property
+    def name(self):
+        return self.get_name().decode("utf-8")
+
+    @property
+    def group(self):
+        return self.get_group().decode("utf-8")
+
+    @property
+    def tool_id(self) -> int:
+        return self.get_id()
+
+    @property
+    def vendor_id(self) -> int:
+        return self.get_vendor_id()
+
+    @property
+    def num_buttons(self) -> int:
+        return self.get_num_buttons()
+
+    @property
+    def is_eraser(self) -> bool:
+        lib = LibWacom.instance()
+        return lib.stylus_is_eraser(self.stylus) != 0
+
+    @property
+    def stylus_type(self) -> WacomEraserType:
+        return WacomEraserType(self.get_eraser_type())
+
+    @property
+    def eraser_type(self) -> WacomEraserType:
+        return WacomEraserType(self.get_eraser_type())
+
+    def get_paired_styli(self) -> List["WacomStylus"]:
+        lib = LibWacom.instance()
+        paired = lib.stylus_get_paired_styli(self.stylus, None)
+        styli = [
+            WacomStylus(p)
+            for p in itertools.takewhile(lambda ptr: ptr is not None, paired)
+        ]
+        GlibC.instance().free(paired)
+        return styli
+
+
 class WacomDevice:
     """
     Convenience wrapper to make using libwacom a bit more pythonic.
@@ -571,7 +663,7 @@ class WacomDevice:
         for api in lib._api_prototypes:
             allowlist = ["get_", "is_", "has_"]
             if any(api.basename.startswith(n) for n in allowlist):
-                denylist = ["get_paired_device", "get_matches"]
+                denylist = ["get_paired_device", "get_matches", "get_styli"]
                 if all(not api.basename.startswith(n) for n in denylist):
                     func = getattr(lib, api.basename)
                     setattr(self, api.basename, wrapper(func))
@@ -593,6 +685,15 @@ class WacomDevice:
         return [
             WacomMatch(m)
             for m in itertools.takewhile(lambda ptr: ptr is not None, matches)
+        ]
+
+    def get_styli(self) -> List[WacomStylus]:
+        lib = LibWacom.instance()
+        styli = lib.get_styli(self.device, None)
+
+        return [
+            WacomStylus(m)
+            for m in itertools.takewhile(lambda ptr: ptr is not None, styli)
         ]
 
     def __del__(self):

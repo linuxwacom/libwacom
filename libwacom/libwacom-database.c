@@ -271,17 +271,17 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		WacomStylus *stylus;
 		GError *error = NULL;
 		char *eraser_type, *type;
-		int id;
+		int tool_id;
 		char **string_list;
 
-		if (!safe_atoi_base (groups[i], &id, 16)) {
+		if (!safe_atoi_base (groups[i], &tool_id, 16)) {
 			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
 			continue;
 		}
 
 		stylus = g_new0 (WacomStylus, 1);
 		stylus->refcnt = 1;
-		stylus->id = id;
+		stylus->tool_id = tool_id;
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
 
@@ -346,10 +346,10 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->type = type_from_str (type);
 		g_clear_pointer(&type, g_free);
 
-		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (id)) != NULL)
-			g_warning ("Duplicate definition for stylus ID '%#x'", id);
+		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (tool_id)) != NULL)
+			g_warning ("Duplicate definition for stylus ID '%#x'", tool_id);
 
-		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
+		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (tool_id), stylus);
 	}
 	g_clear_pointer(&groups, g_strfreev);
 	g_clear_pointer(&keyfile, g_key_file_free);
@@ -721,7 +721,7 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 			while (g_hash_table_iter_next (&iter, &key, &value)) {
 				WacomStylus *stylus = value;
 				if (stylus->group && g_str_equal(group, stylus->group)) {
-					g_array_append_val (array, stylus->id);
+					g_array_append_val (array, stylus->tool_id);
 				}
 			}
 		} else {

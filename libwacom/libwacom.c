@@ -1543,7 +1543,7 @@ libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id)
 LIBWACOM_EXPORT int
 libwacom_stylus_get_id (const WacomStylus *stylus)
 {
-	return stylus->id;
+	return stylus->tool_id;
 }
 
 LIBWACOM_EXPORT const char *
@@ -1564,7 +1564,7 @@ LIBWACOM_EXPORT int
 libwacom_stylus_get_num_buttons (const WacomStylus *stylus)
 {
 	if (stylus->num_buttons == -1) {
-		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->id);
+		g_warning ("Stylus '0x%x' has no number of buttons defined, falling back to 2", stylus->tool_id);
 		return 2;
 	}
 	return stylus->num_buttons;
@@ -1604,7 +1604,7 @@ LIBWACOM_EXPORT WacomStylusType
 libwacom_stylus_get_type (const WacomStylus *stylus)
 {
 	if (stylus->type == WSTYLUS_UNKNOWN) {
-		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->id);
+		g_warning ("Stylus '0x%x' has no type defined, falling back to 'General'", stylus->tool_id);
 		return WSTYLUS_GENERAL;
 	}
 	return stylus->type;

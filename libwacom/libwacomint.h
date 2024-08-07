@@ -121,7 +121,7 @@ struct _WacomDevice {
 
 struct _WacomStylus {
 	gint refcnt;
-	int id;
+	int tool_id;
 	char *name;
 	char *group;
 	int num_buttons;

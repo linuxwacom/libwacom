@@ -33,7 +33,7 @@ DeviceMatch=usb|056a|03c4
 Width=15
 Height=8
 Layout=wacom-cintiq-pro-17.svg
-Styli=@cintiqpro2022;@mobilestudio;@propengen2;
+Styli=@propen3;@mobilestudio;@propengen2;
 IntegratedIn=Display
 
 [Features]

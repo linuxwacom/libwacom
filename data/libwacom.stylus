@@ -298,7 +298,16 @@ Type=General
 [0x200]
 # Cintiq Pro 2022
 Name=Pro Pen 3
-Group=cintiqpro2022
+Group=propen3
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x202]
+# Wacom Movink 13
+Name=Pro Pen 3E
+Group=propen3
+PairedStylusIds=0x20a;
 Buttons=3
 Axes=Tilt;Pressure;Distance;
 Type=General
@@ -453,6 +462,16 @@ Group=mobilestudio
 PairedStylusIds=0x842;
 EraserType=Invert
 Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x20A]
+# Wacom Movink 13
+Name=Pro Pen 3E Eraser
+Group=propen3
+PairedStylusIds=0x202;
+EraserType=Invert
+Buttons=3
 Axes=Tilt;Pressure;Distance;
 Type=General
 

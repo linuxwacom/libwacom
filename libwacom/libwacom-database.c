@@ -900,16 +900,13 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	g_free(class);
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
-	if (string_list) {
-		libwacom_parse_styli_list(db, device, string_list);
-		g_strfreev (string_list);
-	} else {
-		int fallback_eraser = WACOM_ERASER_FALLBACK_ID;
-		int fallback_stylus = WACOM_STYLUS_FALLBACK_ID;
-		device->styli = g_array_new(FALSE, FALSE, sizeof(int));
-		g_array_append_val(device->styli, fallback_eraser);
-		g_array_append_val(device->styli, fallback_stylus);
+	if (!string_list) {
+		string_list = g_new0(char*, 3);
+		string_list[0] = g_strdup_printf("0x%x", WACOM_ERASER_FALLBACK_ID);
+		string_list[1] = g_strdup_printf("0x%x", WACOM_STYLUS_FALLBACK_ID);
 	}
+	libwacom_parse_styli_list(db, device, string_list);
+	g_strfreev (string_list);
 
 	device->num_strips = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumStrips", NULL);
 	device->num_dials = g_key_file_get_integer(keyfile, FEATURES_GROUP, "NumDials", NULL);

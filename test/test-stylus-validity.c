@@ -445,10 +445,8 @@ static const WacomStylus **
 assemble_styli(WacomDeviceDatabase *db)
 {
 	WacomDevice **devices = libwacom_list_devices_from_database(db, NULL);
-	const WacomStylus **styli;
-	int *ids = NULL;
-	int nids = 0;
-	int sz = 0;
+	GHashTable *all = g_hash_table_new(g_direct_hash, g_direct_equal);
+	const WacomStylus **all_styli = NULL;
 
 	g_assert(devices);
 
@@ -457,39 +455,18 @@ assemble_styli(WacomDeviceDatabase *db)
 		int nstyli;
 
 		styli = libwacom_get_supported_styli(*d, &nstyli);
-
-		/* Make sure our array is large enough to accommodate for
-		   all new styli. Simpler than reallocing after every entry */
-		if (nstyli > sz - nids) {
-			sz = nids + nstyli;
-			ids = realloc(ids, sz * sizeof(*ids));
-			g_assert(ids);
-		}
-
-		/* For each stylus in the current device, add it to ids[] if
-		   it's not already in there */
 		for (int i = 0; i < nstyli; i++) {
-			gboolean found = FALSE;
-
-			for (int j = 0; j < nids && !found; j++) {
-				if (ids[j] == styli[i])
-					found = TRUE;
-			}
-
-			if (!found)
-				ids[nids++] = styli[i];
+			const WacomStylus *stylus = libwacom_stylus_get_for_id (db, styli[i]);
+			g_hash_table_add(all, (gpointer)stylus);
 		}
 	}
 
-	styli = calloc(nids + 1, sizeof(*styli));
-	for (int i = 0; i < nids; i++) {
-		styli[i] = libwacom_stylus_get_for_id (db, ids[i]);
-		g_assert(styli[i]);
-	}
+	all_styli = (const WacomStylus**)g_hash_table_get_keys_as_array(all, NULL);
+	g_hash_table_steal_all(all);
+	g_clear_pointer(&all, g_hash_table_unref);
+	g_clear_pointer(&devices, g_free);
 
-	free(devices);
-	free(ids);
-	return styli;
+	return all_styli;
 }
 
 static WacomDeviceDatabase *

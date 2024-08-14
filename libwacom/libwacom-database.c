@@ -289,23 +289,18 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->eraser_type = eraser_type_from_str (eraser_type);
 		g_clear_pointer(&eraser_type, g_free);
 
-		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
 		stylus->paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
-		if (string_list) {
-			guint j;
+		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+		for (guint j = 0; string_list && string_list[j]; j++) {
+			int val;
 
-			for (j = 0; string_list[j]; j++) {
-				int val;
-
-				if (safe_atoi_base (string_list[j], &val, 16)) {
-					g_array_append_val (stylus->paired_ids, val);
-				} else {
-					g_warning ("Stylus %s (%s) Ignoring invalid PairedStylusIds value\n", stylus->name, groups[i]);
-				}
+			if (safe_atoi_base (string_list[j], &val, 16)) {
+				g_array_append_val (stylus->paired_ids, val);
+			} else {
+				g_warning ("Stylus %s (%s) Ignoring invalid PairedStylusIds value\n", stylus->name, groups[i]);
 			}
-
-			g_strfreev (string_list);
 		}
+		g_clear_pointer(&string_list, g_strfreev);
 
 		stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
@@ -322,36 +317,30 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 			g_clear_error (&error);
 		}
 
+		stylus->axes = WACOM_AXIS_TYPE_NONE;
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "Axes", NULL, NULL);
-		if (string_list) {
-			WacomAxisTypeFlags axes = WACOM_AXIS_TYPE_NONE;
-			guint j;
-
-			for (j = 0; string_list[j]; j++) {
-				WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
-				if (g_str_equal(string_list[j], "Tilt")) {
-					flag = WACOM_AXIS_TYPE_TILT;
-				} else if (g_str_equal(string_list[j], "RotationZ")) {
-					flag = WACOM_AXIS_TYPE_ROTATION_Z;
-				} else if (g_str_equal(string_list[j], "Distance")) {
-					flag = WACOM_AXIS_TYPE_DISTANCE;
-				} else if (g_str_equal(string_list[j], "Pressure")) {
-					flag = WACOM_AXIS_TYPE_PRESSURE;
-				} else if (g_str_equal(string_list[j], "Slider")) {
-					flag = WACOM_AXIS_TYPE_SLIDER;
-				} else {
-					g_warning ("Invalid axis %s for stylus ID %s\n",
-						   string_list[j], groups[i]);
-				}
-				if (axes & flag)
-					g_warning ("Duplicate axis %s for stylus ID %s\n",
-						   string_list[j], groups[i]);
-				axes |= flag;
+		for (guint j = 0; string_list && string_list[j]; j++) {
+			WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
+			if (g_str_equal(string_list[j], "Tilt")) {
+				flag = WACOM_AXIS_TYPE_TILT;
+			} else if (g_str_equal(string_list[j], "RotationZ")) {
+				flag = WACOM_AXIS_TYPE_ROTATION_Z;
+			} else if (g_str_equal(string_list[j], "Distance")) {
+				flag = WACOM_AXIS_TYPE_DISTANCE;
+			} else if (g_str_equal(string_list[j], "Pressure")) {
+				flag = WACOM_AXIS_TYPE_PRESSURE;
+			} else if (g_str_equal(string_list[j], "Slider")) {
+				flag = WACOM_AXIS_TYPE_SLIDER;
+			} else {
+				g_warning ("Invalid axis %s for stylus ID %s\n",
+					   string_list[j], groups[i]);
 			}
-
-			stylus->axes = axes;
-			g_strfreev (string_list);
+			if (stylus->axes & flag)
+				g_warning ("Duplicate axis %s for stylus ID %s\n",
+					   string_list[j], groups[i]);
+			stylus->axes |= flag;
 		}
+		g_clear_pointer(&string_list, g_strfreev);
 
 		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);
 		stylus->type = type_from_str (type);

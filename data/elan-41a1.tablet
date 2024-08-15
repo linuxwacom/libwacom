@@ -1,0 +1,20 @@
+# ELAN touchscreen/pen sensor present in the ASUS ZenBook Pro Duo UX8402V
+# this is the main / top touchscreen
+# 310 x 194mm
+# 12.20in x 7.64in
+#
+# sysinfo.pBLxbOD8HZ.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/400
+
+[Device]
+Name=ELAN 41A1
+ModelName=
+DeviceMatch=i2c:04f3:41a1
+Class=ISDV4
+Width=14
+Height=8
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true

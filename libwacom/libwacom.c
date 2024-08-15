@@ -400,12 +400,10 @@ libwacom_copy(const WacomDevice *device)
 	d->height = device->height;
 	d->integration_flags = device->integration_flags;
 	d->layout = g_strdup(device->layout);
-	d->matches = g_array_sized_new(TRUE, TRUE, sizeof(WacomDevice*),
-				       device->matches->len);
+	d->matches = g_array_copy(device->matches);
 	for (guint i = 0; i < device->matches->len; i++) {
-		WacomMatch *m = g_array_index(device->matches, WacomMatch*, i);
+		WacomMatch *m = g_array_index(d->matches, WacomMatch*, i);
 		libwacom_match_ref(m);
-		g_array_append_val(d->matches, m);
 	}
 	d->match = libwacom_match_ref(device->match);
 	if (device->paired)
@@ -420,20 +418,8 @@ libwacom_copy(const WacomDevice *device)
 	d->dial2_num_modes = device->dial2_num_modes;
 	d->ring_num_modes = device->ring_num_modes;
 	d->ring2_num_modes = device->ring2_num_modes;
-	d->styli = g_array_sized_new(FALSE, FALSE, sizeof(int),
-				     device->styli->len);
-	for (guint i = 0; i < device->styli->len; i++) {
-		int id = g_array_index(device->styli, int, i);
-		g_array_append_val(d->styli, id);
-	}
-	d->status_leds = g_array_sized_new(FALSE, FALSE,
-					   sizeof(WacomStatusLEDs),
-					   device->status_leds->len);
-	for (guint i = 0; i < device->status_leds->len; i++) {
-		g_array_append_val(d->status_leds,
-				   g_array_index(device->status_leds, WacomStatusLEDs, i));
-	}
-
+	d->styli = g_array_copy(device->styli);
+	d->status_leds = g_array_copy(device->status_leds);
 	d->buttons = g_hash_table_new_full(g_direct_hash, g_direct_equal,
 					   NULL, g_free);
 	g_hash_table_iter_init(&iter, device->buttons);

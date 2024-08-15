@@ -309,6 +309,7 @@ if get_option('tests').enabled()
 				     meson.current_source_dir() / 'test' / f,
 			     ],
 			     env: env,
+			     timeout: 60,
 			     suite: ['all'])
 		endforeach
 	endif

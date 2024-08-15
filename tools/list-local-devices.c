@@ -151,6 +151,10 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 		WacomEraserType eraser_type = libwacom_stylus_get_eraser_type(stylus);
 		const char *etype= "unknown";
 
+		/* warning: Value stored to 'type' during its initialization is never read [deadcode.DeadStores] */
+		(void)type;
+		(void)etype;
+
 		switch (libwacom_stylus_get_type(stylus)) {
 		case WSTYLUS_UNKNOWN:  type = "unknown"; break;
 		case WSTYLUS_GENERAL:  type = "general"; break;

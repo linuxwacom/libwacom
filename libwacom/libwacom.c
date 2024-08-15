@@ -555,7 +555,7 @@ libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags f
 
 	if (a->status_leds->len > 0 &&
 	    memcmp(a->status_leds->data, b->status_leds->data,
-		   sizeof(WacomStatusLEDs) * a->status_leds->len) != 0)
+		   g_array_get_element_size(a->status_leds) * a->status_leds->len) != 0)
 		return 1;
 
 	g_hash_table_iter_init(&iter, a->buttons);

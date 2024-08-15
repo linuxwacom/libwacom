@@ -270,7 +270,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 	for (i = 0; groups[i]; i++) {
 		WacomStylus *stylus;
 		GError *error = NULL;
-		char *type;
+		char *eraser_type, *type;
 		int id;
 		char **string_list;
 
@@ -285,9 +285,9 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
 		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
 
-		type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
-		stylus->eraser_type = eraser_type_from_str (type);
-		g_free (type);
+		eraser_type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
+		stylus->eraser_type = eraser_type_from_str (eraser_type);
+		g_clear_pointer(&eraser_type, g_free);
 
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
 		stylus->paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
@@ -355,16 +355,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);
 		stylus->type = type_from_str (type);
-		g_free (type);
+		g_clear_pointer(&type, g_free);
 
 		if (g_hash_table_lookup (db->stylus_ht, GINT_TO_POINTER (id)) != NULL)
 			g_warning ("Duplicate definition for stylus ID '%#x'", id);
 
 		g_hash_table_insert (db->stylus_ht, GINT_TO_POINTER (id), stylus);
 	}
-	g_strfreev (groups);
-	if (keyfile)
-		g_key_file_free (keyfile);
+	g_clear_pointer(&groups, g_strfreev);
+	g_clear_pointer(&keyfile, g_key_file_free);
 }
 
 static void

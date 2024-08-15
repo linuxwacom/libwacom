@@ -6,7 +6,7 @@ date=`date +"%Y-%m-%d-%H.%M.%S"`
 builddir="build.$date"
 
 echo "####################################### running test suite"
-meson $builddir
+meson setup $builddir
 ninja -C $builddir test
 
 echo "####################################### running valgrind"

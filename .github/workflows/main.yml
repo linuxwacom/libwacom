@@ -87,7 +87,7 @@ jobs:
       - name: valgrind - meson test
         uses: ./.github/actions/meson
         with:
-          meson_test_args: --setup=valgrind --suite=valgrind
+          meson_test_args: --setup=valgrind
         env:
           CC: ${{matrix.compiler}}
       # Capture all the meson logs, even if we failed

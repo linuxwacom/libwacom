@@ -11,7 +11,7 @@ ninja -C $builddir test
 
 echo "####################################### running valgrind"
 pushd $builddir > /dev/null
-meson test --setup=valgrind --suite=valgrind
+meson test --setup=valgrind
 popd > /dev/null
 
 echo "####################################### running ubsan"

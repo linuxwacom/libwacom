@@ -2,7 +2,7 @@ project('libwacom', 'c',
 	version: '2.12.2',
 	license: 'HPND',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
-	meson_version: '>= 0.56.0')
+	meson_version: '>= 0.57.0')
 
 dir_bin     = get_option('prefix') / get_option('bindir')
 dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
@@ -245,7 +245,7 @@ if get_option('tests').enabled()
 			       include_directories: [includes_include, includes_src],
 			       c_args: tests_cflags,
 			       install: false)
-	test('test-load', test_load, suite: ['all', 'valgrind'])
+	test('test-load', test_load, suite: ['all'])
 
 	test_dbverify = executable('test-dbverify',
 				   'test/test-dbverify.c',
@@ -253,7 +253,7 @@ if get_option('tests').enabled()
 				   include_directories: [includes_src],
 				   c_args: tests_cflags,
 				   install: false)
-	test('test-dbverify', test_dbverify, suite: ['all', 'valgrind'])
+	test('test-dbverify', test_dbverify, suite: ['all'])
 
 	test_tablet_validity = executable('test-tablet-validity',
 					  'test/test-tablet-validity.c',
@@ -261,7 +261,7 @@ if get_option('tests').enabled()
 					  include_directories: [includes_src],
 					  c_args: tests_cflags,
 					  install: false)
-	test('test-tablet-validity', test_tablet_validity, suite: ['all', 'valgrind'])
+	test('test-tablet-validity', test_tablet_validity, suite: ['all'])
 
 	test_stylus_validity= executable('test-stylus-validity',
 					 'test/test-stylus-validity.c',
@@ -269,12 +269,13 @@ if get_option('tests').enabled()
 					 include_directories: [includes_src],
 					 c_args: tests_cflags,
 					 install: false)
-	test('test-stylus-validity', test_stylus_validity, suite: ['all', 'valgrind'])
+	test('test-stylus-validity', test_stylus_validity, suite: ['all'])
 
 	valgrind = find_program('valgrind', required : false)
 	if valgrind.found()
 		valgrind_suppressions_file = dir_test / 'valgrind.suppressions'
 		add_test_setup('valgrind',
+			       exclude_suites: ['not-in-valgrind'],
 			       exe_wrapper: [valgrind,
 					     '--leak-check=full',
 					     '--gen-suppressions=all',
@@ -310,7 +311,7 @@ if get_option('tests').enabled()
 			     ],
 			     env: env,
 			     timeout: 60,
-			     suite: ['all'])
+			     suite: ['all', 'not-in-valgrind'])
 		endforeach
 	endif
 endif

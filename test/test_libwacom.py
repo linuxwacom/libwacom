@@ -2,6 +2,9 @@
 #
 # This file is formatted with ruff format
 
+from configparser import ConfigParser
+from dataclasses import dataclass, field
+
 import logging
 import pytest
 
@@ -10,61 +13,106 @@ from . import WacomBuilder, WacomBustype, WacomDatabase, WacomDevice
 logger = logging.getLogger(__name__)
 
 
-def write_stylus_file(dir):
-    from configparser import ConfigParser
+@dataclass
+class StylusEntry:
+    id: str
+    name: str
+    group: str = "generic-with-eraser"
+    paired_stylus_ids: list[str] = field(default_factory=list)
+    buttons: int = 2
+    axes: str = "Tilt;Pressure;Distance;"
+    stylus_type: str = "General"
+    eraser_type: str | None = None
 
-    config = ConfigParser()
-    config.optionxform = lambda option: option
-    config["0xfffff"] = {
-        "Name": "General Pen",
-        "Group": "generic-with-eraser",
-        "PairedStylusIds": "0xffffe;",
-        "Buttons": "2",
-        "Axes": "Tilt;Pressure;Distance;",
-        "Type": "General",
-    }
+    def add_to_config(self, config: ConfigParser):
+        c = {
+            "Name": self.name,
+            "Group": self.group,
+            "PairedStylusIds": ";".join(self.paired_stylus_ids),
+            "Buttons": f"{self.buttons}",
+            "Axes": self.axes,
+            "Type": self.stylus_type,
+        }
+        if self.eraser_type is not None:
+            c["EraserType"] = self.eraser_type
+        config[self.id] = c
 
-    config["0xffffe"] = {
-        "Name": "General Pen Eraser",
-        "Group": "generic-with-eraser",
-        "PairedStylusIds": "0xfffff;",
-        "EraserType": "Invert",
-        "Buttons": "2",
-        "Axes": "Tilt;Pressure;Distance;",
-        "Type": "General",
-    }
+    @classmethod
+    def generic_pen(cls) -> "StylusEntry":
+        return cls(id="0xfffff", name="General Pen", paired_stylus_ids=["0xffffe"])
 
-    with open(dir / "libwacom.stylus", "w") as fd:
-        config.write(fd, space_around_delimiters=False)
+    @classmethod
+    def generic_eraser(cls) -> "StylusEntry":
+        return StylusEntry(
+            id="0xffffe",
+            name="General Pen Eraser",
+            paired_stylus_ids=["0xfffff"],
+            eraser_type="Invert",
+        )
 
 
-def write_tablet_file(filename, devicename, matches):
-    from configparser import ConfigParser
+@dataclass
+class StylusFile:
+    entries: list[StylusEntry]
 
-    config = ConfigParser()
-    config.optionxform = lambda option: option
-    config["Device"] = {
-        "Name": devicename,
-        "DeviceMatch": ";".join(matches),
-        "Width": 9,
-        "Height": 6,
-        "IntegratedIn": "",
-        "Class": "Bamboo",
-        "Layout": "",
-    }
-    config["Features"] = {
-        "Stylus": True,
-        "Reversible": False,
-    }
+    @classmethod
+    def default(cls) -> "StylusFile":
+        return cls(
+            entries=[
+                StylusEntry.generic_pen(),
+                StylusEntry.generic_eraser(),
+            ]
+        )
 
-    with open(filename, "w") as fd:
-        config.write(fd, space_around_delimiters=False)
+    def write_to_dir(self, dir, filename="libwacom.stylus"):
+        config = ConfigParser()
+        config.optionxform = lambda option: option
+
+        for s in self.entries:
+            s.add_to_config(config)
+
+        with open(dir / filename, "w") as fd:
+            config.write(fd, space_around_delimiters=False)
+
+
+@dataclass
+class TabletFile:
+    name: str
+    matches: list[str]
+    width: int = 9
+    height: int = 6
+    integrated_in: str = ""
+    klass: str = "Bamboo"
+    layout: str = ""
+    has_stylus: bool = True
+    is_reversible: bool = False
+
+    def write_to(self, filename):
+        config = ConfigParser()
+        config.optionxform = lambda option: option
+        config["Device"] = {
+            "Name": self.name,
+            "DeviceMatch": ";".join(self.matches),
+            "Width": self.width,
+            "Height": self.height,
+            "IntegratedIn": self.integrated_in,
+            "Class": self.klass,
+            "Layout": self.layout,
+        }
+        config["Features"] = {
+            "Stylus": self.has_stylus,
+            "Reversible": self.is_reversible,
+        }
+        with open(filename, "w") as fd:
+            config.write(fd, space_around_delimiters=False)
 
 
 @pytest.fixture()
 def custom_datadir(tmp_path):
-    write_stylus_file(tmp_path)
-    write_tablet_file(tmp_path / "generic.tablet", "Generic", ["generic"])
+    StylusFile.default().write_to_dir(tmp_path)
+    TabletFile(name="Generic", matches=["generic"]).write_to(
+        tmp_path / "generic.tablet"
+    )
     return tmp_path
 
 
@@ -287,15 +335,19 @@ def test_exact_matches(custom_datadir):
 
     # A device match with uniq but no name
     matches = ["usb|1234|5678||uniqval"]
-    write_tablet_file(custom_datadir / "uniq.tablet", "UniqOnly", matches)
+    TabletFile(name="UniqOnly", matches=matches).write_to(
+        custom_datadir / "uniq.tablet"
+    )
 
     # A device match with a name but no uniq
     matches = ["usb|1234|5678|nameval"]
-    write_tablet_file(custom_datadir / "name.tablet", "NameOnly", matches)
+    TabletFile(name="NameOnly", matches=matches).write_to(
+        custom_datadir / "name.tablet"
+    )
 
     # A device match with both
     matches = ["usb|1234|5678|nameval|uniqval"]
-    write_tablet_file(custom_datadir / "both.tablet", "Both", matches)
+    TabletFile(name="Both", matches=matches).write_to(custom_datadir / "both.tablet")
 
     db = WacomDatabase(path=custom_datadir)
 
@@ -322,11 +374,15 @@ def test_prefer_uniq_over_name(custom_datadir):
 
     # A device match with uniq but no name
     matches = ["usb|1234|5678||uniqval"]
-    write_tablet_file(custom_datadir / "uniq.tablet", "UniqOnly", matches)
+    TabletFile(name="UniqOnly", matches=matches).write_to(
+        custom_datadir / "uniq.tablet"
+    )
 
     # A device match with a name but no uniq
     matches = ["usb|1234|5678|nameval"]
-    write_tablet_file(custom_datadir / "name.tablet", "NameOnly", matches)
+    TabletFile(name="NameOnly", matches=matches).write_to(
+        custom_datadir / "name.tablet"
+    )
 
     db = WacomDatabase(path=custom_datadir)
 
@@ -359,7 +415,7 @@ def test_dont_ignore_exact_matches(custom_datadir):
 
     # A device match with both
     matches = ["usb|1234|5678|nameval|uniqval"]
-    write_tablet_file(custom_datadir / "both.tablet", "Both", matches)
+    TabletFile(name="Both", matches=matches).write_to(custom_datadir / "both.tablet")
 
     db = WacomDatabase(path=custom_datadir)
 

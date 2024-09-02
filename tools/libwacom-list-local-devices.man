@@ -1,13 +1,13 @@
 .TH libwacom-list-local-devices 1
 
 .SH NAME
-libwacom-list-local-devices - utility to list tablet devices
+libwacom\-list\-local\-devices - utility to list tablet devices
 
 .SH SYNOPSIS
-.B libwacom-list-local-devices [--format=oneline|datafile] [--database /path/to/datadir]
+.B libwacom\-list\-local\-devices [--format=oneline|datafile] [--database /path/to/datadir]
 
 .SH DESCRIPTION
-libwacom-list-local-devices is a debug utility to list connected tablet
+libwacom\-list\-local\-devices is a debug utility to list connected tablet
 devices identified by libwacom. It is usually used to check whether a
 libwacom data file is correct, present and/or applies to a specific device.
 .SH OPTIONS

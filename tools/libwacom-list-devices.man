@@ -1,13 +1,13 @@
 .TH libwacom-list-devices 1
 
 .SH NAME
-libwacom-list-devices - utility to list supported tablet devices
+libwacom\-list\-devices - utility to list supported tablet devices
 
 .SH SYNOPSIS
-.B libwacom-list-devices [--format=yaml|datafile]
+.B libwacom\-list\-devices [--format=yaml|datafile]
 
 .SH DESCRIPTION
-libwacom-list-devices is a debug utility to list all supported tablet
+libwacom\-list\-devices is a debug utility to list all supported tablet
 devices identified by libwacom. It is usually used to check whether a
 libwacom installation is correct after adding custom data files.
 .SH OPTIONS

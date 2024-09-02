@@ -4,13 +4,13 @@ project('libwacom', 'c',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.57.0')
 
-dir_bin     = get_option('prefix') / get_option('bindir')
-dir_data    = get_option('prefix') / get_option('datadir') / 'libwacom'
-dir_etc     = get_option('prefix') / get_option('sysconfdir') / 'libwacom'
-dir_src     = meson.current_source_dir()  / 'libwacom'
-dir_src_data= meson.current_source_dir()  / 'data'
-dir_test    = meson.current_source_dir()  / 'test'
-dir_sys_udev= get_option('prefix') / 'lib' / 'udev'
+dir_bin      = get_option('prefix') / get_option('bindir')
+dir_data     = get_option('prefix') / get_option('datadir') / 'libwacom'
+dir_etc      = get_option('prefix') / get_option('sysconfdir') / 'libwacom'
+dir_src      = meson.current_source_dir() / 'libwacom'
+dir_src_data = meson.current_source_dir() / 'data'
+dir_test     = meson.current_source_dir() / 'test'
+dir_sys_udev = get_option('prefix') / 'lib' / 'udev'
 
 dir_udev = get_option('udev-dir')
 if dir_udev == ''

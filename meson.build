@@ -201,6 +201,10 @@ install_man(configure_file(input: 'tools/libwacom-list-devices.man',
 			   output: '@BASENAME@.1',
 			   copy: true))
 
+install_man(configure_file(input: 'tools/libwacom-show-stylus.man',
+			   output: '@BASENAME@.1',
+			   copy: true))
+
 showstylus_config = configuration_data()
 showstylus_config.set('DATADIR', dir_data)
 showstylus_config.set('ETCDIR', dir_etc)

@@ -1,0 +1,16 @@
+# This is for the StarLite Mk V
+# sysinfo.UkQ9Px1eOS.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/392
+
+[Device]
+Name=StarLabs Starlite
+Class=ISDV4
+DeviceMatch=i2c|27c6|0111
+Width=11
+Height=7
+IntegratedIn=Display;System;
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Touch=true

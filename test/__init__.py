@@ -45,7 +45,7 @@ class _Api:
 
     @property
     def basename(self) -> str:
-        return self.name[len(PREFIX) :]
+        return self.name.removeprefix(PREFIX)
 
 
 @dataclass
@@ -56,6 +56,39 @@ class _Enum:
     @property
     def basename(self) -> str:
         return self.name.removeprefix("WACOM_").removeprefix("W")
+
+
+class GlibC:
+    _lib = None
+
+    _api_prototypes: List[_Api] = [
+        _Api(name="free", args=(c_void_p,), return_type=None),
+    ]
+
+    @staticmethod
+    def _cdll():
+        # BSD has 7, Linux has 6
+        for libc in ("libc.so.6", "libc.so.7"):
+            try:
+                return ctypes.CDLL(libc, use_errno=True)
+            except OSError:
+                pass
+        raise NotImplementedError("Not implemented for other libc.so")
+
+    @classmethod
+    def _load(cls):
+        cls._lib = cls._cdll()
+        for api in cls._api_prototypes:
+            func = getattr(cls._lib, api.name)
+            func.argtypes = api.args
+            func.restype = api.return_type
+            setattr(cls, api.basename, func)
+
+    @classmethod
+    def instance(cls):
+        if cls._lib is None:
+            cls._load()
+        return cls
 
 
 class LibWacom:
@@ -716,7 +749,9 @@ class WacomDatabase:
 
     def list_devices(self) -> List[WacomDevice]:
         devices = self.libwacom_list_devices_from_database(self.db, 0)
-        return [
+        devs = [
             WacomDevice(d, destroy=False)
             for d in itertools.takewhile(lambda ptr: ptr is not None, devices)
         ]
+        GlibC.instance().free(devices)
+        return devs

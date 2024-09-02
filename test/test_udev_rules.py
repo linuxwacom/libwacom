@@ -128,9 +128,9 @@ def test_hwdb_files(tablet):
     assert stdout, f"No output recorded for query {query}"
     logging.debug(stdout)
     props = {}
-    for l in filter(lambda l: len(l) > 1, stdout.split("\n")):
-        print(l)
-        k, v = l.split("=")
+    for line in filter(lambda line: len(line) > 1, stdout.split("\n")):
+        print(line)
+        k, v = line.split("=")
         props[k] = v
 
     assert "ID_INPUT" in props

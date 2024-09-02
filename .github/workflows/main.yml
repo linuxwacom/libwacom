@@ -82,6 +82,10 @@ jobs:
         with:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
+      - name: make /etc/udev/hwdb.d writable
+        run: |
+          sudo mkdir -p /etc/udev/hwdb.d
+          sudo chmod o+rwx /etc/udev/hwdb.d
       # for the valgrind case, we need custom setup, the matrix isn't
       # flexible enough for this
       - name: valgrind - meson test

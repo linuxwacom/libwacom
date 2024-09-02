@@ -1,0 +1,18 @@
+.TH libwacom-show-stylus 1
+
+.SH NAME
+libwacom\-show\-stylus - utility to show the tool id and serial number of a stylus
+
+.SH SYNOPSIS
+.B libwacom\-show\-stylus [path]
+
+.SH DESCRIPTION
+libwacom\-show\-stylus is an interactive debug utility to show the tool id
+and serial number of a pen currently in proximity.
+.PP
+This tool needs read access to the \fI/dev/input/event*\fR device node.
+Typically this means it should be run as root.
+.PP
+If no path is provided this tool searches for the first available tablet device
+and uses that. Otherwise the path must be an evdev device node,
+e.g.\fI/dev/input/event0\fR.

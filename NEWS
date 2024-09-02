@@ -1,3 +1,9 @@
+libwacom 2.13.0
+- New Devices:
+  - HP Elite Chromebook c1030
+  - Asus ZenBook Pro Duo
+  - Wacom Pro Pen 3E
+
 libwacom 2.12.2
 - No new devices or APIs, bugfix release only
 

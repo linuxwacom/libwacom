@@ -1,0 +1,21 @@
+# ELAN touchscreen/pen sensor present in the ASUS ZenBook Duo UX8406MA
+# this is the main / top touchscreen
+# 298mm x 184mm
+# 11.75in x 7.25in
+#
+# sysinfo.qhRFeZ2XwI.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/407
+
+
+[Device]
+Name=ELAN9008:00
+ModelName=
+DeviceMatch=i2c:04f3:4259
+Class=ISDV4
+Width=14
+Height=4
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true

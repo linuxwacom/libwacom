@@ -97,16 +97,22 @@ $(document).ready(function(){initNavTree('deprecated.html',''); initResizable();
 <div class="textblock"><dl class="reflist">
 <dt>Global <a class="el" href="group__devices.html#gaca2749ecdda450e836843ed320b0991f">libwacom_get_class</a>  (const WacomDevice *device)</dt>
 <dd><a class="anchor" id="_deprecated000002"></a>This function should no longer be used. The classes are not fine-grained or reliable enough to be useful. </dd>
+<dt>Global <a class="el" href="group__styli.html#ga3f82f01ec46ca1869eb54e9359970a6e">libwacom_get_supported_styli</a>  (const WacomDevice *device, int *num_styli)</dt>
+<dd><a class="anchor" id="_deprecated000003"></a>2.14 Use <a class="el" href="group__styli.html#ga18cd23a382eade1bc72b3ef3c49060fb">libwacom_get_styli()</a> instead.  </dd>
 <dt>Global <a class="el" href="group__devices.html#ga3090bd61bf9739619ed58fc7154dba78">libwacom_has_ring</a>  (const WacomDevice *device) LIBWACOM_DEPRECATED</dt>
-<dd><p class="startdd"><a class="anchor" id="_deprecated000003"></a>2.12 Use <a class="el" href="group__devices.html#gafd308796a4696c86cca0843d0ebf2223">libwacom_get_num_rings()</a> instead.</p>
-<p class="enddd"></p>
-</dd>
-<dt>Global <a class="el" href="group__devices.html#ga059947f8b1917c5e2939c4886b56067b">libwacom_has_ring2</a>  (const WacomDevice *device) LIBWACOM_DEPRECATED</dt>
 <dd><p class="startdd"><a class="anchor" id="_deprecated000004"></a>2.12 Use <a class="el" href="group__devices.html#gafd308796a4696c86cca0843d0ebf2223">libwacom_get_num_rings()</a> instead.</p>
 <p class="enddd"></p>
 </dd>
+<dt>Global <a class="el" href="group__devices.html#ga059947f8b1917c5e2939c4886b56067b">libwacom_has_ring2</a>  (const WacomDevice *device) LIBWACOM_DEPRECATED</dt>
+<dd><p class="startdd"><a class="anchor" id="_deprecated000005"></a>2.12 Use <a class="el" href="group__devices.html#gafd308796a4696c86cca0843d0ebf2223">libwacom_get_num_rings()</a> instead.</p>
+<p class="enddd"></p>
+</dd>
 <dt>Global <a class="el" href="group__devices.html#ga802170200f00ba89d4b5d2f4f0bc88a4">libwacom_is_builtin</a>  (const WacomDevice *device) LIBWACOM_DEPRECATED</dt>
-<dd><a class="anchor" id="_deprecated000005"></a>0.7 Use <a class="el" href="group__devices.html#ga88efa2a2a569569563e81f578c7730fc">libwacom_get_integration_flags()</a> instead. </dd>
+<dd><a class="anchor" id="_deprecated000006"></a>0.7 Use <a class="el" href="group__devices.html#ga88efa2a2a569569563e81f578c7730fc">libwacom_get_integration_flags()</a> instead. </dd>
+<dt>Global <a class="el" href="group__styli.html#ga9e62921ea8d1d8a0b3cb68ba007e15ce">libwacom_stylus_get_for_id</a>  (const WacomDeviceDatabase *db, int id)</dt>
+<dd><a class="anchor" id="_deprecated000007"></a>2.14 Use <a class="el" href="group__styli.html#ga18cd23a382eade1bc72b3ef3c49060fb">libwacom_get_styli()</a> and <a class="el" href="group__styli.html#ga9f794cff42ec3a7d6e164e02816d3384">libwacom_stylus_get_paired_styli()</a> to obtain the WacomStylus directly  </dd>
+<dt>Global <a class="el" href="group__styli.html#gadb6cc0e16ed301484f120de707d4e26e">libwacom_stylus_get_paired_ids</a>  (const WacomStylus *stylus, int *num_paired_ids)</dt>
+<dd><a class="anchor" id="_deprecated000008"></a>2.14 Use <a class="el" href="group__styli.html#ga9f794cff42ec3a7d6e164e02816d3384">libwacom_stylus_get_paired_styli()</a> instead  </dd>
 <dt>Global <a class="el" href="group__devices.html#gabe5d90234cce1b8ad62be2676a1d56e5">WacomClass</a>  </dt>
 <dd><a class="anchor" id="_deprecated000001"></a>This enum should no longer be used. The classes are not fine-grained or reliable enough to be useful.</dd>
 </dl>
@@ -116,7 +122,7 @@ $(document).ready(function(){initNavTree('deprecated.html',''); initResizable();
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Oct 2 2024 22:31:48 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Fri Oct 4 2024 04:53:43 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

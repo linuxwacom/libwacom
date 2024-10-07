@@ -15,7 +15,7 @@
 Name=Wacom ExpressKey Remote
 ModelName=ACK-411050
 DeviceMatch=usb|056a|0331
-Layout=ek-remote.svg
+Layout=wacom-ek-remote.svg
 Class=Remote
 
 [Features]

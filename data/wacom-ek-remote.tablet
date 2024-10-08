@@ -17,6 +17,7 @@ ModelName=ACK-411050
 DeviceMatch=usb|056a|0331
 Layout=wacom-ek-remote.svg
 Class=Remote
+IntegratedIn=Remote
 
 [Features]
 Stylus=false

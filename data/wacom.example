@@ -133,7 +133,7 @@ Layout=wacom-bamboo-16fg-m-pt.svg
 # styli, so you can copy/paste the list from another definition.
 #
 # After that, you can try piecing the stylus list from the names of the
-# styli in libwacom.stylus, using the Wacom webshop as a reference
+# styli in wacom.stylus, using the Wacom webshop as a reference
 # (how many supported styli, what do they look like, etc.)
 #
 # Finally, if you cannot find any information about the styli supported

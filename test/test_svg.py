@@ -83,7 +83,7 @@ def pytest_generate_tests(metafunc):
     ]
 
     def filenames(devices: List[SvgDevice]) -> List[str]:
-        return [Path(d.device.layout_filename).name for d in devices]
+        return sorted([Path(d.device.layout_filename).name for d in devices])
 
     if "svgdevice" in metafunc.fixturenames:
         metafunc.parametrize("svgdevice", devices, ids=filenames(devices))

@@ -115,9 +115,9 @@ jobs:
           - sudo mv /usr/share/libwacom/wacom-intuos*.tablet /etc/libwacom
           - sudo mv /usr/share/libwacom/*.tablet /etc/libwacom
           - sudo mv /usr/share/libwacom/*.stylus /etc/libwacom
-          # split the libwacom.stylus file into to two files to check for
+          # split the wacom.stylus file into to two files to check for
           # accumlated loading
-          - sudo csplit data/libwacom.stylus '/^\[0x822\]/' && sudo mv xx00 /etc/libwacom/first.stylus && sudo mv xx01 /usr/share/libwacom/libwacom.stylus
+          - sudo csplit data/wacom.stylus '/^\[0x822\]/' && sudo mv xx00 /etc/libwacom/first.stylus && sudo mv xx01 /usr/share/libwacom/wacom.stylus
 
     steps:
       - uses: actions/checkout@v4

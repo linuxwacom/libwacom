@@ -1009,6 +1009,8 @@ static void print_integrated_flags_for_device (int fd, const WacomDevice *device
 		dprintf(fd, "Display;");
 	if (device->integration_flags & WACOM_DEVICE_INTEGRATED_SYSTEM)
 		dprintf(fd, "System;");
+	if (device->integration_flags & WACOM_DEVICE_INTEGRATED_REMOTE)
+		dprintf(fd, "Remote;");
 	dprintf(fd, "\n");
 }
 

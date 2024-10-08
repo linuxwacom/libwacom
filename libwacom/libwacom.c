@@ -1086,7 +1086,7 @@ libwacom_print_device_description(int fd, const WacomDevice *device)
 	dprintf(fd, "[Features]\n");
 	dprintf(fd, "Reversible=%s\n", libwacom_is_reversible(device)	? "true" : "false");
 	dprintf(fd, "Stylus=%s\n",	 libwacom_has_stylus(device)	? "true" : "false");
-	dprintf(fd, "NumRings=%s\n",	 libwacom_get_num_rings(device)	? "true" : "false");
+	dprintf(fd, "NumRings=%d\n",	 libwacom_get_num_rings(device));
 	dprintf(fd, "Touch=%s\n",	 libwacom_has_touch(device)	? "true" : "false");
 	dprintf(fd, "TouchSwitch=%s\n",	libwacom_has_touchswitch(device)? "true" : "false");
 	print_supported_leds(fd, device);

@@ -448,7 +448,8 @@ static const struct {
 	WacomIntegrationFlags   value;
 } integration_flags[] = {
 	{ "Display",		WACOM_DEVICE_INTEGRATED_DISPLAY },
-	{ "System",		WACOM_DEVICE_INTEGRATED_SYSTEM }
+	{ "System",		WACOM_DEVICE_INTEGRATED_SYSTEM },
+	{ "Remote",		WACOM_DEVICE_INTEGRATED_REMOTE }
 };
 
 static void

@@ -163,8 +163,24 @@ typedef enum {
  */
 typedef enum {
 	WACOM_DEVICE_INTEGRATED_NONE    = 0,
+	/**
+	 * The device is integrated into a display
+	 * like the Wacom Cintiq series.
+	 */
 	WACOM_DEVICE_INTEGRATED_DISPLAY = (1 << 0),
-	WACOM_DEVICE_INTEGRATED_SYSTEM  = (1 << 1)
+	/**
+	 * This flag is almost always used together
+	 * with @ref WACOM_DEVICE_INTEGRATED_DISPLAY
+	 * and indicates that the device is a built-in
+	 * device such as a Wacom tablet in the screen
+	 * of a laptop.
+	 */
+	WACOM_DEVICE_INTEGRATED_SYSTEM  = (1 << 1),
+	/**
+	 * The device is an external pad
+	 * like the Wacom ExpressKey Remote.
+	 */
+	WACOM_DEVICE_INTEGRATED_REMOTE  = (1 << 2),
 } WacomIntegrationFlags;
 
 /**

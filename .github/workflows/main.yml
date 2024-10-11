@@ -194,6 +194,22 @@ jobs:
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x0358") | .name' | wc -l) -eq 1
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name' | wc -l) -eq 1
 
+  ####
+  # make sure clean_svg.py works on our layout files
+  clean-svg-check:
+    needs: build-and-dist
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: run clean-svg on all .tablet files
+        run: |
+          for tabletfile in data/*.tablet; do
+            ./tools/clean_svg.py --ignore-missing "$tabletfile" ""
+          done
+
   ###
   #
   # tarball verification

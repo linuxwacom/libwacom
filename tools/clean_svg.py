@@ -261,7 +261,7 @@ def apply_id_and_class_from_group(group_node):
     _id = group_node.attrib.get("id")
     if _id is None:
         return
-    for child in group_node.getchildren():
+    for child in group_node:
         if child.tag == "rect" or child.tag == "circle":
             if button_assigned:
                 continue

@@ -302,11 +302,10 @@ def clean_svg(root, tabletname):
 if __name__ == "__main__":
     parser = ArgumentParser(description="Clean SVG files for libwacom")
     parser.add_argument(
-        "filename", nargs=1, type=str, help="SVG file to clean", metavar="FILE"
+        "filename", type=str, help="SVG file to clean", metavar="FILE"
     )
     parser.add_argument(
         "tabletname",
-        nargs=1,
         type=str,
         help="The name of the tablet",
         metavar="TABLET_NAME",
@@ -315,10 +314,10 @@ if __name__ == "__main__":
 
     ET.register_namespace("", NAMESPACE)
     try:
-        tree = ET.parse(args.filename[0])
+        tree = ET.parse(args.filename)
     except Exception as e:
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
     root = tree.getroot()
-    clean_svg(root, args.tabletname[0])
+    clean_svg(root, args.tabletname)
     print(to_string(root))

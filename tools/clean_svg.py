@@ -19,6 +19,7 @@
 #
 
 import sys
+from pathlib import Path
 from argparse import ArgumentParser
 from xml.etree import ElementTree as ET
 
@@ -302,6 +303,9 @@ def clean_svg(root, tabletname):
 if __name__ == "__main__":
     parser = ArgumentParser(description="Clean SVG files for libwacom")
     parser.add_argument(
+        "--ignore-missing", action="store_true", default=False, help="Ignore .tablet files without a Layout"
+    )
+    parser.add_argument(
         "filename", type=str, help="SVG file to clean", metavar="FILE"
     )
     parser.add_argument(
@@ -312,12 +316,27 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    svgfile = args.filename
+    tabletname = args.tabletname
+    if args.filename.endswith(".tablet"):
+        import configparser
+        config = configparser.ConfigParser()
+        config.read(args.filename)
+        try:
+            svgname = config["Device"]["Layout"]
+        except KeyError:
+            print(f"{args.filename} does not specify a layout, skipping", file=sys.stderr)
+            sys.exit(0 if args.ignore_missing else 77)
+        svgfile = Path(args.filename).parent / "layouts" / svgname
+        tabletname = config["Device"]["Name"]
+
+
     ET.register_namespace("", NAMESPACE)
     try:
-        tree = ET.parse(args.filename)
+        tree = ET.parse(svgfile)
     except Exception as e:
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
     root = tree.getroot()
-    clean_svg(root, args.tabletname)
+    clean_svg(root, tabletname)
     print(to_string(root))

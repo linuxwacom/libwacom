@@ -29,18 +29,7 @@ device in the kernel (see `/proc/bus/input/devices`) and in the X session (see
 Use the `libwacom-list-devices` tool to list all known devices and verify
 the tablet is not in that list.
 
-## To add support for a new tablet to libwacom git:
-
-1. Create a new tablet definition file. See `data/wacom.example` in the source
-   for a guideline on how to add a new tablet. For an installed version of
-   libwacom, see the existing data files (e.g.
-   `/usr/share/libwacom/cintiq-13hd.tablet`)
-2. A new tablet description is enabled by adding and installing a new file with
-   a `.tablet` suffix. Once installed the tablet is part of libwacom's
-   database, no rebuild is necessary
-3. The tablet is then available through `libwacom-list-local-devices`
-
-You must update udev after installing the file, see below.
+See the [wiki page on adding a new device](https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device).
 
 ## To add support for a tablet to an installed libwacom
 

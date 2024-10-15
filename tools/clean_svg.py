@@ -29,9 +29,10 @@ BRACKETS_NAMESPACE = "{" + NAMESPACE + "}"
 
 def human_round(number):
     """
-    Round to closest .5
+    Round to closest .5, keep integer values
     """
-    return round(number * 2) / 2.0
+    v = round(number * 2) / 2.0
+    return int(v) if v == int(v) else v
 
 
 def traverse_and_clean(node):

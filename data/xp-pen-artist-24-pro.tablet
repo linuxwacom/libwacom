@@ -1,0 +1,31 @@
+# XP-Pen
+# Artist 24 Pro
+#
+# sysinfo.tv7cDpjYVj
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/417
+
+[Device]
+Name=XP-Pen Artist 24 Pro
+ModelName=
+DeviceMatch=usb|28bd|092d
+PairedIDs=
+Class=Cintiq
+Width=24
+Height=15
+IntegratedIn=Display
+Layout=xp-pen-artist24-pro.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+NumRings=0
+NumStrips=0
+NumDials=2
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H;I;J
+Right=K;L;M;N;O;P;Q;R;S;T
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7;BTN_8;BTN_RIGHT;BTN_MIDDLE;BTN_SIDE;BTN_EXTRA;BTN_FORWARD;BTN_BACK;BTN_B;BTN_A;BTN_BASE;BTN_BASE2;BTN_X

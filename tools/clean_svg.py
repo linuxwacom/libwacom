@@ -19,6 +19,7 @@
 #
 
 import sys
+from pathlib import Path
 from argparse import ArgumentParser
 from xml.etree import ElementTree as ET
 
@@ -261,7 +262,7 @@ def apply_id_and_class_from_group(group_node):
     _id = group_node.attrib.get("id")
     if _id is None:
         return
-    for child in group_node.getchildren():
+    for child in group_node:
         if child.tag == "rect" or child.tag == "circle":
             if button_assigned:
                 continue
@@ -302,23 +303,40 @@ def clean_svg(root, tabletname):
 if __name__ == "__main__":
     parser = ArgumentParser(description="Clean SVG files for libwacom")
     parser.add_argument(
-        "filename", nargs=1, type=str, help="SVG file to clean", metavar="FILE"
+        "--ignore-missing", action="store_true", default=False, help="Ignore .tablet files without a Layout"
+    )
+    parser.add_argument(
+        "filename", type=str, help="SVG file to clean", metavar="FILE"
     )
     parser.add_argument(
         "tabletname",
-        nargs=1,
         type=str,
         help="The name of the tablet",
         metavar="TABLET_NAME",
     )
     args = parser.parse_args()
 
+    svgfile = args.filename
+    tabletname = args.tabletname
+    if args.filename.endswith(".tablet"):
+        import configparser
+        config = configparser.ConfigParser()
+        config.read(args.filename)
+        try:
+            svgname = config["Device"]["Layout"]
+        except KeyError:
+            print(f"{args.filename} does not specify a layout, skipping", file=sys.stderr)
+            sys.exit(0 if args.ignore_missing else 77)
+        svgfile = Path(args.filename).parent / "layouts" / svgname
+        tabletname = config["Device"]["Name"]
+
+
     ET.register_namespace("", NAMESPACE)
     try:
-        tree = ET.parse(args.filename[0])
+        tree = ET.parse(svgfile)
     except Exception as e:
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
     root = tree.getroot()
-    clean_svg(root, args.tabletname[0])
+    clean_svg(root, tabletname)
     print(to_string(root))

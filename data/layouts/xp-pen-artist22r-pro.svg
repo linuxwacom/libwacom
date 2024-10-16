@@ -1,0 +1,465 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+        id="xp-pen-artist-22r-pro"
+        width="623.0"
+        height="462.0"
+        style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg">
+  <title
+          id="title">XP-Pen Artist 22R Pro</title>
+  <g>
+    <rect
+            id="ButtonA"
+            class="A Button"
+            x="25.0"
+            y="65.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderA"
+            class="A Leader"
+            d="M 61.0 84.413276H 90.0 Z" />
+    <text
+            id="LabelA"
+            class="A Label"
+            x="90.5"
+            y="84.0"
+            style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonB"
+            class="B Button"
+            x="25.0"
+            y="88.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderB"
+            class="B Leader"
+            d="M 61.0 104.413276H 90.0 Z" />
+    <text
+            id="LabelB"
+            class="B Label"
+            x="90.5"
+            y="104.0"
+            style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonC"
+            class="C Button"
+            x="25.0"
+            y="112.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderC"
+            class="C Leader"
+            d="M 61.5 127.0217421H 90.0 Z" />
+    <text
+            id="LabelC"
+            class="C Label"
+            x="91.0"
+            y="127.5"
+            style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonD"
+            class="D Button"
+            x="25.0"
+            y="135.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderD"
+            class="D Leader"
+            d="M 60.0 151.573682H 90.0 Z" />
+    <text
+            id="LabelD"
+            class="D Label"
+            x="90.5"
+            y="151.0"
+            style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonE"
+            class="E Button"
+            x="25.0"
+            y="159.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderE"
+            class="E Leader"
+            d="M 61.0 175.377185H 90.0 Z" />
+    <text
+            id="LabelE"
+            class="E Label"
+            x="90.5"
+            y="175.0"
+            style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <circle
+            id="Dial"
+            class="Dial TouchDial"
+            cx="39.5"
+            cy="224.5"
+            r="25.0" />
+    <path
+            id="LeaderDialCCW"
+            class="DialCCW Dial Leader"
+            d="M 40.5 198.0 V 193.5 h 49.5" />
+    <path
+            id="DialCCW"
+            class="DialCCW Button"
+            d="m 35.5 206.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 1.0 6.5 2.0 8.5 8.5 0.0 0.0 0.0 -6.5 -0.5 v 1.5 z" />
+    <path
+            id="LeaderDialCW"
+            class="DialCW Dial Leader"
+            d="m 40.5 250.5 v 4.5 H 90.0" />
+    <path
+            id="DialCW"
+            class="DialCW Button"
+            d="m 35.5 242.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 0.0 6.5 -1.5 8.5 8.5 0.0 0.0 1.0 -6.5 2.5 v 1.5 z" />
+    <text
+            id="LabelDialCCW"
+            class="DialCCW Dial Label"
+            x="94.5"
+            y="196.0"
+            style="text-anchor:start;">CCW</text>
+    <text
+            id="LabelDialCW"
+            class="DialCW Dial Label"
+            x="94.5"
+            y="258.0"
+            style="text-anchor:start;">CW</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonF"
+            class="F Button"
+            x="25.0"
+            y="269.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderF"
+            class="F Leader"
+            d="M 60.0 285.26162999999997H 90.0 Z" />
+    <text
+            id="LabelF"
+            class="F Label"
+            x="89.5"
+            y="285.0"
+            style="text-anchor:start;">F</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonG"
+            class="G Button"
+            x="25.0"
+            y="293.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderG"
+            class="G Leader"
+            d="M 60.0 309.58293000000003H 90.0 Z" />
+    <text
+            id="LabelG"
+            class="G Label"
+            x="89.5"
+            y="309.0"
+            style="text-anchor:start;">G</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonH"
+            class="H Button"
+            x="25.0"
+            y="318.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderH"
+            class="H Leader"
+            d="M 60.0 333.9004H 90.0 Z" />
+    <text
+            id="LabelH"
+            class="H Label"
+            x="89.5"
+            y="333.0"
+            style="text-anchor:start;">H</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonI"
+            class="I Button"
+            x="25.0"
+            y="342.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderI"
+            class="I Leader"
+            d="M 61.0 358.2804H 90.0 Z" />
+    <text
+            id="LabelI"
+            class="I Label"
+            x="90.5"
+            y="357.0"
+            style="text-anchor:start;">I</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonJ"
+            class="J Button"
+            x="25.0"
+            y="366.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderJ"
+            class="J Leader"
+            d="M 61.0 385.2804H 90.0 Z" />
+    <text
+            id="LabelJ"
+            class="J Label"
+            x="90.5"
+            y="385.0"
+            style="text-anchor:start;">J</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonK"
+            class="K Button"
+            x="567.5"
+            y="65.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderK"
+            class="K Leader"
+            d="M 563.0 84.413276H 530.0 Z" />
+    <text
+            id="LabelK"
+            class="K Label"
+            x="529.5"
+            y="84.0"
+            style="text-anchor:start;">K</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonL"
+            class="L Button"
+            x="567.5"
+            y="88.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderL"
+            class="L Leader"
+            d="M 563.0 104.413276H 530.0 Z" />
+    <text
+            id="LabelL"
+            class="L Label"
+            x="529.5"
+            y="104.0"
+            style="text-anchor:start;">L</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonM"
+            class="M Button"
+            x="567.5"
+            y="112.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderM"
+            class="M Leader"
+            d="M 563.0 127.0217421H 530.0 Z" />
+    <text
+            id="LabelM"
+            class="M Label"
+            x="529.5"
+            y="127.0"
+            style="text-anchor:start;">M</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonN"
+            class="N Button"
+            x="567.5"
+            y="135.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderN"
+            class="N Leader"
+            d="M 563.0 151.573682H 530.0 Z" />
+    <text
+            id="LabelN"
+            class="N Label"
+            x="529.5"
+            y="151.0"
+            style="text-anchor:start;">N</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonO"
+            class="O Button"
+            x="567.5"
+            y="159.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderO"
+            class="O Leader"
+            d="M 563.0 175.377185H 530.0 Z" />
+    <text
+            id="LabelO"
+            class="O Label"
+            x="529.5"
+            y="175.0"
+            style="text-anchor:start;">O</text>
+  </g>
+  <g>
+    <circle
+            id="Dial2"
+            class="Dial2 TouchDial"
+            cx="584.0"
+            cy="224.5"
+            r="25.0" />
+    <path
+            id="LeaderDial2CCW"
+            class="Dial2CCW Dial2 Leader"
+            d="M 585.5 198.0 V 193.5 h -49.5" />
+    <path
+            id="Dial2CCW"
+            class="Dial2CCW Button"
+            d="m 580.5 206.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 1.0 6.5 2.0 8.5 8.5 0.0 0.0 0.0 -6.5 -0.5 v 1.5 z" />
+    <path
+            id="LeaderDial2CW"
+            class="Dial2CW Dial2 Leader"
+            d="m 585.5 250.5 v 4.5 h -49.5" />
+    <path
+            id="Dial2CW"
+            class="Dial2CW Button"
+            d="m 580.5 242.5 4.0 -2.0 v 1.5 a 9.5 9.5 0.0 0.0 0.0 6.5 -1.5 8.5 8.5 0.0 0.0 1.0 -6.5 2.5 v 1.5 z" />
+    <text
+            id="LabelDial2CCW"
+            class="Dial2CCW Dial2 Label"
+            x="530.5"
+            y="196.0"
+            style="text-anchor:start;">CCW</text>
+    <text
+            id="LabelDial2CW"
+            class="Dial2CW Dial2 Label"
+            x="530.5"
+            y="258.0"
+            style="text-anchor:start;">CW</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonP"
+            class="P Button"
+            x="567.5"
+            y="269.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderP"
+            class="P Leader"
+            d="M 563.0 285.26162999999997H 530.0 Z" />
+    <text
+            id="LabelP"
+            class="P Label"
+            x="529.5"
+            y="285.0"
+            style="text-anchor:start;">P</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonQ"
+            class="Q Button"
+            x="567.5"
+            y="293.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderQ"
+            class="Q Leader"
+            d="M 563.0 309.58293000000003H 530.0 Z" />
+    <text
+            id="LabelQ"
+            class="Q Label"
+            x="529.5"
+            y="309.0"
+            style="text-anchor:start;">Q</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonR"
+            class="R Button"
+            x="567.5"
+            y="318.0"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderR"
+            class="R Leader"
+            d="M 563.0 333.9004H 530.0 Z" />
+    <text
+            id="LabelR"
+            class="R Label"
+            x="529.5"
+            y="333.0"
+            style="text-anchor:start;">R</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonS"
+            class="S Button"
+            x="567.5"
+            y="342.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderS"
+            class="S Leader"
+            d="M 563.0 358.2804H 530.0 Z" />
+    <text
+            id="LabelS"
+            class="S Label"
+            x="529.5"
+            y="357.0"
+            style="text-anchor:start;">S</text>
+  </g>
+  <g>
+    <rect
+            id="ButtonT"
+            class="T Button"
+            x="567.5"
+            y="366.5"
+            width="30.5"
+            height="19.5" />
+    <path
+            id="LeaderT"
+            class="T Leader"
+            d="M 563.0 385.2804H 530.0 Z" />
+    <text
+            id="LabelT"
+            class="T Label"
+            x="529.5"
+            y="385.0"
+            style="text-anchor:start;">T</text>
+  </g>
+</svg>

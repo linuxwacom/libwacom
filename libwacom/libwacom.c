@@ -1364,7 +1364,20 @@ libwacom_get_height(const WacomDevice *device)
 LIBWACOM_EXPORT WacomClass
 libwacom_get_class(const WacomDevice *device)
 {
-	return device->cls;
+	if (device->cls != WCLASS_UNKNOWN) {
+		return device->cls;
+	}
+
+	switch (device->integration_flags) {
+	case WACOM_DEVICE_INTEGRATED_DISPLAY:
+		return WCLASS_CINTIQ;
+	case WACOM_DEVICE_INTEGRATED_DISPLAY|WACOM_DEVICE_INTEGRATED_SYSTEM:
+		return WCLASS_CINTIQ;
+	case WACOM_DEVICE_INTEGRATED_REMOTE:
+		return WCLASS_REMOTE;
+	}
+
+	return WCLASS_BAMBOO;
 }
 
 LIBWACOM_EXPORT int

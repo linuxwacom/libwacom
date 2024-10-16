@@ -1,5 +1,5 @@
 [0x866b]
-# Lenovo ; VID_NONE     | 0x866b | BAT_CHRG
+# Lenovo ; VID_LENOVO     | 0x866b | BAT_CHRG
 Name=Lenovo Precision Pen 2 (2023)
 Group=isdv4-aes
 Buttons=1

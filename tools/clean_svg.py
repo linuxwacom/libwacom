@@ -84,7 +84,7 @@ def round_if_number(value):
 def remove_non_svg_nodes_and_strip_namespace(root):
     if root.tag.startswith(BRACKETS_NAMESPACE):
         root.tag = root.tag[len(BRACKETS_NAMESPACE) :]
-    for elem in root:
+    for elem in list(root):
         if (
             not elem.tag.startswith(BRACKETS_NAMESPACE)
             or elem.tag == BRACKETS_NAMESPACE + "metadata"

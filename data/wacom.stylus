@@ -222,6 +222,15 @@ EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
+[0x219]
+# Lenovo ; VID_LENOVO     | 0x219 | BAT_SWAP
+Name=Lenovo Digital Pen 2
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Pressure
+Type=Mobile
+
 # Inking pen have no eraser
 [0x812]
 # Intuos and Intuos2

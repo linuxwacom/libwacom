@@ -1,0 +1,22 @@
+# Wacom
+# Wacom HID 52C6 Pen
+# AES sensor used by the Lenovo Ideapad Flex 5 14ALC7
+#
+# sysinfo.6QHqFdEfjw
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/413
+
+[Device]
+Name=Wacom HID 52C6 Pen,Wacom HID 52C6 Finger
+ModelName=
+Class=ISDV4
+DeviceMatch=i2c:056a:52c6;
+Width=11
+Height=7
+# No pad buttons, so no layout
+IntegratedIn=Display;System
+Styli=@isdv4-aes
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

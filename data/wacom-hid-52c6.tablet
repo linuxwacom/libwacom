@@ -6,7 +6,7 @@
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/413
 
 [Device]
-Name=Wacom HID 52C6 Pen,Wacom HID 52C6 Finger
+Name=Wacom HID 52C6
 ModelName=
 Class=ISDV4
 DeviceMatch=i2c:056a:52c6;

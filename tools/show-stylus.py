@@ -157,8 +157,15 @@ def load_data_files():
         config = configparser.ConfigParser()
         config.read(path)
         for stylus_id in config.sections():
-            sid = int(stylus_id, 16)
-            styli[sid] = config[stylus_id].get("Group", sid)
+            ids = stylus_id.split(":")
+            if len(ids) > 1:
+                _, sid = map(lambda x: int(x, 16), ids)
+            else:
+                _ = 0x56a  # vid
+                sid = int(ids[0], 16)
+            # FIXME: vendor should be used here, let's do that when we figure out
+            # who needs it.
+            styli[sid] = config[stylus_id].get("Group", stylus_id)
 
     return styli
 

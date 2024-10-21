@@ -109,6 +109,7 @@ var NAVTREEINDEX0 =
 "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dac1c9baa6fe67ceaab2db3aea48a52b5c":[5,1,4,7],
 "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021dade285ee1f37744428a4f15bd83a7229b":[5,1,4,5],
 "group__devices.html#gga7349dfd03aece0522b2133c7fbe9021daf8d9cf362897f649f6075ab342123a3f":[5,1,4,10],
+"group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10":[5,1,8,3],
 "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1":[5,1,8,1],
 "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da9b8f1d3d89a25bf5628789a8822800f1":[5,1,8,0],
 "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857":[5,1,8,2],

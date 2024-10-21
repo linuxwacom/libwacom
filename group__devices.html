@@ -127,6 +127,7 @@ Enumerations</h2></td></tr>
 <tr class="memitem:ga89b8a336b7d1d0d37659db8fe976323d" id="r_ga89b8a336b7d1d0d37659db8fe976323d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga89b8a336b7d1d0d37659db8fe976323d">WacomIntegrationFlags</a> { <a class="el" href="group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da9b8f1d3d89a25bf5628789a8822800f1">WACOM_DEVICE_INTEGRATED_NONE</a> = 0
 , <a class="el" href="group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1">WACOM_DEVICE_INTEGRATED_DISPLAY</a> = (1 &lt;&lt; 0)
 , <a class="el" href="group__devices.html#gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857">WACOM_DEVICE_INTEGRATED_SYSTEM</a> = (1 &lt;&lt; 1)
+, <a class="el" href="group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10">WACOM_DEVICE_INTEGRATED_REMOTE</a> = (1 &lt;&lt; 2)
  }</td></tr>
 <tr class="memdesc:ga89b8a336b7d1d0d37659db8fe976323d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablet integration.  <a href="group__devices.html#ga89b8a336b7d1d0d37659db8fe976323d">More...</a><br /></td></tr>
 <tr class="separator:ga89b8a336b7d1d0d37659db8fe976323d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -511,8 +512,12 @@ Functions</h2></td></tr>
 <p>Tablet integration. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323da9b8f1d3d89a25bf5628789a8822800f1" name="gga89b8a336b7d1d0d37659db8fe976323da9b8f1d3d89a25bf5628789a8822800f1"></a>WACOM_DEVICE_INTEGRATED_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1" name="gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1"></a>WACOM_DEVICE_INTEGRATED_DISPLAY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857" name="gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857"></a>WACOM_DEVICE_INTEGRATED_SYSTEM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1" name="gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1"></a>WACOM_DEVICE_INTEGRATED_DISPLAY&#160;</td><td class="fielddoc"><p>The device is integrated into a display like the Wacom Cintiq series. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857" name="gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857"></a>WACOM_DEVICE_INTEGRATED_SYSTEM&#160;</td><td class="fielddoc"><p>This flag is almost always used together with <a class="el" href="group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1">WACOM_DEVICE_INTEGRATED_DISPLAY</a> and indicates that the device is a built-in device such as a Wacom tablet in the screen of a laptop. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10" name="gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10"></a>WACOM_DEVICE_INTEGRATED_REMOTE&#160;</td><td class="fielddoc"><p>The device is an external pad like the Wacom ExpressKey Remote. </p>
+</td></tr>
 </table>
 
 </div>
@@ -1926,7 +1931,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Oct 21 2024 04:04:42 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Oct 21 2024 04:12:39 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

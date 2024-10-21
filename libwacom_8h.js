@@ -83,7 +83,8 @@ var libwacom_8h =
     [ "WacomIntegrationFlags", "group__devices.html#ga89b8a336b7d1d0d37659db8fe976323d", [
       [ "WACOM_DEVICE_INTEGRATED_NONE", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da9b8f1d3d89a25bf5628789a8822800f1", null ],
       [ "WACOM_DEVICE_INTEGRATED_DISPLAY", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da957fb212fda27c9a006d6121266b04f1", null ],
-      [ "WACOM_DEVICE_INTEGRATED_SYSTEM", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857", null ]
+      [ "WACOM_DEVICE_INTEGRATED_SYSTEM", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857", null ],
+      [ "WACOM_DEVICE_INTEGRATED_REMOTE", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10", null ]
     ] ],
     [ "WacomStatusLEDs", "group__devices.html#ga18a534584fbfeb1254107b30246bcfd6", [
       [ "WACOM_STATUS_LED_UNAVAILABLE", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a3bd225390cbe0e364beb86269d746393", null ],

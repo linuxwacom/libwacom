@@ -1,0 +1,288 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="ek-remote"
+   width="265"
+   height="215"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="title">xp-pen-ack05-remote</title>
+  <path
+     id="rect1523"
+     d="M 76.5 56 A 30 30 0 0 0 46.5 86 A 30 30 0 0 0 55 107 L 55 146.5 C 55 151 58.5 154 63 154 L 219.5 154 C 223.5 154 227 151 227 146.5 L 227 71.5 C 227 67.5 223.5 64 219.5 64 L 97 64 A 30 30 0 0 0 76.5 56 z" />
+  <ellipse
+     id="Dial"
+     class="Dial TouchDial"
+     cx="76.5"
+     cy="86"
+     rx="28"
+     ry="28" />
+  <g>
+    <circle
+       id="ButtonA"
+       class="A ModeSwitch Button"
+       cx="76.5"
+       cy="86.5"
+       r="9" />
+    <path
+       id="LeaderA"
+       class="A ModeSwitch Leader"
+       d="M 77 87 31.5 86.5" />
+    <text
+       id="LabelA"
+       class="A ModeSwitch Label"
+       x="24.5"
+       y="87.5"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="144"
+       y="70.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 236 41 H 182.5 L 160.5 78.5" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="250"
+       y="41"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="171"
+       y="70.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="m 236 61 -26.5 0.5 -21 16.5" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="250"
+       y="61"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="117"
+       y="70.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 236 20.5 H 155.5 L 132.5 78.5" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="250"
+       y="21"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonH"
+       class="H Button"
+       x="197.5"
+       y="70.5"
+       width="23.5"
+       height="50.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="m 213.5 92 16.5 -11 h 6" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="250"
+       y="81"
+       style="text-anchor:start;">H</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonI"
+       class="I Button"
+       x="117"
+       y="125"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderI"
+       class="I Leader"
+       d="m 131 143 25 58.5 h 80" />
+    <text
+       id="LabelI"
+       class="I Label"
+       x="250"
+       y="201"
+       style="text-anchor:start;">I</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonJ"
+       class="J Button"
+       x="144"
+       y="125"
+       width="50.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderJ"
+       class="J Leader"
+       d="m 171 143 11.5 38.5 h 54" />
+    <text
+       id="LabelJ"
+       class="J Label"
+       x="250"
+       y="181"
+       style="text-anchor:start;">J</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonK"
+       class="K Button"
+       x="197.5"
+       y="125"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderK"
+       class="K Leader"
+       d="m 209.5 143 0 18.5 h 26.5" />
+    <text
+       id="LabelK"
+       class="K Label"
+       x="250"
+       y="161"
+       style="text-anchor:start;">K</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonG"
+       class="G Button"
+       x="171"
+       y="97.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="m 188.5 112.5 41.5 8.5 6 0" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="250"
+       y="121"
+       style="text-anchor:start;">G</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="144"
+       y="97.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <circle
+       id="circle3320"
+       cx="155.5"
+       cy="109"
+       r="1" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="m 160.5 114 69.5 27 h 6" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="250"
+       y="141"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g>
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="117"
+       y="97.5"
+       width="23.5"
+       height="23.5"
+       rx="4"
+       ry="4" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="m 135 106.5 94.5 -5.5 h 6.5" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="250"
+       y="101"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g>
+    <path
+       id="LeaderDialCCW"
+       class="DialCCW Dial Leader"
+       d="m 77 65.5 v -2 H 31.5" />
+    <path
+       id="ButtonDialCCW"
+       class="DialCCW Dial Button"
+       d="m 73.5 71 3 -1.5 v 1 a 7.5 7.5 0 0 1 5 1.5 6.5 6.5 0 0 0 -5 -0.5 v 1 z" />
+    <text
+       id="LabelDialCCW"
+       class="DialCCW Dial Label"
+       x="24.5"
+       y="64"
+       style="text-anchor:start;">DialCCW</text>
+  </g>
+  <g>
+    <path
+       id="LeaderDialCW"
+       class="DialCW Dial Leader"
+       d="m 77 106.5 v 2 H 31.5" />
+    <path
+       id="ButtonDialCW"
+       class="DialCW Dial Button"
+       d="m 73.5 101 3 -1.5 v 1 a 7.5 7.5 0 0 0 5 -1 6.5 6.5 0 0 1 -5 2 v 1 z" />
+    <text
+       id="LabelDialCW"
+       class="DialCW Dial Label"
+       x="24.5"
+       y="110.5"
+       style="text-anchor:start;">DialCW</text>
+  </g>
+</svg>

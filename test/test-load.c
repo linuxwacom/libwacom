@@ -202,6 +202,10 @@ test_cintiq24hdt(struct fixture *f, gconstpointer user_data)
 	const WacomMatch *match;
 
 	g_assert_nonnull(device);
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	g_assert_cmpint(libwacom_get_class(device), ==, WCLASS_CINTIQ);
+#pragma GCC diagnostic pop
 
 	/* 24HDT has one paired device */
 	match = libwacom_get_paired_device(device);

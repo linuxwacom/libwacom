@@ -539,6 +539,71 @@ def test_new_from_path_unknown_device(db, fallback):
         assert dev.product_id == 0
 
 
+@pytest.mark.parametrize(
+    "feature",
+    ("Ring", "Touchstrip", "Dial"),
+)
+@pytest.mark.parametrize("count", (1, 2))
+def test_button_modeswitch(custom_datadir, feature, count):
+    USBID = (0x1234, 0x5678)
+
+    # sigh, Touchstrip but StripsNumModes...
+    num_mode_key = f"{feature}s" if feature != "Touchstrip" else "Strip"
+
+    extra = {
+        "Buttons": {
+            "Left": "A;B;C;",
+            "Right": "D;E;F;",
+            feature: "A",
+        },
+        "Features": {
+            num_mode_key: 4,
+        },
+    }
+    if count > 1:
+        extra["Buttons"][f"{feature}2"] = "D"
+
+    TabletFile(
+        name="some tablet",
+        matches=[f"usb|{USBID[0]:04x}|{USBID[1]:04x}"],
+        extra=extra,
+    ).write_to(custom_datadir / "led.tablet")
+
+    db = WacomDatabase(path=custom_datadir)
+    builder = WacomBuilder.create(usbid=USBID)
+    device = db.new_from_builder(builder)
+    assert device is not None
+
+    expected_flag = {
+        "Ring": WacomDevice.ButtonFlags.RING_MODESWITCH,
+        "Touchstrip": WacomDevice.ButtonFlags.TOUCHSTRIP_MODESWITCH,
+        "Dial": WacomDevice.ButtonFlags.DIAL_MODESWITCH,
+    }[feature]
+
+    flags = device.button_flags("A")
+    assert expected_flag in flags
+
+    for b in "BCDEF":
+        flags = device.button_flags(b)
+        assert expected_flag not in flags
+
+    expected_flag = {
+        "Ring": WacomDevice.ButtonFlags.RING2_MODESWITCH,
+        "Touchstrip": WacomDevice.ButtonFlags.TOUCHSTRIP2_MODESWITCH,
+        "Dial": WacomDevice.ButtonFlags.DIAL2_MODESWITCH,
+    }[feature]
+
+    flags = device.button_flags("D")
+    if count > 1:
+        assert expected_flag in flags
+    else:
+        assert expected_flag not in flags
+
+    for b in "ABCEF":
+        flags = device.button_flags(b)
+        assert expected_flag not in flags
+
+
 def test_nonwacom_stylus_ids(tmp_path):
     styli = StylusFile.default()
     s1 = StylusEntry(

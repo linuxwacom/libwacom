@@ -89,11 +89,15 @@ class TabletFile:
     has_stylus: bool = True
     is_reversible: bool = False
     styli: list[str] = field(default_factory=list)
+    # extra additions to the tablet file, e.g. { "Buttons": { "Left" : "A;B;" }
+    extra: dict[str, dict[str, str]] = field(default_factory=dict)
 
     def write_to(self, filename):
         config = ConfigParser()
         config.optionxform = lambda option: option
-        config["Device"] = {
+
+        cfg = {}
+        cfg["Device"] = {
             "Name": self.name,
             "DeviceMatch": ";".join(self.matches),
             "Width": self.width,
@@ -103,12 +107,18 @@ class TabletFile:
             "Layout": self.layout,
         }
         if self.styli:
-            config["Device"]["Styli"] = ";".join(self.styli)
+            cfg["Device"]["Styli"] = ";".join(self.styli)
 
-        config["Features"] = {
+        cfg["Features"] = {
             "Stylus": self.has_stylus,
             "Reversible": self.is_reversible,
         }
+
+        cfg = cfg | self.extra
+
+        for k, v in cfg.items():
+            config[k] = v
+
         with open(filename, "w") as fd:
             config.write(fd, space_around_delimiters=False)
 

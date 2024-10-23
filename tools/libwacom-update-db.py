@@ -23,9 +23,15 @@
 
 import argparse
 import configparser
+import os
 import sys
 import subprocess
+import tempfile
 from pathlib import Path
+
+
+def xdg_dir():
+    return Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config")) / "libwacom"
 
 
 class Tablet(object):
@@ -154,19 +160,20 @@ class TabletDatabase:
 
 # Guess the udev directory based on path. For the case of /usr/share, the
 # udev directory is probably in /usr/lib so let's fallback to that.
-def find_udev_base_dir(path):
-    for parent in path.parents:
-        d = Path(parent / "udev" / "rules.d")
-        if d.exists():
-            return d.parent
+def find_udev_base_dir(paths):
+    for path in paths:
+        for parent in path.parents:
+            d = Path(parent / "udev" / "rules.d")
+            if d.exists():
+                return d.parent
 
-    # /usr/share but also any custom prefixes
-    for parent in path.parents:
-        d = Path(parent / "lib" / "udev" / "rules.d")
-        if d.exists():
-            return d.parent
+        # /usr/share but also any custom prefixes
+        for parent in path.parents:
+            d = Path(parent / "lib" / "udev" / "rules.d")
+            if d.exists():
+                return d.parent
 
-    raise FileNotFoundError(path)
+    raise FileNotFoundError(paths)
 
 
 # udev's behaviour is that where a file X exists in two locations,
@@ -190,8 +197,8 @@ if __name__ == "__main__":
         "path",
         nargs="?",
         type=Path,
-        default="/etc/libwacom",
-        help="Directory to load .tablet files from",
+        default=None,
+        help="Directory to load .tablet files from. Default: $XDG_CONFIG_HOME/libwacom and /etc/libwacom",
     )
     # buildsystem-mode is what we use from meson, it changes the
     # the behavior to just generate the file and print it
@@ -215,7 +222,14 @@ if __name__ == "__main__":
     )
     ns = parser.parse_args()
 
-    db = TabletDatabase(ns.path)
+    if ns.path is None:
+        paths = [xdg_dir(), Path("/etc/libwacom")]
+    else:
+        paths = [ns.path]
+
+    # Reverse the list so the most important one is last and takes precedence
+    paths.reverse()
+    dbs = [TabletDatabase(p) for p in paths]
 
     hwdb = HWDBFile()
     # Bamboo and Intuos devices connected to the system via Wacom's
@@ -230,20 +244,32 @@ if __name__ == "__main__":
         wwak.has_touch = True
         hwdb.tablets.append(wwak)
 
-    hwdb.tablets.extend(db.tablets)
+    for db in dbs:
+        hwdb.tablets.extend(db.tablets)
+
     if ns.buildsystem_mode:
         hwdb.print()
     else:
+        if os.geteuid() == 0:
+            print(
+                "WARNING: Running this command as root will not pick up .tablet files in $XDG_CONFIG_HOME/libwacom"
+            )
+
         try:
-            udevdir = ns.udev_base_dir or find_udev_base_dir(ns.path)
+            udevdir = ns.udev_base_dir or find_udev_base_dir(paths)
             hwdbfile = guess_hwdb_filename(udevdir)
-            with open(hwdbfile, "w") as fd:
+
+            with tempfile.NamedTemporaryFile(
+                mode="w+", prefix=f"{hwdbfile.name}-XXXXXX", encoding="utf-8"
+            ) as fd:
                 hwdb.print(fd)
-            print(f"New hwdb file: {hwdbfile}")
+                print(f"Using sudo to copy hwdb file to {hwdbfile}")
+                subprocess.run(["sudo", "cp", f"{fd.name}", hwdbfile.absolute()])
 
             if not ns.skip_systemd_hwdb_update:
+                print("Using sudo to run systemd-hwdb update")
                 subprocess.run(
-                    ["systemd-hwdb", "update"],
+                    ["sudo", "systemd-hwdb", "update"],
                     capture_output=True,
                     check=True,
                     text=True,
@@ -255,3 +281,5 @@ if __name__ == "__main__":
             print(f"Unable to find udev base directory: {e}")
         except subprocess.CalledProcessError as e:
             print(f"hwdb update failed: {e.stderr}")
+        except KeyboardInterrupt:
+            pass

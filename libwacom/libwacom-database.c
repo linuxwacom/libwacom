@@ -302,7 +302,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		char **string_list;
 
 		if (!parse_stylus_id(groups[i], &id)) {
-			g_warning ("Failed to parse stylus ID '%s'", groups[i]);
+			g_warning ("Failed to parse stylus ID '%s', ignoring entry", groups[i]);
 			continue;
 		}
 		stylus = g_new0 (WacomStylus, 1);
@@ -402,7 +402,7 @@ libwacom_setup_paired_attributes(WacomDeviceDatabase *db)
 			WacomStylus *paired = g_hash_table_lookup(db->stylus_ht, id);
 
 			if (paired == NULL) {
-				g_warning ("Invalid paired stylus %04x:%x", id->vid, id->tool_id);
+				g_warning ("Ignoring paired stylus %04x:%x", id->vid, id->tool_id);
 				continue;
 			}
 
@@ -756,9 +756,9 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 				if (stylus)
 					g_array_append_val (array, stylus);
 				else
-					g_warning ("Invalid stylus id for '%s'!", str);
+					g_warning ("Invalid stylus id for '%s', ignoring stylus", str);
 			} else {
-				g_warning ("Invalid stylus id format for '%s'!", str);
+				g_warning ("Invalid stylus id format for '%s', ignoring stylus", str);
 			}
 		} else if (g_str_has_prefix(str, "@")) {
 			const char *group = &str[1];
@@ -773,7 +773,7 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 				}
 			}
 		} else {
-			g_warning ("Invalid prefix for '%s'!", str);
+			g_warning ("Invalid prefix for '%s', ignoring stylus", str);
 		}
 	}
 	/* Using groups means we don't get the styli in ascending order.
@@ -929,7 +929,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 				}
 			}
 			if (!found)
-				g_warning ("Unrecognized integration flag '%s'", string_list[i]);
+				g_warning ("Unrecognized integration flag '%s', ignoring flag", string_list[i]);
 		}
 		g_strfreev (string_list);
 	}
@@ -973,8 +973,10 @@ out:
 		g_key_file_free(keyfile);
 	if (error)
 		g_error_free(error);
-	if (!success)
+	if (!success) {
+		g_warning("Ignoring invalid .tablet file %s", filename);
 		device = libwacom_unref(device);
+	}
 
 	return device;
 }
@@ -1159,8 +1161,10 @@ database_new_for_paths (char * const *datadirs)
 
 	/* If we couldn't load _anything_ then something's wrong */
 	if (g_hash_table_size (db->stylus_ht) == 0 ||
-	    g_hash_table_size (db->device_ht) == 0)
+	    g_hash_table_size (db->device_ht) == 0) {
+		g_warning("Zero tablet or stylus files found in datadirs");
 		goto error;
+	}
 
 	libwacom_setup_paired_attributes(db);
 

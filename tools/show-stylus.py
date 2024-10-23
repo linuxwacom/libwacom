@@ -22,6 +22,7 @@
 
 import argparse
 import configparser
+import os
 import sys
 from pathlib import Path
 
@@ -35,6 +36,10 @@ except ModuleNotFoundError as e:
         "modules and re-run this tool."
     )
     sys.exit(1)
+
+
+def xdg_dir():
+    return Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config")) / "libwacom"
 
 
 class Ansi:
@@ -133,7 +138,7 @@ def record_events(ns):
 def load_data_files():
     lookup_paths = (
         ("./data/",),
-        ("@DATADIR@", "@ETCDIR@"),
+        ("@DATADIR@", "@ETCDIR@", xdg_dir()),
         ("/usr/share/libwacom/", "/etc/libwacom/"),
     )
     stylusfiles = []

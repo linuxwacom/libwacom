@@ -1192,13 +1192,28 @@ libwacom_database_new_for_path (const char *datadir)
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
+	WacomDeviceDatabase *db;
+	char *xdgdir = NULL;
+	char *xdg_config_home = g_strdup(g_getenv("XDG_CONFIG_HOME"));
+
+	if (!xdg_config_home)
+		xdg_config_home = g_strdup_printf("%s/.config/", g_get_home_dir());
+
+	xdgdir = g_strdup_printf("%s/libwacom", xdg_config_home);
+
 	char *datadir[] = {
+		xdgdir,
 		ETCDIR,
 		DATADIR,
 		NULL,
 	};
 
-	return database_new_for_paths(datadir);
+	db = database_new_for_paths(datadir);
+
+	free(xdgdir);
+	free(xdg_config_home);
+
+	return db;
 }
 
 LIBWACOM_EXPORT void

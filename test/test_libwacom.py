@@ -600,3 +600,24 @@ def test_nonwacom_stylus_ids(tmp_path):
     assert sum(s.vendor_id == 0x1234 and s.tool_id == 0x9876 for s in styli) == 1
     assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFE for s in styli) == 1
     assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFF for s in styli) == 1
+
+
+def test_load_xdg_config_home(monkeypatch, tmp_path, custom_datadir):
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path.absolute()))
+
+    xdg = tmp_path / "libwacom"
+    xdg.mkdir()
+
+    usbid = (0x1234, 0x5678)
+    matches = [f"usb|{usbid[0]:04x}|{usbid[1]:04x}"]
+    TabletFile(name="XDGTablet", matches=matches).write_to(xdg / "uniq.tablet")
+
+    StylusFile.default().write_to_dir(xdg)
+
+    # This should load from system *and* XDG. system files could
+    # interfere with our test or may not exist but unfortunately we can't
+    # chroot for the test. it should be good enough this way anyway.
+    db = WacomDatabase()
+    builder = WacomBuilder.create(usbid=usbid)
+    device = db.new_from_builder(builder)
+    assert device is not None and device.name == "XDGTablet"

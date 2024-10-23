@@ -222,6 +222,8 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				case WACOM_STATUS_LED_RING2: ledstr = "RING2"; break;
 				case WACOM_STATUS_LED_TOUCHSTRIP: ledstr = "TOUCHSTRIP"; break;
 				case WACOM_STATUS_LED_TOUCHSTRIP2: ledstr = "TOUCHSTRIP2"; break;
+				case WACOM_STATUS_LED_DIAL: ledstr = "DIAL"; break;
+				case WACOM_STATUS_LED_DIAL2: ledstr = "DIAL2"; break;
 			}
 			snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s%s", i > 0 ? ", " : "", ledstr);
 		}

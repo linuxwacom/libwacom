@@ -218,7 +218,7 @@ class LibWacom:
         _Api(
             name="libwacom_get_status_leds",
             args=(c_void_p, c_void_p),
-            return_type=c_void_p,
+            return_type=ctypes.POINTER(ctypes.c_int),
         ),
         _Api(
             name="libwacom_get_button_led_group",
@@ -394,6 +394,8 @@ class LibWacom:
         _Enum(name="WACOM_STATUS_LED_RING2", value=2),
         _Enum(name="WACOM_STATUS_LED_TOUCHSTRIP", value=3),
         _Enum(name="WACOM_STATUS_LED_TOUCHSTRIP2", value=4),
+        _Enum(name="WACOM_STATUS_LED_DIAL", value=1),
+        _Enum(name="WACOM_STATUS_LED_DIAL2", value=2),
     ]
 
 
@@ -616,6 +618,16 @@ class WacomStylus:
         return styli
 
 
+class WacomStatusLed(enum.IntEnum):
+    UNAVAILABLE = -1
+    RING = 0
+    RING2 = 1
+    TOUCHSTRIP = 2
+    TOUCHSTRIP2 = 3
+    DIAL = 4
+    DIAL2 = 5
+
+
 class WacomDevice:
     """
     Convenience wrapper to make using libwacom a bit more pythonic.
@@ -794,6 +806,16 @@ class WacomDevice:
 
     def button_evdev_code(self, button: str) -> int:
         return self.get_button_evdev_code(button.encode("utf-8"))
+
+    def button_led_group(self, button: str) -> List[ButtonFlags]:
+        return self.get_button_led_group(button.encode("utf-8"))
+
+    @property
+    def status_leds(self) -> List["WacomStatusLed"]:
+        nleds = c_int()
+        leds = self.get_status_leds(ctypes.byref(nleds))
+
+        return [WacomStatusLed(l) for l in leds[: nleds.value]]
 
 
 class WacomDatabase:

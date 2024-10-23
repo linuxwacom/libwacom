@@ -440,7 +440,9 @@ static const struct {
 	{ "Ring",		WACOM_STATUS_LED_RING },
 	{ "Ring2",		WACOM_STATUS_LED_RING2 },
 	{ "Touchstrip",		WACOM_STATUS_LED_TOUCHSTRIP },
-	{ "Touchstrip2",	WACOM_STATUS_LED_TOUCHSTRIP2 }
+	{ "Touchstrip2",	WACOM_STATUS_LED_TOUCHSTRIP2 },
+	{ "Dial",		WACOM_STATUS_LED_DIAL },
+	{ "Dial2",		WACOM_STATUS_LED_DIAL2 },
 };
 
 static const struct {

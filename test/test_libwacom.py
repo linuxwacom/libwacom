@@ -8,7 +8,14 @@ from dataclasses import dataclass, field
 import logging
 import pytest
 
-from . import WacomBuilder, WacomBustype, WacomDatabase, WacomDevice, WacomEraserType
+from . import (
+    WacomBuilder,
+    WacomBustype,
+    WacomDatabase,
+    WacomDevice,
+    WacomEraserType,
+    WacomStatusLed,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -602,6 +609,76 @@ def test_button_modeswitch(custom_datadir, feature, count):
     for b in "ABCEF":
         flags = device.button_flags(b)
         assert expected_flag not in flags
+
+
+@pytest.mark.parametrize(
+    "feature",
+    ("Ring", "Touchstrip", "Dial"),
+)
+@pytest.mark.parametrize("count", (1, 2))
+def test_status_leds(custom_datadir, feature, count):
+    USBID = (0x1234, 0x5678)
+
+    # sigh, Touchstrip but StripsNumModes...
+    num_mode_key = f"{feature}s" if feature != "Touchstrip" else "Strip"
+
+    extra = {
+        "Buttons": {
+            "Left": "A;B;C;",
+            "Right": "D;E;F;",
+            feature: "A",
+        },
+        "Features": {
+            "StatusLEDs": f"{feature};{feature}2" if count > 1 else f"{feature}",
+            num_mode_key: 4,
+        },
+    }
+    if count > 1:
+        extra["Buttons"][f"{feature}2"] = "D"
+
+    TabletFile(
+        name="some tablet",
+        matches=[f"usb|{USBID[0]:04x}|{USBID[1]:04x}"],
+        extra=extra,
+    ).write_to(custom_datadir / "led.tablet")
+
+    db = WacomDatabase(path=custom_datadir)
+    builder = WacomBuilder.create(usbid=USBID)
+    device = db.new_from_builder(builder)
+    assert device is not None
+
+    expected = [
+        {
+            "Ring": WacomStatusLed.RING,
+            "Touchstrip": WacomStatusLed.TOUCHSTRIP,
+            "Dial": WacomStatusLed.DIAL,
+        }[feature]
+    ]
+
+    if count > 1:
+        expected.append(
+            {
+                "Ring": WacomStatusLed.RING2,
+                "Touchstrip": WacomStatusLed.TOUCHSTRIP2,
+                "Dial": WacomStatusLed.DIAL2,
+            }[feature]
+        )
+
+    leds = device.status_leds
+    assert sorted(leds) == sorted(expected)
+
+    led_group = device.button_led_group("A")
+    assert led_group == 0
+
+    led_group = device.button_led_group("D")
+    if count > 1:
+        assert led_group == 1
+    else:
+        assert led_group == -1
+
+    for b in "BCEF":
+        led_group = device.button_led_group(b)
+        assert led_group == -1
 
 
 def test_nonwacom_stylus_ids(tmp_path):

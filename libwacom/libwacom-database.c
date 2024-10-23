@@ -1132,10 +1132,10 @@ stylus_compare(WacomStylusId *a, WacomStylusId *b)
 }
 
 static WacomDeviceDatabase *
-database_new_for_paths (const char **datadirs)
+database_new_for_paths (char * const *datadirs)
 {
 	WacomDeviceDatabase *db;
-	const char **datadir;
+	char * const *datadir;
 
 	db = g_new0 (WacomDeviceDatabase, 1);
 	db->device_ht = g_hash_table_new_full (g_str_hash,
@@ -1174,17 +1174,21 @@ error:
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
 {
-	const char *datadirs[] = {
-		datadir,
-		NULL,
-	};
-	return database_new_for_paths(datadirs);
+	WacomDeviceDatabase *db;
+	char **paths;
+
+	paths = g_strsplit(datadir, ":", 0);
+	db = database_new_for_paths(paths);
+
+	g_strfreev(paths);
+
+	return db;
 }
 
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new (void)
 {
-	const char *datadir[] = {
+	char *datadir[] = {
 		ETCDIR,
 		DATADIR,
 		NULL,

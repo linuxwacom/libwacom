@@ -362,6 +362,8 @@ WacomDeviceDatabase* libwacom_database_new(void);
  * a layouts/ subdirectory for the svg files if any of the .tablet
  * files references an svg.
  *
+ * datadir may be a colon-separated list of directories.
+ *
  * @return A new database or NULL on error.
  *
  * @ingroup context

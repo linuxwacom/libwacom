@@ -1132,10 +1132,9 @@ stylus_compare(WacomStylusId *a, WacomStylusId *b)
 }
 
 static WacomDeviceDatabase *
-database_new_for_paths (size_t npaths, const char **datadirs)
+database_new_for_paths (const char **datadirs)
 {
 	WacomDeviceDatabase *db;
-	size_t n;
 	const char **datadir;
 
 	db = g_new0 (WacomDeviceDatabase, 1);
@@ -1148,12 +1147,12 @@ database_new_for_paths (size_t npaths, const char **datadirs)
 					       (GDestroyNotify) g_free,
 					       (GDestroyNotify) stylus_destroy);
 
-	for (datadir = datadirs, n = npaths; n--; datadir++) {
+	for (datadir = datadirs; *datadir; datadir++) {
 		if (!load_stylus_files(db, *datadir))
 			goto error;
 	}
 
-	for (datadir = datadirs, n = npaths; n--; datadir++) {
+	for (datadir = datadirs; *datadir;  datadir++) {
 		if (!load_tablet_files(db, *datadir))
 			goto error;
 	}
@@ -1175,7 +1174,11 @@ error:
 LIBWACOM_EXPORT WacomDeviceDatabase *
 libwacom_database_new_for_path (const char *datadir)
 {
-	return database_new_for_paths(1, &datadir);
+	const char *datadirs[] = {
+		datadir,
+		NULL,
+	};
+	return database_new_for_paths(datadirs);
 }
 
 LIBWACOM_EXPORT WacomDeviceDatabase *
@@ -1184,9 +1187,10 @@ libwacom_database_new (void)
 	const char *datadir[] = {
 		ETCDIR,
 		DATADIR,
+		NULL,
 	};
 
-	return database_new_for_paths (2, datadir);
+	return database_new_for_paths(datadir);
 }
 
 LIBWACOM_EXPORT void

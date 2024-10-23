@@ -354,9 +354,13 @@ WacomDeviceDatabase* libwacom_database_new(void);
 
 /**
  * Loads the Tablet and Stylus databases, to be used
- * in libwacom_new_*() functions, from the prefix
- * path passes. This is only useful for diagnostics
+ * in libwacom_new_*() functions, from the datadir
+ * given in the argument. This is only useful for diagnostics
  * applications.
+ *
+ * The datadir must contain the libwacom .tablet files and optionally
+ * a layouts/ subdirectory for the svg files if any of the .tablet
+ * files references an svg.
  *
  * @return A new database or NULL on error.
  *

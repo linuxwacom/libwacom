@@ -38,23 +38,23 @@ except ModuleNotFoundError as e:
 
 
 class Ansi:
-    clearline = "\x1B[K"
+    clearline = "\x1b[K"
 
     @classmethod
     def up(cls, count):
-        return f"\x1B[{count}A"
+        return f"\x1b[{count}A"
 
     @classmethod
     def down(cls, count):
-        return f"\x1B[{count}B"
+        return f"\x1b[{count}B"
 
     @classmethod
     def right(cls, count):
-        return f"\x1B[{count}C"
+        return f"\x1b[{count}C"
 
     @classmethod
     def left(cls, count):
-        return f"\x1B[{count}D"
+        return f"\x1b[{count}D"
 
 
 def die(msg):
@@ -161,7 +161,7 @@ def load_data_files():
             if len(ids) > 1:
                 _, sid = map(lambda x: int(x, 16), ids)
             else:
-                _ = 0x56a  # vid
+                _ = 0x56A  # vid
                 sid = int(ids[0], 16)
             # FIXME: vendor should be used here, let's do that when we figure out
             # who needs it.

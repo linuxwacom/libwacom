@@ -39,7 +39,9 @@ class StylusEntry:
 
     @classmethod
     def generic_pen(cls) -> "StylusEntry":
-        return cls(id="0x0:0xfffff", name="General Pen", paired_stylus_ids=["0x0:0xffffe"])
+        return cls(
+            id="0x0:0xfffff", name="General Pen", paired_stylus_ids=["0x0:0xffffe"]
+        )
 
     @classmethod
     def generic_eraser(cls) -> "StylusEntry":

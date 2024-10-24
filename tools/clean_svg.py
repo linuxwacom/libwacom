@@ -48,9 +48,6 @@ def traverse_and_clean(node):
     for key in list(node.attrib.keys()):
         if key.startswith("{"):
             del node.attrib[key]
-    if node.tag == "g" and "id" in node.attrib:
-        apply_id_and_class_from_group(node)
-        del node.attrib["id"]
     if "style" in node.attrib:
         if node.tag == "text":
             node.attrib["style"] = "text-anchor:start;"

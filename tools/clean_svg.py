@@ -18,10 +18,15 @@
 # Author: Joaquim Rocha <jrocha@redhat.com>
 #
 
+import logging
 import sys
 from pathlib import Path
 from argparse import ArgumentParser
 from xml.etree import ElementTree as ET
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("clean-svg")
+logger.setLevel(logging.INFO)
 
 NAMESPACE = "http://www.w3.org/2000/svg"
 BRACKETS_NAMESPACE = "{" + NAMESPACE + "}"
@@ -304,6 +309,12 @@ def clean_svg(root, tabletname):
 if __name__ == "__main__":
     parser = ArgumentParser(description="Clean SVG files for libwacom")
     parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Print debug logging output",
+    )
+    parser.add_argument(
         "--ignore-missing",
         action="store_true",
         default=False,
@@ -317,6 +328,9 @@ if __name__ == "__main__":
         metavar="TABLET_NAME",
     )
     args = parser.parse_args()
+
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
 
     svgfile = args.filename
     tabletname = args.tabletname

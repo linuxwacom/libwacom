@@ -1,0 +1,20 @@
+# Lenovo IdeaPad Flex 5 14ARE05
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+#
+# Derived from wacom-isdv4-5215.tablet as the sysinfo script didn't generate a file
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/421
+
+[Device]
+Name=ISDv4 5214
+ModelName=
+DeviceMatch=i2c|056a|5214
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

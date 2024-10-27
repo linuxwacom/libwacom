@@ -1528,7 +1528,7 @@ libwacom_get_button_led_group (const WacomDevice *device, char button)
 		}
 	}
 
-	return WACOM_STATUS_LED_UNAVAILABLE;
+	return -1;
 }
 
 LIBWACOM_EXPORT int

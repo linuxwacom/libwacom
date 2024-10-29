@@ -222,9 +222,22 @@ static void
 test_dimensions(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
+	unsigned int flags = libwacom_get_integration_flags(device);
 
-	g_assert_cmpint(libwacom_get_width(device), >, 0);
-	g_assert_cmpint(libwacom_get_height(device), >, 0);
+	switch (flags) {
+	case WACOM_DEVICE_INTEGRATED_REMOTE:
+		g_assert_cmpint(libwacom_get_width(device), ==, 0);
+		g_assert_cmpint(libwacom_get_height(device), ==, 0);
+		break;
+	case WACOM_DEVICE_INTEGRATED_SYSTEM|WACOM_DEVICE_INTEGRATED_DISPLAY:
+		/* ISDV4 devices may not always have a width/height set */
+		break;
+	default:
+		g_assert_cmpint(libwacom_get_width(device), >, 0);
+		g_assert_cmpint(libwacom_get_height(device), >, 0);
+		break;
+	}
+
 }
 
 static void
@@ -403,9 +416,7 @@ static void setup_tests(WacomDevice *device)
 	cls = libwacom_get_class(device);
 #pragma GCC diagnostic pop
 
-	/* ISDv4 are built-in, they may be of varying size */
-	if (cls != WCLASS_ISDV4 && cls != WCLASS_REMOTE)
-		add_test(device, test_dimensions);
+	add_test(device, test_dimensions);
 
 	/* FIXME: we force the generic pen for these, should add a test */
 	if (libwacom_has_stylus(device))

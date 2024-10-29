@@ -34,7 +34,6 @@
 [Device]
 Name=Huion Inspiroy 2 L
 ModelName=H1061P
-Class=Bamboo
 DeviceMatch=usb|256c|0068;
 Width=11
 Height=7

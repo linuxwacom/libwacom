@@ -6,7 +6,6 @@
 Name=XP-Pen G430
 ModelName=
 DeviceMatch=usb|28bd|0075
-Class=Bamboo
 Width=4
 Height=3
 Styli=@generic-no-eraser;

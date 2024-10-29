@@ -37,7 +37,6 @@
 [Device]
 Name=Huion HS611
 DeviceMatch=usb|256c|006d|HUION Huion Tablet_HS611 Pad;usb|256c|006d|HUION Huion Tablet_HS611 Touch Strip;usb|256c|006d|HUION Huion Tablet_HS611 Pen
-Class=Bamboo
 Width=10
 Height=6
 IntegratedIn=

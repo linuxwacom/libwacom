@@ -17,7 +17,6 @@
 Name=Huion H640P
 ModelName=
 DeviceMatch=usb|256c|006d|HUION Huion Tablet_H640P Pad;usb|256c|006d|HUION Huion Tablet_H640P Pen
-Class=Bamboo
 Width=6
 Height=4
 IntegratedIn=

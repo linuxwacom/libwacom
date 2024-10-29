@@ -37,7 +37,6 @@
 [Device]
 Name=Huion Kamvas Pro 13
 ModelName=GT-133
-Class=Cintiq
 DeviceMatch=usb|256c|006e|Tablet Monitor Pen;usb|256c|006e|Tablet Monitor Pad;
 Width=12
 Height=7

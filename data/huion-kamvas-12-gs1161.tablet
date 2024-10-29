@@ -23,7 +23,6 @@
 [Device]
 Name=Huion Kamvas 12
 ModelName=KAMVAS 12 GS1161
-Class=Cintiq
 DeviceMatch=usb|256c|006d||HUION_M19p;usb|256c|006d|HUION Huion Tablet_GS1161 Pen;usb|256c|006d|HUION Huion Tablet_GS1161 Pad;
 Width=10
 Height=6

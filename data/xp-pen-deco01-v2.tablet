@@ -9,7 +9,6 @@ Name=UGTABLET 10 inch PenTablet Pad
 ModelName=
 DeviceMatch=usb|28bd|0905
 PairedIDs=
-Class=Bamboo
 Width=10
 Height=6
 IntegratedIn=

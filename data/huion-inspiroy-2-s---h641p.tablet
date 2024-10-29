@@ -33,7 +33,6 @@
 [Device]
 Name=Inspiroy 2 S
 ModelName=H641P
-Class=Bamboo
 DeviceMatch=usb|256c|0066;
 Width=6
 Height=4

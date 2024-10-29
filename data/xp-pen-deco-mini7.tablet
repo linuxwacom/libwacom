@@ -8,7 +8,6 @@
 Name=XP-Pen Deco mini7
 ModelName=
 DeviceMatch=usb|28bd|0928|UGTABLET 6 inch PenTablet
-Class=Bamboo
 Width=7
 Height=4
 Layout=xp-pen-deco-mw.svg

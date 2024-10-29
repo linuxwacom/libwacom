@@ -6,7 +6,6 @@
 Name=Huion New 1060 Plus
 ModelName=
 DeviceMatch=usb|256c|006e|HID 256c:006e Pen;usb|256c|006e|HID 256c:006e Pad
-Class=Bamboo
 Width=10
 Height=6
 IntegratedIn=

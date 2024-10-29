@@ -4,7 +4,6 @@
 [Device]
 Name=Huion Kamvas 16 (2019)
 ModelName=Kamvas 16 (2019)
-Class=Cintiq
 DeviceMatch=usb|256c|006d||HUION_M18e
 Width=14
 Height=8

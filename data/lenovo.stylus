@@ -6,3 +6,12 @@ Buttons=1
 EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
+
+[0x865b]
+# Lenovo ; VID_LENOVO     | 0x865b | BAT_SWAP
+Name=Lenovo Active Pen 3 (2023)
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile

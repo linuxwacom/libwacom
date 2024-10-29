@@ -25,6 +25,7 @@ ModelName=
 DeviceMatch=usb|28bd|0202
 Layout=xp-pen-ack05-remote.svg
 Class=Remote
+IntegratedIn=Remote
 
 [Features]
 Stylus=false

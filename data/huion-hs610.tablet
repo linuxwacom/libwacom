@@ -5,7 +5,6 @@
 [Device]
 Name=Huion HS610
 ModelName=HS610
-Class=Bamboo
 DeviceMatch=usb|256c|0064||HUION_T194
 Width=10
 Height=6

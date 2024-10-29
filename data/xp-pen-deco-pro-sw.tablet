@@ -9,7 +9,6 @@ Name=UGTABLET Deco Pro SW
 ModelName=
 DeviceMatch=usb|28bd|0933
 PairedIDs=
-Class=Bamboo
 Width=9
 Height=5
 IntegratedIn=

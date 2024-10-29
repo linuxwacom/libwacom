@@ -9,7 +9,6 @@ Name=UGEE 10.1 Tablet Monitor
 ModelName=
 DeviceMatch=usb|5543|004a|UGEE 10.1 Tablet Monitor;usb|5543|004a|UGEE 10.1 Tablet Monitor Pad;usb|5543|004a|UGEE 10.1 Tablet Monitor Mouse
 PairedIDs=
-Class=Bamboo
 Width=9
 Height=5
 IntegratedIn=

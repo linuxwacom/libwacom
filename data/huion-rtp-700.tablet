@@ -23,7 +23,6 @@
 [Device]
 Name=Huion RTP-700
 ModelName=RTP-700
-Class=Bamboo
 DeviceMatch=usb|256c|0064||HUION_T19k
 Width=11
 Height=7

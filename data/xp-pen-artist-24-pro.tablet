@@ -9,7 +9,6 @@ Name=XP-Pen Artist 24 Pro
 ModelName=
 DeviceMatch=usb|28bd|092d
 PairedIDs=
-Class=Cintiq
 Width=24
 Height=15
 IntegratedIn=Display

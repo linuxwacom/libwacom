@@ -6,7 +6,6 @@
 Name=Huion H610 Pro
 ModelName=
 DeviceMatch=usb|256c|006e|HUION PenTablet Pen;usb|256c|006e|HUION PenTablet Pad;usb|256c|006e|Turcom TS-6610 Pen;usb|256c|006e|Turcom TS-6610 Pad;usb|256c|006e|HUION Huion Tablet Pen;usb|256c|006e|HUION Huion Tablet Pad;usb|256c|006e|HUION H610 Pen;usb|256c|006e|HUION H610 Pad
-Class=Bamboo
 Width=10
 Height=6
 IntegratedIn=

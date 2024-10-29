@@ -11,7 +11,7 @@ ModelName=Mini KeyDial KD100
 Class=Remote
 DeviceMatch=usb|256c|006d||HUION_T200
 Layout=huion-mini-keydial-kd100.svg
-IntegratedIn=
+IntegratedIn=Remote
 
 [Features]
 NumDials=1

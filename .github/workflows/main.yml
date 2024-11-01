@@ -211,6 +211,7 @@ jobs:
       - name: run clean-svg on all .tablet files
         run: |
           for tabletfile in data/*.tablet; do
+            echo "Checking $tabletfile"
             ./tools/clean_svg.py --ignore-missing "$tabletfile" ""
           done
 

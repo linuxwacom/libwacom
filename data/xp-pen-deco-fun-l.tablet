@@ -1,0 +1,20 @@
+# XP-Pen
+# 10 inch PenTablet
+#
+# sysinfo.Eju9RVJHML.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/401
+
+[Device]
+Name=XP-Pen 10 inch PenTablet
+ModelName=CT1060
+DeviceMatch=usb|28bd|0932
+PairedIDs=
+Class=Bamboo
+Width=10
+Height=6
+IntegratedIn=
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=true

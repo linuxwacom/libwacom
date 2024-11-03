@@ -40,6 +40,36 @@ labels:
       pr:
         body: |
           Thanks for providing the sysinfo. Someone will be along shortly to review the PR.
+
+  - name: hid-recorder needed
+    labeled:
+      pr:
+        body: |
+          We need some more information about your device.
+          Please get [hid-recorder](https://github.com/hidutils/hid-recorder) and run it against
+          your device. The README in that repo has more information and
+          instructions on how to build and run.
+
+          Please **attach** (do not paste) the output of hid-recorder here.
+    unlabeled:
+      pr:
+        body: |
+          Thanks for providing the hid-recorder output. Someone will be along shortly to review the PR.
+
+  - name: libinput-record needed
+    labeled:
+      pr:
+        body: |
+          We need some more information about your device.
+          Please run [libinput record](https://wayland.freedesktop.org/libinput/doc/latest/tools.html)
+          against your device **attach** (do not paste) the output here.
+
+          `libinput record` may be in a distribution package named `libinput-utils` or `libinput-tools`.
+    unlabeled:
+      pr:
+        body: |
+          Thanks for providing the libinput record output. Someone will be along shortly to review the PR.
+
   - name: please file pull request
     labeled:
       issue:

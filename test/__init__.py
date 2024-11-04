@@ -196,8 +196,8 @@ class LibWacom:
         _Api(name="libwacom_get_num_keys", args=(c_void_p,), return_type=c_int),
         _Api(
             name="libwacom_get_supported_styli",
-            args=(c_void_p, c_void_p),
-            return_type=c_void_p,
+            args=(c_void_p, ctypes.POINTER(c_int)),
+            return_type=ctypes.POINTER(c_int),
         ),
         _Api(
             name="libwacom_get_styli",
@@ -558,6 +558,11 @@ class WacomEraserType(enum.IntEnum):
 
 
 class WacomStylus:
+    class Generic(enum.IntEnum):
+        PEN_WITH_ERASER = 0xFFFFF
+        ERASER = 0xFFFFE
+        PEN_NO_ERASER = 0xFFFFD
+
     def __init__(self, stylus):
         self.stylus = stylus
         lib = LibWacom.instance()

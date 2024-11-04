@@ -42,6 +42,12 @@
 #define WACOM_DEVICE_INTEGRATED_UNSET (WACOM_DEVICE_INTEGRATED_NONE - 1U)
 #define WACOM_VENDOR_ID 0x056a
 
+enum GenericStylus {
+	GENERIC_PEN_WITH_ERASER = 0xfffff,
+        GENERIC_ERASER = 0xffffe,
+        GENERIC_PEN_NO_ERASER = 0xffffd,
+};
+
 enum WacomFeature {
 	FEATURE_STYLUS		= (1 << 0),
 	FEATURE_TOUCH		= (1 << 1),

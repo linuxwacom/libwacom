@@ -5,6 +5,7 @@
 from configparser import ConfigParser
 from dataclasses import dataclass, field
 
+import ctypes
 import logging
 import pytest
 
@@ -15,6 +16,7 @@ from . import (
     WacomDevice,
     WacomEraserType,
     WacomStatusLed,
+    WacomStylus,
 )
 
 logger = logging.getLogger(__name__)
@@ -279,6 +281,32 @@ def test_isdv4_4800(db):
     assert device.vendor_id == 0x56A
     assert device.product_id == 0x4800
     assert device.num_buttons == 0
+
+
+@pytest.mark.parametrize(
+    "usbid,expected",
+    [
+        [(0x256C, 0x0067), [WacomStylus.Generic.PEN_NO_ERASER]],
+        [
+            (0x04F3, 0x264C),
+            [
+                WacomStylus.Generic.PEN_WITH_ERASER,
+                WacomStylus.Generic.ERASER,
+                WacomStylus.Generic.PEN_NO_ERASER,
+            ],
+        ],
+    ],
+)
+def test_generic_pens(db, usbid, expected):
+    # Inspiroy 2 has a generic-pen-no-eraser
+    device = db.new_from_usbid(*usbid)
+    assert device is not None
+
+    nstyli = ctypes.c_int()
+    styli = device.get_supported_styli(ctypes.byref(nstyli))
+    s = [WacomStylus.Generic(id) for id in styli[: nstyli.value]]
+
+    assert sorted(s) == sorted(expected)
 
 
 @pytest.mark.parametrize(

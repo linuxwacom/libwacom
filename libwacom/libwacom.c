@@ -1600,6 +1600,14 @@ libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int tool_id)
 		.tool_id = tool_id,
 	};
 
+	switch (tool_id) {
+	case GENERIC_PEN_WITH_ERASER:
+	case GENERIC_ERASER:
+	case GENERIC_PEN_NO_ERASER:
+		id.vid = 0;
+		break;
+
+	}
 	return libwacom_stylus_get_for_stylus_id (db, &id);
 }
 

@@ -91,7 +91,9 @@ var libwacom_8h =
       [ "WACOM_STATUS_LED_RING", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a5ff0f7a54421536958f76f1fa13b32a0", null ],
       [ "WACOM_STATUS_LED_RING2", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a7764f598cd2e21bea2c2162503dda5f6", null ],
       [ "WACOM_STATUS_LED_TOUCHSTRIP", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a89bac8fcc84c8868918cb2bbe1ae683a", null ],
-      [ "WACOM_STATUS_LED_TOUCHSTRIP2", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a2fbb178e496555ec0591548dec2e141c", null ]
+      [ "WACOM_STATUS_LED_TOUCHSTRIP2", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a2fbb178e496555ec0591548dec2e141c", null ],
+      [ "WACOM_STATUS_LED_DIAL", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a6ba522bc0a0141d1a364bf99cd11d42d", null ],
+      [ "WACOM_STATUS_LED_DIAL2", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6ae6b42697e495ca937b6ca19df6eda6a3", null ]
     ] ],
     [ "WacomStylusType", "group__styli.html#ga6f96ee71140aee8ac56c80fb8353c3f6", [
       [ "WSTYLUS_UNKNOWN", "group__styli.html#gga6f96ee71140aee8ac56c80fb8353c3f6ab0ce0a738eb1d022736559e59a7b64d6", null ],

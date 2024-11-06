@@ -75,6 +75,7 @@ def test_svg_exists(tabletfile):
 
     try:
         svg = config["Device"]["Layout"]
+        assert svg != "", "Empty Layout= line not permitted"
         assert (layoutsdir() / svg).exists()
 
     except KeyError:

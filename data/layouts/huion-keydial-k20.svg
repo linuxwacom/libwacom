@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="huion-mini-keydial-kd100"
+   width="274.74927"
+   height="425.1506"
+   sodipodi:docname="huion-keydial-k20.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs19" />
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.3729188"
+     inkscape:cx="3.7927973"
+     inkscape:cy="200.59683"
+     inkscape:window-width="3072"
+     inkscape:window-height="1659"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="huion-mini-keydial-kd100" />
+  <title
+     id="title">Mini KeyDial KD100</title>
+  <path
+     id="LeaderDialCCW"
+     class="DialCCW Dial Leader"
+     d="M 79.042834,31.253293 H 137.04283"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+     sodipodi:nodetypes="cc" />
+  <g
+     id="g1"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="32"
+       y="135"
+       width="47"
+       height="47" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="63.5"
+       y="160.5"
+       style="text-anchor:start">A</text>
+    <path
+       style="fill:none"
+       d="m 48.5,158.5 h 7"
+       id="LeaderA"
+       class="Leader A" />
+  </g>
+  <g
+     id="g2"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="86"
+       y="135"
+       width="47"
+       height="47" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="117.5"
+       y="160.5"
+       style="text-anchor:start">B</text>
+    <path
+       style="fill:none"
+       d="m 102.5,158.5 h 7"
+       id="LeaderB"
+       class="Leader B" />
+  </g>
+  <g
+     id="g3"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="140"
+       y="135"
+       width="47"
+       height="47" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="171.5"
+       y="160.5"
+       style="text-anchor:start">C</text>
+    <path
+       style="fill:none"
+       d="m 156.5,158.5 h 7"
+       id="LeaderC"
+       class="Leader C" />
+  </g>
+  <g
+     id="g4"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="194"
+       y="135"
+       width="47"
+       height="47" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="225.5"
+       y="160.5"
+       style="text-anchor:start">D</text>
+    <path
+       style="fill:none"
+       d="m 210.5,158.5 h 7"
+       id="LeaderD"
+       class="Leader D" />
+  </g>
+  <g
+     id="g5"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="32"
+       y="190"
+       width="47"
+       height="47" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="63.5"
+       y="215.5"
+       style="text-anchor:start">E</text>
+    <path
+       style="fill:none"
+       d="m 48.5,213.5 h 7"
+       id="LeaderE"
+       class="Leader E" />
+  </g>
+  <g
+     id="g6"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="88"
+       y="190"
+       width="47"
+       height="47" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="119.5"
+       y="215.5"
+       style="text-anchor:start">F</text>
+    <path
+       style="fill:none"
+       d="m 104.5,213.5 h 7"
+       id="LeaderF"
+       class="Leader F" />
+  </g>
+  <g
+     id="g7"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonG"
+       class="G Button"
+       x="141"
+       y="190"
+       width="47"
+       height="47" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="172.5"
+       y="215.5"
+       style="text-anchor:start">G</text>
+    <path
+       style="fill:none"
+       d="m 157.5,213.5 h 7"
+       id="LeaderG"
+       class="Leader G" />
+  </g>
+  <g
+     id="g8"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonH"
+       class="H Button"
+       x="195"
+       y="190"
+       width="47"
+       height="47" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="226.5"
+       y="215.5"
+       style="text-anchor:start">H</text>
+    <path
+       style="fill:none"
+       d="m 211.5,213.5 h 7"
+       id="LeaderH"
+       class="Leader H" />
+  </g>
+  <g
+     id="g9"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonI"
+       class="I Button"
+       x="32"
+       y="242"
+       width="47"
+       height="47" />
+    <text
+       id="LabelI"
+       class="I Label"
+       x="63.5"
+       y="267.5"
+       style="text-anchor:start">I</text>
+    <path
+       style="fill:none"
+       d="m 48.5,265.5 h 7"
+       id="LeaderI"
+       class="Leader I" />
+  </g>
+  <g
+     id="g10"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonJ"
+       class="J Button"
+       x="87"
+       y="243"
+       width="47"
+       height="47" />
+    <text
+       id="LabelJ"
+       class="J Label"
+       x="118.5"
+       y="268.5"
+       style="text-anchor:start">J</text>
+    <path
+       style="fill:none"
+       d="m 103.5,266.5 h 7"
+       id="LeaderJ"
+       class="Leader J" />
+  </g>
+  <g
+     id="g11"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonK"
+       class="K Button"
+       x="140"
+       y="243"
+       width="47"
+       height="47" />
+    <text
+       id="LabelK"
+       class="K Label"
+       x="171.5"
+       y="268.5"
+       style="text-anchor:start">K</text>
+    <path
+       style="fill:none"
+       d="m 156.5,266.5 h 7"
+       id="LeaderK"
+       class="Leader K" />
+  </g>
+  <g
+     id="g12"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonL"
+       class="L Button"
+       x="195"
+       y="243"
+       width="47"
+       height="47" />
+    <text
+       id="LabelL"
+       class="L Label"
+       x="226.5"
+       y="268.5"
+       style="text-anchor:start">L</text>
+    <path
+       style="fill:none"
+       d="m 211.5,266.5 h 7"
+       id="LeaderL"
+       class="Leader L" />
+  </g>
+  <g
+     id="g13"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonM"
+       class="M Button"
+       x="32"
+       y="296"
+       width="47"
+       height="47" />
+    <text
+       id="LabelM"
+       class="M Label"
+       x="63.5"
+       y="321.5"
+       style="text-anchor:start">M</text>
+    <path
+       style="fill:none"
+       d="m 48.5,319.5 h 7"
+       id="LeaderM"
+       class="Leader M" />
+  </g>
+  <g
+     id="g14"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonN"
+       class="N Button"
+       x="86"
+       y="296"
+       width="47"
+       height="47" />
+    <text
+       id="LabelN"
+       class="N Label"
+       x="117.5"
+       y="321.5"
+       style="text-anchor:start">N</text>
+    <path
+       style="fill:none"
+       d="m 102.5,319.5 h 7"
+       id="LeaderN"
+       class="Leader N" />
+  </g>
+  <g
+     id="g15"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonO"
+       class="O Button"
+       x="140"
+       y="296"
+       width="47"
+       height="47" />
+    <text
+       id="LabelO"
+       class="O Label"
+       x="171.5"
+       y="321.5"
+       style="text-anchor:start">O</text>
+    <path
+       style="fill:none"
+       d="m 156.5,319.5 h 7"
+       id="LeaderO"
+       class="Leader O" />
+  </g>
+  <g
+     id="g16"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonP"
+       class="P Button"
+       x="195"
+       y="296"
+       width="45"
+       height="99" />
+    <text
+       id="LabelP"
+       class="P Label"
+       x="225.5"
+       y="347.5"
+       style="text-anchor:start">P</text>
+    <path
+       style="fill:none"
+       d="m 210.5,345.5 h 7"
+       id="LeaderP"
+       class="Leader P" />
+  </g>
+  <g
+     id="g17"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonQ"
+       class="Q Button"
+       x="32"
+       y="350"
+       width="99"
+       height="45" />
+    <text
+       id="LabelQ"
+       class="Q Label"
+       x="89.5"
+       y="374.5"
+       style="text-anchor:start">Q</text>
+    <path
+       style="fill:none"
+       d="m 74.5,372.5 h 7"
+       id="LeaderQ"
+       class="Leader Q" />
+  </g>
+  <g
+     id="g18"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonR"
+       class="R Button"
+       x="140"
+       y="349"
+       width="47"
+       height="47" />
+    <text
+       id="LabelR"
+       class="R Label"
+       x="171.5"
+       y="374.5"
+       style="text-anchor:start">R</text>
+    <path
+       style="fill:none"
+       d="m 156.5,372.5 h 7"
+       id="LeaderR"
+       class="Leader R" />
+  </g>
+  <g
+     id="g19"
+     transform="translate(0.91783367,-1.6637073)">
+    <rect
+       id="ButtonS"
+       class="S Button"
+       x="42"
+       y="43"
+       width="39"
+       height="39" />
+    <text
+       id="LabelS"
+       class="S Label"
+       x="69.5"
+       y="64.5"
+       style="text-anchor:start">S</text>
+    <path
+       style="fill:none"
+       d="m 54.5,62.5 h 7"
+       id="LeaderS"
+       class="Leader S" />
+  </g>
+  <circle
+     style="fill:none"
+     id="Dial"
+     class="Dial TouchDial"
+     cx="62.417835"
+     cy="60.836292"
+     r="43.984413" />
+  <path
+     id="DialCCW"
+     class="DialCCW Button"
+     d="m 55.419653,30.392456 5.386094,-2.693047 v 1.795365 a 13.465235,13.465235 0 0 1 8.976824,2.693047 11.669871,11.669871 0 0 0 -8.976824,-0.897683 v 1.795365 z"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.448841"
+     inkscape:label="#DialCCW" />
+  <path
+     id="DialCW"
+     class="DialCW Button"
+     d="m 55.418755,91.243846 5.376448,-2.68822 v 1.79214 a 13.441119,13.441119 0 0 0 8.960746,-1.79214 11.64897,11.64897 0 0 1 -8.960746,3.58429 v 1.79215 z"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.448037"
+     inkscape:label="#DialCW" />
+  <text
+     id="LabelDialCCW"
+     class="DialCCW Dial Label"
+     x="139.04283"
+     y="31.253292"
+     style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">CCW</text>
+  <path
+     id="LeaderDialCW"
+     class="DialCW Dial Leader"
+     d="M 79.042834,89.253293 H 137.04283"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+     sodipodi:nodetypes="cc" />
+  <text
+     id="LabelDialCW"
+     class="DialCW Dial Label"
+     x="139.04283"
+     y="89.253304"
+     style="color:#000000;font-size:8px;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">CW</text>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Mini KeyDial KD100</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g3465"
+     inkscape:label="kdial-case"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+     transform="matrix(2.3253496,0,0,2.3253496,-167.77479,-42.585986)">
+    <path
+       id="rect1079"
+       style="overflow:visible;opacity:1;vector-effect:none;stroke-width:0.250001;paint-order:stroke fill markers;stop-color:#000000;stop-opacity:1"
+       d="m 97.773479,18.4388 h 65.817911 c 14.12596,0 25.49812,11.508011 25.49812,25.802716 V 186.8752 c 0,14.2947 -11.37216,14.10664 -25.49812,14.10664 H 97.773479 c -14.125964,0 -25.498129,1.41799 -25.498129,-12.87671 V 44.241516 c 0,-14.294705 11.372165,-25.802716 25.498129,-25.802716 z"
+       sodipodi:nodetypes="sssssssss"
+       inkscape:label="silhouette" />
+    <rect
+       style="color:#000000;font-variation-settings:normal;overflow:visible;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#7f7f7f;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000;stop-opacity:1"
+       id="rect1217"
+       width="108.40132"
+       height="43.688095"
+       x="76.042854"
+       y="22.282274"
+       rx="21.022074"
+       ry="21.022074"
+       inkscape:label="dial-outline" />
+    <path
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#7f7f7f;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000;stop-opacity:1"
+       d="m 189.17289,60.614713 c 0,0 1.00438,-0.164429 0.99193,0.86143 -0.0124,1.025859 0.0251,12.403704 0.0113,13.15192 -0.0138,0.748215 -0.44109,0.92833 -1.20059,0.925099"
+       id="path1282"
+       sodipodi:nodetypes="ccsc"
+       inkscape:label="power-button" />
+    <rect
+       style="color:#000000;font-variation-settings:normal;overflow:visible;opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#7f7f7f;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000;stop-opacity:1"
+       id="rect1388"
+       width="107.89783"
+       height="120.79305"
+       x="76.865082"
+       y="70.469841"
+       rx="7.5390472"
+       ry="7.5390472"
+       inkscape:label="pad-outline" />
+  </g>
+</svg>

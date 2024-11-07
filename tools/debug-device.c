@@ -193,10 +193,11 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 	{
 		WacomIntegrationFlags flags = libwacom_get_integration_flags(device);
-		func(libwacom_get_integration_flags, "%s%s %s",
+		func(libwacom_get_integration_flags, "%s%s %s %s",
 		     flags == WACOM_DEVICE_INTEGRATED_NONE ? "NONE" : "",
 		     flags == WACOM_DEVICE_INTEGRATED_DISPLAY ? "DISPLAY" : "",
-		     flags == WACOM_DEVICE_INTEGRATED_SYSTEM ? "SYSTEM" : ""
+		     flags == WACOM_DEVICE_INTEGRATED_SYSTEM ? "SYSTEM" : "",
+		     flags == WACOM_DEVICE_INTEGRATED_REMOTE ? "REMOTE" : ""
 		);
 	}
 

@@ -52,7 +52,7 @@ class SvgDevice:
         assert len(nodes) == 1, f"Expected one element with id {id}, have {len(nodes)}"
         node = nodes[0]
         for klass in classes or []:
-            assert klass in node.get("class").split(
+            assert klass in node.get("class", "").split(
                 " "
             ), f"Missing class '{klass}' for {id}. Have: {node.get('class')}"
 

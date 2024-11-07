@@ -216,9 +216,24 @@ check_if_udev_tablet(const char *path)
 	device = g_udev_client_query_by_device_file (client, path);
 	if (device &&
 	    g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET")) {
+		GUdevDevice *parent = g_udev_device_get_parent (device);
+		char *info = NULL;
+
+		if (parent) {
+			const char *bus = g_udev_device_get_property (parent, "ID_BUS");
+			const char *vid = g_udev_device_get_property (parent, "ID_VENDOR_ID");
+			const char *pid = g_udev_device_get_property (parent, "ID_MODEL_ID");
+			const char *name = g_udev_device_get_property (parent, "NAME");
+
+			if (bus && vid && pid && name)
+				info = g_strdup_printf("(%s:%s:%s - %s) ", bus, vid, pid, name);
+			g_object_unref (parent);
+		}
+
 		fprintf(stderr,
-			"%s is a tablet but not supported by libwacom\n",
-			path);
+			"%s %sis a tablet but not supported by libwacom\n",
+			path, info ? info : "");
+		g_free (info);
 	}
 	g_object_unref (device);
 	g_object_unref (client);

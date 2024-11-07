@@ -748,7 +748,7 @@ libwacom_parse_styli_list(WacomDeviceDatabase *db, WacomDevice *device,
 	guint i;
 
 	array = g_array_new (FALSE, FALSE, sizeof(WacomStylus*));
-	for (i = 0; ids[i]; i++) {
+	for (i = 0; ids && ids[i]; i++) {
 		const char *str = ids[i];
 
 		if (g_str_has_prefix(str, "0x")) {
@@ -949,9 +949,15 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 
 	string_list = g_key_file_get_string_list(keyfile, DEVICE_GROUP, "Styli", NULL, NULL);
 	if (!string_list) {
-		string_list = g_new0(char*, 3);
-		string_list[0] = g_strdup_printf("0x0:0x%x", WACOM_ERASER_FALLBACK_ID);
-		string_list[1] = g_strdup_printf("0x0:0x%x", WACOM_STYLUS_FALLBACK_ID);
+		GError *error = NULL;
+		if (g_key_file_get_boolean(keyfile, FEATURES_GROUP, "Stylus", &error) ||
+		    g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)) {
+			string_list = g_new0(char*, 3);
+			string_list[0] = g_strdup_printf("0x0:0x%x", WACOM_ERASER_FALLBACK_ID);
+			string_list[1] = g_strdup_printf("0x0:0x%x", WACOM_STYLUS_FALLBACK_ID);
+		}
+		if (error)
+			g_error_free(error);
 	}
 	libwacom_parse_styli_list(db, device, string_list);
 	g_strfreev (string_list);

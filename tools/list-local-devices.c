@@ -167,6 +167,7 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 		case WSTYLUS_MOBILE:   type = "mobile"; break;
 		}
 		printf("      - id: 0x%x\n", libwacom_stylus_get_id(stylus));
+		printf("        vid: 0x%04x\n", libwacom_stylus_get_vendor_id(stylus));
 		printf("        name: '%s'\n", libwacom_stylus_get_name(stylus));
 		printf("        type: '%s'\n", type);
 		printf("        axes: ['x', 'y' %s%s%s%s%s]\n",

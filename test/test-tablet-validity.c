@@ -286,6 +286,29 @@ test_styli(gconstpointer data)
 }
 
 static void
+test_no_styli(gconstpointer data)
+{
+	WacomDevice *device = (WacomDevice*)data;
+	int nstylus_ids, nstyli;
+	const WacomStylus **styli;
+	const int *stylus_ids;
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+	stylus_ids = libwacom_get_supported_styli(device, &nstylus_ids);
+#pragma GCC diagnostic pop
+	styli = libwacom_get_styli(device, &nstyli);
+
+	g_assert_cmpint(nstyli, ==, 0);
+	g_assert_cmpint(nstylus_ids, ==, 0);
+	g_assert_nonnull(styli);
+	g_assert_null(stylus_ids);
+	g_assert_null(styli[0]); /* NULL-terminated list */
+	g_free(styli);
+
+}
+
+static void
 test_realstylus(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
@@ -421,6 +444,8 @@ static void setup_tests(WacomDevice *device)
 	/* FIXME: we force the generic pen for these, should add a test */
 	if (libwacom_has_stylus(device))
 		add_test(device, test_styli);
+	else
+		add_test(device, test_no_styli);
 
 	switch (cls) {
 		case WCLASS_INTUOS:

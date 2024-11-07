@@ -142,7 +142,7 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 	g_list_foreach(d->nodes, print_devnode, NULL);
 
 	styli = libwacom_get_styli(d->dev, &nstyli);
-	printf("  styli:%s\n", nstyli > 0 ? "" : "[]");
+	printf("  styli:%s\n", nstyli > 0 ? "" : " []");
 	for (int i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus = styli[i];
 		const char *type = "invalid";

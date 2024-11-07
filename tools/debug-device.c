@@ -126,6 +126,31 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 		func(libwacom_get_bustype, "%s", busstr);
 	}
 
+	{
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+		WacomClass cls = libwacom_get_class(device);
+		#pragma GCC diagnostic pop
+		const char *str = NULL;
+
+		switch (cls) {
+		case WCLASS_UNKNOWN: str = "UNKNOWN"; break;
+		case WCLASS_INTUOS3: str = "INTUOS3"; break;
+		case WCLASS_INTUOS4: str = "INTUOS4"; break;
+		case WCLASS_INTUOS5: str = "INTUOS5"; break;
+		case WCLASS_CINTIQ: str = "CINTIQ"; break;
+		case WCLASS_BAMBOO: str = "BAMBOO"; break;
+		case WCLASS_GRAPHIRE: str = "GRAPHIRE"; break;
+		case WCLASS_ISDV4: str = "ISDV4"; break;
+		case WCLASS_INTUOS: str = "INTUOS"; break;
+		case WCLASS_INTUOS2: str = "INTUOS2"; break;
+		case WCLASS_PEN_DISPLAYS: str = "PEN_DISPLAYS"; break;
+		case WCLASS_REMOTE: str = "REMOTE"; break;
+			break;
+		}
+		func(libwacom_get_class, "%s", str);
+	}
+
 	intfunc(libwacom_get_width, device);
 	intfunc(libwacom_get_height, device);
 

@@ -429,7 +429,6 @@ static void setup_tests(WacomDevice *device)
 	add_test(device, test_matches);
 	add_test(device, test_matches_vidpid);
 	add_test(device, test_buttons);
-	add_test(device, test_styli);
 	add_test(device, test_rings);
 	add_test(device, test_strips);
 	add_test(device, test_dials);

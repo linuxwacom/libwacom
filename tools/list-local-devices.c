@@ -103,7 +103,7 @@ print_devnode(gpointer data, gpointer user_data)
 
 	g_free(basename);
 	if (g_file_get_contents(path, &name, &size, &error)) {
-		printf("  - %s: '%.*s'\n", devnode, (int)(size - 1), name);
+		printf("      - %s: '%.*s'\n", devnode, (int)(size - 1), name);
 	} else {
 		fprintf(stderr, "%s\n", error->message);
 	}
@@ -134,15 +134,15 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 			break;
 	}
 
-	printf("- name: '%s'\n", name);
-	printf("  bus: '%s'\n", bus);
-	printf("  vid: '0x%04x'\n", vid);
-	printf("  pid: '0x%04x'\n", pid);
-	printf("  nodes: \n");
+	printf("  - name: '%s'\n", name);
+	printf("    bus: '%s'\n", bus);
+	printf("    vid: '0x%04x'\n", vid);
+	printf("    pid: '0x%04x'\n", pid);
+	printf("    nodes: \n");
 	g_list_foreach(d->nodes, print_devnode, NULL);
 
 	styli = libwacom_get_styli(d->dev, &nstyli);
-	printf("  styli:%s\n", nstyli > 0 ? "" : " []");
+	printf("    styli:%s\n", nstyli > 0 ? "" : " []");
 	for (int i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus = styli[i];
 		const char *type = "invalid";
@@ -166,16 +166,16 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 		case WSTYLUS_3D:       type = "3D"; break;
 		case WSTYLUS_MOBILE:   type = "mobile"; break;
 		}
-		printf("   - id: 0x%x\n", libwacom_stylus_get_id(stylus));
-		printf("     name: '%s'\n", libwacom_stylus_get_name(stylus));
-		printf("     type: '%s'\n", type);
-		printf("     axes: ['x', 'y' %s%s%s%s%s]\n",
+		printf("      - id: 0x%x\n", libwacom_stylus_get_id(stylus));
+		printf("        name: '%s'\n", libwacom_stylus_get_name(stylus));
+		printf("        type: '%s'\n", type);
+		printf("        axes: ['x', 'y' %s%s%s%s%s]\n",
 			axes & WACOM_AXIS_TYPE_TILT ? ", 'tilt'" : "",
 			axes & WACOM_AXIS_TYPE_ROTATION_Z ? ", 'rotation'" : "",
 			axes & WACOM_AXIS_TYPE_DISTANCE ? ", 'distance'" : "",
 			axes & WACOM_AXIS_TYPE_PRESSURE ? ", 'pressure'" : "",
 			axes & WACOM_AXIS_TYPE_SLIDER ? ", 'slider'" : "");
-		printf("     buttons: %d\n", libwacom_stylus_get_num_buttons(stylus));
+		printf("        buttons: %d\n", libwacom_stylus_get_num_buttons(stylus));
 
 		switch (eraser_type) {
 		case WACOM_ERASER_UNKNOWN: etype = "unknown"; break;
@@ -185,10 +185,10 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 		}
 
 		if (libwacom_stylus_is_eraser(stylus)) {
-			printf("     is_eraser: 'true'\n");
-			printf("     eraser_type: '%s'\n", etype);
+			printf("        is_eraser: 'true'\n");
+			printf("        eraser_type: '%s'\n", etype);
 		} else {
-			printf("     erasers: [");
+			printf("        erasers: [");
 			if (libwacom_stylus_has_eraser(stylus)) {
 				int npaired;
 				const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);

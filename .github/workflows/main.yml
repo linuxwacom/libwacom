@@ -183,19 +183,19 @@ jobs:
         # the multiple matches of the Intuos Pro L.
       - name: copy and modify tablet files to override another one
         run: |
-          sed -e 's/27QHD/27QHD MODIFIED/' data/wacom-cintiq-27hd.tablet | sudo tee /etc/libwacom/modified-cintiq.tablet
-          sed -e 's/Pro L/Pro L MODIFIED/' -e 's/usb|056a|0358;//' data/wacom-intuos-pro-2-l.tablet | sudo tee /etc/libwacom/modified-intuos.tablet
+          sed -e 's/27QHD/27QHD MODIFIED/' data/wacom-cintiq-27hd.tablet | sudo tee /etc/libwacom/wacom-cintiq-27hd.tablet
+          sed -e 's/Pro L/Pro L MODIFIED/' -e 's/usb|056a|0358;//' data/wacom-intuos-pro-2-l.tablet | sudo tee /etc/libwacom/wacom-intuos-pro-2-l.tablet
       - name: list all devices for debugging
         run: libwacom-list-devices --format=yaml
 
       # We expect the modified tablets to be listed
-      # We expect the remaining match for a modified tablet to be listed
+      # We expect the remaining match for a modified tablet to not be listed
       # We expect the overridden match *not* to be listed
       - name: check for the expected devices to be present (or not present)
         run: |
           test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name')" == "Wacom Cintiq 27QHD MODIFIED"
           test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "bluetooth") | select(.vid == "0x056a") | select(.pid == "0x0361") | .name')" == "Wacom Intuos Pro L MODIFIED"
-          test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x0358") | .name' | wc -l) -eq 1
+          test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x0358") | .name' | wc -l) -eq 0
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name' | wc -l) -eq 1
 
   ####

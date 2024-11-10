@@ -136,8 +136,8 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 
 	printf("  - name: '%s'\n", name);
 	printf("    bus: '%s'\n", bus);
-	printf("    vid: '0x%04x'\n", vid);
-	printf("    pid: '0x%04x'\n", pid);
+	printf("    vid: 0x%04x\n", vid);
+	printf("    pid: 0x%04x\n", pid);
 	printf("    nodes: \n");
 	g_list_foreach(d->nodes, print_devnode, NULL);
 

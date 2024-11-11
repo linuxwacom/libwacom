@@ -344,6 +344,8 @@ if __name__ == "__main__":
         config.read(args.filename)
         try:
             svgname = config["Device"]["Layout"]
+            if not svgname:
+                raise KeyError("Empty layout line")
         except KeyError:
             print(
                 f"{args.filename} does not specify a layout, skipping", file=sys.stderr

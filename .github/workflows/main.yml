@@ -66,6 +66,29 @@ jobs:
         with:
           name: tarball
           path: libwacom-*tar.xz
+
+  ###
+  #
+  # scan-build
+  #
+  scan-build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
+      - name: scan-build
+        uses: ./.github/actions/meson
+        with:
+          meson_skip_test: 1
+          ninja_args: scan-build
+
   ###
   #
   # valgrind run

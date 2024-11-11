@@ -317,11 +317,17 @@ if __name__ == "__main__":
         default=False,
         help="Ignore .tablet files without a Layout",
     )
-    parser.add_argument("filename", type=str, help="SVG file to clean", metavar="FILE")
+    parser.add_argument(
+        "filename",
+        type=str,
+        help="SVG file to clean or .tablet file with a Layout=xyz.svg line",
+        metavar="FILE",
+    )
     parser.add_argument(
         "tabletname",
         type=str,
-        help="The name of the tablet",
+        nargs="?",
+        help="The name of the tablet, can be omitted if FILE is a .tablet file",
         metavar="TABLET_NAME",
     )
     args = parser.parse_args()
@@ -345,6 +351,8 @@ if __name__ == "__main__":
             sys.exit(0 if args.ignore_missing else 77)
         svgfile = Path(args.filename).parent / "layouts" / svgname
         tabletname = config["Device"]["Name"]
+    else:
+        assert tabletname, "Argument TABLET_NAME must be provided for SVG files"
 
     ET.register_namespace("", NAMESPACE)
     try:

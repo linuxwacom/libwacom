@@ -212,7 +212,7 @@ jobs:
         run: |
           for tabletfile in data/*.tablet; do
             echo "Checking $tabletfile"
-            ./tools/clean_svg.py --ignore-missing "$tabletfile" ""
+            ./tools/clean_svg.py --ignore-missing "$tabletfile"
           done
 
   ###

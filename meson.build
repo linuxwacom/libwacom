@@ -1,5 +1,5 @@
 project('libwacom', 'c',
-	version: '2.13.0',
+	version: '2.14.0',
 	license: 'HPND',
 	default_options: [ 'c_std=gnu99', 'warning_level=2' ],
 	meson_version: '>= 0.57.0')

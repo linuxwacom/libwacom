@@ -15,3 +15,12 @@ Buttons=1
 EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
+
+[0x80a3]
+# Lenovo ; VID_LENOVO     | 0x80a3 | BAT_CHRG
+Name=Lenovo Slim Pen
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile

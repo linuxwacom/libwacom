@@ -105,6 +105,34 @@ type_from_str (const char *type)
 	return WSTYLUS_UNKNOWN;
 }
 
+static const char *
+str_from_type (WacomStylusType type)
+{
+	switch (type) {
+	case WSTYLUS_UNKNOWN:
+		return NULL;
+	case WSTYLUS_GENERAL:
+		return "General";
+	case WSTYLUS_INKING:
+		return "Inking";
+	case WSTYLUS_AIRBRUSH:
+		return "Airbrush";
+	case WSTYLUS_CLASSIC:
+		return "Classic";
+	case WSTYLUS_MARKER:
+		return "Marker";
+	case WSTYLUS_STROKE:
+		return "Stroke";
+	case WSTYLUS_PUCK:
+		return "Pick";
+	case WSTYLUS_3D:
+		return "3D";
+	case WSTYLUS_MOBILE:
+		return "Mobile";
+	}
+	return NULL;
+}
+
 static WacomEraserType
 eraser_type_from_str (const char *type)
 {
@@ -117,6 +145,22 @@ eraser_type_from_str (const char *type)
 	if (g_str_equal(type, "Button"))
 		return WACOM_ERASER_BUTTON;
 	return WACOM_ERASER_UNKNOWN;
+}
+
+static const char *
+eraser_str_from_type (WacomEraserType type)
+{
+	switch (type) {
+	case WACOM_ERASER_NONE:
+		return "None";
+	case WACOM_ERASER_INVERT:
+		return "Invert";
+	case WACOM_ERASER_BUTTON:
+		return "Button";
+	case WACOM_ERASER_UNKNOWN:
+		return NULL;
+	}
+	return NULL;
 }
 
 WacomBusType
@@ -279,8 +323,88 @@ parse_stylus_id(const char *str, WacomStylusId *id)
 	return ret;
 }
 
+static char *
+string_or_fallback (GKeyFile *keyfile, const char *group,
+		    const char *key, const char *fallback) {
+	g_autoptr(GError) local_error = NULL;
+	if (g_key_file_has_key(keyfile, group, key, &local_error))
+		return g_key_file_get_string(keyfile, group, key, NULL);
+
+	return g_strdup(fallback);
+}
+
+static int
+int_or_fallback (GKeyFile *keyfile, const char *group,
+		const char *key, int fallback) {
+	g_autoptr(GError) local_error = NULL;
+	if (g_key_file_has_key(keyfile, group, key, &local_error))
+		return g_key_file_get_integer(keyfile, group, key, NULL);
+
+	return fallback;
+}
+
+static bool
+boolean_or_fallback (GKeyFile *keyfile, const char *group,
+		 const char *key, bool fallback, WacomStylus *stylus) {
+	g_autoptr(GError) error = NULL;
+	if (g_key_file_has_key(keyfile, group, key, &error)) {
+		return g_key_file_get_boolean(keyfile, group, key, NULL);
+	}
+	if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+		g_warning ("Stylus %s (%s) %s\n", stylus->name, group, error->message);
+
+	return fallback;
+}
+
+gchar **
+garray_to_string_list(GArray *array)
+{
+	gchar **values;
+	WacomStylusId *id;
+	char buffer[33];
+	bool ret;
+
+	if (array == NULL)
+		return NULL;
+
+	values = g_new (gchar *, array->len + 1);
+	for (guint i = 0; i < array->len; i++) {
+		id = &g_array_index(array, WacomStylusId, i);
+		ret = safe_itoa_base(id->tool_id, buffer, sizeof(buffer), 16);
+		values[i] = strdup(buffer);
+	}
+	values[array->len] = NULL;
+
+	return values;
+}
+
+static bool
+create_stylus_id_from_aliased(const char* str, const char *alias_value, WacomStylusId *id)
+{
+	char **tokens = g_strsplit(str, ":", 2);
+	const char *vidstr;
+	int vid;
+	bool ret = false;
+	int aliased_int;
+
+        if (tokens[1] == NULL) {
+                vidstr = G_STRINGIFY(WACOM_VENDOR_ID);
+        } else {
+                vidstr = tokens[0];
+        }
+
+        if (safe_atoi_base (vidstr, &vid, 16) && safe_atoi_base (alias_value, &aliased_int, 16)) {
+                id->vid = vid;
+                id->tool_id = aliased_int;
+                ret = true;
+        }
+        g_clear_pointer(&tokens, g_strfreev);
+
+        return ret;
+}
+
 static void
-libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
+libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path, AliasStatus alias)
 {
 	GKeyFile *keyfile;
 	GError *error = NULL;
@@ -295,24 +419,49 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 	groups = g_key_file_get_groups (keyfile, NULL);
 	for (i = 0; groups[i]; i++) {
-		WacomStylus *stylus;
-		WacomStylusId id;
+		WacomStylus *stylus, *other;
+		WacomStylusId id, lookup;
 		GError *error = NULL;
 		char *eraser_type, *type;
 		char **string_list;
+		char *alias_value;
 
 		if (!parse_stylus_id(groups[i], &id)) {
 			g_warning ("Failed to parse stylus ID '%s', ignoring entry", groups[i]);
 			continue;
 		}
+
 		stylus = g_new0 (WacomStylus, 1);
 		stylus->refcnt = 1;
 		stylus->id = id;
-		stylus->name = g_key_file_get_string(keyfile, groups[i], "Name", NULL);
-		stylus->group = g_key_file_get_string(keyfile, groups[i], "Group", NULL);
+
+		if (alias == IGNORE_ALIASES && g_key_file_get_string(keyfile, groups[i], "AliasOf", NULL) != NULL) {
+			continue;
+		}
+
+		if (alias == ONLY_ALIASES && g_key_file_get_string(keyfile, groups[i], "AliasOf", NULL) == NULL) {
+			continue;
+		}
+
+		if (alias == ONLY_ALIASES) {
+			alias_value = g_key_file_get_string(keyfile, groups[i], "AliasOf", NULL);
+
+			if (!create_stylus_id_from_aliased(groups[i], alias_value, &lookup)) {
+				g_warning ("Failed to parse Aliased ID '%s', ignoring entry", groups[i]);
+	                        continue;
+			}
+			other = g_hash_table_lookup(db->stylus_ht, &lookup);
+			if (!other) {
+				g_warning ("Unkown Aliased ID 0x%08x %s\n", lookup.tool_id, alias_value);
+				continue;
+			}
+		}
+
+		stylus->name = string_or_fallback(keyfile, groups[i], "Name", other ? other->name : NULL);
+		stylus->group = string_or_fallback(keyfile, groups[i], "Group", other ? other->group : NULL);
 		stylus->paired_stylus_ids = g_array_new (FALSE, FALSE, sizeof(WacomStylusId));
 
-		eraser_type = g_key_file_get_string(keyfile, groups[i], "EraserType", NULL);
+		eraser_type = string_or_fallback(keyfile, groups[i], "EraserType", other ? eraser_str_from_type(other->eraser_type) : NULL);
 		stylus->eraser_type = eraser_type_from_str (eraser_type);
 		g_clear_pointer(&eraser_type, g_free);
 
@@ -320,7 +469,15 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		stylus->deprecated_paired_ids = g_array_new (FALSE, FALSE, sizeof(int));
 		stylus->paired_styli = g_array_new (FALSE, FALSE, sizeof(WacomStylus*));
 
-		string_list = g_key_file_get_string_list (keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+		if (alias == IGNORE_ALIASES) {
+			string_list = g_key_file_get_string_list(keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+		} else {
+			string_list = g_key_file_get_string_list(keyfile, groups[i], "PairedStylusIds", NULL, NULL);
+			if (string_list == NULL) {
+				string_list = garray_to_string_list (other ? other->paired_stylus_ids: NULL);
+			}
+		}
+
 		for (guint j = 0; string_list && string_list[j]; j++) {
 			WacomStylusId paired_id;
 			if (parse_stylus_id(string_list[j], &paired_id)) {
@@ -333,16 +490,11 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 		}
 		g_clear_pointer(&string_list, g_strfreev);
 
-		stylus->has_lens = g_key_file_get_boolean(keyfile, groups[i], "HasLens", &error);
-		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-		g_clear_error (&error);
-		stylus->has_wheel = g_key_file_get_boolean(keyfile, groups[i], "HasWheel", &error);
-		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
-			g_warning ("Stylus %s (%s) %s\n", stylus->name, groups[i], error->message);
-		g_clear_error (&error);
+		stylus->has_lens = boolean_or_fallback(keyfile, groups[i], "HasLens", other ? other->has_lens : FALSE, stylus);
 
-		stylus->num_buttons = g_key_file_get_integer(keyfile, groups[i], "Buttons", &error);
+		stylus->has_wheel = boolean_or_fallback(keyfile, groups[i], "HasWheel", other ? other->has_wheel : FALSE, stylus);
+
+		stylus->num_buttons = int_or_fallback(keyfile, groups[i], "Buttons", other ? other->num_buttons : 0);
 		if (stylus->num_buttons == 0 && error != NULL) {
 			stylus->num_buttons = -1;
 			g_clear_error (&error);
@@ -350,30 +502,35 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db, const char *path)
 
 		stylus->axes = WACOM_AXIS_TYPE_NONE;
 		string_list = g_key_file_get_string_list (keyfile, groups[i], "Axes", NULL, NULL);
-		for (guint j = 0; string_list && string_list[j]; j++) {
-			WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
-			if (g_str_equal(string_list[j], "Tilt")) {
-				flag = WACOM_AXIS_TYPE_TILT;
-			} else if (g_str_equal(string_list[j], "RotationZ")) {
-				flag = WACOM_AXIS_TYPE_ROTATION_Z;
-			} else if (g_str_equal(string_list[j], "Distance")) {
-				flag = WACOM_AXIS_TYPE_DISTANCE;
-			} else if (g_str_equal(string_list[j], "Pressure")) {
-				flag = WACOM_AXIS_TYPE_PRESSURE;
-			} else if (g_str_equal(string_list[j], "Slider")) {
-				flag = WACOM_AXIS_TYPE_SLIDER;
-			} else {
-				g_warning ("Invalid axis %s for stylus ID %s\n",
-					   string_list[j], groups[i]);
+
+		if (alias == ONLY_ALIASES && (string_list == NULL)) {
+			stylus->axes = other->axes;
+		} else {
+			for (guint j = 0; string_list && string_list[j]; j++) {
+				WacomAxisTypeFlags flag = WACOM_AXIS_TYPE_NONE;
+				if (g_str_equal(string_list[j], "Tilt")) {
+					flag = WACOM_AXIS_TYPE_TILT;
+				} else if (g_str_equal(string_list[j], "RotationZ")) {
+					flag = WACOM_AXIS_TYPE_ROTATION_Z;
+				} else if (g_str_equal(string_list[j], "Distance")) {
+					flag = WACOM_AXIS_TYPE_DISTANCE;
+				} else if (g_str_equal(string_list[j], "Pressure")) {
+					flag = WACOM_AXIS_TYPE_PRESSURE;
+				} else if (g_str_equal(string_list[j], "Slider")) {
+					flag = WACOM_AXIS_TYPE_SLIDER;
+				} else {
+					g_warning ("Invalid axis %s for stylus ID %s\n",
+						   string_list[j], groups[i]);
 			}
-			if (stylus->axes & flag)
-				g_warning ("Duplicate axis %s for stylus ID %s\n",
-					   string_list[j], groups[i]);
-			stylus->axes |= flag;
+				if (stylus->axes & flag)
+					g_warning ("Duplicate axis %s for stylus ID %s\n",
+						   string_list[j], groups[i]);
+				stylus->axes |= flag;
+			}
 		}
 		g_clear_pointer(&string_list, g_strfreev);
 
-		type = g_key_file_get_string(keyfile, groups[i], "Type", NULL);
+		type = string_or_fallback(keyfile, groups[i], "Type", other ? str_from_type(other->type) : NULL);
 		stylus->type = type_from_str (type);
 		g_clear_pointer(&type, g_free);
 
@@ -1082,7 +1239,7 @@ stylus_destroy(void *data)
 }
 
 static bool
-load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
+load_stylus_files(WacomDeviceDatabase *db, const char *datadir, AliasStatus alias)
 {
 	DIR *dir;
 	struct dirent *file;
@@ -1093,12 +1250,11 @@ load_stylus_files(WacomDeviceDatabase *db, const char *datadir)
 
 	while ((file = readdir(dir))) {
 		char *path;
-
 		if (!is_stylus_file(file))
 			continue;
 
 		path = g_build_filename (datadir, file->d_name, NULL);
-		libwacom_parse_stylus_keyfile(db, path);
+		libwacom_parse_stylus_keyfile(db, path, alias);
 		g_free(path);
 	}
 
@@ -1142,7 +1298,12 @@ database_new_for_paths (char * const *datadirs)
 					       (GDestroyNotify) stylus_destroy);
 
 	for (datadir = datadirs; *datadir; datadir++) {
-		if (!load_stylus_files(db, *datadir))
+		if (!load_stylus_files(db, *datadir, IGNORE_ALIASES))
+			goto error;
+	}
+
+	for (datadir = datadirs; *datadir; datadir++) {
+		if (!load_stylus_files(db, *datadir, ONLY_ALIASES))
 			goto error;
 	}
 

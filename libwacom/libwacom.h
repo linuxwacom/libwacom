@@ -309,6 +309,10 @@ typedef enum {
 	WACOM_STATUS_LED_DIAL2		= 5,
 } WacomStatusLEDs;
 
+typedef enum {
+	IGNORE_ALIASES	= 0,
+	ONLY_ALIASES	= 1,
+} AliasStatus;
 /**
  * Allocate a new structure for error reporting.
  *

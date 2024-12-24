@@ -133,6 +133,21 @@ safe_atoi_base(const char *str, int *val, int base)
 }
 
 static inline bool
+safe_itoa_base(int val, char *buffer, int buf_size, int base)
+{
+	assert(base == 10 || base == 16 || base == 8);
+
+	if (base == 10)
+		snprintf(buffer, buf_size, "0x%08d", val);
+	else if (base == 16)
+		snprintf(buffer, buf_size, "0x%08x", val);
+	else if (base == 8)
+		snprintf(buffer, buf_size, "0x%08o", val);
+
+	return true;
+}
+
+static inline bool
 safe_atoi(const char *str, int *val)
 {
 	return safe_atoi_base(str, val, 10);

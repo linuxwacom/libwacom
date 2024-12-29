@@ -1,0 +1,323 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="xp-pen-artist-13.3-pro"
+   width="640"
+   height="350"
+   style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+   version="1.1"
+   viewBox="0 0 640 350"
+   xmlns="http://www.w3.org/2000/svg">
+  <title
+     id="title">XP-Pen Innovator 16</title>
+  <g
+     id="g5"
+     transform="translate(15.637,-49.394)">
+    <circle
+       id="Ring"
+       class="Ring TouchRing"
+       cx="39.5"
+       cy="224.5"
+       r="25" />
+    <path
+       id="LeaderRingCCW"
+       class="RingCCW Ring Leader"
+       d="m 39.5 197.5 v -4" />
+    <path
+       id="LeaderRingCW"
+       class="RingCW Ring Leader"
+       d="m 39.5 251.5 v 4" />
+    <path
+       id="RingCCW"
+       class="RingCCW Button"
+       d="m 34.5 204 4 -2 v 1.5 a 9.5 9.5 0 0 1 6.5 2 8.5 8.5 0 0 0 -6.5 -0.5 v 1.5 z" />
+    <path
+       id="RingCW"
+       class="RingCW Button"
+       d="m 34.5 245 4 -2 v 1.5 a 9.5 9.5 0 0 0 6.5 -1.5 8.5 8.5 0 0 1 -6.5 2.5 v 1.5 z" />
+    <text
+       id="LabelRingCCW"
+       class="RingCCW Ring Label"
+       x="30.5"
+       y="191"
+       style="text-anchor:start;">CCW</text>
+    <text
+       id="LabelRingCW"
+       class="RingCW Ring Label"
+       x="33"
+       y="263.5"
+       style="text-anchor:start;">CW</text>
+  </g>
+  <g
+     id="g39"
+     transform="translate(15.637,-49.5)">
+    <circle
+       id="Dial"
+       class="Dial TouchDial"
+       cx="39.5"
+       cy="224.5"
+       r="17" />
+    <path
+       id="LeaderDialCCW"
+       class="DialCCW Dial Leader"
+       d="M 58 224.5 H 70.5" />
+    <path
+       id="LeaderDialCW"
+       class="DialCW Dial Leader"
+       d="M 20.5 224.5 H 8.5" />
+    <path
+       id="DialCCW"
+       class="DialCCW Button"
+       d="m 52 219.5 2 4 h -1.5 a 9.5 9.5 0 0 1 -2 6.5 8.5 8.5 0 0 0 0.5 -6.5 h -1.5 z" />
+    <path
+       id="DialCW"
+       class="DialCW Button"
+       d="m 27 219.5 2 4 H 27.5 A 9.5 9.5 0 0 0 29 230 8.5 8.5 0 0 1 26.5 223.5 H 25 Z" />
+    <text
+       id="LabelDialCCW"
+       class="DialCCW Dial Label"
+       x="72"
+       y="227"
+       style="text-anchor:start;">CCW</text>
+    <text
+       id="LabelDialCW"
+       class="DialCW Dial Label"
+       x="-6"
+       y="227"
+       style="text-anchor:start;">CW</text>
+  </g>
+  <g
+     id="g20"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="22.5"
+       y="22"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="m 56 32 h 8 z" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="66"
+       y="35"
+       style="text-anchor:start;">A</text>
+  </g>
+  <g
+     id="g21"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="22.5"
+       y="44"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="m 56 54 h 8 z" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="66"
+       y="57"
+       style="text-anchor:start;">B</text>
+  </g>
+  <g
+     id="g22"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="22.5"
+       y="66"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="m 56 76 h 8 z" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="66"
+       y="79"
+       style="text-anchor:start;">C</text>
+  </g>
+  <g
+     id="g23"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="22.5"
+       y="88"
+       width="30"
+       height="40"
+       rx="2" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="m 56 108 h 8 z" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="66"
+       y="111"
+       style="text-anchor:start;">D</text>
+  </g>
+  <g
+     id="g35"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="22.5"
+       y="222"
+       width="30"
+       height="40"
+       rx="2" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="m 56 242 h 8 z" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="66"
+       y="245"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g
+     id="g36"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="22.5"
+       y="264"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="m 56 274 h 8 z" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="66"
+       y="277"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g
+     id="g37"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonG"
+       class="G Button"
+       x="22.5"
+       y="286"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderG"
+       class="G Leader"
+       d="m 56 296 h 8 z" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="66"
+       y="299"
+       style="text-anchor:start;">G</text>
+  </g>
+  <g
+     id="g38"
+     transform="translate(18.154)">
+    <rect
+       id="ButtonH"
+       class="H Button"
+       x="22.5"
+       y="308"
+       width="30"
+       height="20"
+       rx="2" />
+    <path
+       id="LeaderH"
+       class="H Leader"
+       d="m 56 318 h 8 z" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="66"
+       y="321"
+       style="text-anchor:start;">H</text>
+  </g>
+  <g
+     id="g34">
+    <rect
+       id="Screen"
+       x="110"
+       y="15"
+       width="520"
+       height="320" />
+    <rect
+       id="DotB"
+       x="51.5"
+       y="53.5"
+       width="8"
+       height="1"
+       rx="0.5"
+       ry="0.5" />
+    <rect
+       id="DotD"
+       x="51.5"
+       y="107.5"
+       width="8"
+       height="1"
+       rx="0.5"
+       ry="0.5" />
+    <rect
+       id="DotG"
+       x="51.5"
+       y="295.5"
+       width="8"
+       height="1"
+       rx="0.5"
+       ry="0.5" />
+    <rect
+       id="DotE"
+       x="51.5"
+       y="241.5"
+       width="8"
+       height="1"
+       rx="0.5"
+       ry="0.5" />
+    <rect
+       id="ButtonsGroupAD"
+       x="38.5"
+       y="20"
+       width="34"
+       height="110"
+       rx="4"
+       ry="4" />
+    <rect
+       id="ButtonsGroupEH"
+       x="38.5"
+       y="220"
+       width="34"
+       height="110"
+       rx="4"
+       ry="4" />
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+# XP-Pen
+# Innovator 16
+#
+# sysinfo.7AC5OuEz4a.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/436
+
+[Device]
+Name=XP-Pen Innovator 16
+ModelName=ID160F
+DeviceMatch=usb|28bd|092c
+PairedIDs=
+Width=17
+Height=10
+IntegratedIn=Display
+Layout=xp-pen-innovator-16.svg
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+NumRings=1
+NumDials=1
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7

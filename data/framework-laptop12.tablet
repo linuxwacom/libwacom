@@ -1,0 +1,19 @@
+# Framework Laptop 12
+#
+# sysinfo.9HcjU7I6uJ.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/475
+[Device]
+Name=Framework Laptop 12
+# VID belongs to Ilitek, the touch IC vendor
+# PID is reserved for this Framework Laptop 12
+DeviceMatch=i2c|222a|5539
+# Dimensions of the touch area in inches
+# Actually 10.5x6.6in, rounding up
+Width=11
+Height=7
+IntegratedIn=Display;System;
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Touch=true

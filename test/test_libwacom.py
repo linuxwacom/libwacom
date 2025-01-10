@@ -514,11 +514,11 @@ def test_new_unknown_device_with_fallback(custom_datadir, fallback, bustype):
         assert device is None
 
 
-def create_uinput(name, vid, pid):
+def create_uinput(name, vid, pid, bustype=0x3):
     libevdev = pytest.importorskip("libevdev")
     dev = libevdev.Device()
     dev.name = name
-    dev.id = {"bustype": 0x3, "vendor": vid, "product": pid}
+    dev.id = {"bustype": bustype, "vendor": vid, "product": pid}
     dev.enable(
         libevdev.EV_ABS.ABS_X,
         libevdev.InputAbsInfo(minimum=0, maximum=10000, resolution=200),
@@ -553,14 +553,22 @@ def test_new_from_path_known_device(db, fallback):
     assert dev.product_id == pid
 
 
+@pytest.mark.parametrize("bustype", WacomBustype)
 @pytest.mark.parametrize(
     "fallback", (WacomDatabase.Fallback.NONE, WacomDatabase.Fallback.GENERIC)
 )
-def test_new_from_path_unknown_device(db, fallback):
+def test_new_from_path_unknown_device(db, fallback, bustype):
+    bus = {
+        WacomBustype.UNKNOWN: 0,
+        WacomBustype.USB: 0x3,
+        WacomBustype.BLUETOOTH: 0x5,
+        WacomBustype.I2C: 0x18,
+    }[bustype]
+
     name = "Unknown device"
     vid = 0x1234
     pid = 0xABAC
-    uinput = create_uinput(name, vid, pid)
+    uinput = create_uinput(name, vid, pid, bustype=bus)
 
     dev = db.new_from_path(
         uinput.devnode, fallback=fallback
@@ -572,6 +580,7 @@ def test_new_from_path_unknown_device(db, fallback):
         assert dev.name == name
         assert dev.vendor_id == 0
         assert dev.product_id == 0
+        assert dev.bustype == 0  # fallback device is always bustype 0
 
 
 @pytest.mark.parametrize(

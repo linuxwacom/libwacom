@@ -137,6 +137,10 @@ get_bus_vid_pid (GUdevDevice  *device,
 	*product_id = (int)strtol (splitted_product[2], NULL, 16);
 
 	switch (bus_id) {
+	case 0:
+		*bus = WBUSTYPE_UNKNOWN;
+		retval = TRUE;
+		break;
 	case 3:
 		*bus = WBUSTYPE_USB;
 		retval = TRUE;

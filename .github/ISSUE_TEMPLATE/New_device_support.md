@@ -19,7 +19,7 @@ long time.
 - **Device model identifier**: <!-- e.g. CTH-680 -->
 - **libwacom version**:
 
-- [ ] I understand that libwacom does affect whether the device works (see [Troubleshooting](https://github.com/linuxwacom/libwacom/wiki/Troubleshooting#my-tablet-doesnt-work))
+- [ ] I understand that libwacom does **not** affect whether the device works (see [Troubleshooting](https://github.com/linuxwacom/libwacom/wiki/Troubleshooting#my-tablet-doesnt-work))
 
 - [ ] **udevadm info output**: <!-- as attachment! -->
 - [ ] sysinfo issue in [wacom-hid-descriptors](https://github.com/linuxwacom/wacom-hid-descriptors):

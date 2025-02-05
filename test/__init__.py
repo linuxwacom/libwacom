@@ -240,6 +240,11 @@ class LibWacom:
             return_type=c_int,
         ),
         _Api(
+            name="libwacom_get_button_modeswitch_mode",
+            args=(c_void_p, c_char),
+            return_type=c_int,
+        ),
+        _Api(
             name="libwacom_stylus_get_for_id",
             args=(c_void_p, c_int),
             return_type=c_void_p,
@@ -396,6 +401,11 @@ class LibWacom:
         _Enum(name="WACOM_STATUS_LED_TOUCHSTRIP2", value=4),
         _Enum(name="WACOM_STATUS_LED_DIAL", value=1),
         _Enum(name="WACOM_STATUS_LED_DIAL2", value=2),
+        _Enum(name="WACOM_MODE_SWITCH_NEXT", value=-1),
+        _Enum(name="WACOM_MODE_SWITCH_0", value=0),
+        _Enum(name="WACOM_MODE_SWITCH_1", value=1),
+        _Enum(name="WACOM_MODE_SWITCH_2", value=2),
+        _Enum(name="WACOM_MODE_SWITCH_3", value=3),
     ]
 
 
@@ -667,6 +677,13 @@ class WacomDevice:
                 WacomDevice.ButtonFlags.DIAL2_MODESWITCH,
             ]
 
+    class ModeSwitch(enum.IntEnum):
+        NEXT = -1
+        MODE_0 = 0
+        MODE_1 = 1
+        MODE_2 = 2
+        MODE_3 = 3
+
     def __init__(self, device, destroy=True):
         self.device = device
         self._destroy_on_del = destroy
@@ -811,6 +828,10 @@ class WacomDevice:
 
     def button_evdev_code(self, button: str) -> int:
         return self.get_button_evdev_code(button.encode("utf-8"))
+
+    def button_modeswitch_mode(self, button: str) -> ModeSwitch:
+        mode = self.get_button_modeswitch_mode(button.encode("utf-8"))
+        return WacomDevice.ModeSwitch(mode)
 
     def button_led_group(self, button: str) -> List[ButtonFlags]:
         return self.get_button_led_group(button.encode("utf-8"))

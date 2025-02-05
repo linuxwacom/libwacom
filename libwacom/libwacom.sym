@@ -94,3 +94,7 @@ LIBWACOM_2.14 {
     libwacom_stylus_get_paired_styli;
     libwacom_stylus_get_vendor_id;
 } LIBWACOM_2.12;
+
+LIBWACOM_2.15 {
+    libwacom_get_button_modeswitch_mode;
+} LIBWACOM_2.14;

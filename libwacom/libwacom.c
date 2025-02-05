@@ -1589,6 +1589,18 @@ libwacom_get_button_evdev_code(const WacomDevice *device, char button)
 	return b ? b->code : 0;
 }
 
+LIBWACOM_EXPORT WacomModeSwitch
+libwacom_get_button_modeswitch_mode(const WacomDevice *device, char button)
+{
+	WacomButton *b = g_hash_table_lookup(device->buttons,
+					     GINT_TO_POINTER(button));
+
+	if (!b || (b->flags & WACOM_BUTTON_MODESWITCH) == 0)
+		return WACOM_MODE_SWITCH_NEXT;
+
+	return b->mode;
+}
+
 static const WacomStylus *
 libwacom_stylus_get_for_stylus_id (const WacomDeviceDatabase *db,
 				   const WacomStylusId *id)

@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 import ctypes
 import logging
 import pytest
+import string
 
 from . import (
     WacomBuilder,
@@ -226,6 +227,11 @@ def test_cintiq24hdt(db):
     assert match.product_id == 0xF6
     assert match.bustype == device.BUSTYPE_USB
 
+    modes = {"A": 0, "B": 1, "C": 2, "I": 0, "J": 1, "K": 2}
+    for btn in string.ascii_uppercase[: device.num_buttons]:
+        expected_mode = modes.get(btn, WacomDevice.ModeSwitch.NEXT)
+        assert device.button_modeswitch_mode(btn) == expected_mode
+
 
 def test_cintiq13hd(db):
     libevdev = pytest.importorskip("libevdev")
@@ -248,6 +254,9 @@ def test_cintiqpro13(db):
     device = db.new_from_name("Wacom Cintiq Pro 13")
     assert device is not None
     assert device.num_keys == 5
+
+    for btn in string.ascii_uppercase[: device.num_buttons]:
+        assert device.button_modeswitch_mode(btn) == WacomDevice.ModeSwitch.NEXT
 
 
 def test_dell_canvas(db):
@@ -281,6 +290,16 @@ def test_isdv4_4800(db):
     assert device.vendor_id == 0x56A
     assert device.product_id == 0x4800
     assert device.num_buttons == 0
+
+
+def test_mobilestudio_pro_modeswitch(db):
+    device = db.new_from_name("Wacom MobileStudio Pro 13")
+    assert device is not None
+
+    modes = {"H": 0, "I": 1, "J": 2, "K": 3}
+    for btn in string.ascii_uppercase[: device.num_buttons]:
+        expected_mode = modes.get(btn, WacomDevice.ModeSwitch.NEXT)
+        assert device.button_modeswitch_mode(btn) == expected_mode
 
 
 @pytest.mark.parametrize(

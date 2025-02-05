@@ -462,10 +462,19 @@ libwacom_parse_buttons_key(WacomDevice      *device,
 {
 	guint i;
 	char **vals;
+	WacomModeSwitch mode = WACOM_MODE_SWITCH_NEXT;
 
 	vals = g_key_file_get_string_list (keyfile, BUTTONS_GROUP, key, NULL, NULL);
 	if (vals == NULL)
 		return;
+
+	/* If we have more than one entry our buttons
+	 * switch mode to a direct mode. Otherwise the
+	 * single button just cycles to next mode;
+	 */
+	if (vals[0] != NULL && vals[1] != NULL)
+		mode = WACOM_MODE_SWITCH_0;
+
 	for (i = 0; vals[i] != NULL; i++) {
 		char val;
 		WacomButton *button;
@@ -481,10 +490,20 @@ libwacom_parse_buttons_key(WacomDevice      *device,
 		button = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(val));
 		if (!button) {
 			button = g_new0(WacomButton, 1);
+			button->mode = WACOM_MODE_SWITCH_NEXT;
 			g_hash_table_insert(device->buttons, GINT_TO_POINTER(val), button);
 		}
 
 		button->flags |= flag;
+
+		/* This is Good Enough. Devices with direct mode switch buttons
+		 * have those tied to a single feature only, e.g. Ring (and optionally Ring2).
+		 * We effectively take the order of the buttons in the .tablet file and
+		 * bind the buttons in that order to the mode - first button is mode 0, etc.
+		 * If there's only one button it is set to "next".
+		 */
+		if (flag & WACOM_BUTTON_MODESWITCH)
+			button->mode = mode++;
 	}
 
 	g_strfreev (vals);

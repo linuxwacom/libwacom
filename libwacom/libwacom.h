@@ -310,6 +310,27 @@ typedef enum {
 } WacomStatusLEDs;
 
 /**
+ * @ingroup devices
+ *
+ * Defines the mode a button with @ref WACOM_BUTTON_RING_MODESWITCH,
+ * @ref WACOM_BUTTON_RING2_MODESWITCH, @ref WACOM_BUTTON_TOUCHSTRIP_MODESWITCH,
+ * @ref WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH, @ref WACOM_BUTTON_DIAL_MODESWITCH
+ * or @ref WACOM_BUTTON_DIAL2_MODESWITCH switches to.
+ *
+ * Positive values in this enum are used to signify the mode number. A tablet may
+ * support more than the 4 modes defined here, callers should use the numerical
+ * value of this enum to determine the mode number.
+ */
+typedef enum {
+	WACOM_MODE_SWITCH_NEXT = -1,
+	WACOM_MODE_SWITCH_0 = 0,
+	WACOM_MODE_SWITCH_1 = 1,
+	WACOM_MODE_SWITCH_2 = 2,
+	WACOM_MODE_SWITCH_3 = 3,
+	/* further modes are numerical only */
+} WacomModeSwitch;
+
+/**
  * Allocate a new structure for error reporting.
  *
  * @return A newly allocated error structure or NULL if the allocation
@@ -861,6 +882,24 @@ WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
  */
 int libwacom_get_button_evdev_code(const WacomDevice *device,
 				   char               button);
+
+/**
+ * @param device The tablet to query
+ * @param button The ID of the button to check for, between 'A' and 'Z'
+ *
+ * This function may only be called for buttons with one of the
+ * @ref WACOM_BUTTON_MODESWITCH flags set. For all other buttons, it returns
+ * @ref WACOM_MODE_SWITCH_NEXT.
+ *
+ * @return the target mode for this button. Values zero and above signal the
+ * number of the target mode, negative values are enumerated in the @WacomModeSwitch
+ * enum.
+ *
+ * @ingroup devices
+ * @since 2.15
+ */
+WacomModeSwitch libwacom_get_button_modeswitch_mode(const WacomDevice *device,
+						    char button);
 
 /**
  * Get the WacomStylus for the given tool ID.

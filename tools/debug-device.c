@@ -233,6 +233,20 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				 flags & WACOM_BUTTON_DIAL2_MODESWITCH ? "DIAL2_MODESWITCH|" : "",
 				 flags & WACOM_BUTTON_OLED ? "OLED " : "");
 		}
+
+		for (int i = 0; i < libwacom_get_num_buttons(device); i++ ) {
+			char b = 'A' + i;
+			WacomModeSwitch mode;
+
+			if ((libwacom_get_button_flag(device, b) & WACOM_BUTTON_MODESWITCH) == 0)
+				continue;
+
+			mode = libwacom_get_button_modeswitch_mode(device, b);
+			if (mode == WACOM_MODE_SWITCH_NEXT)
+				func_arg(libwacom_get_button_modeswitch_mode, "%c", b, "%s", "MODE_SWITCH_NEXT");
+			else
+				func_arg(libwacom_get_button_modeswitch_mode, "%c", b, "%d", (int)mode);
+		}
 	}
 
 	{

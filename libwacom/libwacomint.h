@@ -80,6 +80,7 @@ struct _WacomMatch {
 typedef struct _WacomButton {
 	WacomButtonFlags flags;
 	int code;
+	WacomModeSwitch mode;
 } WacomButton;
 
 typedef struct _WacomKeycode {

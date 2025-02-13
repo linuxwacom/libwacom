@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="377mm"
+   height="252mm"
+   viewBox="0 0 377 252"
+   version="1.1"
+   id="intuos-pro-l-ptk870"
+   style="fill:none;stroke:#7f7f7f;stroke-width:0.25;font-size:6;font-family:monospace"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <title
+     id="title">Wacom Intuos Pro L (PTK870)</title>
+  <g
+     id="g1">
+    <path
+       id="ButtonA"
+       class="Button A"
+       d="M 123.918 6.4004 C 118.908 1.76944 111.18 1.76813 106.168 6.3974 L 110.541 10.7699 C 113.131 8.54602 116.957 8.5473 119.546 10.7729 Z" />
+    <path
+       id="LeaderA"
+       class="Leader A"
+       d="M 93.7051 6.89279 L 109.952 6.89279" />
+    <text
+       id="LabelA"
+       class="Label A"
+       x="88.7051"
+       y="7.11235"
+       style="text-anchor:end;">A</text>
+  </g>
+  <g
+     id="g2">
+    <path
+       id="ButtonB"
+       class="Button B"
+       d="M 120.243 20.4721 L 124.629 24.8587 C 129.276 19.8443 129.277 12.0967 124.63 7.08171 L 120.242 11.4696 C 122.466 14.0587 122.466 17.8831 120.242 20.4721 Z" />
+    <path
+       id="LeaderB"
+       class="Leader B"
+       d="M 93.7051 43.56015 L 125.909 43.56015 L 125.835 19.5" />
+    <text
+       id="LabelB"
+       class="Label B"
+       x="88.7051"
+       y="43.77971"
+       style="text-anchor:end;">B</text>
+  </g>
+  <g
+     id="g3">
+    <path
+       id="ButtonC"
+       class="Button C"
+       d="M 110.519 21.1934 L 106.154 25.5581 C 111.17 30.2049 118.918 30.2035 123.932 25.5551 L 119.568 21.1904 C 116.972 23.4409 113.116 23.4417 110.519 21.1924 Z" />
+    <path
+       id="LeaderC"
+       class="Leader C"
+       d="M 93.7051 25.22647 L 109.952 25.22647" />
+    <text
+       id="LabelC"
+       class="Label C"
+       x="88.7051"
+       y="25.44603"
+       style="text-anchor:end;">C</text>
+  </g>
+  <g
+     id="g4">
+    <path
+       id="ButtonD"
+       class="Button D"
+       d="M 109.844 11.4671 L 105.472 7.09461 C 100.841 12.1059 100.841 19.8351 105.472 24.8459 L 109.844 20.4747 C 107.618 17.8848 107.618 14.057 109.844 11.4671 Z" />
+    <path
+       id="LeaderD"
+       class="Leader D"
+       d="M 93.7051 16.05963 L 104.335 16.05963" />
+    <text
+       id="LabelD"
+       class="Label D"
+       x="88.7051"
+       y="16.27919"
+       style="text-anchor:end;">D</text>
+  </g>
+  <g
+     id="g5">
+    <path
+       id="ButtonI"
+       class="Button I ModeSwitch"
+       d="M 115.039 10.6101 C 112.868 10.6101 110.911 11.9178 110.08 13.9235 C 109.25 15.9292 109.709 18.2378 111.244 19.7729 C 112.779 21.308 115.088 21.7672 117.093 20.9364 C 119.099 20.1057 120.407 18.1485 120.407 15.9776 C 120.407 14.554 119.841 13.1888 118.835 12.1822 C 117.828 11.1756 116.463 10.6101 115.039 10.6101 Z" />
+    <path
+       id="LeaderI"
+       class="Leader I ModeSwitch"
+       d="M 93.7051 34.39331 L 115.113 34.39331 L 115.039 19.5003" />
+    <text
+       id="LabelI"
+       class="Label I ModeSwitch"
+       x="88.7051"
+       y="34.61287"
+       style="text-anchor:end;">I</text>
+  </g>
+  <g
+     id="g7">
+    <path
+       id="DialCCW"
+       class="DialCCW Button"
+       d="M 143.885 5.88344 L 146.132 4.78296 L 146.132 5.51662 C 147.475 5.43235 148.804 5.82284 149.877 6.61708 C 148.73 6.00801 147.38 5.87584 146.132 6.25026 L 146.132 6.9839 Z" />
+    <path
+       id="LeaderDialCCW"
+       class="DialCCW Dial Leader"
+       d="M 151.853 6.89279 L 166.099 6.89279" />
+    <text
+       id="LabelDialCCW"
+       class="DialCCW Dial Label"
+       x="171.099"
+       y="7.2452002"
+       style="text-anchor:start;">CCW</text>
+    <path
+       id="DialCW"
+       class="DialCW Button"
+       d="M 143.883 26.4255 L 146.13 25.3251 L 146.13 26.0587 C 147.428 26.2501 148.753 25.9905 149.875 25.3251 C 148.902 26.3215 147.537 26.8566 146.13 26.7923 L 146.13 27.526 Z" />
+    <path
+       id="LeaderDialCW"
+       class="DialCW Dial Leader"
+       d="M 151.853 25.0477 L 166.099 25.0477" />
+    <text
+       id="LabelDialCW"
+       class="DialCW Dial Label"
+       x="171.099"
+       y="25.45682"
+       style="text-anchor:start;">CW</text>
+    <path
+       id="Dial"
+       class="Dial TouchDial"
+       d="M 146.854 3.00752 C 141.607 3.00752 136.878 6.16756 134.87 11.0141 C 132.863 15.8607 133.972 21.4393 137.682 25.1487 C 141.391 28.8581 146.97 29.9677 151.817 27.9602 C 156.664 25.9527 159.824 21.2234 159.824 15.9775 C 159.824 8.81439 154.017 3.00752 146.854 3.00752 Z" />
+  </g>
+  <g
+     id="g11">
+    <path
+       id="ButtonE"
+       class="Button E"
+       d="M 270.744 6.44612 C 265.734 1.81516 258.006 1.81385 252.994 6.44312 L 257.367 10.8156 C 259.957 8.59174 263.783 8.59302 266.372 10.8186 Z" />
+    <path
+       id="LeaderE"
+       class="Leader E"
+       d="M 283.198 6.93851 L 266.952 6.93851" />
+    <text
+       id="LabelE"
+       class="Label E"
+       x="288.198"
+       y="7.11235"
+       style="text-anchor:start;">E</text>
+  </g>
+  <g
+     id="g12">
+    <path
+       id="ButtonF"
+       class="Button F"
+       d="M 267.068 20.5178 L 271.455 24.9044 C 276.102 19.89 276.103 12.1424 271.456 7.12743 L 267.068 11.5153 C 269.291 14.1044 269.291 17.9288 267.068 20.5178 Z" />
+    <path
+       id="LeaderF"
+       class="Leader F"
+       d="M 283.198 16.05963 L 272.569 16.05963" />
+    <text
+       id="LabelF"
+       class="Label F"
+       x="288.198"
+       y="16.27919"
+       style="text-anchor:start;">F</text>
+  </g>
+  <g
+     id="g13">
+    <path
+       id="ButtonG"
+       class="Button G"
+       d="M 257.345 21.2391 L 252.98 25.6038 C 257.996 30.2506 265.744 30.2492 270.758 25.6008 L 266.394 21.2361 C 263.797 23.4866 259.942 23.4874 257.345 21.2381 Z" />
+    <path
+       id="LeaderG"
+       class="Leader G"
+       d="M 283.198 25.22647 L 266.952 25.22647" />
+    <text
+       id="LabelG"
+       class="Label G"
+       x="288.198"
+       y="25.44603"
+       style="text-anchor:start;">G</text>
+  </g>
+  <g
+     id="g14">
+    <path
+       id="ButtonH"
+       class="Button H"
+       d="M 256.67 11.5128 L 252.297 7.14033 C 247.667 12.1516 247.667 19.8808 252.298 24.8916 L 256.67 20.5204 C 254.443 17.9305 254.443 14.1027 256.67 11.5128 Z" />
+    <path
+       id="LeaderH"
+       class="Leader H"
+       d="M 283.198 43.56015 L 251.143 43.56015 L 251.069 19.5457" />
+    <text
+       id="LabelH"
+       class="Label H"
+       x="288.198"
+       y="43.77971"
+       style="text-anchor:start;">H</text>
+  </g>
+  <g
+     id="g15">
+    <path
+       id="ButtonJ"
+       class="Button J ModeSwitch"
+       d="M 261.865 10.6558 C 259.694 10.6558 257.737 11.9635 256.906 13.9692 C 256.075 15.9749 256.535 18.2835 258.07 19.8186 C 259.605 21.3537 261.914 21.8129 263.919 20.9821 C 265.925 20.1514 267.233 18.1942 267.233 16.0233 C 267.233 14.5997 266.667 13.2345 265.661 12.2279 C 264.654 11.2213 263.289 10.6558 261.865 10.6558 Z" />
+    <path
+       id="LeaderJ"
+       class="Leader J ModeSwitch"
+       d="M 283.198 34.39331 L 261.939 34.39331 L 261.865 19.546" />
+    <text
+       id="LabelJ"
+       class="Label J ModeSwitch"
+       x="288.198"
+       y="34.61287"
+       style="text-anchor:start;">J</text>
+  </g>
+  <g
+     id="g17">
+    <path
+       id="Dial2CCW"
+       class="Dial2CCW Dial2 Button"
+       d="M 227.31 5.92916 L 229.557 4.82868 L 229.557 5.56234 C 230.9 5.47807 232.229 5.86856 233.302 6.6628 C 232.155 6.05373 230.805 5.92156 229.557 6.29598 L 229.557 7.02962 Z" />
+    <path
+       id="LeaderDial2CCW"
+       class="Dial2CCW Dial2 Leader"
+       d="M 225.28 6.93851 L 211.034 6.93851" />
+    <text
+       id="LabelDial2CCW"
+       class="Dial2CCW Dial2 Label"
+       x="206.034"
+       y="7.2452002"
+       style="text-anchor:end;">CCW</text>
+    <path
+       id="Dial2CW"
+       class="Dial2CW Button"
+       d="M 227.308 26.4712 L 229.555 25.3708 L 229.555 26.1044 C 230.853 26.2958 232.178 26.0362 233.3 25.3708 C 232.327 26.3672 230.962 26.9023 229.555 26.838 L 229.555 27.5717 Z" />
+    <path
+       id="LeaderDial2CW"
+       class="Dial2CW Dial2 Leader"
+       d="M 225.28 25.0934 L 211.034 25.0934" />
+    <text
+       id="LabelDial2CW"
+       class="Dial2CW Dial2 Label"
+       x="206.034"
+       y="25.457001"
+       style="text-anchor:end;">CW</text>
+    <path
+       id="Dial2"
+       class="Dial2 TouchDial"
+       d="M 230.279 3.05324 C 225.033 3.05324 220.304 6.21328 218.296 11.0598 C 216.289 15.9064 217.398 21.485 221.108 25.1944 C 224.817 28.9038 230.396 30.0134 235.242 28.0059 C 240.089 25.9984 243.249 21.2691 243.249 16.0232 C 243.249 8.86011 237.442 3.05324 230.279 3.05324 Z" />
+  </g>
+</svg>

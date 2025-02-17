@@ -97,12 +97,67 @@ handle_match(const WacomMatch *m)
 	pop();
 }
 
+static WacomDevice *
+device_from_device_match(WacomDeviceDatabase *db, char **parts)
+{
+	WacomBusType bustype;
+	guint64 vid, pid;
+	const char *name = NULL;
+	const char *uniq = NULL;
+	WacomBuilder *builder;
+	WacomDevice *device;
+
+	if (g_str_equal(parts[0], "usb"))
+		bustype = WBUSTYPE_USB;
+	else if (g_str_equal(parts[0], "serial"))
+		bustype = WBUSTYPE_SERIAL;
+	else if (g_str_equal(parts[0], "bluetooth"))
+		bustype = WBUSTYPE_BLUETOOTH;
+	else if (g_str_equal(parts[0], "i2c"))
+		bustype = WBUSTYPE_I2C;
+	else {
+		fprintf(stderr, "Unknown bus type %s\n", parts[0]);
+		return NULL;
+	}
+
+	if (!g_ascii_string_to_unsigned(parts[1], 16, 0, 0xffff, &vid, NULL) ||
+	    !g_ascii_string_to_unsigned(parts[2], 16, 0, 0xffff, &pid, NULL)) {
+		fprintf(stderr, "Failed to parse vid/pid\n");
+		return NULL;
+	}
+
+	if (parts[3]) {
+		name = parts[3];
+		if (parts[4])
+			uniq = parts[4];
+	}
+
+	builder = libwacom_builder_new();
+	libwacom_builder_set_bustype(builder, bustype);
+	libwacom_builder_set_usbid(builder, vid, pid);
+	if (name)
+		libwacom_builder_set_match_name(builder, name);
+	if (name)
+		libwacom_builder_set_uniq(builder, uniq);
+
+	device = libwacom_new_from_builder(db, builder, WFALLBACK_NONE, NULL);
+	libwacom_builder_destroy(builder);
+	return device;
+}
+
 static int
 handle_device(WacomDeviceDatabase *db, const char *path)
 {
 	WacomDevice *device;
+	char **parts = g_strsplit(path, "|", 5);
 
-	device = libwacom_new_from_path(db, path, WFALLBACK_NONE, NULL);
+	if (parts && parts[0] && parts[1]) {
+		device = device_from_device_match(db, parts);
+	} else {
+		device = libwacom_new_from_path(db, path, WFALLBACK_NONE, NULL);
+	}
+	g_strfreev(parts);
+
 	if (!device) {
 		fprintf(stderr, "Device not known to libwacom\n");
 		return EXIT_FAILURE;
@@ -405,7 +460,8 @@ int main(int argc, char **argv)
 	GError *error;
 	int rc;
 
-	context = g_option_context_new (NULL);
+	context = g_option_context_new ("[/dev/input/event0 | \"usb|0123|abcd|some tablet\"]");
+	g_option_context_set_description(context, "The argument may be a device node or a single DeviceMatch string as listed in .tablet files.");
 
 	g_option_context_add_main_entries (context, opts, NULL);
 	error = NULL;
@@ -437,7 +493,7 @@ int main(int argc, char **argv)
 	}
 
 	if (argc <= 1) {
-		fprintf(stderr, "Missing device node\n");
+		fprintf(stderr, "Missing device node or match string\n");
 		libwacom_database_destroy (db);
 		return EXIT_FAILURE;
 	}

@@ -50,7 +50,7 @@ static int indent = 0;
 #define pop() indent -= 2
 
 #define ip(fmt_, ...) \
-	printf("%-*s" fmt_, indent, "", __VA_ARGS__);
+	printf("%-*s" fmt_, indent, "", __VA_ARGS__)
 /* Usage: p("function_name", "return value is %d", a) */
 #define p(f_, fmt_, ...) \
 	printf("%-*s%-*s -> " fmt_ "\n", indent, "", (46 - indent), f_, __VA_ARGS__)
@@ -61,11 +61,11 @@ static int indent = 0;
 
 /* Usage: func(myfunc, "%d", argval, "return value is %d", a) */
 #define func_arg(f_, arg_fmt_, arg_val_, fmt_, ...) \
-	{ \
+	do { \
 		char buf_[256]; \
 		snprintf(buf_, sizeof(buf_), #f_"(" arg_fmt_ ")", arg_val_); \
 		p(buf_, fmt_, __VA_ARGS__); \
-	}
+	} while(0)
 
 #define strfunc(f_, dev_) \
 	func(f_, "\"%s\"", f_(dev_))

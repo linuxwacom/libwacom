@@ -9,6 +9,7 @@ var searchData=
   ['wacomerrorcode_6',['WacomErrorCode',['../group__context.html#gac3d9ee175999d6b22cee82aae8f829de',1,'libwacom.h']]],
   ['wacomfallbackflags_7',['WacomFallbackFlags',['../group__devices.html#gac345850b5a595ab24cf120e2a89005d7',1,'libwacom.h']]],
   ['wacomintegrationflags_8',['WacomIntegrationFlags',['../group__devices.html#ga89b8a336b7d1d0d37659db8fe976323d',1,'libwacom.h']]],
-  ['wacomstatusleds_9',['WacomStatusLEDs',['../group__devices.html#ga18a534584fbfeb1254107b30246bcfd6',1,'libwacom.h']]],
-  ['wacomstylustype_10',['WacomStylusType',['../group__styli.html#ga6f96ee71140aee8ac56c80fb8353c3f6',1,'libwacom.h']]]
+  ['wacommodeswitch_9',['WacomModeSwitch',['../group__devices.html#ga9b8ab05f49c688ac2d5a517f87f19c0d',1,'libwacom.h']]],
+  ['wacomstatusleds_10',['WacomStatusLEDs',['../group__devices.html#ga18a534584fbfeb1254107b30246bcfd6',1,'libwacom.h']]],
+  ['wacomstylustype_11',['WacomStylusType',['../group__styli.html#ga6f96ee71140aee8ac56c80fb8353c3f6',1,'libwacom.h']]]
 ];

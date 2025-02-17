@@ -57,6 +57,13 @@ var group__devices =
       [ "WACOM_DEVICE_INTEGRATED_SYSTEM", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323dab5f6f55d44f18b26f0569676e1344857", null ],
       [ "WACOM_DEVICE_INTEGRATED_REMOTE", "group__devices.html#gga89b8a336b7d1d0d37659db8fe976323da2bbc04b59767fec4a150b0134dfc2f10", null ]
     ] ],
+    [ "WacomModeSwitch", "group__devices.html#ga9b8ab05f49c688ac2d5a517f87f19c0d", [
+      [ "WACOM_MODE_SWITCH_NEXT", "group__devices.html#gga9b8ab05f49c688ac2d5a517f87f19c0da36075c433e64c539d8f131b25346db96", null ],
+      [ "WACOM_MODE_SWITCH_0", "group__devices.html#gga9b8ab05f49c688ac2d5a517f87f19c0dabeea0bdb1ab7bbec1c788924cf6da70e", null ],
+      [ "WACOM_MODE_SWITCH_1", "group__devices.html#gga9b8ab05f49c688ac2d5a517f87f19c0da97fbd494a6fb354ddca7ff8c72c3e52a", null ],
+      [ "WACOM_MODE_SWITCH_2", "group__devices.html#gga9b8ab05f49c688ac2d5a517f87f19c0dabbca7c63df76f06c951f748eaad25e2c", null ],
+      [ "WACOM_MODE_SWITCH_3", "group__devices.html#gga9b8ab05f49c688ac2d5a517f87f19c0dadfd8337767b8b820d366b3e0eb6c318b", null ]
+    ] ],
     [ "WacomStatusLEDs", "group__devices.html#ga18a534584fbfeb1254107b30246bcfd6", [
       [ "WACOM_STATUS_LED_UNAVAILABLE", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a3bd225390cbe0e364beb86269d746393", null ],
       [ "WACOM_STATUS_LED_RING", "group__devices.html#gga18a534584fbfeb1254107b30246bcfd6a5ff0f7a54421536958f76f1fa13b32a0", null ],
@@ -72,6 +79,7 @@ var group__devices =
     [ "libwacom_get_button_evdev_code", "group__devices.html#ga9a24171166ee19047d67a6f772cd642d", null ],
     [ "libwacom_get_button_flag", "group__devices.html#gab62583042419e89507662048fc7593ac", null ],
     [ "libwacom_get_button_led_group", "group__devices.html#ga505f528225b6ffe639d3b44faecd4449", null ],
+    [ "libwacom_get_button_modeswitch_mode", "group__devices.html#gabd2f361ab51ab8fc09cabc61028e87f0", null ],
     [ "libwacom_get_class", "group__devices.html#gaca2749ecdda450e836843ed320b0991f", null ],
     [ "libwacom_get_dial2_num_modes", "group__devices.html#ga01d68c9440d5aea4f607282ac5fed834", null ],
     [ "libwacom_get_dial_num_modes", "group__devices.html#ga7822f49667d9090410cb31a2d4bc209f", null ],

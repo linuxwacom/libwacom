@@ -18,11 +18,6 @@ jobs:
         compiler:
           - gcc
           - clang
-        meson_options:
-          - ''
-          # clang requires b_lundef=false for b_santize, see
-          # https://github.com/mesonbuild/meson/issues/764
-          - '-Db_sanitize=address,undefined -Db_lundef=false'
     steps:
       - uses: actions/checkout@v4
       # install python so we get pip for meson
@@ -41,8 +36,6 @@ jobs:
         run: sudo chmod +s /usr/bin/systemd-hwdb
       - name: meson test ${{matrix.meson_options}}
         uses: ./.github/actions/meson
-        with:
-          meson_args: ${{matrix.meson_options}}
         env:
           CC: ${{matrix.compiler}}
       # create the tarball

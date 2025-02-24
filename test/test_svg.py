@@ -52,9 +52,9 @@ class SvgDevice:
         assert len(nodes) == 1, f"Expected one element with id {id}, have {len(nodes)}"
         node = nodes[0]
         for klass in classes or []:
-            assert klass in node.get("class", "").split(
-                " "
-            ), f"Missing class '{klass}' for {id}. Have: {node.get('class')}"
+            assert klass in node.get("class", "").split(" "), (
+                f"Missing class '{klass}' for {id}. Have: {node.get('class')}"
+            )
 
     @property
     def name(self):
@@ -125,9 +125,9 @@ def test_svg_maybe_not_needed(svgdevice):
         device.num_strips,
         device.num_dials,
     ]
-    assert any(
-        x > 0 for x in features
-    ), f"Device {device.name} has no buttons/rings/strips/dials and should not have an SVG"
+    assert any(x > 0 for x in features), (
+        f"Device {device.name} has no buttons/rings/strips/dials and should not have an SVG"
+    )
 
 
 def has_item(root, id: str, classes: Optional[List[str]] = None):
@@ -136,9 +136,9 @@ def has_item(root, id: str, classes: Optional[List[str]] = None):
     assert len(nodes) == 1, f"Expected on element with id {id}, have {len(nodes)}"
     node = nodes[0]
     for klass in classes or []:
-        assert klass in node.get("class").split(
-            " "
-        ), f"Missing class '{klass}' for {id}. Have: {node.get('class')}"
+        assert klass in node.get("class").split(" "), (
+            f"Missing class '{klass}' for {id}. Have: {node.get('class')}"
+        )
 
 
 def test_svg_rings(ringdevice):

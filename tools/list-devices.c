@@ -75,7 +75,7 @@ static void print_device_info (WacomDevice *device, WacomBusType bus_type_filter
 			if (vid != 0 || pid != 0 || bus != 0)
 				printf("- { bus: '%s',%*svid: '0x%04x', pid: '0x%04x', name: '%s', uniq: '%s' }\n",
 				       bus, (int)(10 - strlen(bus)), " ",
-				       vid, pid, name, uniq);
+				       vid, pid, name, uniq ? uniq : "");
 		}
 	}
 }

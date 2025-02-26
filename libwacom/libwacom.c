@@ -909,8 +909,8 @@ static void print_supported_leds (int fd, const WacomDevice *device)
 	char *leds_name[] = {
 		"Ring;",
 		"Ring2;",
-		"Touchstrip;",
-		"Touchstrip2;"
+		"Strip;",
+		"Strip2;"
 	};
 	int num_leds;
 	const WacomStatusLEDs *status_leds;
@@ -981,8 +981,8 @@ static void print_buttons_for_device (int fd, const WacomDevice *device)
 	print_button_flag_if(fd, device, "Right", WACOM_BUTTON_POSITION_RIGHT);
 	print_button_flag_if(fd, device, "Top", WACOM_BUTTON_POSITION_TOP);
 	print_button_flag_if(fd, device, "Bottom", WACOM_BUTTON_POSITION_BOTTOM);
-	print_button_flag_if(fd, device, "Touchstrip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
-	print_button_flag_if(fd, device, "Touchstrip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH);
+	print_button_flag_if(fd, device, "Strip", WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
+	print_button_flag_if(fd, device, "Strip2", WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH);
 	print_button_flag_if(fd, device, "Dial", WACOM_BUTTON_DIAL_MODESWITCH);
 	print_button_flag_if(fd, device, "OLEDs", WACOM_BUTTON_OLED);
 	print_button_flag_if(fd, device, "Ring", WACOM_BUTTON_RING_MODESWITCH);

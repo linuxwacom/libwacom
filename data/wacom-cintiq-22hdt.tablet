@@ -54,7 +54,7 @@ NumStrips=2
 Left=B;C;D;E;A;F;G;H;I
 Right=K;L;M;N;J;O;P;Q;R
 
-Touchstrip=A
-Touchstrip2=J
+Strip=A
+Strip2=J
 # Note: no physical LEDs to show mode
 StripsNumModes=4

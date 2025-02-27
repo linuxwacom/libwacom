@@ -57,12 +57,12 @@ IntegratedIn=Display
 Stylus=true
 NumRings=0
 NumStrips=2
-StatusLEDs=Touchstrip2;Touchstrip
+StatusLEDs=Strip2;Strip
 
 [Buttons]
 Left=B;C;D;E;A;F;G;H;I
 Right=K;L;M;N;J;O;P;Q;R
 
-Touchstrip=A
-Touchstrip2=J
+Strip=A
+Strip2=J
 StripsNumModes=4

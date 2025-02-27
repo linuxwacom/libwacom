@@ -604,14 +604,11 @@ def test_new_from_path_unknown_device(db, fallback, bustype):
 
 @pytest.mark.parametrize(
     "feature",
-    ("Ring", "Touchstrip", "Dial"),
+    ("Ring", "Strip", "Dial"),
 )
 @pytest.mark.parametrize("count", (1, 2))
 def test_button_modeswitch(custom_datadir, feature, count):
     USBID = (0x1234, 0x5678)
-
-    # sigh, Touchstrip but StripsNumModes...
-    num_mode_key = f"{feature}s" if feature != "Touchstrip" else "Strip"
 
     extra = {
         "Buttons": {
@@ -620,7 +617,7 @@ def test_button_modeswitch(custom_datadir, feature, count):
             feature: "A",
         },
         "Features": {
-            num_mode_key: 4,
+            f"{feature}s": 4,
         },
     }
     if count > 1:
@@ -639,7 +636,7 @@ def test_button_modeswitch(custom_datadir, feature, count):
 
     expected_flag = {
         "Ring": WacomDevice.ButtonFlags.RING_MODESWITCH,
-        "Touchstrip": WacomDevice.ButtonFlags.TOUCHSTRIP_MODESWITCH,
+        "Strip": WacomDevice.ButtonFlags.TOUCHSTRIP_MODESWITCH,
         "Dial": WacomDevice.ButtonFlags.DIAL_MODESWITCH,
     }[feature]
 
@@ -652,7 +649,7 @@ def test_button_modeswitch(custom_datadir, feature, count):
 
     expected_flag = {
         "Ring": WacomDevice.ButtonFlags.RING2_MODESWITCH,
-        "Touchstrip": WacomDevice.ButtonFlags.TOUCHSTRIP2_MODESWITCH,
+        "Strip": WacomDevice.ButtonFlags.TOUCHSTRIP2_MODESWITCH,
         "Dial": WacomDevice.ButtonFlags.DIAL2_MODESWITCH,
     }[feature]
 
@@ -669,14 +666,11 @@ def test_button_modeswitch(custom_datadir, feature, count):
 
 @pytest.mark.parametrize(
     "feature",
-    ("Ring", "Touchstrip", "Dial"),
+    ("Ring", "Strip", "Dial"),
 )
 @pytest.mark.parametrize("count", (1, 2))
 def test_status_leds(custom_datadir, feature, count):
     USBID = (0x1234, 0x5678)
-
-    # sigh, Touchstrip but StripsNumModes...
-    num_mode_key = f"{feature}s" if feature != "Touchstrip" else "Strip"
 
     extra = {
         "Buttons": {
@@ -686,7 +680,7 @@ def test_status_leds(custom_datadir, feature, count):
         },
         "Features": {
             "StatusLEDs": f"{feature};{feature}2" if count > 1 else f"{feature}",
-            num_mode_key: 4,
+            f"{feature}s": 4,
         },
     }
     if count > 1:
@@ -706,7 +700,7 @@ def test_status_leds(custom_datadir, feature, count):
     expected = [
         {
             "Ring": WacomStatusLed.RING,
-            "Touchstrip": WacomStatusLed.TOUCHSTRIP,
+            "Strip": WacomStatusLed.TOUCHSTRIP,
             "Dial": WacomStatusLed.DIAL,
         }[feature]
     ]
@@ -715,7 +709,7 @@ def test_status_leds(custom_datadir, feature, count):
         expected.append(
             {
                 "Ring": WacomStatusLed.RING2,
-                "Touchstrip": WacomStatusLed.TOUCHSTRIP2,
+                "Strip": WacomStatusLed.TOUCHSTRIP2,
                 "Dial": WacomStatusLed.DIAL2,
             }[feature]
         )

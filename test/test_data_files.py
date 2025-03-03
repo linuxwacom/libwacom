@@ -48,12 +48,12 @@ def test_device_match(tabletfile):
             "i2c",
             "serial",
         ], f"{tabletfile}: unknown bus type"
-        assert re.match(
-            "[0-9a-f]{4}", vid
-        ), f"{tabletfile}: {vid} must be lowercase hex"
-        assert re.match(
-            "[0-9a-f]{4}", pid
-        ), f"{tabletfile}: {pid} must be lowercase hex"
+        assert re.match("[0-9a-f]{4}", vid), (
+            f"{tabletfile}: {vid} must be lowercase hex"
+        )
+        assert re.match("[0-9a-f]{4}", pid), (
+            f"{tabletfile}: {pid} must be lowercase hex"
+        )
 
 
 def test_no_receiver_id(tabletfile):

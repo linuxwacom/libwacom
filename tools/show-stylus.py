@@ -154,7 +154,7 @@ def load_data_files():
     else:
         die("Unable to find a libwacom.stylus data file")
 
-    print(f'Using stylus file(s): {", ".join([str(s) for s in stylusfiles])}')
+    print(f"Using stylus file(s): {', '.join([str(s) for s in stylusfiles])}")
 
     styli = {}
 

@@ -1,0 +1,29 @@
+# XP-Pen
+# Deco01 v3
+#
+# sysinfo.uWI7cjQylf.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/468
+
+[Device]
+Name=XP-Pen Deco 01 V3
+ModelName=
+DeviceMatch=usb|28bd|0947
+PairedIDs=
+Width=10
+Height=6
+IntegratedIn=
+# Looks the same as the v2, so let's re-use the layout
+Layout=xp-pen-deco01-v2.svg
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+NumRings=0
+NumStrips=0
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7

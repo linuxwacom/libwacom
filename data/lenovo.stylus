@@ -1,4 +1,4 @@
-[0x866b]
+[0x56a:0x866b]
 # Lenovo ; VID_LENOVO     | 0x866b | BAT_CHRG
 Name=Lenovo Precision Pen 2 (2023)
 Group=isdv4-aes
@@ -7,7 +7,7 @@ EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
-[0x865b]
+[0x56a:0x865b]
 # Lenovo ; VID_LENOVO     | 0x865b | BAT_SWAP
 Name=Lenovo Active Pen 3 (2023)
 Group=isdv4-aes
@@ -16,7 +16,7 @@ EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
 
-[0x80a3]
+[0x56a:0x80a3]
 # Lenovo ; VID_LENOVO     | 0x80a3 | BAT_CHRG
 Name=Lenovo Slim Pen
 Group=isdv4-aes

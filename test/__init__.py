@@ -615,8 +615,8 @@ class WacomStylus:
         return lib.stylus_is_eraser(self.stylus) != 0
 
     @property
-    def stylus_type(self) -> WacomEraserType:
-        return WacomEraserType(self.get_eraser_type())
+    def stylus_type(self) -> WacomStylusType:
+        return WacomStylusType(self.get_type())
 
     @property
     def eraser_type(self) -> WacomEraserType:

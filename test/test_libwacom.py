@@ -50,15 +50,15 @@ class StylusEntry:
     @classmethod
     def generic_pen(cls) -> "StylusEntry":
         return cls(
-            id="0x0:0xfffff", name="General Pen", paired_stylus_ids=["0x0:0xffffe"]
+            id="0x0:0xaffff", name="General Pen", paired_stylus_ids=["0x0:0xafffe"]
         )
 
     @classmethod
     def generic_eraser(cls) -> "StylusEntry":
         return StylusEntry(
-            id="0x0:0xffffe",
+            id="0x0:0xafffe",
             name="General Pen Eraser",
-            paired_stylus_ids=["0x0:0xfffff"],
+            paired_stylus_ids=["0x0:0xaffff"],
             eraser_type="Invert",
         )
 
@@ -810,8 +810,8 @@ def test_nonwacom_stylus_ids(tmp_path):
     assert len(styli) == 3  # 1 non-wacom, 2 generic ones
     # Order of styli is undefined
     assert sum(s.vendor_id == 0x1234 and s.tool_id == 0x9876 for s in styli) == 1
-    assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFE for s in styli) == 1
-    assert sum(s.vendor_id == 0 and s.tool_id == 0xFFFFF for s in styli) == 1
+    assert sum(s.vendor_id == 0 and s.tool_id == 0xAFFFE for s in styli) == 1
+    assert sum(s.vendor_id == 0 and s.tool_id == 0xAFFFF for s in styli) == 1
 
 
 def test_load_xdg_config_home(monkeypatch, tmp_path, custom_datadir):

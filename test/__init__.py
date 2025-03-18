@@ -567,6 +567,15 @@ class WacomEraserType(enum.IntEnum):
     BUTTON = 3
 
 
+class WacomAxisType(enum.IntEnum):
+    NONE = 0
+    TILT = (1 << 1,)
+    ROTATION_Z = (1 << 2,)
+    DISTANCE = (1 << 3,)
+    PRESSURE = (1 << 4,)
+    SLIDER = 1 << 5
+
+
 class WacomStylus:
     class Generic(enum.IntEnum):
         PEN_WITH_ERASER = 0xFFFFF
@@ -584,7 +593,12 @@ class WacomStylus:
         for api in lib._api_prototypes:
             allowlist = ["stylus"]
             if any(api.basename.startswith(n) for n in allowlist):
-                denylist = ["stylus_get_paired_styli", "stylus_is_eraser"]
+                denylist = [
+                    "stylus_get_paired_styli",
+                    "stylus_is_eraser",
+                    "stylus_has_lens",
+                    "stylus_has_wheel",
+                ]
                 if all(not api.basename.startswith(n) for n in denylist):
                     func = getattr(lib, api.basename)
                     setattr(self, api.basename.removeprefix("stylus_"), wrapper(func))
@@ -606,8 +620,23 @@ class WacomStylus:
         return self.get_vendor_id()
 
     @property
+    def axes(self) -> list[WacomAxisType]:
+        axes = self.get_axes()
+        return [t for t in WacomAxisType if axes & t]
+
+    @property
     def num_buttons(self) -> int:
         return self.get_num_buttons()
+
+    @property
+    def has_lens(self) -> bool:
+        lib = LibWacom.instance()
+        return lib.stylus_has_lens(self.stylus) != 0
+
+    @property
+    def has_wheel(self) -> bool:
+        lib = LibWacom.instance()
+        return lib.stylus_has_wheel(self.stylus) != 0
 
     @property
     def is_eraser(self) -> bool:

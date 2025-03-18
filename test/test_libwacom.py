@@ -86,6 +86,11 @@ class StylusFile:
         with open(dir / filename, "w") as fd:
             config.write(fd, space_around_delimiters=False)
 
+        if logger.getEffectiveLevel() == logging.DEBUG:
+            logger.debug(f"{dir}/{filename}:")
+            for line in open(dir / filename).readlines():
+                logger.debug(f"  {line.rstrip()}")
+
 
 @dataclass
 class TabletFile:
@@ -131,6 +136,11 @@ class TabletFile:
 
         with open(filename, "w") as fd:
             config.write(fd, space_around_delimiters=False)
+
+        if logger.getEffectiveLevel() == logging.DEBUG:
+            logger.debug(f"{filename}:")
+            for line in open(filename).readlines():
+                logger.debug(f"  {line.rstrip()}")
 
 
 @pytest.fixture()

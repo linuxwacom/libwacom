@@ -149,14 +149,13 @@ static int
 handle_device(WacomDeviceDatabase *db, const char *path)
 {
 	WacomDevice *device;
-	char **parts = g_strsplit(path, "|", 5);
+	g_auto(GStrv) parts = g_strsplit(path, "|", 5);
 
 	if (parts && parts[0] && parts[1]) {
 		device = device_from_device_match(db, parts);
 	} else {
 		device = libwacom_new_from_path(db, path, WFALLBACK_NONE, NULL);
 	}
-	g_strfreev(parts);
 
 	if (!device) {
 		fprintf(stderr, "Device not known to libwacom\n");
@@ -343,7 +342,7 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 	{
 		int nstyli;
-		const WacomStylus **styli = libwacom_get_styli(device, &nstyli);
+		g_autofree const WacomStylus **styli = libwacom_get_styli(device, &nstyli);
 		{
 			char buf[1024] = {0};
 			for (int i = 0; i < nstyli; i++) {
@@ -388,7 +387,7 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				{
 					char buf[1024] = {0};
 					int npaired;
-					const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
+					g_autofree const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
 
 					for (int i = 0; i < npaired; i++) {
 						const WacomStylus *p = paired[i];
@@ -396,8 +395,6 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 							 libwacom_stylus_get_vendor_id(p), libwacom_stylus_get_id(p));
 					}
 					func_arg(libwacom_stylus_get_paired_ids, "0x%04x", id, "[%s]", buf);
-
-					g_clear_pointer(&paired, g_free);
 				}
 
 				{
@@ -444,8 +441,6 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 				ip("%s\n", "}");
 			}
 		}
-
-		g_clear_pointer(&styli, g_free);
 	}
 
 	libwacom_destroy(device);
@@ -457,20 +452,17 @@ int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
 	GOptionContext *context;
-	GError *error;
+	g_autoptr(GError) error = NULL;
 	int rc;
 
 	context = g_option_context_new ("[/dev/input/event0 | \"usb|0123|abcd|some tablet\"]");
 	g_option_context_set_description(context, "The argument may be a device node or a single DeviceMatch string as listed in .tablet files.");
 
 	g_option_context_add_main_entries (context, opts, NULL);
-	error = NULL;
 
 	if (!g_option_context_parse (context, &argc, &argv, &error)) {
-		if (error != NULL) {
+		if (error != NULL)
 			fprintf (stderr, "%s\n", error->message);
-			g_error_free (error);
-		}
 		return EXIT_FAILURE;
 	}
 

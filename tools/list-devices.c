@@ -100,20 +100,17 @@ static GOptionEntry opts[] = {
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
-	WacomDevice **list, **p;
-	GOptionContext *context;
-	GError *error = NULL;
+	g_autofree WacomDevice **list = NULL;
+	WacomDevice **p;
+	g_autoptr(GOptionContext) context = g_option_context_new(NULL);
+	g_autoptr(GError) error = NULL;
 
-	context = g_option_context_new (NULL);
 	g_option_context_add_main_entries (context, opts, NULL);
 	if (!g_option_context_parse (context, &argc, &argv, &error)) {
-		if (error != NULL) {
+		if (error != NULL)
 			fprintf (stderr, "%s\n", error->message);
-			g_error_free (error);
-		}
 		return EXIT_FAILURE;
 	}
-	g_option_context_free (context);
 
 #ifdef DATABASEPATH
 	db = libwacom_database_new_for_path(DATABASEPATH);
@@ -146,7 +143,6 @@ int main(int argc, char **argv)
 		print_device_info ((WacomDevice *) *p, WBUSTYPE_UNKNOWN, output_format);
 
 	libwacom_database_destroy (db);
-	free(list);
 
 	return 0;
 }

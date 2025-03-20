@@ -296,7 +296,7 @@ get_device_info (const char            *path,
 
 	retval = FALSE;
 	/* The integration flags from device info are unset by default */
-	*integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;
+	*integration_flags = WACOM_DEVICE_INTEGRATED_UNSET; // NOLINT: core.EnumCastOutOfRange
 	*name = NULL;
 	*uniq = NULL;
 	bus_str = NULL;

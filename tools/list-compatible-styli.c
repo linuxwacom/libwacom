@@ -38,7 +38,7 @@
 static void
 print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
 {
-	WacomStylus const **styli;
+	g_autofree WacomStylus const **styli = NULL;
 	int nstyli;
 
 	printf("- name: '%s'\n", libwacom_get_name(device));
@@ -62,7 +62,6 @@ print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
 		       (int)(7 - strlen(id)), " ", id,
 		       libwacom_stylus_get_name(s));
 	}
-	g_free(styli);
 }
 
 int main(int argc, char **argv)

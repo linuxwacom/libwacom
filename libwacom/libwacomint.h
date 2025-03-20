@@ -181,6 +181,9 @@ WacomBusType  bus_from_str (const char *str);
 const char   *bus_to_str   (WacomBusType bus);
 char *make_match_string(const char *name, const char *uniq, WacomBusType bus, int vendor_id, int product_id);
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomMatch, libwacom_match_unref);
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomDevice, libwacom_unref);
+
 #endif /* _LIBWACOMINT_H_ */
 
 /* vim: set noexpandtab shiftwidth=8: */

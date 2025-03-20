@@ -257,7 +257,7 @@ test_styli(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
 	int nstylus_ids, nstyli;
-	const WacomStylus **styli;
+	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
 
 #pragma GCC diagnostic push
@@ -280,9 +280,6 @@ test_styli(gconstpointer data)
 		}
 		g_assert_true(found);
 	}
-
-	g_free(styli);
-
 }
 
 static void
@@ -290,7 +287,7 @@ test_no_styli(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
 	int nstylus_ids, nstyli;
-	const WacomStylus **styli;
+	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
 
 #pragma GCC diagnostic push
@@ -304,7 +301,6 @@ test_no_styli(gconstpointer data)
 	g_assert_nonnull(styli);
 	g_assert_null(stylus_ids);
 	g_assert_null(styli[0]); /* NULL-terminated list */
-	g_free(styli);
 
 }
 
@@ -313,7 +309,7 @@ test_realstylus(gconstpointer data)
 {
 	WacomDevice *device = (WacomDevice*)data;
 	int nstylus_ids, nstyli;
-	const WacomStylus **styli;
+	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
 
 #pragma GCC diagnostic push
@@ -332,9 +328,6 @@ test_realstylus(gconstpointer data)
 		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_STYLUS_FALLBACK_ID);
 		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_ERASER_FALLBACK_ID);
 	}
-
-
-	g_free(styli);
 }
 
 static void

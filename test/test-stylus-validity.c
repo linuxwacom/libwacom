@@ -88,7 +88,7 @@ test_has_eraser(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
 	gboolean matching_eraser_found = FALSE;
-	const WacomStylus **paired;
+	g_autofree const WacomStylus **paired = NULL;
 	int count;
 	int i;
 
@@ -107,7 +107,6 @@ test_has_eraser(gconstpointer data)
 			break;
 		}
 	}
-	g_free(paired);
 
 	g_assert_true(matching_eraser_found);
 }
@@ -116,7 +115,7 @@ static void
 test_eraser_link(const WacomStylus *stylus, gboolean linked)
 {
 	gboolean matching_stylus_found = FALSE;
-	const WacomStylus **paired;
+	g_autofree const WacomStylus **paired = NULL;
 	int count;
 	int i;
 
@@ -128,7 +127,6 @@ test_eraser_link(const WacomStylus *stylus, gboolean linked)
 	paired = libwacom_stylus_get_paired_styli(stylus, &count);
 	if (!linked) {
 		g_assert_cmpint(count, ==, 0);
-		g_free(paired);
 		return;
 	}
 
@@ -141,7 +139,6 @@ test_eraser_link(const WacomStylus *stylus, gboolean linked)
 			break;
 		}
 	}
-	g_free(paired);
 
 	g_assert_true(matching_stylus_found);
 }
@@ -273,14 +270,14 @@ static void
 test_mutually_paired(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	const WacomStylus **stylus_pairings;
+	g_autofree const WacomStylus **stylus_pairings = NULL;
 	int count;
 
 	stylus_pairings = libwacom_stylus_get_paired_styli(stylus, &count);
 
 	for (int i = 0; i < count; i++) {
 		const WacomStylus *paired = stylus_pairings[i];
-		const WacomStylus **counter_paired;
+		g_autofree const WacomStylus **counter_paired = NULL;
 		gboolean match_found = FALSE;
 		int pair_count;
 
@@ -294,11 +291,8 @@ test_mutually_paired(gconstpointer data)
 				break;
 			}
 		}
-		g_free(counter_paired);
-
 		g_assert_true(match_found);
 	}
-	g_free(stylus_pairings);
 }
 
 /* Wrapper function to make adding tests simpler. g_test requires
@@ -440,27 +434,24 @@ setup_tests(const WacomStylus *stylus)
 static const WacomStylus **
 assemble_styli(WacomDeviceDatabase *db)
 {
-	WacomDevice **devices = libwacom_list_devices_from_database(db, NULL);
-	GHashTable *all = g_hash_table_new(g_direct_hash, g_direct_equal);
+	g_autofree WacomDevice **devices = libwacom_list_devices_from_database(db, NULL);
+	g_autoptr(GHashTable) all = g_hash_table_new(g_direct_hash, g_direct_equal);
 	const WacomStylus **all_styli = NULL;
 
 	g_assert(devices);
 
 	for (WacomDevice **d = devices; *d; d++) {
-		const WacomStylus **styli;
+		g_autofree const WacomStylus **styli = NULL;
 		int nstyli;
 
 		styli = libwacom_get_styli(*d, &nstyli);
 		for (int i = 0; i < nstyli; i++) {
 			g_hash_table_add(all, (gpointer)styli[i]);
 		}
-		g_free(styli);
 	}
 
 	all_styli = (const WacomStylus**)g_hash_table_get_keys_as_array(all, NULL);
 	g_hash_table_steal_all(all);
-	g_clear_pointer(&all, g_hash_table_unref);
-	g_clear_pointer(&devices, g_free);
 
 	return all_styli;
 }

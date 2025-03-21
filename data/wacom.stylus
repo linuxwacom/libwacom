@@ -167,11 +167,7 @@ Type=Mobile
 [0x211]
 # Dell   ; VID_NONE     | 0xc0278ae6 | BAT_CHRG | BAT_HID
 Name=Dell Active Pen - PN7320A
-Group=isdv4-aes
-Buttons=1
-EraserType=Button
-Axes=Pressure
-Type=Mobile
+AliasOf=0x1
 
 [0x56a:0x8051]
 # Google ; VID_NONE     | 0x0000 | BAT_SWAP ("Google Pixelbook Pen" / C0B)

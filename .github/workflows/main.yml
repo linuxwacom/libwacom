@@ -62,9 +62,9 @@ jobs:
 
   ###
   #
-  # scan-build
+  # clang-tidy
   #
-  scan-build:
+  clang-tidy:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -76,11 +76,13 @@ jobs:
         with:
           apt: $UBUNTU_PACKAGES
           pip: $PIP_PACKAGES
-      - name: scan-build
+      - name: clang-tidy
         uses: ./.github/actions/meson
         with:
           meson_skip_test: 1
-          ninja_args: scan-build
+          ninja_args: clang-tidy
+        env:
+          CC: clang
 
   ###
   #

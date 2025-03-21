@@ -94,23 +94,18 @@ static void
 print_devnode(gpointer data, gpointer user_data)
 {
 	const gchar *devnode = data;
-	gchar *name = NULL;
+	g_autofree gchar *name = NULL;
 	gsize size;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 
-	gchar *basename = g_path_get_basename(devnode);
-	char *path = g_strdup_printf("/sys/class/input/%s/device/name", basename);
+	g_autofree gchar *basename = g_path_get_basename(devnode);
+	g_autofree char *path = g_strdup_printf("/sys/class/input/%s/device/name", basename);
 
-	g_free(basename);
 	if (g_file_get_contents(path, &name, &size, &error)) {
 		printf("      - %s: '%.*s'\n", devnode, (int)(size - 1), name);
 	} else {
 		fprintf(stderr, "%s\n", error->message);
 	}
-	if (error)
-		g_error_free(error);
-	g_free(name);
-	g_free(path);
 }
 
 static void
@@ -122,7 +117,7 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 	int vid = libwacom_get_vendor_id(d->dev);
 	int pid = libwacom_get_product_id(d->dev);
 	WacomBusType bustype = libwacom_get_bustype(d->dev);
-	const WacomStylus **styli;
+	g_autofree const WacomStylus **styli;
 	int nstyli;
 
 	switch (bustype) {
@@ -192,33 +187,29 @@ tablet_print_yaml(gpointer data, gpointer user_data)
 			printf("        erasers: [");
 			if (libwacom_stylus_has_eraser(stylus)) {
 				int npaired;
-				const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
+				g_autofree const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
 				for (int j = 0; j < npaired; j++) {
 					const WacomStylus *p = paired[j];
 					printf("%s0x%x", j == 0 ? "" : ", ", libwacom_stylus_get_id(p));
 				}
-				g_free(paired);
 			}
 			printf("]\n");
 		}
 
 	}
-	g_free(styli);
 }
 
 static void
 check_if_udev_tablet(const char *path)
 {
-	GUdevClient *client;
-	GUdevDevice *device;
 	const char * const subsystems[] = { "input", NULL };
+	g_autoptr(GUdevClient) client = g_udev_client_new (subsystems);
+	g_autoptr(GUdevDevice) device = g_udev_client_query_by_device_file (client, path);
 
-	client = g_udev_client_new (subsystems);
-	device = g_udev_client_query_by_device_file (client, path);
 	if (device &&
 	    g_udev_device_get_property_as_boolean (device, "ID_INPUT_TABLET")) {
-		GUdevDevice *parent = g_udev_device_get_parent (device);
-		char *info = NULL;
+		g_autoptr(GUdevDevice) parent = g_udev_device_get_parent (device);
+		g_autofree char *info = NULL;
 
 		if (parent) {
 			const char *bus = g_udev_device_get_property (parent, "ID_BUS");
@@ -228,16 +219,12 @@ check_if_udev_tablet(const char *path)
 
 			if (bus && vid && pid && name)
 				info = g_strdup_printf("(%s:%s:%s - %s) ", bus, vid, pid, name);
-			g_object_unref (parent);
 		}
 
 		fprintf(stderr,
 			"%s %sis a tablet but not supported by libwacom\n",
 			path, info ? info : "");
-		g_free (info);
 	}
-	g_object_unref (device);
-	g_object_unref (client);
 }
 
 static gboolean
@@ -261,22 +248,19 @@ static GOptionEntry opts[] = {
 int main(int argc, char **argv)
 {
 	WacomDeviceDatabase *db;
-	GOptionContext *context;
-	GError *error;
+	g_autoptr(GOptionContext) context = g_option_context_new (NULL);
+	g_autoptr(GError) error = NULL;
 	GList *tabletlist = NULL;
 	GDir *dir = NULL;
 	const char *filename;
 
-	context = g_option_context_new (NULL);
+
 
 	g_option_context_add_main_entries (context, opts, NULL);
-	error = NULL;
 
 	if (!g_option_context_parse (context, &argc, &argv, &error)) {
-		if (error != NULL) {
+		if (error != NULL)
 			fprintf (stderr, "%s\n", error->message);
-			g_error_free (error);
-		}
 		return EXIT_FAILURE;
 	}
 
@@ -301,7 +285,6 @@ int main(int argc, char **argv)
 	dir = g_dir_open("/dev/input", 0, &error);
 	if (!dir) {
 		fprintf(stderr, "%s\n", error->message);
-		g_error_free(error);
 		return EXIT_FAILURE;
 	}
 

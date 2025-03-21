@@ -22,9 +22,9 @@ echo "####################################### running asan"
 meson configure $builddir  -Db_sanitize=address
 ninja -C $builddir test
 
-echo "####################################### running scan-build"
+echo "####################################### running clang-tidy"
 meson configure $builddir  -Db_sanitize=none
-ninja -C $builddir scan-build
+ninja -C $builddir clang-tidy
 
 echo "######## Success. Removing builddir #########"
 rm -rf "$buildir"

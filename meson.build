@@ -164,20 +164,35 @@ configure_file(input: 'tools/65-libwacom.rules.in',
 	       install_dir: dir_udev / 'rules.d')
 
 # The non-installed version of list-devices uses the git tree's data files
-executable('debug-device',
-	   'tools/debug-device.c',
-	   dependencies: [dep_libwacom, dep_glib],
-	   include_directories: [includes_src],
-	   c_args: tools_cflags,
-	   install: false)
+debug_device = executable('debug-device',
+			  'tools/debug-device.c',
+			  dependencies: [dep_libwacom, dep_glib],
+			  include_directories: [includes_src],
+			  c_args: tools_cflags,
+			  install: false)
+testdevices = {
+	'huion-h640p': 'usb|256c|006d|HUION Huion Tablet_H640P Pad',
+	'huion-dial-2': 'usb|256c|006e||HUION_T216',
+	'wacom-cintiq-pro-13': 'usb|056a|034f',
+	'wacom-intuos4': 'usb|056a|00bb',
+	'wacom-isdv4-0148': 'usb|056a|0148',
+}
+foreach name : testdevices.keys()
+	match = testdevices[name]
+	test(f'debug-device-@name@',
+	debug_device,
+	args: [match],
+	suite: ['all'])
+endforeach
 
 # The non-installed version of list-devices uses the git tree's data files
-executable('list-devices',
-	   'tools/list-devices.c',
-	   dependencies: [dep_libwacom, dep_glib],
-	   include_directories: [includes_src],
-	   c_args: tools_cflags,
-	   install: false)
+list_devices = executable('list-devices',
+			  'tools/list-devices.c',
+			  dependencies: [dep_libwacom, dep_glib],
+			  include_directories: [includes_src],
+			  c_args: tools_cflags,
+			  install: false)
+test('list-devices', list_devices, suite: ['all'])
 
 # The installed version of list-devices uses the installed data files
 executable('libwacom-list-devices',
@@ -186,12 +201,13 @@ executable('libwacom-list-devices',
 	   include_directories: [includes_src],
 	   install: true)
 
-executable('list-compatible-styli',
-	   'tools/list-compatible-styli.c',
-	   dependencies: [dep_libwacom, dep_glib],
-	   include_directories: [includes_src],
-	   c_args: tools_cflags,
-	   install: false)
+list_compatible_styli = executable('list-compatible-styli',
+				   'tools/list-compatible-styli.c',
+				   dependencies: [dep_libwacom, dep_glib],
+				   include_directories: [includes_src],
+				   c_args: tools_cflags,
+				   install: false)
+test('list-compatible-styli', list_compatible_styli, suite: ['all'])
 
 install_man(configure_file(input: 'tools/libwacom-list-local-devices.man',
 			   output: '@BASENAME@.1',

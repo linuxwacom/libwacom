@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bug_20list_0',['Bug List',['../bug.html',1,'']]]
+  ['aliasstatus_0',['AliasStatus',['../libwacom_8h.html#ab1378b52d354d3deee585f4eccd24b6b',1,'libwacom.h']]]
 ];

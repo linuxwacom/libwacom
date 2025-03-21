@@ -9,6 +9,10 @@ var libwacom_8h =
     [ "WacomError", "group__context.html#gad6d154a58c34d973502cfa8e50f5a148", null ],
     [ "WacomMatch", "group__devices.html#gad9598829a59951a74f91c640a01f2fad", null ],
     [ "WacomStylus", "group__styli.html#gade7dd5ce503ef37813e5f08bf1544170", null ],
+    [ "AliasStatus", "libwacom_8h.html#ab1378b52d354d3deee585f4eccd24b6b", [
+      [ "IGNORE_ALIASES", "libwacom_8h.html#ab1378b52d354d3deee585f4eccd24b6bab6e40c96bc0e5ae22b49d79fdf0ad4c7", null ],
+      [ "ONLY_ALIASES", "libwacom_8h.html#ab1378b52d354d3deee585f4eccd24b6bac7cf5d48b1db060c246163a3db703200", null ]
+    ] ],
     [ "WacomAxisTypeFlags", "group__styli.html#gaeef7d6526953f4e1a268346dafdd204f", [
       [ "WACOM_AXIS_TYPE_NONE", "group__styli.html#ggaeef7d6526953f4e1a268346dafdd204fa1c88621d522f89637b6a72c40c256abf", null ],
       [ "WACOM_AXIS_TYPE_TILT", "group__styli.html#ggaeef7d6526953f4e1a268346dafdd204fae8c4c2fc838abfb115843fca3395019e", null ],

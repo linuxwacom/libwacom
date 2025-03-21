@@ -1,3 +1,11 @@
+libwacom 2.15.0:
+- New API:
+  - libwacom_get_button_modeswitch_mode() to retrieve the target mode for a
+    modeswitch button
+- New Devices:
+  - XP-Pen Innovator 16, Deco01 v3, Deco Pro S
+  - Wacom Intuos Pro 3 and a large number of ISDv4 devices
+
 libwacom 2.14.0:
 - New API:
   - libwacom now supports stylis from vendors other than Wacom with these new APIs

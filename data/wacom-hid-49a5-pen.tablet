@@ -1,0 +1,19 @@
+# Wacom
+# Wacom HID 49A5
+#
+# AES 1.0 Sensor used by the Dell Latitude 7320 Detachable
+#
+#
+[Device]
+Name=Wacom HID 49A5 Pen
+ModelName=
+DeviceMatch=i2c|056a|49a5
+Class=ISDV4
+Width=10.8
+Height=7.2
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

@@ -164,7 +164,7 @@ EraserType=Button
 Axes=Pressure
 Type=Mobile
 
-[0x211]
+[0x56a:0x211]
 # Dell   ; VID_NONE     | 0xc0278ae6 | BAT_CHRG | BAT_HID
 Name=Dell Active Pen - PN7320A
 AliasOf=0x1

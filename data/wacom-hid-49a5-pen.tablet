@@ -11,8 +11,8 @@ Name=Wacom HID 49A5 Pen
 ModelName=
 DeviceMatch=i2c|056a|49a5
 Class=ISDV4
-Width=10.8
-Height=7.2
+Width=11
+Height=7
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

@@ -11,6 +11,7 @@ import pytest
 import string
 
 from . import (
+    WacomAxisType,
     WacomBuilder,
     WacomBustype,
     WacomDatabase,
@@ -18,6 +19,7 @@ from . import (
     WacomEraserType,
     WacomStatusLed,
     WacomStylus,
+    WacomStylusType,
 )
 
 logger = logging.getLogger(__name__)
@@ -33,6 +35,9 @@ class StylusEntry:
     axes: str = "Tilt;Pressure;Distance;"
     stylus_type: str = "General"
     eraser_type: str | None = None
+    alias_of: str | None = None
+    has_wheel: str | None = None
+    has_lens: str | None = None
 
     def add_to_config(self, config: ConfigParser):
         c = {
@@ -43,8 +48,12 @@ class StylusEntry:
             "Axes": self.axes,
             "Type": self.stylus_type,
         }
-        if self.eraser_type is not None:
-            c["EraserType"] = self.eraser_type
+        for attr in ["eraser_type", "alias_of", "has_wheel", "has_lens"]:
+            if (val := getattr(self, attr, None)) is not None:
+                key = attr.title().replace("_", "")
+                # We need lowercase true/false
+                c[key] = val if not isinstance(val, bool) else str(val).lower()
+
         config[self.id] = c
 
     @classmethod
@@ -833,3 +842,155 @@ def test_load_xdg_config_home(monkeypatch, tmp_path, custom_datadir):
     builder = WacomBuilder.create(usbid=usbid)
     device = db.new_from_builder(builder)
     assert device is not None and device.name == "XDGTablet"
+
+
+@pytest.mark.parametrize(
+    "override,value",
+    (
+        ("axes", "Tilt;"),
+        ("buttons", 3),
+        ("has_lens", True),
+        ("has_wheel", True),
+        ("stylus_type", WacomStylusType.AIRBRUSH),
+        ("eraser_type", WacomEraserType.INVERT),
+    ),
+)
+def test_alias_of(custom_datadir, override, value):
+    usbid = (0x1234, 0x5678)
+    matches = [f"usb|{usbid[0]:04x}|{usbid[1]:04x}"]
+    TabletFile(name="XDGTablet", matches=matches, styli=["@happy-aliases"]).write_to(
+        custom_datadir / "uniq.tablet"
+    )
+
+    stylusfile = StylusFile.default()
+    stylusfile.entries.append(
+        StylusEntry(
+            id="0x1234:0xabcd",
+            name="To be aliased",
+            group="happy-aliases",
+        )
+    )
+
+    alias = StylusEntry(
+        id="0x1234:0xffff",
+        name="AliasTester",
+        alias_of="0x1234:0xabcd",
+        group="happy-aliases",
+    )
+    if override == "stylus_type":
+        setattr(alias, override, "Airbrush")
+    elif override == "eraser_type":
+        setattr(alias, override, "Invert")
+    else:
+        setattr(alias, override, value)
+
+    stylusfile.entries.append(alias)
+    stylusfile.write_to_dir(custom_datadir)
+
+    db = WacomDatabase(path=custom_datadir)
+    builder = WacomBuilder.create(usbid=usbid)
+    device = db.new_from_builder(builder)
+    assert device is not None and device.name == "XDGTablet"
+
+    styli = device.get_styli()
+    assert len(styli) == 2
+
+    original = styli[0]
+    aliasing = styli[1]
+
+    assert original.vendor_id == 0x1234
+    assert original.tool_id == 0xABCD
+    assert original.num_buttons == 2
+    assert original.axes == [
+        WacomAxisType.TILT,
+        WacomAxisType.DISTANCE,
+        WacomAxisType.PRESSURE,
+    ]
+    assert not original.has_lens
+    assert not original.has_wheel
+    assert original.eraser_type == WacomEraserType.NONE
+
+    assert aliasing.vendor_id == 0x1234
+    assert aliasing.tool_id == 0xFFFF
+    if override == "buttons":
+        assert aliasing.num_buttons == value
+    else:
+        assert aliasing.num_buttons == 2
+
+    if override == "axes":
+        assert aliasing.axes == [WacomAxisType.TILT]
+    else:
+        assert aliasing.axes == [
+            WacomAxisType.TILT,
+            WacomAxisType.DISTANCE,
+            WacomAxisType.PRESSURE,
+        ]
+
+    if override == "stylus_type":
+        assert aliasing.stylus_type == value
+    else:
+        assert aliasing.stylus_type == WacomStylusType.GENERAL
+
+    if override == "eraser_type":
+        assert aliasing.eraser_type == value
+    else:
+        assert aliasing.eraser_type == WacomEraserType.NONE
+
+    if override == "has_lens":
+        assert aliasing.has_lens is value
+    else:
+        assert aliasing.has_lens is False
+
+    if override == "has_wheel":
+        assert aliasing.has_wheel is value
+    else:
+        assert aliasing.has_wheel is False
+
+
+@pytest.mark.parametrize("alias", ("0x1234:0xaaaa", "0xabcd", "banana"))
+def test_alias_of_invalid(custom_datadir, alias):
+    usbid = (0x1234, 0x5678)
+    matches = [f"usb|{usbid[0]:04x}|{usbid[1]:04x}"]
+    TabletFile(name="XDGTablet", matches=matches, styli=["@happy-aliases"]).write_to(
+        custom_datadir / "uniq.tablet"
+    )
+
+    stylusfile = StylusFile.default()
+    stylusfile.entries = []
+    stylusfile.entries.append(
+        StylusEntry(
+            id="0x1234:0xabcd",
+            name="To be aliased",
+            group="happy-aliases",
+        )
+    )
+
+    alias = StylusEntry(
+        id="0x1234:0xffff",
+        name="AliasTester",
+        alias_of=alias,
+        group="happy-aliases",
+    )
+    stylusfile.entries.append(alias)
+    stylusfile.write_to_dir(custom_datadir)
+
+    db = WacomDatabase(path=custom_datadir)
+    builder = WacomBuilder.create(usbid=usbid)
+    device = db.new_from_builder(builder)
+    assert device is not None and device.name == "XDGTablet"
+
+    styli = device.get_styli()
+    assert len(styli) == 1
+
+    original = styli[0]
+    assert original.vendor_id == 0x1234
+    assert original.tool_id == 0xABCD
+    assert original.num_buttons == 2
+    assert original.axes == [
+        WacomAxisType.TILT,
+        WacomAxisType.DISTANCE,
+        WacomAxisType.PRESSURE,
+    ]
+    assert not original.has_lens
+    assert not original.has_wheel
+    assert original.eraser_type == WacomEraserType.NONE

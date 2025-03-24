@@ -100,6 +100,11 @@ AliasOf=0x1
 Name=Dell Active Pen
 AliasOf=0x1
 
+[0x56a:0x211]
+# Dell   ; VID_NONE     | 0xc0278ae6 | BAT_CHRG | BAT_HID
+Name=Dell Active Pen - PN7320A
+AliasOf=0x1
+
 [0x56a:0x8051]
 # Google ; VID_NONE     | 0x0000 | BAT_SWAP ("Google Pixelbook Pen" / C0B)
 Buttons=0

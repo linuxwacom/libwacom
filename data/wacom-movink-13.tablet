@@ -44,7 +44,6 @@ Layout=wacom-movink-13.svg
 Stylus=true
 Reversible=false
 Touch=true
-Buttons=3
 
 [Buttons]
 # Button C can be physically left or right depending on the firmware

@@ -50,3 +50,4 @@ Touch=true
 # but let's assign it to Left here, that's good enough.
 Left=A;C
 Right=B
+EvdevCodes=BTN_0;BTN_1;BTN_2

@@ -1,0 +1,23 @@
+# Wacom
+# Cintiq 24 Touch
+# DTH246
+#
+# sysinfo.CRGxDhjS94
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/484
+
+[Device]
+Name=Wacom Cintiq 24 Touch
+ModelName=DTH246
+Class=Cintiq
+DeviceMatch=usb|056a|03fd
+Width=21
+Height=12
+# No pad buttons, so no layout
+Styli=@propen3;@mobilestudio;@propengen2;@dth2242;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+NumRings=0

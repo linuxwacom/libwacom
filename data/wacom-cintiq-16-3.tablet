@@ -1,0 +1,24 @@
+# Wacom
+# Cintiq 16
+# DTK168
+# (Third Generation)
+#
+# sysinfo.zv99h6U7Eu
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/480
+
+[Device]
+Name=Wacom Cintiq 16
+ModelName=DTK168
+Class=Cintiq
+DeviceMatch=usb|056a|03e6
+Width=14
+Height=8
+# No pad buttons, so no layout
+Styli=@propen3;@mobilestudio;@propengen2;@dth2242;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+NumRings=0

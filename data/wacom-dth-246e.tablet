@@ -1,0 +1,22 @@
+# Wacom
+# DTH246E
+#
+# sysinfo.2ICtoho6hS
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/485
+
+[Device]
+Name=Wacom DTH246E
+ModelName=DTH246E
+Class=Cintiq
+DeviceMatch=usb|056a|03ff
+Width=21
+Height=12
+# No pad buttons, so no layout
+Styli=@propen3;@mobilestudio;@propengen2;@dth2242;
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+NumRings=0

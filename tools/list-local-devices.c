@@ -264,8 +264,6 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	g_option_context_free (context);
-
 	if (database_path) {
 		db = libwacom_database_new_for_path(database_path);
 		g_free (database_path);

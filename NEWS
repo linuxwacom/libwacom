@@ -1,3 +1,10 @@
+libwacom 2.16.0:
+- internal changes: g_auto() and friends are now used in libwacom
+- New Devices:
+  - Dell Active Pen PN7320A (stylus only)
+  - Framework 12 touchscreen
+  - Wacom Cintiq 16 (DTK168), Cintiq 24 (DTK246), Cintiq 24 Touch (DTH246), DTH246E, DTK246E, DTK168E
+
 libwacom 2.15.0:
 - New API:
   - libwacom_get_button_modeswitch_mode() to retrieve the target mode for a

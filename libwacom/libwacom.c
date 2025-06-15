@@ -367,7 +367,9 @@ get_device_info (const char            *path,
 out:
 	if (retval == FALSE) {
 		g_free (*name);
+		*name = NULL;
 		g_free (*uniq);
+		*uniq = NULL;
 	}
 	return retval;
 }

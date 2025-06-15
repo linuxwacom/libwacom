@@ -217,6 +217,35 @@ jobs:
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name' | wc -l) -eq 1
 
   ####
+  # duplicate device check
+  list-local-devices:
+    needs: build-and-dist
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      # install python so we get pip for meson
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # Run as sudo because we install to /etc and thus need the pip
+      # packages available to root
+      - uses: ./.github/actions/pkginstall
+        with:
+          apt: $UBUNTU_PACKAGES
+          pip: $PIP_PACKAGES
+          pip_precmd: sudo
+      - uses: ./.github/actions/meson
+        with:
+          meson_args: --prefix=/usr
+          meson_skip_test: yes
+          ninja_args: install
+          ninja_precmd: sudo
+      # We have no local devices so this doesn't do much beyond checking for segfaults
+      - run: libwacom-list-local-devices
+      - run: libwacom-list-local-devices --format=yaml
+      - run: libwacom-list-local-devices --format=datafile
+
+  ####
   # make sure clean_svg.py works on our layout files
   clean-svg-check:
     needs: build-and-dist

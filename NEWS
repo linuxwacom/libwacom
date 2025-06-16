@@ -1,3 +1,6 @@
+libwacom 2.16.1:
+- Fix two segfaults caused by double-free
+
 libwacom 2.16.0:
 - internal changes: g_auto() and friends are now used in libwacom
 - New Devices:

@@ -24,7 +24,6 @@
  *	Peter Hutterer (peter.hutterer@redhat.com)
  */
 
-
 /** @cond hide_from_doxygen */
 #ifndef _LIBWACOM_H_
 #define _LIBWACOM_H_
@@ -60,10 +59,10 @@
       error = libwacom_error_new();
       device = libwacom_new_from_path(db, "/dev/input/event0", WFALLBACK_NONE, error);
       if (!device)
-           return; // should check for error here
+	   return; // should check for error here
 
       if (libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM)
-           printf("This is a built-in device\n");
+	   printf("This is a built-in device\n");
 
       libwacom_destroy(device);
       libwacom_database_destroy(db);
@@ -134,13 +133,13 @@ typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
  * @ingroup context
  */
 enum WacomErrorCode {
-	WERROR_NONE,		/**< No error has occured */
-	WERROR_BAD_ALLOC,	/**< Allocation error */
-	WERROR_INVALID_PATH,	/**< A path specified is invalid */
-	WERROR_INVALID_DB,	/**< The passed DB is invalid */
-	WERROR_BAD_ACCESS,	/**< Invalid permissions to access the path */
-	WERROR_UNKNOWN_MODEL,	/**< Unsupported/unknown device */
-	WERROR_BUG_CALLER,	/**< A bug in the caller */
+	WERROR_NONE,          /**< No error has occured */
+	WERROR_BAD_ALLOC,     /**< Allocation error */
+	WERROR_INVALID_PATH,  /**< A path specified is invalid */
+	WERROR_INVALID_DB,    /**< The passed DB is invalid */
+	WERROR_BAD_ACCESS,    /**< Invalid permissions to access the path */
+	WERROR_UNKNOWN_MODEL, /**< Unsupported/unknown device */
+	WERROR_BUG_CALLER,    /**< A bug in the caller */
 };
 
 /**
@@ -149,11 +148,11 @@ enum WacomErrorCode {
  * @ingroup devices
  */
 typedef enum {
-	WBUSTYPE_UNKNOWN,	/**< Unknown/unsupported bus type */
-	WBUSTYPE_USB,		/**< USB tablet */
-	WBUSTYPE_SERIAL,	/**< Serial tablet */
-	WBUSTYPE_BLUETOOTH,	/**< Bluetooth tablet */
-	WBUSTYPE_I2C,		/**< I2C tablet */
+	WBUSTYPE_UNKNOWN,   /**< Unknown/unsupported bus type */
+	WBUSTYPE_USB,       /**< USB tablet */
+	WBUSTYPE_SERIAL,    /**< Serial tablet */
+	WBUSTYPE_BLUETOOTH, /**< Bluetooth tablet */
+	WBUSTYPE_I2C,       /**< I2C tablet */
 } WacomBusType;
 
 /**
@@ -162,7 +161,7 @@ typedef enum {
  * @ingroup devices
  */
 typedef enum {
-	WACOM_DEVICE_INTEGRATED_NONE    = 0,
+	WACOM_DEVICE_INTEGRATED_NONE = 0,
 	/**
 	 * The device is integrated into a display
 	 * like the Wacom Cintiq series.
@@ -175,12 +174,12 @@ typedef enum {
 	 * device such as a Wacom tablet in the screen
 	 * of a laptop.
 	 */
-	WACOM_DEVICE_INTEGRATED_SYSTEM  = (1 << 1),
+	WACOM_DEVICE_INTEGRATED_SYSTEM = (1 << 1),
 	/**
 	 * The device is an external pad
 	 * like the Wacom ExpressKey Remote.
 	 */
-	WACOM_DEVICE_INTEGRATED_REMOTE  = (1 << 2),
+	WACOM_DEVICE_INTEGRATED_REMOTE = (1 << 2),
 } WacomIntegrationFlags;
 
 /**
@@ -192,18 +191,18 @@ typedef enum {
  * @ingroup devices
  */
 typedef enum {
-	WCLASS_UNKNOWN,		/**< Unknown/unsupported device class */
-	WCLASS_INTUOS3,		/**< Any Intuos3 series */
-	WCLASS_INTUOS4,		/**< Any Intuos4 series */
-	WCLASS_INTUOS5,		/**< Any Intuos5 series */
-	WCLASS_CINTIQ,		/**< Any Cintiq device */
-	WCLASS_BAMBOO,		/**< Any Bamboo device */
-	WCLASS_GRAPHIRE,	/**< Any Graphire device */
-	WCLASS_ISDV4,		/**< Any serial ISDV4 device */
-	WCLASS_INTUOS,		/**< Any Intuos series */
-	WCLASS_INTUOS2,		/**< Any Intuos2 series */
-	WCLASS_PEN_DISPLAYS,	/**< Any "interactive pen display" */
-	WCLASS_REMOTE,		/**< Any Wacom Remote */
+	WCLASS_UNKNOWN,      /**< Unknown/unsupported device class */
+	WCLASS_INTUOS3,      /**< Any Intuos3 series */
+	WCLASS_INTUOS4,      /**< Any Intuos4 series */
+	WCLASS_INTUOS5,      /**< Any Intuos5 series */
+	WCLASS_CINTIQ,       /**< Any Cintiq device */
+	WCLASS_BAMBOO,       /**< Any Bamboo device */
+	WCLASS_GRAPHIRE,     /**< Any Graphire device */
+	WCLASS_ISDV4,        /**< Any serial ISDV4 device */
+	WCLASS_INTUOS,       /**< Any Intuos series */
+	WCLASS_INTUOS2,      /**< Any Intuos2 series */
+	WCLASS_PEN_DISPLAYS, /**< Any "interactive pen display" */
+	WCLASS_REMOTE,       /**< Any Wacom Remote */
 } WacomClass;
 
 /**
@@ -231,9 +230,11 @@ typedef enum {
  */
 typedef enum {
 	WACOM_ERASER_UNKNOWN,
-	WACOM_ERASER_NONE,      /**< No eraser is present on the stylus */
-	WACOM_ERASER_INVERT,	/**< Eraser is a separate tool on the opposite end of the stylus */
-	WACOM_ERASER_BUTTON,	/**< Eraser is a button alongside any other stylus buttons */
+	WACOM_ERASER_NONE,   /**< No eraser is present on the stylus */
+	WACOM_ERASER_INVERT, /**< Eraser is a separate tool on the opposite end of the
+				stylus */
+	WACOM_ERASER_BUTTON, /**< Eraser is a button alongside any other stylus buttons
+			      */
 } WacomEraserType;
 
 /**
@@ -242,23 +243,32 @@ typedef enum {
  * @ingroup devices
  */
 typedef enum {
-	WACOM_BUTTON_NONE                   = 0,
-	WACOM_BUTTON_POSITION_LEFT          = (1 << 1),
-	WACOM_BUTTON_POSITION_RIGHT         = (1 << 2),
-	WACOM_BUTTON_POSITION_TOP           = (1 << 3),
-	WACOM_BUTTON_POSITION_BOTTOM        = (1 << 4),
-	WACOM_BUTTON_RING_MODESWITCH        = (1 << 5),
-	WACOM_BUTTON_RING2_MODESWITCH       = (1 << 6),
-	WACOM_BUTTON_TOUCHSTRIP_MODESWITCH  = (1 << 7),
+	WACOM_BUTTON_NONE = 0,
+	WACOM_BUTTON_POSITION_LEFT = (1 << 1),
+	WACOM_BUTTON_POSITION_RIGHT = (1 << 2),
+	WACOM_BUTTON_POSITION_TOP = (1 << 3),
+	WACOM_BUTTON_POSITION_BOTTOM = (1 << 4),
+	WACOM_BUTTON_RING_MODESWITCH = (1 << 5),
+	WACOM_BUTTON_RING2_MODESWITCH = (1 << 6),
+	WACOM_BUTTON_TOUCHSTRIP_MODESWITCH = (1 << 7),
 	WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH = (1 << 8),
-	WACOM_BUTTON_OLED                   = (1 << 9),
-	WACOM_BUTTON_DIAL_MODESWITCH        = (1 << 10),
-	WACOM_BUTTON_DIAL2_MODESWITCH       = (1 << 11),
-	WACOM_BUTTON_MODESWITCH             = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH | WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH),
-	WACOM_BUTTON_DIRECTION              = (WACOM_BUTTON_POSITION_LEFT | WACOM_BUTTON_POSITION_RIGHT | WACOM_BUTTON_POSITION_TOP | WACOM_BUTTON_POSITION_BOTTOM),
-	WACOM_BUTTON_RINGS_MODESWITCH       = (WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH),
-	WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH | WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
-	WACOM_BUTTON_DIALS_MODESWITCH       = (WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH),
+	WACOM_BUTTON_OLED = (1 << 9),
+	WACOM_BUTTON_DIAL_MODESWITCH = (1 << 10),
+	WACOM_BUTTON_DIAL2_MODESWITCH = (1 << 11),
+	WACOM_BUTTON_MODESWITCH =
+		(WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH |
+		 WACOM_BUTTON_TOUCHSTRIP_MODESWITCH |
+		 WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH | WACOM_BUTTON_DIAL_MODESWITCH |
+		 WACOM_BUTTON_DIAL2_MODESWITCH),
+	WACOM_BUTTON_DIRECTION =
+		(WACOM_BUTTON_POSITION_LEFT | WACOM_BUTTON_POSITION_RIGHT |
+		 WACOM_BUTTON_POSITION_TOP | WACOM_BUTTON_POSITION_BOTTOM),
+	WACOM_BUTTON_RINGS_MODESWITCH =
+		(WACOM_BUTTON_RING_MODESWITCH | WACOM_BUTTON_RING2_MODESWITCH),
+	WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH = (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH |
+					       WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH),
+	WACOM_BUTTON_DIALS_MODESWITCH =
+		(WACOM_BUTTON_DIAL_MODESWITCH | WACOM_BUTTON_DIAL2_MODESWITCH),
 } WacomButtonFlags;
 
 /**
@@ -267,51 +277,48 @@ typedef enum {
  * @ingroup styli
  */
 typedef enum {
-	WACOM_AXIS_TYPE_NONE                = 0,
+	WACOM_AXIS_TYPE_NONE = 0,
 	/** Tilt in x and y direction */
-	WACOM_AXIS_TYPE_TILT                = (1 << 1),
+	WACOM_AXIS_TYPE_TILT = (1 << 1),
 	/** Rotation in the z-axis */
-	WACOM_AXIS_TYPE_ROTATION_Z          = (1 << 2),
+	WACOM_AXIS_TYPE_ROTATION_Z = (1 << 2),
 	/** Distance to surface */
-	WACOM_AXIS_TYPE_DISTANCE            = (1 << 3),
+	WACOM_AXIS_TYPE_DISTANCE = (1 << 3),
 	/** Tip pressure */
-	WACOM_AXIS_TYPE_PRESSURE            = (1 << 4),
+	WACOM_AXIS_TYPE_PRESSURE = (1 << 4),
 	/** A absolute-position slider like the wheel on the airbrush */
-	WACOM_AXIS_TYPE_SLIDER              = (1 << 5),
+	WACOM_AXIS_TYPE_SLIDER = (1 << 5),
 } WacomAxisTypeFlags;
 
 /**
  * @ingroup devices
  */
-typedef enum {
-	WFALLBACK_NONE = 0,
-	WFALLBACK_GENERIC = 1
-} WacomFallbackFlags;
+typedef enum { WFALLBACK_NONE = 0, WFALLBACK_GENERIC = 1 } WacomFallbackFlags;
 
 /**
  * @ingroup devices
  */
 typedef enum {
-	WCOMPARE_NORMAL		= 0,		/**< compare the device only */
-	WCOMPARE_MATCHES	= (1 << 1),	/**< compare all possible matches too */
+	WCOMPARE_NORMAL = 0,         /**< compare the device only */
+	WCOMPARE_MATCHES = (1 << 1), /**< compare all possible matches too */
 } WacomCompareFlags;
 
 /**
  * @ingroup devices
  */
 typedef enum {
-	WACOM_STATUS_LED_UNAVAILABLE	= -1,
-	WACOM_STATUS_LED_RING		= 0,
-	WACOM_STATUS_LED_RING2		= 1,
-	WACOM_STATUS_LED_TOUCHSTRIP	= 2,
-	WACOM_STATUS_LED_TOUCHSTRIP2	= 3,
-	WACOM_STATUS_LED_DIAL		= 4,
-	WACOM_STATUS_LED_DIAL2		= 5,
+	WACOM_STATUS_LED_UNAVAILABLE = -1,
+	WACOM_STATUS_LED_RING = 0,
+	WACOM_STATUS_LED_RING2 = 1,
+	WACOM_STATUS_LED_TOUCHSTRIP = 2,
+	WACOM_STATUS_LED_TOUCHSTRIP2 = 3,
+	WACOM_STATUS_LED_DIAL = 4,
+	WACOM_STATUS_LED_DIAL2 = 5,
 } WacomStatusLEDs;
 
 typedef enum {
-	IGNORE_ALIASES	= 0,
-	ONLY_ALIASES	= 1,
+	IGNORE_ALIASES = 0,
+	ONLY_ALIASES = 1,
 } AliasStatus;
 /**
  * @ingroup devices
@@ -342,7 +349,8 @@ typedef enum {
  *
  * @ingroup context
  */
-WacomError* libwacom_error_new(void);
+WacomError *
+libwacom_error_new(void);
 
 /**
  * Free the error and associated memory.
@@ -353,21 +361,24 @@ WacomError* libwacom_error_new(void);
  *
  * @ingroup context
  */
-void libwacom_error_free(WacomError **error);
+void
+libwacom_error_free(WacomError **error);
 
 /**
  * @return The code for this error.
  *
  * @ingroup context
  */
-enum WacomErrorCode libwacom_error_get_code(WacomError *error);
+enum WacomErrorCode
+libwacom_error_get_code(WacomError *error);
 
 /**
  * @return A human-readable message for this error
  *
  * @ingroup context
  */
-const char* libwacom_error_get_message(WacomError *error);
+const char *
+libwacom_error_get_message(WacomError *error);
 
 /**
  * Loads the Tablet and Stylus databases, to be used
@@ -377,7 +388,8 @@ const char* libwacom_error_get_message(WacomError *error);
  *
  * @ingroup context
  */
-WacomDeviceDatabase* libwacom_database_new(void);
+WacomDeviceDatabase *
+libwacom_database_new(void);
 
 /**
  * Loads the Tablet and Stylus databases, to be used
@@ -395,7 +407,8 @@ WacomDeviceDatabase* libwacom_database_new(void);
  *
  * @ingroup context
  */
-WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
+WacomDeviceDatabase *
+libwacom_database_new_for_path(const char *datadir);
 
 /**
  * Free all memory used by the database.
@@ -404,7 +417,8 @@ WacomDeviceDatabase* libwacom_database_new_for_path(const char *datadir);
  *
  * @ingroup context
  */
-void libwacom_database_destroy(WacomDeviceDatabase *db);
+void
+libwacom_database_destroy(WacomDeviceDatabase *db);
 
 /**
  * Create a new device reference for the given builder.
@@ -434,7 +448,11 @@ void libwacom_database_destroy(WacomDeviceDatabase *db);
  *
  * @ingroup devices
  */
-WacomDevice* libwacom_new_from_builder(const WacomDeviceDatabase *db, const WacomBuilder *builder, WacomFallbackFlags fallback, WacomError *error);
+WacomDevice *
+libwacom_new_from_builder(const WacomDeviceDatabase *db,
+			  const WacomBuilder *builder,
+			  WacomFallbackFlags fallback,
+			  WacomError *error);
 
 /**
  * Create a new device reference from the given device path.
@@ -450,7 +468,11 @@ WacomDevice* libwacom_new_from_builder(const WacomDeviceDatabase *db, const Waco
  *
  * @ingroup devices
  */
-WacomDevice* libwacom_new_from_path(const WacomDeviceDatabase *db, const char *path, WacomFallbackFlags fallback, WacomError *error);
+WacomDevice *
+libwacom_new_from_path(const WacomDeviceDatabase *db,
+		       const char *path,
+		       WacomFallbackFlags fallback,
+		       WacomError *error);
 
 /**
  * Create a new device reference from the given vendor/product IDs.
@@ -469,7 +491,11 @@ WacomDevice* libwacom_new_from_path(const WacomDeviceDatabase *db, const char *p
  *
  * @ingroup devices
  */
-WacomDevice* libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_id, int product_id, WacomError *error);
+WacomDevice *
+libwacom_new_from_usbid(const WacomDeviceDatabase *db,
+			int vendor_id,
+			int product_id,
+			WacomError *error);
 
 /**
  * Create a new device reference from the given name.
@@ -484,7 +510,10 @@ WacomDevice* libwacom_new_from_usbid(const WacomDeviceDatabase *db, int vendor_i
  *
  * @ingroup devices
  */
-WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *name, WacomError *error);
+WacomDevice *
+libwacom_new_from_name(const WacomDeviceDatabase *db,
+		       const char *name,
+		       WacomError *error);
 
 /**
  * Returns the list of devices in the given database.
@@ -499,7 +528,9 @@ WacomDevice* libwacom_new_from_name(const WacomDeviceDatabase *db, const char *n
  *
  * @ingroup devices
  */
-WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db, WacomError *error);
+WacomDevice **
+libwacom_list_devices_from_database(const WacomDeviceDatabase *db,
+				    WacomError *error);
 
 /**
  * Print the description of this device to the given file.
@@ -509,8 +540,9 @@ WacomDevice** libwacom_list_devices_from_database(const  WacomDeviceDatabase *db
  *
  * @ingroup devices
  */
-void libwacom_print_device_description (int fd, const WacomDevice *device);
-
+void
+libwacom_print_device_description(int fd,
+				  const WacomDevice *device);
 
 /**
  * Remove the device and free all memory and references to it.
@@ -519,7 +551,8 @@ void libwacom_print_device_description (int fd, const WacomDevice *device);
  *
  * @ingroup devices
  */
-void libwacom_destroy(WacomDevice *device);
+void
+libwacom_destroy(WacomDevice *device);
 
 /**
  * Compare the two devices for equal-ness.
@@ -532,7 +565,10 @@ void libwacom_destroy(WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFlags flags);
+int
+libwacom_compare(const WacomDevice *a,
+		 const WacomDevice *b,
+		 WacomCompareFlags flags);
 
 /**
  * @param device The tablet to query
@@ -544,7 +580,8 @@ int libwacom_compare(const WacomDevice *a, const WacomDevice *b, WacomCompareFla
  * @ingroup devices
  */
 LIBWACOM_DEPRECATED
-WacomClass libwacom_get_class(const WacomDevice *device);
+WacomClass
+libwacom_get_class(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -552,15 +589,18 @@ WacomClass libwacom_get_class(const WacomDevice *device);
  *
  * @ingroup devices
  */
-const char* libwacom_get_name(const WacomDevice *device);
+const char *
+libwacom_get_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return The vendor-specific model name (e.g. CTE-650 for a Bamboo Fun), or NULL if none is set
+ * @return The vendor-specific model name (e.g. CTE-650 for a Bamboo Fun), or NULL if
+ * none is set
  *
  * @ingroup devices
  */
-const char* libwacom_get_model_name(const WacomDevice *device);
+const char *
+libwacom_get_model_name(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -569,7 +609,8 @@ const char* libwacom_get_model_name(const WacomDevice *device);
  *
  * @ingroup devices
  */
-const char* libwacom_get_layout_filename(const WacomDevice *device);
+const char *
+libwacom_get_layout_filename(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -581,7 +622,8 @@ const char* libwacom_get_layout_filename(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_vendor_id(const WacomDevice *device);
+int
+libwacom_get_vendor_id(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -590,16 +632,18 @@ int libwacom_get_vendor_id(const WacomDevice *device);
  *
  * @ingroup devices
  */
-const char* libwacom_get_match(const WacomDevice *device);
+const char *
+libwacom_get_match(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
- * @return A pointer to the null-terminated list of possible matches for this device. Do not
- * modify this pointer or any content!
+ * @return A pointer to the null-terminated list of possible matches for this device. Do
+ * not modify this pointer or any content!
  *
  * @ingroup devices
  */
-const WacomMatch** libwacom_get_matches(const WacomDevice *device);
+const WacomMatch **
+libwacom_get_matches(const WacomDevice *device);
 
 /**
  * Return the match string of the paired device for this device. A paired
@@ -617,7 +661,8 @@ const WacomMatch** libwacom_get_matches(const WacomDevice *device);
  *
  * @ingroup devices
  */
-const WacomMatch* libwacom_get_paired_device(const WacomDevice *device);
+const WacomMatch *
+libwacom_get_paired_device(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -629,7 +674,8 @@ const WacomMatch* libwacom_get_paired_device(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_product_id(const WacomDevice *device);
+int
+libwacom_get_product_id(const WacomDevice *device);
 
 /**
  * Retrieve the width of the device. This is the width of the usable area as
@@ -641,7 +687,8 @@ int libwacom_get_product_id(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_width(const WacomDevice *device);
+int
+libwacom_get_width(const WacomDevice *device);
 
 /**
  * Retrieve the height of the device. This is the height of the usable area as
@@ -653,7 +700,8 @@ int libwacom_get_width(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_height(const WacomDevice *device);
+int
+libwacom_get_height(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -661,7 +709,8 @@ int libwacom_get_height(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_has_stylus(const WacomDevice *device);
+int
+libwacom_has_stylus(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -669,7 +718,8 @@ int libwacom_has_stylus(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_has_touch(const WacomDevice *device);
+int
+libwacom_has_touch(const WacomDevice *device);
 
 /**
  * Tablet buttons are numbered 'A' through to 'A' + number of buttons.
@@ -679,7 +729,8 @@ int libwacom_has_touch(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_num_buttons(const WacomDevice *device);
+int
+libwacom_get_num_buttons(const WacomDevice *device);
 
 /**
  * Tablet keys indices are numbered from zero
@@ -689,7 +740,8 @@ int libwacom_get_num_buttons(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_num_keys(const WacomDevice *device);
+int
+libwacom_get_num_keys(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -700,7 +752,9 @@ int libwacom_get_num_keys(const WacomDevice *device);
  * @deprecated 2.14 Use libwacom_get_styli() instead.
  */
 LIBWACOM_DEPRECATED
-const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styli);
+const int *
+libwacom_get_supported_styli(const WacomDevice *device,
+			     int *num_styli);
 
 /**
  * @param device The tablet to query
@@ -715,7 +769,9 @@ const int *libwacom_get_supported_styli(const WacomDevice *device, int *num_styl
  * @since 2.14
  * @ingroup styli
  */
-const WacomStylus ** libwacom_get_styli(const WacomDevice *device, int *num_styli);
+const WacomStylus **
+libwacom_get_styli(const WacomDevice *device,
+		   int *num_styli);
 
 /**
  * @param device The tablet to query
@@ -724,7 +780,8 @@ const WacomStylus ** libwacom_get_styli(const WacomDevice *device, int *num_styl
  * @deprecated 2.12 Use libwacom_get_num_rings() instead.
  * @ingroup devices
  */
-int libwacom_has_ring(const WacomDevice *device) LIBWACOM_DEPRECATED;
+int
+libwacom_has_ring(const WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
@@ -733,7 +790,8 @@ int libwacom_has_ring(const WacomDevice *device) LIBWACOM_DEPRECATED;
  * @deprecated 2.12 Use libwacom_get_num_rings() instead.
  * @ingroup devices
  */
-int libwacom_has_ring2(const WacomDevice *device) LIBWACOM_DEPRECATED;
+int
+libwacom_has_ring2(const WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
@@ -743,7 +801,8 @@ int libwacom_has_ring2(const WacomDevice *device) LIBWACOM_DEPRECATED;
  * @since 2.12
  * @ingroup devices
  */
-int libwacom_get_num_rings(const WacomDevice *device);
+int
+libwacom_get_num_rings(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -751,7 +810,8 @@ int libwacom_get_num_rings(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_has_touchswitch(const WacomDevice *device);
+int
+libwacom_has_touchswitch(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -759,7 +819,8 @@ int libwacom_has_touchswitch(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_ring_num_modes(const WacomDevice *device);
+int
+libwacom_get_ring_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -767,7 +828,8 @@ int libwacom_get_ring_num_modes(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_ring2_num_modes(const WacomDevice *device);
+int
+libwacom_get_ring2_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -776,7 +838,8 @@ int libwacom_get_ring2_num_modes(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_num_strips(const WacomDevice *device);
+int
+libwacom_get_num_strips(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -784,7 +847,8 @@ int libwacom_get_num_strips(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_strips_num_modes(const WacomDevice *device);
+int
+libwacom_get_strips_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -793,7 +857,8 @@ int libwacom_get_strips_num_modes(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_num_dials(const WacomDevice *device);
+int
+libwacom_get_num_dials(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -801,7 +866,8 @@ int libwacom_get_num_dials(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_dial_num_modes(const WacomDevice *device);
+int
+libwacom_get_dial_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -809,7 +875,8 @@ int libwacom_get_dial_num_modes(const WacomDevice *device);
  *
  * @ingroup devices
  */
-int libwacom_get_dial2_num_modes(const WacomDevice *device);
+int
+libwacom_get_dial2_num_modes(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -818,7 +885,9 @@ int libwacom_get_dial2_num_modes(const WacomDevice *device);
  *
  * @ingroup devices
  */
-const WacomStatusLEDs *libwacom_get_status_leds(const WacomDevice *device, int *num_leds);
+const WacomStatusLEDs *
+libwacom_get_status_leds(const WacomDevice *device,
+			 int *num_leds);
 
 /**
  * @param device The tablet to query
@@ -828,8 +897,9 @@ const WacomStatusLEDs *libwacom_get_status_leds(const WacomDevice *device, int *
  *
  * @ingroup devices
  */
-int libwacom_get_button_led_group (const WacomDevice *device,
-				   char               button);
+int
+libwacom_get_button_led_group(const WacomDevice *device,
+			      char button);
 
 /**
  * @param device The tablet to query
@@ -839,7 +909,8 @@ int libwacom_get_button_led_group (const WacomDevice *device,
  *
  * @ingroup devices
  */
-int libwacom_is_builtin(const WacomDevice *device) LIBWACOM_DEPRECATED;
+int
+libwacom_is_builtin(const WacomDevice *device) LIBWACOM_DEPRECATED;
 
 /**
  * @param device The tablet to query
@@ -848,7 +919,8 @@ int libwacom_is_builtin(const WacomDevice *device) LIBWACOM_DEPRECATED;
  *
  * @ingroup devices
  */
-int libwacom_is_reversible(const WacomDevice *device);
+int
+libwacom_is_reversible(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -856,7 +928,8 @@ int libwacom_is_reversible(const WacomDevice *device);
  *
  * @ingroup devices
  */
-WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device);
+WacomIntegrationFlags
+libwacom_get_integration_flags(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -864,7 +937,8 @@ WacomIntegrationFlags libwacom_get_integration_flags (const WacomDevice *device)
  *
  * @ingroup devices
  */
-WacomBusType libwacom_get_bustype(const WacomDevice *device);
+WacomBusType
+libwacom_get_bustype(const WacomDevice *device);
 
 /**
  * @param device The tablet to query
@@ -873,8 +947,9 @@ WacomBusType libwacom_get_bustype(const WacomDevice *device);
  *
  * @ingroup devices
  */
-WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
-					  char               button);
+WacomButtonFlags
+libwacom_get_button_flag(const WacomDevice *device,
+			 char button);
 
 /**
  * @param device The tablet to query
@@ -884,8 +959,9 @@ WacomButtonFlags libwacom_get_button_flag(const WacomDevice *device,
  *
  * @ingroup devices
  */
-int libwacom_get_button_evdev_code(const WacomDevice *device,
-				   char               button);
+int
+libwacom_get_button_evdev_code(const WacomDevice *device,
+			       char button);
 
 /**
  * @param device The tablet to query
@@ -902,8 +978,9 @@ int libwacom_get_button_evdev_code(const WacomDevice *device,
  * @ingroup devices
  * @since 2.15
  */
-WacomModeSwitch libwacom_get_button_modeswitch_mode(const WacomDevice *device,
-						    char button);
+WacomModeSwitch
+libwacom_get_button_modeswitch_mode(const WacomDevice *device,
+				    char button);
 
 /**
  * Get the WacomStylus for the given tool ID.
@@ -919,7 +996,9 @@ WacomModeSwitch libwacom_get_button_modeswitch_mode(const WacomDevice *device,
  * libwacom_stylus_get_paired_styli() to obtain the WacomStylus directly
  */
 LIBWACOM_DEPRECATED
-const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, int id);
+const WacomStylus *
+libwacom_stylus_get_for_id(const WacomDeviceDatabase *db,
+			   int id);
 
 /**
  * @param stylus The stylus to query
@@ -927,7 +1006,8 @@ const WacomStylus *libwacom_stylus_get_for_id (const WacomDeviceDatabase *db, in
  *
  * @ingroup styli
  */
-int         libwacom_stylus_get_id (const WacomStylus *stylus);
+int
+libwacom_stylus_get_id(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -936,7 +1016,8 @@ int         libwacom_stylus_get_id (const WacomStylus *stylus);
  * @ingroup styli
  * @since 2.14
  */
-int         libwacom_stylus_get_vendor_id (const WacomStylus *stylus);
+int
+libwacom_stylus_get_vendor_id(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -944,7 +1025,8 @@ int         libwacom_stylus_get_vendor_id (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-const char *libwacom_stylus_get_name (const WacomStylus *stylus);
+const char *
+libwacom_stylus_get_name(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -959,7 +1041,9 @@ const char *libwacom_stylus_get_name (const WacomStylus *stylus);
  * @deprecated 2.14 Use libwacom_stylus_get_paired_styli() instead
  */
 LIBWACOM_DEPRECATED
-const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_paired_ids);
+const int *
+libwacom_stylus_get_paired_ids(const WacomStylus *stylus,
+			       int *num_paired_ids);
 
 /**
  * @param stylus The stylus to query
@@ -973,7 +1057,9 @@ const int *libwacom_stylus_get_paired_ids(const WacomStylus *stylus, int *num_pa
  * @ingroup styli
  * @since 2.14
  */
-const WacomStylus **libwacom_stylus_get_paired_styli(const WacomStylus *stylus, int *num_paired);
+const WacomStylus **
+libwacom_stylus_get_paired_styli(const WacomStylus *stylus,
+				 int *num_paired);
 
 /**
  * @param stylus The stylus to query
@@ -981,7 +1067,8 @@ const WacomStylus **libwacom_stylus_get_paired_styli(const WacomStylus *stylus, 
  *
  * @ingroup styli
  */
-int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
+int
+libwacom_stylus_get_num_buttons(const WacomStylus *stylus);
 
 /**
  * Check if the given stylus is paired with a separate eraser.
@@ -997,7 +1084,8 @@ int         libwacom_stylus_get_num_buttons (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
+int
+libwacom_stylus_has_eraser(const WacomStylus *stylus);
 
 /**
  * Check if the given stylus may act like an eraser.
@@ -1014,7 +1102,8 @@ int         libwacom_stylus_has_eraser (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
+int
+libwacom_stylus_is_eraser(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -1022,7 +1111,8 @@ int         libwacom_stylus_is_eraser (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-int         libwacom_stylus_has_lens (const WacomStylus *stylus);
+int
+libwacom_stylus_has_lens(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -1030,7 +1120,8 @@ int         libwacom_stylus_has_lens (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-int         libwacom_stylus_has_wheel (const WacomStylus *stylus);
+int
+libwacom_stylus_has_wheel(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -1038,7 +1129,8 @@ int         libwacom_stylus_has_wheel (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus);
+WacomAxisTypeFlags
+libwacom_stylus_get_axes(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -1046,7 +1138,8 @@ WacomAxisTypeFlags libwacom_stylus_get_axes (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
+WacomStylusType
+libwacom_stylus_get_type(const WacomStylus *stylus);
 
 /**
  * @param stylus The stylus to query
@@ -1054,7 +1147,8 @@ WacomStylusType libwacom_stylus_get_type (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-WacomEraserType libwacom_stylus_get_eraser_type (const WacomStylus *stylus);
+WacomEraserType
+libwacom_stylus_get_eraser_type(const WacomStylus *stylus);
 
 /**
  * Print the description of this stylus to the given file.
@@ -1064,35 +1158,50 @@ WacomEraserType libwacom_stylus_get_eraser_type (const WacomStylus *stylus);
  *
  * @ingroup styli
  */
-void libwacom_print_stylus_description (int fd, const WacomStylus *stylus);
+void
+libwacom_print_stylus_description(int fd,
+				  const WacomStylus *stylus);
 
 /** @addtogroup devices
  * @{ */
-const char *libwacom_match_get_name(const WacomMatch *match);
-const char *libwacom_match_get_uniq(const WacomMatch *match);
-WacomBusType libwacom_match_get_bustype(const WacomMatch *match);
-uint32_t libwacom_match_get_product_id(const WacomMatch *match);
-uint32_t libwacom_match_get_vendor_id(const WacomMatch *match);
-const char* libwacom_match_get_match_string(const WacomMatch *match);
+const char *
+libwacom_match_get_name(const WacomMatch *match);
+const char *
+libwacom_match_get_uniq(const WacomMatch *match);
+WacomBusType
+libwacom_match_get_bustype(const WacomMatch *match);
+uint32_t
+libwacom_match_get_product_id(const WacomMatch *match);
+uint32_t
+libwacom_match_get_vendor_id(const WacomMatch *match);
+const char *
+libwacom_match_get_match_string(const WacomMatch *match);
 /** @} */
-
 
 /**
  * Create a new builder to be used into libwacom_new_from_builder().
  * The returned builder must be freed with libwacom_builder_destroy().
  */
-WacomBuilder *libwacom_builder_new(void);
-void libwacom_builder_destroy(WacomBuilder *builder);
+WacomBuilder *
+libwacom_builder_new(void);
+void
+libwacom_builder_destroy(WacomBuilder *builder);
 
 /**
  * Change the bustype to the given bustype, overriding the currently set one (if any).
  */
-void libwacom_builder_set_bustype(WacomBuilder *builder, WacomBusType bustype);
+void
+libwacom_builder_set_bustype(WacomBuilder *builder,
+			     WacomBusType bustype);
 
 /**
- * Change the vendor and product id to the given ids, overriding the currently set ones (if any).
+ * Change the vendor and product id to the given ids, overriding the currently set ones
+ * (if any).
  */
-void libwacom_builder_set_usbid(WacomBuilder *builder, int vendor_id, int product_id);
+void
+libwacom_builder_set_usbid(WacomBuilder *builder,
+			   int vendor_id,
+			   int product_id);
 
 /**
  * Change the device name to the given name, overriding the currently set one (if any).
@@ -1101,7 +1210,9 @@ void libwacom_builder_set_usbid(WacomBuilder *builder, int vendor_id, int produc
  * kernel name for this device. See libwacom_builder_set_match_name() to set the kernel
  * name.
  */
-void libwacom_builder_set_device_name(WacomBuilder *builder, const char *name);
+void
+libwacom_builder_set_device_name(WacomBuilder *builder,
+				 const char *name);
 
 /**
  * Change the match name to the given name, overriding the currently set one (if any).
@@ -1109,13 +1220,16 @@ void libwacom_builder_set_device_name(WacomBuilder *builder, const char *name);
  * The match name is the device name advertised by the kernel and may be different
  * to the device name, the human-readable name as set in the libwacom database.
  */
-void libwacom_builder_set_match_name(WacomBuilder *builder, const char *name);
+void
+libwacom_builder_set_match_name(WacomBuilder *builder,
+				const char *name);
 
 /**
  * Change the uniq to the given uniq, overriding the currently set one (if any).
  */
-void libwacom_builder_set_uniq(WacomBuilder *builder, const char *uniq);
-
+void
+libwacom_builder_set_uniq(WacomBuilder *builder,
+			  const char *uniq);
 
 /** @cond hide_from_doxygen */
 #endif /* _LIBWACOM_H_ */

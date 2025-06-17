@@ -28,12 +28,13 @@
 
 #define _GNU_SOURCE
 
-#include "libwacomint.h"
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-LIBWACOM_EXPORT WacomError*
+#include "libwacomint.h"
+
+LIBWACOM_EXPORT WacomError *
 libwacom_error_new(void)
 {
 	WacomError *error = malloc(sizeof(*error));
@@ -56,16 +57,19 @@ libwacom_error_get_code(WacomError *error)
 	return error->code;
 }
 
-LIBWACOM_EXPORT const char*
+LIBWACOM_EXPORT const char *
 libwacom_error_get_message(WacomError *error)
 {
 	return error->msg;
 }
 
-__attribute__ ((format (printf, 3, 4)))
-void
-libwacom_error_set(WacomError *error, enum WacomErrorCode code,
-		   const char *msg, ...)
+__attribute__((format(printf,
+		      3,
+		      4))) void
+libwacom_error_set(WacomError *error,
+		   enum WacomErrorCode code,
+		   const char *msg,
+		   ...)
 {
 	if (!error)
 		return;

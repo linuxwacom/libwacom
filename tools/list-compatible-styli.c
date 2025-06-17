@@ -27,16 +27,18 @@
 #include "config.h"
 
 #define _GNU_SOURCE
+#include <assert.h>
+#include <glib.h>
+#include <libgen.h>
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
-#include <libgen.h>
 #include <unistd.h>
-#include <glib.h>
+
 #include "libwacom.h"
 
 static void
-print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
+print_device_info(const WacomDeviceDatabase *db,
+		  const WacomDevice *device)
 {
 	g_autofree WacomStylus const **styli = NULL;
 	int nstyli;
@@ -59,12 +61,16 @@ print_device_info(const WacomDeviceDatabase *db, const WacomDevice *device)
 
 		snprintf(id, sizeof(id), "0x%x", libwacom_stylus_get_id(s));
 		printf("    - { id: %*s'%s', name: '%s' }\n",
-		       (int)(7 - strlen(id)), " ", id,
+		       (int)(7 - strlen(id)),
+		       " ",
+		       id,
 		       libwacom_stylus_get_name(s));
 	}
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **list, **p;
@@ -72,7 +78,7 @@ int main(int argc, char **argv)
 	if (argc > 1) {
 		printf("Usage: %s [--help] - list compatible styli\n",
 		       basename(argv[0]));
-	       return g_str_equal(argv[1], "--help");
+		return g_str_equal(argv[1], "--help");
 	}
 
 	db = libwacom_database_new_for_path(DATABASEPATH);
@@ -89,7 +95,7 @@ int main(int argc, char **argv)
 	libwacom_database_destroy(db);
 	g_free(list);
 
-        return 0;
+	return 0;
 }
 
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

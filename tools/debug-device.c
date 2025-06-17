@@ -26,23 +26,26 @@
 
 #include "config.h"
 
+#include <assert.h>
+#include <glib.h>
+#include <glib/gi18n.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <assert.h>
-#include <glib/gi18n.h>
-#include <glib.h>
+
 #include "libwacom.h"
 
 static char *database_path;
 static gboolean with_styli;
 
+/* clang-format off */
 static GOptionEntry opts[] = {
-	{"database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
-	{"with-styli", 0, 0, G_OPTION_ARG_NONE, &with_styli, N_("Select to also list styli for this device"), NULL },
-	{ .long_name = NULL}
+	{ "database", 0, 0, G_OPTION_ARG_FILENAME, &database_path, N_("Path to device database"), NULL },
+	{ "with-styli", 0, 0, G_OPTION_ARG_NONE, &with_styli, N_("Select to also list styli for this device"), NULL },
+	{ .long_name = NULL }
 };
+/* clang-format on */
 
 static int indent = 0;
 
@@ -98,7 +101,8 @@ handle_match(const WacomMatch *m)
 }
 
 static WacomDevice *
-device_from_device_match(WacomDeviceDatabase *db, char **parts)
+device_from_device_match(WacomDeviceDatabase *db,
+			 char **parts)
 {
 	WacomBusType bustype;
 	guint64 vid, pid;
@@ -146,7 +150,8 @@ device_from_device_match(WacomDeviceDatabase *db, char **parts)
 }
 
 static int
-handle_device(WacomDeviceDatabase *db, const char *path)
+handle_device(WacomDeviceDatabase *db,
+	      const char *path)
 {
 	WacomDevice *device;
 	g_auto(GStrv) parts = g_strsplit(path, "|", 5);
@@ -171,35 +176,69 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 	{
 		char *busstr = NULL;
 		switch (libwacom_get_bustype(device)) {
-			case WBUSTYPE_UNKNOWN: busstr = "UNKNOWN"; break;
-			case WBUSTYPE_USB: busstr = "USB"; break;
-			case WBUSTYPE_SERIAL: busstr = "SERIAL"; break;
-			case WBUSTYPE_BLUETOOTH: busstr = "BLUETOOTH"; break;
-			case WBUSTYPE_I2C: busstr = "I2C"; break;
+		case WBUSTYPE_UNKNOWN:
+			busstr = "UNKNOWN";
+			break;
+		case WBUSTYPE_USB:
+			busstr = "USB";
+			break;
+		case WBUSTYPE_SERIAL:
+			busstr = "SERIAL";
+			break;
+		case WBUSTYPE_BLUETOOTH:
+			busstr = "BLUETOOTH";
+			break;
+		case WBUSTYPE_I2C:
+			busstr = "I2C";
+			break;
 		}
 		func(libwacom_get_bustype, "%s", busstr);
 	}
 
 	{
-		#pragma GCC diagnostic push
-		#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		WacomClass cls = libwacom_get_class(device);
-		#pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 		const char *str = NULL;
 
 		switch (cls) {
-		case WCLASS_UNKNOWN: str = "UNKNOWN"; break;
-		case WCLASS_INTUOS3: str = "INTUOS3"; break;
-		case WCLASS_INTUOS4: str = "INTUOS4"; break;
-		case WCLASS_INTUOS5: str = "INTUOS5"; break;
-		case WCLASS_CINTIQ: str = "CINTIQ"; break;
-		case WCLASS_BAMBOO: str = "BAMBOO"; break;
-		case WCLASS_GRAPHIRE: str = "GRAPHIRE"; break;
-		case WCLASS_ISDV4: str = "ISDV4"; break;
-		case WCLASS_INTUOS: str = "INTUOS"; break;
-		case WCLASS_INTUOS2: str = "INTUOS2"; break;
-		case WCLASS_PEN_DISPLAYS: str = "PEN_DISPLAYS"; break;
-		case WCLASS_REMOTE: str = "REMOTE"; break;
+		case WCLASS_UNKNOWN:
+			str = "UNKNOWN";
+			break;
+		case WCLASS_INTUOS3:
+			str = "INTUOS3";
+			break;
+		case WCLASS_INTUOS4:
+			str = "INTUOS4";
+			break;
+		case WCLASS_INTUOS5:
+			str = "INTUOS5";
+			break;
+		case WCLASS_CINTIQ:
+			str = "CINTIQ";
+			break;
+		case WCLASS_BAMBOO:
+			str = "BAMBOO";
+			break;
+		case WCLASS_GRAPHIRE:
+			str = "GRAPHIRE";
+			break;
+		case WCLASS_ISDV4:
+			str = "ISDV4";
+			break;
+		case WCLASS_INTUOS:
+			str = "INTUOS";
+			break;
+		case WCLASS_INTUOS2:
+			str = "INTUOS2";
+			break;
+		case WCLASS_PEN_DISPLAYS:
+			str = "PEN_DISPLAYS";
+			break;
+		case WCLASS_REMOTE:
+			str = "REMOTE";
+			break;
 			break;
 		}
 		func(libwacom_get_class, "%s", str);
@@ -231,11 +270,11 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 	intfunc(libwacom_has_touch, device);
 	intfunc(libwacom_get_num_buttons, device);
 	intfunc(libwacom_get_num_keys, device);
-	#pragma GCC diagnostic push
-	#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 	intfunc(libwacom_has_ring, device);
 	intfunc(libwacom_has_ring2, device);
-	#pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 	intfunc(libwacom_has_touchswitch, device);
 	intfunc(libwacom_get_ring_num_modes, device);
 	intfunc(libwacom_get_ring2_num_modes, device);
@@ -247,24 +286,30 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 	{
 		WacomIntegrationFlags flags = libwacom_get_integration_flags(device);
-		func(libwacom_get_integration_flags, "%s%s %s %s",
+		func(libwacom_get_integration_flags,
+		     "%s%s %s %s",
 		     flags == WACOM_DEVICE_INTEGRATED_NONE ? "NONE" : "",
 		     flags == WACOM_DEVICE_INTEGRATED_DISPLAY ? "DISPLAY" : "",
 		     flags == WACOM_DEVICE_INTEGRATED_SYSTEM ? "SYSTEM" : "",
-		     flags == WACOM_DEVICE_INTEGRATED_REMOTE ? "REMOTE" : ""
-		);
+		     flags == WACOM_DEVICE_INTEGRATED_REMOTE ? "REMOTE" : "");
 	}
 
 	{
 		for (int i = 0; i < libwacom_get_num_buttons(device); i++) {
 			char b = 'A' + i;
-			func_arg(libwacom_get_button_led_group, "%c", b, "%d",
-				libwacom_get_button_led_group(device, b));
+			func_arg(libwacom_get_button_led_group,
+				 "%c",
+				 b,
+				 "%d",
+				 libwacom_get_button_led_group(device, b));
 		}
 
 		for (int i = 0; i < libwacom_get_num_buttons(device); i++) {
 			char b = 'A' + i;
-			func_arg(libwacom_get_button_evdev_code, "%c", b, "0x%x",
+			func_arg(libwacom_get_button_evdev_code,
+				 "%c",
+				 b,
+				 "0x%x",
 				 libwacom_get_button_evdev_code(device, b));
 		}
 
@@ -273,68 +318,119 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 			WacomButtonFlags flags;
 
 			flags = libwacom_get_button_flag(device, b);
-			func_arg(libwacom_get_button_flag, "%c", b, "%s%s%s%s%s%s%s%s%s%s%s%s",
+			func_arg(libwacom_get_button_flag,
+				 "%c",
+				 b,
+				 "%s%s%s%s%s%s%s%s%s%s%s%s",
 				 flags == WACOM_BUTTON_NONE ? "NONE" : "",
-				 flags & WACOM_BUTTON_POSITION_LEFT ? "POSITION_LEFT|" : "",
-				 flags & WACOM_BUTTON_POSITION_RIGHT ? "POSITION_RIGHT|" : "",
-				 flags & WACOM_BUTTON_POSITION_TOP ? "POSITION_TOP|" : "",
-				 flags & WACOM_BUTTON_POSITION_BOTTOM ? "POSITION_BOTTOM|" : "",
-				 flags & WACOM_BUTTON_RING_MODESWITCH ? "RING_MODESWITCH|" : "",
-				 flags & WACOM_BUTTON_RING2_MODESWITCH ? "RING2_MODESWITCH|" : "",
-				 flags & WACOM_BUTTON_TOUCHSTRIP_MODESWITCH ? "TOUCHSTRIP_MODESWITCH|" : "",
-				 flags & WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH ? "TOUCHSTRIP2_MODESWITCH|" : "",
-				 flags & WACOM_BUTTON_DIAL_MODESWITCH ? "DIAL_MODESWITCH|" : "",
-				 flags & WACOM_BUTTON_DIAL2_MODESWITCH ? "DIAL2_MODESWITCH|" : "",
+				 flags & WACOM_BUTTON_POSITION_LEFT ? "POSITION_LEFT|"
+								    : "",
+				 flags & WACOM_BUTTON_POSITION_RIGHT ? "POSITION_RIGHT|"
+								     : "",
+				 flags & WACOM_BUTTON_POSITION_TOP ? "POSITION_TOP|"
+								   : "",
+				 flags & WACOM_BUTTON_POSITION_BOTTOM
+					 ? "POSITION_BOTTOM|"
+					 : "",
+				 flags & WACOM_BUTTON_RING_MODESWITCH
+					 ? "RING_MODESWITCH|"
+					 : "",
+				 flags & WACOM_BUTTON_RING2_MODESWITCH
+					 ? "RING2_MODESWITCH|"
+					 : "",
+				 flags & WACOM_BUTTON_TOUCHSTRIP_MODESWITCH
+					 ? "TOUCHSTRIP_MODESWITCH|"
+					 : "",
+				 flags & WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH
+					 ? "TOUCHSTRIP2_MODESWITCH|"
+					 : "",
+				 flags & WACOM_BUTTON_DIAL_MODESWITCH
+					 ? "DIAL_MODESWITCH|"
+					 : "",
+				 flags & WACOM_BUTTON_DIAL2_MODESWITCH
+					 ? "DIAL2_MODESWITCH|"
+					 : "",
 				 flags & WACOM_BUTTON_OLED ? "OLED " : "");
 		}
 
-		for (int i = 0; i < libwacom_get_num_buttons(device); i++ ) {
+		for (int i = 0; i < libwacom_get_num_buttons(device); i++) {
 			char b = 'A' + i;
 			WacomModeSwitch mode;
 
-			if ((libwacom_get_button_flag(device, b) & WACOM_BUTTON_MODESWITCH) == 0)
+			if ((libwacom_get_button_flag(device, b) &
+			     WACOM_BUTTON_MODESWITCH) == 0)
 				continue;
 
 			mode = libwacom_get_button_modeswitch_mode(device, b);
 			if (mode == WACOM_MODE_SWITCH_NEXT)
-				func_arg(libwacom_get_button_modeswitch_mode, "%c", b, "%s", "MODE_SWITCH_NEXT");
+				func_arg(libwacom_get_button_modeswitch_mode,
+					 "%c",
+					 b,
+					 "%s",
+					 "MODE_SWITCH_NEXT");
 			else
-				func_arg(libwacom_get_button_modeswitch_mode, "%c", b, "%d", (int)mode);
+				func_arg(libwacom_get_button_modeswitch_mode,
+					 "%c",
+					 b,
+					 "%d",
+					 (int)mode);
 		}
 	}
 
 	{
-		char buf[1024] = {0};
+		char buf[1024] = { 0 };
 		int nleds;
 		const WacomStatusLEDs *leds = libwacom_get_status_leds(device, &nleds);
 
 		for (int i = 0; i < nleds; i++) {
 			char *ledstr = NULL;
 			switch (leds[i]) {
-				case WACOM_STATUS_LED_UNAVAILABLE: ledstr = "UNAVAILABLE"; break;
-				case WACOM_STATUS_LED_RING: ledstr = "RING"; break;
-				case WACOM_STATUS_LED_RING2: ledstr = "RING2"; break;
-				case WACOM_STATUS_LED_TOUCHSTRIP: ledstr = "TOUCHSTRIP"; break;
-				case WACOM_STATUS_LED_TOUCHSTRIP2: ledstr = "TOUCHSTRIP2"; break;
-				case WACOM_STATUS_LED_DIAL: ledstr = "DIAL"; break;
-				case WACOM_STATUS_LED_DIAL2: ledstr = "DIAL2"; break;
+			case WACOM_STATUS_LED_UNAVAILABLE:
+				ledstr = "UNAVAILABLE";
+				break;
+			case WACOM_STATUS_LED_RING:
+				ledstr = "RING";
+				break;
+			case WACOM_STATUS_LED_RING2:
+				ledstr = "RING2";
+				break;
+			case WACOM_STATUS_LED_TOUCHSTRIP:
+				ledstr = "TOUCHSTRIP";
+				break;
+			case WACOM_STATUS_LED_TOUCHSTRIP2:
+				ledstr = "TOUCHSTRIP2";
+				break;
+			case WACOM_STATUS_LED_DIAL:
+				ledstr = "DIAL";
+				break;
+			case WACOM_STATUS_LED_DIAL2:
+				ledstr = "DIAL2";
+				break;
 			}
-			snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s%s", i > 0 ? ", " : "", ledstr);
+			snprintf(buf + strlen(buf),
+				 sizeof(buf) - strlen(buf),
+				 "%s%s",
+				 i > 0 ? ", " : "",
+				 ledstr);
 		}
 		func(libwacom_get_status_leds, "[%s]", buf);
 	}
 
 	{
 		int nstyli;
-		#pragma GCC diagnostic push
-		#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 		const int *styli = libwacom_get_supported_styli(device, &nstyli);
-		#pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 
 		{
-			char buf[1024] = {0};
+			char buf[1024] = { 0 };
 			for (int i = 0; i < nstyli; i++)
-				snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s0x%06x", i > 0 ? ", " : "", styli[i]);
+				snprintf(buf + strlen(buf),
+					 sizeof(buf) - strlen(buf),
+					 "%s0x%06x",
+					 i > 0 ? ", " : "",
+					 styli[i]);
 
 			func(libwacom_get_supported_styli, "[%s]", buf);
 		}
@@ -342,13 +438,18 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 	{
 		int nstyli;
-		g_autofree const WacomStylus **styli = libwacom_get_styli(device, &nstyli);
+		g_autofree const WacomStylus **styli =
+			libwacom_get_styli(device, &nstyli);
 		{
-			char buf[1024] = {0};
+			char buf[1024] = { 0 };
 			for (int i = 0; i < nstyli; i++) {
 				const WacomStylus *s = styli[i];
-				snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s[0x%04x, 0x%06x]", i > 0 ? ", " : "",
-					 libwacom_stylus_get_vendor_id(s), libwacom_stylus_get_id(s));
+				snprintf(buf + strlen(buf),
+					 sizeof(buf) - strlen(buf),
+					 "%s[0x%04x, 0x%06x]",
+					 i > 0 ? ", " : "",
+					 libwacom_stylus_get_vendor_id(s),
+					 libwacom_stylus_get_id(s));
 			}
 
 			func(libwacom_get_styli, "[%s]", buf);
@@ -363,79 +464,181 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 
 				ip("%s\n", "{");
 				push();
-				func_arg(libwacom_stylus_get_id, "0x%04x", id, "0x%04x", libwacom_stylus_get_id(stylus));
-				func_arg(libwacom_stylus_get_name, "0x%04x", id, "%s", libwacom_stylus_get_name(stylus));
-				func_arg(libwacom_stylus_get_num_buttons, "0x%04x", id, "%d", libwacom_stylus_get_num_buttons(stylus));
-				func_arg(libwacom_stylus_has_eraser, "0x%04x", id, "%d", libwacom_stylus_has_eraser(stylus));
-				func_arg(libwacom_stylus_is_eraser, "0x%04x", id, "%d", libwacom_stylus_is_eraser(stylus));
-				func_arg(libwacom_stylus_has_lens, "0x%04x", id, "%d", libwacom_stylus_has_lens(stylus));
-				func_arg(libwacom_stylus_has_wheel, "0x%04x", id, "%d", libwacom_stylus_has_wheel(stylus));
+				func_arg(libwacom_stylus_get_id,
+					 "0x%04x",
+					 id,
+					 "0x%04x",
+					 libwacom_stylus_get_id(stylus));
+				func_arg(libwacom_stylus_get_name,
+					 "0x%04x",
+					 id,
+					 "%s",
+					 libwacom_stylus_get_name(stylus));
+				func_arg(libwacom_stylus_get_num_buttons,
+					 "0x%04x",
+					 id,
+					 "%d",
+					 libwacom_stylus_get_num_buttons(stylus));
+				func_arg(libwacom_stylus_has_eraser,
+					 "0x%04x",
+					 id,
+					 "%d",
+					 libwacom_stylus_has_eraser(stylus));
+				func_arg(libwacom_stylus_is_eraser,
+					 "0x%04x",
+					 id,
+					 "%d",
+					 libwacom_stylus_is_eraser(stylus));
+				func_arg(libwacom_stylus_has_lens,
+					 "0x%04x",
+					 id,
+					 "%d",
+					 libwacom_stylus_has_lens(stylus));
+				func_arg(libwacom_stylus_has_wheel,
+					 "0x%04x",
+					 id,
+					 "%d",
+					 libwacom_stylus_has_wheel(stylus));
 
 				{
-					char buf[1024] = {0};
+					char buf[1024] = { 0 };
 					int npaired;
-					#pragma GCC diagnostic push
-					#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-					const int *paired = libwacom_stylus_get_paired_ids(stylus, &npaired);
-					#pragma GCC diagnostic pop
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+					const int *paired =
+						libwacom_stylus_get_paired_ids(
+							stylus,
+							&npaired);
+#pragma GCC diagnostic pop
 
 					for (int i = 0; i < npaired; i++)
-						snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s0x%06x", i > 0 ? ", " : "", paired[i]);
-					func_arg(libwacom_stylus_get_paired_ids, "0x%04x", id, "[%s]", buf);
+						snprintf(buf + strlen(buf),
+							 sizeof(buf) - strlen(buf),
+							 "%s0x%06x",
+							 i > 0 ? ", " : "",
+							 paired[i]);
+					func_arg(libwacom_stylus_get_paired_ids,
+						 "0x%04x",
+						 id,
+						 "[%s]",
+						 buf);
 				}
 
 				{
-					char buf[1024] = {0};
+					char buf[1024] = { 0 };
 					int npaired;
-					g_autofree const WacomStylus **paired = libwacom_stylus_get_paired_styli(stylus, &npaired);
+					g_autofree const WacomStylus **paired =
+						libwacom_stylus_get_paired_styli(
+							stylus,
+							&npaired);
 
 					for (int i = 0; i < npaired; i++) {
 						const WacomStylus *p = paired[i];
-						snprintf(buf + strlen(buf), sizeof(buf) - strlen(buf), "%s[0x%04x, 0x%06x]", i > 0 ? ", " : "",
-							 libwacom_stylus_get_vendor_id(p), libwacom_stylus_get_id(p));
+						snprintf(buf + strlen(buf),
+							 sizeof(buf) - strlen(buf),
+							 "%s[0x%04x, 0x%06x]",
+							 i > 0 ? ", " : "",
+							 libwacom_stylus_get_vendor_id(
+								 p),
+							 libwacom_stylus_get_id(p));
 					}
-					func_arg(libwacom_stylus_get_paired_ids, "0x%04x", id, "[%s]", buf);
+					func_arg(libwacom_stylus_get_paired_ids,
+						 "0x%04x",
+						 id,
+						 "[%s]",
+						 buf);
 				}
 
 				{
-					WacomAxisTypeFlags flags = libwacom_stylus_get_axes(stylus);
-					func_arg(libwacom_stylus_has_wheel, "0x%04x", id, "%s%s%s%s%s%s",
-						 flags == WACOM_AXIS_TYPE_NONE ? "NONE" : "",
-						 flags & WACOM_AXIS_TYPE_TILT ? "TILT|" : "",
-						 flags & WACOM_AXIS_TYPE_ROTATION_Z ? "ROTATION_Z|" : "",
-						 flags & WACOM_AXIS_TYPE_DISTANCE ? "DISTANCE|" : "",
-						 flags & WACOM_AXIS_TYPE_PRESSURE ? "PRESSURE|" : "",
-						 flags & WACOM_AXIS_TYPE_SLIDER ? "SLIDER" : "");
+					WacomAxisTypeFlags flags =
+						libwacom_stylus_get_axes(stylus);
+					func_arg(libwacom_stylus_has_wheel,
+						 "0x%04x",
+						 id,
+						 "%s%s%s%s%s%s",
+						 flags == WACOM_AXIS_TYPE_NONE ? "NONE"
+									       : "",
+						 flags & WACOM_AXIS_TYPE_TILT ? "TILT|"
+									      : "",
+						 flags & WACOM_AXIS_TYPE_ROTATION_Z
+							 ? "ROTATION_Z|"
+							 : "",
+						 flags & WACOM_AXIS_TYPE_DISTANCE
+							 ? "DISTANCE|"
+							 : "",
+						 flags & WACOM_AXIS_TYPE_PRESSURE
+							 ? "PRESSURE|"
+							 : "",
+						 flags & WACOM_AXIS_TYPE_SLIDER
+							 ? "SLIDER"
+							 : "");
 				}
 
 				{
 					const char *typestr = NULL;
 					switch (libwacom_stylus_get_type(stylus)) {
-						case WSTYLUS_UNKNOWN: typestr = "UNKNOWN"; break;
-						case WSTYLUS_GENERAL: typestr = "GENERAL"; break;
-						case WSTYLUS_INKING: typestr = "INKING"; break;
-						case WSTYLUS_AIRBRUSH: typestr = "AIRBRUSH"; break;
-						case WSTYLUS_CLASSIC: typestr = "CLASSIC"; break;
-						case WSTYLUS_MARKER: typestr = "MARKER"; break;
-						case WSTYLUS_STROKE: typestr = "STROKE"; break;
-						case WSTYLUS_PUCK: typestr = "PUCK"; break;
-						case WSTYLUS_3D: typestr = "3D"; break;
-						case WSTYLUS_MOBILE: typestr = "MOBILE"; break;
+					case WSTYLUS_UNKNOWN:
+						typestr = "UNKNOWN";
+						break;
+					case WSTYLUS_GENERAL:
+						typestr = "GENERAL";
+						break;
+					case WSTYLUS_INKING:
+						typestr = "INKING";
+						break;
+					case WSTYLUS_AIRBRUSH:
+						typestr = "AIRBRUSH";
+						break;
+					case WSTYLUS_CLASSIC:
+						typestr = "CLASSIC";
+						break;
+					case WSTYLUS_MARKER:
+						typestr = "MARKER";
+						break;
+					case WSTYLUS_STROKE:
+						typestr = "STROKE";
+						break;
+					case WSTYLUS_PUCK:
+						typestr = "PUCK";
+						break;
+					case WSTYLUS_3D:
+						typestr = "3D";
+						break;
+					case WSTYLUS_MOBILE:
+						typestr = "MOBILE";
+						break;
 					}
 
-					func_arg(libwacom_stylus_get_type, "0x%04x", id, "%s", typestr);
+					func_arg(libwacom_stylus_get_type,
+						 "0x%04x",
+						 id,
+						 "%s",
+						 typestr);
 				}
 
 				{
 					const char *eraserstr = NULL;
-					switch (libwacom_stylus_get_eraser_type(stylus)) {
-						case WACOM_ERASER_UNKNOWN: eraserstr = "UNKNOWN"; break;
-						case WACOM_ERASER_NONE: eraserstr = "NONE"; break;
-						case WACOM_ERASER_INVERT: eraserstr = "INVERT"; break;
-						case WACOM_ERASER_BUTTON: eraserstr = "BUTTON"; break;
+					switch (libwacom_stylus_get_eraser_type(
+						stylus)) {
+					case WACOM_ERASER_UNKNOWN:
+						eraserstr = "UNKNOWN";
+						break;
+					case WACOM_ERASER_NONE:
+						eraserstr = "NONE";
+						break;
+					case WACOM_ERASER_INVERT:
+						eraserstr = "INVERT";
+						break;
+					case WACOM_ERASER_BUTTON:
+						eraserstr = "BUTTON";
+						break;
 					}
 
-					func_arg(libwacom_stylus_get_type, "0x%04x", id, "%s", eraserstr);
+					func_arg(libwacom_stylus_get_type,
+						 "0x%04x",
+						 id,
+						 "%s",
+						 eraserstr);
 				}
 				pop();
 				ip("%s\n", "}");
@@ -448,29 +651,35 @@ handle_device(WacomDeviceDatabase *db, const char *path)
 	return EXIT_SUCCESS;
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	WacomDeviceDatabase *db;
 	GOptionContext *context;
 	g_autoptr(GError) error = NULL;
 	int rc;
 
-	context = g_option_context_new ("[/dev/input/event0 | \"usb|0123|abcd|some tablet\"]");
-	g_option_context_set_description(context, "The argument may be a device node or a single DeviceMatch string as listed in .tablet files.");
+	context = g_option_context_new(
+		"[/dev/input/event0 | \"usb|0123|abcd|some tablet\"]");
+	g_option_context_set_description(
+		context,
+		"The argument may be a device node or a single "
+		"DeviceMatch string as listed in .tablet files.");
 
-	g_option_context_add_main_entries (context, opts, NULL);
+	g_option_context_add_main_entries(context, opts, NULL);
 
-	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+	if (!g_option_context_parse(context, &argc, &argv, &error)) {
 		if (error != NULL)
-			fprintf (stderr, "%s\n", error->message);
+			fprintf(stderr, "%s\n", error->message);
 		return EXIT_FAILURE;
 	}
 
-	g_option_context_free (context);
+	g_option_context_free(context);
 
 	if (database_path) {
 		db = libwacom_database_new_for_path(database_path);
-		g_free (database_path);
+		g_free(database_path);
 	} else {
 #ifdef DATABASEPATH
 		db = libwacom_database_new_for_path(DATABASEPATH);
@@ -486,13 +695,13 @@ int main(int argc, char **argv)
 
 	if (argc <= 1) {
 		fprintf(stderr, "Missing device node or match string\n");
-		libwacom_database_destroy (db);
+		libwacom_database_destroy(db);
 		return EXIT_FAILURE;
 	}
 
 	rc = handle_device(db, argv[1]);
 
-	libwacom_database_destroy (db);
+	libwacom_database_destroy(db);
 	return rc;
 }
 

@@ -26,8 +26,8 @@
 
 #include "config.h"
 
-#include <linux/input-event-codes.h>
 #include <glib.h>
+#include <linux/input-event-codes.h>
 #include <stdlib.h>
 
 #include "libwacom.h"
@@ -44,7 +44,7 @@ load_database(void)
 
 	datadir = getenv("LIBWACOM_DATA_DIR");
 	if (!datadir)
-		datadir = TOPSRCDIR"/data";
+		datadir = TOPSRCDIR "/data";
 
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
@@ -55,34 +55,35 @@ load_database(void)
 }
 
 static void
-fixture_setup(struct fixture *f, gconstpointer user_data)
+fixture_setup(struct fixture *f,
+	      gconstpointer user_data)
 {
 	f->db = load_database();
 }
 
 static void
-fixture_teardown(struct fixture *f, gconstpointer user_data)
+fixture_teardown(struct fixture *f,
+		 gconstpointer user_data)
 {
 	libwacom_database_destroy(f->db);
 }
 
-
-static void check_multiple_match(WacomDevice *device)
+static void
+check_multiple_match(WacomDevice *device)
 {
 	const WacomMatch **match;
 	int nmatches = 0;
-	int found_bus = 0,
-	    found_vendor_id = 0,
-	    found_product_id = 0;
+	int found_bus = 0, found_vendor_id = 0, found_product_id = 0;
 
-	for (match = libwacom_get_matches(device); *match; match++)
-	{
+	for (match = libwacom_get_matches(device); *match; match++) {
 		nmatches++;
 		if (libwacom_match_get_bustype(*match) == libwacom_get_bustype(device))
 			found_bus = 1;
-		if ((int)libwacom_match_get_vendor_id(*match) == libwacom_get_vendor_id(device))
+		if ((int)libwacom_match_get_vendor_id(*match) ==
+		    libwacom_get_vendor_id(device))
 			found_vendor_id = 1;
-		if ((int)libwacom_match_get_product_id(*match) == libwacom_get_product_id(device))
+		if ((int)libwacom_match_get_product_id(*match) ==
+		    libwacom_get_product_id(device))
 			found_product_id = 1;
 	}
 
@@ -92,16 +93,17 @@ static void check_multiple_match(WacomDevice *device)
 	g_assert_true(found_product_id);
 }
 
-
 static void
-test_invalid_device(struct fixture *f, gconstpointer user_data)
+test_invalid_device(struct fixture *f,
+		    gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0, 0, NULL);
 	g_assert_null(device);
 }
 
 static void
-test_intuos4(struct fixture *f, gconstpointer user_data)
+test_intuos4(struct fixture *f,
+	     gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x00bc, NULL);
 	g_assert_nonnull(device);
@@ -127,7 +129,9 @@ test_intuos4(struct fixture *f, gconstpointer user_data)
 	g_assert_false(libwacom_has_touchswitch(device));
 	g_assert_cmpint(libwacom_get_num_strips(device), ==, 0);
 	g_assert_cmpint(libwacom_get_num_dials(device), ==, 0);
-	g_assert_cmpint(libwacom_get_integration_flags (device), ==, WACOM_DEVICE_INTEGRATED_NONE);
+	g_assert_cmpint(libwacom_get_integration_flags(device),
+			==,
+			WACOM_DEVICE_INTEGRATED_NONE);
 	g_assert_cmpint(libwacom_get_width(device), ==, 8);
 	g_assert_cmpint(libwacom_get_height(device), ==, 5);
 
@@ -137,12 +141,14 @@ test_intuos4(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_intuos4_wl(struct fixture *f, gconstpointer user_data)
+test_intuos4_wl(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x00b9, NULL);
 	g_assert_nonnull(device);
 
-	g_assert_true(libwacom_get_button_flag(device, 'A') & WACOM_BUTTON_RING_MODESWITCH);
+	g_assert_true(libwacom_get_button_flag(device, 'A') &
+		      WACOM_BUTTON_RING_MODESWITCH);
 	g_assert_true(libwacom_get_button_flag(device, 'I') & WACOM_BUTTON_OLED);
 #if 0
 	/* disabled - needs subprocesses testing but invalid data handling
@@ -160,7 +166,8 @@ test_intuos4_wl(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_cintiq24hd(struct fixture *f, gconstpointer user_data)
+test_cintiq24hd(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x00f4, NULL);
 	g_assert_nonnull(device);
@@ -172,7 +179,8 @@ test_cintiq24hd(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_cintiq21ux(struct fixture *f, gconstpointer user_data)
+test_cintiq21ux(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x00cc, NULL);
 	g_assert_nonnull(device);
@@ -183,20 +191,25 @@ test_cintiq21ux(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_wacf004(struct fixture *f, gconstpointer user_data)
+test_wacf004(struct fixture *f,
+	     gconstpointer user_data)
 {
-	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Serial Tablet WACf004", NULL);
+	WacomDevice *device =
+		libwacom_new_from_name(f->db, "Wacom Serial Tablet WACf004", NULL);
 	g_assert_nonnull(device);
 
-	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
-	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	g_assert_true(libwacom_get_integration_flags(device) &
+		      WACOM_DEVICE_INTEGRATED_DISPLAY);
+	g_assert_true(libwacom_get_integration_flags(device) &
+		      WACOM_DEVICE_INTEGRATED_SYSTEM);
 	g_assert_null(libwacom_get_model_name(device));
 
 	libwacom_destroy(device);
 }
 
 static void
-test_cintiq24hdt(struct fixture *f, gconstpointer user_data)
+test_cintiq24hdt(struct fixture *f,
+		 gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x00f8, NULL);
 	const WacomMatch *match;
@@ -218,7 +231,8 @@ test_cintiq24hdt(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_cintiq13hd(struct fixture *f, gconstpointer user_data)
+test_cintiq13hd(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Cintiq 13HD", NULL);
 	g_assert_nonnull(device);
@@ -237,9 +251,11 @@ test_cintiq13hd(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_cintiqpro13(struct fixture *f, gconstpointer user_data)
+test_cintiqpro13(struct fixture *f,
+		 gconstpointer user_data)
 {
-	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Cintiq Pro 13", NULL);
+	WacomDevice *device =
+		libwacom_new_from_name(f->db, "Wacom Cintiq Pro 13", NULL);
 	g_assert_nonnull(device);
 	g_assert_cmpint(libwacom_get_num_keys(device), ==, 5);
 
@@ -247,7 +263,8 @@ test_cintiqpro13(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_bamboopen(struct fixture *f, gconstpointer user_data)
+test_bamboopen(struct fixture *f,
+	       gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_name(f->db, "Wacom Bamboo Pen", NULL);
 	g_assert_nonnull(device);
@@ -261,25 +278,31 @@ test_bamboopen(struct fixture *f, gconstpointer user_data)
 }
 
 static void
-test_dellcanvas(struct fixture *f, gconstpointer user_data)
+test_dellcanvas(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_name(f->db, "Dell Canvas 27", NULL);
 
 	g_assert_nonnull(device);
-	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
-	g_assert_false(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	g_assert_true(libwacom_get_integration_flags(device) &
+		      WACOM_DEVICE_INTEGRATED_DISPLAY);
+	g_assert_false(libwacom_get_integration_flags(device) &
+		       WACOM_DEVICE_INTEGRATED_SYSTEM);
 
 	libwacom_destroy(device);
 }
 
 static void
-test_isdv4_4800(struct fixture *f, gconstpointer user_data)
+test_isdv4_4800(struct fixture *f,
+		gconstpointer user_data)
 {
 	WacomDevice *device = libwacom_new_from_usbid(f->db, 0x56a, 0x4800, NULL);
 	g_assert_nonnull(device);
 
-	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_DISPLAY);
-	g_assert_true(libwacom_get_integration_flags(device) & WACOM_DEVICE_INTEGRATED_SYSTEM);
+	g_assert_true(libwacom_get_integration_flags(device) &
+		      WACOM_DEVICE_INTEGRATED_DISPLAY);
+	g_assert_true(libwacom_get_integration_flags(device) &
+		      WACOM_DEVICE_INTEGRATED_SYSTEM);
 	g_assert_null(libwacom_get_model_name(device));
 	g_assert_cmpint(libwacom_get_vendor_id(device), ==, 0x56a);
 	g_assert_cmpint(libwacom_get_product_id(device), ==, 0x4800);
@@ -288,46 +311,84 @@ test_isdv4_4800(struct fixture *f, gconstpointer user_data)
 	libwacom_destroy(device);
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	g_test_init(&argc, &argv, NULL);
 	g_test_set_nonfatal_assertions();
 
-	g_test_add("/load/0000:0000", struct fixture, NULL,
-		   fixture_setup, test_invalid_device,
+	g_test_add("/load/0000:0000",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_invalid_device,
 		   fixture_teardown);
-	g_test_add("/load/056a:00bc", struct fixture, NULL,
-		   fixture_setup, test_intuos4,
+	g_test_add("/load/056a:00bc",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_intuos4,
 		   fixture_teardown);
-	g_test_add("/load/056a:00b8", struct fixture, NULL,
-		   fixture_setup, test_intuos4_wl,
+	g_test_add("/load/056a:00b8",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_intuos4_wl,
 		   fixture_teardown);
-	g_test_add("/load/056a:00f4", struct fixture, NULL,
-		   fixture_setup, test_cintiq24hd,
+	g_test_add("/load/056a:00f4",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_cintiq24hd,
 		   fixture_teardown);
-	g_test_add("/load/056a:00cc", struct fixture, NULL,
-		   fixture_setup, test_cintiq21ux,
+	g_test_add("/load/056a:00cc",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_cintiq21ux,
 		   fixture_teardown);
-	g_test_add("/load/056a:00f8", struct fixture, NULL,
-		   fixture_setup, test_cintiq24hdt,
+	g_test_add("/load/056a:00f8",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_cintiq24hdt,
 		   fixture_teardown);
-	g_test_add("/load/056a:0304", struct fixture, NULL,
-		   fixture_setup, test_cintiq13hd,
+	g_test_add("/load/056a:0304",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_cintiq13hd,
 		   fixture_teardown);
-	g_test_add("/load/056a:034f", struct fixture, NULL,
-		   fixture_setup, test_cintiqpro13,
+	g_test_add("/load/056a:034f",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_cintiqpro13,
 		   fixture_teardown);
-	g_test_add("/load/056a:0065", struct fixture, NULL,
-		   fixture_setup, test_bamboopen,
+	g_test_add("/load/056a:0065",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_bamboopen,
 		   fixture_teardown);
-	g_test_add("/load/056a:4200", struct fixture, NULL,
-		   fixture_setup, test_dellcanvas,
+	g_test_add("/load/056a:4200",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_dellcanvas,
 		   fixture_teardown);
-	g_test_add("/load/056a:WACf004", struct fixture, NULL,
-		   fixture_setup, test_wacf004,
+	g_test_add("/load/056a:WACf004",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_wacf004,
 		   fixture_teardown);
-	g_test_add("/load/056a:4800", struct fixture, NULL,
-		   fixture_setup, test_isdv4_4800,
+	g_test_add("/load/056a:4800",
+		   struct fixture,
+		   NULL,
+		   fixture_setup,
+		   test_isdv4_4800,
 		   fixture_teardown);
 
 	return g_test_run();

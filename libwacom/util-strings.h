@@ -31,11 +31,11 @@
 #include <errno.h>
 #include <limits.h>
 #include <math.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
@@ -65,7 +65,7 @@ zalloc(size_t size)
  * string is NULL. If the input string is a string pointer, we strdup or
  * abort on failure.
  */
-static inline char*
+static inline char *
 safe_strdup(const char *str)
 {
 	char *s;
@@ -92,9 +92,12 @@ safe_strdup(const char *str)
  * upon success or -1 upon failure. In the case of failure the pointer is set
  * to NULL.
  */
-__attribute__ ((format (printf, 2, 3)))
-static inline int
-xasprintf(char **strp, const char *fmt, ...)
+__attribute__((format(printf,
+		      2,
+		      3))) static inline int
+xasprintf(char **strp,
+	  const char *fmt,
+	  ...)
 {
 	int rc = 0;
 	va_list args;
@@ -109,7 +112,9 @@ xasprintf(char **strp, const char *fmt, ...)
 }
 
 static inline bool
-safe_atoi_base(const char *str, int *val, int base)
+safe_atoi_base(const char *str,
+	       int *val,
+	       int base)
 {
 	char *endptr;
 	long v;
@@ -133,13 +138,16 @@ safe_atoi_base(const char *str, int *val, int base)
 }
 
 static inline bool
-safe_atoi(const char *str, int *val)
+safe_atoi(const char *str,
+	  int *val)
 {
 	return safe_atoi_base(str, val, 10);
 }
 
 static inline bool
-safe_atou_base(const char *str, unsigned int *val, int base)
+safe_atou_base(const char *str,
+	       unsigned int *val,
+	       int base)
 {
 	char *endptr;
 	unsigned long v;
@@ -163,13 +171,15 @@ safe_atou_base(const char *str, unsigned int *val, int base)
 }
 
 static inline bool
-safe_atou(const char *str, unsigned int *val)
+safe_atou(const char *str,
+	  unsigned int *val)
 {
 	return safe_atou_base(str, val, 10);
 }
 
 static inline bool
-safe_atod(const char *str, double *val)
+safe_atod(const char *str,
+	  double *val)
 {
 	char *endptr;
 	double v;
@@ -184,8 +194,8 @@ safe_atod(const char *str, double *val)
 		char c = str[i];
 
 		if (isdigit(c))
-		       continue;
-		switch(c) {
+			continue;
+		switch (c) {
 		case '+':
 		case '-':
 		case '.':
@@ -222,11 +232,16 @@ safe_atod(const char *str, double *val)
 	return true;
 }
 
-char **strv_from_string(const char *string, const char *separator);
-char *strv_join(char **strv, const char *separator);
+char **
+strv_from_string(const char *string,
+		 const char *separator);
+char *
+strv_join(char **strv,
+	  const char *separator);
 
 static inline void
-strv_free(char **strv) {
+strv_free(char **strv)
+{
 	char **s = strv;
 
 	if (!strv)
@@ -234,14 +249,14 @@ strv_free(char **strv) {
 
 	while (*s != NULL) {
 		free(*s);
-		*s = (char*)0x1; /* detect use-after-free */
+		*s = (char *)0x1; /* detect use-after-free */
 		s++;
 	}
 
-	free (strv);
+	free(strv);
 }
 
-struct key_value_str{
+struct key_value_str {
 	char *key;
 	char *value;
 };
@@ -264,8 +279,8 @@ kv_double_from_string(const char *string,
 	ssize_t npairs = 0;
 	unsigned int idx = 0;
 
-	if (!pair_separator || pair_separator[0] == '\0' ||
-	    !kv_separator || kv_separator[0] == '\0')
+	if (!pair_separator || pair_separator[0] == '\0' || !kv_separator ||
+	    kv_separator[0] == '\0')
 		return -1;
 
 	pairs = strv_from_string(string, pair_separator);
@@ -284,8 +299,7 @@ kv_double_from_string(const char *string,
 		char **kv = strv_from_string(*pair, kv_separator);
 		double k, v;
 
-		if (!kv || !kv[0] || !kv[1] || kv[2] ||
-		    !safe_atod(kv[0], &k) ||
+		if (!kv || !kv[0] || !kv[1] || kv[2] || !safe_atod(kv[0], &k) ||
 		    !safe_atod(kv[1], &v)) {
 			strv_free(kv);
 			goto error;

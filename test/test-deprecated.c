@@ -44,39 +44,49 @@ asm(".symver libwacom_stylus_destroy,libwacom_stylus_destroy@LIBWACOM_0.33");
  * anyway it doesn't matter that we only have generic pointers. The basic
  * signatures are the same.
  */
-extern void libwacom_match_destroy(void*);
-void* libwacom_match_new(void *, int, int, int);
-void libwacom_error_set(void *error, int, char *, ...);
-void libwacom_stylus_destroy(void *);
-void libwacom_update_match(void *, const void *);
+extern void
+libwacom_match_destroy(void *);
+void *
+libwacom_match_new(void *,
+		   int,
+		   int,
+		   int);
+void
+libwacom_error_set(void *error,
+		   int,
+		   char *,
+		   ...);
+void
+libwacom_stylus_destroy(void *);
+void
+libwacom_update_match(void *,
+		      const void *);
 
-int main(void) {
-    const char *syms[] = {
-        "libwacom_match_destroy",
-        "libwacom_match_new",
-        "libwacom_error_set",
-        "libwacom_update_match",
-        "libwacom_stylus_destroy",
-        NULL,
-    };
-    void *lib, *sym;
+int
+main(void)
+{
+	const char *syms[] = {
+		"libwacom_match_destroy",  "libwacom_match_new",
+		"libwacom_error_set",      "libwacom_update_match",
+		"libwacom_stylus_destroy", NULL,
+	};
+	void *lib, *sym;
 
+	lib = dlopen("libwacom.so", RTLD_LAZY);
+	assert(lib != NULL);
 
-    lib = dlopen("libwacom.so", RTLD_LAZY);
-    assert(lib != NULL);
+	for (const char **s = syms; *s; s++) {
+		sym = dlsym(lib, *s);
+		assert(sym == NULL);
+	}
 
-    for (const char **s = syms; *s; s++) {
-        sym = dlsym(lib, *s);
-        assert(sym == NULL);
-    }
+	/* These are all noops, so all we're looking for is not getting a linker
+	 * error */
+	libwacom_match_destroy(NULL);
+	libwacom_match_new(NULL, 0, 0, 0);
+	libwacom_error_set(NULL, 0, NULL);
+	libwacom_stylus_destroy(NULL);
+	libwacom_update_match(NULL, NULL);
 
-    /* These are all noops, so all we're looking for is not getting a linker
-     * error */
-    libwacom_match_destroy(NULL);
-    libwacom_match_new(NULL, 0, 0, 0);
-    libwacom_error_set(NULL, 0, NULL);
-    libwacom_stylus_destroy(NULL);
-    libwacom_update_match(NULL, NULL);
-
-    return 0;
+	return 0;
 }

@@ -29,9 +29,10 @@
 #ifndef _LIBWACOMINT_H_
 #define _LIBWACOMINT_H_
 
-#include "libwacom.h"
-#include <stdint.h>
 #include <glib.h>
+#include <stdint.h>
+
+#include "libwacom.h"
 
 #define LIBWACOM_EXPORT __attribute__ ((visibility("default")))
 
@@ -44,15 +45,15 @@
 
 enum GenericStylus {
 	GENERIC_PEN_WITH_ERASER = 0xfffff,
-        GENERIC_ERASER = 0xffffe,
-        GENERIC_PEN_NO_ERASER = 0xffffd,
+	GENERIC_ERASER = 0xffffe,
+	GENERIC_PEN_NO_ERASER = 0xffffd,
 };
 
 enum WacomFeature {
-	FEATURE_STYLUS		= (1 << 0),
-	FEATURE_TOUCH		= (1 << 1),
-	FEATURE_REVERSIBLE	= (1 << 4),
-	FEATURE_TOUCHSWITCH	= (1 << 5)
+	FEATURE_STYLUS = (1 << 0),
+	FEATURE_TOUCH = (1 << 1),
+	FEATURE_REVERSIBLE = (1 << 4),
+	FEATURE_TOUCHSWITCH = (1 << 5)
 };
 
 struct _WacomBuilder {
@@ -97,7 +98,7 @@ struct _WacomDevice {
 	int width;
 	int height;
 
-	WacomMatch *match;	/* used match or first match by default */
+	WacomMatch *match; /* used match or first match by default */
 	GArray *matches;
 
 	WacomMatch *paired;
@@ -118,7 +119,7 @@ struct _WacomDevice {
 	/* for libwacom_get_supported_styli() */
 	GArray *deprecated_styli_ids; /* int */
 	/* for libwacom_get_styli() */
-	GArray *styli; /* WacomStylus* */
+	GArray *styli;       /* WacomStylus* */
 	GHashTable *buttons; /* 'A' : WacomButton */
 	WacomKeycode keycodes[32];
 	size_t num_keycodes;
@@ -142,9 +143,10 @@ struct _WacomStylus {
 	char *group;
 	int num_buttons;
 	gboolean has_eraser;
-	GArray *paired_styli; /* [WacomStylus*, ...] */
+	GArray *paired_styli;          /* [WacomStylus*, ...] */
 	GArray *deprecated_paired_ids; /* [int, ...] */
-	GArray *paired_stylus_ids; /* [WacomStylusId, ...], NULL once parsing is complete */
+	GArray *paired_stylus_ids;     /* [WacomStylusId, ...], NULL once parsing is
+					  complete */
 	WacomEraserType eraser_type;
 	gboolean has_lens;
 	gboolean has_wheel;
@@ -162,27 +164,55 @@ struct _WacomError {
 	char *msg;
 };
 
-WacomDevice* libwacom_ref(WacomDevice *device);
-WacomDevice* libwacom_unref(WacomDevice *device);
-WacomStylus* libwacom_stylus_ref(WacomStylus *stylus);
-WacomStylus* libwacom_stylus_unref(WacomStylus *stylus);
-WacomMatch* libwacom_match_ref(WacomMatch *match);
-WacomMatch* libwacom_match_unref(WacomMatch *match);
+WacomDevice *
+libwacom_ref(WacomDevice *device);
+WacomDevice *
+libwacom_unref(WacomDevice *device);
+WacomStylus *
+libwacom_stylus_ref(WacomStylus *stylus);
+WacomStylus *
+libwacom_stylus_unref(WacomStylus *stylus);
+WacomMatch *
+libwacom_match_ref(WacomMatch *match);
+WacomMatch *
+libwacom_match_unref(WacomMatch *match);
 
-void libwacom_error_set(WacomError *error, enum WacomErrorCode code, const char *msg, ...);
-void libwacom_add_match(WacomDevice *device, WacomMatch *newmatch);
-void libwacom_set_default_match(WacomDevice *device, WacomMatch *newmatch);
-void libwacom_remove_match(WacomDevice *device, WacomMatch *newmatch);
-WacomMatch* libwacom_match_new(const char *name, const char *uniq,
-			       WacomBusType bus,
-			       int vendor_id, int product_id);
+void
+libwacom_error_set(WacomError *error,
+		   enum WacomErrorCode code,
+		   const char *msg,
+		   ...);
+void
+libwacom_add_match(WacomDevice *device,
+		   WacomMatch *newmatch);
+void
+libwacom_set_default_match(WacomDevice *device,
+			   WacomMatch *newmatch);
+void
+libwacom_remove_match(WacomDevice *device,
+		      WacomMatch *newmatch);
+WacomMatch *
+libwacom_match_new(const char *name,
+		   const char *uniq,
+		   WacomBusType bus,
+		   int vendor_id,
+		   int product_id);
 
-WacomBusType  bus_from_str (const char *str);
-const char   *bus_to_str   (WacomBusType bus);
-char *make_match_string(const char *name, const char *uniq, WacomBusType bus, int vendor_id, int product_id);
+WacomBusType
+bus_from_str(const char *str);
+const char *
+bus_to_str(WacomBusType bus);
+char *
+make_match_string(const char *name,
+		  const char *uniq,
+		  WacomBusType bus,
+		  int vendor_id,
+		  int product_id);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomMatch, libwacom_match_unref);
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomDevice, libwacom_unref);
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomMatch,
+			      libwacom_match_unref);
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(WacomDevice,
+			      libwacom_unref);
 
 #endif /* _LIBWACOMINT_H_ */
 

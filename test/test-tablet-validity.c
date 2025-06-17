@@ -27,31 +27,32 @@
 #include "config.h"
 
 #define _GNU_SOURCE
+#include <dirent.h>
+#include <fcntl.h>
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include "libwacom.h"
+#include <sys/types.h>
 #include <unistd.h>
 
-typedef int (*NumModesFn) (const WacomDevice *device);
+#include "libwacom.h"
+
+typedef int (*NumModesFn)(const WacomDevice *device);
 
 static gboolean
 buttons_have_direction(WacomDevice *device)
 {
-	char               button;
-	int                num_buttons;
+	char button;
+	int num_buttons;
 
-	num_buttons = libwacom_get_num_buttons (device);
+	num_buttons = libwacom_get_num_buttons(device);
 	if (num_buttons == 0)
 		return TRUE;
 
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
-		WacomButtonFlags  flags;
+		WacomButtonFlags flags;
 		flags = libwacom_get_button_flag(device, button);
 		if (!(flags & WACOM_BUTTON_DIRECTION))
 			return FALSE;
@@ -65,17 +66,17 @@ match_mode_switch(WacomDevice *device,
 		  NumModesFn get_num_modes,
 		  WacomButtonFlags flag)
 {
-	char               button;
-	int                num_buttons;
-	int                num_switches;
-	int                num_modes;
+	char button;
+	int num_buttons;
+	int num_switches;
+	int num_modes;
 
-	num_buttons  = libwacom_get_num_buttons (device);
-	num_modes    = get_num_modes (device);
+	num_buttons = libwacom_get_num_buttons(device);
+	num_modes = get_num_modes(device);
 	num_switches = 0;
 
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
-		WacomButtonFlags  flags;
+		WacomButtonFlags flags;
 		flags = libwacom_get_button_flag(device, button);
 
 		if (flags & flag)
@@ -107,7 +108,7 @@ tablet_has_lr_buttons(WacomDevice *device)
 	int num_buttons;
 	char button;
 
-	num_buttons  = libwacom_get_num_buttons (device);
+	num_buttons = libwacom_get_num_buttons(device);
 
 	for (button = 'A'; button < 'A' + num_buttons; button++) {
 		WacomButtonFlags f = libwacom_get_button_flag(device, button);
@@ -126,7 +127,7 @@ tablet_has_lr_buttons(WacomDevice *device)
 static void
 test_class(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	WacomClass cls;
 
 #pragma GCC diagnostic push
@@ -134,72 +135,76 @@ test_class(gconstpointer data)
 	cls = libwacom_get_class(device);
 #pragma GCC diagnostic pop
 	switch (cls) {
-		case WCLASS_BAMBOO:
-		case WCLASS_ISDV4:
-		case WCLASS_PEN_DISPLAYS:
-		case WCLASS_GRAPHIRE:
-		case WCLASS_REMOTE:
-		case WCLASS_INTUOS:
-		case WCLASS_INTUOS2:
-		case WCLASS_INTUOS3:
-		case WCLASS_INTUOS4:
-		case WCLASS_INTUOS5:
-		case WCLASS_CINTIQ:
-			break;
-		default:
-			g_test_fail();
-			break;
+	case WCLASS_BAMBOO:
+	case WCLASS_ISDV4:
+	case WCLASS_PEN_DISPLAYS:
+	case WCLASS_GRAPHIRE:
+	case WCLASS_REMOTE:
+	case WCLASS_INTUOS:
+	case WCLASS_INTUOS2:
+	case WCLASS_INTUOS3:
+	case WCLASS_INTUOS4:
+	case WCLASS_INTUOS5:
+	case WCLASS_CINTIQ:
+		break;
+	default:
+		g_test_fail();
+		break;
 	}
 }
 
 static void
 test_name(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_nonnull(libwacom_get_name(device));
 	g_assert_cmpstr(libwacom_get_name(device), !=, "");
 }
 
 static void
-assert_vidpid(WacomBusType bus, int vid, int pid)
+assert_vidpid(WacomBusType bus,
+	      int vid,
+	      int pid)
 {
 	switch (bus) {
-		case WBUSTYPE_SERIAL:
-			g_assert_cmpint(vid, >=, 0);
-			g_assert_cmpint(pid, >=, 0);
-			break;
-		case WBUSTYPE_USB:
-			if (vid == 0x056A)
-				g_assert_cmpint(pid, !=, 0x84); /* wireless dongle */
-			g_assert_cmpint(vid, >, 0);
-			g_assert_cmpint(pid, >, 0);
-			break;
-		case WBUSTYPE_BLUETOOTH:
-		case WBUSTYPE_I2C:
-			g_assert_cmpint(vid, >, 0);
-			g_assert_cmpint(pid, >, 0);
-			break;
-		case WBUSTYPE_UNKNOWN:
-		default:
-			g_test_fail();
-			break;
+	case WBUSTYPE_SERIAL:
+		g_assert_cmpint(vid, >=, 0);
+		g_assert_cmpint(pid, >=, 0);
+		break;
+	case WBUSTYPE_USB:
+		if (vid == 0x056A)
+			g_assert_cmpint(pid, !=, 0x84); /* wireless dongle */
+		g_assert_cmpint(vid, >, 0);
+		g_assert_cmpint(pid, >, 0);
+		break;
+	case WBUSTYPE_BLUETOOTH:
+	case WBUSTYPE_I2C:
+		g_assert_cmpint(vid, >, 0);
+		g_assert_cmpint(pid, >, 0);
+		break;
+	case WBUSTYPE_UNKNOWN:
+	default:
+		g_test_fail();
+		break;
 	}
 }
 
 static void
 test_vidpid(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	WacomBusType bus = libwacom_get_bustype(device);
 
-	assert_vidpid(bus, libwacom_get_vendor_id(device), libwacom_get_product_id(device));
+	assert_vidpid(bus,
+		      libwacom_get_vendor_id(device),
+		      libwacom_get_product_id(device));
 }
 
 static void
 test_matches(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_nonnull(libwacom_get_match(device));
 	g_assert_nonnull(libwacom_get_matches(device));
@@ -208,12 +213,14 @@ test_matches(gconstpointer data)
 static void
 test_matches_vidpid(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	const WacomMatch **match = libwacom_get_matches(device);
 
 	while (*match) {
 		WacomBusType bus = libwacom_match_get_bustype(*match);
-		assert_vidpid(bus, libwacom_match_get_vendor_id(*match), libwacom_match_get_product_id(*match));
+		assert_vidpid(bus,
+			      libwacom_match_get_vendor_id(*match),
+			      libwacom_match_get_product_id(*match));
 		match++;
 	}
 }
@@ -221,7 +228,7 @@ test_matches_vidpid(gconstpointer data)
 static void
 test_dimensions(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	unsigned int flags = libwacom_get_integration_flags(device);
 
 	switch (flags) {
@@ -229,7 +236,7 @@ test_dimensions(gconstpointer data)
 		g_assert_cmpint(libwacom_get_width(device), ==, 0);
 		g_assert_cmpint(libwacom_get_height(device), ==, 0);
 		break;
-	case WACOM_DEVICE_INTEGRATED_SYSTEM|WACOM_DEVICE_INTEGRATED_DISPLAY:
+	case WACOM_DEVICE_INTEGRATED_SYSTEM | WACOM_DEVICE_INTEGRATED_DISPLAY:
 		/* ISDV4 devices may not always have a width/height set */
 		break;
 	default:
@@ -237,13 +244,12 @@ test_dimensions(gconstpointer data)
 		g_assert_cmpint(libwacom_get_height(device), >, 0);
 		break;
 	}
-
 }
 
 static void
 test_buttons(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_cmpint(libwacom_get_num_buttons(device), >=, 0);
 	g_assert_true(buttons_have_direction(device));
@@ -255,7 +261,7 @@ test_buttons(gconstpointer data)
 static void
 test_styli(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	int nstylus_ids, nstyli;
 	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
@@ -285,7 +291,7 @@ test_styli(gconstpointer data)
 static void
 test_no_styli(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	int nstylus_ids, nstyli;
 	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
@@ -301,13 +307,12 @@ test_no_styli(gconstpointer data)
 	g_assert_nonnull(styli);
 	g_assert_null(stylus_ids);
 	g_assert_null(styli[0]); /* NULL-terminated list */
-
 }
 
 static void
 test_realstylus(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 	int nstylus_ids, nstyli;
 	g_autofree const WacomStylus **styli = NULL;
 	const int *stylus_ids;
@@ -325,15 +330,19 @@ test_realstylus(gconstpointer data)
 
 	for (int i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus = styli[i];
-		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_STYLUS_FALLBACK_ID);
-		g_assert_cmpint(libwacom_stylus_get_id(stylus), !=, WACOM_ERASER_FALLBACK_ID);
+		g_assert_cmpint(libwacom_stylus_get_id(stylus),
+				!=,
+				WACOM_STYLUS_FALLBACK_ID);
+		g_assert_cmpint(libwacom_stylus_get_id(stylus),
+				!=,
+				WACOM_ERASER_FALLBACK_ID);
 	}
 }
 
 static void
 test_rings(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_cmpint(libwacom_get_ring_num_modes(device), >=, 0);
 	g_assert_cmpint(libwacom_get_ring2_num_modes(device), >=, 0);
@@ -351,7 +360,7 @@ test_rings(gconstpointer data)
 static void
 test_strips(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_cmpint(libwacom_get_num_strips(device), >=, 0);
 	g_assert_cmpint(libwacom_get_strips_num_modes(device), >=, 0);
@@ -365,7 +374,7 @@ test_strips(gconstpointer data)
 static void
 test_dials(gconstpointer data)
 {
-	WacomDevice *device = (WacomDevice*)data;
+	WacomDevice *device = (WacomDevice *)data;
 
 	g_assert_cmpint(libwacom_get_num_dials(device), >=, 0);
 	g_assert_cmpint(libwacom_get_dial_num_modes(device), >=, 0);
@@ -386,7 +395,9 @@ test_dials(gconstpointer data)
  * the tablet data.
  */
 static inline void
-_add_test(WacomDevice *device, GTestDataFunc func, const char *funcname)
+_add_test(WacomDevice *device,
+	  GTestDataFunc func,
+	  const char *funcname)
 {
 	char buf[128];
 	static int count; /* guarantee unique test case names */
@@ -396,7 +407,9 @@ _add_test(WacomDevice *device, GTestDataFunc func, const char *funcname)
 	g_assert(strncmp(funcname, "test_", 5) == 0);
 	prefix = &funcname[5];
 
-	snprintf(buf, 128, "/tablet/%s/%03d/%04x:%04x-%s",
+	snprintf(buf,
+		 128,
+		 "/tablet/%s/%03d/%04x:%04x-%s",
 		 prefix,
 		 ++count,
 		 libwacom_get_vendor_id(device),
@@ -407,7 +420,8 @@ _add_test(WacomDevice *device, GTestDataFunc func, const char *funcname)
 #define add_test(device_, func_) \
 	_add_test(device_, func_, #func_)
 
-static void setup_tests(WacomDevice *device)
+static void
+setup_tests(WacomDevice *device)
 {
 	const char *name;
 	WacomClass cls;
@@ -440,16 +454,16 @@ static void setup_tests(WacomDevice *device)
 		add_test(device, test_no_styli);
 
 	switch (cls) {
-		case WCLASS_INTUOS:
-		case WCLASS_INTUOS2:
-		case WCLASS_INTUOS3:
-		case WCLASS_INTUOS4:
-		case WCLASS_INTUOS5:
-		case WCLASS_CINTIQ:
-			add_test(device, test_realstylus);
-			break;
-		default:
-			break;
+	case WCLASS_INTUOS:
+	case WCLASS_INTUOS2:
+	case WCLASS_INTUOS3:
+	case WCLASS_INTUOS4:
+	case WCLASS_INTUOS5:
+	case WCLASS_CINTIQ:
+		add_test(device, test_realstylus);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -461,7 +475,7 @@ load_database(void)
 
 	datadir = getenv("LIBWACOM_DATA_DIR");
 	if (!datadir)
-		datadir = TOPSRCDIR"/data";
+		datadir = TOPSRCDIR "/data";
 
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
@@ -471,7 +485,9 @@ load_database(void)
 	return db;
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	WacomDeviceDatabase *db;
 	WacomDevice **devices;

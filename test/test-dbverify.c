@@ -27,16 +27,17 @@
 #include "config.h"
 
 #define _GNU_SOURCE
+#include <dirent.h>
+#include <fcntl.h>
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include "libwacom.h"
+#include <sys/types.h>
 #include <unistd.h>
+
+#include "libwacom.h"
 
 static WacomDeviceDatabase *db_old;
 static WacomDeviceDatabase *db_new;
@@ -138,13 +139,14 @@ compare_databases(WacomDeviceDatabase *new)
 
 	devs_new = libwacom_list_devices_from_database(new, NULL);
 
-	for (n = devs_new, i = 0 ; *n; n++, i++)
-	{
+	for (n = devs_new, i = 0; *n; n++, i++) {
 		char buf[1024];
 
 		/* We need to add the test index to avoid duplicate
 		   test names */
-		snprintf(buf, sizeof(buf), "/dbverify/%03d/%04x:%04x-%s",
+		snprintf(buf,
+			 sizeof(buf),
+			 "/dbverify/%03d/%04x:%04x-%s",
 			 i,
 			 libwacom_get_vendor_id(*n),
 			 libwacom_get_product_id(*n),
@@ -158,7 +160,8 @@ compare_databases(WacomDeviceDatabase *new)
 
 /* write out the current db, read it back in, compare */
 static void
-duplicate_database(WacomDeviceDatabase *db, const char *dirname)
+duplicate_database(WacomDeviceDatabase *db,
+		   const char *dirname)
 {
 	WacomDevice **device, **devices;
 	int i;
@@ -174,10 +177,12 @@ duplicate_database(WacomDeviceDatabase *db, const char *dirname)
 		int nstyli;
 		g_autofree const WacomStylus **styli = NULL;
 
-		g_assert(asprintf(&path, "%s/%s.tablet", dirname,
-				libwacom_get_match(*device)) != -1);
+		g_assert(asprintf(&path,
+				  "%s/%s.tablet",
+				  dirname,
+				  libwacom_get_match(*device)) != -1);
 		g_assert(path);
-		fd = open(path, O_WRONLY|O_CREAT, S_IRWXU);
+		fd = open(path, O_WRONLY | O_CREAT, S_IRWXU);
 		g_assert(fd >= 0);
 		libwacom_print_device_description(fd, *device);
 		close(fd);
@@ -189,8 +194,11 @@ duplicate_database(WacomDeviceDatabase *db, const char *dirname)
 		for (i = 0; i < nstyli; i++) {
 			int fd_stylus;
 			const WacomStylus *stylus = styli[i];
-			g_autofree char *path = g_strdup_printf("%s/%#x.stylus", dirname, libwacom_stylus_get_id(stylus));
-			fd_stylus = open(path, O_WRONLY|O_CREAT, S_IRWXU);
+			g_autofree char *path =
+				g_strdup_printf("%s/%#x.stylus",
+						dirname,
+						libwacom_stylus_get_id(stylus));
+			fd_stylus = open(path, O_WRONLY | O_CREAT, S_IRWXU);
 			g_assert(fd_stylus >= 0);
 			libwacom_print_stylus_description(fd_stylus, stylus);
 			close(fd_stylus);
@@ -208,7 +216,7 @@ load_database(void)
 
 	datadir = getenv("LIBWACOM_DATA_DIR");
 	if (!datadir)
-		datadir = TOPSRCDIR"/data";
+		datadir = TOPSRCDIR "/data";
 
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
@@ -218,7 +226,9 @@ load_database(void)
 	return db;
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	WacomDeviceDatabase *db;
 	g_autofree char *dirname;

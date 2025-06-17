@@ -1,0 +1,26 @@
+name: "Coding style"
+
+on: [ push, pull_request ]
+
+permissions:
+  contents: read
+
+# see https://github.com/ssciwr/clang-format-wheel
+env:
+  PIP_PACKAGES: clang-format
+
+jobs:
+  clang-format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ./.github/actions/pkginstall
+        with:
+          pip: $PIP_PACKAGES
+      - run: clang-format -i -- **/*.c **/*.h
+      - run: git diff --exit-code
+      - if: failure()
+        run: echo "Please run clang-format (or via pre-commit) against the modified sources"

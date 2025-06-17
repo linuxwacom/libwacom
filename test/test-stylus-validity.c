@@ -24,16 +24,17 @@
 #include "config.h"
 
 #define _GNU_SOURCE
+#include <dirent.h>
+#include <fcntl.h>
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
-#include "libwacom.h"
+#include <sys/types.h>
 #include <unistd.h>
+
+#include "libwacom.h"
 
 static const WacomStylus **all_styli;
 
@@ -112,7 +113,8 @@ test_has_eraser(gconstpointer data)
 }
 
 static void
-test_eraser_link(const WacomStylus *stylus, gboolean linked)
+test_eraser_link(const WacomStylus *stylus,
+		 gboolean linked)
 {
 	gboolean matching_stylus_found = FALSE;
 	g_autofree const WacomStylus **paired = NULL;
@@ -163,7 +165,7 @@ static void
 test_eraser_inverted(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type(stylus);
 
 	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_INVERT);
 }
@@ -172,7 +174,7 @@ static void
 test_eraser_button(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type (stylus);
+	WacomEraserType eraser_type = libwacom_stylus_get_eraser_type(stylus);
 
 	g_assert_cmpint(eraser_type, ==, WACOM_ERASER_BUTTON);
 }
@@ -214,7 +216,8 @@ static void
 test_pressure(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	gboolean has_pressure = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_PRESSURE;
+	gboolean has_pressure =
+		libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_PRESSURE;
 	g_assert_true(has_pressure);
 }
 
@@ -222,7 +225,8 @@ static void
 test_no_pressure(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	gboolean has_pressure = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_PRESSURE;
+	gboolean has_pressure =
+		libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_PRESSURE;
 	g_assert_false(has_pressure);
 }
 
@@ -230,7 +234,8 @@ static void
 test_distance(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	gboolean has_distance = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
+	gboolean has_distance =
+		libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
 	g_assert_true(has_distance);
 }
 
@@ -238,7 +243,8 @@ static void
 test_no_distance(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
-	gboolean has_distance = libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
+	gboolean has_distance =
+		libwacom_stylus_get_axes(stylus) & WACOM_AXIS_TYPE_DISTANCE;
 	g_assert_false(has_distance);
 }
 
@@ -300,7 +306,9 @@ test_mutually_paired(gconstpointer data)
  * the stylus data.
  */
 static inline void
-_add_test(const WacomStylus *stylus, GTestDataFunc func, const char *funcname)
+_add_test(const WacomStylus *stylus,
+	  GTestDataFunc func,
+	  const char *funcname)
 {
 	char buf[128];
 	const char *prefix;
@@ -309,7 +317,9 @@ _add_test(const WacomStylus *stylus, GTestDataFunc func, const char *funcname)
 	g_assert(strncmp(funcname, "test_", 5) == 0);
 	prefix = &funcname[5];
 
-	snprintf(buf, 128, "/stylus/%s/%03x-%s",
+	snprintf(buf,
+		 128,
+		 "/stylus/%s/%03x-%s",
 		 prefix,
 		 libwacom_stylus_get_id(stylus),
 		 libwacom_stylus_get_name(stylus));
@@ -342,38 +352,38 @@ static void
 setup_emr_tests(const WacomStylus *stylus)
 {
 	switch (libwacom_stylus_get_id(stylus)) {
-		case 0xffffd:
-			add_test(stylus, test_pressure);
-			add_test(stylus, test_no_distance);
-			add_test(stylus, test_no_tilt);
-			break;
-		case 0x006:
-		case 0x096:
-		case 0x097:
-			add_test(stylus, test_no_pressure);
-			add_test(stylus, test_distance);
-			add_test(stylus, test_no_tilt);
-			break;
-		case 0x007:
-		case 0x017:
-		case 0x094:
-		case 0x806:
-			add_test(stylus, test_no_pressure);
-			add_test(stylus, test_distance);
-			add_test(stylus, test_tilt);
-			break;
-		case 0x021:
-		case 0x8e2:
-		case 0x862:
-			add_test(stylus, test_pressure);
-			add_test(stylus, test_distance);
-			add_test(stylus, test_no_tilt);
-			break;
-		default:
-			add_test(stylus, test_pressure);
-			add_test(stylus, test_tilt);
-			add_test(stylus, test_distance);
-			break;
+	case 0xffffd:
+		add_test(stylus, test_pressure);
+		add_test(stylus, test_no_distance);
+		add_test(stylus, test_no_tilt);
+		break;
+	case 0x006:
+	case 0x096:
+	case 0x097:
+		add_test(stylus, test_no_pressure);
+		add_test(stylus, test_distance);
+		add_test(stylus, test_no_tilt);
+		break;
+	case 0x007:
+	case 0x017:
+	case 0x094:
+	case 0x806:
+		add_test(stylus, test_no_pressure);
+		add_test(stylus, test_distance);
+		add_test(stylus, test_tilt);
+		break;
+	case 0x021:
+	case 0x8e2:
+	case 0x862:
+		add_test(stylus, test_pressure);
+		add_test(stylus, test_distance);
+		add_test(stylus, test_no_tilt);
+		break;
+	default:
+		add_test(stylus, test_pressure);
+		add_test(stylus, test_tilt);
+		add_test(stylus, test_distance);
+		break;
 	}
 
 	if (libwacom_stylus_is_eraser(stylus)) {
@@ -390,23 +400,23 @@ setup_tests(const WacomStylus *stylus)
 
 	/* Button checks */
 	switch (libwacom_stylus_get_type(stylus)) {
-		case WSTYLUS_PUCK:
-			add_test(stylus, test_puck);
-			add_test(stylus, test_buttons);
-			break;
-		case WSTYLUS_INKING:
-		case WSTYLUS_STROKE:
+	case WSTYLUS_PUCK:
+		add_test(stylus, test_puck);
+		add_test(stylus, test_buttons);
+		break;
+	case WSTYLUS_INKING:
+	case WSTYLUS_STROKE:
+		add_test(stylus, test_no_buttons);
+		break;
+	default:
+		switch (libwacom_stylus_get_id(stylus)) {
+		case 0x885:
+		case 0x8051:
 			add_test(stylus, test_no_buttons);
 			break;
 		default:
-			switch (libwacom_stylus_get_id(stylus)) {
-				case 0x885:
-				case 0x8051:
-					add_test(stylus, test_no_buttons);
-					break;
-				default:
-					add_test(stylus, test_buttons);
-			}
+			add_test(stylus, test_buttons);
+		}
 	}
 
 	/* Technology-specific tests */
@@ -434,7 +444,8 @@ setup_tests(const WacomStylus *stylus)
 static const WacomStylus **
 assemble_styli(WacomDeviceDatabase *db)
 {
-	g_autofree WacomDevice **devices = libwacom_list_devices_from_database(db, NULL);
+	g_autofree WacomDevice **devices =
+		libwacom_list_devices_from_database(db, NULL);
 	g_autoptr(GHashTable) all = g_hash_table_new(g_direct_hash, g_direct_equal);
 	const WacomStylus **all_styli = NULL;
 
@@ -450,7 +461,7 @@ assemble_styli(WacomDeviceDatabase *db)
 		}
 	}
 
-	all_styli = (const WacomStylus**)g_hash_table_get_keys_as_array(all, NULL);
+	all_styli = (const WacomStylus **)g_hash_table_get_keys_as_array(all, NULL);
 	g_hash_table_steal_all(all);
 
 	return all_styli;
@@ -464,7 +475,7 @@ load_database(void)
 
 	datadir = getenv("LIBWACOM_DATA_DIR");
 	if (!datadir)
-		datadir = TOPSRCDIR"/data";
+		datadir = TOPSRCDIR "/data";
 
 	db = libwacom_database_new_for_path(datadir);
 	if (!db)
@@ -474,7 +485,9 @@ load_database(void)
 	return db;
 }
 
-int main(int argc, char **argv)
+int
+main(int argc,
+     char **argv)
 {
 	WacomDeviceDatabase *db;
 	int rc;
@@ -491,7 +504,7 @@ int main(int argc, char **argv)
 	rc = g_test_run();
 
 	free(all_styli);
-	libwacom_database_destroy (db);
+	libwacom_database_destroy(db);
 
 	return rc;
 }

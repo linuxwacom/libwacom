@@ -1,0 +1,18 @@
+# Waltop
+# Batteryless Tablet
+#
+# sysinfo.XSrrkQpKdX.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/489
+
+[Device]
+Name=Waltop Batteryless Tablet
+ModelName=
+DeviceMatch=usb|172f|0505
+Class=Bamboo
+Width=8
+Height=5
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=true

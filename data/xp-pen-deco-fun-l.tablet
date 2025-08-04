@@ -13,7 +13,7 @@ Class=Bamboo
 Width=10
 Height=6
 IntegratedIn=
-Styli=@generic-no-eraser
+Styli=@generic-with-eraser
 
 [Features]
 Stylus=true

@@ -1,8 +1,13 @@
 # Huion
 # Keydial K20
 #
+# USB:
 # sysinfo.lvuqy3Kjgl.tar.gz
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/425
+#
+# Bluetooth:
+# sysinfo.YS1xk8fa7P.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/539
 #
 #   __________
 #  |( S )     |
@@ -18,7 +23,7 @@
 Name=Huion Keydial K20
 ModelName=K20
 # This appears to be a unique PID, if that changes the FW prefix is HUION_T21h
-DeviceMatch=usb|256c|0069
+DeviceMatch=usb|256c|0069;bluetooth|256c|8251
 Layout=huion-keydial-k20.svg
 IntegratedIn=Remote
 

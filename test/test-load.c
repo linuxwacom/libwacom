@@ -27,10 +27,10 @@
 #include "config.h"
 
 #include <glib.h>
-#include <linux/input-event-codes.h>
 #include <stdlib.h>
 
 #include "libwacom.h"
+#include "linux/input-event-codes.h"
 
 struct fixture {
 	WacomDeviceDatabase *db;

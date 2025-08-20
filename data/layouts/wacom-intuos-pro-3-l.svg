@@ -8,95 +8,158 @@
    version="1.1"
    id="intuos-pro-l-ptk870"
    style="fill:none;stroke:#7f7f7f;stroke-width:0.25;font-size:6;font-family:monospace"
+   sodipodi:docname="wacom-intuos-pro-3-l.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:zoom="3.0406085"
+     inkscape:cx="799.18215"
+     inkscape:cy="210.81307"
+     inkscape:window-width="3072"
+     inkscape:window-height="1659"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="intuos-pro-l-ptk870">
+    <sodipodi:guide
+       position="129.09573,204.21859"
+       orientation="1,0"
+       id="guide1"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="131.97659,203.77923"
+       orientation="1,0"
+       id="guide3"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="247.87624,200.19217"
+       orientation="1,0"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="244.86465,191.78454"
+       orientation="1,0"
+       id="guide5"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="135.34671,208.46448"
+       orientation="0,-1"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="135.13871,200.89516"
+       orientation="0,-1"
+       id="guide7"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="135.29252,193.2438"
+       orientation="0,-1"
+       id="guide8"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="133.8077,185.75651"
+       orientation="0,-1"
+       id="guide9"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="104.94332,177.96261"
+       orientation="0,-1"
+       id="guide10"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <title
      id="title">Wacom Intuos Pro L (PTK870)</title>
-  <g
-     id="g1">
-    <path
-       id="ButtonA"
-       class="Button A"
-       d="M 123.918 6.4004 C 118.908 1.76944 111.18 1.76813 106.168 6.3974 L 110.541 10.7699 C 113.131 8.54602 116.957 8.5473 119.546 10.7729 Z" />
-    <path
-       id="LeaderA"
-       class="Leader A"
-       d="M 93.7051 6.89279 L 109.952 6.89279" />
-    <text
-       id="LabelA"
-       class="Label A"
-       x="88.7051"
-       y="7.11235"
-       style="text-anchor:end;">A</text>
-  </g>
-  <g
-     id="g2">
-    <path
-       id="ButtonB"
-       class="Button B"
-       d="M 120.243 20.4721 L 124.629 24.8587 C 129.276 19.8443 129.277 12.0967 124.63 7.08171 L 120.242 11.4696 C 122.466 14.0587 122.466 17.8831 120.242 20.4721 Z" />
-    <path
-       id="LeaderB"
-       class="Leader B"
-       d="M 93.7051 43.56015 L 125.909 43.56015 L 125.835 19.5" />
-    <text
-       id="LabelB"
-       class="Label B"
-       x="88.7051"
-       y="43.77971"
-       style="text-anchor:end;">B</text>
-  </g>
-  <g
-     id="g3">
-    <path
-       id="ButtonC"
-       class="Button C"
-       d="M 110.519 21.1934 L 106.154 25.5581 C 111.17 30.2049 118.918 30.2035 123.932 25.5551 L 119.568 21.1904 C 116.972 23.4409 113.116 23.4417 110.519 21.1924 Z" />
-    <path
-       id="LeaderC"
-       class="Leader C"
-       d="M 93.7051 25.22647 L 109.952 25.22647" />
-    <text
-       id="LabelC"
-       class="Label C"
-       x="88.7051"
-       y="25.44603"
-       style="text-anchor:end;">C</text>
-  </g>
-  <g
-     id="g4">
-    <path
-       id="ButtonD"
-       class="Button D"
-       d="M 109.844 11.4671 L 105.472 7.09461 C 100.841 12.1059 100.841 19.8351 105.472 24.8459 L 109.844 20.4747 C 107.618 17.8848 107.618 14.057 109.844 11.4671 Z" />
-    <path
-       id="LeaderD"
-       class="Leader D"
-       d="M 93.7051 16.05963 L 104.335 16.05963" />
-    <text
-       id="LabelD"
-       class="Label D"
-       x="88.7051"
-       y="16.27919"
-       style="text-anchor:end;">D</text>
-  </g>
-  <g
-     id="g5">
-    <path
-       id="ButtonI"
-       class="Button I ModeSwitch"
-       d="M 115.039 10.6101 C 112.868 10.6101 110.911 11.9178 110.08 13.9235 C 109.25 15.9292 109.709 18.2378 111.244 19.7729 C 112.779 21.308 115.088 21.7672 117.093 20.9364 C 119.099 20.1057 120.407 18.1485 120.407 15.9776 C 120.407 14.554 119.841 13.1888 118.835 12.1822 C 117.828 11.1756 116.463 10.6101 115.039 10.6101 Z" />
-    <path
-       id="LeaderI"
-       class="Leader I ModeSwitch"
-       d="M 93.7051 34.39331 L 115.113 34.39331 L 115.039 19.5003" />
-    <text
-       id="LabelI"
-       class="Label I ModeSwitch"
-       x="88.7051"
-       y="34.61287"
-       style="text-anchor:end;">I</text>
-  </g>
+  <path
+     id="ButtonA"
+     class="Button A"
+     d="m 123.918,6.4004 c -5.01,-4.63096 -12.738,-4.63227 -17.75,-0.003 l 4.373,4.3725 c 2.59,-2.22388 6.416,-2.2226 9.005,0.003 z" />
+  <path
+     id="LeaderA"
+     class="Leader A"
+     d="m 129.09573,74.037396 -29.816137,0 L 99.157273,6.9437631 109.952,6.89279"
+     sodipodi:nodetypes="cccc" />
+  <text
+     id="LabelA"
+     class="Label A"
+     x="135.6055"
+     y="73.68782"
+     style="text-anchor:end">A</text>
+  <path
+     id="ButtonB"
+     class="Button B"
+     d="m 120.243,20.4721 4.386,4.3866 c 4.647,-5.0144 4.648,-12.762 10e-4,-17.77699 l -4.388,4.38789 c 2.224,2.5891 2.224,6.4135 0,9.0025 z" />
+  <path
+     id="LeaderB"
+     class="Leader B"
+     d="m 129.02333,43.56015 -3.11433,0 L 125.835,19.5"
+     sodipodi:nodetypes="ccc" />
+  <text
+     id="LabelB"
+     class="Label B"
+     x="135.50296"
+     y="43.41053"
+     style="text-anchor:end">B</text>
+  <path
+     id="ButtonC"
+     class="Button C"
+     d="m 110.519,21.1934 -4.365,4.3647 c 5.016,4.6468 12.764,4.6454 17.778,-0.003 l -4.364,-4.3647 c -2.596,2.2505 -6.452,2.2513 -9.049,0.002 z" />
+  <path
+     id="LeaderC"
+     class="Leader C"
+     d="M 129.09573,58.756206 H 110.04824 L 109.95204,25.22647"
+     sodipodi:nodetypes="ccc" />
+  <text
+     id="LabelC"
+     class="Label C"
+     x="135.63626"
+     y="58.546246"
+     style="text-anchor:end">C</text>
+  <path
+     id="ButtonD"
+     class="Button D"
+     d="m 109.844,11.4671 -4.372,-4.37249 c -4.631,5.01129 -4.631,12.74049 0,17.75129 l 4.372,-4.3712 c -2.226,-2.5899 -2.226,-6.4177 0,-9.0076 z" />
+  <path
+     id="LeaderD"
+     class="Leader D"
+     d="M 129.09573,66.243496 H 104.2863 L 104.335,16.05963"
+     sodipodi:nodetypes="ccc" />
+  <text
+     id="LabelD"
+     class="Label D"
+     x="135.59085"
+     y="66.1185"
+     style="text-anchor:end">D</text>
+  <path
+     id="ButtonI"
+     class="Button I ModeSwitch"
+     d="m 115.039,10.6101 c -2.171,0 -4.128,1.3077 -4.959,3.3134 -0.83,2.0057 -0.371,4.3143 1.164,5.8494 1.535,1.5351 3.844,1.9943 5.849,1.1635 2.006,-0.8307 3.314,-2.7879 3.314,-4.9588 0,-1.4236 -0.566,-2.7888 -1.572,-3.7954 -1.007,-1.0066 -2.372,-1.5721 -3.796,-1.5721 z" />
+  <path
+     id="LeaderI"
+     class="Leader I ModeSwitch"
+     d="M 129.09573,51.104847 H 115.113 L 115.039,19.5003"
+     sodipodi:nodetypes="ccc" />
+  <text
+     id="LabelI"
+     class="Label I ModeSwitch"
+     x="135.60843"
+     y="50.979851"
+     style="text-anchor:end">I</text>
   <g
      id="g7">
     <path
@@ -132,91 +195,81 @@
        class="Dial TouchDial"
        d="M 146.854 3.00752 C 141.607 3.00752 136.878 6.16756 134.87 11.0141 C 132.863 15.8607 133.972 21.4393 137.682 25.1487 C 141.391 28.8581 146.97 29.9677 151.817 27.9602 C 156.664 25.9527 159.824 21.2234 159.824 15.9775 C 159.824 8.81439 154.017 3.00752 146.854 3.00752 Z" />
   </g>
-  <g
-     id="g11">
-    <path
-       id="ButtonE"
-       class="Button E"
-       d="M 270.744 6.44612 C 265.734 1.81516 258.006 1.81385 252.994 6.44312 L 257.367 10.8156 C 259.957 8.59174 263.783 8.59302 266.372 10.8186 Z" />
-    <path
-       id="LeaderE"
-       class="Leader E"
-       d="M 283.198 6.93851 L 266.952 6.93851" />
-    <text
-       id="LabelE"
-       class="Label E"
-       x="288.198"
-       y="7.11235"
-       style="text-anchor:start;">E</text>
-  </g>
-  <g
-     id="g12">
-    <path
-       id="ButtonF"
-       class="Button F"
-       d="M 267.068 20.5178 L 271.455 24.9044 C 276.102 19.89 276.103 12.1424 271.456 7.12743 L 267.068 11.5153 C 269.291 14.1044 269.291 17.9288 267.068 20.5178 Z" />
-    <path
-       id="LeaderF"
-       class="Leader F"
-       d="M 283.198 16.05963 L 272.569 16.05963" />
-    <text
-       id="LabelF"
-       class="Label F"
-       x="288.198"
-       y="16.27919"
-       style="text-anchor:start;">F</text>
-  </g>
-  <g
-     id="g13">
-    <path
-       id="ButtonG"
-       class="Button G"
-       d="M 257.345 21.2391 L 252.98 25.6038 C 257.996 30.2506 265.744 30.2492 270.758 25.6008 L 266.394 21.2361 C 263.797 23.4866 259.942 23.4874 257.345 21.2381 Z" />
-    <path
-       id="LeaderG"
-       class="Leader G"
-       d="M 283.198 25.22647 L 266.952 25.22647" />
-    <text
-       id="LabelG"
-       class="Label G"
-       x="288.198"
-       y="25.44603"
-       style="text-anchor:start;">G</text>
-  </g>
-  <g
-     id="g14">
-    <path
-       id="ButtonH"
-       class="Button H"
-       d="M 256.67 11.5128 L 252.297 7.14033 C 247.667 12.1516 247.667 19.8808 252.298 24.8916 L 256.67 20.5204 C 254.443 17.9305 254.443 14.1027 256.67 11.5128 Z" />
-    <path
-       id="LeaderH"
-       class="Leader H"
-       d="M 283.198 43.56015 L 251.143 43.56015 L 251.069 19.5457" />
-    <text
-       id="LabelH"
-       class="Label H"
-       x="288.198"
-       y="43.77971"
-       style="text-anchor:start;">H</text>
-  </g>
-  <g
-     id="g15">
-    <path
-       id="ButtonJ"
-       class="Button J ModeSwitch"
-       d="M 261.865 10.6558 C 259.694 10.6558 257.737 11.9635 256.906 13.9692 C 256.075 15.9749 256.535 18.2835 258.07 19.8186 C 259.605 21.3537 261.914 21.8129 263.919 20.9821 C 265.925 20.1514 267.233 18.1942 267.233 16.0233 C 267.233 14.5997 266.667 13.2345 265.661 12.2279 C 264.654 11.2213 263.289 10.6558 261.865 10.6558 Z" />
-    <path
-       id="LeaderJ"
-       class="Leader J ModeSwitch"
-       d="M 283.198 34.39331 L 261.939 34.39331 L 261.865 19.546" />
-    <text
-       id="LabelJ"
-       class="Label J ModeSwitch"
-       x="288.198"
-       y="34.61287"
-       style="text-anchor:start;">J</text>
-  </g>
+  <path
+     id="ButtonE"
+     class="Button E"
+     d="m 270.744,6.44612 c -5.01,-4.63096 -12.738,-4.63227 -17.75,-0.003 l 4.373,4.37248 c 2.59,-2.22386 6.416,-2.22258 9.005,0.003 z" />
+  <path
+     id="LeaderE"
+     class="Leader E"
+     d="m 247.87623,74.037396 30.67943,0 0.1153,-67.1859026 L 266.952,6.93851"
+     sodipodi:nodetypes="cccc" />
+  <path
+     id="ButtonF"
+     class="Button F"
+     d="m 267.068,20.5178 4.387,4.3866 c 4.647,-5.0144 4.648,-12.762 0.001,-17.77697 l -4.388,4.38787 c 2.223,2.5891 2.223,6.4135 0,9.0025 z" />
+  <path
+     id="LeaderF"
+     class="Leader F"
+     d="m 247.87623,66.243496 24.69926,0 -0.006,-50.183866"
+     sodipodi:nodetypes="ccc" />
+  <path
+     id="ButtonG"
+     class="Button G"
+     d="m 257.345,21.2391 -4.365,4.3647 c 5.016,4.6468 12.764,4.6454 17.778,-0.003 l -4.364,-4.3647 c -2.597,2.2505 -6.452,2.2513 -9.049,0.002 z" />
+  <path
+     id="LeaderG"
+     class="Leader G"
+     d="m 247.87623,58.756206 19.02269,0 0.0531,-33.529736"
+     sodipodi:nodetypes="ccc" />
+  <path
+     id="ButtonH"
+     class="Button H"
+     d="m 256.67,11.5128 -4.373,-4.37247 c -4.63,5.01127 -4.63,12.74047 0.001,17.75127 l 4.372,-4.3712 c -2.227,-2.5899 -2.227,-6.4177 0,-9.0076 z" />
+  <path
+     id="LeaderH"
+     class="Leader H"
+     d="M 247.87623,43.535527 251.143,43.56015 251.069,19.5457"
+     sodipodi:nodetypes="ccc" />
+  <path
+     id="ButtonJ"
+     class="Button J ModeSwitch"
+     d="m 261.865,10.6558 c -2.171,0 -4.128,1.3077 -4.959,3.3134 -0.831,2.0057 -0.371,4.3143 1.164,5.8494 1.535,1.5351 3.844,1.9943 5.849,1.1635 2.006,-0.8307 3.314,-2.7879 3.314,-4.9588 0,-1.4236 -0.566,-2.7888 -1.572,-3.7954 -1.007,-1.0066 -2.372,-1.5721 -3.796,-1.5721 z" />
+  <path
+     id="LeaderJ"
+     class="Leader J ModeSwitch"
+     d="m 247.87623,51.104847 14.06277,0 L 261.865,19.546"
+     sodipodi:nodetypes="ccc" />
+  <text
+     id="LabelE"
+     class="Label E"
+     x="241.36903"
+     y="73.912399"
+     style="text-anchor:start">E</text>
+  <text
+     id="LabelF"
+     class="Label F"
+     x="241.30165"
+     y="66.1185"
+     style="text-anchor:start">F</text>
+  <text
+     id="LabelG"
+     class="Label G"
+     x="241.50526"
+     y="58.546246"
+     style="text-anchor:start">G</text>
+  <text
+     id="LabelH"
+     class="Label H"
+     x="241.46571"
+     y="43.410526"
+     style="text-anchor:start">H</text>
+  <text
+     id="LabelJ"
+     class="Label J ModeSwitch"
+     x="241.71181"
+     y="50.894886"
+     style="text-anchor:start">J</text>
   <g
      id="g17">
     <path

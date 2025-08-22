@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="xp-pen-deco02"
+   width="10in"
+   height="5.6300001in"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   viewBox="0 0 254 143.002"
+   xmlns="http://www.w3.org/2000/svg">
+   <title id="title">XP-Pen Deco 02</title>
+  <circle
+     id="ButtonF"
+     class="F Button"
+     cx="30.5"
+     cy="123.5"
+     r="4.5" />
+  <circle
+     id="ButtonE"
+     class="E Button"
+     cx="30.5"
+     cy="108.5"
+     r="4.5" />
+  <circle
+     id="ButtonD"
+     class="D Button"
+     cx="30.5"
+     cy="93.5"
+     r="4.5" />
+  <circle
+     id="RingCW"
+     class="RingCW Button"
+     cx="30.5"
+     cy="71"
+     r="10" />
+  <circle
+     id="RingCCW"
+     class="RingCCW Button"
+     cx="30.5"
+     cy="71"
+     r="10" />
+  <circle
+     id="ButtonC"
+     class="C Button"
+     cx="30.5"
+     cy="49.5"
+     r="4.5" />
+  <circle
+     id="ButtonB"
+     class="B Button"
+     cx="30.5"
+     cy="34.5"
+     r="4.5" />
+  <circle
+     id="ButtonA"
+     class="A Button"
+     cx="30.5"
+     cy="19.5"
+     r="4.5" />
+</svg>

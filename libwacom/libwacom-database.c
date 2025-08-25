@@ -31,7 +31,6 @@
 #include <dirent.h>
 #include <glib.h>
 #include <libevdev/libevdev.h>
-#include <linux/input-event-codes.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +39,7 @@
 #include "util-strings.h"
 
 #include "libwacomint.h"
+#include "linux/input-event-codes.h"
 
 #define TABLET_SUFFIX ".tablet"
 #define STYLUS_SUFFIX ".stylus"

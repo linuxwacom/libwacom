@@ -13,8 +13,8 @@
  * under the terms of the GNU General Public License version 2 as published by
  * the Free Software Foundation.
  */
-#ifndef _UAPI_INPUT_EVENT_CODES_H
-#define _UAPI_INPUT_EVENT_CODES_H
+#ifndef _INPUT_EVENT_CODES_H
+#define _INPUT_EVENT_CODES_H
 
 /*
  * Device properties and quirks

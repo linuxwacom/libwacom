@@ -1,0 +1,22 @@
+# Wacom
+# Wacom One 14
+# DTC141
+#
+# sysinfo.4SBQz5mvw9
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/548
+
+[Device]
+Name=Wacom One 14
+ModelName=DTC141
+Class=PenDisplay
+DeviceMatch=usb|056a|040f
+Width=12
+Height=7
+# No pad buttons, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+NumRings=0

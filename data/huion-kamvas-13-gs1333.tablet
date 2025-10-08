@@ -1,0 +1,58 @@
+# Huion
+# Kamvas 13 (Gen 3)
+# GS1333
+#
+# sysinfo.Tr4eGCKfMh.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/550
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#          *---------------------------------*
+#    F     |                                 |
+#          |                                 |
+#    A     |                                 |
+#    B     |                                 |
+#    C     |             DISPLAY             |
+#    D     |                                 |
+#    E     |                                 |
+#          |                                 |
+#    G     |                                 |
+#          *---------------------------------*
+#
+# Relative Dial Map:
+# (A=1st dial, B=2nd dial, ...)
+#
+#    *-----------------------------*
+#    |                             |
+#  F |                             |
+#    |                             |
+#    |           DISPLAY           |
+#    |                             |
+#  G |                             |
+#    |                             |
+#    *-----------------------------*
+
+
+[Device]
+Name=Huion Kamvas 13 (Gen 3)
+ModelName=GS1333
+DeviceMatch=usb|256c|2008||HUION_M22c;
+Width=12
+Height=7
+Layout=huion-kamvas-13-gs1333.svg
+IntegratedIn=Display
+Styli=@generic-no-eraser;
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=false
+TouchSwitch=false
+NumStrips=0
+NumDials=2
+
+[Buttons]
+Left=F;A;B;C;D;E;G
+Dial=F
+Dial2=G

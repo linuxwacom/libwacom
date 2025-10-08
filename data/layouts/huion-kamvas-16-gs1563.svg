@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="huion-kamvas-162019" width="704" height="430">
+  <title id="title">KAMVAS 16 (Gen 3)</title>
+
+  <rect x="96" y="65" width="550" height="310"/>
+
+  <g>
+    <rect id="ButtonA" class="A Button" x="40" y="130" width="20" height="30"/>
+    <text id="LabelA" class="A Label" x="74.0" y="148" style="text-anchor:start;">A</text>
+    <path style="fill:none" d="M 50.0,145.0 H 70.0" id="LeaderA" class="Leader A"/>
+  </g>
+  <g>
+    <rect id="ButtonB" class="B Button" x="40" y="160" width="20" height="30"/>
+    <text id="LabelB" class="B Label" x="74.0" y="178" style="text-anchor:start;">B</text>
+    <path style="fill:none" d="M 50.0,175.0 H 70.0" id="LeaderB" class="Leader B"/>
+  </g>
+  <g>
+    <rect id="ButtonC" class="C Button" x="40" y="190" width="20" height="30"/>
+    <text id="LabelC" class="C Label" x="74.0" y="208" style="text-anchor:start;">C</text>
+    <path style="fill:none" d="M 50.0,205.0 H 70.0" id="LeaderC" class="Leader C"/>
+  </g>
+  <g>
+    <rect id="ButtonD" class="D Button" x="40" y="220" width="20" height="30"/>
+    <text id="LabelD" class="D Label" x="74.0" y="238" style="text-anchor:start;">D</text>
+    <path style="fill:none" d="M 50.0,235.0 H 70.0" id="LeaderD" class="Leader D"/>
+  </g>
+  <g>
+    <rect id="ButtonE" class="E Button" x="40" y="250" width="20" height="30"/>
+    <text id="LabelE" class="E Label" x="74.0" y="268" style="text-anchor:start;">E</text>
+    <path style="fill:none" d="M 50.0,265.0 H 70.0" id="LeaderE" class="Leader E"/>
+  </g>
+  <g>
+    <rect id="ButtonF" class="F Button" x="40" y="280" width="20" height="30"/>
+    <text id="LabelF" class="F Label" x="74.0" y="298" style="text-anchor:start;">F</text>
+    <path style="fill:none" d="M 50.0,295.0 H 70.0" id="LeaderF" class="Leader F"/>
+  </g>
+
+  <g>
+    <circle id="ButtonG" class="G Button ModeSwitch" cx="50.0" cy="90.0" r="10"/>
+    <text id="LabelG" class="G Label ModeSwitch" x="74.0" y="123" style="text-anchor:start;">G</text>
+    <path style="fill:none" d="M 50.0,92.0 V 120.0 H 70.0" id="LeaderG" class="G Leader ModeSwitch"/>
+  </g>
+
+  <g>
+    <circle id="ButtonH" class="H Button ModeSwitch" cx="50.0" cy="350.0" r="10"/>
+    <text id="LabelH" class="H Label ModeSwitch" x="74.0" y="323" style="text-anchor:start;">H</text>
+    <path style="fill:none" d="M 50.0,348.0 V 320.0 H 70.0" id="LeaderH" class="H Leader ModeSwitch"/>
+  </g>
+
+  <g>
+    <circle id="Dial" class="Dial TouchDial" cx="50.0" cy="90.0" r="22"/>
+    <path id="LeaderDialCCW" class="DialCCW Dial Leader" d="M 57.0,75.0 H 74.0"/>
+    <path id="LeaderDialCW" class="DialCW Dial Leader" d="M 57.0,105.0 H 74.0"/>
+    <text id="LabelDialCCW" class="DialCCW Dial Label" x="76" y="78" style="text-anchor:start;">CCW</text>
+    <text id="LabelDialCW" class="DialCW Dial Label" x="76" y="107" style="text-anchor:start;">CW</text>
+  </g>
+
+  <g>
+    <circle id="Dial2" class="Dial2 TouchDial" cx="50.0" cy="350.0" r="22"/>
+    <path id="LeaderDial2CCW" class="Dial2CCW Dial2 Leader" d="M 57.0,335.0 H 74.0"/>
+    <path id="LeaderDial2CW" class="Dial2CW Dial2 Leader" d="M 57.0,364.0 H 74.0"/>
+    <text id="LabelDial2CCW" class="Dial2CCW Dial2 Label" x="76" y="338" style="text-anchor:start;">CCW</text>
+    <text id="LabelDial2CW" class="Dial2CW Dial2 Label" x="76" y="366" style="text-anchor:start;">CW</text>
+  </g>
+
+</svg>

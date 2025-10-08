@@ -46,6 +46,32 @@
      class="B Label"
      x="52"
      y="86.5">B</text>
+  <rect
+    id="Strip"
+    class="Strip TouchStrip"
+    x="28"
+    y="102"
+    width="12"
+    height="46"
+    rx="6.0" />
+  <path
+    id="LeaderStripUp"
+    class="StripUp Strip Leader"
+    d="M 34.0,100.0 V 98.0 H 44.0" />
+  <text
+    id="LabelStripUp"
+    class="StripUp Strip Label"
+    x="46"
+    y="101">UP</text>
+  <path
+    id="LeaderStripDown"
+    class="StripDown Strip Leader"
+    d="M 34.0,150.0 V 152.0 H 44.0" />
+  <text
+    id="LabelStripDown"
+    class="StripDown Strip Label"
+    x="46"
+    y="154">DOWN</text>
   <circle
      id="ButtonC"
      class="C Button"

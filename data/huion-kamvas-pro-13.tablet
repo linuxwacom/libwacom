@@ -49,6 +49,7 @@ Stylus=true
 Reversible=false
 Touch=false
 NumRings=0
+NumStrips=1
 
 [Buttons]
 Left=A;B;C;D;E

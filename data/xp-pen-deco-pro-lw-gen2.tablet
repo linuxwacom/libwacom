@@ -1,0 +1,25 @@
+# XP-Pen
+# Deco Pro LW (Gen 2)
+# MT1172B
+#
+# sysinfo.8I4kUo2EF8
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/544#issue-3368125524
+
+[Device]
+Name=XP-Pen Deco Pro LW (Gen 2)
+ModelName=MT1172B
+DeviceMatch=usb|28bd|0943
+PairedIDs=
+Width=11
+Height=7
+IntegratedIn=
+Styli=@generic-with-eraser
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+NumRings=0
+NumDials=0
+NumStrips=0

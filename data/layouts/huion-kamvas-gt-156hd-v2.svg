@@ -73,4 +73,11 @@
     <text id="LabelN" class="N Label" x="28" y="405.0" style="text-anchor:start;">N</text>
     <path style="fill:none" d="M 30.0,390.0 V 397.0" id="LeaderN" class="Leader N"/>
   </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="22" y="172" width="16" height="86" rx="8.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 30.0,170.0 V 168.0 H 50.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="52" y="170">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 30.0,260.0 V 262.0 H 50.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="52" y="264">DOWN</text>
+  </g>
 </svg>

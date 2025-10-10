@@ -103,4 +103,18 @@
     <text id="LabelT" class="T Label" x="659.0" y="336" style="text-anchor:start;">T</text>
     <path style="fill:none" d="M 677.0,334.0 H 669.0" id="LeaderT" class="Leader T"/>
   </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="13" y="174" width="24" height="75" rx="12.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 25.0,172.0 V 170.0 H 41.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="43" y="172">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 25.0,251.0 V 253.0 H 41.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="43" y="255">DOWN</text>
+  </g>
+  <g>
+    <rect id="Strip2" class="Strip2 TouchStrip" x="690" y="174" width="24" height="75" rx="12.0" />
+    <path id="LeaderStrip2Up" class="Strip2Up Strip2 Leader" d="M 702.0,172.0 V 170.0 H 684.0" />
+    <text id="LabelStrip2Up" class="Strip2Up Strip2 Label" x="672" y="172">UP</text>
+    <path id="LeaderStrip2Down" class="Strip2Down Strip2 Leader" d="M 702.0,251.0 V 253.0 H 684.0" />
+    <text id="LabelStrip2Down" class="Strip2Down Strip2 Label" x="657" y="255">DOWN</text>
+  </g>
 </svg>

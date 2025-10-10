@@ -68,4 +68,48 @@
     <text id="LabelM" class="M Label" x="102.0" y="217" style="text-anchor:start;">M</text>
     <path style="fill:none" d="M 87.0,215.0 H 94.0" id="LeaderM" class="Leader M"/>
   </g>
+  <g
+    id="g48"
+    transform="matrix(2.2820631,0,0,2.2820631,-14.358852,-70.068449)"
+    style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.10955;stroke-dasharray:none">
+    <circle
+      id="Ring"
+      class="Ring TouchRing"
+      cx="34"
+      cy="125"
+      r="19.5"
+      style="stroke-width:0.10955;stroke-dasharray:none" />
+    <path
+      id="LeaderRingCCW"
+      class="RingCCW Ring Leader"
+      d="m 34,105 v -2 h 26"
+      style="stroke-width:0.10955;stroke-dasharray:none" />
+    <text
+      id="LabelRingCCW"
+      class="RingCCW Ring Label"
+      x="62"
+      y="103"
+      style="line-height:0%;text-anchor:start;stroke-width:0.10955;stroke-dasharray:none">CCW</text>
+    <path
+      id="RingCCW"
+      class="RingCCW Button"
+      d="m 31,111 3,-1.5 v 1 a 7.5,7.5 0 0 1 5,1.5 6.5,6.5 0 0 0 -5,-0.5 v 1 z"
+      style="stroke-width:0.10955;stroke-dasharray:none" />
+    <path
+      id="LeaderRingCW"
+      class="RingCW Ring Leader"
+      d="m 34,145 v 2 h 26"
+      style="stroke-width:0.10955;stroke-dasharray:none" />
+    <text
+      id="LabelRingCW"
+      class="RingCW Ring Label"
+      x="62"
+      y="147"
+      style="line-height:0%;text-anchor:start;stroke-width:0.10955;stroke-dasharray:none">CW</text>
+    <path
+      id="RingCW"
+      class="RingCW Button"
+      d="m 31,139 3,-1.5 v 1 a 7.5,7.5 0 0 0 5,-1 6.5,6.5 0 0 1 -5,2 v 1 z"
+      style="stroke-width:0.10955;stroke-dasharray:none" />
+    </g>
 </svg>

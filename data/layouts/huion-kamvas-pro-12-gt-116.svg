@@ -4,28 +4,35 @@
   <title id="title">KAMVAS Pro 12 GT-116</title>
   <rect x="110" y="51" width="574" height="319"/>
   <g>
-    <rect id="ButtonA" class="A Button" x="32" y="90" width="21" height="21"/>
+    <rect id="ButtonA" class="A Button" x="32" y="90" width="20" height="20" rx="10.0"/>
     <text id="LabelA" class="A Label" x="80.5" y="102.5" style="text-anchor:start;">A</text>
     <path style="fill:none" d="M 65.5,100.5 H 72.5" id="LeaderA" class="Leader A"/>
   </g>
   <g>
-    <rect id="ButtonB" class="B Button" x="32" y="118" width="21" height="21"/>
+    <rect id="ButtonB" class="B Button" x="32" y="118" width="20" height="20" rx="10.0"/>
     <text id="LabelB" class="B Label" x="80.5" y="130.5" style="text-anchor:start;">B</text>
     <path style="fill:none" d="M 65.5,128.5 H 72.5" id="LeaderB" class="Leader B"/>
   </g>
   <g>
-    <rect id="ButtonC" class="C Button" x="32" y="287" width="21" height="21"/>
+    <rect id="ButtonC" class="C Button" x="32" y="287" width="20" height="20" rx="10.0"/>
     <text id="LabelC" class="C Label" x="80.5" y="299.5" style="text-anchor:start;">C</text>
     <path style="fill:none" d="M 65.5,297.5 H 72.5" id="LeaderC" class="Leader C"/>
   </g>
   <g>
-    <rect id="ButtonD" class="D Button" x="32" y="316" width="21" height="21"/>
+    <rect id="ButtonD" class="D Button" x="32" y="316" width="20" height="20" rx="10.0"/>
     <text id="LabelD" class="D Label" x="80.5" y="328.5" style="text-anchor:start;">D</text>
     <path style="fill:none" d="M 65.5,326.5 H 72.5" id="LeaderD" class="Leader D"/>
   </g>
   <g>
-    <rect id="ButtonE" class="E Button" x="29" y="343" width="27" height="27"/>
+    <rect id="ButtonE" class="E Button" x="29" y="343" width="26" height="27" rx="13.0"/>
     <text id="LabelE" class="E Label" x="80.5" y="358.5" style="text-anchor:start;">E</text>
     <path style="fill:none" d="M 65.5,356.5 H 72.5" id="LeaderE" class="Leader E"/>
+  </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="32" y="157" width="20" height="114" rx="10.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 42.0,155.0 V 153.0 H 70.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="72" y="156">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 42.0,273.0 V 275.0 H 70.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="72" y="277">DOWN</text>
   </g>
 </svg>

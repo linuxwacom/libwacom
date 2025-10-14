@@ -12,8 +12,9 @@ labels:
           libwacom is a bunch of text files with a C API, and the information in those text files
           is static fixed information that we cannot get from the device (e.g. the model name or which
           button will produce which event code). It does not affect functionality directly, if the
-          tablet does not work this is either an issue with the kernel drivers, xf86-input-wacom
-          (if using X) or libinput/the desktop environment (if using Wayland). Please file the
+          tablet does not work this is either an issue with the kernel drivers, the BPF (if
+          udev-hid-bpf is in use), xf86-input-wacom (if using X) or
+          libinput/the desktop environment (if using Wayland). Please file the
           issue with the component that most likely applies.
 
           See also https://github.com/linuxwacom/libwacom/wiki/Troubleshooting

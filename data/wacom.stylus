@@ -164,6 +164,10 @@ Axes=Tilt;Pressure;Distance;
 Type=Inking
 
 [0x56a:0x20802]
+# Mangled tool ID for kernel < 6.20
+AliasOf=0x56a:0x2802
+
+[0x56a:0x2802]
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Inking Pen
 Buttons=0
@@ -171,6 +175,10 @@ Axes=Tilt;Pressure;Distance;
 Type=Inking
 
 [0x56a:0x120802]
+# Mangled tool ID for kernel < 6.20
+AliasOf=0x56a:0x12802
+
+[0x56a:0x12802]
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Inking Pen
 Group=intuos5
@@ -237,6 +245,10 @@ Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0x56a:0x80842]
+# Mangled tool ID for kernel < 6.20
+AliasOf=0x56a:0x8842
+
+[0x56a:0x8842]
 # MobileStudio Pro
 Name=Pro Pen 3D
 Group=mobilestudio
@@ -297,67 +309,102 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
 
-[0x56a:0x100804]
+[0x56a:0x10804]
 # Intuos4, 5 and Cintiq 21UX2, 22HD, 24HD
 Name=Art Pen
 Group=propengen2
-PairedStylusIds=0x56a:0x10080c;
+PairedStylusIds=0x56a:0x1080c;
 Buttons=2
 Axes=Tilt;Pressure;Distance;RotationZ;
 Type=Marker
 
-[0x56a:0x100802]
+[0x56a:0x100804]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x10080c;
+AliasOf=0x56a:0x10804
+
+[0x56a:0x10802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen
 Group=propengen2
+PairedStylusIds=0x56a:0x1080a;
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x56a:0x100802]
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x10080a;
+AliasOf=0x56a:0x10802
+
+[0x56a:0x10842]
+# MobileStudio Pro, Cintiq Pro, Intuos Pro
+Name=Pro Pen Slim
+Group=mobilestudio
+PairedStylusIds=0x56a:0x1084a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0x56a:0x100842]
-# MobileStudio Pro, Cintiq Pro, Intuos Pro
-Name=Pro Pen Slim
-Group=mobilestudio
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x10084a;
-Buttons=2
-Axes=Tilt;Pressure;Distance;
-Type=General
+AliasOf=0x56a:0x10842
 
-[0x56a:0x40802]
+[0x56a:0x4802]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen
+PairedStylusIds=0x56a:0x480a;
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=Classic
+
+[0x56a:0x40802]
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x4080a;
+AliasOf=0x56a:0x4802
+
+[0x56a:0x14802]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen
+Group=propengen2
+PairedStylusIds=0x56a:0x1480a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
 
 [0x56a:0x140802]
-# Intuos4, 5 and Cintiq 21UX2, 24HD
-Name=Classic Pen
-Group=propengen2
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x14080a;
+AliasOf=0x56a:0x14802
+
+[0x56a:0x16802]
+# Cintiq 13HD Pro Pen
+Name=Pro Pen
+Group=propengen2
+PairedStylusIds=0x56a:0x1680a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
 
 [0x56a:0x160802]
-# Cintiq 13HD Pro Pen
-Name=Pro Pen
-Group=propengen2
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x16080a;
-Buttons=2
-Axes=Tilt;Pressure;Distance;
-Type=Classic
+AliasOf=0x56a:0x16802
 
-[0x56a:0x180802]
+[0x56a:0x18802]
 # DTH2242 Pen
 Name=Pen
 Group=dth2242
-PairedStylusIds=0x56a:0x18080a;
+PairedStylusIds=0x56a:0x1880a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
+
+[0x56a:0x180802]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x18080a;
+AliasOf=0x56a:0x18802
 
 # Stroke pen has no eraser
 [0x56a:0x832]
@@ -479,84 +526,124 @@ Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x56a:0x4080a]
+[0x56a:0x480a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Classic Pen Eraser
+PairedStylusIds=0x56a:0x4802;
+EraserType=Invert
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=Classic
+
+[0x56a:0x4080a]
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x40802;
+AliasOf=0x56a:0x480a
+
+[0x56a:0x1480a]
+# Intuos4, 5 and Cintiq 21UX2, 24HD
+Name=Classic Pen Eraser
+Group=propengen2
+PairedStylusIds=0x56a:0x14802;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
 
 [0x56a:0x14080a]
-# Intuos4, 5 and Cintiq 21UX2, 24HD
-Name=Classic Pen Eraser
-Group=propengen2
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x140802;
-EraserType=Invert
-Buttons=2
-Axes=Tilt;Pressure;Distance;
-Type=Classic
+AliasOf=0x56a:0x1480a
 
-[0x56a:0x10080c]
+[0x56a:0x1080c]
 # Intuos4, 5 and 13HD, 24HD Art Pen
 Name=Art Pen Eraser
 Group=propengen2
-PairedStylusIds=0x56a:0x100804;
+PairedStylusIds=0x56a:0x10804;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Marker
 
-[0x56a:0x10080a]
+[0x56a:0x10080c]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x100804;
+AliasOf=0x56a:0x1080c
+
+[0x56a:0x1080a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
 Name=Grip Pen Eraser
 Group=propengen2
+PairedStylusIds=0x56a:0x10802;
+EraserType=Invert
+Buttons=2
+Axes=Tilt;Pressure;Distance;
+Type=General
+
+[0x56a:0x10080a]
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x100802;
+AliasOf=0x56a:0x1080a
+
+[0x56a:0x1084a]
+# MobileStudio Pro, Cintiq Pro, Intuos Pro
+Name=Pro Pen Slim
+Group=mobilestudio
+PairedStylusIds=0x56a:0x10842;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
 [0x56a:0x10084a]
-# MobileStudio Pro, Cintiq Pro, Intuos Pro
-Name=Pro Pen Slim
-Group=mobilestudio
+# Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x100842;
-EraserType=Invert
-Buttons=2
-Axes=Tilt;Pressure;Distance;
-Type=General
+AliasOf=0x56a:0x1084a
 
-[0x56a:0x16080a]
+[0x56a:0x1680a]
 # Cintiq 13HD
 Name=Pro Pen Eraser
 Group=propengen2
-PairedStylusIds=0x56a:0x160802;
+PairedStylusIds=0x56a:0x16802;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=Classic
 
-[0x56a:0x18080a]
+[0x56a:0x16080a]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x160802;
+AliasOf=0x56a:0x1680a
+
+[0x56a:0x1880a]
 # DTH2242 Eraser
 Name=Pen Eraser
 Group=dth2242
-PairedStylusIds=0x56a:0x180802;
+PairedStylusIds=0x56a:0x18802;
 EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x56a:0x10090a]
+[0x56a:0x18080a]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x180802;
+AliasOf=0x56a:0x1880a
+
+[0x56a:0x1090a]
 # Intuos4, 5 and Cintiq 13HD, 22HD, 24HD Airbrush Eraser
 Name=Airbrush Pen Eraser
 Group=intuos5
-PairedStylusIds=0x56a:0x100902;
+PairedStylusIds=0x56a:0x10902;
 EraserType=Invert
 Buttons=1
 Axes=Tilt;Pressure;Distance;
 Type=Airbrush
+
+[0x56a:0x10090a]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x100902;
+AliasOf=0x56a:0x1090a
 
 [0x56a:0x90a]
 # Intuos4, 5 and Cintiq 21UX2, 24HD
@@ -605,14 +692,19 @@ Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
 
-[0x56a:0x100902]
+[0x56a:0x10902]
 # Intuos4, 5 and Cintiq 13HD, 21UX2, 22HD, 24HD
 Name=Airbrush Pen
 Group=intuos5
-PairedStylusIds=0x56a:0x10090a;
+PairedStylusIds=0x56a:0x1090a;
 Buttons=1
 Axes=Tilt;Pressure;Distance;Slider;
 Type=Airbrush
+
+[0x56a:0x100902]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x10090a;
+AliasOf=0x56a:0x10902
 
 # Puck devices
 [0x56a:0x096]
@@ -685,21 +777,31 @@ HasLens=false
 HasWheel=true
 Buttons=5
 
-[0x56a:0x10002]
+[0x56a:0x1002]
 # Wacom Movink 13
 Name=UD Pen
 Group=udpen
-PairedStylusIds=0x56a:0x1000a;
+PairedStylusIds=0x56a:0x100a;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
 
-[0x56a:0x1000a]
+[0x56a:0x10002]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x1000a;
+AliasOf=0x56a:0x1002
+
+[0x56a:0x100a]
 # Wacom Movink 13
 Name=UD Pen Eraser
 Group=udpen
-PairedStylusIds=0x56a:0x10002;
+PairedStylusIds=0x56a:0x1002;
 Buttons=1
 EraserType=Invert
 Axes=Tilt;Pressure;Distance;
 Type=General
+
+[0x56a:0x1000a]
+# Mangled tool ID for kernel < 6.20
+PairedStylusIds=0x56a:0x10002;
+AliasOf=0x56a:0x100a

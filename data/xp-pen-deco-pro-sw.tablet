@@ -1,13 +1,28 @@
 # XP-Pen
-# Deco Pro SW
+# Deco Pro S & SW
+#
+# S is the wired version, SW is the bluetooth version, but should otherwise be identical over USB
 #
 # sysinfo.YgZdvbyG6s
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/300
+#
+# Button Map:
+# (A=1, B=2, C=3, ...)
+#
+#      *-----------------------*
+#      |                       |
+#  A B |                       |
+#  C D |                       |
+#      |        TABLET         |
+#  E F |                       |
+#  G H |                       |
+#      |                       |
+#      *-----------------------*
 
 [Device]
 Name=UGTABLET Deco Pro SW
 ModelName=
-DeviceMatch=usb|28bd|0933
+DeviceMatch=usb|28bd|0909;usb|28bd|0933
 PairedIDs=
 Width=9
 Height=5
@@ -20,6 +35,7 @@ Stylus=true
 Reversible=true
 Touch=false
 NumRings=0
+NumDials=1
 NumStrips=0
 
 [Buttons]

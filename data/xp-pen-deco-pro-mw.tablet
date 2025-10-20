@@ -1,9 +1,11 @@
 # XP-Pen
-# Deco Pro MW
+# Deco Pro M & MW
+#
+# M is the wired version, MW is the bluetooth version, but should otherwise be identical over USB
 #
 # sysinfo.H746LBd8lp
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/295
-
+#
 # Button Map:
 # (A=1, B=2, C=3, ...)
 #
@@ -20,7 +22,7 @@
 [Device]
 Name=Hanvon Ugee Technology Co.,Ltd Deco Pro MW
 ModelName=
-DeviceMatch=usb|28bd|0934
+DeviceMatch=usb|28bd|0904;usb|28bd|0934
 PairedIDs=
 Width=11
 Height=6
@@ -33,6 +35,7 @@ Stylus=true
 Reversible=true
 Touch=false
 NumRings=0
+NumDials=1
 NumStrips=0
 
 [Buttons]

@@ -13,7 +13,10 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs1" />
   <sodipodi:namedview
@@ -27,21 +30,48 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="1.8688618"
-     inkscape:cx="550.06743"
-     inkscape:cy="216.17436"
+     inkscape:cx="660.83003"
+     inkscape:cy="-44.412059"
      inkscape:window-width="3072"
      inkscape:window-height="1659"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="intuos-pro-m-ptk670" />
+     inkscape:current-layer="intuos-pro-m-ptk670"
+     showgrid="true"
+     showguides="true">
+    <sodipodi:guide
+       position="170.99112,187.66268"
+       orientation="1,0"
+       id="guide1"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="164.83641,188.83465"
+       orientation="0,-1"
+       id="guide3"
+       inkscape:locked="false" />
+    <inkscape:grid
+       id="grid1"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.99999999"
+       spacingy="0.99999998"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
   <title
      id="title">Wacom Intuos Pro M (PTK670)</title>
   <path
      id="ButtonA"
      class="Button A"
      d="m 80.503889,6.4003248 c -5.01,-4.63096 -12.738,-4.63227 -17.75,-0.003 l 4.373,4.3725002 c 2.59,-2.2238802 6.416,-2.2226002 9.005,0.003 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderA"
      class="Leader A"
@@ -58,7 +88,7 @@
      id="ButtonB"
      class="Button B"
      d="m 76.828889,20.472025 4.386,4.3866 c 4.647,-5.0144 4.648,-12.762 0.001,-17.7769902 l -4.388,4.3878902 c 2.224,2.5891 2.224,6.4135 0,9.0025 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderB"
      class="Leader B"
@@ -75,7 +105,7 @@
      id="ButtonC"
      class="Button C"
      d="m 67.104889,21.193325 -4.365,4.3647 c 5.016,4.6468 12.764,4.6454 17.778,-0.003 l -4.364,-4.3647 c -2.596,2.2505 -6.452,2.2513 -9.049,0.002 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderC"
      class="Leader C"
@@ -92,7 +122,7 @@
      id="ButtonD"
      class="Button D"
      d="m 66.429889,11.467025 -4.372,-4.3724902 c -4.631,5.0112902 -4.631,12.7404902 0,17.7512902 l 4.372,-4.3712 c -2.226,-2.5899 -2.226,-6.4177 0,-9.0076 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderD"
      class="Leader D"
@@ -109,7 +139,7 @@
      id="ButtonI"
      class="Button I ModeSwitch"
      d="m 71.624889,10.610025 c -2.171,0 -4.128,1.3077 -4.959,3.3134 -0.83,2.0057 -0.371,4.3143 1.164,5.8494 1.535,1.5351 3.844,1.9943 5.849,1.1635 2.006,-0.8307 3.314,-2.7879 3.314,-4.9588 0,-1.4236 -0.566,-2.7888 -1.572,-3.7954 -1.007,-1.0066 -2.372,-1.5721 -3.796,-1.5721 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderI"
      class="Leader I ModeSwitch"
@@ -123,47 +153,55 @@
      y="50.979774"
      style="font-size:6px;font-family:monospace;text-anchor:end;fill:none;stroke:#7f7f7f;stroke-width:0.25">I</text>
   <g
-     id="g7"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
-     transform="translate(-43.414111,-7.5157166e-5)">
+     id="g2">
     <path
        id="Dial"
        class="Dial TouchDial"
-       d="m 146.854,3.00752 c -5.247,0 -9.976,3.16004 -11.984,8.00658 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288,4.819 14.135,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.16311 -5.807,-12.96998 -12.97,-12.96998 z" />
+       d="m 103.43989,3.0074448 c -5.247001,0 -9.976001,3.16004 -11.984001,8.0065802 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288001,4.819 14.135001,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.1631102 -5.807,-12.9699802 -12.97,-12.9699802 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="sccsss" />
     <path
        id="DialCCW"
        class="DialCCW Button"
-       d="m 143.885,5.88344 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 C 148.73,6.00801 147.38,5.87584 146.132,6.25026 V 6.9839 Z" />
+       d="m 100.47089,5.8833648 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 -1.147,-0.60907 -2.497,-0.74124 -3.745,-0.36682 v 0.73364 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="ccccccc" />
     <path
        id="LeaderDialCCW"
        class="DialCCW Dial Leader"
-       d="m 151.853,6.89279 h 14.246" />
+       d="m 109,7.0000001 h 14"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cc" />
     <text
        id="LabelDialCCW"
        class="DialCCW Dial Label"
-       x="171.099"
-       y="7.2452002"
-       style="text-anchor:start">CCW</text>
+       x="127.71777"
+       y="7.578125"
+       style="font-size:6px;font-family:monospace;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">CCW</text>
     <path
        id="DialCW"
        class="DialCW Button"
-       d="m 143.883,26.4255 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z" />
+       d="m 100.46889,26.425425 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="ccccccc" />
     <path
        id="LeaderDialCW"
        class="DialCW Dial Leader"
-       d="m 151.853,25.0477 h 14.246" />
+       d="m 108,26 10,0 0,-11 h 5"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cccc" />
     <text
        id="LabelDialCW"
        class="DialCW Dial Label"
-       x="171.099"
-       y="25.45682"
-       style="text-anchor:start">CW</text>
+       x="127.71777"
+       y="15.578125"
+       style="font-size:6px;font-family:monospace;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">CW</text>
   </g>
   <path
      id="ButtonE"
      class="Button E"
      d="m 227.32989,6.4460448 c -5.01,-4.63096 -12.738,-4.63227 -17.75,-0.003 l 4.373,4.3724802 c 2.59,-2.2238602 6.416,-2.2225802 9.005,0.003 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <g
      id="g10"
      style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
@@ -178,7 +216,7 @@
      id="ButtonF"
      class="Button F"
      d="m 223.65389,20.517725 4.387,4.3866 c 4.647,-5.0144 4.648,-12.762 0.001,-17.7769702 l -4.388,4.3878702 c 2.223,2.5891 2.223,6.4135 0,9.0025 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderF"
      class="Leader F"
@@ -189,7 +227,7 @@
      id="ButtonG"
      class="Button G"
      d="m 213.93089,21.239025 -4.365,4.3647 c 5.016,4.6468 12.764,4.6454 17.778,-0.003 l -4.364,-4.3647 c -2.597,2.2505 -6.452,2.2513 -9.049,0.002 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderG"
      class="Leader G"
@@ -200,7 +238,7 @@
      id="ButtonH"
      class="Button H"
      d="m 213.25589,11.512725 -4.373,-4.3724702 c -4.63,5.0112702 -4.63,12.7404702 0.001,17.7512702 l 4.372,-4.3712 c -2.227,-2.5899 -2.227,-6.4177 0,-9.0076 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderH"
      class="Leader H"
@@ -211,7 +249,7 @@
      id="ButtonJ"
      class="Button J ModeSwitch"
      d="m 218.45089,10.655725 c -2.171,0 -4.128,1.3077 -4.959,3.3134 -0.831,2.0057 -0.371,4.3143 1.164,5.8494 1.535,1.5351 3.844,1.9943 5.849,1.1635 2.006,-0.8307 3.314,-2.7879 3.314,-4.9588 0,-1.4236 -0.566,-2.7888 -1.572,-3.7954 -1.007,-1.0066 -2.372,-1.5721 -3.796,-1.5721 z"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
+     style="font-size:6px;font-family:monospace;stroke:#7f7f7f;stroke-width:0.25" />
   <path
      id="LeaderJ"
      class="Leader J ModeSwitch"
@@ -249,40 +287,54 @@
      y="50.89481"
      style="font-size:6px;font-family:monospace;text-anchor:start;fill:none;stroke:#7f7f7f;stroke-width:0.25">J</text>
   <g
-     id="g17"
-     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
-     transform="translate(-43.414111,-7.5157166e-5)">
+     id="g1">
     <path
        id="Dial2"
        class="Dial2 TouchDial"
-       d="m 230.279,3.05324 c -5.246,0 -9.975,3.16004 -11.983,8.00656 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288,4.819 14.134,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.16309 -5.807,-12.96996 -12.97,-12.96996 z" />
+       d="m 186.86489,3.0531648 c -5.246,0 -9.975,3.16004 -11.983,8.0065602 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288,4.819 14.134,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.1630902 -5.807,-12.9699602 -12.97,-12.9699602 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
     <path
        id="Dial2CCW"
        class="Dial2CCW Dial2 Button"
-       d="m 227.31,5.92916 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 -1.147,-0.60907 -2.497,-0.74124 -3.745,-0.36682 v 0.73364 z" />
+       d="m 183.89589,5.9290848 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 -1.147,-0.60907 -2.497,-0.74124 -3.745,-0.36682 v 0.73364 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
     <path
        id="LeaderDial2CCW"
        class="Dial2CCW Dial2 Leader"
-       d="M 225.28,6.93851 H 211.034" />
+       d="M 182,6.0000001 H 171 V 24 h -3"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cccc" />
     <text
        id="LabelDial2CCW"
        class="Dial2CCW Dial2 Label"
-       x="206.034"
-       y="7.2452002"
-       style="text-anchor:end">CCW</text>
+       x="162.55469"
+       y="24.578125"
+       style="font-size:6px;font-family:monospace;text-anchor:end;fill:none;stroke:#7f7f7f;stroke-width:0.25">CCW</text>
     <path
        id="Dial2CW"
        class="Dial2CW Button"
-       d="m 227.308,26.4712 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z" />
+       d="m 183.89389,26.471125 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25" />
     <path
        id="LeaderDial2CW"
        class="Dial2CW Dial2 Leader"
-       d="M 225.28,25.0934 H 211.034" />
+       d="m 182,26 h -9 v 8.000001 h -5"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cccc" />
     <text
        id="LabelDial2CW"
        class="Dial2CW Dial2 Label"
-       x="206.034"
-       y="25.457001"
-       style="text-anchor:end">CW</text>
+       x="158.94238"
+       y="34.578125"
+       style="font-size:6px;font-family:monospace;text-anchor:end;fill:none;stroke:#7f7f7f;stroke-width:0.25">CW</text>
   </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Wacom Intuos Pro M (PTK670)</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
 </svg>

@@ -13,7 +13,10 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs1" />
   <sodipodi:namedview
@@ -26,11 +29,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="false"
+     showgrid="true"
      showguides="true"
-     inkscape:zoom="3.0406085"
-     inkscape:cx="799.18215"
-     inkscape:cy="210.81307"
+     inkscape:zoom="4.3000698"
+     inkscape:cx="712.31402"
+     inkscape:cy="69.76631"
      inkscape:window-width="3072"
      inkscape:window-height="1659"
      inkscape:window-x="0"
@@ -82,6 +85,20 @@
        orientation="0,-1"
        id="guide10"
        inkscape:locked="false" />
+    <inkscape:grid
+       id="grid19"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
   </sodipodi:namedview>
   <title
      id="title">Wacom Intuos Pro L (PTK870)</title>
@@ -161,39 +178,41 @@
      y="50.979851"
      style="text-anchor:end">I</text>
   <g
-     id="g7">
+     id="g19">
     <path
        id="Dial"
        class="Dial TouchDial"
-       d="M 146.854 3.00752 C 141.607 3.00752 136.878 6.16756 134.87 11.0141 C 132.863 15.8607 133.972 21.4393 137.682 25.1487 C 141.391 28.8581 146.97 29.9677 151.817 27.9602 C 156.664 25.9527 159.824 21.2234 159.824 15.9775 C 159.824 8.81439 154.017 3.00752 146.854 3.00752 Z" />
+       d="m 146.854,3.00752 c -5.247,0 -9.976,3.16004 -11.984,8.00658 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288,4.819 14.135,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.16311 -5.807,-12.96998 -12.97,-12.96998 z" />
     <path
        id="DialCCW"
        class="DialCCW Button"
-       d="M 143.885 5.88344 L 146.132 4.78296 L 146.132 5.51662 C 147.475 5.43235 148.804 5.82284 149.877 6.61708 C 148.73 6.00801 147.38 5.87584 146.132 6.25026 L 146.132 6.9839 Z" />
+       d="m 143.885,5.88344 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 C 148.73,6.00801 147.38,5.87584 146.132,6.25026 V 6.9839 Z" />
     <path
        id="LeaderDialCCW"
        class="DialCCW Dial Leader"
-       d="M 151.853 6.89279 L 166.099 6.89279" />
+       d="m 151.99999,6.9999998 h 14"
+       sodipodi:nodetypes="cc" />
     <text
        id="LabelDialCCW"
        class="DialCCW Dial Label"
-       x="171.099"
-       y="7.2452002"
-       style="text-anchor:start;">CCW</text>
+       x="170.71777"
+       y="7.578125"
+       style="text-anchor:start">CCW</text>
     <path
        id="DialCW"
        class="DialCW Button"
-       d="M 143.883 26.4255 L 146.13 25.3251 L 146.13 26.0587 C 147.428 26.2501 148.753 25.9905 149.875 25.3251 C 148.902 26.3215 147.537 26.8566 146.13 26.7923 L 146.13 27.526 Z" />
+       d="m 143.883,26.4255 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z" />
     <path
        id="LeaderDialCW"
        class="DialCW Dial Leader"
-       d="M 151.853 25.0477 L 166.099 25.0477" />
+       d="m 151.99999,24.999999 h 10 V 16 h 4"
+       sodipodi:nodetypes="cccc" />
     <text
        id="LabelDialCW"
        class="DialCW Dial Label"
-       x="171.099"
-       y="25.45682"
-       style="text-anchor:start;">CW</text>
+       x="170.71777"
+       y="16.578125"
+       style="text-anchor:start">CW</text>
   </g>
   <path
      id="ButtonE"
@@ -271,38 +290,51 @@
      y="50.894886"
      style="text-anchor:start">J</text>
   <g
-     id="g17">
+     id="g20">
     <path
        id="Dial2"
        class="Dial2 TouchDial"
-       d="M 230.279 3.05324 C 225.033 3.05324 220.304 6.21328 218.296 11.0598 C 216.289 15.9064 217.398 21.485 221.108 25.1944 C 224.817 28.9038 230.396 30.0134 235.242 28.0059 C 240.089 25.9984 243.249 21.2691 243.249 16.0232 C 243.249 8.86011 237.442 3.05324 230.279 3.05324 Z" />
+       d="m 230.279,3.05324 c -5.246,0 -9.975,3.16004 -11.983,8.00656 -2.007,4.8466 -0.898,10.4252 2.812,14.1346 3.709,3.7094 9.288,4.819 14.134,2.8115 4.847,-2.0075 8.007,-6.7368 8.007,-11.9827 0,-7.16309 -5.807,-12.96996 -12.97,-12.96996 z" />
     <path
        id="Dial2CCW"
        class="Dial2CCW Dial2 Button"
-       d="M 227.31 5.92916 L 229.557 4.82868 L 229.557 5.56234 C 230.9 5.47807 232.229 5.86856 233.302 6.6628 C 232.155 6.05373 230.805 5.92156 229.557 6.29598 L 229.557 7.02962 Z" />
-    <path
-       id="LeaderDial2CCW"
-       class="Dial2CCW Dial2 Leader"
-       d="M 225.28 6.93851 L 211.034 6.93851" />
+       d="m 227.31,5.92916 2.247,-1.10048 v 0.73366 c 1.343,-0.08427 2.672,0.30622 3.745,1.10046 -1.147,-0.60907 -2.497,-0.74124 -3.745,-0.36682 v 0.73364 z" />
     <text
        id="LabelDial2CCW"
        class="Dial2CCW Dial2 Label"
-       x="206.034"
-       y="7.2452002"
-       style="text-anchor:end;">CCW</text>
+       x="205.55469"
+       y="25.578125"
+       style="text-anchor:end">CCW</text>
     <path
        id="Dial2CW"
        class="Dial2CW Button"
-       d="M 227.308 26.4712 L 229.555 25.3708 L 229.555 26.1044 C 230.853 26.2958 232.178 26.0362 233.3 25.3708 C 232.327 26.3672 230.962 26.9023 229.555 26.838 L 229.555 27.5717 Z" />
-    <path
-       id="LeaderDial2CW"
-       class="Dial2CW Dial2 Leader"
-       d="M 225.28 25.0934 L 211.034 25.0934" />
+       d="m 227.308,26.4712 2.247,-1.1004 v 0.7336 c 1.298,0.1914 2.623,-0.0682 3.745,-0.7336 -0.973,0.9964 -2.338,1.5315 -3.745,1.4672 v 0.7337 z" />
     <text
        id="LabelDial2CW"
        class="Dial2CW Dial2 Label"
-       x="206.034"
-       y="25.457001"
-       style="text-anchor:end;">CW</text>
+       x="201.94238"
+       y="34.578125"
+       style="text-anchor:end">CW</text>
+    <path
+       id="LeaderDial2CCW"
+       class="Dial2CCW Dial2 Leader"
+       d="m 224.99999,6.9999998 h -12 l 0,17.9999992 h -2"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="LeaderDial2CW"
+       class="Dial2CW Dial2 Leader"
+       d="m 224.99999,25.093398 -8,-0.03262 v 8.939222 h -6"
+       style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+       sodipodi:nodetypes="cccc" />
   </g>
+  <metadata
+     id="metadata19">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Wacom Intuos Pro L (PTK870)</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
 </svg>

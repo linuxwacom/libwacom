@@ -1,5 +1,4 @@
-# Dell Inspiron 7445 14 2-in-1
-# Sensor Type: AES
+# ELAN touchscreen/pen sensor present in the Dell Inspiron 7445 14 2-in-1
 # Features: Touch (Intergrated), Tilt
 #
 # sysinfo.BRJPJZKkp3.tar.gz
@@ -14,7 +13,7 @@ Class=ISDV4
 Width=12
 Height=7
 IntegratedIn=Display;System
-Styli=@isdv4-aes;
+Styli=@isdv4-aes;@generic;
 
 [Features]
 Stylus=true

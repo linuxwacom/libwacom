@@ -1,3 +1,12 @@
+libwacom 2.17.0:
+- New Devices:
+  - Dell Inspiron 14 7445 2-in-1
+  - Wacom One 14
+  - Huion Kamvas 13 (Gen 3), Kamvas 16 (Gen 3)
+  - Waltop Batteryless Tablet
+  - XP-Pen Deco Pro LW (Gen 2)
+  - Wacom styli IDs updated and aliased in preparation for upcoming kernel changes
+
 libwacom 2.16.1:
 - Fix two segfaults caused by double-free
 

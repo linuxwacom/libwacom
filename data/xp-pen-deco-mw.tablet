@@ -3,11 +3,18 @@
 #
 # sysinfo.VOAFvy7j7z.tar.gz
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/291
+# sysinfo.xEHXYQ3D0h.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/566
+# sysinfo.dwWr0dkJW2.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/567
+# sysinfo.znrBdxmBWS.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/568
+
 
 [Device]
 Name=XP-Pen Deco MW
 ModelName=Deco_MW
-DeviceMatch=usb|28bd|0936
+DeviceMatch=usb|28bd|0936;bluetooth|28bd|0936;
 Width=8
 Height=5
 Layout=xp-pen-deco-mw.svg

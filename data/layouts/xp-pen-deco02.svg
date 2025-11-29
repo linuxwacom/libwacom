@@ -1,0 +1,165 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg
+   id="xp-pen-deco02"
+   width="10in"
+   height="5.6300001in"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   version="1.1"
+   viewBox="0 0 254 143.002"
+   xmlns="http://www.w3.org/2000/svg" >
+  <title
+     id="title">XP-Pen Deco 02</title>
+  <g
+     id="F">
+    <circle
+       id="ButtonF"
+       class="F Button"
+       cx="30.5"
+       cy="123.5"
+       r="4.5" />
+    <path
+       id="LeaderF"
+       class="F Leader"
+       d="M 38 123.5 H 63.5" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="66.5"
+       y="123.5"
+       style="text-anchor:start">F</text>
+  </g>
+  <g
+     id="E">
+    <circle
+       id="ButtonE"
+       class="E Button"
+       cx="30.5"
+       cy="108.5"
+       r="4.5" />
+    <path
+       id="LeaderE"
+       class="E Leader"
+       d="M 38 108.5 H 63.5" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="66.5"
+       y="108.5"
+       style="text-anchor:start">E</text>
+  </g>
+  <g
+     id="D">
+    <circle
+       id="ButtonD"
+       class="D Button"
+       cx="30.5"
+       cy="93.5"
+       r="4.5" />
+    <path
+       id="LeaderD"
+       class="D Leader"
+       d="M 38 93.5 H 63.5" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="66.5"
+       y="93.5"
+       style="text-anchor:start">D</text>
+  </g>
+  <g
+     id="C">
+    <circle
+       id="ButtonC"
+       class="C Button"
+       cx="30.5"
+       cy="49.5"
+       r="4.5" />
+    <path
+       id="LeaderC"
+       class="C Leader"
+       d="M 38 49.5 H 63.5" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="66.5"
+       y="49.5"
+       style="text-anchor:start">C</text>
+  </g>
+  <g
+     id="B">
+    <circle
+       id="ButtonB"
+       class="B Button"
+       cx="30.5"
+       cy="34.5"
+       r="4.5" />
+    <path
+       id="LeaderB"
+       class="B Leader"
+       d="M 38 34.5 H 63.5" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="66.5"
+       y="34.5"
+       style="text-anchor:start">B</text>
+  </g>
+  <g
+     id="A">
+    <circle
+       id="ButtonA"
+       class="A Button"
+       cx="30.5"
+       cy="19.5"
+       r="4.5" />
+    <path
+       id="LeaderA"
+       class="A Leader"
+       d="m 38 19 26 0" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="66.5"
+       y="19"
+       style="text-anchor:start">A</text>
+  </g>
+  <g
+     id="DialGroup">
+      <circle
+     id="Dial"
+     class="TouchDial Dial"
+     cx="30.5"
+     cy="71"
+     r="10" />
+    <path
+       id="LeaderDialCCW"
+       class="DialCCW Dial Leader"
+       d="m 45.5 65 h 10" />
+    <path
+       id="DialCCW"
+       class="DialCCW Dial Button"
+       d="m 40 64 1 1.5 0 -0.5 c 0.5 0 2 1 2.5 1.5 0 -0.5 -1.5 -2 -2 -2.5 l 0 -0.5 z"
+       />
+    <text
+       id="LabelDialCCW"
+       class="DialCCW Dial Label"
+       x="57"
+       y="65"
+       style="text-anchor:start;">CWW</text>
+        <path
+       id="LeaderDialCW"
+       class="DialCW Dial Leader"
+       d="m 45.5,76.5 h 10" />
+    <path
+       id="DialCW"
+       class="DialCW Dial Button"
+       d="m 40,78 1,-1.5 v 0.350377 c 0.5,0 2,-1 2.5,-1.5 0,0.5 -1.5,2 -2,2.5 v 0.5 z" />
+      <text
+       id="LabelDialCW"
+       class="DialCW Dial Label"
+       x="57"
+       y="76.5"
+       style="text-anchor:start">CW</text>
+  </g>
+</svg>

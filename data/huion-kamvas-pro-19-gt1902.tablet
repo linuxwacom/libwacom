@@ -1,0 +1,28 @@
+# Huion
+# Kamvas Pro 19 (4K)
+# GT1902
+#
+# This tablet description file has been generated using an automated tool:
+# https://github.com/JoseExposito/uclogic-libwacom-tablet-descriptions
+# If you own this tablet, please improve it.
+#
+# sysinfo.b93aiqXV5w.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/577
+
+[Device]
+Name=Kamvas Pro 19 (4K)
+ModelName=GT1902
+# Product ID is unknown, please fix
+DeviceMatch=usb|256c|006b||HUION Huion Tablet_GT1902;usb|256c|006e||HUION_M220;usb|256c|006d||HUION_M220;usb|256c|006f||HUION_M220;usb|256c|0064||HUION_M220;usb|256c|006e||HUION_M245;usb|256c|006d||HUION_M245;usb|256c|006f||HUION_M245;usb|256c|0064||HUION_M245;
+Width=16
+Height=9
+Styli=@generic-no-eraser;
+IntegratedIn=Display
+
+[Features]
+NumStrips=0
+NumRings=0
+Reversible=false
+Stylus=true
+Touch=true
+TouchSwitch=true

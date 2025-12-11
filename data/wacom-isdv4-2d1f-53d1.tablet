@@ -1,0 +1,20 @@
+# Lenovo ThinkVision M14t Gen 2
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+#
+# Manually generated from sysinfo.XXG8yghpWe.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/575#issue-3676825694
+
+[Device]
+Name=Lenovo ThinkVision M14t Gen 2
+ModelName=
+DeviceMatch=usb|2d1f|53d1
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

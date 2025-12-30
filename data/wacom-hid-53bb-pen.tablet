@@ -1,0 +1,21 @@
+# Lenovo IdeaPad 5-14AHP9
+# Pen: Wacom HID 53BB Pen
+# Screen: Touchscreen 14", 1920x1200
+# Features: Stylus (1 button, eraser-invert), Touchscreen
+#
+# sysinfo.WlvlvxLwpX.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/636
+
+[Device]
+Name=Wacom HID 53BB Pen
+Class=ISDV4
+DeviceMatch=i2c|056a|53bb
+Width=300
+Height=190
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=0

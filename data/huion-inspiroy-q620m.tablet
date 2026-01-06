@@ -10,8 +10,8 @@
 Name=INSPIROY Q620M
 ModelName=INSPIROY Q620M
 DeviceMatch=usb|256c|006d||HUION_T18d;
-Width=10.5  # 266.7mm
-Height=6.56  # 166.7mm
+Width=11 # 10.5 inch 266.7mm
+Height=7 # 6.56 inch 166.7mm
 Layout=huion-inspiroy-q620m.svg
 Styli=@generic-no-eraser;
 IntegratedIn=

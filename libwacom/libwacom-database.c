@@ -571,6 +571,18 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 				  groups[i],
 				  error->message);
 		g_clear_error(&error);
+		stylus->is_generic_stylus = boolean_or_fallback(
+			keyfile,
+			groups[i],
+			"IsGenericStylus",
+			aliased ? aliased->is_generic_stylus : FALSE,
+			error);
+		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
+			g_warning("Stylus %s (%s) %s\n",
+				  stylus->name,
+				  groups[i],
+				  error->message);
+		g_clear_error(&error);
 		stylus->num_buttons =
 			int_or_fallback(keyfile,
 					groups[i],

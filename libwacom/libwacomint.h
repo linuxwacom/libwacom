@@ -143,6 +143,7 @@ struct _WacomStylus {
 	char *group;
 	int num_buttons;
 	gboolean has_eraser;
+	gboolean is_generic_stylus;
 	GArray *paired_styli;          /* [WacomStylus*, ...] */
 	GArray *deprecated_paired_ids; /* [int, ...] */
 	GArray *paired_stylus_ids;     /* [WacomStylusId, ...], NULL once parsing is

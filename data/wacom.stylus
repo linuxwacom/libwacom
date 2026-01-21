@@ -6,6 +6,7 @@ PairedStylusIds=0x0:0xffffe;
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
+IsGenericStylus=true
 
 [0x0:0xffffe]
 Name=General Pen Eraser
@@ -15,6 +16,7 @@ EraserType=Invert
 Buttons=2
 Axes=Tilt;Pressure;Distance;
 Type=General
+IsGenericStylus=true
 
 [0x0:0xffffd]
 Name=General Pen with no Eraser
@@ -22,6 +24,7 @@ Group=generic-no-eraser
 Buttons=2
 Axes=Pressure;
 Type=General
+IsGenericStylus=true
 
 [0x56a:0x1]
 # Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP

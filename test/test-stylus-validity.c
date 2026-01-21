@@ -257,6 +257,22 @@ test_name(gconstpointer data)
 }
 
 static void
+test_generic(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	g_assert_true(libwacom_stylus_is_generic(stylus));
+}
+
+static void
+test_not_generic(gconstpointer data)
+{
+	const WacomStylus *stylus = data;
+
+	g_assert_false(libwacom_stylus_is_generic(stylus));
+}
+
+static void
 test_buttons(gconstpointer data)
 {
 	const WacomStylus *stylus = data;
@@ -352,7 +368,15 @@ static void
 setup_emr_tests(const WacomStylus *stylus)
 {
 	switch (libwacom_stylus_get_id(stylus)) {
-	case 0xffffd:
+	case 0xfffff: /* GENERIC_PEN_WITH_ERASER */
+	case 0xffffe: /* GENERIC_ERASER */
+		add_test(stylus, test_generic);
+		add_test(stylus, test_pressure);
+		add_test(stylus, test_distance);
+		add_test(stylus, test_tilt);
+		break;
+	case 0xffffd: /* GENERIC_PEN_NO_ERASER */
+		add_test(stylus, test_generic);
 		add_test(stylus, test_pressure);
 		add_test(stylus, test_no_distance);
 		add_test(stylus, test_no_tilt);
@@ -360,6 +384,7 @@ setup_emr_tests(const WacomStylus *stylus)
 	case 0x006:
 	case 0x096:
 	case 0x097:
+		add_test(stylus, test_not_generic);
 		add_test(stylus, test_no_pressure);
 		add_test(stylus, test_distance);
 		add_test(stylus, test_no_tilt);
@@ -368,6 +393,7 @@ setup_emr_tests(const WacomStylus *stylus)
 	case 0x017:
 	case 0x094:
 	case 0x806:
+		add_test(stylus, test_not_generic);
 		add_test(stylus, test_no_pressure);
 		add_test(stylus, test_distance);
 		add_test(stylus, test_tilt);
@@ -375,11 +401,13 @@ setup_emr_tests(const WacomStylus *stylus)
 	case 0x021:
 	case 0x8e2:
 	case 0x862:
+		add_test(stylus, test_not_generic);
 		add_test(stylus, test_pressure);
 		add_test(stylus, test_distance);
 		add_test(stylus, test_no_tilt);
 		break;
 	default:
+		add_test(stylus, test_not_generic);
 		add_test(stylus, test_pressure);
 		add_test(stylus, test_tilt);
 		add_test(stylus, test_distance);

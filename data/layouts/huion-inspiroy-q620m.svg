@@ -1,51 +1,263 @@
-<?xml version='1.0' encoding='ASCII'?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" id="huion-inspiroy-q620m" width="733" height="430">
-  <title id="title">INSPIROY Q620M</title>
-  <rect x="161" y="52" width="520" height="325"/>
-  <g>
-    <rect id="ButtonA" class="A Button" x="21" y="85" width="42" height="42"/>
-    <text id="LabelA" class="A Label" x="80.0" y="108" style="text-anchor:start;">A</text>
-    <path style="fill:none" d="M 65.0,106.0 H 72.0" id="LeaderA" class="Leader A"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
+   id="huion-inspiroy-q620m"
+   width="733"
+   height="430"
+   sodipodi:docname="huion-inspiroy-q620m.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.8690314"
+     inkscape:cx="366.5"
+     inkscape:cy="214.88088"
+     inkscape:window-width="3072"
+     inkscape:window-height="1662"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="huion-inspiroy-q620m" />
+  <title
+     id="title">INSPIROY Q620M</title>
+  <rect
+     x="161"
+     y="52"
+     width="520"
+     height="325"
+     id="rect1" />
+  <g
+     id="g1">
+    <rect
+       id="ButtonA"
+       class="A Button"
+       x="21"
+       y="85"
+       width="42"
+       height="42" />
+    <text
+       id="LabelA"
+       class="A Label"
+       x="80.0"
+       y="108"
+       style="text-anchor:start;">A</text>
+    <path
+       style="fill:none"
+       d="M 65.0,106.0 H 72.0"
+       id="LeaderA"
+       class="Leader A" />
   </g>
-  <g>
-    <rect id="ButtonB" class="B Button" x="21" y="128" width="42" height="38"/>
-    <text id="LabelB" class="B Label" x="80.0" y="149" style="text-anchor:start;">B</text>
-    <path style="fill:none" d="M 65.0,147.0 H 72.0" id="LeaderB" class="Leader B"/>
+  <g
+     id="g2">
+    <rect
+       id="ButtonB"
+       class="B Button"
+       x="21"
+       y="128"
+       width="42"
+       height="38" />
+    <text
+       id="LabelB"
+       class="B Label"
+       x="80.0"
+       y="149"
+       style="text-anchor:start;">B</text>
+    <path
+       style="fill:none"
+       d="M 65.0,147.0 H 72.0"
+       id="LeaderB"
+       class="Leader B" />
   </g>
-  <g>
-    <rect id="ButtonC" class="C Button" x="21" y="168" width="42" height="38"/>
-    <text id="LabelC" class="C Label" x="80.0" y="189" style="text-anchor:start;">C</text>
-    <path style="fill:none" d="M 65.0,187.0 H 72.0" id="LeaderC" class="Leader C"/>
+  <g
+     id="g3">
+    <rect
+       id="ButtonC"
+       class="C Button"
+       x="21"
+       y="168"
+       width="42"
+       height="38" />
+    <text
+       id="LabelC"
+       class="C Label"
+       x="80.0"
+       y="189"
+       style="text-anchor:start;">C</text>
+    <path
+       style="fill:none"
+       d="M 65.0,187.0 H 72.0"
+       id="LeaderC"
+       class="Leader C" />
   </g>
-  <g>
-    <rect id="ButtonD" class="D Button" x="21" y="208" width="42" height="38"/>
-    <text id="LabelD" class="D Label" x="80.0" y="229" style="text-anchor:start;">D</text>
-    <path style="fill:none" d="M 65.0,227.0 H 72.0" id="LeaderD" class="Leader D"/>
+  <g
+     id="g4">
+    <rect
+       id="ButtonD"
+       class="D Button"
+       x="21"
+       y="208"
+       width="42"
+       height="38" />
+    <text
+       id="LabelD"
+       class="D Label"
+       x="80.0"
+       y="229"
+       style="text-anchor:start;">D</text>
+    <path
+       style="fill:none"
+       d="M 65.0,227.0 H 72.0"
+       id="LeaderD"
+       class="Leader D" />
   </g>
-  <g>
-    <rect id="ButtonE" class="E Button" x="21" y="248" width="42" height="38"/>
-    <text id="LabelE" class="E Label" x="80.0" y="269" style="text-anchor:start;">E</text>
-    <path style="fill:none" d="M 65.0,267.0 H 72.0" id="LeaderE" class="Leader E"/>
+  <g
+     id="g5">
+    <rect
+       id="ButtonE"
+       class="E Button"
+       x="21"
+       y="248"
+       width="42"
+       height="38" />
+    <text
+       id="LabelE"
+       class="E Label"
+       x="80.0"
+       y="269"
+       style="text-anchor:start;">E</text>
+    <path
+       style="fill:none"
+       d="M 65.0,267.0 H 72.0"
+       id="LeaderE"
+       class="Leader E" />
   </g>
-  <g>
-    <rect id="ButtonF" class="F Button" x="21" y="288" width="42" height="38"/>
-    <text id="LabelF" class="F Label" x="80.0" y="309" style="text-anchor:start;">F</text>
-    <path style="fill:none" d="M 65.0,307.0 H 72.0" id="LeaderF" class="Leader F"/>
+  <g
+     id="g6">
+    <rect
+       id="ButtonF"
+       class="F Button"
+       x="21"
+       y="288"
+       width="42"
+       height="38" />
+    <text
+       id="LabelF"
+       class="F Label"
+       x="80.0"
+       y="309"
+       style="text-anchor:start;">F</text>
+    <path
+       style="fill:none"
+       d="M 65.0,307.0 H 72.0"
+       id="LeaderF"
+       class="Leader F" />
   </g>
-  <g>
-    <rect id="ButtonG" class="G Button" x="21" y="328" width="42" height="38"/>
-    <text id="LabelG" class="G Label" x="80.0" y="349" style="text-anchor:start;">G</text>
-    <path style="fill:none" d="M 65.0,347.0 H 72.0" id="LeaderG" class="Leader G"/>
+  <g
+     id="g7">
+    <rect
+       id="ButtonG"
+       class="G Button"
+       x="21"
+       y="328"
+       width="42"
+       height="38" />
+    <text
+       id="LabelG"
+       class="G Label"
+       x="80.0"
+       y="349"
+       style="text-anchor:start;">G</text>
+    <path
+       style="fill:none"
+       d="M 65.0,347.0 H 72.0"
+       id="LeaderG"
+       class="Leader G" />
   </g>
-  <g>
-    <rect id="ButtonH" class="H Button" x="21" y="368" width="42" height="40"/>
-    <text id="LabelH" class="H Label" x="80.0" y="390" style="text-anchor:start;">H</text>
-    <path style="fill:none" d="M 65.0,388.0 H 72.0" id="LeaderH" class="Leader H"/>
+  <g
+     id="g8">
+    <rect
+       id="ButtonH"
+       class="H Button"
+       x="21"
+       y="368"
+       width="42"
+       height="40" />
+    <text
+       id="LabelH"
+       class="H Label"
+       x="80.0"
+       y="390"
+       style="text-anchor:start;">H</text>
+    <path
+       style="fill:none"
+       d="M 65.0,388.0 H 72.0"
+       id="LeaderH"
+       class="Leader H" />
   </g>
-  <g>
-    <rect id="ButtonI" class="I Button" x="29" y="30" width="26" height="26"/>
-    <text id="LabelI" class="I Label" x="80.0" y="45" style="text-anchor:start;">I</text>
-    <path style="fill:none" d="M 65.0,43.0 H 72.0" id="LeaderI" class="Leader I"/>
+  <g
+     id="g9">
+    <rect
+       id="ButtonI"
+       class="I Button ModeSwitch"
+       x="29"
+       y="30"
+       width="26"
+       height="26" />
+    <text
+       id="LabelI"
+       class="I Label ModeSwitch"
+       x="80.0"
+       y="45"
+       style="text-anchor:start;">I</text>
+    <path
+       style="fill:none"
+       d="M 65.0,43.0 H 72.0"
+       id="LeaderI"
+       class="Leader I ModeSwitch" />
+  </g>
+  <g
+     id="g8-3"
+     style="color:#000000;font-size:8px;fill:none;stroke:#7f7f7f;stroke-width:0.25"
+     transform="matrix(1.5169492,0,0,1.5169492,-33.220342,-93.525428)">
+    <circle
+       id="Dial"
+       class="Dial TouchDial"
+       cx="50"
+       cy="90"
+       r="22" />
+    <path
+       id="LeaderDialCCW"
+       class="DialCCW Dial Leader"
+       d="M 57,75 H 74" />
+    <path
+       id="LeaderDialCW"
+       class="DialCW Dial Leader"
+       d="M 57,105 H 74" />
+    <text
+       id="LabelDialCCW"
+       class="DialCCW Dial Label"
+       x="76"
+       y="78"
+       style="text-anchor:start">CCW</text>
+    <text
+       id="LabelDialCW"
+       class="DialCW Dial Label"
+       x="76"
+       y="107"
+       style="text-anchor:start">CW</text>
   </g>
 </svg>

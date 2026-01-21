@@ -805,3 +805,10 @@ Type=General
 # Mangled tool ID for kernel < 6.20
 PairedStylusIds=0x56a:0x10002;
 AliasOf=0x56a:0x100a
+
+[0x8113]
+Name=Lenovo Yoga Pen (0x8113)
+Group=isdv4-aes
+Buttons=2
+Axes=Tilt;Pressure;
+Type=Mobile

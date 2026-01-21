@@ -98,3 +98,7 @@ LIBWACOM_2.14 {
 LIBWACOM_2.15 {
     libwacom_get_button_modeswitch_mode;
 } LIBWACOM_2.14;
+
+LIBWACOM_2.18 {
+    libwacom_stylus_is_generic;
+} LIBWACOM_2.15;

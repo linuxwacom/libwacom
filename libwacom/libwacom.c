@@ -1814,6 +1814,12 @@ libwacom_stylus_is_eraser(const WacomStylus *stylus)
 }
 
 LIBWACOM_EXPORT int
+libwacom_stylus_is_generic(const WacomStylus *stylus)
+{
+	return stylus->is_generic_stylus;
+}
+
+LIBWACOM_EXPORT int
 libwacom_stylus_has_lens(const WacomStylus *stylus)
 {
 	return stylus->has_lens;

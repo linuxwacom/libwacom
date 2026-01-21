@@ -1106,6 +1106,24 @@ int
 libwacom_stylus_is_eraser(const WacomStylus *stylus);
 
 /**
+ * Check if the given stylus is a generic stylus.
+ *
+ * Generic styli are styli that cannot be uniquely identified by their
+ * tool ID. Instead a tool ID is assigned by libwacom but these styli
+ * cannot be differentiated at runtime. A device may support multiple
+ * generic styli but there is no information which stylus is in use
+ * at any time.
+ *
+ * @param stylus The stylus to query
+ * @return Non-zero if the stylus is a generic stylus, zero otherwise
+ *
+ * @since 2.18
+ * @ingroup styli
+ */
+int
+libwacom_stylus_is_generic(const WacomStylus *stylus);
+
+/**
  * @param stylus The stylus to query
  * @return Whether the stylus has a lens
  *

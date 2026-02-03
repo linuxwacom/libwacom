@@ -181,6 +181,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gadeebad73b4bce9f9791ef59e07b8c051" id="r_gadeebad73b4bce9f9791ef59e07b8c051"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#gadeebad73b4bce9f9791ef59e07b8c051">libwacom_stylus_is_eraser</a> (const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> *stylus)</td></tr>
 <tr class="memdesc:gadeebad73b4bce9f9791ef59e07b8c051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the given stylus may act like an eraser.  <br /></td></tr>
 <tr class="separator:gadeebad73b4bce9f9791ef59e07b8c051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3f387a2a713ab790fd40242573617c7" id="r_gaf3f387a2a713ab790fd40242573617c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#gaf3f387a2a713ab790fd40242573617c7">libwacom_stylus_is_generic</a> (const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> *stylus)</td></tr>
+<tr class="memdesc:gaf3f387a2a713ab790fd40242573617c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the given stylus is a generic stylus.  <br /></td></tr>
+<tr class="separator:gaf3f387a2a713ab790fd40242573617c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3302fa288fae4c8057ae75d4120c075e" id="r_ga3302fa288fae4c8057ae75d4120c075e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#ga3302fa288fae4c8057ae75d4120c075e">libwacom_stylus_has_lens</a> (const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> *stylus)</td></tr>
 <tr class="separator:ga3302fa288fae4c8057ae75d4120c075e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga25750936d41579fa5cb0d5296e68d7f8" id="r_ga25750936d41579fa5cb0d5296e68d7f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#ga25750936d41579fa5cb0d5296e68d7f8">libwacom_stylus_has_wheel</a> (const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> *stylus)</td></tr>
@@ -842,12 +845,41 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gaf3f387a2a713ab790fd40242573617c7" name="gaf3f387a2a713ab790fd40242573617c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf3f387a2a713ab790fd40242573617c7">&#9670;&#160;</a></span>libwacom_stylus_is_generic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_stylus_is_generic </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> *&#160;</td>
+          <td class="paramname"><em>stylus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the given stylus is a generic stylus. </p>
+<p>Generic styli are styli that cannot be uniquely identified by their tool ID. Instead a tool ID is assigned by libwacom but these styli cannot be differentiated at runtime. A device may support multiple generic styli but there is no information which stylus is in use at any time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stylus</td><td>The stylus to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero if the stylus is a generic stylus, zero otherwise</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>2.18 </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jan 21 2026 03:52:52 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Feb 3 2026 05:43:01 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -86,5 +86,6 @@ var searchData=
   ['libwacom_5fstylus_5fhas_5flens_83',['libwacom_stylus_has_lens',['../group__styli.html#ga3302fa288fae4c8057ae75d4120c075e',1,'libwacom.h']]],
   ['libwacom_5fstylus_5fhas_5fwheel_84',['libwacom_stylus_has_wheel',['../group__styli.html#ga25750936d41579fa5cb0d5296e68d7f8',1,'libwacom.h']]],
   ['libwacom_5fstylus_5fis_5feraser_85',['libwacom_stylus_is_eraser',['../group__styli.html#gadeebad73b4bce9f9791ef59e07b8c051',1,'libwacom.h']]],
-  ['list_86',['list',['../bug.html',1,'Bug List'],['../deprecated.html',1,'Deprecated List']]]
+  ['libwacom_5fstylus_5fis_5fgeneric_86',['libwacom_stylus_is_generic',['../group__styli.html#gaf3f387a2a713ab790fd40242573617c7',1,'libwacom.h']]],
+  ['list_87',['list',['../bug.html',1,'Bug List'],['../deprecated.html',1,'Deprecated List']]]
 ];

@@ -45,5 +45,6 @@ var group__styli =
     [ "libwacom_stylus_has_eraser", "group__styli.html#gaa5042d687a5ca7c3b8625d7db1143356", null ],
     [ "libwacom_stylus_has_lens", "group__styli.html#ga3302fa288fae4c8057ae75d4120c075e", null ],
     [ "libwacom_stylus_has_wheel", "group__styli.html#ga25750936d41579fa5cb0d5296e68d7f8", null ],
-    [ "libwacom_stylus_is_eraser", "group__styli.html#gadeebad73b4bce9f9791ef59e07b8c051", null ]
+    [ "libwacom_stylus_is_eraser", "group__styli.html#gadeebad73b4bce9f9791ef59e07b8c051", null ],
+    [ "libwacom_stylus_is_generic", "group__styli.html#gaf3f387a2a713ab790fd40242573617c7", null ]
 ];

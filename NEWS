@@ -1,3 +1,11 @@
+libwacom 2.18.0:
+- New Devices:
+  - XP-Pen Deco MW (bluetooth), Deco02
+  - Huion Kamvas Pro 19
+  - Lenovo ThinkVision M14t Gen 2
+- New API:
+  - libwacom_stylus_is_generic() returns true for generic styli that are added by libwacom
+
 libwacom 2.17.0:
 - New Devices:
   - Dell Inspiron 14 7445 2-in-1

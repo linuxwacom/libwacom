@@ -2,10 +2,12 @@
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/590
 
 [Device]
-Name=GAOMON M5 V2 Pen
-ModelName=M5
-DeviceMatch=usb|256c|200e;
+Name=M5 V2
+ModelName=
+DeviceMatch=usb|256c|200e
 Class=Bamboo
+Width=9
+Height=6
 IntegratedIn=
 Layout=gaomon-m5v2.svg
 Styli=@generic-no-eraser

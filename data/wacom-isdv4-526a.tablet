@@ -1,0 +1,21 @@
+# Lenovo ThinkBook 14s Yoga ITL
+# Sensor Type: AES
+# Features: Touch (Integrated), Tilt
+# HW Resolution: 30931 x 17399 (2540 x 2540 lpi)
+#
+# Manually created. Tarball: sysinfo.2vUZJA6tu9.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/582
+
+[Device]
+Name=ISDv4 526a
+ModelName=
+DeviceMatch=i2c|056a|526a
+Class=ISDV4
+Width=12
+Height=7
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true

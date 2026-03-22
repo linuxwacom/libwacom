@@ -12,8 +12,8 @@ ModelName=
 DeviceMatch=i2c|2d1f|0114
 PairedID=i2c|04f3|2c86
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 Styli=@generic-with-eraser;
 

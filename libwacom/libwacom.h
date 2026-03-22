@@ -696,12 +696,38 @@ libwacom_get_width(const WacomDevice *device);
  * Intuos4 6x9 this will return 6.
  *
  * @param device The tablet to query
- * @return The width of this device in inches
+ * @return The height of this device in inches
  *
  * @ingroup devices
  */
 int
 libwacom_get_height(const WacomDevice *device);
+
+/**
+ * Retrieve the width of the device in mm. This is the width of the usable
+ * area as advertised, not the total size of the physical tablet.
+ *
+ * @param device The tablet to query
+ * @return The width of this device in mm
+ *
+ * @since 2.19
+ * @ingroup devices
+ */
+int
+libwacom_get_width_mm(const WacomDevice *device);
+
+/**
+ * Retrieve the height of the device in mm. This is the height of the usable
+ * area as advertised, not the total size of the physical tablet.
+ *
+ * @param device The tablet to query
+ * @return The height of this device in mm
+ *
+ * @since 2.19
+ * @ingroup devices
+ */
+int
+libwacom_get_height_mm(const WacomDevice *device);
 
 /**
  * @param device The tablet to query

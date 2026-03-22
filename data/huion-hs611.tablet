@@ -40,8 +40,8 @@
 [Device]
 Name=Huion HS611
 DeviceMatch=usb|256c|006d|HUION Huion Tablet_HS611 Pad;usb|256c|006d|HUION Huion Tablet_HS611 Touch Strip;usb|256c|006d|HUION Huion Tablet_HS611 Pen;usb|256c|006f|HUION Huion Tablet_HS611 Pen
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Layout=huion-hs611.svg
 Styli=@generic-no-eraser

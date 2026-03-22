@@ -6,8 +6,8 @@
 Name=Huion HS610
 ModelName=HS610
 DeviceMatch=usb|256c|0064||HUION_T194
-Width=10
-Height=6
+Width=254
+Height=152
 Layout=huion-hs610.svg
 Styli=@generic-no-eraser;
 IntegratedIn=

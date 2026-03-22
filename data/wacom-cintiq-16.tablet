@@ -7,8 +7,8 @@ Name=Wacom Cintiq 16
 ModelName=DTK-1660
 Class=Cintiq
 DeviceMatch=usb|056a|0390
-Width=14
-Height=8
+Width=356
+Height=203
 # No pad buttons, so no layout
 Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display

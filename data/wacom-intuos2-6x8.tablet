@@ -8,8 +8,8 @@ ModelName=XD-0608
 # FIXME add missing usb|0056a|0047 match
 DeviceMatch=usb|056a|0042
 Class=Intuos2
-Width=8
-Height=6
+Width=203
+Height=152
 # ID 0x842 was re-used, listed here explicitly
 Styli=0x842;@intuos;@intuos2;
 

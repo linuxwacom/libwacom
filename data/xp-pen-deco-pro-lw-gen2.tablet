@@ -10,8 +10,8 @@ Name=XP-Pen Deco Pro LW (Gen 2)
 ModelName=MT1172B
 DeviceMatch=usb|28bd|0943
 PairedIDs=
-Width=11
-Height=7
+Width=279
+Height=178
 IntegratedIn=
 Styli=@generic-with-eraser
 

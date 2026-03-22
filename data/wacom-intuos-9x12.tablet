@@ -7,8 +7,8 @@ Name=Wacom Intuos 9x12
 ModelName=GD-0912
 DeviceMatch=usb|056a|0022
 Class=Intuos
-Width=12
-Height=9
+Width=305
+Height=229
 Styli=@intuos-airbrush;@intuos;
 
 [Features]

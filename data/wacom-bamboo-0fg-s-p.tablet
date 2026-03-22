@@ -44,8 +44,8 @@ Name=Wacom Bamboo Pen
 ModelName=MTE-450
 DeviceMatch=usb|056a|0065
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 IntegratedIn=
 Layout=wacom-bamboo-0fg-s-p.svg
 

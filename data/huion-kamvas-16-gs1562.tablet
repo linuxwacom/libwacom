@@ -7,8 +7,8 @@
 Name=KAMVAS 16 GS1562
 ModelName=KAMVAS 16 GS1562
 DeviceMatch=usb|256c|006d||HUION_M19s
-Width=14
-Height=8
+Width=356
+Height=203
 Layout=huion-kamvas-16-gs1562.svg
 Styli=@generic-no-eraser;
 IntegratedIn=Display

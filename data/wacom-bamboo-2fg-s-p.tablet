@@ -12,8 +12,8 @@ Name=Wacom Bamboo Pen small
 ModelName=CTL-460
 DeviceMatch=usb|056a|00d4
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 # No pad buttons, so no layout
 IntegratedIn=
 

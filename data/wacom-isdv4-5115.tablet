@@ -4,8 +4,8 @@
 Name=Wacom HID 5115
 DeviceMatch=i2c|056a|5115
 Class=ISDV4
-Width=10
-Height=7
+Width=254
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

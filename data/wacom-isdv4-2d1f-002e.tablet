@@ -6,8 +6,8 @@ Name=Wacom ISDv4 2E
 ModelName=
 DeviceMatch=i2c|2d1f|002e
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

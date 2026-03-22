@@ -24,8 +24,8 @@
 Name=Huion RTP-700
 ModelName=RTP-700
 DeviceMatch=usb|256c|0064||HUION_T19k
-Width=11
-Height=7
+Width=279
+Height=178
 Layout=huion-rtp-700.svg
 Styli=@generic-no-eraser;
 IntegratedIn=

@@ -10,8 +10,8 @@ ModelName=WP9620
 DeviceMatch=usb|6161|4d15
 PairedIDs=
 Class=Bamboo
-Width=8
-Height=6
+Width=203
+Height=152
 IntegratedIn=
 
 [Features]

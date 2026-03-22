@@ -9,8 +9,8 @@ ModelName=DTH-1152
 DeviceMatch=usb|056a|035a
 PairedID=usb|056a|0368
 Class=PenDisplay
-Width=9
-Height=5
+Width=229
+Height=127
 #No ExpressKeys, so no layout
 IntegratedIn=Display
 

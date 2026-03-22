@@ -6,8 +6,8 @@
 Name=XP-Pen G430
 ModelName=
 DeviceMatch=usb|28bd|0075
-Width=4
-Height=3
+Width=102
+Height=76
 Styli=@generic-no-eraser;
 
 [Features]

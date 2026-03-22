@@ -403,8 +403,8 @@ libwacom_copy(const WacomDevice *device)
 	g_atomic_int_inc(&d->refcnt);
 	d->name = g_strdup(device->name);
 	d->model_name = g_strdup(device->model_name);
-	d->width = device->width;
-	d->height = device->height;
+	d->width_mm = device->width_mm;
+	d->height_mm = device->height_mm;
 	d->integration_flags = device->integration_flags;
 	d->layout = g_strdup(device->layout);
 	d->matches = g_array_copy(device->matches);
@@ -516,7 +516,7 @@ libwacom_compare(const WacomDevice *a,
 	if (!g_str_equal(a->name, b->name))
 		return 1;
 
-	if (a->width != b->width || a->height != b->height)
+	if (a->width_mm != b->width_mm || a->height_mm != b->height_mm)
 		return 1;
 
 	if (!libwacom_same_layouts(a, b))
@@ -1191,8 +1191,8 @@ libwacom_print_device_description(int fd,
 	}
 
 	dprintf(fd, "Class=%s\n", class_name);
-	dprintf(fd, "Width=%d\n", libwacom_get_width(device));
-	dprintf(fd, "Height=%d\n", libwacom_get_height(device));
+	dprintf(fd, "Width=%d\n", device->width_mm);
+	dprintf(fd, "Height=%d\n", device->height_mm);
 	print_integrated_flags_for_device(fd, device);
 	print_layout_for_device(fd, device);
 	print_styli_for_device(fd, device);
@@ -1479,13 +1479,25 @@ libwacom_get_paired_device(const WacomDevice *device)
 LIBWACOM_EXPORT int
 libwacom_get_width(const WacomDevice *device)
 {
-	return device->width;
+	return (int)(device->width_mm / 25.4 + 0.5);
 }
 
 LIBWACOM_EXPORT int
 libwacom_get_height(const WacomDevice *device)
 {
-	return device->height;
+	return (int)(device->height_mm / 25.4 + 0.5);
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_width_mm(const WacomDevice *device)
+{
+	return device->width_mm;
+}
+
+LIBWACOM_EXPORT int
+libwacom_get_height_mm(const WacomDevice *device)
+{
+	return device->height_mm;
 }
 
 LIBWACOM_EXPORT WacomClass

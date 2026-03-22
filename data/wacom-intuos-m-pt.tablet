@@ -38,8 +38,8 @@ Name=Intuos Pen & Touch Medium
 ModelName=CTH-680
 DeviceMatch=usb|056a|0303
 Class=Bamboo
-Width=9
-Height=5
+Width=229
+Height=127
 Layout=wacom-intuos-m-pt.svg
 IntegratedIn=
 

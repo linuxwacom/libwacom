@@ -10,8 +10,8 @@ ModelName=CT1060
 DeviceMatch=usb|28bd|0932
 PairedIDs=
 Class=Bamboo
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Styli=@generic-no-eraser
 

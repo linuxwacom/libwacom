@@ -11,8 +11,8 @@ Name=ISDv4 5072
 ModelName=
 DeviceMatch=i2c|056a|5072
 Class=ISDV4
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

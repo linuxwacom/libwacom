@@ -38,8 +38,8 @@
 Name=Huion Kamvas 13 (Gen 3)
 ModelName=GS1333
 DeviceMatch=usb|256c|2008;
-Width=12
-Height=7
+Width=305
+Height=178
 Layout=huion-kamvas-13-gs1333.svg
 IntegratedIn=Display
 Styli=@generic-no-eraser;

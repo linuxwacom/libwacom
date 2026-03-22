@@ -9,8 +9,8 @@ Name=Wacom Bamboo Pad Wireless
 ModelName=CTH-300
 DeviceMatch=usb|056a|0319
 Class=Bamboo
-Width=4
-Height=3
+Width=102
+Height=76
 Layout=wacom-bamboo-pad.svg
 
 [Features]

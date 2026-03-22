@@ -31,8 +31,8 @@ Name=Wacom Cintiq Pro 24
 ModelName=DTK-2420
 Class=Cintiq
 DeviceMatch=usb|056a|037c
-Width=20
-Height=12
+Width=508
+Height=305
 # No pad buttons, so no layout
 Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display

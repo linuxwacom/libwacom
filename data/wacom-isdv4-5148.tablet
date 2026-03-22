@@ -8,8 +8,8 @@ Name=Wacom ISDv4 5148
 ModelName=
 DeviceMatch=usb|056a|5148
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

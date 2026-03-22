@@ -5,8 +5,8 @@ Name=Wacom ISDv4 E5
 ModelName=
 DeviceMatch=usb|056a|00e5
 Class=ISDV4
-Width=11
-Height=6
+Width=279
+Height=152
 IntegratedIn=Display;System
 
 [Features]

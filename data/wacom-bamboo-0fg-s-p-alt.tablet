@@ -44,8 +44,8 @@ Name=Wacom Bamboo Fun small
 ModelName=CTE-450
 DeviceMatch=usb|056a|0017
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 IntegratedIn=
 Layout=wacom-bamboo-0fg-s-p-alt.svg
 

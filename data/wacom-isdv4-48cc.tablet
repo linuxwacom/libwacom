@@ -11,8 +11,8 @@ Name=Wacom ISDv4 48cc
 ModelName=
 DeviceMatch=i2c|056a|48cc
 Class=ISDV4
-Width=10
-Height=7
+Width=254
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

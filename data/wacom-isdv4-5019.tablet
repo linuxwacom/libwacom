@@ -11,8 +11,8 @@ Name=ISDv4 5019
 ModelName=
 DeviceMatch=usb|056a|5019
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 Styli=@generic-with-eraser;
 

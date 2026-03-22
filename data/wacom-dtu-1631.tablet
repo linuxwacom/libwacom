@@ -7,8 +7,8 @@
 Name=Wacom DTU-1631
 ModelName=DTU-1631
 DeviceMatch=usb|056a|00f0
-Width=14
-Height=8
+Width=356
+Height=203
 Class=PenDisplay
 IntegratedIn=Display
 

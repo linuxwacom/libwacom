@@ -7,8 +7,8 @@ Name=Wacom Intuos 12x18
 ModelName=GD-1218
 DeviceMatch=usb|056a|0024
 Class=Intuos
-Width=18
-Height=12
+Width=457
+Height=305
 Styli=@intuos-airbrush;@intuos;
 
 [Features]

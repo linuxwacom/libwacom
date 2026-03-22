@@ -105,8 +105,8 @@ class StylusFile:
 class TabletFile:
     name: str
     matches: list[str]
-    width: int = 9
-    height: int = 6
+    width: int = 229
+    height: int = 152
     integrated_in: str = ""
     klass: str = "Bamboo"
     layout: str = ""

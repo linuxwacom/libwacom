@@ -23,10 +23,8 @@ ModelName=L310
 # The PID of bluetooth is conflict with Huion Keydial K20,
 # use the UNIQ "HUION_T23a" of this device.
 DeviceMatch=usb|256c|2011||HUION_T23a;bluetooth|256c|8251||HUION_T23a;
-# (Optional) Width 220mm.
-Width=9
-# (Optional) Height 165.7mm.
-Height=6
+Width=220
+Height=166
 IntegratedIn=
 Styli=@generic-no-eraser
 

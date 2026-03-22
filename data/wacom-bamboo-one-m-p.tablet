@@ -9,8 +9,8 @@ Name=Wacom Bamboo1 5x8 Pen
 ModelName=CTE-660
 DeviceMatch=usb|056a|006b
 Class=Bamboo
-Width=8
-Height=5
+Width=203
+Height=127
 # No pad buttons, so no layout
 IntegratedIn=
 

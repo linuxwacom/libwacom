@@ -15,8 +15,8 @@
 Name=XP-Pen Deco MW
 ModelName=Deco_MW
 DeviceMatch=usb|28bd|0936;bluetooth|28bd|0936;
-Width=8
-Height=5
+Width=203
+Height=127
 Layout=xp-pen-deco-mw.svg
 Styli=@generic-no-eraser;
 

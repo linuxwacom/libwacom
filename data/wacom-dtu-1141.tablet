@@ -18,8 +18,8 @@ Name=Wacom DTU1141
 ModelName=DTU-1141
 DeviceMatch=usb|056a|0336
 Class=PenDisplay
-Width=9
-Height=5
+Width=229
+Height=127
 Layout=wacom-dtu-1141.svg
 IntegratedIn=Display
 

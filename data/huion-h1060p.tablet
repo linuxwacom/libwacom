@@ -7,8 +7,8 @@
 Name=HUION H1060P Tablet
 ModelName=
 DeviceMatch=usb|256c|006d||HUION_T167;usb|256c|006d|HUION Huion Tablet Pad;usb|256c|006d|HUION Huion Tablet Pen
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Layout=huion-h1060p.svg
 Styli=@generic-no-eraser;

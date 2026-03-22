@@ -9,8 +9,8 @@ Name=Wacom Cintiq 27QHD touch
 ModelName=DTH-2700
 DeviceMatch=usb|056a|032b
 PairedID=usb|056a|032c
-Width=24
-Height=12
+Width=610
+Height=305
 Styli=@intuos5;@propengen2;
 IntegratedIn=Display
 

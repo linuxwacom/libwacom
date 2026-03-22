@@ -34,8 +34,8 @@ Name=Wacom Intuos3 12x12
 ModelName=PTZ-1230
 DeviceMatch=usb|056a|00b3
 Class=Intuos3
-Width=12
-Height=12
+Width=305
+Height=305
 Layout=wacom-intuos3-12x12.svg
 Styli=@intuos3-pucks;@intuos3;
 

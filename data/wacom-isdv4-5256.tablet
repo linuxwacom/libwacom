@@ -11,8 +11,8 @@ Name=ISDv4 5256
 ModelName=
 DeviceMatch=i2c|056a|5256
 Class=ISDV4
-Width=14
-Height=8
+Width=356
+Height=203
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

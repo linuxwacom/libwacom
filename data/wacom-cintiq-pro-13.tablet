@@ -32,8 +32,8 @@ ModelName=DTH-1320
 Class=Cintiq
 DeviceMatch=usb|056a|034f
 PairedID=usb|056a|0353
-Width=12
-Height=7
+Width=305
+Height=178
 # No pad buttons, so no layout
 Styli=@intuos5;@mobilestudio;@propengen2;
 IntegratedIn=Display

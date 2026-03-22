@@ -21,8 +21,8 @@ Name=Wacom Graphire2 5x7
 ModelName=ET-0507A
 DeviceMatch=usb|056a|0012
 Class=Graphire
-Width=7
-Height=5
+Width=178
+Height=127
 
 [Features]
 Stylus=true

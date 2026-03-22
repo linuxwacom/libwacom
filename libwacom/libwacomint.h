@@ -95,8 +95,8 @@ typedef struct _WacomKeycode {
 struct _WacomDevice {
 	char *name;
 	char *model_name;
-	int width;
-	int height;
+	int width_mm;
+	int height_mm;
 
 	WacomMatch *match; /* used match or first match by default */
 	GArray *matches;

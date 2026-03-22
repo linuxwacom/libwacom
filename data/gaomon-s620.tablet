@@ -12,8 +12,8 @@
 Name=GAOMON S620
 ModelName=
 DeviceMatch=usb|256c|006d|GAOMON Gaomon Tablet Pen;usb|256c|006d|GAOMON Gaomon Tablet Pad;usb|256c|006d|GAOMON Gaomon Tablet Pen|OEM02_T18e;usb|256c|006d|GAOMON Gaomon Tablet Pad|OEM02_T18e;
-Width=6
-Height=4
+Width=152
+Height=102
 Layout=gaomon-s620.svg
 IntegratedIn=
 Styli=@generic-no-eraser;

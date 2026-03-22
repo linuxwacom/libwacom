@@ -34,8 +34,8 @@
 Name=Inspiroy 2 S
 ModelName=H641P
 DeviceMatch=usb|256c|0066;
-Width=6
-Height=4
+Width=152
+Height=102
 Layout=huion-inspiroy-2-s---h641p.svg
 Styli=@generic-no-eraser;
 IntegratedIn=

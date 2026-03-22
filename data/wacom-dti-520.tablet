@@ -19,8 +19,8 @@ Name=Wacom DTI520UB/L
 ModelName=DTI-520
 DeviceMatch=usb|056a|003a
 Class=PenDisplay
-Width=14
-Height=12
+Width=356
+Height=305
 Layout=wacom-dti-520.svg
 # FIXME does the stylus have an eraser?
 # Styli=0xfffff;

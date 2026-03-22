@@ -41,8 +41,8 @@
 Name=Huion Inspiroy 2 M
 ModelName=H951P
 DeviceMatch=usb|256c|0067;
-Width=9
-Height=6  # Technically rounds down to 5, but 6 seems more natural
+Width=229
+Height=152
 IntegratedIn=
 Layout=huion-inspiroy-2-m---h951p.svg
 Styli=@generic-no-eraser;

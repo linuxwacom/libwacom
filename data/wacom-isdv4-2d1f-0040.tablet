@@ -12,8 +12,8 @@ ModelName=
 DeviceMatch=i2c|2d1f|0040|ACPI0C50:00 2D1F:0040 Stylus
 PairedIDs=i2c|06cB|7813
 Class=ISDV4
-Width=12
-Height=8
+Width=305
+Height=203
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

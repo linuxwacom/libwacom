@@ -190,6 +190,8 @@ class LibWacom:
         _Api(name="libwacom_get_product_id", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_get_width", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_get_height", args=(c_void_p,), return_type=c_int),
+        _Api(name="libwacom_get_width_mm", args=(c_void_p,), return_type=c_int),
+        _Api(name="libwacom_get_height_mm", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_has_stylus", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_has_touch", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_get_num_buttons", args=(c_void_p,), return_type=c_int),
@@ -801,6 +803,14 @@ class WacomDevice:
     @property
     def height(self):
         return self.get_height()
+
+    @property
+    def width_mm(self):
+        return self.get_width_mm()
+
+    @property
+    def height_mm(self):
+        return self.get_height_mm()
 
     @property
     def num_buttons(self):

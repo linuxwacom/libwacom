@@ -7,8 +7,8 @@ Name=Wacom Intuos2 12x18
 ModelName=XD-1218
 DeviceMatch=usb|056a|0045
 Class=Intuos2
-Width=18
-Height=12
+Width=457
+Height=305
 # ID 0x842 was re-used, listed here explicitly
 Styli=0x842;@intuos;@intuos2;
 

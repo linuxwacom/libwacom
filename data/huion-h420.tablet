@@ -16,8 +16,8 @@
 Name=Huion H420
 ModelName=
 DeviceMatch=usb|256c|006e|HUION H420 Pen;usb|256c|006e|HUION H420 Pad;
-Width=4
-Height=2
+Width=102
+Height=51
 IntegratedIn=
 Layout=huion-h420.svg
 Styli=@generic-no-eraser;

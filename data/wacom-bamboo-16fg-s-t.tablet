@@ -12,8 +12,8 @@ Name=Wacom Bamboo 16FG 4x5
 ModelName=CTT-470
 DeviceMatch=usb|056a|00dc
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 Layout=wacom-bamboo-16fg-s-t.svg
 IntegratedIn=
 

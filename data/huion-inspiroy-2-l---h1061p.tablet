@@ -35,8 +35,8 @@
 Name=Huion Inspiroy 2 L
 ModelName=H1061P
 DeviceMatch=usb|256c|0068;
-Width=11
-Height=7
+Width=279
+Height=178
 Layout=huion-inspiroy-2-l---h1061p.svg
 Styli=@generic-no-eraser;
 IntegratedIn=

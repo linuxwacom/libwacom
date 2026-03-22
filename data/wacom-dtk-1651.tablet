@@ -17,8 +17,8 @@ Name=Wacom DTK1651
 ModelName=DTK-1651
 DeviceMatch=usb|056a|0343
 Class=PenDisplay
-Width=14
-Height=8
+Width=356
+Height=203
 Layout=wacom-dtk-1651.svg
 IntegratedIn=Display
 

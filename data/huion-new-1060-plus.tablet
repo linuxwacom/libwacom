@@ -6,8 +6,8 @@
 Name=Huion New 1060 Plus
 ModelName=
 DeviceMatch=usb|256c|006e|HID 256c:006e Pen;usb|256c|006e|HID 256c:006e Pad
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Layout=huion-new-1060-plus.svg
 Styli=@generic-no-eraser;

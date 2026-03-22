@@ -4,8 +4,8 @@ Name=ELAN 2627
 ModelName=
 DeviceMatch=i2c|04f3|2627
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 
 [Features]

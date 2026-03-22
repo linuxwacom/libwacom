@@ -38,8 +38,8 @@
 Name=Huion Kamvas Pro 13
 ModelName=GT-133
 DeviceMatch=usb|256c|006d||HUION_M182;usb|256c|006e|Tablet Monitor Pen;usb|256c|006e|Tablet Monitor Pad;
-Width=12
-Height=7
+Width=305
+Height=178
 Layout=huion-kamvas-pro-13.svg
 Styli=@generic-no-eraser;
 IntegratedIn=Display

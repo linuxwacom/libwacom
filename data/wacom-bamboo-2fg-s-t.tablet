@@ -24,8 +24,8 @@ Name=Wacom Bamboo Touch (2FG)
 ModelName=CTT-460
 DeviceMatch=usb|056a|00d0
 Class=Bamboo
-Width=5
-Height=3
+Width=127
+Height=76
 Layout=wacom-bamboo-2fg-s-t.svg
 IntegratedIn=
 

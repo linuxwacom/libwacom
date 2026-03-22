@@ -164,13 +164,12 @@ duplicate_database(WacomDeviceDatabase *db,
 		   const char *dirname)
 {
 	WacomDevice **device, **devices;
-	int i;
 
 	devices = libwacom_list_devices_from_database(db, NULL);
 	g_assert(devices);
 	g_assert(*devices);
 
-	for (device = devices, i = 0; *device; device++, i++) {
+	for (device = devices; *device; device++) {
 		int i;
 		int fd;
 		g_autofree char *path = NULL;

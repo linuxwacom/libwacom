@@ -10,8 +10,8 @@ Name=Wacom One 14
 ModelName=DTC141
 Class=PenDisplay
 DeviceMatch=usb|056a|040f
-Width=12
-Height=7
+Width=305
+Height=178
 # No pad buttons, so no layout
 IntegratedIn=Display
 

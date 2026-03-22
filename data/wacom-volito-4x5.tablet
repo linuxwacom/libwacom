@@ -7,8 +7,8 @@ Name=Wacom Volito 4x5
 ModelName=FT-0405
 DeviceMatch=usb|056a|0060
 Class=Graphire
-Width=5
-Height=4
+Width=127
+Height=102
 Styli=@generic-no-eraser;
 
 [Features]

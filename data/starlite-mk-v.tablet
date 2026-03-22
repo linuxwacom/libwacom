@@ -6,8 +6,8 @@
 Name=StarLabs Starlite
 Class=ISDV4
 DeviceMatch=i2c|27c6|0111
-Width=11
-Height=7
+Width=279
+Height=178
 IntegratedIn=Display;System;
 Styli=@generic-no-eraser;
 

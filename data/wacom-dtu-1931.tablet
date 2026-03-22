@@ -6,8 +6,8 @@
 Name=Wacom DTU-1931
 ModelName=DTU-1931
 DeviceMatch=usb|056a|00c7
-Width=15
-Height=12
+Width=381
+Height=305
 Class=PenDisplay
 IntegratedIn=Display
 

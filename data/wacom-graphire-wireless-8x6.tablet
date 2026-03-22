@@ -19,8 +19,8 @@ Name=Wacom Graphire Wireless
 ModelName=CTE-630BT
 DeviceMatch=bluetooth|056a|0081
 Class=Graphire
-Width=8
-Height=6
+Width=203
+Height=152
 Layout=wacom-graphire-wireless-8x6.svg
 IntegratedIn=
 

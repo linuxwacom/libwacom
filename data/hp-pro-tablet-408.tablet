@@ -9,8 +9,8 @@
 Name=HP Pro Tablet 408
 Class=ISDV4
 DeviceMatch=i2c|06cb|125d
-Width=4
-Height=7
+Width=102
+Height=178
 IntegratedIn=Display;System;
 
 [Features]

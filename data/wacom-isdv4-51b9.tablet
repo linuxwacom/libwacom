@@ -12,8 +12,8 @@ Name=ISDv4 51B9
 ModelName=
 DeviceMatch=usb|056a|51b9
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

@@ -15,8 +15,8 @@ Name=ELAN 2513
 ModelName=
 DeviceMatch=i2c|04f3|2b5f;i2c|04f3|2f9d
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display;System
 
 [Features]

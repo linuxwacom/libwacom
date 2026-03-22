@@ -12,8 +12,8 @@ Name=One by Wacom (medium)
 ModelName=CTL-671
 DeviceMatch=usb|056a|0301
 Class=Bamboo
-Width=9
-Height=5
+Width=229
+Height=127
 # No pad buttons, so no layout
 IntegratedIn=
 

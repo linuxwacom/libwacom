@@ -10,8 +10,8 @@ Name=ELAN 2D55
 ModelName=
 DeviceMatch=i2c|04f3|2d55
 Class=ISDV4
-Width=14
-Height=4
+Width=356
+Height=102
 IntegratedIn=Display;System
 
 [Features]

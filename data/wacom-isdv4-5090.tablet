@@ -5,8 +5,8 @@ Name=Wacom ISDv4 5090
 ModelName=
 DeviceMatch=usb|056a|5090
 Class=ISDV4
-Width=11
-Height=6
+Width=279
+Height=152
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

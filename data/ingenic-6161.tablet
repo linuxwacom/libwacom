@@ -9,8 +9,8 @@ Name=Ingenic Touch/Pen display
 ModelName=
 Class=PenDisplay
 DeviceMatch=usb|17ef|6161
-Width=11
-Height=6
+Width=279
+Height=152
 # No pad buttons, so no layout
 IntegratedIn=Display;System
 

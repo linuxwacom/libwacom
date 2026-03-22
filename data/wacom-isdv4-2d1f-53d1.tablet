@@ -10,8 +10,8 @@ Name=Lenovo ThinkVision M14t Gen 2
 ModelName=
 DeviceMatch=usb|2d1f|53d1
 Class=ISDV4
-Width=12
-Height=7
+Width=305
+Height=178
 IntegratedIn=Display
 Styli=@isdv4-aes;
 

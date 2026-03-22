@@ -3,8 +3,8 @@ Name=Wacom ISDv4 12C
 ModelName=
 DeviceMatch=usb|056a|012c
 Class=ISDV4
-Width=11
-Height=6
+Width=279
+Height=152
 IntegratedIn=Display;System
 
 [Features]

@@ -34,8 +34,8 @@ Name=Wacom Intuos3 4x5
 ModelName=PTZ-430
 DeviceMatch=usb|056a|00b0
 Class=Intuos3
-Width=5
-Height=4
+Width=127
+Height=102
 Layout=wacom-intuos3-4x5.svg
 Styli=@intuos3-pucks;@intuos3;
 

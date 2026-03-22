@@ -7,8 +7,8 @@ Name=Bamboo One
 ModelName=CTF-430
 DeviceMatch=usb|056a|0069
 Class=Bamboo
-Width=5
-Height=4
+Width=127
+Height=102
 IntegratedIn=
 
 [Features]

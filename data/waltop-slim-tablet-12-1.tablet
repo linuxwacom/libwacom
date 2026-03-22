@@ -12,8 +12,8 @@ Name=Waltop Slim Tablet 12.1"
 ModelName=
 DeviceMatch=usb|172f|0031
 Class=Bamboo
-Width=10
-Height=6
+Width=254
+Height=152
 Styli=@generic-no-eraser;
 
 [Features]

@@ -6,8 +6,8 @@
 Name=XP-Pen Star G640
 ModelName=
 DeviceMatch=usb|28bd|0914;usb|28bd|0094
-Width=6
-Height=4
+Width=152
+Height=102
 Styli=@generic-no-eraser;
 
 [Features]

@@ -12,8 +12,8 @@ Name=One by Wacom (small)
 ModelName=CTL-472
 DeviceMatch=usb|056a|037a
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 # No pad buttons, so no layout
 IntegratedIn=
 

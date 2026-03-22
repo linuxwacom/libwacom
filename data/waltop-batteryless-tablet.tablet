@@ -9,8 +9,8 @@ Name=Waltop Batteryless Tablet
 ModelName=
 DeviceMatch=usb|172f|0505
 Class=Bamboo
-Width=8
-Height=5
+Width=203
+Height=127
 Styli=@generic-no-eraser
 
 [Features]

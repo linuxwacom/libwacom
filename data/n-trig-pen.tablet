@@ -10,8 +10,8 @@ Name=N-Trig Pen
 ModelName=
 DeviceMatch=usb|1b96|0001
 Class=ISDV4
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=Display;System
 
 [Features]

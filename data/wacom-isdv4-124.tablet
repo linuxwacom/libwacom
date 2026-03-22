@@ -6,8 +6,8 @@ Name=Wacom ISDv4 124
 DeviceMatch=i2c|056a|0124
 ModelName=
 Class=ISDV4
-Width=9
-Height=5
+Width=229
+Height=127
 IntegratedIn=Display;System
 
 [Features]

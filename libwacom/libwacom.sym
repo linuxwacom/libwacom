@@ -102,3 +102,8 @@ LIBWACOM_2.15 {
 LIBWACOM_2.18 {
     libwacom_stylus_is_generic;
 } LIBWACOM_2.15;
+
+LIBWACOM_2.19 {
+    libwacom_get_height_mm;
+    libwacom_get_width_mm;
+} LIBWACOM_2.18;

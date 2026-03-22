@@ -25,8 +25,8 @@ Name=Wacom Bamboo Fun medium (2FG)
 ModelName=CTH-661
 DeviceMatch=usb|056a|00d3
 Class=Bamboo
-Width=9
-Height=5
+Width=229
+Height=127
 Layout=wacom-bamboo-2fg-fun-m-pt.svg
 IntegratedIn=
 

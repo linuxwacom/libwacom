@@ -6,8 +6,8 @@ Name=Wacom ISDv4 1E
 ModelName=
 DeviceMatch=i2c|2d1f|001e
 Class=ISDV4
-Width=13
-Height=7
+Width=330
+Height=178
 IntegratedIn=Display;System
 
 [Features]

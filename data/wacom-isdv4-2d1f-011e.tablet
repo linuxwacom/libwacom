@@ -11,8 +11,8 @@ Name=ISDv4 011e
 ModelName=
 DeviceMatch=i2c|2d1f|011e
 Class=ISDV4
-Width=4
-Height=7
+Width=102
+Height=178
 IntegratedIn=Display;System
 
 

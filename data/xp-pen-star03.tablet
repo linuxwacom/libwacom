@@ -6,8 +6,8 @@
 Name=XP-Pen Star 03
 ModelName=
 DeviceMatch=usb|5543|0081|UC-Logic TABLET 1060N Pen;usb|5543|0081|UC-Logic TABLET 1060N Pad;usb|28bd|0907|UGTABLET 10 inch PenTablet;usb|5543|0081|UC-LOIC TABLET 1060 Pad;usb|5543|0081|UC-LOIC TABLET 1060
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Layout=xp-pen-star03.svg
 Styli=@generic-no-eraser;

@@ -8,8 +8,8 @@ DeviceMatch=usb|056a|0013
 
 Class=Graphire
 
-Width=5
-Height=4
+Width=127
+Height=102
 
 [Features]
 Stylus=true

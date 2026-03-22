@@ -7,8 +7,8 @@ Name=Wacom DTU-2231
 ModelName=DTU-2231
 DeviceMatch=usb|056a|00ce
 Class=PenDisplay
-Width=19
-Height=11
+Width=483
+Height=279
 IntegratedIn=Display
 
 [Features]

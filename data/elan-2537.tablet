@@ -5,8 +5,8 @@ Name=ELAN 2537
 ModelName=
 DeviceMatch=i2c|04f3|2537
 Class=ISDV4
-Width=14
-Height=8
+Width=356
+Height=203
 IntegratedIn=Display;System
 
 [Features]

@@ -10,8 +10,8 @@
 Name=Lenovo ThinkPad X1 Fold 16 Gen 1
 DeviceMatch=i2c|056a|52ba
 Class=ISDV4
-Width=10
-Height=13
+Width=254
+Height=330
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

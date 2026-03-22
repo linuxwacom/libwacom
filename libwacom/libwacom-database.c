@@ -1293,8 +1293,24 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 		free(device->model_name);
 		device->model_name = NULL;
 	}
-	device->width = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
-	device->height = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
+	device->width_mm = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
+	device->height_mm =
+		g_key_file_get_integer(keyfile, DEVICE_GROUP, "Height", NULL);
+
+	if (device->width_mm > 0 && device->width_mm < 20) {
+		g_warning("%s: Width is %d, expected a value in mm. "
+			  "This .tablet file needs to be updated.",
+			  filename,
+			  device->width_mm);
+		device->width_mm = (int)(device->width_mm * 25.4 + 0.5);
+	}
+	if (device->height_mm > 0 && device->height_mm < 20) {
+		g_warning("%s: Height is %d, expected a value in mm. "
+			  "This .tablet file needs to be updated.",
+			  filename,
+			  device->height_mm);
+		device->height_mm = (int)(device->height_mm * 25.4 + 0.5);
+	}
 
 	device->integration_flags = WACOM_DEVICE_INTEGRATED_UNSET;
 	g_auto(GStrv) integrated = g_key_file_get_string_list(keyfile,

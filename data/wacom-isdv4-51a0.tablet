@@ -5,8 +5,8 @@ Name=Wacom ISDv4 51a0
 ModelName=
 DeviceMatch=usb|056a|51a0
 Class=ISDV4
-Width=14
-Height=8
+Width=356
+Height=203
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

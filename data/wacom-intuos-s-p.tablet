@@ -23,8 +23,8 @@ Name=Intuos Pen Small
 ModelName=CTL-480
 DeviceMatch=usb|056a|030e
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 Layout=wacom-intuos-s-p.svg
 IntegratedIn=
 

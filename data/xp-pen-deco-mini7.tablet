@@ -8,8 +8,8 @@
 Name=XP-Pen Deco mini7
 ModelName=
 DeviceMatch=usb|28bd|0928|UGTABLET 6 inch PenTablet
-Width=7
-Height=4
+Width=178
+Height=102
 Layout=xp-pen-deco-mw.svg
 Styli=@generic-no-eraser;
 

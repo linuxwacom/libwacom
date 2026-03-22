@@ -16,8 +16,8 @@ DeviceMatch=usb|256c|006b||HUION_M220;
 # https://github.com/linuxwacom/libwacom/pull/946
 # HUION_FIRMWARE_ID="HUION_M220_241220"
 # HUION_MAGIC_BYTES="1303803f01b8b300ff3fd81303000000080040"
-Width=16
-Height=9
+Width=406
+Height=229
 Styli=@generic-no-eraser;
 IntegratedIn=Display
 

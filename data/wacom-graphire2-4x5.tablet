@@ -21,8 +21,8 @@ Name=Wacom Graphire2 4x5
 ModelName=ET-0405A
 DeviceMatch=usb|056a|0011
 Class=Graphire
-Width=5
-Height=4
+Width=127
+Height=102
 
 [Features]
 Stylus=true

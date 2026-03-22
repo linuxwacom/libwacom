@@ -5,8 +5,8 @@ Name=ELAN touchscreen/pen sensor
 ModelName=ELAN-264C
 DeviceMatch=i2c|04f3|264c
 Class=ISDV4
-Width=14
-Height=8
+Width=356
+Height=203
 IntegratedIn=Display;System
 # This device supports both pens with eraser and without eraser
 Styli=@generic-no-eraser;@generic-with-eraser;

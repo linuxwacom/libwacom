@@ -33,8 +33,8 @@ Name=Wacom Intuos3 6x8
 ModelName=PTZ-630
 DeviceMatch=usb|056a|00b1
 Class=Intuos3
-Width=8
-Height=6
+Width=203
+Height=152
 Layout=wacom-intuos3-6x8.svg
 Styli=@intuos3-pucks;@intuos3;
 

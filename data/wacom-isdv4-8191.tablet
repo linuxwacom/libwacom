@@ -11,8 +11,8 @@ Name=Wacom ISDv4 8191
 ModelName=
 DeviceMatch=usb|056a|8191
 Class=ISDV4
-Width=6
-Height=4
+Width=152
+Height=102
 IntegratedIn=Display;System
 
 

@@ -21,8 +21,8 @@ Name=Wacom Graphire
 ModelName=ET-0405
 DeviceMatch=usb|056a|0010
 Class=Graphire
-Width=5
-Height=4
+Width=127
+Height=102
 
 [Features]
 Stylus=true

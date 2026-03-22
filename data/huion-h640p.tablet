@@ -17,8 +17,8 @@
 Name=Huion H640P
 ModelName=
 DeviceMatch=usb|256c|006d|HUION Huion Tablet_H640P Pad;usb|256c|006d|HUION Huion Tablet_H640P Pen
-Width=6
-Height=4
+Width=152
+Height=102
 IntegratedIn=
 Layout=huion-h640p.svg
 Styli=@generic-no-eraser;

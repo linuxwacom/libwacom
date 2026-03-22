@@ -24,8 +24,8 @@ Name=XP-PEN DECO 02
 ModelName=
 DeviceMatch=usb|28bd|0803
 PairedIDs=
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 Layout=xp-pen-deco02.svg
 # Only the discontinued P05 stylus is supported, which is single button only.

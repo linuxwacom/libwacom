@@ -18,8 +18,8 @@ Name=Wacom DTU1031
 ModelName=DTU-1031
 DeviceMatch=usb|056a|00fb
 Class=PenDisplay
-Width=9
-Height=5
+Width=229
+Height=127
 Layout=wacom-dtu-1031.svg
 IntegratedIn=Display
 

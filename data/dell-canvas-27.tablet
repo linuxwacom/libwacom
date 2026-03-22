@@ -24,8 +24,8 @@ ModelName=
 Class=Cintiq
 DeviceMatch=usb|056a|4200
 PairedID=usb|2575|0204
-Width=23
-Height=13
+Width=584
+Height=330
 # No pad buttons, so no layout
 Styli=@generic-no-eraser;
 IntegratedIn=Display

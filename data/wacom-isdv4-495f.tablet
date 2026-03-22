@@ -11,8 +11,8 @@ Name=ISDv4 495F
 ModelName=
 DeviceMatch=i2c|056a|495f
 Class=ISDV4
-Width=11
-Height=7
+Width=279
+Height=178
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

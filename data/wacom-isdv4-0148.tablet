@@ -12,8 +12,8 @@ ModelName=
 DeviceMatch=usb|056a|0148
 PairedID=usb|0eef|c066
 Class=ISDV4
-Width=9
-Height=5
+Width=229
+Height=127
 IntegratedIn=Display;System
 
 [Features]

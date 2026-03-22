@@ -8,8 +8,8 @@
 Name=Huion H610 Pro V2
 ModelName=
 DeviceMatch=usb|256c|006d|HUION Huion Tablet|HUION_T184_190313;usb|256c|006d|HUION Huion Tablet Touch Strip|HUION_T184_190313;usb|256c|006d|HUION Huion Tablet Dial|HUION_T184_190313
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=
 # Re-using the v1 H610 svg here
 Layout=huion-h610-pro.svg

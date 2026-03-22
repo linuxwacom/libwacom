@@ -39,8 +39,8 @@
 Name=Huion RTM-500
 ModelName=H952
 DeviceMatch=usb|256c|006d||HUION_T19h;
-Width=9
-Height=5
+Width=229
+Height=127
 IntegratedIn=
 Layout=huion-rtm-500.svg
 Styli=@generic-no-eraser;

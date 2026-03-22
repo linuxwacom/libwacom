@@ -246,6 +246,8 @@ handle_device(WacomDeviceDatabase *db,
 
 	intfunc(libwacom_get_width, device);
 	intfunc(libwacom_get_height, device);
+	intfunc(libwacom_get_width_mm, device);
+	intfunc(libwacom_get_height_mm, device);
 
 	intfunc(libwacom_is_reversible, device);
 

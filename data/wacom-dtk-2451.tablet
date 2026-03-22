@@ -18,8 +18,8 @@ Name=Wacom DTK2451
 ModelName=DTK-2451
 DeviceMatch=usb|056a|0382
 Class=PenDisplay
-Width=20
-Height=12
+Width=508
+Height=305
 Layout=wacom-dtk-2451.svg
 IntegratedIn=Display
 

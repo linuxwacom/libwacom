@@ -12,8 +12,8 @@ Name=Wacom Bamboo Connect
 ModelName=CTL-470
 DeviceMatch=usb|056a|00dd
 Class=Bamboo
-Width=6
-Height=4
+Width=152
+Height=102
 # No pad buttons, so no layout
 IntegratedIn=
 

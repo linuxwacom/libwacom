@@ -5,8 +5,8 @@ Name=Wacom ISDv4 513B
 ModelName=
 DeviceMatch=i2c|056a|513b
 Class=ISDV4
-Width=10
-Height=6
+Width=254
+Height=152
 IntegratedIn=Display;System
 Styli=@isdv4-aes;
 

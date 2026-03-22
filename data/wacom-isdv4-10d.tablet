@@ -5,8 +5,8 @@ Name=Wacom ISDv4 10D
 ModelName=
 DeviceMatch=usb|056a|010d
 Class=ISDV4
-Width=11
-Height=6
+Width=279
+Height=152
 IntegratedIn=Display;System
 
 [Features]

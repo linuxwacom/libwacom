@@ -133,7 +133,7 @@ typedef struct _WacomDeviceDatabase WacomDeviceDatabase;
  * @ingroup context
  */
 enum WacomErrorCode {
-	WERROR_NONE,          /**< No error has occured */
+	WERROR_NONE,          /**< No error has occurred */
 	WERROR_BAD_ALLOC,     /**< Allocation error */
 	WERROR_INVALID_PATH,  /**< A path specified is invalid */
 	WERROR_INVALID_DB,    /**< The passed DB is invalid */
@@ -464,7 +464,7 @@ libwacom_new_from_builder(const WacomDeviceDatabase *db,
  * @param fallback Whether we should create a generic if model is unknown
  * @param error If not NULL, set to the error if any occurs
  *
- * @return A new reference to this device or NULL on errror.
+ * @return A new reference to this device or NULL on error.
  *
  * @ingroup devices
  */
@@ -487,7 +487,7 @@ libwacom_new_from_path(const WacomDeviceDatabase *db,
  * @param product_id The product ID of the device
  * @param error If not NULL, set to the error if any occurs
  *
- * @return A new reference to this device or NULL on errror.
+ * @return A new reference to this device or NULL on error.
  *
  * @ingroup devices
  */

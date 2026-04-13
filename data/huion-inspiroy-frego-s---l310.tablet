@@ -1,0 +1,35 @@
+# Huion
+# Inspiroy Frego S
+# L310
+#
+# usb:
+# sysinfo.VvlxvXAvsM.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/606
+#
+# sysinfo.eK4JstuomH.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/569
+#
+#
+# bluetooth:
+# sysinfo.jv4qEqVyOF.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/606
+#
+# sysinfo.qB5dPML29k.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/570
+
+[Device]
+Name=Huion Inspiroy Frego S
+ModelName=L310
+# The PID of bluetooth is conflict with Huion Keydial K20,
+# use the UNIQ "HUION_T23a" of this device.
+DeviceMatch=usb|256c|2011||HUION_T23a;bluetooth|256c|8251||HUION_T23a;
+# (Optional) Width 220mm.
+Width=9
+# (Optional) Height 165.7mm.
+Height=6
+IntegratedIn=
+Styli=@generic-no-eraser
+
+[Features]
+Reversible=true
+Stylus=true

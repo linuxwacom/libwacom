@@ -984,12 +984,15 @@ print_button_flag_if(int fd,
 		     int flag)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
-	char buf[nbuttons * 2 + 1];
+	char buf[256] = { 0 };
 	int idx = 0;
 	char b;
 	bool have_flag = false;
 
 	for (b = 'A'; b < 'A' + nbuttons; b++) {
+		if (idx + 2 >= (int)sizeof(buf))
+			break;
+
 		if (libwacom_get_button_flag(device, b) & flag) {
 			buf[idx++] = b;
 			buf[idx++] = ';';

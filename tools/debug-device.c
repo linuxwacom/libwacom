@@ -26,12 +26,10 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
 #include "libwacom.h"
@@ -380,7 +378,9 @@ handle_device(WacomDeviceDatabase *db,
 	}
 
 	{
-		char buf[1024] = { 0 };
+		g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+		g_auto(GStrv) strv = NULL;
+		g_autofree char *str = NULL;
 		int nleds;
 		const WacomStatusLEDs *leds = libwacom_get_status_leds(device, &nleds);
 
@@ -409,13 +409,11 @@ handle_device(WacomDeviceDatabase *db,
 				ledstr = "DIAL2";
 				break;
 			}
-			snprintf(buf + strlen(buf),
-				 sizeof(buf) - strlen(buf),
-				 "%s%s",
-				 i > 0 ? ", " : "",
-				 ledstr);
+			g_strv_builder_add(builder, ledstr);
 		}
-		func(libwacom_get_status_leds, "[%s]", buf);
+		strv = g_strv_builder_end(builder);
+		str = g_strjoinv(", ", strv);
+		func(libwacom_get_status_leds, "[%s]", str);
 	}
 
 	{
@@ -426,15 +424,16 @@ handle_device(WacomDeviceDatabase *db,
 #pragma GCC diagnostic pop
 
 		{
-			char buf[1024] = { 0 };
-			for (int i = 0; i < nstyli; i++)
-				snprintf(buf + strlen(buf),
-					 sizeof(buf) - strlen(buf),
-					 "%s0x%06x",
-					 i > 0 ? ", " : "",
-					 styli[i]);
-
-			func(libwacom_get_supported_styli, "[%s]", buf);
+			g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+			g_auto(GStrv) strv = NULL;
+			g_autofree char *str = NULL;
+			for (int i = 0; i < nstyli; i++) {
+				char *s = g_strdup_printf("0x%06x", styli[i]);
+				g_strv_builder_take(builder, s);
+			}
+			strv = g_strv_builder_end(builder);
+			str = g_strjoinv(", ", strv);
+			func(libwacom_get_supported_styli, "[%s]", str);
 		}
 	}
 
@@ -443,18 +442,20 @@ handle_device(WacomDeviceDatabase *db,
 		g_autofree const WacomStylus **styli =
 			libwacom_get_styli(device, &nstyli);
 		{
-			char buf[1024] = { 0 };
+			g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+			g_auto(GStrv) strv = NULL;
+			g_autofree char *str = NULL;
 			for (int i = 0; i < nstyli; i++) {
 				const WacomStylus *s = styli[i];
-				snprintf(buf + strlen(buf),
-					 sizeof(buf) - strlen(buf),
-					 "%s[0x%04x, 0x%06x]",
-					 i > 0 ? ", " : "",
-					 libwacom_stylus_get_vendor_id(s),
-					 libwacom_stylus_get_id(s));
+				char *entry = g_strdup_printf(
+					"[0x%04x, 0x%06x]",
+					libwacom_stylus_get_vendor_id(s),
+					libwacom_stylus_get_id(s));
+				g_strv_builder_take(builder, entry);
 			}
-
-			func(libwacom_get_styli, "[%s]", buf);
+			strv = g_strv_builder_end(builder);
+			str = g_strjoinv(", ", strv);
+			func(libwacom_get_styli, "[%s]", str);
 		}
 
 		if (with_styli) {
@@ -503,7 +504,10 @@ handle_device(WacomDeviceDatabase *db,
 					 libwacom_stylus_has_wheel(stylus));
 
 				{
-					char buf[1024] = { 0 };
+					g_autoptr(GStrvBuilder) builder =
+						g_strv_builder_new();
+					g_auto(GStrv) strv = NULL;
+					g_autofree char *str = NULL;
 					int npaired;
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -513,21 +517,25 @@ handle_device(WacomDeviceDatabase *db,
 							&npaired);
 #pragma GCC diagnostic pop
 
-					for (int i = 0; i < npaired; i++)
-						snprintf(buf + strlen(buf),
-							 sizeof(buf) - strlen(buf),
-							 "%s0x%06x",
-							 i > 0 ? ", " : "",
-							 paired[i]);
+					for (int i = 0; i < npaired; i++) {
+						char *s = g_strdup_printf("0x%06x",
+									  paired[i]);
+						g_strv_builder_take(builder, s);
+					}
+					strv = g_strv_builder_end(builder);
+					str = g_strjoinv(", ", strv);
 					func_arg(libwacom_stylus_get_paired_ids,
 						 "0x%04x",
 						 id,
 						 "[%s]",
-						 buf);
+						 str);
 				}
 
 				{
-					char buf[1024] = { 0 };
+					g_autoptr(GStrvBuilder) builder =
+						g_strv_builder_new();
+					g_auto(GStrv) strv = NULL;
+					g_autofree char *str = NULL;
 					int npaired;
 					g_autofree const WacomStylus **paired =
 						libwacom_stylus_get_paired_styli(
@@ -536,19 +544,20 @@ handle_device(WacomDeviceDatabase *db,
 
 					for (int i = 0; i < npaired; i++) {
 						const WacomStylus *p = paired[i];
-						snprintf(buf + strlen(buf),
-							 sizeof(buf) - strlen(buf),
-							 "%s[0x%04x, 0x%06x]",
-							 i > 0 ? ", " : "",
-							 libwacom_stylus_get_vendor_id(
-								 p),
-							 libwacom_stylus_get_id(p));
+						char *entry = g_strdup_printf(
+							"[0x%04x, 0x%06x]",
+							libwacom_stylus_get_vendor_id(
+								p),
+							libwacom_stylus_get_id(p));
+						g_strv_builder_take(builder, entry);
 					}
+					strv = g_strv_builder_end(builder);
+					str = g_strjoinv(", ", strv);
 					func_arg(libwacom_stylus_get_paired_ids,
 						 "0x%04x",
 						 id,
 						 "[%s]",
-						 buf);
+						 str);
 				}
 
 				{

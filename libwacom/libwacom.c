@@ -913,30 +913,30 @@ print_styli_for_device(int fd,
 {
 	int nstyli;
 	g_autofree const WacomStylus **styli = NULL;
-	int i;
-	unsigned idx = 0;
-	char buf[1024] = { 0 };
+	g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+	g_auto(GStrv) strv = NULL;
+	g_autofree char *str = NULL;
 
 	if (!libwacom_has_stylus(device))
 		return;
 
 	styli = libwacom_get_styli(device, &nstyli);
-	for (i = 0; i < nstyli; i++) {
+	for (int i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus = styli[i];
-		/* 20 digits for a stylus are enough, right */
-		assert(idx < sizeof(buf) - 20);
+		char *s;
 
 		if (stylus->id.vid != WACOM_VENDOR_ID)
-			idx += snprintf(buf + idx,
-					20,
-					"0x%04x:%#x;",
-					stylus->id.vid,
-					stylus->id.tool_id);
+			s = g_strdup_printf("0x%04x:%#x",
+					    stylus->id.vid,
+					    stylus->id.tool_id);
 		else
-			idx += snprintf(buf + idx, 20, "%#x;", stylus->id.tool_id);
+			s = g_strdup_printf("%#x", stylus->id.tool_id);
+		g_strv_builder_take(builder, s);
 	}
 
-	dprintf(fd, "Styli=%s\n", buf);
+	strv = g_strv_builder_end(builder);
+	str = g_strjoinv(";", strv);
+	dprintf(fd, "Styli=%s\n", str);
 }
 
 static void
@@ -1005,21 +1005,26 @@ print_button_evdev_codes(int fd,
 			 const WacomDevice *device)
 {
 	int nbuttons = libwacom_get_num_buttons(device);
-	char b;
-	char buf[1024] = { 0 };
-	unsigned idx = 0;
+	g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+	g_auto(GStrv) strv = NULL;
+	g_autofree char *str = NULL;
 
-	for (b = 'A'; b < 'A' + nbuttons; b++) {
+	for (char b = 'A'; b < 'A' + nbuttons; b++) {
 		unsigned int code = libwacom_get_button_evdev_code(device, b);
-		const char *str = libevdev_event_code_get_name(EV_KEY, code);
+		const char *name = libevdev_event_code_get_name(EV_KEY, code);
+		char *s;
 
-		assert(idx < sizeof(buf) - 30);
-		if (str)
-			idx += snprintf(buf + idx, 30, "%s;", str);
+		if (name)
+			s = g_strdup(name);
 		else
-			idx += snprintf(buf + idx, 30, "0x%x;", code);
+			s = g_strdup_printf("0x%x", code);
+
+		g_strv_builder_take(builder, s);
 	}
-	dprintf(fd, "EvdevCodes=%s\n", buf);
+
+	strv = g_strv_builder_end(builder);
+	str = g_strjoinv(";", strv);
+	dprintf(fd, "EvdevCodes=%s\n", str);
 }
 
 static void

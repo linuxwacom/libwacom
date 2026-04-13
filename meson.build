@@ -53,7 +53,7 @@ add_project_arguments(cflags, language: 'c')
 # Dependencies
 pkgconfig    = import('pkgconfig')
 dep_gudev    = dependency('gudev-1.0')
-dep_glib     = dependency('glib-2.0')
+dep_glib     = dependency('glib-2.0', version: '>= 2.68')
 dep_libevdev = dependency('libevdev')
 
 includes_include = include_directories('include')

@@ -1370,11 +1370,13 @@ static bool
 has_suffix(const char *name,
 	   const char *suffix)
 {
-	size_t len = strlen(name);
-	size_t suffix_len = strlen(suffix);
+	size_t len, suffix_len;
 
 	if (!name || name[0] == '.')
-		return 0;
+		return false;
+
+	len = strlen(name);
+	suffix_len = strlen(suffix);
 
 	if (len <= suffix_len)
 		return false;

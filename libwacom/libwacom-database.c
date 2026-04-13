@@ -839,6 +839,12 @@ set_key_codes_from_string(WacomDevice *device,
 		int code = -1;
 		int type = -1;
 
+		if (idx >= G_N_ELEMENTS(device->keycodes)) {
+			g_warning("%s: Too many KeyCodes, ignoring all codes\n",
+				  device->name);
+			goto out;
+		}
+
 		if (!str) {
 			g_error("%s: Missing KeyCode for key %d, ignoring all codes\n",
 				device->name,

@@ -38,6 +38,9 @@ LIBWACOM_EXPORT WacomError *
 libwacom_error_new(void)
 {
 	WacomError *error = malloc(sizeof(*error));
+	if (!error)
+		return NULL;
+
 	error->code = WERROR_NONE;
 	error->msg = NULL;
 	return error;
@@ -46,6 +49,9 @@ libwacom_error_new(void)
 LIBWACOM_EXPORT void
 libwacom_error_free(WacomError **error)
 {
+	if (!error || !*error)
+		return;
+
 	free((*error)->msg);
 	free(*error);
 	*error = NULL;
@@ -75,6 +81,8 @@ libwacom_error_set(WacomError *error,
 		return;
 
 	error->code = code;
+	free(error->msg);
+	error->msg = NULL;
 	if (msg) {
 		va_list ap;
 		va_start(ap, msg);

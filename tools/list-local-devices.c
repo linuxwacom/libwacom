@@ -108,7 +108,8 @@ print_devnode(gpointer data,
 		g_strdup_printf("/sys/class/input/%s/device/name", basename);
 
 	if (g_file_get_contents(path, &name, &size, &error)) {
-		printf("      - %s: '%.*s'\n", devnode, (int)(size - 1), name);
+		int len = size > 0 ? (int)(size - 1) : 0;
+		printf("      - %s: '%.*s'\n", devnode, len, name);
 	} else {
 		fprintf(stderr, "%s\n", error->message);
 	}

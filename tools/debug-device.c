@@ -385,7 +385,7 @@ handle_device(WacomDeviceDatabase *db,
 		const WacomStatusLEDs *leds = libwacom_get_status_leds(device, &nleds);
 
 		for (int i = 0; i < nleds; i++) {
-			char *ledstr = NULL;
+			const char *ledstr = "UNKNOWN";
 			switch (leds[i]) {
 			case WACOM_STATUS_LED_UNAVAILABLE:
 				ledstr = "UNAVAILABLE";

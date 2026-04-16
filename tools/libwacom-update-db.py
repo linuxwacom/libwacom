@@ -259,11 +259,21 @@ if __name__ == "__main__":
             hwdbfile = guess_hwdb_filename(udevdir)
 
             with tempfile.NamedTemporaryFile(
-                mode="w+", prefix=f"{hwdbfile.name}-XXXXXX", encoding="utf-8"
+                mode="w+",
+                prefix=f"{hwdbfile.name}-",
+                suffix=".tmp",
+                dir=tempfile.gettempdir(),
+                encoding="utf-8",
+                delete=True,
             ) as fd:
                 hwdb.print(fd)
+                fd.flush()
+                os.fsync(fd.fileno())
                 print(f"Using sudo to copy hwdb file to {hwdbfile}")
-                subprocess.run(["sudo", "cp", f"{fd.name}", hwdbfile.absolute()])
+                subprocess.run(
+                    ["sudo", "cp", "--", fd.name, str(hwdbfile.absolute())],
+                    check=True,
+                )
 
             if not ns.skip_systemd_hwdb_update:
                 print("Using sudo to run systemd-hwdb update")

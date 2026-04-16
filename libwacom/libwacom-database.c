@@ -1290,7 +1290,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	/* ModelName= would give us the empty string, let's make it NULL
 	 * instead */
 	if (device->model_name && strlen(device->model_name) == 0) {
-		free(device->model_name);
+		g_free(device->model_name);
 		device->model_name = NULL;
 	}
 	device->width_mm = g_key_file_get_integer(keyfile, DEVICE_GROUP, "Width", NULL);
@@ -1531,7 +1531,7 @@ database_new_for_paths(char *const *datadirs)
 	char *const *datadir;
 	GHashTable *parsed_filenames;
 
-	parsed_filenames = g_hash_table_new_full(g_str_hash, g_str_equal, free, NULL);
+	parsed_filenames = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 	if (!parsed_filenames)
 		return NULL;
 

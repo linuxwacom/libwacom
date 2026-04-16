@@ -154,6 +154,12 @@ safe_atou_base(const char *str,
 
 	assert(base == 10 || base == 16 || base == 8);
 
+	/* Reject strings starting with '-'; strtoul accepts them and
+	 * wraps silently, but we never want negative values for an
+	 * unsigned parse. */
+	if (str[0] == '-')
+		return false;
+
 	errno = 0;
 	v = strtoul(str, &endptr, base);
 	if (errno > 0)
@@ -163,7 +169,7 @@ safe_atou_base(const char *str,
 	if (*str != '\0' && *endptr != '\0')
 		return false;
 
-	if ((long)v < 0)
+	if (v > UINT_MAX)
 		return false;
 
 	*val = v;

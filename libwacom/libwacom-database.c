@@ -1601,6 +1601,9 @@ libwacom_database_new(void)
 LIBWACOM_EXPORT void
 libwacom_database_destroy(WacomDeviceDatabase *db)
 {
+	if (!db)
+		return;
+
 	if (db->device_ht)
 		g_hash_table_destroy(db->device_ht);
 	if (db->stylus_ht)

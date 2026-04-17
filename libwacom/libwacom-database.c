@@ -405,17 +405,17 @@ static gchar **
 stylus_ids_as_hex(GArray *array)
 {
 	WacomStylusId *id;
+	g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
 
 	if (array == NULL || array->len == 0)
 		return NULL;
 
-	GArray *a = g_array_new(true, false, array->len);
 	for (guint i = 0; i < array->len; i++) {
 		id = &g_array_index(array, WacomStylusId, i);
-		g_array_append_vals(a, g_strdup_printf("0x%08x", id->tool_id), 1);
+		g_strv_builder_take(builder, g_strdup_printf("0x%08x", id->tool_id));
 	}
 
-	return g_array_steal(a, NULL);
+	return g_strv_builder_end(builder);
 }
 
 static void

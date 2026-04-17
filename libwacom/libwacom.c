@@ -953,28 +953,48 @@ print_layout_for_device(int fd,
 	}
 }
 
+static const char *
+led_name(WacomStatusLEDs led)
+{
+	switch (led) {
+	case WACOM_STATUS_LED_RING:
+		return "Ring";
+	case WACOM_STATUS_LED_RING2:
+		return "Ring2";
+	case WACOM_STATUS_LED_TOUCHSTRIP:
+		return "Strip";
+	case WACOM_STATUS_LED_TOUCHSTRIP2:
+		return "Strip2";
+	case WACOM_STATUS_LED_DIAL:
+		return "Dial";
+	case WACOM_STATUS_LED_DIAL2:
+		return "Dial2";
+	default:
+		return NULL;
+	}
+}
+
 static void
 print_supported_leds(int fd,
 		     const WacomDevice *device)
 {
-	char *leds_name[] = { "Ring;", "Ring2;", "Strip;", "Strip2;" };
 	int num_leds;
 	const WacomStatusLEDs *status_leds;
-	char buf[256] = { 0 };
-	bool have_led = false;
+	g_autoptr(GStrvBuilder) builder = g_strv_builder_new();
+	g_auto(GStrv) strv = NULL;
+	g_autofree char *str = NULL;
 
 	status_leds = libwacom_get_status_leds(device, &num_leds);
 
-	snprintf(buf,
-		 sizeof(buf),
-		 "%s%s%s%s",
-		 num_leds > 0 ? leds_name[status_leds[0]] : "",
-		 num_leds > 1 ? leds_name[status_leds[1]] : "",
-		 num_leds > 2 ? leds_name[status_leds[2]] : "",
-		 num_leds > 3 ? leds_name[status_leds[3]] : "");
-	have_led = num_leds > 0;
+	for (int i = 0; i < num_leds; i++) {
+		const char *name = led_name(status_leds[i]);
+		if (name)
+			g_strv_builder_add(builder, name);
+	}
 
-	dprintf(fd, "%sStatusLEDs=%s\n", have_led ? "" : "# ", buf);
+	strv = g_strv_builder_end(builder);
+	str = g_strjoinv(";", strv);
+	dprintf(fd, "%sStatusLEDs=%s\n", num_leds > 0 ? "" : "# ", str);
 }
 
 static void

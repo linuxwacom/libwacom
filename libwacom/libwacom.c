@@ -1641,7 +1641,7 @@ libwacom_get_button_led_group(const WacomDevice *device,
 {
 	WacomButton *b = g_hash_table_lookup(device->buttons, GINT_TO_POINTER(button));
 
-	if (!(b->flags & WACOM_BUTTON_MODESWITCH))
+	if (!b || !(b->flags & WACOM_BUTTON_MODESWITCH))
 		return -1;
 
 	for (guint led_index = 0; led_index < device->status_leds->len; led_index++) {

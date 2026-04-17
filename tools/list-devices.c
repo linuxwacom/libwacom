@@ -85,7 +85,7 @@ print_device_info(WacomDevice *device,
 			}
 
 			/* We don't need to print the generic device */
-			if (vid != 0 || pid != 0 || bus != 0)
+			if (vid != 0 || pid != 0 || type != WBUSTYPE_UNKNOWN)
 				printf("- { bus: '%s',%*svid: '0x%04x', pid: '0x%04x', name: '%s', "
 				       "uniq: '%s' }\n",
 				       bus,

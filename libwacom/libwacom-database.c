@@ -1535,7 +1535,7 @@ database_new_for_paths(char *const *datadirs)
 {
 	WacomDeviceDatabase *db;
 	char *const *datadir;
-	GHashTable *parsed_filenames;
+	g_autoptr(GHashTable) parsed_filenames = NULL;
 
 	parsed_filenames = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 	if (!parsed_filenames)
@@ -1565,8 +1565,6 @@ database_new_for_paths(char *const *datadirs)
 		if (!load_tablet_files(db, parsed_filenames, *datadir))
 			goto error;
 	}
-
-	g_hash_table_unref(parsed_filenames);
 
 	/* If we couldn't load _anything_ then something's wrong */
 	if (g_hash_table_size(db->stylus_ht) == 0 ||

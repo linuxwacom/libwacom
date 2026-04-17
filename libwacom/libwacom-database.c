@@ -1327,8 +1327,14 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 
 	layout = g_key_file_get_string(keyfile, DEVICE_GROUP, "Layout", NULL);
 	if (layout && layout[0] != '\0') {
-		/* For the layout, we store the full path to the SVG layout */
-		device->layout = g_build_filename(datadir, "layouts", layout, NULL);
+		if (strchr(layout, '/') != NULL || strchr(layout, '\\') != NULL) {
+			g_warning("Layout '%s' contains path separators, ignoring",
+				  layout);
+		} else {
+			/* For the layout, we store the full path to the SVG layout */
+			device->layout =
+				g_build_filename(datadir, "layouts", layout, NULL);
+		}
 	}
 
 	class = g_key_file_get_string(keyfile, DEVICE_GROUP, "Class", NULL);

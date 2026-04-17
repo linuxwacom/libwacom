@@ -340,19 +340,18 @@ static char *
 string_or_fallback(GKeyFile *keyfile,
 		   const char *group,
 		   const char *key,
-		   const char *fallback,
-		   GError *error)
+		   const char *fallback)
 {
-	GError *local_error = NULL;
+	g_autoptr(GError) error = NULL;
 	bool ret;
 
-	ret = g_key_file_has_key(keyfile, group, key, &local_error);
-	if (local_error) {
-		g_warning("String fallback error: %s", local_error->message);
-		g_clear_error(&local_error);
+	ret = g_key_file_has_key(keyfile, group, key, &error);
+	if (error) {
+		g_warning("String fallback error: %s", error->message);
+		return g_strdup(fallback);
 	}
 	if (ret)
-		return g_key_file_get_string(keyfile, group, key, &error);
+		return g_key_file_get_string(keyfile, group, key, NULL);
 
 	return g_strdup(fallback);
 }
@@ -362,19 +361,26 @@ int_or_fallback(GKeyFile *keyfile,
 		const char *group,
 		const char *key,
 		int fallback,
-		GError *error)
+		GError **error)
 {
-	GError *local_error = NULL;
+	g_autoptr(GError) local_error = NULL;
 	bool ret;
 
 	ret = g_key_file_has_key(keyfile, group, key, &local_error);
 	if (local_error) {
 		g_warning("int fallback error: %s", local_error->message);
-		g_clear_error(&local_error);
+		return fallback;
 	}
 
-	if (ret)
-		return g_key_file_get_integer(keyfile, group, key, &error);
+	if (ret) {
+		int val = g_key_file_get_integer(keyfile, group, key, &local_error);
+		if (local_error) {
+			if (error)
+				*error = g_steal_pointer(&local_error);
+			return fallback;
+		}
+		return val;
+	}
 
 	return fallback;
 }
@@ -384,19 +390,26 @@ boolean_or_fallback(GKeyFile *keyfile,
 		    const char *group,
 		    const char *key,
 		    bool fallback,
-		    GError *error)
+		    GError **error)
 {
-	GError *local_error = NULL;
+	g_autoptr(GError) local_error = NULL;
 	bool ret;
 
 	ret = g_key_file_has_key(keyfile, group, key, &local_error);
 	if (local_error) {
 		g_warning("boolean fallback error: %s", local_error->message);
-		g_clear_error(&local_error);
+		return fallback;
 	}
 
-	if (ret)
-		return g_key_file_get_boolean(keyfile, group, key, &error);
+	if (ret) {
+		bool val = g_key_file_get_boolean(keyfile, group, key, &local_error);
+		if (local_error) {
+			if (error)
+				*error = g_steal_pointer(&local_error);
+			return fallback;
+		}
+		return val;
+	}
 
 	return fallback;
 }
@@ -494,13 +507,11 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 		stylus->name = string_or_fallback(keyfile,
 						  groups[i],
 						  "Name",
-						  aliased ? aliased->name : NULL,
-						  NULL);
+						  aliased ? aliased->name : NULL);
 		stylus->group = string_or_fallback(keyfile,
 						   groups[i],
 						   "Group",
-						   aliased ? aliased->group : NULL,
-						   NULL);
+						   aliased ? aliased->group : NULL);
 		stylus->paired_stylus_ids =
 			g_array_new(FALSE, FALSE, sizeof(WacomStylusId));
 
@@ -508,8 +519,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 			keyfile,
 			groups[i],
 			"EraserType",
-			aliased ? eraser_str_from_type(aliased->eraser_type) : NULL,
-			NULL);
+			aliased ? eraser_str_from_type(aliased->eraser_type) : NULL);
 		stylus->eraser_type = eraser_type_from_str(eraser_type);
 
 		/* We have to keep the integer array for libwacom_get_supported_styli()
@@ -552,7 +562,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 					    groups[i],
 					    "HasLens",
 					    aliased ? aliased->has_lens : FALSE,
-					    error);
+					    &error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 			g_warning("Stylus %s (%s) %s\n",
 				  stylus->name,
@@ -564,7 +574,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 					    groups[i],
 					    "HasWheel",
 					    aliased ? aliased->has_wheel : FALSE,
-					    error);
+					    &error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 			g_warning("Stylus %s (%s) %s\n",
 				  stylus->name,
@@ -576,7 +586,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 			groups[i],
 			"IsGenericStylus",
 			aliased ? aliased->is_generic_stylus : FALSE,
-			error);
+			&error);
 		if (error && error->code == G_KEY_FILE_ERROR_INVALID_VALUE)
 			g_warning("Stylus %s (%s) %s\n",
 				  stylus->name,
@@ -588,7 +598,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 					groups[i],
 					"Buttons",
 					aliased ? aliased->num_buttons : 0,
-					error);
+					&error);
 		if (stylus->num_buttons == 0 && error != NULL) {
 			stylus->num_buttons = -1;
 			g_clear_error(&error);
@@ -632,8 +642,8 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 		type = string_or_fallback(keyfile,
 					  groups[i],
 					  "Type",
-					  aliased ? str_from_type(aliased->type) : NULL,
-					  NULL);
+					  aliased ? str_from_type(aliased->type)
+						  : NULL);
 		stylus->type = type_from_str(type);
 
 		if (g_hash_table_lookup(db->stylus_ht, &id) != NULL)

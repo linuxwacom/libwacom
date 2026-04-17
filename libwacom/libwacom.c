@@ -229,11 +229,13 @@ get_device_prop(GUdevDevice *device,
 		GUdevDevice *next;
 		const char *v = g_udev_device_get_property(parent, propname);
 		if (v) {
+			size_t len;
 			/* NAME and UNIQ properties are enclosed with quotes */
 			size_t offset = v[0] == '"' ? 1 : 0;
 			value = g_strdup(v + offset);
-			if (value[strlen(value) - 1] == '"')
-				value[strlen(value) - 1] = '\0';
+			len = strlen(value);
+			if (len > 0 && value[len - 1] == '"')
+				value[len - 1] = '\0';
 			break;
 		}
 		next = g_udev_device_get_parent(parent);

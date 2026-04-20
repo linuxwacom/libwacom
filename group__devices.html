@@ -259,6 +259,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gac925a601e2f6b894d11b285aaf811d21" id="r_gac925a601e2f6b894d11b285aaf811d21"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#gac925a601e2f6b894d11b285aaf811d21">libwacom_get_height</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
 <tr class="memdesc:gac925a601e2f6b894d11b285aaf811d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the height of the device.  <br /></td></tr>
 <tr class="separator:gac925a601e2f6b894d11b285aaf811d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga07a9902de47f76d26d5fd9ef0461cf8d" id="r_ga07a9902de47f76d26d5fd9ef0461cf8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga07a9902de47f76d26d5fd9ef0461cf8d">libwacom_get_width_mm</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="memdesc:ga07a9902de47f76d26d5fd9ef0461cf8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the width of the device in mm.  <br /></td></tr>
+<tr class="separator:ga07a9902de47f76d26d5fd9ef0461cf8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga685dd955074db9142011b1f810d6767c" id="r_ga685dd955074db9142011b1f810d6767c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga685dd955074db9142011b1f810d6767c">libwacom_get_height_mm</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
+<tr class="memdesc:ga685dd955074db9142011b1f810d6767c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the height of the device in mm.  <br /></td></tr>
+<tr class="separator:ga685dd955074db9142011b1f810d6767c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga07869844856ccbdd2c18599a79775e34" id="r_ga07869844856ccbdd2c18599a79775e34"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga07869844856ccbdd2c18599a79775e34">libwacom_has_stylus</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
 <tr class="separator:ga07869844856ccbdd2c18599a79775e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2eb8125b1fe03130c32883a3513a73cf" id="r_ga2eb8125b1fe03130c32883a3513a73cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__devices.html#ga2eb8125b1fe03130c32883a3513a73cf">libwacom_has_touch</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device)</td></tr>
@@ -927,7 +933,36 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The width of this device in inches </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The height of this device in inches </dd></dl>
+
+</div>
+</div>
+<a id="ga685dd955074db9142011b1f810d6767c" name="ga685dd955074db9142011b1f810d6767c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga685dd955074db9142011b1f810d6767c">&#9670;&#160;</a></span>libwacom_get_height_mm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_height_mm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the height of the device in mm. </p>
+<p>This is the height of the usable area as advertised, not the total size of the physical tablet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The height of this device in mm</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>2.19 </dd></dl>
 
 </div>
 </div>
@@ -1429,6 +1464,35 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The width of this device in inches </dd></dl>
+
+</div>
+</div>
+<a id="ga07a9902de47f76d26d5fd9ef0461cf8d" name="ga07a9902de47f76d26d5fd9ef0461cf8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07a9902de47f76d26d5fd9ef0461cf8d">&#9670;&#160;</a></span>libwacom_get_width_mm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int libwacom_get_width_mm </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the width of the device in mm. </p>
+<p>This is the width of the usable area as advertised, not the total size of the physical tablet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>The tablet to query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The width of this device in mm</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>2.19 </dd></dl>
 
 </div>
 </div>
@@ -2010,7 +2074,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Apr 16 2026 01:16:49 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Apr 20 2026 23:47:21 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

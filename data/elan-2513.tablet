@@ -10,10 +10,15 @@
 # sysinfo.yZGgFYGbVa
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/419#issue-2594972408
 
+# HP Envy x360 2-in-1 Laptop 15-fh0xxx
+# i2c|04f3|4162
+# sysinfo.kK45U26dWC
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/614
+
 [Device]
 Name=ELAN 2513
 ModelName=
-DeviceMatch=i2c|04f3|2b5f;i2c|04f3|2f9d
+DeviceMatch=i2c|04f3|2b5f;i2c|04f3|2f9d;i2c|04f3|4162
 Class=ISDV4
 Width=305
 Height=178

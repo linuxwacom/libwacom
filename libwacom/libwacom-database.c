@@ -235,6 +235,8 @@ match_from_string(const char *str_in,
 		goto out;
 
 	*bus = bus_from_str(components[0]);
+	if (*bus == WBUSTYPE_UNKNOWN)
+		goto out;
 	if (!g_ascii_string_to_unsigned(components[1], 16, 0, 0xffff, &num, NULL))
 		goto out;
 	*vendor_id = (int)num;

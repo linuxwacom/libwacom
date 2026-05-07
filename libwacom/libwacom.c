@@ -1117,6 +1117,11 @@ print_match(int fd,
 	int product = libwacom_match_get_product_id(match);
 	const char *bus_name;
 
+	if (g_str_equal(match->match, GENERIC_DEVICE_MATCH)) {
+		dprintf(fd, "%s;", match->match);
+		return;
+	}
+
 	switch (type) {
 	case WBUSTYPE_BLUETOOTH:
 		bus_name = "bluetooth";

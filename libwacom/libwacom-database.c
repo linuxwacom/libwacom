@@ -437,15 +437,20 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 			      AliasStatus handle_aliases)
 {
 	g_autoptr(GKeyFile) keyfile;
-	GError *error = NULL;
-	g_auto(GStrv) groups;
+	g_autoptr(GError) error = NULL;
+	g_auto(GStrv) groups = NULL;
 	gboolean rc;
 	guint i;
 
 	keyfile = g_key_file_new();
 
 	rc = g_key_file_load_from_file(keyfile, path, G_KEY_FILE_NONE, &error);
-	g_assert(rc);
+	if (!rc) {
+		g_warning("Failed to load stylus keyfile '%s': %s",
+			  path,
+			  error ? error->message : "unknown error");
+		return;
+	}
 
 	groups = g_key_file_get_groups(keyfile, NULL);
 	for (i = 0; groups[i]; i++) {

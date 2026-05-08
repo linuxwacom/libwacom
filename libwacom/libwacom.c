@@ -2021,7 +2021,7 @@ libwacom_stylus_ref(WacomStylus *stylus)
 WacomStylus *
 libwacom_stylus_unref(WacomStylus *stylus)
 {
-	if (!g_atomic_int_dec_and_test(&stylus->refcnt))
+	if (stylus == NULL || !g_atomic_int_dec_and_test(&stylus->refcnt))
 		return NULL;
 
 	g_free(stylus->name);

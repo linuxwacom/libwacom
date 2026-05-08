@@ -106,6 +106,7 @@ get_bus_vid_pid(GUdevDevice *device,
 	g_auto(GStrv) splitted_product = NULL;
 	unsigned int bus_id;
 	gboolean retval = FALSE;
+	guint64 val;
 
 	/* Parse that:
 	 * E: PRODUCT=5/56a/81/100
@@ -135,9 +136,18 @@ get_bus_vid_pid(GUdevDevice *device,
 		goto out;
 	}
 
-	bus_id = (int)strtoul(splitted_product[0], NULL, 16);
-	*vendor_id = (int)strtol(splitted_product[1], NULL, 16);
-	*product_id = (int)strtol(splitted_product[2], NULL, 16);
+	if (!g_ascii_string_to_unsigned(splitted_product[0], 16, 0, 0xff, &val, NULL))
+		goto out;
+
+	bus_id = val;
+	if (!g_ascii_string_to_unsigned(splitted_product[1], 16, 0, 0xffff, &val, NULL))
+		goto out;
+
+	*vendor_id = (int)val;
+	if (!g_ascii_string_to_unsigned(splitted_product[2], 16, 0, 0xffff, &val, NULL))
+		goto out;
+
+	*product_id = (int)val;
 
 	switch (bus_id) {
 	case 0:

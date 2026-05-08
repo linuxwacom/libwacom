@@ -189,9 +189,6 @@ libwacom_add_match(WacomDevice *device,
 void
 libwacom_set_default_match(WacomDevice *device,
 			   WacomMatch *newmatch);
-void
-libwacom_remove_match(WacomDevice *device,
-		      WacomMatch *newmatch);
 WacomMatch *
 libwacom_match_new(const char *name,
 		   const char *uniq,

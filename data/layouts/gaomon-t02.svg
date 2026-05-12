@@ -18,4 +18,18 @@
     <text id="LabelC" class="C Label" x="88.0" y="275" style="text-anchor:start;">C</text>
     <path style="fill:none" d="M 73.0,273.0 H 80.0" id="LeaderC" class="Leader C" />
   </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="2" y="211.1" width="14" height="37.8" rx="7.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 9.0,209.1 V 207.1 H 75.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="77" y="209" style="text-anchor:start;">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 9.0,250.9 V 252.9 H 75.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="77" y="252" style="text-anchor:start;">DOWN</text>
+  </g>
+  <g>
+    <rect id="Strip2" class="Strip2 TouchStrip" x="2" y="268.9" width="14" height="37.8" rx="7.0" />
+    <path id="LeaderStrip2Up" class="Strip2Up Strip2 Leader" d="M 9.0,266.9 V 264.9 H 75.0" />
+    <text id="LabelStrip2Up" class="Strip2Up Strip2 Label" x="77" y="266" style="text-anchor:start;">UP</text>
+    <path id="LeaderStrip2Down" class="Strip2Down Strip2 Leader" d="M 9.0,308.7 V 310.7 H 75.0" />
+    <text id="LabelStrip2Down" class="Strip2Down Strip2 Label" x="77" y="310" style="text-anchor:start;">DOWN</text>
+  </g>
 </svg>

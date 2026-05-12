@@ -91,10 +91,10 @@
     <text id="LabelStripDown" class="StripDown Strip Label" x="50" y="272">DOWN</text>
   </g>
   <g>
-    <rect id="Strip2" class="Strip TouchStrip" x="721" y="172" width="28" height="94" rx="14.0" />
-    <path id="LeaderStrip2Up" class="StripUp Strip Leader" d="M 735.0,170.0 V 168.0 H 718.0" />
-    <text id="LabelStrip2Up" class="StripUp Strip Label" x="705" y="170">UP</text>
-    <path id="LeaderStrip2Down" class="StripDown Strip Leader" d="M 735.0,268.0 V 270.0 H 718.0" />
-    <text id="LabelStrip2Down" class="StripDown Strip Label" x="690" y="272">DOWN</text>
+    <rect id="Strip2" class="Strip2 TouchStrip" x="721" y="172" width="28" height="94" rx="14.0" />
+    <path id="LeaderStrip2Up" class="Strip2Up Strip2 Leader" d="M 735.0,170.0 V 168.0 H 718.0" />
+    <text id="LabelStrip2Up" class="Strip2Up Strip2 Label" x="705" y="170">UP</text>
+    <path id="LeaderStrip2Down" class="Strip2Down Strip2 Leader" d="M 735.0,268.0 V 270.0 H 718.0" />
+    <text id="LabelStrip2Down" class="Strip2Down Strip2 Label" x="690" y="272">DOWN</text>
   </g>
 </svg>

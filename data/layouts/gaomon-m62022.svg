@@ -68,4 +68,11 @@
     <text id="LabelM" class="M Label" x="120.5" y="289" style="text-anchor:start;">M</text>
     <path style="fill:none" d="M 105.5,287.0 H 112.5" id="LeaderM" class="Leader M" />
   </g>
+  <g>
+    <circle id="Dial" class="Dial TouchDial" cx="63.5" cy="89.5" r="21.6" />
+    <path id="LeaderDialCCW" class="DialCCW Dial Leader" d="M 87.1,78.7 H 115.0" />
+    <text id="LabelDialCCW" class="DialCCW Dial Label" x="117" y="80" style="text-anchor:start;">CCW</text>
+    <path id="LeaderDialCW" class="DialCW Dial Leader" d="M 87.1,100.3 H 115.0" />
+    <text id="LabelDialCW" class="DialCW Dial Label" x="117" y="102" style="text-anchor:start;">CW</text>
+  </g>
 </svg>

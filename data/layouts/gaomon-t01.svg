@@ -48,4 +48,11 @@
     <text id="LabelI" class="I Label" x="91.0" y="45" style="text-anchor:start;">I</text>
     <path style="fill:none" d="M 76.0,43.0 H 83.0" id="LeaderI" class="Leader I" />
   </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="3.0" y="182.0" width="14" height="80" rx="7.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 10.0,180.0 V 178.0 H 79.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="81" y="180" style="text-anchor:start;">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 10.0,264.0 V 266.0 H 79.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="81" y="266" style="text-anchor:start;">DOWN</text>
+  </g>
 </svg>

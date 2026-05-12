@@ -63,4 +63,25 @@
     <text id="LabelL" class="L Label" x="115.0" y="316.5" style="text-anchor:start;">L</text>
     <path style="fill:none" d="M 100.0,314.5 H 107.0" id="LeaderL" class="Leader L" />
   </g>
+  <g>
+    <rect id="Strip" class="Strip TouchStrip" x="24.0" y="156.5" width="14" height="80" rx="7.0" />
+    <path id="LeaderStripUp" class="StripUp Strip Leader" d="M 31.0,154.5 V 152.5 H 117.0" />
+    <text id="LabelStripUp" class="StripUp Strip Label" x="119" y="154" style="text-anchor:start;">UP</text>
+    <path id="LeaderStripDown" class="StripDown Strip Leader" d="M 31.0,238.5 V 240.5 H 117.0" />
+    <text id="LabelStripDown" class="StripDown Strip Label" x="119" y="240" style="text-anchor:start;">DOWN</text>
+  </g>
+  <g>
+    <rect id="Strip2" class="Strip2 TouchStrip" x="24.0" y="256.5" width="14" height="80" rx="7.0" />
+    <path id="LeaderStrip2Up" class="Strip2Up Strip2 Leader" d="M 31.0,254.5 V 252.5 H 117.0" />
+    <text id="LabelStrip2Up" class="Strip2Up Strip2 Label" x="119" y="254" style="text-anchor:start;">UP</text>
+    <path id="LeaderStrip2Down" class="Strip2Down Strip2 Leader" d="M 31.0,338.5 V 340.5 H 117.0" />
+    <text id="LabelStrip2Down" class="Strip2Down Strip2 Label" x="119" y="340" style="text-anchor:start;">DOWN</text>
+  </g>
+  <g>
+    <rect id="Strip3" class="Strip3 TouchStrip" x="715.0" y="156.5" width="14" height="80" rx="7.0" />
+    <path id="LeaderStrip3Up" class="Strip3Up Strip3 Leader" d="M 722.0,154.5 V 152.5 H 695.0" />
+    <text id="LabelStrip3Up" class="Strip3Up Strip3 Label" x="693" y="154" style="text-anchor:end;">UP</text>
+    <path id="LeaderStrip3Down" class="Strip3Down Strip3 Leader" d="M 722.0,238.5 V 240.5 H 695.0" />
+    <text id="LabelStrip3Down" class="Strip3Down Strip3 Label" x="693" y="240" style="text-anchor:end;">DOWN</text>
+  </g>
 </svg>

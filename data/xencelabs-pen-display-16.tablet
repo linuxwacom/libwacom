@@ -1,0 +1,22 @@
+# Xencelabs Pen Display 16
+#
+# sysinfo.8KkSFPuMvY.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/618
+
+[Device]
+Name=Xencelabs Pen Display 16
+ModelName=LPH1612U-A
+DeviceMatch=usb|28bd|520b
+Width=344
+Height=194
+Styli=@generic-with-eraser;
+IntegratedIn=Display
+Class=Bamboo
+
+[Features]
+Stylus=true
+NumStrips=0
+NumRings=0
+Reversible=false
+Touch=false
+TouchSwitch=false

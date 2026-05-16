@@ -1,0 +1,17 @@
+# Lenovo Yoga 7 2-in-1 16ILL10 (83JT)
+# Sensor Type: EMR
+# Features: Touch (Integrated), Tilt, Pressure (4096 levels), Eraser
+# HW Resolution: 34445 x 21528 (100 x 100 lpi per evtest)
+
+[Device]
+Name=Wacom HID 5402
+ModelName=
+DeviceMatch=i2c|056a|5402
+Class=ISDV4
+Width=14
+Height=9
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true

@@ -8,8 +8,8 @@ Name=Wacom HID 5402
 ModelName=
 DeviceMatch=i2c|056a|5402
 Class=ISDV4
-Width=14
-Height=9
+Width=355
+Height=228
 IntegratedIn=Display;System
 
 [Features]

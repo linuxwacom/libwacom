@@ -71,6 +71,27 @@ labels:
         body: |
           Thanks for providing the libinput record output. Someone will be along shortly to review the PR.
 
+  - name: please squash
+    labeled:
+      pr:
+        body: |
+          Looks like this PR is ready to merge but it first needs to be squashed. This is a
+          limitation of GitHub's merge queues so we require the contributors to squash commits
+          manually. Unless specified otherwise in the comments, this should be
+          a single commit only with a descriptive commit message.
+
+          Typically this requires the following commands:
+          ```
+          $ git rebase -i origin/main
+          # change 'pick' to 'fixup' for all followup commits to the primary commit, save and exit
+          $ git log -n1 -p  # verify the commit message and patch is what is expected
+          $ git push -f <remote> <branch>  # force-push the branch to the remote
+          ```
+          Then check in the browser that the PR has been updated to a single commit.
+
+          For details please see any of the tutorials on git interactive rebases and
+          git commit squashing online.
+
   - name: please file pull request
     labeled:
       issue:

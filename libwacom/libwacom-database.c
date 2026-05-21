@@ -509,7 +509,7 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 		}
 
 		stylus = g_new0(WacomStylus, 1);
-		stylus->refcnt = 1;
+		g_atomic_ref_count_init(&stylus->refcnt);
 		stylus->id = id;
 		stylus->name = string_or_fallback(keyfile,
 						  groups[i],
@@ -1262,7 +1262,7 @@ libwacom_parse_tablet_keyfile(WacomDeviceDatabase *db,
 	}
 
 	device = g_new0(WacomDevice, 1);
-	device->refcnt = 1;
+	g_atomic_ref_count_init(&device->refcnt);
 	device->matches = g_array_new(TRUE, TRUE, sizeof(WacomMatch *));
 
 	g_auto(GStrv) matches = g_key_file_get_string_list(keyfile,

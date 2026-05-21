@@ -26,7 +26,6 @@
 
 #include "config.h"
 
-#include <assert.h>
 #include <gudev/gudev.h>
 #include <libevdev/libevdev.h>
 #include <stdbool.h>
@@ -412,7 +411,7 @@ libwacom_copy(const WacomDevice *device)
 	gpointer k, v;
 
 	d = g_new0(WacomDevice, 1);
-	g_atomic_int_inc(&d->refcnt);
+	g_atomic_ref_count_init(&d->refcnt);
 	d->name = g_strdup(device->name);
 	d->model_name = g_strdup(device->model_name);
 	d->width_mm = device->width_mm;
@@ -1259,9 +1258,7 @@ libwacom_print_device_description(int fd,
 WacomDevice *
 libwacom_ref(WacomDevice *device)
 {
-	assert(device->refcnt >= 1);
-
-	g_atomic_int_inc(&device->refcnt);
+	g_atomic_ref_count_inc(&device->refcnt);
 	return device;
 }
 
@@ -1271,9 +1268,7 @@ libwacom_unref(WacomDevice *device)
 	if (device == NULL)
 		return NULL;
 
-	assert(device->refcnt >= 1);
-
-	if (!g_atomic_int_dec_and_test(&device->refcnt))
+	if (!g_atomic_ref_count_dec(&device->refcnt))
 		return NULL;
 
 	g_free(device->name);
@@ -1303,14 +1298,14 @@ libwacom_destroy(WacomDevice *device)
 WacomMatch *
 libwacom_match_ref(WacomMatch *match)
 {
-	g_atomic_int_inc(&match->refcnt);
+	g_atomic_ref_count_inc(&match->refcnt);
 	return match;
 }
 
 WacomMatch *
 libwacom_match_unref(WacomMatch *match)
 {
-	if (match == NULL || !g_atomic_int_dec_and_test(&match->refcnt))
+	if (match == NULL || !g_atomic_ref_count_dec(&match->refcnt))
 		return NULL;
 
 	g_free(match->match);
@@ -1332,7 +1327,7 @@ libwacom_match_new(const char *name,
 	char *newmatch;
 
 	match = g_malloc(sizeof(*match));
-	match->refcnt = 1;
+	g_atomic_ref_count_init(&match->refcnt);
 	if (name == NULL && bus == WBUSTYPE_UNKNOWN && vendor_id == 0 &&
 	    product_id == 0)
 		newmatch = g_strdup("generic");
@@ -1998,7 +1993,7 @@ libwacom_print_stylus_description(int fd,
 WacomStylus *
 libwacom_stylus_ref(WacomStylus *stylus)
 {
-	g_atomic_int_inc(&stylus->refcnt);
+	g_atomic_ref_count_inc(&stylus->refcnt);
 
 	return stylus;
 }
@@ -2006,7 +2001,7 @@ libwacom_stylus_ref(WacomStylus *stylus)
 WacomStylus *
 libwacom_stylus_unref(WacomStylus *stylus)
 {
-	if (stylus == NULL || !g_atomic_int_dec_and_test(&stylus->refcnt))
+	if (stylus == NULL || !g_atomic_ref_count_dec(&stylus->refcnt))
 		return NULL;
 
 	g_free(stylus->name);

@@ -68,7 +68,7 @@ struct _WacomBuilder {
 /* WARNING: When adding new members to this struct
  * make sure to update libwacom_copy_match() ! */
 struct _WacomMatch {
-	gint refcnt;
+	gatomicrefcount refcnt;
 	char *match;
 	char *name;
 	char *uniq;
@@ -128,7 +128,7 @@ struct _WacomDevice {
 
 	char *layout;
 
-	gint refcnt; /* for the db hashtable */
+	gatomicrefcount refcnt; /* for the db hashtable */
 };
 
 typedef struct _WacomStylusId {
@@ -137,7 +137,7 @@ typedef struct _WacomStylusId {
 } WacomStylusId;
 
 struct _WacomStylus {
-	gint refcnt;
+	gatomicrefcount refcnt;
 	WacomStylusId id;
 	char *name;
 	char *group;

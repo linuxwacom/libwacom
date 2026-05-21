@@ -1754,6 +1754,19 @@ libwacom_stylus_get_for_stylus_id(const WacomDeviceDatabase *db,
 }
 
 LIBWACOM_EXPORT const WacomStylus *
+libwacom_stylus_lookup(const WacomDeviceDatabase *db,
+		       int vendor_id,
+		       int tool_id)
+{
+	WacomStylusId id = {
+		.vid = vendor_id,
+		.tool_id = tool_id,
+	};
+
+	return libwacom_stylus_get_for_stylus_id(db, &id);
+}
+
+LIBWACOM_EXPORT const WacomStylus *
 libwacom_stylus_get_for_id(const WacomDeviceDatabase *db,
 			   int tool_id)
 {

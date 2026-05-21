@@ -1050,13 +1050,29 @@ libwacom_get_button_modeswitch_mode(const WacomDevice *device,
  * @return A WacomStylus representing the stylus. Do not free.
  *
  * @ingroup styli
- * @deprecated 2.14 Use libwacom_get_styli() and
+ * @deprecated 2.14 Use libwacom_get_styli() or libwacom_stylus_lookup() and
  * libwacom_stylus_get_paired_styli() to obtain the WacomStylus directly
  */
 LIBWACOM_DEPRECATED
 const WacomStylus *
 libwacom_stylus_get_for_id(const WacomDeviceDatabase *db,
 			   int id);
+
+/**
+ * Get the WacomStylus for the given vendor/tool ID pair.
+ *
+ * @param db A Tablet and Stylus database.
+ * @param vendor_id The Vendor ID for this stylus
+ * @param tool_id The Tool ID for this stylus
+ * @return A WacomStylus representing the stylus. Do not free.
+ *
+ * @since 2.19
+ * @ingroup styli
+ */
+const WacomStylus *
+libwacom_stylus_lookup(const WacomDeviceDatabase *db,
+		       int vendor_id,
+		       int tool_id);
 
 /**
  * @param stylus The stylus to query

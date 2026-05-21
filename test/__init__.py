@@ -251,6 +251,11 @@ class LibWacom:
             args=(c_void_p, c_int),
             return_type=c_void_p,
         ),
+        _Api(
+            name="libwacom_stylus_lookup",
+            args=(c_void_p, c_int, c_int),
+            return_type=c_void_p,
+        ),
         _Api(name="libwacom_stylus_get_id", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_stylus_get_vendor_id", args=(c_void_p,), return_type=c_int),
         _Api(name="libwacom_stylus_get_name", args=(c_void_p,), return_type=c_char_p),
@@ -934,6 +939,11 @@ class WacomDatabase:
     ) -> Optional[WacomDevice]:
         device = self.libwacom_new_from_builder(builder.builder, fallback.value, 0)
         return WacomDevice(device) if device else None
+
+    def stylus_lookup(self, vendor_id: int, tool_id: int) -> Optional[WacomStylus]:
+        lib = LibWacom.instance()
+        stylus = lib.stylus_lookup(self.db, vendor_id, tool_id)
+        return WacomStylus(stylus) if stylus else None
 
     def list_devices(self) -> List[WacomDevice]:
         devices = self.libwacom_list_devices_from_database(self.db, 0)

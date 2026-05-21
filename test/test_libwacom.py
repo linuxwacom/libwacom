@@ -823,6 +823,104 @@ def test_nonwacom_stylus_ids(tmp_path):
     assert sum(s.vendor_id == 0 and s.tool_id == 0xAFFFF for s in styli) == 1
 
 
+@pytest.mark.parametrize(
+    "vid, tool_id, name",
+    [
+        (0x56A, 0x802, "Wacom Pen"),
+        (0x1234, 0xABCD, "OtherVendor Pen"),
+    ],
+)
+def test_stylus_lookup(tmp_path, vid, tool_id, name):
+    styli = StylusFile.default()
+    styli.entries.append(
+        StylusEntry(
+            id=f"{vid:#x}:{tool_id:#x}",
+            name=name,
+        )
+    )
+    styli.write_to_dir(tmp_path)
+    TabletFile(name="Test Tablet", matches=["usb|1234|abcd"]).write_to(
+        tmp_path / "test.tablet"
+    )
+
+    db = WacomDatabase(path=tmp_path)
+    stylus = db.stylus_lookup(vid, tool_id)
+    assert stylus is not None
+    assert stylus.vendor_id == vid
+    assert stylus.tool_id == tool_id
+    assert stylus.name == name
+
+
+@pytest.mark.parametrize(
+    "lookup_vid, lookup_tool_id",
+    [
+        pytest.param(0x9999, 0x9999, id="unknown"),
+        pytest.param(0x1234, 0x802, id="wrong-vendor"),
+        pytest.param(0x56A, 0x9999, id="wrong-tool-id"),
+    ],
+)
+def test_stylus_lookup_not_found(tmp_path, lookup_vid, lookup_tool_id):
+    styli = StylusFile.default()
+    styli.entries.append(
+        StylusEntry(
+            id="0x56a:0x802",
+            name="Wacom Pen",
+        )
+    )
+    styli.write_to_dir(tmp_path)
+    TabletFile(name="Test Tablet", matches=["usb|1234|abcd"]).write_to(
+        tmp_path / "test.tablet"
+    )
+
+    db = WacomDatabase(path=tmp_path)
+    stylus = db.stylus_lookup(lookup_vid, lookup_tool_id)
+    assert stylus is None
+
+
+def test_stylus_lookup_generic(tmp_path):
+    styli = StylusFile.default()
+    styli.write_to_dir(tmp_path)
+    TabletFile(name="Test Tablet", matches=["usb|1234|abcd"]).write_to(
+        tmp_path / "test.tablet"
+    )
+
+    db = WacomDatabase(path=tmp_path)
+    stylus = db.stylus_lookup(0x0, 0xAFFFF)
+    assert stylus is not None
+    assert stylus.vendor_id == 0x0
+    assert stylus.tool_id == 0xAFFFF
+    assert stylus.name == "General Pen"
+
+
+def test_stylus_lookup_matches_get_styli(tmp_path):
+    styli = StylusFile.default()
+    s = StylusEntry(
+        id="0x1234:0xabcd",
+        name="Custom Pen",
+        group="custom",
+    )
+    styli.entries.append(s)
+    styli.write_to_dir(tmp_path)
+
+    TabletFile(
+        name="Custom Tablet",
+        matches=["usb|5555|aaaa"],
+        styli=[s.id, "@generic-with-eraser"],
+    ).write_to(tmp_path / "custom.tablet")
+
+    db = WacomDatabase(path=tmp_path)
+    builder = WacomBuilder.create(usbid=(0x5555, 0xAAAA))
+    device = db.new_from_builder(builder)
+    assert device is not None
+
+    for s in device.get_styli():
+        looked_up = db.stylus_lookup(s.vendor_id, s.tool_id)
+        assert looked_up is not None
+        assert looked_up.vendor_id == s.vendor_id
+        assert looked_up.tool_id == s.tool_id
+        assert looked_up.name == s.name
+
+
 def test_load_xdg_config_home(monkeypatch, tmp_path, custom_datadir):
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path.absolute()))
 

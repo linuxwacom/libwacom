@@ -156,6 +156,7 @@ struct _WacomStylus {
 };
 
 struct _WacomDeviceDatabase {
+	gatomicrefcount refcnt;
 	GHashTable *device_ht; /* key = DeviceMatch (str), value = WacomDeviceData * */
 	GHashTable *stylus_ht; /* key = WacomStylusId, value = WacomStylus * */
 };

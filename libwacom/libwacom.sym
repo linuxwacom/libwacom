@@ -104,6 +104,8 @@ LIBWACOM_2.18 {
 } LIBWACOM_2.15;
 
 LIBWACOM_2.19 {
+    libwacom_database_ref;
+    libwacom_database_unref;
     libwacom_get_height_mm;
     libwacom_get_width_mm;
 } LIBWACOM_2.18;

@@ -1,0 +1,17 @@
+# Wacom
+# Wacom HID 53FD Pen
+#
+# sysinfo.Ul3NVe7Qo3
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/616
+
+[Device]
+Name=Wacom HID 53FD Pen
+ModelName=
+DeviceMatch=i2c|056a|53fd
+IntegratedIn=Display;System
+Styli=@isdv4-aes
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true

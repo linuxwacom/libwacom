@@ -413,12 +413,44 @@ libwacom_database_new_for_path(const char *datadir);
 /**
  * Free all memory used by the database.
  *
+ * This call is equivalent to libwacom_database_unref() and
+ * assumes the caller only has one reference to the database.
+ * If the caller obtained multiple references using
+ * libwacom_database_ref(), libwacom_database_unref() should
+ * be used instead.
+ *
  * @param db A Tablet and Stylus database.
  *
  * @ingroup context
  */
 void
 libwacom_database_destroy(WacomDeviceDatabase *db);
+
+/**
+ * Increase the refcount of the database by one.
+ *
+ * @param db A Tablet and Stylus database.
+ * @return The database passed in as argument.
+ *
+ * @ingroup context
+ * @since 2.19
+ */
+WacomDeviceDatabase *
+libwacom_database_ref(WacomDeviceDatabase *db);
+
+/**
+ * Decrease the refcount of the database by one.
+ * Once the refcount hits zero, all memory used by
+ * the database is released.
+ *
+ * @param db A Tablet and Stylus database.
+ * @return Always NULL.
+ *
+ * @ingroup context
+ * @since 2.19
+ */
+WacomDeviceDatabase *
+libwacom_database_unref(WacomDeviceDatabase *db);
 
 /**
  * Create a new device reference for the given builder.

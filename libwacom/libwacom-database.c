@@ -1559,6 +1559,7 @@ database_new_for_paths(char *const *datadirs)
 		return NULL;
 
 	db = g_new0(WacomDeviceDatabase, 1);
+	g_atomic_ref_count_init(&db->refcnt);
 	db->device_ht = g_hash_table_new_full(g_str_hash,
 					      g_str_equal,
 					      g_free,
@@ -1595,7 +1596,7 @@ database_new_for_paths(char *const *datadirs)
 	return db;
 
 error:
-	libwacom_database_destroy(db);
+	libwacom_database_unref(db);
 	return NULL;
 }
 
@@ -1638,14 +1639,29 @@ libwacom_database_new(void)
 LIBWACOM_EXPORT void
 libwacom_database_destroy(WacomDeviceDatabase *db)
 {
-	if (!db)
-		return;
+	libwacom_database_unref(db);
+}
+
+LIBWACOM_EXPORT WacomDeviceDatabase *
+libwacom_database_ref(WacomDeviceDatabase *db)
+{
+	g_atomic_ref_count_inc(&db->refcnt);
+	return db;
+}
+
+LIBWACOM_EXPORT WacomDeviceDatabase *
+libwacom_database_unref(WacomDeviceDatabase *db)
+{
+	if (db == NULL || !g_atomic_ref_count_dec(&db->refcnt))
+		return NULL;
 
 	if (db->device_ht)
 		g_hash_table_destroy(db->device_ht);
 	if (db->stylus_ht)
 		g_hash_table_destroy(db->stylus_ht);
 	g_free(db);
+
+	return NULL;
 }
 
 static gint

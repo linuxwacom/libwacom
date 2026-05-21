@@ -24,3 +24,12 @@ Buttons=1
 EraserType=Button
 Axes=Tilt;Pressure
 Type=Mobile
+
+[0x56a:0x8113]
+# Lenovo ; VID_LENOVO     | 0x8113 | BAT_CHRG
+Name=Lenovo Yoga Pen GX81S07448
+Group=isdv4-aes
+Buttons=1
+EraserType=Button
+Axes=Tilt;Pressure
+Type=Mobile

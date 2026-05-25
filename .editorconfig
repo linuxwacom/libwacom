@@ -17,5 +17,5 @@ indent_size = 4
 indent_style = space
 
 [{meson.build,meson_options.txt}]
-indent_size = 8
-indent_style = tab
+indent_size = 4
+indent_style = space

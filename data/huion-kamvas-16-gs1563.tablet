@@ -44,7 +44,7 @@ Width=356
 Height=203
 Layout=huion-kamvas-16-gs1563.svg
 IntegratedIn=Display
-Styli=@generic-no-eraser;
+Styli=@generic-3btn-with-eraser;
 
 [Features]
 Stylus=true

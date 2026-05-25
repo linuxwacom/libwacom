@@ -13,7 +13,7 @@ ModelName=GT2701
 DeviceMatch=usb|256c|006c;
 Width=597
 Height=336
-Styli=@generic-no-eraser;
+Styli=@generic-3btn-with-eraser;
 IntegratedIn=Display
 
 [Features]

@@ -18,7 +18,7 @@ DeviceMatch=usb|256c|006b||HUION_M220;
 # HUION_MAGIC_BYTES="1303803f01b8b300ff3fd81303000000080040"
 Width=406
 Height=229
-Styli=@generic-no-eraser;
+Styli=@generic-3btn-with-eraser;
 IntegratedIn=Display
 
 [Features]

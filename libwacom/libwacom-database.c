@@ -552,7 +552,8 @@ libwacom_parse_stylus_keyfile(WacomDeviceDatabase *db,
 			if (parse_stylus_id(paired_id_list[j], &paired_id)) {
 				g_array_append_val(stylus->paired_stylus_ids,
 						   paired_id);
-				if (paired_id.vid == WACOM_VENDOR_ID)
+				if (paired_id.vid == 0 ||
+				    paired_id.vid == WACOM_VENDOR_ID)
 					g_array_append_val(
 						stylus->deprecated_paired_ids,
 						paired_id.tool_id);

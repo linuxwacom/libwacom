@@ -565,6 +565,24 @@ libwacom_list_devices_from_database(const WacomDeviceDatabase *db,
 				    WacomError *error);
 
 /**
+ * Returns the list of styli in the given database.
+ *
+ * @param db A device database
+ * @param error If not NULL, set to the error if any occurs
+ *
+ * @return A NULL terminated list of pointers to all the styli inside the
+ * database, sorted by vendor ID and tool ID.
+ * The content of the list is owned by the database and should not be
+ * modified or freed. Use free() to free the list.
+ *
+ * @since 2.19
+ * @ingroup styli
+ */
+const WacomStylus **
+libwacom_list_styli_from_database(const WacomDeviceDatabase *db,
+				  WacomError *error);
+
+/**
  * Print the description of this device to the given file.
  *
  * @param fd The file descriptor to print to

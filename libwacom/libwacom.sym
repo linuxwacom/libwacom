@@ -108,4 +108,5 @@ LIBWACOM_2.19 {
     libwacom_database_unref;
     libwacom_get_height_mm;
     libwacom_get_width_mm;
+    libwacom_list_styli_from_database;
 } LIBWACOM_2.18;

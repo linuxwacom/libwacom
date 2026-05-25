@@ -583,6 +583,8 @@ class WacomStylus:
         PEN_WITH_ERASER = 0xFFFFF
         ERASER = 0xFFFFE
         PEN_NO_ERASER = 0xFFFFD
+        ERASER_3BTN = 0xFFFFC
+        PEN_3BTN_WITH_ERASER = 0xFFFFB
 
     def __init__(self, stylus):
         self.stylus = stylus

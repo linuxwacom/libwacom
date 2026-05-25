@@ -1766,6 +1766,8 @@ libwacom_stylus_get_for_id(const WacomDeviceDatabase *db,
 	case GENERIC_PEN_WITH_ERASER:
 	case GENERIC_ERASER:
 	case GENERIC_PEN_NO_ERASER:
+	case GENERIC_PEN_3BTN_WITH_ERASER:
+	case GENERIC_ERASER_3BTN:
 		id.vid = 0;
 		break;
 	}

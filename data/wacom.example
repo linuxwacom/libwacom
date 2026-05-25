@@ -127,6 +127,8 @@ Layout=wacom-bamboo-16fg-m-pt.svg
 # Styli=@generic-with-eraser
 # If the stylus does not have an eraser:
 # Styli=@generic-no-eraser
+# If the stylus has 3 buttons and an eraser (e.g. Huion PW600):
+# Styli=@generic-3btn-with-eraser
 #
 # For Wacom devices this is needed only for the professional series devices,
 # i.e. Intuos Pro and Cintiq.

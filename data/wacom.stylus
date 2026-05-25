@@ -26,6 +26,26 @@ Axes=Pressure;
 Type=General
 IsGenericStylus=true
 
+# Used by e.g. Huion devices
+[0x0:0xffffb]
+Name=General 3 Button Pen
+Group=generic-3btn-with-eraser
+PairedStylusIds=0x0:0xffffc;
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+IsGenericStylus=true
+
+[0x0:0xffffc]
+Name=General 3 Button Pen Eraser
+Group=generic-3btn-with-eraser
+PairedStylusIds=0x0:0xffffb;
+EraserType=Invert
+Buttons=3
+Axes=Tilt;Pressure;Distance;
+Type=General
+IsGenericStylus=true
+
 [0x56a:0x1]
 # Lenovo ; VID_NONE     | 0x0000 | BAT_SWAP
 Name=AES Pen

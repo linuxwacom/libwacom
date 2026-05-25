@@ -1,0 +1,25 @@
+# Huion
+# Kamvas Pro 27
+# GT2701
+
+# This tablet description file has been generated based on Huions website specifications.
+# If you own this tablet, please improve it.
+# sysinfo missing - if you own this device please provide it. See this link
+# for details: https://github.com/linuxwacom/libwacom/wiki/Adding-a-new-device
+
+[Device]
+Name=Kamvas Pro 27
+ModelName=GT2701
+DeviceMatch=usb|256c|006c;
+Width=597
+Height=336
+Styli=@generic-no-eraser;
+IntegratedIn=Display
+
+[Features]
+NumStrips=0
+NumRings=0
+Reversible=false
+Stylus=true
+Touch=true
+TouchSwitch=true

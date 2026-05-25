@@ -165,6 +165,11 @@ class LibWacom:
             return_type=ctypes.POINTER(c_void_p),
         ),
         _Api(
+            name="libwacom_list_styli_from_database",
+            args=(c_void_p, c_void_p),
+            return_type=ctypes.POINTER(c_void_p),
+        ),
+        _Api(
             name="libwacom_print_device_description",
             args=(c_int, c_void_p),
             return_type=None,
@@ -904,7 +909,11 @@ class WacomDatabase:
             return lambda *args, **kwargs: func(self.db, *args, **kwargs)
 
         for api in lib._api_prototypes:
-            prefixes = ["new_from_", "list_devices_from_database"]
+            prefixes = [
+                "new_from_",
+                "list_devices_from_database",
+                "list_styli_from_database",
+            ]
             if any(api.basename.startswith(prefix) for prefix in prefixes):
                 func = getattr(lib, api.basename)
                 setattr(self, api.name, wrapper(func))
@@ -943,3 +952,12 @@ class WacomDatabase:
         ]
         GlibC.instance().free(devices)
         return devs
+
+    def list_styli(self) -> List[WacomStylus]:
+        styli = self.libwacom_list_styli_from_database(self.db, 0)
+        result = [
+            WacomStylus(s)
+            for s in itertools.takewhile(lambda ptr: ptr is not None, styli)
+        ]
+        GlibC.instance().free(styli)
+        return result

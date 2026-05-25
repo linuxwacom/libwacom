@@ -1724,4 +1724,40 @@ error:
 	return NULL;
 }
 
+static gint
+stylus_compare_func(gconstpointer pa,
+		    gconstpointer pb)
+{
+	const WacomStylus *a = pa, *b = pb;
+
+	return wacom_stylus_id_sort(&a->id, &b->id);
+}
+
+LIBWACOM_EXPORT const WacomStylus **
+libwacom_list_styli_from_database(const WacomDeviceDatabase *db,
+				  WacomError *error)
+{
+	g_autoptr(GList) styli = NULL;
+	GList *cur;
+	const WacomStylus **list, **p;
+
+	if (!db) {
+		libwacom_error_set(error, WERROR_INVALID_DB, "db is NULL");
+		return NULL;
+	}
+
+	styli = g_hash_table_get_values(db->stylus_ht);
+	list = calloc(g_list_length(styli) + 1, sizeof(WacomStylus *));
+	if (!list) {
+		libwacom_error_set(error, WERROR_BAD_ALLOC, "Memory allocation failed");
+		return NULL;
+	}
+
+	styli = g_list_sort(styli, stylus_compare_func);
+	for (p = list, cur = styli; cur; cur = g_list_next(cur))
+		*p++ = (const WacomStylus *)cur->data;
+
+	return list;
+}
+
 /* vim: set noexpandtab tabstop=8 shiftwidth=8: */

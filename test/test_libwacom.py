@@ -823,6 +823,82 @@ def test_nonwacom_stylus_ids(tmp_path):
     assert sum(s.vendor_id == 0 and s.tool_id == 0xAFFFF for s in styli) == 1
 
 
+def test_list_styli_from_database(tmp_path):
+    styli = StylusFile.default()
+    styli.entries.append(
+        StylusEntry(
+            id="0x56a:0x802",
+            name="Wacom Pen",
+        )
+    )
+    styli.entries.append(
+        StylusEntry(
+            id="0x1234:0xabcd",
+            name="OtherVendor Pen",
+        )
+    )
+    styli.write_to_dir(tmp_path)
+    # Two tablets referencing the same styli to verify no duplicates
+    TabletFile(
+        name="Tablet A",
+        matches=["usb|1234|abcd"],
+        styli=["0x56a:0x802", "0x1234:0xabcd", "@generic-with-eraser"],
+    ).write_to(tmp_path / "tablet-a.tablet")
+    TabletFile(
+        name="Tablet B",
+        matches=["usb|5678|ef01"],
+        styli=["0x56a:0x802", "@generic-with-eraser"],
+    ).write_to(tmp_path / "tablet-b.tablet")
+
+    db = WacomDatabase(path=tmp_path)
+    all_styli = db.list_styli()
+    assert len(all_styli) > 0
+
+    # Every stylus should have valid vendor_id and tool_id
+    for s in all_styli:
+        assert isinstance(s, WacomStylus)
+
+    # Check that specific styli are present
+    ids = [(s.vendor_id, s.tool_id) for s in all_styli]
+    assert (0x56A, 0x802) in ids
+    assert (0x1234, 0xABCD) in ids
+    assert (0x0, 0xAFFFF) in ids
+    assert (0x0, 0xAFFFE) in ids
+
+    # No duplicates: should contain exactly 4 unique styli even though
+    # two tablets reference the same ones
+    assert len(ids) == len(set(ids))
+    assert len(all_styli) == 4
+
+    # Should be sorted by (vendor_id, tool_id)
+    assert ids == sorted(ids)
+
+
+def test_list_styli_from_database_matches_get_styli(tmp_path):
+    """Every stylus from get_styli should be present in list_styli."""
+    styli = StylusFile.default()
+    styli.entries.append(
+        StylusEntry(id="0x56a:0x802", name="Wacom Pen"),
+    )
+    styli.write_to_dir(tmp_path)
+    TabletFile(
+        name="Test Tablet",
+        matches=["usb|1234|abcd"],
+        styli=["0x56a:0x802", "@generic-with-eraser"],
+    ).write_to(tmp_path / "test.tablet")
+
+    db = WacomDatabase(path=tmp_path)
+    all_styli = db.list_styli()
+    all_ids = {(s.vendor_id, s.tool_id) for s in all_styli}
+
+    builder = WacomBuilder.create(usbid=(0x1234, 0xABCD))
+    device = db.new_from_builder(builder)
+    assert device is not None
+
+    for s in device.get_styli():
+        assert (s.vendor_id, s.tool_id) in all_ids
+
+
 def test_load_xdg_config_home(monkeypatch, tmp_path, custom_datadir):
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path.absolute()))
 

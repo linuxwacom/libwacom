@@ -129,6 +129,8 @@ var libwacom_8h =
     [ "libwacom_database_destroy", "group__context.html#gafdc100499a3d0760a53ec19d28ce1b12", null ],
     [ "libwacom_database_new", "group__context.html#ga9dfbecd1a2e74eac8d85e446e8d16711", null ],
     [ "libwacom_database_new_for_path", "group__context.html#ga608f10d525f4252963fee40a85136e16", null ],
+    [ "libwacom_database_ref", "group__context.html#ga6afa2d693b3a6aeeeb461016bcecbf5a", null ],
+    [ "libwacom_database_unref", "group__context.html#gaf6e5ace2c5ff8911c3cb9cac834df89c", null ],
     [ "libwacom_destroy", "group__devices.html#ga6ef7b31ab0e7039ee3aeb85fd02cb892", null ],
     [ "libwacom_error_free", "group__context.html#ga6864ec1cbb3582b386ff13fa5e23d366", null ],
     [ "libwacom_error_get_code", "group__context.html#ga7835e4ff16a2f3360ffe61769d8f009e", null ],

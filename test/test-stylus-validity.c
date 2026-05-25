@@ -381,6 +381,13 @@ setup_emr_tests(const WacomStylus *stylus)
 		add_test(stylus, test_no_distance);
 		add_test(stylus, test_no_tilt);
 		break;
+	case 0xffffc: /* GENERIC_ERASER_3BTN */
+	case 0xffffb: /* GENERIC_PEN_3BTN_WITH_ERASER */
+		add_test(stylus, test_generic);
+		add_test(stylus, test_pressure);
+		add_test(stylus, test_distance);
+		add_test(stylus, test_tilt);
+		break;
 	case 0x006:
 	case 0x096:
 	case 0x097:

@@ -47,6 +47,8 @@ enum GenericStylus {
 	GENERIC_PEN_WITH_ERASER = 0xfffff,
 	GENERIC_ERASER = 0xffffe,
 	GENERIC_PEN_NO_ERASER = 0xffffd,
+	GENERIC_ERASER_3BTN = 0xffffc,
+	GENERIC_PEN_3BTN_WITH_ERASER = 0xffffb,
 };
 
 enum WacomFeature {

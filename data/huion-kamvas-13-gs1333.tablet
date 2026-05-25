@@ -42,7 +42,7 @@ Width=305
 Height=178
 Layout=huion-kamvas-13-gs1333.svg
 IntegratedIn=Display
-Styli=@generic-no-eraser;
+Styli=@generic-3btn-with-eraser;
 
 [Features]
 Stylus=true

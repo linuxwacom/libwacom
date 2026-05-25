@@ -333,6 +333,13 @@ def test_mobilestudio_pro_modeswitch(db):
                 WacomStylus.Generic.PEN_NO_ERASER,
             ],
         ],
+        [
+            (0x256C, 0x006C),
+            [
+                WacomStylus.Generic.PEN_3BTN_WITH_ERASER,
+                WacomStylus.Generic.ERASER_3BTN,
+            ],
+        ],
     ],
 )
 def test_generic_pens(db, usbid, expected):

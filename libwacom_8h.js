@@ -176,6 +176,7 @@ var libwacom_8h =
     [ "libwacom_is_builtin", "group__devices.html#ga802170200f00ba89d4b5d2f4f0bc88a4", null ],
     [ "libwacom_is_reversible", "group__devices.html#gaa52facf4eda6bdd89f4fb15dabe8bfd8", null ],
     [ "libwacom_list_devices_from_database", "group__devices.html#gaacc8260759c9cb05d0921ec34d4f4014", null ],
+    [ "libwacom_list_styli_from_database", "group__styli.html#ga8024fcd4cf0e0529a602f4ba0c600d76", null ],
     [ "libwacom_match_get_bustype", "group__devices.html#ga9159afd9136fb5f712669d0472553fc5", null ],
     [ "libwacom_match_get_match_string", "group__devices.html#gae33c0a3621f10157d99d27bd9f236959", null ],
     [ "libwacom_match_get_name", "group__devices.html#ga92faa2c00d81c4c3b2f22287fdc29f7b", null ],

@@ -156,6 +156,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga8024fcd4cf0e0529a602f4ba0c600d76" id="r_ga8024fcd4cf0e0529a602f4ba0c600d76"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#ga8024fcd4cf0e0529a602f4ba0c600d76">libwacom_list_styli_from_database</a> (const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *db, <a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *error)</td></tr>
+<tr class="memdesc:ga8024fcd4cf0e0529a602f4ba0c600d76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the list of styli in the given database.  <br /></td></tr>
+<tr class="separator:ga8024fcd4cf0e0529a602f4ba0c600d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f82f01ec46ca1869eb54e9359970a6e" id="r_ga3f82f01ec46ca1869eb54e9359970a6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="libwacom_8h.html#ac36e8235910429091f20b3503c40d173">LIBWACOM_DEPRECATED</a> const int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#ga3f82f01ec46ca1869eb54e9359970a6e">libwacom_get_supported_styli</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device, int *num_styli)</td></tr>
 <tr class="separator:ga3f82f01ec46ca1869eb54e9359970a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga18cd23a382eade1bc72b3ef3c49060fb" id="r_ga18cd23a382eade1bc72b3ef3c49060fb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__styli.html#ga18cd23a382eade1bc72b3ef3c49060fb">libwacom_get_styli</a> (const <a class="el" href="group__devices.html#gadbb6667e3d45b58fb0e269dd435c29cb">WacomDevice</a> *device, int *num_styli)</td></tr>
@@ -401,6 +404,45 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an array of Styli IDs supported by the device</dd></dl>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated:</a></b></dt><dd>2.14 Use <a class="el" href="group__styli.html#ga18cd23a382eade1bc72b3ef3c49060fb">libwacom_get_styli()</a> instead. </dd></dl>
+
+</div>
+</div>
+<a id="ga8024fcd4cf0e0529a602f4ba0c600d76" name="ga8024fcd4cf0e0529a602f4ba0c600d76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8024fcd4cf0e0529a602f4ba0c600d76">&#9670;&#160;</a></span>libwacom_list_styli_from_database()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="group__styli.html#gade7dd5ce503ef37813e5f08bf1544170">WacomStylus</a> ** libwacom_list_styli_from_database </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__context.html#ga6e785a1c70f2bacb048735d2ca78f116">WacomDeviceDatabase</a> *&#160;</td>
+          <td class="paramname"><em>db</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__context.html#gad6d154a58c34d973502cfa8e50f5a148">WacomError</a> *&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the list of styli in the given database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>A device database </td></tr>
+    <tr><td class="paramname">error</td><td>If not NULL, set to the error if any occurs</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A NULL terminated list of pointers to all the styli inside the database, sorted by vendor ID and tool ID. The content of the list is owned by the database and should not be modified or freed. Use free() to free the list.</dd></dl>
+<dl class="section since"><dt>Since</dt><dd>2.19 </dd></dl>
 
 </div>
 </div>
@@ -879,7 +921,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon May 25 2026 23:25:58 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Wed May 27 2026 05:41:00 for libwacom by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

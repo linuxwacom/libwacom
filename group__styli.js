@@ -31,6 +31,7 @@ var group__styli =
     ] ],
     [ "libwacom_get_styli", "group__styli.html#ga18cd23a382eade1bc72b3ef3c49060fb", null ],
     [ "libwacom_get_supported_styli", "group__styli.html#ga3f82f01ec46ca1869eb54e9359970a6e", null ],
+    [ "libwacom_list_styli_from_database", "group__styli.html#ga8024fcd4cf0e0529a602f4ba0c600d76", null ],
     [ "libwacom_print_stylus_description", "group__styli.html#ga84b9c038c3d9f53c8c9fed4ff30f71f2", null ],
     [ "libwacom_stylus_get_axes", "group__styli.html#ga28c212a70b84efb5d06460c95f87d6d2", null ],
     [ "libwacom_stylus_get_eraser_type", "group__styli.html#ga7299684f73159055f5b4e3ceb5b0f4d0", null ],

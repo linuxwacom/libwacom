@@ -1,3 +1,19 @@
+libwacom 2.19.0:
+- New API:
+  - libwacom_list_styli_from_database() provides a WacomStylus list of all known styli
+  - libwacom_database_ref() and libwacom_database_unref() to simplify callers having
+     multiple refs to the same database
+  - libwacom_get_width_mm() and libwacom_get_height_mm() for the tablet dimensions
+    in mm. The .tablet files switched to mm too.
+- New generic 3 button + eraser tool, assigned to some Huion devices by default
+- New devices:
+  - Gaomon M5 V2
+  - HP Envy x360 15-fh0xxx
+  - Huion Inspiroy Frego S (L310), Kamvas Pro 27 (GT2701), H610 Pro V2
+  - Lenovo ThinkBook 14s Yoga ITL
+  - Wacom HID 53FD
+  - Xencelabs Pen Display 16
+
 libwacom 2.18.0:
 - New Devices:
   - XP-Pen Deco MW (bluetooth), Deco02

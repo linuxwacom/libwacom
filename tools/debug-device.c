@@ -428,8 +428,9 @@ handle_device(WacomDeviceDatabase *db,
 			g_auto(GStrv) strv = NULL;
 			g_autofree char *str = NULL;
 			for (int i = 0; i < nstyli; i++) {
-				char *s = g_strdup_printf("0x%06x", styli[i]);
-				g_strv_builder_take(builder, s);
+				g_autofree char *s =
+					g_strdup_printf("0x%06x", styli[i]);
+				g_strv_builder_add(builder, s);
 			}
 			strv = g_strv_builder_end(builder);
 			str = g_strjoinv(", ", strv);
@@ -447,11 +448,11 @@ handle_device(WacomDeviceDatabase *db,
 			g_autofree char *str = NULL;
 			for (int i = 0; i < nstyli; i++) {
 				const WacomStylus *s = styli[i];
-				char *entry = g_strdup_printf(
+				g_autofree char *entry = g_strdup_printf(
 					"[0x%04x, 0x%06x]",
 					libwacom_stylus_get_vendor_id(s),
 					libwacom_stylus_get_id(s));
-				g_strv_builder_take(builder, entry);
+				g_strv_builder_add(builder, entry);
 			}
 			strv = g_strv_builder_end(builder);
 			str = g_strjoinv(", ", strv);
@@ -518,9 +519,10 @@ handle_device(WacomDeviceDatabase *db,
 #pragma GCC diagnostic pop
 
 					for (int i = 0; i < npaired; i++) {
-						char *s = g_strdup_printf("0x%06x",
-									  paired[i]);
-						g_strv_builder_take(builder, s);
+						g_autofree char *s =
+							g_strdup_printf("0x%06x",
+									paired[i]);
+						g_strv_builder_add(builder, s);
 					}
 					strv = g_strv_builder_end(builder);
 					str = g_strjoinv(", ", strv);
@@ -544,12 +546,12 @@ handle_device(WacomDeviceDatabase *db,
 
 					for (int i = 0; i < npaired; i++) {
 						const WacomStylus *p = paired[i];
-						char *entry = g_strdup_printf(
+						g_autofree char *entry = g_strdup_printf(
 							"[0x%04x, 0x%06x]",
 							libwacom_stylus_get_vendor_id(
 								p),
 							libwacom_stylus_get_id(p));
-						g_strv_builder_take(builder, entry);
+						g_strv_builder_add(builder, entry);
 					}
 					strv = g_strv_builder_end(builder);
 					str = g_strjoinv(", ", strv);

@@ -427,7 +427,8 @@ stylus_ids_as_hex(GArray *array)
 
 	for (guint i = 0; i < array->len; i++) {
 		id = &g_array_index(array, WacomStylusId, i);
-		g_strv_builder_take(builder, g_strdup_printf("0x%08x", id->tool_id));
+		g_autofree char *hex = g_strdup_printf("0x%08x", id->tool_id);
+		g_strv_builder_add(builder, hex);
 	}
 
 	return g_strv_builder_end(builder);

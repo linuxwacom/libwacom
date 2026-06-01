@@ -934,7 +934,7 @@ print_styli_for_device(int fd,
 	styli = libwacom_get_styli(device, &nstyli);
 	for (int i = 0; i < nstyli; i++) {
 		const WacomStylus *stylus = styli[i];
-		char *s;
+		g_autofree char *s = NULL;
 
 		if (stylus->id.vid != WACOM_VENDOR_ID)
 			s = g_strdup_printf("0x%04x:%#x",
@@ -942,7 +942,7 @@ print_styli_for_device(int fd,
 					    stylus->id.tool_id);
 		else
 			s = g_strdup_printf("%#x", stylus->id.tool_id);
-		g_strv_builder_take(builder, s);
+		g_strv_builder_add(builder, s);
 	}
 
 	strv = g_strv_builder_end(builder);
@@ -1046,14 +1046,14 @@ print_button_evdev_codes(int fd,
 	for (char b = 'A'; b < 'A' + nbuttons; b++) {
 		unsigned int code = libwacom_get_button_evdev_code(device, b);
 		const char *name = libevdev_event_code_get_name(EV_KEY, code);
-		char *s;
+		g_autofree char *s = NULL;
 
 		if (name)
 			s = g_strdup(name);
 		else
 			s = g_strdup_printf("0x%x", code);
 
-		g_strv_builder_take(builder, s);
+		g_strv_builder_add(builder, s);
 	}
 
 	strv = g_strv_builder_end(builder);

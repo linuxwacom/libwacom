@@ -67,8 +67,8 @@ class GlibC:
 
     @staticmethod
     def _cdll():
-        # BSD has 7, Linux has 6
-        for libc in ("libc.so.6", "libc.so.7"):
+        # BSD has 7, Linux has 6, Linux/alpha has 6.1
+        for libc in ("libc.so.6", "libc.so.7", "libc.so.6.1"):
             try:
                 return ctypes.CDLL(libc, use_errno=True)
             except OSError:

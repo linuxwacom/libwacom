@@ -1,3 +1,6 @@
+libwacom 2.19.1:
+- Build fixes for older systems and other arches
+
 libwacom 2.19.0:
 - New API:
   - libwacom_list_styli_from_database() provides a WacomStylus list of all known styli

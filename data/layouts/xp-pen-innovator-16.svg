@@ -263,14 +263,24 @@
        y="321"
        style="text-anchor:start;">H</text>
   </g>
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="Outline"
+     id="Outline"
+     width="640"
+     height="350"
+     x="0"
+     y="0"
+     ry="2.9007006" />
   <g
      id="g34">
-    <rect
-       id="Screen"
-       x="110"
-       y="15"
-       width="520"
-       height="320" />
+     <rect
+        class="DrawingArea"
+     id="DrawingArea"
+        x="110"
+        y="15"
+        width="520"
+        height="320" />
     <rect
        id="DotB"
        x="51.5"

@@ -1,0 +1,19 @@
+# Lenovo IdeaPad 5-14AHP9
+# Pen: Wacom HID 53BB Pen
+# Screen: Touchscreen 14", 1920x2000
+# Features: Stylus (2 buttons), Touchscreen
+
+[Device]
+Name=Wacom HID 53BB Pen
+ModelName=IdeaPad 5-14AHP9
+DeviceMatch=i2c|056a|53bb
+Class=ISDV4
+Width=14
+Height=7.5
+IntegratedIn=Display;System
+Styli=@isdv4-aes;
+
+[Features]
+Stylus=true
+Touch=true
+Buttons=2

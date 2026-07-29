@@ -13,7 +13,7 @@ jobs:
   freebsd:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: meson test
       uses: vmactions/freebsd-vm@v1
       with:
@@ -25,7 +25,7 @@ jobs:
           meson setup builddir
           meson test -C builddir --print-errorlogs
     # Capture all the meson logs, even if we failed
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       if: ${{ always() }}  # even if we fail
       with:
         name: meson test logs

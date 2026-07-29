@@ -344,6 +344,9 @@ main(int argc,
 
 	dir = g_dir_open("/dev/input", 0, &error);
 	if (!dir) {
+		/* Probably running in a container */
+		if (error->domain == G_FILE_ERROR && error->code == G_FILE_ERROR_NOENT)
+			return EXIT_SUCCESS;
 		fprintf(stderr, "%s\n", error->message);
 		return EXIT_FAILURE;
 	}

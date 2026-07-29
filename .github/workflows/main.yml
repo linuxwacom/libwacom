@@ -211,8 +211,8 @@ jobs:
       # We expect the overridden match *not* to be listed
       - name: check for the expected devices to be present (or not present)
         run: |
-          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name')" == "Wacom Cintiq 27QHD MODIFIED"
-          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "bluetooth") | select(.vid == "0x056a") | select(.pid == "0x0361") | .name')" == "Wacom Intuos Pro L MODIFIED"
+          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name')" = "Wacom Cintiq 27QHD MODIFIED"
+          test "$(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "bluetooth") | select(.vid == "0x056a") | select(.pid == "0x0361") | .name')" = "Wacom Intuos Pro L MODIFIED"
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x0358") | .name' | wc -l) -eq 0
           test $(libwacom-list-devices --format=yaml | yq -r '.devices[] | select(.bus == "usb") | select(.vid == "0x056a") | select(.pid == "0x032a") | .name' | wc -l) -eq 1
 

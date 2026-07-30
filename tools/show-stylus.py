@@ -30,7 +30,7 @@ try:
     import libevdev
     import pyudev
 except ModuleNotFoundError as e:
-    print("Error: {}".format(str(e)), file=sys.stderr)
+    print(f"Error: {e!s}", file=sys.stderr)
     print(
         "One or more python modules are missing. Please install those "
         "modules and re-run this tool."
@@ -132,7 +132,7 @@ def record_events(ns):
         except KeyboardInterrupt:
             print("Terminating")
 
-        return [s[0] for s in styli.keys()]
+        return [s[0] for s in styli]
 
 
 def load_data_files():

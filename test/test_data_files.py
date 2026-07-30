@@ -7,7 +7,6 @@ import os
 import re
 from pathlib import Path
 
-
 WACOM_RECEIVER_USBIDS = [
     (0x56A, 0x84),
 ]

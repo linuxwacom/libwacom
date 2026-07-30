@@ -20,16 +20,14 @@
 # - WacomDevice, WacomDatabase, ...: pythonic wrappers around the
 #   underlying C object.
 
-from ctypes import c_char_p, c_char, c_int, c_uint32, c_void_p
-from typing import Optional, Tuple, Type, List
-from dataclasses import dataclass
-from pathlib import Path
-
 import ctypes
 import enum
 import itertools
 import logging
-
+from ctypes import c_char, c_char_p, c_int, c_uint32, c_void_p
+from dataclasses import dataclass
+from pathlib import Path
+from typing import List, Optional, Tuple, Type
 
 logger = logging.getLogger(__name__)
 
@@ -40,8 +38,8 @@ PREFIX = "libwacom_"
 @dataclass
 class _Api:
     name: str
-    args: Tuple[Type[ctypes._SimpleCData], ...]
-    return_type: Optional[Type[ctypes._SimpleCData]]
+    args: tuple[type[ctypes._SimpleCData], ...]
+    return_type: type[ctypes._SimpleCData] | None
 
     @property
     def basename(self) -> str:
@@ -61,7 +59,7 @@ class _Enum:
 class GlibC:
     _lib = None
 
-    _api_prototypes: List[_Api] = [
+    _api_prototypes: list[_Api] = [
         _Api(name="free", args=(c_void_p,), return_type=None),
     ]
 
@@ -127,7 +125,7 @@ class LibWacom:
             cls._load()
         return cls
 
-    _api_prototypes: List[_Api] = [
+    _api_prototypes: list[_Api] = [
         _Api(name="libwacom_error_new", args=(c_void_p,), return_type=c_void_p),
         _Api(name="libwacom_error_free", args=(c_void_p,), return_type=None),
         _Api(name="libwacom_error_get_code", args=(c_void_p,), return_type=c_int),
@@ -329,7 +327,7 @@ class LibWacom:
         ),
     ]
 
-    _enums: List[_Enum] = [
+    _enums: list[_Enum] = [
         _Enum(name="WERROR_NONE", value=0),
         _Enum(name="WERROR_BAD_ALLOC", value=1),
         _Enum(name="WERROR_INVALID_PATH", value=2),
@@ -439,12 +437,12 @@ class WacomMatch:
                 setattr(self, api.basename.removeprefix("match_"), wrapper(func))
 
     @property
-    def name(self) -> Optional[str]:
+    def name(self) -> str | None:
         name = self.get_name()
         return name.decode("utf-8") if name else None
 
     @property
-    def uniq(self) -> Optional[str]:
+    def uniq(self) -> str | None:
         uniq = self.get_uniq()
         return uniq.decode("utf-8") if uniq else None
 
@@ -482,23 +480,23 @@ class WacomBuilder:
                 setattr(self, api.basename.removeprefix("builder_"), wrapper(func))
 
     @property
-    def device_name(self) -> Optional[str]:
+    def device_name(self) -> str | None:
         return self._device_name
 
     @property
-    def match_name(self) -> Optional[str]:
+    def match_name(self) -> str | None:
         return self._match_name
 
     @property
-    def uniq(self) -> Optional[str]:
+    def uniq(self) -> str | None:
         return self._uniq
 
     @property
-    def bustype(self) -> Optional[WacomBustype]:
+    def bustype(self) -> WacomBustype | None:
         return self._bustype
 
     @property
-    def usbid(self) -> Optional[Tuple[int, int]]:
+    def usbid(self) -> tuple[int, int] | None:
         return self._usbid
 
     @bustype.setter
@@ -507,7 +505,7 @@ class WacomBuilder:
         self.set_bustype(bus.value)
 
     @usbid.setter
-    def usbid(self, usbid: Tuple[int, int]):
+    def usbid(self, usbid: tuple[int, int]):
         self._usbid = usbid
         self.set_usbid(usbid[0], usbid[1])
 
@@ -529,11 +527,11 @@ class WacomBuilder:
     @classmethod
     def create(
         cls,
-        device_name: Optional[str] = None,
-        match_name: Optional[str] = None,
-        uniq: Optional[str] = None,
-        usbid: Optional[Tuple[int, int]] = None,
-        bus: Optional[WacomBustype] = None,
+        device_name: str | None = None,
+        match_name: str | None = None,
+        uniq: str | None = None,
+        usbid: tuple[int, int] | None = None,
+        bus: WacomBustype | None = None,
     ) -> "WacomBuilder":
         lib = LibWacom.instance()
         builder = WacomBuilder(lib.builder_new())
@@ -660,7 +658,7 @@ class WacomStylus:
     def eraser_type(self) -> WacomEraserType:
         return WacomEraserType(self.get_eraser_type())
 
-    def get_paired_styli(self) -> List["WacomStylus"]:
+    def get_paired_styli(self) -> list["WacomStylus"]:
         lib = LibWacom.instance()
         paired = lib.stylus_get_paired_styli(self.stylus, None)
         styli = [
@@ -705,7 +703,7 @@ class WacomDevice:
         DIAL2_MODESWITCH = 1 << 11
 
         @staticmethod
-        def modeswitch_flags() -> List["WacomDevice.ButtonFlags"]:
+        def modeswitch_flags() -> list["WacomDevice.ButtonFlags"]:
             return [
                 WacomDevice.ButtonFlags.RING_MODESWITCH,
                 WacomDevice.ButtonFlags.RING2_MODESWITCH,
@@ -745,12 +743,12 @@ class WacomDevice:
             val = getattr(lib, e.basename)
             setattr(self, e.basename, val)
 
-    def get_paired_device(self) -> Optional[WacomMatch]:
+    def get_paired_device(self) -> WacomMatch | None:
         lib = LibWacom.instance()
         match = lib.get_paired_device(self.device)
         return WacomMatch(match) if match else None
 
-    def get_matches(self) -> List[WacomMatch]:
+    def get_matches(self) -> list[WacomMatch]:
         lib = LibWacom.instance()
         matches = lib.get_matches(self.device)
 
@@ -759,7 +757,7 @@ class WacomDevice:
             for m in itertools.takewhile(lambda ptr: ptr is not None, matches)
         ]
 
-    def get_styli(self) -> List[WacomStylus]:
+    def get_styli(self) -> list[WacomStylus]:
         lib = LibWacom.instance()
         styli = lib.get_styli(self.device, None)
 
@@ -774,7 +772,7 @@ class WacomDevice:
             lib.destroy(self.device)
 
     @property
-    def paired_device(self) -> Optional[WacomMatch]:
+    def paired_device(self) -> WacomMatch | None:
         return self.get_paired_device()
 
     @property
@@ -864,11 +862,11 @@ class WacomDevice:
         return self.get_matches()
 
     @property
-    def integration_flags(self) -> List[IntegrationFlags]:
+    def integration_flags(self) -> list[IntegrationFlags]:
         flags = self.get_integration_flags()
         return [f for f in WacomDevice.IntegrationFlags if f & flags != 0]
 
-    def button_flags(self, button: str) -> List[ButtonFlags]:
+    def button_flags(self, button: str) -> list[ButtonFlags]:
         flags = self.get_button_flag(button.encode("utf-8"))
         return [f for f in WacomDevice.ButtonFlags if f & flags != 0]
 
@@ -879,11 +877,11 @@ class WacomDevice:
         mode = self.get_button_modeswitch_mode(button.encode("utf-8"))
         return WacomDevice.ModeSwitch(mode)
 
-    def button_led_group(self, button: str) -> List[ButtonFlags]:
+    def button_led_group(self, button: str) -> list[ButtonFlags]:
         return self.get_button_led_group(button.encode("utf-8"))
 
     @property
-    def status_leds(self) -> List["WacomStatusLed"]:
+    def status_leds(self) -> list["WacomStatusLed"]:
         nleds = c_int()
         leds = self.get_status_leds(ctypes.byref(nleds))
 
@@ -899,7 +897,7 @@ class WacomDatabase:
         NONE = 0x0
         GENERIC = 0x1
 
-    def __init__(self, path: Optional[Path] = None):
+    def __init__(self, path: Path | None = None):
         lib = LibWacom.instance()
         if path is None:
             self.db = lib.database_new()  # type: ignore
@@ -926,27 +924,27 @@ class WacomDatabase:
             lib = LibWacom.instance()
             lib.database_destroy(db)
 
-    def new_from_name(self, name: str) -> Optional[WacomDevice]:
+    def new_from_name(self, name: str) -> WacomDevice | None:
         device = self.libwacom_new_from_name(name.encode("utf-8"), 0)
         return WacomDevice(device) if device else None
 
     def new_from_path(
         self, path: str, fallback: Fallback = Fallback.NONE
-    ) -> Optional[WacomDevice]:
+    ) -> WacomDevice | None:
         device = self.libwacom_new_from_path(path.encode("utf-8"), fallback, 0)
         return WacomDevice(device) if device else None
 
-    def new_from_usbid(self, vid: int, pid: int) -> Optional[WacomDevice]:
+    def new_from_usbid(self, vid: int, pid: int) -> WacomDevice | None:
         device = self.libwacom_new_from_usbid(vid, pid, 0)
         return WacomDevice(device) if device else None
 
     def new_from_builder(
         self, builder: WacomBuilder, fallback: Fallback = Fallback.NONE
-    ) -> Optional[WacomDevice]:
+    ) -> WacomDevice | None:
         device = self.libwacom_new_from_builder(builder.builder, fallback.value, 0)
         return WacomDevice(device) if device else None
 
-    def list_devices(self) -> List[WacomDevice]:
+    def list_devices(self) -> list[WacomDevice]:
         devices = self.libwacom_list_devices_from_database(self.db, 0)
         devs = [
             WacomDevice(d, destroy=False)
@@ -955,7 +953,7 @@ class WacomDatabase:
         GlibC.instance().free(devices)
         return devs
 
-    def list_styli(self) -> List[WacomStylus]:
+    def list_styli(self) -> list[WacomStylus]:
         styli = self.libwacom_list_styli_from_database(self.db, 0)
         result = [
             WacomStylus(s)

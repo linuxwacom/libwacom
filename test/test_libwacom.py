@@ -2,13 +2,13 @@
 #
 # This file is formatted with ruff format
 
+import ctypes
+import logging
+import string
 from configparser import ConfigParser
 from dataclasses import dataclass, field
 
-import ctypes
-import logging
 import pytest
-import string
 
 from . import (
     WacomAxisType,
@@ -97,7 +97,7 @@ class StylusFile:
 
         if logger.getEffectiveLevel() == logging.DEBUG:
             logger.debug(f"{dir}/{filename}:")
-            for line in open(dir / filename).readlines():
+            for line in open(dir / filename):
                 logger.debug(f"  {line.rstrip()}")
 
 
@@ -148,7 +148,7 @@ class TabletFile:
 
         if logger.getEffectiveLevel() == logging.DEBUG:
             logger.debug(f"{filename}:")
-            for line in open(filename).readlines():
+            for line in open(filename):
                 logger.debug(f"  {line.rstrip()}")
 
 

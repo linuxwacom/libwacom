@@ -24,8 +24,8 @@
 import argparse
 import configparser
 import os
-import sys
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -34,7 +34,7 @@ def xdg_dir():
     return Path(os.getenv("XDG_CONFIG_HOME", Path.home() / ".config")) / "libwacom"
 
 
-class Tablet(object):
+class Tablet:
     def __init__(self, name, bus, vid, pid):
         self.name = name
         self.bus = bus

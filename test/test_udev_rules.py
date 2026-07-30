@@ -9,13 +9,14 @@
 # - check if that device has the udev properties set we expect
 
 import configparser
-import os
-from pathlib import Path
-import pytest
 import logging
-import sys
-import subprocess
+import os
 import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -42,7 +43,7 @@ def systemd_reload():
 
         subprocess.run(["systemd-hwdb", "update"], check=True)
 
-    except (IOError, FileNotFoundError, subprocess.CalledProcessError) as e:
+    except (OSError, FileNotFoundError, subprocess.CalledProcessError) as e:
         # If any of the commands above are not found (most likely the system
         # simply does not use systemd), just skip.
         logging.critical(f"{e}")
@@ -89,7 +90,7 @@ def pytest_generate_tests(metafunc):
                 elif bus == "bluetooth":
                     bus = 0x5
 
-                class Tablet(object):
+                class Tablet:
                     def __init__(self, name, bus, vid, pid, is_touchscreen=False):
                         self.name = name
                         self.bus = bus

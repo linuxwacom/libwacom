@@ -3,9 +3,10 @@
 # This file is formatted with ruff format
 #
 
-from pathlib import Path
 import logging
 import os
+from pathlib import Path
+
 import pytest
 
 from . import WacomDatabase

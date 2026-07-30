@@ -20,8 +20,8 @@
 
 import logging
 import sys
-from pathlib import Path
 from argparse import ArgumentParser
+from pathlib import Path
 from xml.etree import ElementTree as ET
 
 logging.basicConfig(level=logging.INFO)
@@ -84,8 +84,7 @@ def round_if_number(value):
 
 
 def remove_non_svg_nodes_and_strip_namespace(root):
-    if root.tag.startswith(BRACKETS_NAMESPACE):
-        root.tag = root.tag[len(BRACKETS_NAMESPACE) :]
+    root.tag = root.tag.removeprefix(BRACKETS_NAMESPACE)
     for elem in list(root):
         if (
             not elem.tag.startswith(BRACKETS_NAMESPACE)

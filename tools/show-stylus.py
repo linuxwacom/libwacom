@@ -92,9 +92,7 @@ def record_events(ns):
         if not d.absinfo[libevdev.EV_ABS.ABS_MISC]:
             die("Device only supports generic styli")
 
-        tool_bits = set(
-            c for c in libevdev.EV_KEY.codes if c.name.startswith("BTN_TOOL_")
-        )
+        tool_bits = {c for c in libevdev.EV_KEY.codes if c.name.startswith("BTN_TOOL_")}
         styli = {}  # dict of (type, serial) = proximity_state
         current_type, current_serial = 0, 0
         in_prox = False
@@ -164,7 +162,7 @@ def load_data_files():
         for stylus_id in config.sections():
             ids = stylus_id.split(":")
             if len(ids) > 1:
-                _, sid = map(lambda x: int(x, 16), ids)
+                _, sid = (int(x, 16) for x in ids)
             else:
                 _ = 0x56A  # vid
                 sid = int(ids[0], 16)

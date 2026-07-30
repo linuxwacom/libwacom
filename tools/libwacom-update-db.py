@@ -46,7 +46,7 @@ class Tablet:
 
         # We have everything in strings so let's use that for sorting later
         # This will sort bluetooth before usb but meh
-        self.cmpstr = ":".join((bus, vid, pid, name))
+        self.cmpstr = f"{bus}:{vid}:{pid}:{name}"
 
     def __lt__(self, other):
         return self.cmpstr < other.cmpstr
@@ -137,9 +137,9 @@ class TabletDatabase:
                 # for tablets with re-used usbids and that doesn't matter
                 try:
                     bus, vid, pid, *_ = match.split("|")
-                except ValueError as e:
+                except ValueError:
                     print(f"Failed to process match {match} in {file}", file=sys.stderr)
-                    raise e
+                    raise
 
                 name = config["Device"]["Name"]
                 t = Tablet(name, bus, vid, pid)

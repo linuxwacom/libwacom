@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#
 # This file is formatted with ruff format
 
 import ctypes
@@ -97,8 +95,9 @@ class StylusFile:
 
         if logger.getEffectiveLevel() == logging.DEBUG:
             logger.debug(f"{dir}/{filename}:")
-            for line in open(dir / filename):
-                logger.debug(f"  {line.rstrip()}")
+            with open(dir / filename) as f:
+                for line in f:
+                    logger.debug(f"  {line.rstrip()}")
 
 
 @dataclass
@@ -148,8 +147,9 @@ class TabletFile:
 
         if logger.getEffectiveLevel() == logging.DEBUG:
             logger.debug(f"{filename}:")
-            for line in open(filename):
-                logger.debug(f"  {line.rstrip()}")
+            with open(filename) as f:
+                for line in f:
+                    logger.debug(f"  {line.rstrip()}")
 
 
 @pytest.fixture()

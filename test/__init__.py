@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#
 # This file is formatted with ruff format
 #
 # Run with pytest:
@@ -27,7 +25,7 @@ import logging
 from ctypes import c_char, c_char_p, c_int, c_uint32, c_void_p
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional, Tuple, Type
+from typing import ClassVar
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +57,7 @@ class _Enum:
 class GlibC:
     _lib = None
 
-    _api_prototypes: list[_Api] = [
+    _api_prototypes: ClassVar[list[_Api]] = [
         _Api(name="free", args=(c_void_p,), return_type=None),
     ]
 
@@ -125,7 +123,7 @@ class LibWacom:
             cls._load()
         return cls
 
-    _api_prototypes: list[_Api] = [
+    _api_prototypes: ClassVar[list[_Api]] = [
         _Api(name="libwacom_error_new", args=(c_void_p,), return_type=c_void_p),
         _Api(name="libwacom_error_free", args=(c_void_p,), return_type=None),
         _Api(name="libwacom_error_get_code", args=(c_void_p,), return_type=c_int),
@@ -327,7 +325,7 @@ class LibWacom:
         ),
     ]
 
-    _enums: list[_Enum] = [
+    _enums: ClassVar[list[_Enum]] = [
         _Enum(name="WERROR_NONE", value=0),
         _Enum(name="WERROR_BAD_ALLOC", value=1),
         _Enum(name="WERROR_INVALID_PATH", value=2),

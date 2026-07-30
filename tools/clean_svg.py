@@ -108,7 +108,7 @@ def remove_transform_if_exists(node):
         values = transform[len(TRANSLATE) + 1 : -1].split(",")
         try:
             x, y = float(values[0]), float(values[1])
-        except Exception:
+        except Exception:  # noqa: BLE001
             return
 
         apply_translation(node, 1, 0, 0, 1, x, y)
@@ -116,7 +116,7 @@ def remove_transform_if_exists(node):
         values = transform[len(MATRIX) + 1 : -1].split(",")
         try:
             a, b, c, d, e, f = [float(value.strip()) for value in values]
-        except Exception:
+        except Exception:  # noqa: BLE001
             return
         apply_translation(node, a, b, c, d, e, f)
         apply_scaling(node, a, d)
@@ -136,8 +136,8 @@ def apply_translation(node, a, b, c, d, e, f):
         new_y = x * b + y * d + 1 * f
         node.attrib[x_attr] = str(new_x)
         node.attrib[y_attr] = str(new_y)
-    except Exception:
-        pass
+    except Exception:  # noqa:BLE001
+        print(f"Failed to apply translation: {e}", file=sys.stderr)
 
 
 def apply_translation_to_path(node, x, y):
@@ -182,8 +182,8 @@ def apply_scaling(node, x, y):
         h = float(node.attrib[h_attr])
         node.attrib[w_attr] = str(w * x)
         node.attrib[h_attr] = str(h * y)
-    except Exception:
-        pass
+    except Exception as e:  # noqa: BLE001
+        print(f"Failed to apply scaling: {e}", file=sys.stderr)
 
 
 def to_string_rec(node, level=0):
@@ -201,7 +201,7 @@ def to_string_rec(node, level=0):
     for attr in get_node_attrs_sorted(node):
         attr_value = node.attrib.get(attr)
         if attr_value is not None:
-            attribs.append(indent + '   %s="%s"' % (attr, attr_value))
+            attribs.append(indent + f'   {attr}="{attr_value}"')
 
     string = indent + "<" + tag_name + "".join(attribs)
     if len(node) or node.text:
@@ -214,7 +214,7 @@ def to_string_rec(node, level=0):
             for child in get_node_children_sorted(node):
                 string += to_string_rec(child, level + 1)
             string += indent
-        string += "</%s>" % tag_name
+        string += f"</{tag_name}>"
     else:
         string += " />"
     return string
@@ -268,20 +268,20 @@ def apply_id_and_class_from_group(group_node):
         if child.tag == "rect" or child.tag == "circle":
             if button_assigned:
                 continue
-            child.attrib["id"] = "Button%s" % _id
-            child.attrib["class"] = "%s Button" % _id
+            child.attrib["id"] = f"Button{_id}"
+            child.attrib["class"] = f"{_id} Button"
             button_assigned = True
         elif child.tag == "path":
             if path_assigned:
                 continue
-            child.attrib["id"] = "Leader%s" % _id
-            child.attrib["class"] = "%s Leader" % _id
+            child.attrib["id"] = f"Leader{_id}"
+            child.attrib["class"] = f"{_id} Leader"
             path_assigned = True
         elif child.tag == "text":
             if label_assigned:
                 continue
-            child.attrib["id"] = "Label%s" % _id
-            child.attrib["class"] = "%s Label" % _id
+            child.attrib["id"] = f"Label{_id}"
+            child.attrib["class"] = f"{_id} Label"
             child.text = _id
             label_assigned = True
 
@@ -358,7 +358,7 @@ if __name__ == "__main__":
     ET.register_namespace("", NAMESPACE)
     try:
         tree = ET.parse(svgfile)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
     root = tree.getroot()

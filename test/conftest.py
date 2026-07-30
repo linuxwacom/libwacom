@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
-#
 # This file is formatted with ruff format
-#
 
 import logging
 import os

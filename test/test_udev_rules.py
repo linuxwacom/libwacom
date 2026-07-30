@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-#
 # This test will only work where /dev/uinput is available.
 # This test will reload the hwdb and udev rules
 #
@@ -17,6 +15,8 @@ import sys
 from pathlib import Path
 
 import pytest
+
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -46,10 +46,10 @@ def systemd_reload():
     except (OSError, FileNotFoundError, subprocess.CalledProcessError) as e:
         # If any of the commands above are not found (most likely the system
         # simply does not use systemd), just skip.
-        logging.critical(f"{e}")
+        logger.critical(f"{e}")
         pytest.skip(f"Skipping test: {e}")
-    except Exception as e:
-        logging.critical(f"{e}")
+    except Exception as e:  # noqa: BLE001
+        logger.critical(f"{e}")
         pytest.fail(f"Aborting test: {e}")
 
 
@@ -68,7 +68,7 @@ def pytest_generate_tests(metafunc):
             want_pad = config["Device"].get("Buttons", 0)
             want_finger = config["Features"].get("Touch") == "true"
             integrated_in = config["Device"].get("IntegratedIn", "").split(";")
-            is_touchscreen = set(integrated_in) & set(["Display", "System"])
+            is_touchscreen = set(integrated_in) & {"Display", "System"}
 
             for match in config["Device"]["DeviceMatch"].split(";"):
                 if not match or match == "generic":
@@ -81,9 +81,9 @@ def pytest_generate_tests(metafunc):
                 try:
                     vid = int(vid, 16)
                     pid = int(pid, 16)
-                except ValueError as e:
+                except ValueError:
                     print(f"Invalid vid/pid in {match} in {f}", file=sys.stderr)
-                    raise e
+                    raise
 
                 if bus == "usb":
                     bus = 0x3
@@ -120,14 +120,14 @@ def test_hwdb_files(tablet):
     # Note: the actual name doesn't really matter, all our hwdb files use either "*"
     # or "* Finger", etc. It does matter for that "Finger" suffix though.
     query = f"libwacom:name:{tablet.name}:input:b{tablet.bus:04X}v{tablet.vid:04X}p{tablet.pid:04X}"
-    logging.debug(query)
+    logger.debug(query)
 
     r = subprocess.run(
         ["systemd-hwdb", "query", query], check=True, capture_output=True
     )
     stdout = r.stdout.decode("utf-8").strip()
     assert stdout, f"No output recorded for query {query}"
-    logging.debug(stdout)
+    logger.debug(stdout)
     props = {}
     for line in filter(lambda line: len(line) > 1, stdout.split("\n")):
         print(line)
@@ -150,6 +150,7 @@ def test_hwdb_files(tablet):
             assert "ID_INPUT_TOUCHPAD" in props
 
     # For the Wacom Bamboo Pad we check for "Pad Pad" in the device name
-    if "Pad" in tablet.name:
-        if "Wacom Bamboo Pad" not in tablet.name or "Pad Pad" in tablet.name:
-            assert "ID_INPUT_TABLET_PAD" in props
+    if "Pad" in tablet.name and (
+        "Wacom Bamboo Pad" not in tablet.name or "Pad Pad" in tablet.name
+    ):
+        assert "ID_INPUT_TABLET_PAD" in props

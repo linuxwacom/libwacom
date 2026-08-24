@@ -1,0 +1,28 @@
+# Ugee
+# M808
+#
+# sysinfo.SRphWtpzlc.tar.gz
+#https://github.com/linuxwacom/wacom-hid-descriptors/issues/641
+
+[Device]
+Name=UGTABLET M808 Pen
+ModelName=M808
+DeviceMatch=usb|28bd|2903
+PairedIDs=
+Width=254
+Height=152
+IntegratedIn=
+Layout=ugee-m808.svg
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=true
+Touch=false
+TouchSwitch=false
+NumRings=0
+NumStrips=0
+
+[Buttons]
+Left=A;B;C;D;E;F;G;H
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4;BTN_5;BTN_6;BTN_7

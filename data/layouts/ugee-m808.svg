@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="ugee-m808" width="330" height="210" style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title id="title">ugee-m808</title>
+    <rect id="DrawingArea" class="DrawingArea" x="59" y="29" width="254" height="152"/>
+    <rect id="Outline" class="Outline" x="0" y="0" width="330" height="210" rx="29.5" ry="58"/>
+    <g id="g8">
+        <path id="LeaderE" class="E Leader" d="M 52 104 H 70"/>
+        <text id="LabelE" class="E Label" x="71" y="107" style="text-anchor:start;">E</text>
+    </g>
+    <g id="g9">
+        <path id="LeaderC" class="C Leader" d="M 38 90 H 70"/>
+        <text id="LabelC" class="C Label" x="71" y="93" style="text-anchor:start;">C</text>
+    </g>
+    <g id="g6">
+        <path id="LeaderD" class="D Leader" d="m 19 108 v 21 h 50"/>
+        <text id="LabelD" class="D Label" x="70.5" y="132" style="text-anchor:start;">D</text>
+    </g>
+    <g id="g3">
+        <circle id="Ring" class="Ring" cx="34" cy="104" r="19.5"/>
+        <circle id="InnerRing" class="Inner Ring" cx="34" cy="104" r="9.5"/>
+        <circle id="ButtonE" class="E Button" cx="48.5" cy="104" r="1"/>
+        <circle id="ButtonC" class="C Button" cx="34" cy="89.5" r="1"/>
+        <circle id="ButtonD" class="D Button" cx="19.5" cy="104" r="1"/>
+        <circle id="ButtonF" class="F Button" cx="34" cy="118.5" r="1"/>
+    </g>
+    <g id="g7">
+        <path id="LeaderF" class="F Leader" d="M 38 118 H 70"/>
+        <text id="LabelF" class="F Label" x="71" y="121" style="text-anchor:start;">F</text>
+    </g>
+    <g id="g11">
+        <path id="LeaderB" class="B Leader" d="M 43.5 60 V 41"/>
+        <text id="LabelB" class="B Label" x="41" y="39.5" style="text-anchor:start;">B</text>
+    </g>
+    <g id="ButtonA" class="A Button">
+        <rect id="rect14" x="23.5" y="70.5" width="2.5" height="0.5" ry="0"/>
+        <circle id="path14" cx="24.5" cy="70.5" r="8"/>
+    </g>
+    <g id="ButtonB" class="B Button">
+        <path id="rect18" d="m 43 69.5 c 0 0.5 0 0.5 0 1 -0.5 0 -0.5 0 -1 0 0 0 0 0.5 0 0.5 0.5 0 0.5 0 1 0 0 0.5 0 0.5 0 1 0 0 0.5 0 0.5 0 0 -0.5 0 -0.5 0 -1 0.5 0 0.5 0 1 0 0 0 0 -0.5 0 -0.5 -0.5 0 -0.5 0 -1 0 0 -0.5 0 -0.5 0 -1 0 0 -0.5 0 -0.5 0 z"/>
+        <ellipse id="circle14" cx="43.5" cy="70.5" rx="8" ry="8"/>
+    </g>
+    <g id="g10">
+        <path id="LeaderA" class="A Leader" d="M 24.5 60 V 41"/>
+        <text id="LabelA" class="A Label" x="22" y="39.5" style="text-anchor:start;">A</text>
+    </g>
+    <g id="ButtonG" class="G Button">
+        <rect id="rect21" x="24.5" y="140.5" width="2.5" height="0.5" ry="0"/>
+        <circle id="circle20" cx="26" cy="140.5" r="8"/>
+    </g>
+    <g id="ButtonH" class="H Button">
+        <circle id="circle21" cx="44.5" cy="140.5" r="8"/>
+        <path id="path21" d="m 44 139.5 c 0 0.5 0 0.5 0 1 -0.5 0 -0.5 0 -1 0 0 0 0 0.5 0 0.5 0.5 0 0.5 0 1 0 0 0.5 0 0.5 0 1 0 0 0.5 0 0.5 0 0 -0.5 0 -0.5 0 -1 0.5 0 0.5 0 1 0 0 0 0 -0.5 0 -0.5 -0.5 0 -0.5 0 -1 0 0 -0.5 0 -0.5 0 -1 0 0 -0.5 0 -0.5 0 z"/>
+    </g>
+    <g id="g5">
+        <path id="LeaderG" class="G Leader" d="M 26 170 V 151"/>
+        <text id="LabelG" class="G Label" x="23" y="184.5" style="text-anchor:start;">G</text>
+    </g>
+    <g id="g4">
+        <path id="LeaderH" class="H Leader" d="M 44.5 170 V 151"/>
+        <text id="LabelH" class="H Label" x="41.5" y="184.5" style="text-anchor:start;">H</text>
+    </g>
+</svg>

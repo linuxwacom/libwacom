@@ -5,7 +5,7 @@
     version="1.1"
     style="color:#000000;stroke:#7f7f7f;fill:none;stroke-width:.25;font-size:8"
     id="xp-pen-deco-l"
-    width="355"
+    width="455"
     height="250">
   <title id="title">XP-Pen Deco L</title>
   <g>
@@ -178,4 +178,21 @@
        y="212"
        style="text-anchor:start">H</text>
   </g>
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="Outline"
+     id="Outline"
+     width="455"
+     height="250"
+     x="0"
+     y="0"
+     ry="2.9007006" />
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="DrawingArea"
+     id="DrawingArea"
+     width="368"
+     height="230"
+     x="77"
+     y="10" />
 </svg>

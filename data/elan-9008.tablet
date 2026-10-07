@@ -8,6 +8,7 @@
 Name=ELAN9008:00
 ModelName=
 DeviceMatch=i2c|04f3|43c7
+Class=ISDV4
 IntegratedIn=Display;System;
 Styli=@generic-with-eraser;
 

@@ -1,0 +1,23 @@
+# Lenovo
+# Yoga 7 2-in-1 16ILL10
+#
+#
+# sysinfo.HrtJRkqh7t.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/619
+
+# Sensor Type: EMR
+# Features: Touch (Integrated), Tilt, Pressure (4096 levels), Eraser
+# HW Resolution: 34445 x 21528 (100 x 100 lpi per evtest)
+
+[Device]
+Name=Wacom HID 5402
+ModelName=
+DeviceMatch=i2c|056a|5402
+Class=ISDV4
+Width=355
+Height=228
+IntegratedIn=Display;System
+
+[Features]
+Stylus=true
+Touch=true

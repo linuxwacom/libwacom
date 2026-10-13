@@ -238,4 +238,21 @@
        y="126.5"
        style="text-anchor:start;">A</text>
   </g>
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="Outline"
+     id="Outline"
+     width="370"
+     height="253"
+     x="0"
+     y="0"
+     ry="2.9007006" />
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="DrawingArea"
+     id="DrawingArea"
+     width="259"
+     height="172"
+     x="61"
+     y="41" />
 </svg>

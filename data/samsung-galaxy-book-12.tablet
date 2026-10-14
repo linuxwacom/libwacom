@@ -1,0 +1,20 @@
+# Samsung
+# Galaxy Book 12
+#
+# UD-EMR Stylus Compatible
+#
+# sysinfo.u3lGkopwq9.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/652
+
+[Device]
+Name=Samsung Galaxy Book 12
+Class=ISDV4
+DeviceMatch=i2c|2d1f|000b
+Width=253
+Height=168
+IntegratedIn=Display;System;
+
+[Features]
+Stylus=true
+Touch=true
+Group=@generic-with-eraser

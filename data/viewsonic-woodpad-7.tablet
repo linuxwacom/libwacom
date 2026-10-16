@@ -1,0 +1,17 @@
+# Viewsonic Corp.
+# Woodpad 7 PF0730-E0WW
+
+[Device]
+Name=ViewSonic Corp. PF0730-E0WW
+ModelName=
+DeviceMatch=usb|0543|e667
+Class=Tablet
+IntegratedIn=
+Width=163
+Height=102
+Styli=@generic-no-eraser
+
+[Features]
+Stylus=true
+Reversible=true
+

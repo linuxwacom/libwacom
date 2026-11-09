@@ -1,0 +1,21 @@
+# Wacom
+# DTH142E
+#
+# sysinfo.i6IaLBGSgW
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/660
+
+[Device]
+Name=Wacom DTH142E
+ModelName=DTH142E
+Class=PenDisplay
+DeviceMatch=usb|056a|0428
+Width=310
+Height=174
+# No pad buttons, so no layout
+IntegratedIn=Display
+
+[Features]
+Stylus=true
+Reversible=false
+Touch=true
+NumRings=0

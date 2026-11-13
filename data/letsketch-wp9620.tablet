@@ -3,6 +3,10 @@
 #
 # HID Descriptor:
 # https://github.com/linuxwacom/wacom-hid-descriptors/issues/171
+#
+# Also sold as the Starcom GC-422 (firmware Vision_V201_180530).
+# The hid-letsketch kernel driver reports the five pad buttons as
+# BTN_0 to BTN_4 on a separate "WP9620 Pad" device.
 
 [Device]
 Name=LetSketch LetSketch
@@ -17,3 +21,7 @@ IntegratedIn=
 [Features]
 Stylus=true
 Reversible=true
+
+[Buttons]
+Left=A;B;C;D;E
+EvdevCodes=BTN_0;BTN_1;BTN_2;BTN_3;BTN_4

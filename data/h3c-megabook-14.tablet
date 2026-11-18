@@ -1,0 +1,20 @@
+# H3C
+# MegaBook 14
+#
+# GXTP7386:00 27C6:0121
+# sysinfo.h3c-megabook-14.tar.gz
+# https://github.com/linuxwacom/wacom-hid-descriptors/issues/657
+
+[Device]
+Name=H3C MegaBook 14
+ModelName=
+Class=ISDV4
+DeviceMatch=i2c|27c6|0121
+Width=288
+Height=180
+IntegratedIn=Display;System;
+Styli=@generic-with-eraser;
+
+[Features]
+Stylus=true
+Touch=true

@@ -13,8 +13,8 @@ DeviceMatch=i2c|2d1f|0151
 Width=294
 Height=165
 IntegratedIn=Display;System;
+Styli=@generic-with-eraser;
 
 [Features]
 Stylus=true
 Touch=true
-Group=@generic-with-eraser

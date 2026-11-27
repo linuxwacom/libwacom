@@ -244,4 +244,21 @@
        y="197"
        style="text-anchor:end;">Down</text>
   </g>
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="Outline"
+     id="Outline"
+     width="561"
+     height="421"
+     x="0"
+     y="0"
+     ry="2.9007006" />
+  <rect
+     style="fill:none;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="DrawingArea"
+     id="DrawingArea"
+     width="420"
+     height="321"
+     x="70"
+     y="50" />
 </svg>

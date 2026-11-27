@@ -9,7 +9,7 @@
    id="intuos-pro-m-ptk670"
    style="fill:none;stroke:#7f7f7f;stroke-width:0.25;font-size:6;font-family:monospace"
    sodipodi:docname="wacom-intuos-pro-3-m.svg"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,16 +29,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.8688618"
-     inkscape:cx="660.83003"
-     inkscape:cy="-44.412059"
+     inkscape:zoom="0.9344309"
+     inkscape:cx="689.18954"
+     inkscape:cy="481.57654"
      inkscape:window-width="3072"
-     inkscape:window-height="1659"
+     inkscape:window-height="1629"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="intuos-pro-m-ptk670"
-     showgrid="true"
+     showgrid="false"
      showguides="true">
     <sodipodi:guide
        position="170.99112,187.66268"
@@ -63,7 +63,7 @@
        opacity="0.14901961"
        empspacing="5"
        enabled="true"
-       visible="true" />
+       visible="false" />
   </sodipodi:namedview>
   <title
      id="title">Wacom Intuos Pro M (PTK670)</title>
@@ -337,4 +337,23 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <rect
+     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="Outline"
+     id="Outline"
+     width="291"
+     height="205"
+     x="0"
+     y="0"
+     ry="2.9007006"
+     inkscape:label="#Outline" />
+  <rect
+     style="font-size:6px;font-family:monospace;fill:none;stroke:#7f7f7f;stroke-width:0.5;stroke-linecap:round;stroke-dasharray:none"
+     class="DrawingArea"
+     id="DrawingArea"
+     width="291"
+     height="173.69473"
+     x="0"
+     y="31.305264"
+     inkscape:label="#DrawingArea" />
 </svg>
